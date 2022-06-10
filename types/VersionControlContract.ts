@@ -6,7 +6,42 @@
 
 import { CosmWasmClient, ExecuteResult, SigningCosmWasmClient } from "@cosmjs/cosmwasm-stargate";
 import { Coin, StdFee } from "@cosmjs/amino";
+export interface ConfigResponse {
+  admin: string;
+  factory: string;
+  [k: string]: unknown;
+}
 export interface InstantiateMsg {
+  [k: string]: unknown;
+}
+export interface ModuleInfo {
+  name: string;
+  version?: string | null;
+  [k: string]: unknown;
+}
+export type Uint64 = string;
+export interface QueryCodeIdResponse {
+  code_id: Uint64;
+  info: ContractVersion;
+  [k: string]: unknown;
+}
+export interface ContractVersion {
+  contract: string;
+  version: string;
+  [k: string]: unknown;
+}
+export interface QueryEnabledModulesResponse {
+  modules: string[];
+  [k: string]: unknown;
+}
+export type Addr = string;
+export interface QueryOsAddressResponse {
+  os_address: Core;
+  [k: string]: unknown;
+}
+export interface Core {
+  manager: Addr;
+  proxy: Addr;
   [k: string]: unknown;
 }
 export interface VersionControlReadOnlyInterface {
