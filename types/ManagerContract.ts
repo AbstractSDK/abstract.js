@@ -6,6 +6,10 @@
 
 import { CosmWasmClient, ExecuteResult, SigningCosmWasmClient } from "@cosmjs/cosmwasm-stargate";
 import { Coin, StdFee } from "@cosmjs/amino";
+export interface ConfigResponse {
+  dapps: string[];
+  [k: string]: unknown;
+}
 export type Addr = string;
 export interface Config {
   module_factory_address: Addr;
@@ -13,8 +17,63 @@ export interface Config {
   version_control_address: Addr;
   [k: string]: unknown;
 }
+export type Uint128 = string;
+export interface HoldingAmountResponse {
+  value: Uint128;
+  [k: string]: unknown;
+}
+export interface HoldingValueResponse {
+  value: Uint128;
+  [k: string]: unknown;
+}
 export interface InstantiateMsg {
   os_id: number;
+  [k: string]: unknown;
+}
+export type AssetInfoBaseFor_Addr = {
+  cw20: Addr;
+} | {
+  native: string;
+};
+export type ValueRef = {
+  pool: {
+    pair_address: Addr;
+    [k: string]: unknown;
+  };
+} | {
+  liquidity: {
+    pool_address: Addr;
+    [k: string]: unknown;
+  };
+} | {
+  proxy: {
+    multiplier: Decimal;
+    proxy_asset: AssetInfoBaseFor_Addr;
+    [k: string]: unknown;
+  };
+} | {
+  external: {
+    contract_address: Addr;
+    [k: string]: unknown;
+  };
+};
+export type Decimal = string;
+export interface ProxyAsset {
+  asset: AssetBaseFor_Addr;
+  value_reference?: ValueRef | null;
+  [k: string]: unknown;
+}
+export interface AssetBaseFor_Addr {
+  amount: Uint128;
+  info: AssetInfoBaseFor_Addr;
+  [k: string]: unknown;
+}
+export interface TotalValueResponse {
+  value: Uint128;
+  [k: string]: unknown;
+}
+export interface VaultAssetConfigResponse {
+  value: ProxyAsset;
   [k: string]: unknown;
 }
 export interface ManagerReadOnlyInterface {

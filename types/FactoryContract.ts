@@ -15,6 +15,24 @@ export interface ConfigResponse {
   version_control_contract: string;
   [k: string]: unknown;
 }
+export type GovernanceDetails = {
+  monarchy: {
+    monarch: string;
+    [k: string]: unknown;
+  };
+} | {
+  multi_signature: {
+    members: string[];
+    threshold_votes: number;
+    total_members: number;
+    [k: string]: unknown;
+  };
+} | {
+  token_weighted: {
+    token_addr: string;
+    [k: string]: unknown;
+  };
+};
 export interface InstantiateMsg {
   memory_address: string;
   module_factory_address: string;
