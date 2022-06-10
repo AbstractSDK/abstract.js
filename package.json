@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/Pandora-OS/contracts-typescript#readme",
   "dependencies": {
-    "@cosmjs/cosmwasm-stargate": "^0.28.4"
+    "@cosmjs/cosmwasm-stargate": "^0.28.4",
+    "react-query": "^3.39.1"
   },
   "devDependencies": {
     "cosmwasm-typescript-gen": "^0.2.9"

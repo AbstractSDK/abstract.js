@@ -16,12 +16,6 @@ export interface ConfigResponse {
   dapps: string[];
   [k: string]: unknown;
 }
-export interface Config {
-  module_factory_address: Addr;
-  subscription_address: Addr;
-  version_control_address: Addr;
-  [k: string]: unknown;
-}
 export type CosmosMsg_for_Empty = {
   bank: BankMsg;
 } | {
@@ -217,6 +211,10 @@ export interface AssetBase_for_Addr {
   info: AssetInfoBase_for_Addr;
   [k: string]: unknown;
 }
+export interface State {
+  dapps: Binary[];
+  [k: string]: unknown;
+}
 export interface TotalValueResponse {
   value: Uint128;
   [k: string]: unknown;
@@ -225,7 +223,7 @@ export interface VaultAssetConfigResponse {
   value: ProxyAsset;
   [k: string]: unknown;
 }
-export interface ManagerReadOnlyInterface {
+export interface ProxyReadOnlyInterface {
   contractAddress: string;
   config: () => Promise<ConfigResponse>;
   totalValue: () => Promise<TotalValueResponse>;
@@ -245,7 +243,7 @@ export interface ManagerReadOnlyInterface {
     identifier: string;
   }) => Promise<VaultAssetConfigResponse>;
 }
-export class ManagerQueryClient implements ManagerReadOnlyInterface {
+export class ProxyQueryClient implements ProxyReadOnlyInterface {
   client: CosmWasmClient;
   contractAddress: string;
 
@@ -303,7 +301,7 @@ export class ManagerQueryClient implements ManagerReadOnlyInterface {
     });
   };
 }
-export interface ManagerInterface extends ManagerReadOnlyInterface {
+export interface ProxyInterface extends ProxyReadOnlyInterface {
   contractAddress: string;
   sender: string;
   setAdmin: ({
@@ -334,7 +332,7 @@ export interface ManagerInterface extends ManagerReadOnlyInterface {
     toRemove: AssetInfoBase_for_Addr[];
   }, fee?: number | StdFee | "auto", memo?: string, funds?: readonly Coin[]) => Promise<ExecuteResult>;
 }
-export class ManagerClient extends ManagerQueryClient implements ManagerInterface {
+export class ProxyClient extends ProxyQueryClient implements ProxyInterface {
   client: SigningCosmWasmClient;
   sender: string;
   contractAddress: string;
