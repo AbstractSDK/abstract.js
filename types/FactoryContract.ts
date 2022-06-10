@@ -13,31 +13,26 @@ export interface ConfigResponse {
   owner: string;
   subscription_address?: string | null;
   version_control_contract: string;
-  [k: string]: unknown;
 }
 export type GovernanceDetails = {
   monarchy: {
     monarch: string;
-    [k: string]: unknown;
   };
 } | {
   multi_signature: {
     members: string[];
     threshold_votes: number;
     total_members: number;
-    [k: string]: unknown;
   };
 } | {
   token_weighted: {
     token_addr: string;
-    [k: string]: unknown;
   };
 };
 export interface InstantiateMsg {
   memory_address: string;
   module_factory_address: string;
   version_control_address: string;
-  [k: string]: unknown;
 }
 export interface FactoryReadOnlyInterface {
   contractAddress: string;

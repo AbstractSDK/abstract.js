@@ -14,13 +14,11 @@ export type AssetInfoBase_for_Addr = {
 export type Addr = string;
 export interface ConfigResponse {
   dapps: string[];
-  [k: string]: unknown;
 }
 export interface Config {
   module_factory_address: Addr;
   subscription_address: Addr;
   version_control_address: Addr;
-  [k: string]: unknown;
 }
 export type CosmosMsg_for_Empty = {
   bank: BankMsg;
@@ -34,7 +32,6 @@ export type CosmosMsg_for_Empty = {
   stargate: {
     type_url: string;
     value: Binary;
-    [k: string]: unknown;
   };
 } | {
   ibc: IbcMsg;
@@ -47,12 +44,10 @@ export type BankMsg = {
   send: {
     amount: Coin[];
     to_address: string;
-    [k: string]: unknown;
   };
 } | {
   burn: {
     amount: Coin[];
-    [k: string]: unknown;
   };
 };
 export type Uint128 = string;
@@ -60,31 +55,26 @@ export type StakingMsg = {
   delegate: {
     amount: Coin;
     validator: string;
-    [k: string]: unknown;
   };
 } | {
   undelegate: {
     amount: Coin;
     validator: string;
-    [k: string]: unknown;
   };
 } | {
   redelegate: {
     amount: Coin;
     dst_validator: string;
     src_validator: string;
-    [k: string]: unknown;
   };
 };
 export type DistributionMsg = {
   set_withdraw_address: {
     address: string;
-    [k: string]: unknown;
   };
 } | {
   withdraw_delegator_reward: {
     validator: string;
-    [k: string]: unknown;
   };
 };
 export type Binary = string;
@@ -94,19 +84,16 @@ export type IbcMsg = {
     channel_id: string;
     timeout: IbcTimeout;
     to_address: string;
-    [k: string]: unknown;
   };
 } | {
   send_packet: {
     channel_id: string;
     data: Binary;
     timeout: IbcTimeout;
-    [k: string]: unknown;
   };
 } | {
   close_channel: {
     channel_id: string;
-    [k: string]: unknown;
   };
 };
 export type Timestamp = Uint64;
@@ -116,7 +103,6 @@ export type WasmMsg = {
     contract_addr: string;
     funds: Coin[];
     msg: Binary;
-    [k: string]: unknown;
   };
 } | {
   instantiate: {
@@ -125,105 +111,85 @@ export type WasmMsg = {
     funds: Coin[];
     label: string;
     msg: Binary;
-    [k: string]: unknown;
   };
 } | {
   migrate: {
     contract_addr: string;
     msg: Binary;
     new_code_id: number;
-    [k: string]: unknown;
   };
 } | {
   update_admin: {
     admin: string;
     contract_addr: string;
-    [k: string]: unknown;
   };
 } | {
   clear_admin: {
     contract_addr: string;
-    [k: string]: unknown;
   };
 };
 export type GovMsg = {
   vote: {
     proposal_id: number;
     vote: VoteOption;
-    [k: string]: unknown;
   };
 };
 export type VoteOption = "yes" | "no" | "abstain" | "no_with_veto";
 export interface Coin {
   amount: Uint128;
   denom: string;
-  [k: string]: unknown;
 }
 export interface Empty {
-  [k: string]: unknown;
 }
 export interface IbcTimeout {
   block?: IbcTimeoutBlock | null;
   timestamp?: Timestamp | null;
-  [k: string]: unknown;
 }
 export interface IbcTimeoutBlock {
   height: number;
   revision: number;
-  [k: string]: unknown;
 }
 export interface HoldingAmountResponse {
   value: Uint128;
-  [k: string]: unknown;
 }
 export interface HoldingValueResponse {
   value: Uint128;
-  [k: string]: unknown;
 }
 export interface InstantiateMsg {
   os_id: number;
-  [k: string]: unknown;
 }
 export type ValueRef = {
   pool: {
     pair_address: Addr;
-    [k: string]: unknown;
   };
 } | {
   liquidity: {
     pool_address: Addr;
-    [k: string]: unknown;
   };
 } | {
   proxy: {
     multiplier: Decimal;
     proxy_asset: AssetInfoBase_for_Addr;
-    [k: string]: unknown;
   };
 } | {
   external: {
     contract_address: Addr;
-    [k: string]: unknown;
   };
 };
 export type Decimal = string;
 export interface ProxyAsset {
   asset: AssetInfoBase_for_Addr;
   value_reference?: ValueRef | null;
-  [k: string]: unknown;
 }
 export interface AssetBase_for_Addr {
   amount: Uint128;
   info: AssetInfoBase_for_Addr;
-  [k: string]: unknown;
 }
 export interface TotalValueResponse {
   value: Uint128;
-  [k: string]: unknown;
 }
 export interface VaultAssetConfigResponse {
   value: ProxyAsset;
-  [k: string]: unknown;
 }
 export interface ManagerReadOnlyInterface {
   contractAddress: string;
