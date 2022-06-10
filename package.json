@@ -1,5 +1,5 @@
 {
-  "name": "contracts-typescript",
+  "name": "@abstract/contracts-typescript",
   "version": "0.0.1",
   "description": "Typings for our smart contracts",
   "main": "index.js",
@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/Pandora-OS/contracts-typescript/issues"
   },
-  "homepage": "https://github.com/Pandora-OS/contracts-typescript#readme"
+  "homepage": "https://github.com/Pandora-OS/contracts-typescript#readme",
+  "dependencies": {
+    "@cosmjs/cosmwasm-stargate": "^0.28.4"
+  },
+  "devDependencies": {
+    "cosmwasm-typescript-gen": "^0.2.9"
+  }
 }
