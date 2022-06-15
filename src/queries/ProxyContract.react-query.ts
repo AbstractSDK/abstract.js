@@ -35,8 +35,8 @@ import {
   State,
   TotalValueResponse,
   VaultAssetConfigResponse,
-} from './ProxyContract'
-import { ProxyQueryClient } from './ProxyContract'
+} from '../contracts/ProxyContract'
+import { ProxyQueryClient } from '../contracts/ProxyContract'
 export interface ProxyVaultAssetConfigQuery {
   client: ProxyQueryClient
   options?: UseQueryOptions<

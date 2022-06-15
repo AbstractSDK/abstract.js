@@ -5,8 +5,8 @@
  */
 
 import { useQuery, UseQueryOptions } from 'react-query'
-import { ConfigResponse, GovernanceDetails, InstantiateMsg } from './FactoryContract'
-import { FactoryQueryClient } from './FactoryContract'
+import { ConfigResponse, GovernanceDetails, InstantiateMsg } from '../contracts/FactoryContract'
+import { FactoryQueryClient } from '../contracts/FactoryContract'
 export interface FactoryConfigQuery {
   client: FactoryQueryClient
   options?: UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>

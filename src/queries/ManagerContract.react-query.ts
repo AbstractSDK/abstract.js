@@ -35,8 +35,8 @@ import {
   AssetBase_for_Addr,
   TotalValueResponse,
   VaultAssetConfigResponse,
-} from './ManagerContract'
-import { ManagerQueryClient } from './ManagerContract'
+} from '../contracts/ManagerContract'
+import { ManagerQueryClient } from '../contracts/ManagerContract'
 export interface ManagerVaultAssetConfigQuery {
   client: ManagerQueryClient
   options?: UseQueryOptions<

@@ -16,8 +16,8 @@ import {
   Addr,
   QueryOsAddressResponse,
   Core,
-} from './VersionControlContract'
-import { VersionControlQueryClient } from './VersionControlContract'
+} from '../contracts/VersionControlContract'
+import { VersionControlQueryClient } from '../contracts/VersionControlContract'
 export interface VersionControlConfigQuery {
   client: VersionControlQueryClient
   options?: UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>
