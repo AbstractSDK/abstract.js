@@ -6,12 +6,24 @@
 
 import { CosmWasmClient, ExecuteResult, SigningCosmWasmClient } from "@cosmjs/cosmwasm-stargate";
 import { Coin, StdFee } from "@cosmjs/amino";
+export type Binary = string;
 export interface InstantiateMsg {
   module_factory_address: string;
   os_id: number;
   root_user: string;
   subscription_address?: string | null;
   version_control_address: string;
+  [k: string]: unknown;
+}
+export type ModuleKind = "add_on" | "a_p_i" | "service" | "perk";
+export interface Module {
+  info: ModuleInfo;
+  kind: ModuleKind;
+  [k: string]: unknown;
+}
+export interface ModuleInfo {
+  name: string;
+  version?: string | null;
   [k: string]: unknown;
 }
 export interface QueryEnabledModulesResponse {
@@ -98,5 +110,183 @@ export class ManagerQueryClient implements ManagerReadOnlyInterface {
     return this.client.queryContractSmart(this.contractAddress, {
       query_os_config: {}
     });
+  };
+}
+export interface ManagerInterface extends ManagerReadOnlyInterface {
+  contractAddress: string;
+  sender: string;
+  setAdmin: ({
+    admin
+  }: {
+    admin: string;
+  }, fee?: number | StdFee | "auto", memo?: string, funds?: readonly Coin[]) => Promise<ExecuteResult>;
+  createModule: ({
+    initMsg,
+    module
+  }: {
+    initMsg?: Binary;
+    module: Module;
+  }, fee?: number | StdFee | "auto", memo?: string, funds?: readonly Coin[]) => Promise<ExecuteResult>;
+  registerModule: ({
+    module,
+    moduleAddr
+  }: {
+    module: Module;
+    moduleAddr: string;
+  }, fee?: number | StdFee | "auto", memo?: string, funds?: readonly Coin[]) => Promise<ExecuteResult>;
+  removeModule: ({
+    moduleName
+  }: {
+    moduleName: string;
+  }, fee?: number | StdFee | "auto", memo?: string, funds?: readonly Coin[]) => Promise<ExecuteResult>;
+  execOnModule: ({
+    execMsg,
+    moduleName
+  }: {
+    execMsg: Binary;
+    moduleName: string;
+  }, fee?: number | StdFee | "auto", memo?: string, funds?: readonly Coin[]) => Promise<ExecuteResult>;
+  updateConfig: ({
+    root,
+    vcAddr
+  }: {
+    root?: string;
+    vcAddr?: string;
+  }, fee?: number | StdFee | "auto", memo?: string, funds?: readonly Coin[]) => Promise<ExecuteResult>;
+  upgrade: ({
+    migrateMsg,
+    module
+  }: {
+    migrateMsg?: Binary;
+    module: Module;
+  }, fee?: number | StdFee | "auto", memo?: string, funds?: readonly Coin[]) => Promise<ExecuteResult>;
+  suspendOs: ({
+    newStatus
+  }: {
+    newStatus: boolean;
+  }, fee?: number | StdFee | "auto", memo?: string, funds?: readonly Coin[]) => Promise<ExecuteResult>;
+}
+export class ManagerClient extends ManagerQueryClient implements ManagerInterface {
+  client: SigningCosmWasmClient;
+  sender: string;
+  contractAddress: string;
+
+  constructor(client: SigningCosmWasmClient, sender: string, contractAddress: string) {
+    super(client, contractAddress);
+    this.client = client;
+    this.sender = sender;
+    this.contractAddress = contractAddress;
+    this.setAdmin = this.setAdmin.bind(this);
+    this.createModule = this.createModule.bind(this);
+    this.registerModule = this.registerModule.bind(this);
+    this.removeModule = this.removeModule.bind(this);
+    this.execOnModule = this.execOnModule.bind(this);
+    this.updateConfig = this.updateConfig.bind(this);
+    this.upgrade = this.upgrade.bind(this);
+    this.suspendOs = this.suspendOs.bind(this);
+  }
+
+  setAdmin = async ({
+    admin
+  }: {
+    admin: string;
+  }, fee: number | StdFee | "auto" = "auto", memo?: string, funds?: readonly Coin[]): Promise<ExecuteResult> => {
+    return await this.client.execute(this.sender, this.contractAddress, {
+      set_admin: {
+        admin
+      }
+    }, fee, memo, funds);
+  };
+  createModule = async ({
+    initMsg,
+    module
+  }: {
+    initMsg?: Binary;
+    module: Module;
+  }, fee: number | StdFee | "auto" = "auto", memo?: string, funds?: readonly Coin[]): Promise<ExecuteResult> => {
+    return await this.client.execute(this.sender, this.contractAddress, {
+      create_module: {
+        init_msg: initMsg,
+        module
+      }
+    }, fee, memo, funds);
+  };
+  registerModule = async ({
+    module,
+    moduleAddr
+  }: {
+    module: Module;
+    moduleAddr: string;
+  }, fee: number | StdFee | "auto" = "auto", memo?: string, funds?: readonly Coin[]): Promise<ExecuteResult> => {
+    return await this.client.execute(this.sender, this.contractAddress, {
+      register_module: {
+        module,
+        module_addr: moduleAddr
+      }
+    }, fee, memo, funds);
+  };
+  removeModule = async ({
+    moduleName
+  }: {
+    moduleName: string;
+  }, fee: number | StdFee | "auto" = "auto", memo?: string, funds?: readonly Coin[]): Promise<ExecuteResult> => {
+    return await this.client.execute(this.sender, this.contractAddress, {
+      remove_module: {
+        module_name: moduleName
+      }
+    }, fee, memo, funds);
+  };
+  execOnModule = async ({
+    execMsg,
+    moduleName
+  }: {
+    execMsg: Binary;
+    moduleName: string;
+  }, fee: number | StdFee | "auto" = "auto", memo?: string, funds?: readonly Coin[]): Promise<ExecuteResult> => {
+    return await this.client.execute(this.sender, this.contractAddress, {
+      exec_on_module: {
+        exec_msg: execMsg,
+        module_name: moduleName
+      }
+    }, fee, memo, funds);
+  };
+  updateConfig = async ({
+    root,
+    vcAddr
+  }: {
+    root?: string;
+    vcAddr?: string;
+  }, fee: number | StdFee | "auto" = "auto", memo?: string, funds?: readonly Coin[]): Promise<ExecuteResult> => {
+    return await this.client.execute(this.sender, this.contractAddress, {
+      update_config: {
+        root,
+        vc_addr: vcAddr
+      }
+    }, fee, memo, funds);
+  };
+  upgrade = async ({
+    migrateMsg,
+    module
+  }: {
+    migrateMsg?: Binary;
+    module: Module;
+  }, fee: number | StdFee | "auto" = "auto", memo?: string, funds?: readonly Coin[]): Promise<ExecuteResult> => {
+    return await this.client.execute(this.sender, this.contractAddress, {
+      upgrade: {
+        migrate_msg: migrateMsg,
+        module
+      }
+    }, fee, memo, funds);
+  };
+  suspendOs = async ({
+    newStatus
+  }: {
+    newStatus: boolean;
+  }, fee: number | StdFee | "auto" = "auto", memo?: string, funds?: readonly Coin[]): Promise<ExecuteResult> => {
+    return await this.client.execute(this.sender, this.contractAddress, {
+      suspend_os: {
+        new_status: newStatus
+      }
+    }, fee, memo, funds);
   };
 }
