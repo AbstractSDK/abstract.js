@@ -5,8 +5,7 @@
 */
 
 import { useQuery, UseQueryOptions } from "react-query";
-import { Binary, InstantiateMsg, ModuleKind, Module, ModuleInfo, QueryEnabledModulesResponse, QueryModulesResponse, Uint64, QueryOsConfigResponse, QueryVersionsResponse, ContractVersion } from "./ManagerContract";
-import { ManagerQueryClient } from "../contracts/ManagerContract";
+import { Binary, InstantiateMsg, ModuleKind, Module, ModuleInfo, QueryEnabledModulesResponse, QueryModulesResponse, Uint64, QueryOsConfigResponse, QueryVersionsResponse, ContractVersion, ManagerQueryClient } from "../contracts/ManagerContract";
 export interface ManagerQueryOsConfigQuery {
   client: ManagerQueryClient;
   options?: UseQueryOptions<QueryOsConfigResponse, Error, QueryOsConfigResponse, (string | undefined)[]>;

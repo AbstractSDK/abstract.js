@@ -13,26 +13,21 @@ export interface InstantiateMsg {
   root_user: string;
   subscription_address?: string | null;
   version_control_address: string;
-  [k: string]: unknown;
 }
 export type ModuleKind = "add_on" | "a_p_i" | "service" | "perk";
 export interface Module {
   info: ModuleInfo;
   kind: ModuleKind;
-  [k: string]: unknown;
 }
 export interface ModuleInfo {
   name: string;
   version?: string | null;
-  [k: string]: unknown;
 }
 export interface QueryEnabledModulesResponse {
   modules: string[];
-  [k: string]: unknown;
 }
 export interface QueryModulesResponse {
   modules: [string, string][];
-  [k: string]: unknown;
 }
 export type Uint64 = string;
 export interface QueryOsConfigResponse {
@@ -40,16 +35,13 @@ export interface QueryOsConfigResponse {
   os_id: Uint64;
   root: string;
   version_control_address: string;
-  [k: string]: unknown;
 }
 export interface QueryVersionsResponse {
   versions: ContractVersion[];
-  [k: string]: unknown;
 }
 export interface ContractVersion {
   contract: string;
   version: string;
-  [k: string]: unknown;
 }
 export interface ManagerReadOnlyInterface {
   contractAddress: string;
