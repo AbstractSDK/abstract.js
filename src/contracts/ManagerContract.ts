@@ -8,55 +8,93 @@ import { CosmWasmClient, ExecuteResult, SigningCosmWasmClient } from "@cosmjs/co
 import { Coin, StdFee } from "@cosmjs/amino";
 export type Binary = string;
 export interface InstantiateMsg {
+  chain_id: string;
+  description?: string | null;
+  governance_type: string;
+  link?: string | null;
   module_factory_address: string;
   os_id: number;
+  os_name: string;
   root_user: string;
   subscription_address?: string | null;
   version_control_address: string;
+  [k: string]: unknown;
+}
+export interface ManagerModuleInfo {
+  address: string;
+  name: string;
+  version: ContractVersion;
+  [k: string]: unknown;
+}
+export interface ContractVersion {
+  contract: string;
+  version: string;
+  [k: string]: unknown;
 }
 export type ModuleKind = "add_on" | "a_p_i" | "service" | "perk";
 export interface Module {
   info: ModuleInfo;
   kind: ModuleKind;
+  [k: string]: unknown;
 }
 export interface ModuleInfo {
   name: string;
   version?: string | null;
+  [k: string]: unknown;
 }
-export interface QueryEnabledModulesResponse {
-  modules: string[];
-}
-export interface QueryModulesResponse {
-  modules: [string, string][];
+export interface OsInfo {
+  chain_id: string;
+  description?: string | null;
+  governance_type: string;
+  link?: string | null;
+  name: string;
+  [k: string]: unknown;
 }
 export type Uint64 = string;
-export interface QueryOsConfigResponse {
+export interface QueryConfigResponse {
   module_factory_address: string;
   os_id: Uint64;
   root: string;
   version_control_address: string;
+  [k: string]: unknown;
 }
-export interface QueryVersionsResponse {
+export interface QueryInfoResponse {
+  info: OsInfo;
+  [k: string]: unknown;
+}
+export interface QueryModuleAddressesResponse {
+  modules: [string, string][];
+  [k: string]: unknown;
+}
+export interface QueryModuleInfosResponse {
+  module_infos: ManagerModuleInfo[];
+  [k: string]: unknown;
+}
+export interface QueryModuleVersionsResponse {
   versions: ContractVersion[];
-}
-export interface ContractVersion {
-  contract: string;
-  version: string;
+  [k: string]: unknown;
 }
 export interface ManagerReadOnlyInterface {
   contractAddress: string;
-  queryVersions: ({
+  queryModuleVersions: ({
     names
   }: {
     names: string[];
-  }) => Promise<QueryVersionsResponse>;
-  queryModules: ({
+  }) => Promise<QueryModuleVersionsResponse>;
+  queryModuleAddresses: ({
     names
   }: {
     names: string[];
-  }) => Promise<QueryModulesResponse>;
-  queryEnabledModules: () => Promise<QueryEnabledModulesResponse>;
-  queryOsConfig: () => Promise<QueryOsConfigResponse>;
+  }) => Promise<QueryModuleAddressesResponse>;
+  queryModuleInfos: ({
+    iterLimit,
+    lastModuleName
+  }: {
+    iterLimit?: number;
+    lastModuleName?: string;
+  }) => Promise<QueryModuleInfosResponse>;
+  queryConfig: () => Promise<QueryConfigResponse>;
+  queryInfo: () => Promise<QueryInfoResponse>;
 }
 export class ManagerQueryClient implements ManagerReadOnlyInterface {
   client: CosmWasmClient;
@@ -65,42 +103,57 @@ export class ManagerQueryClient implements ManagerReadOnlyInterface {
   constructor(client: CosmWasmClient, contractAddress: string) {
     this.client = client;
     this.contractAddress = contractAddress;
-    this.queryVersions = this.queryVersions.bind(this);
-    this.queryModules = this.queryModules.bind(this);
-    this.queryEnabledModules = this.queryEnabledModules.bind(this);
-    this.queryOsConfig = this.queryOsConfig.bind(this);
+    this.queryModuleVersions = this.queryModuleVersions.bind(this);
+    this.queryModuleAddresses = this.queryModuleAddresses.bind(this);
+    this.queryModuleInfos = this.queryModuleInfos.bind(this);
+    this.queryConfig = this.queryConfig.bind(this);
+    this.queryInfo = this.queryInfo.bind(this);
   }
 
-  queryVersions = async ({
+  queryModuleVersions = async ({
     names
   }: {
     names: string[];
-  }): Promise<QueryVersionsResponse> => {
+  }): Promise<QueryModuleVersionsResponse> => {
     return this.client.queryContractSmart(this.contractAddress, {
-      query_versions: {
+      query_module_versions: {
         names
       }
     });
   };
-  queryModules = async ({
+  queryModuleAddresses = async ({
     names
   }: {
     names: string[];
-  }): Promise<QueryModulesResponse> => {
+  }): Promise<QueryModuleAddressesResponse> => {
     return this.client.queryContractSmart(this.contractAddress, {
-      query_modules: {
+      query_module_addresses: {
         names
       }
     });
   };
-  queryEnabledModules = async (): Promise<QueryEnabledModulesResponse> => {
+  queryModuleInfos = async ({
+    iterLimit,
+    lastModuleName
+  }: {
+    iterLimit?: number;
+    lastModuleName?: string;
+  }): Promise<QueryModuleInfosResponse> => {
     return this.client.queryContractSmart(this.contractAddress, {
-      query_enabled_modules: {}
+      query_module_infos: {
+        iter_limit: iterLimit,
+        last_module_name: lastModuleName
+      }
     });
   };
-  queryOsConfig = async (): Promise<QueryOsConfigResponse> => {
+  queryConfig = async (): Promise<QueryConfigResponse> => {
     return this.client.queryContractSmart(this.contractAddress, {
-      query_os_config: {}
+      query_config: {}
+    });
+  };
+  queryInfo = async (): Promise<QueryInfoResponse> => {
+    return this.client.queryContractSmart(this.contractAddress, {
+      query_info: {}
     });
   };
 }
@@ -108,9 +161,11 @@ export interface ManagerInterface extends ManagerReadOnlyInterface {
   contractAddress: string;
   sender: string;
   setAdmin: ({
-    admin
+    admin,
+    governanceType
   }: {
     admin: string;
+    governanceType?: string;
   }, fee?: number | StdFee | "auto", memo?: string, funds?: readonly Coin[]) => Promise<ExecuteResult>;
   createModule: ({
     initMsg,
@@ -157,6 +212,15 @@ export interface ManagerInterface extends ManagerReadOnlyInterface {
   }: {
     newStatus: boolean;
   }, fee?: number | StdFee | "auto", memo?: string, funds?: readonly Coin[]) => Promise<ExecuteResult>;
+  updateInfo: ({
+    description,
+    link,
+    osName
+  }: {
+    description?: string;
+    link?: string;
+    osName?: string;
+  }, fee?: number | StdFee | "auto", memo?: string, funds?: readonly Coin[]) => Promise<ExecuteResult>;
 }
 export class ManagerClient extends ManagerQueryClient implements ManagerInterface {
   client: SigningCosmWasmClient;
@@ -176,16 +240,20 @@ export class ManagerClient extends ManagerQueryClient implements ManagerInterfac
     this.updateConfig = this.updateConfig.bind(this);
     this.upgrade = this.upgrade.bind(this);
     this.suspendOs = this.suspendOs.bind(this);
+    this.updateInfo = this.updateInfo.bind(this);
   }
 
   setAdmin = async ({
-    admin
+    admin,
+    governanceType
   }: {
     admin: string;
+    governanceType?: string;
   }, fee: number | StdFee | "auto" = "auto", memo?: string, funds?: readonly Coin[]): Promise<ExecuteResult> => {
     return await this.client.execute(this.sender, this.contractAddress, {
       set_admin: {
-        admin
+        admin,
+        governance_type: governanceType
       }
     }, fee, memo, funds);
   };
@@ -278,6 +346,23 @@ export class ManagerClient extends ManagerQueryClient implements ManagerInterfac
     return await this.client.execute(this.sender, this.contractAddress, {
       suspend_os: {
         new_status: newStatus
+      }
+    }, fee, memo, funds);
+  };
+  updateInfo = async ({
+    description,
+    link,
+    osName
+  }: {
+    description?: string;
+    link?: string;
+    osName?: string;
+  }, fee: number | StdFee | "auto" = "auto", memo?: string, funds?: readonly Coin[]): Promise<ExecuteResult> => {
+    return await this.client.execute(this.sender, this.contractAddress, {
+      update_info: {
+        description,
+        link,
+        os_name: osName
       }
     }, fee, memo, funds);
   };

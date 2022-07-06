@@ -5,56 +5,75 @@
 */
 
 import { useQuery, UseQueryOptions } from "react-query";
-import { Binary, InstantiateMsg, ModuleKind, Module, ModuleInfo, QueryEnabledModulesResponse, QueryModulesResponse, Uint64, QueryOsConfigResponse, QueryVersionsResponse, ContractVersion, ManagerQueryClient } from "../contracts/ManagerContract";
-export interface ManagerQueryOsConfigQuery {
+import { Binary, InstantiateMsg, ManagerModuleInfo, ContractVersion, ModuleKind, Module, ModuleInfo, OsInfo, Uint64, QueryConfigResponse, QueryInfoResponse, QueryModuleAddressesResponse, QueryModuleInfosResponse, QueryModuleVersionsResponse } from "../contracts/ManagerContract";
+import { ManagerQueryClient } from "../contracts/ManagerContract";
+export interface ManagerQueryInfoQuery {
   client: ManagerQueryClient;
-  options?: UseQueryOptions<QueryOsConfigResponse, Error, QueryOsConfigResponse, (string | undefined)[]>;
+  options?: UseQueryOptions<QueryInfoResponse, Error, QueryInfoResponse, (string | undefined)[]>;
 }
-export function useManagerQueryOsConfigQuery({
+export function useManagerQueryInfoQuery({
   client,
   options
-}: ManagerQueryOsConfigQuery) {
-  return useQuery<QueryOsConfigResponse, Error, QueryOsConfigResponse, (string | undefined)[]>(["managerQueryOsConfig", client.contractAddress], () => client.queryOsConfig(), options);
+}: ManagerQueryInfoQuery) {
+  return useQuery<QueryInfoResponse, Error, QueryInfoResponse, (string | undefined)[]>(["managerQueryInfo", client.contractAddress], () => client.queryInfo(), options);
 }
-export interface ManagerQueryEnabledModulesQuery {
+export interface ManagerQueryConfigQuery {
   client: ManagerQueryClient;
-  options?: UseQueryOptions<QueryEnabledModulesResponse, Error, QueryEnabledModulesResponse, (string | undefined)[]>;
+  options?: UseQueryOptions<QueryConfigResponse, Error, QueryConfigResponse, (string | undefined)[]>;
 }
-export function useManagerQueryEnabledModulesQuery({
+export function useManagerQueryConfigQuery({
   client,
   options
-}: ManagerQueryEnabledModulesQuery) {
-  return useQuery<QueryEnabledModulesResponse, Error, QueryEnabledModulesResponse, (string | undefined)[]>(["managerQueryEnabledModules", client.contractAddress], () => client.queryEnabledModules(), options);
+}: ManagerQueryConfigQuery) {
+  return useQuery<QueryConfigResponse, Error, QueryConfigResponse, (string | undefined)[]>(["managerQueryConfig", client.contractAddress], () => client.queryConfig(), options);
 }
-export interface ManagerQueryModulesQuery {
+export interface ManagerQueryModuleInfosQuery {
   client: ManagerQueryClient;
-  options?: UseQueryOptions<QueryModulesResponse, Error, QueryModulesResponse, (string | undefined)[]>;
+  options?: UseQueryOptions<QueryModuleInfosResponse, Error, QueryModuleInfosResponse, (string | undefined)[]>;
+  args: {
+    iterLimit?: number;
+    lastModuleName?: string;
+  };
+}
+export function useManagerQueryModuleInfosQuery({
+  client,
+  args,
+  options
+}: ManagerQueryModuleInfosQuery) {
+  return useQuery<QueryModuleInfosResponse, Error, QueryModuleInfosResponse, (string | undefined)[]>(["managerQueryModuleInfos", client.contractAddress], () => client.queryModuleInfos({
+    iterLimit: args.iterLimit,
+    lastModuleName: args.lastModuleName
+  }), options);
+}
+export interface ManagerQueryModuleAddressesQuery {
+  client: ManagerQueryClient;
+  options?: UseQueryOptions<QueryModuleAddressesResponse, Error, QueryModuleAddressesResponse, (string | undefined)[]>;
   args: {
     names: string[];
   };
 }
-export function useManagerQueryModulesQuery({
+export function useManagerQueryModuleAddressesQuery({
   client,
   args,
   options
-}: ManagerQueryModulesQuery) {
-  return useQuery<QueryModulesResponse, Error, QueryModulesResponse, (string | undefined)[]>(["managerQueryModules", client.contractAddress], () => client.queryModules({
+}: ManagerQueryModuleAddressesQuery) {
+  return useQuery<QueryModuleAddressesResponse, Error, QueryModuleAddressesResponse, (string | undefined)[]>(["managerQueryModuleAddresses", client.contractAddress], () => client.queryModuleAddresses({
     names: args.names
   }), options);
 }
-export interface ManagerQueryVersionsQuery {
+export interface ManagerQueryModuleVersionsQuery {
   client: ManagerQueryClient;
-  options?: UseQueryOptions<QueryVersionsResponse, Error, QueryVersionsResponse, (string | undefined)[]>;
+  options?: UseQueryOptions<QueryModuleVersionsResponse, Error, QueryModuleVersionsResponse, (string | undefined)[]>;
   args: {
     names: string[];
   };
 }
-export function useManagerQueryVersionsQuery({
+export function useManagerQueryModuleVersionsQuery({
   client,
   args,
   options
-}: ManagerQueryVersionsQuery) {
-  return useQuery<QueryVersionsResponse, Error, QueryVersionsResponse, (string | undefined)[]>(["managerQueryVersions", client.contractAddress], () => client.queryVersions({
+}: ManagerQueryModuleVersionsQuery) {
+  return useQuery<QueryModuleVersionsResponse, Error, QueryModuleVersionsResponse, (string | undefined)[]>(["managerQueryModuleVersions", client.contractAddress], () => client.queryModuleVersions({
     names: args.names
   }), options);
 }

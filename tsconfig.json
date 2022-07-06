@@ -18,5 +18,5 @@
     "baseUrl": "src",
     "useDefineForClassFields": true,
   },
-  "include": ["src"]
+  "include": ["src", "src/queries/FactoryContract.react-query.ts"]
 }
