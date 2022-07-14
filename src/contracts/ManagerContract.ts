@@ -18,29 +18,24 @@ export interface InstantiateMsg {
   root_user: string;
   subscription_address?: string | null;
   version_control_address: string;
-  [k: string]: unknown;
 }
 export interface ManagerModuleInfo {
   address: string;
   name: string;
   version: ContractVersion;
-  [k: string]: unknown;
 }
 export interface ContractVersion {
   contract: string;
   version: string;
-  [k: string]: unknown;
 }
 export type ModuleKind = "add_on" | "a_p_i" | "service" | "perk";
 export interface Module {
   info: ModuleInfo;
   kind: ModuleKind;
-  [k: string]: unknown;
 }
 export interface ModuleInfo {
   name: string;
   version?: string | null;
-  [k: string]: unknown;
 }
 export interface OsInfo {
   chain_id: string;
@@ -48,7 +43,6 @@ export interface OsInfo {
   governance_type: string;
   link?: string | null;
   name: string;
-  [k: string]: unknown;
 }
 export type Uint64 = string;
 export interface QueryConfigResponse {
@@ -56,23 +50,18 @@ export interface QueryConfigResponse {
   os_id: Uint64;
   root: string;
   version_control_address: string;
-  [k: string]: unknown;
 }
 export interface QueryInfoResponse {
   info: OsInfo;
-  [k: string]: unknown;
 }
 export interface QueryModuleAddressesResponse {
   modules: [string, string][];
-  [k: string]: unknown;
 }
 export interface QueryModuleInfosResponse {
   module_infos: ManagerModuleInfo[];
-  [k: string]: unknown;
 }
 export interface QueryModuleVersionsResponse {
   versions: ContractVersion[];
-  [k: string]: unknown;
 }
 export interface ManagerReadOnlyInterface {
   contractAddress: string;

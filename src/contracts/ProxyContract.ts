@@ -14,7 +14,6 @@ export type AssetInfoBaseFor_Addr = {
 export type Addr = string;
 export interface ConfigResponse {
   modules: string[];
-  [k: string]: unknown;
 }
 export type CosmosMsg_for_Empty = {
   bank: BankMsg;
@@ -31,12 +30,10 @@ export type BankMsg = {
   send: {
     amount: Coin[];
     to_address: string;
-    [k: string]: unknown;
   };
 } | {
   burn: {
     amount: Coin[];
-    [k: string]: unknown;
   };
 };
 export type Uint128 = string;
@@ -44,31 +41,26 @@ export type StakingMsg = {
   delegate: {
     amount: Coin;
     validator: string;
-    [k: string]: unknown;
   };
 } | {
   undelegate: {
     amount: Coin;
     validator: string;
-    [k: string]: unknown;
   };
 } | {
   redelegate: {
     amount: Coin;
     dst_validator: string;
     src_validator: string;
-    [k: string]: unknown;
   };
 };
 export type DistributionMsg = {
   set_withdraw_address: {
     address: string;
-    [k: string]: unknown;
   };
 } | {
   withdraw_delegator_reward: {
     validator: string;
-    [k: string]: unknown;
   };
 };
 export type WasmMsg = {
@@ -76,7 +68,6 @@ export type WasmMsg = {
     contract_addr: string;
     funds: Coin[];
     msg: Binary;
-    [k: string]: unknown;
   };
 } | {
   instantiate: {
@@ -85,88 +76,71 @@ export type WasmMsg = {
     funds: Coin[];
     label: string;
     msg: Binary;
-    [k: string]: unknown;
   };
 } | {
   migrate: {
     contract_addr: string;
     msg: Binary;
     new_code_id: number;
-    [k: string]: unknown;
   };
 } | {
   update_admin: {
     admin: string;
     contract_addr: string;
-    [k: string]: unknown;
   };
 } | {
   clear_admin: {
     contract_addr: string;
-    [k: string]: unknown;
   };
 };
 export type Binary = string;
 export interface Coin {
   amount: Uint128;
   denom: string;
-  [k: string]: unknown;
 }
 export interface Empty {
-  [k: string]: unknown;
 }
 export interface HoldingAmountResponse {
   value: Uint128;
-  [k: string]: unknown;
 }
 export interface HoldingValueResponse {
   value: Uint128;
-  [k: string]: unknown;
 }
 export interface InstantiateMsg {
   os_id: number;
-  [k: string]: unknown;
 }
 export type ValueRef = {
   pool: {
     pair_address: Addr;
-    [k: string]: unknown;
   };
 } | {
   liquidity: {
     pool_address: Addr;
-    [k: string]: unknown;
   };
 } | {
   proxy: {
     multiplier: Decimal;
     proxy_asset: AssetInfoBaseFor_Addr;
-    [k: string]: unknown;
   };
 } | {
   external: {
     contract_address: Addr;
-    [k: string]: unknown;
   };
 };
 export type Decimal = string;
 export interface ProxyAsset {
   asset: AssetBaseFor_Addr;
   value_reference?: ValueRef | null;
-  [k: string]: unknown;
 }
 export interface AssetBaseFor_Addr {
   amount: Uint128;
   info: AssetInfoBaseFor_Addr;
-  [k: string]: unknown;
 }
 export interface State {
   modules: Addr[];
-  [k: string]: unknown;
 }
 export interface TotalValueResponse {
   value: Uint128;
-  [k: string]: unknown;
 }
 export type AssetInfoBaseFor_String = {
   cw20: string;
@@ -176,38 +150,31 @@ export type AssetInfoBaseFor_String = {
 export type UncheckedValueRef = {
   pool: {
     pair_address: string;
-    [k: string]: unknown;
   };
 } | {
   liquidity: {
     pool_address: string;
-    [k: string]: unknown;
   };
 } | {
   proxy: {
     multiplier: Decimal;
     proxy_asset: AssetInfoBaseFor_String;
-    [k: string]: unknown;
   };
 } | {
   external: {
     contract_address: string;
-    [k: string]: unknown;
   };
 };
 export interface UncheckedProxyAsset {
   asset: AssetBaseFor_String;
   value_reference?: UncheckedValueRef | null;
-  [k: string]: unknown;
 }
 export interface AssetBaseFor_String {
   amount: Uint128;
   info: AssetInfoBaseFor_String;
-  [k: string]: unknown;
 }
 export interface VaultAssetConfigResponse {
   value: ProxyAsset;
-  [k: string]: unknown;
 }
 export interface ProxyReadOnlyInterface {
   contractAddress: string;

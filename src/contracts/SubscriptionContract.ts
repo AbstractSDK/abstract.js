@@ -10,11 +10,9 @@ export type Addr = string;
 export interface AddOnState {
   memory: Memory;
   proxy_address: Addr;
-  [k: string]: unknown;
 }
 export interface Memory {
   address: Addr;
-  [k: string]: unknown;
 }
 export type AssetInfoBaseFor_Addr = {
   cw20: Addr;
@@ -27,7 +25,6 @@ export type Uint64 = string;
 export interface ConfigResponse {
   contribution: ContributionConfig;
   subscription: SubscriptionConfig;
-  [k: string]: unknown;
 }
 export interface ContributionConfig {
   base_denom: string;
@@ -37,34 +34,28 @@ export interface ContributionConfig {
   max_emissions_multiple: Decimal;
   project_token: Addr;
   protocol_income_share: Decimal;
-  [k: string]: unknown;
 }
 export interface SubscriptionConfig {
   factory_address: Addr;
   payment_asset: AssetInfoBaseFor_Addr;
   subscription_cost: Uint64;
   version_control_address: Addr;
-  [k: string]: unknown;
 }
 export interface ContributorStateResponse {
   compensation: Compensation;
-  [k: string]: unknown;
 }
 export interface Compensation {
   base: number;
   expiration: Uint64;
   next_pay_day: Uint64;
   weight: number;
-  [k: string]: unknown;
 }
 export interface FeeResponse {
   fee: AssetBaseFor_Addr;
-  [k: string]: unknown;
 }
 export interface AssetBaseFor_Addr {
   amount: Uint128;
   info: AssetInfoBaseFor_Addr;
-  [k: string]: unknown;
 }
 export type AssetInfoBaseFor_String = {
   cw20: string;
@@ -75,11 +66,9 @@ export interface InstantiateMsg {
   base: AddOnInstantiateMsg;
   contribution: ContributionInstantiateMsg;
   subscription: SubscriptionInstantiateMsg;
-  [k: string]: unknown;
 }
 export interface AddOnInstantiateMsg {
   memory_address: string;
-  [k: string]: unknown;
 }
 export interface ContributionInstantiateMsg {
   base_denom: string;
@@ -89,19 +78,16 @@ export interface ContributionInstantiateMsg {
   max_emissions_multiple: Decimal;
   project_token: string;
   protocol_income_share: Decimal;
-  [k: string]: unknown;
 }
 export interface SubscriptionInstantiateMsg {
   factory_addr: string;
   payment_asset: AssetInfoBaseFor_String;
   subscription_cost: Uint64;
   version_control_addr: string;
-  [k: string]: unknown;
 }
 export interface StateResponse {
   contribution: ContributionState;
   subscription: SubscriptionState;
-  [k: string]: unknown;
 }
 export interface ContributionState {
   emissions: Uint128;
@@ -109,28 +95,23 @@ export interface ContributionState {
   next_pay_day: Uint64;
   target: Uint64;
   total_weight: Uint128;
-  [k: string]: unknown;
 }
 export interface SubscriptionState {
   active_subs: number;
   collected: boolean;
   income: Uint64;
-  [k: string]: unknown;
 }
 export interface SubscriberStateResponse {
   currently_subscribed: boolean;
   subscriber_details: Subscriber;
-  [k: string]: unknown;
 }
 export interface Subscriber {
   balance: Deposit;
   claimed_emissions: boolean;
   manager_addr: Addr;
-  [k: string]: unknown;
 }
 export interface Deposit {
   value: Uint64;
-  [k: string]: unknown;
 }
 export interface SubscriptionReadOnlyInterface {
   contractAddress: string;
