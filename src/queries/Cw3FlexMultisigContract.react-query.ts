@@ -5,7 +5,7 @@
 */
 
 import { useQuery, UseQueryOptions } from "react-query";
-import { CosmosMsg_for_Empty, BankMsg, Uint128, StakingMsg, DistributionMsg, WasmMsg, Binary, Coin, Empty, Executor, Addr, Duration, Threshold, Decimal, InstantiateMsg, Expiration, Timestamp, Uint64, Status, ThresholdResponse, ListProposalsResponse, ProposalResponseFor_Empty, ListVotersResponse, VoterDetail, Vote, ListVotesResponse, VoteInfo, ProposalResponse, ReverseProposalsResponse, VoteResponse, VoterResponse } from "./Cw3FlexMultisigContract";
+import { CosmosMsg_for_Empty, BankMsg, Uint128, StakingMsg, DistributionMsg, WasmMsg, Binary, Coin, Empty, Executor, Addr, Duration, Threshold, Decimal, InstantiateMsg, Expiration, Timestamp, Uint64, Status, ThresholdResponse, ListProposalsResponse, ProposalResponseFor_Empty, ListVotersResponse, VoterDetail, Vote, ListVotesResponse, VoteInfo, ProposalResponse, ReverseProposalsResponse, VoteResponse, VoterResponse } from "../contracts/Cw3FlexMultisigContract";
 import { Cw3FlexMultisigQueryClient } from "../contracts/Cw3FlexMultisigContract"
 export interface Cw3FlexMultisigListVotersQuery {
   client: Cw3FlexMultisigQueryClient;
