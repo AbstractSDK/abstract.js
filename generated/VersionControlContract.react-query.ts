@@ -5,8 +5,8 @@
 */
 
 import { useQuery, UseQueryOptions } from "react-query";
-import { Addr, ApiAddressResponse, ContractVersion, ApiAddressesResponse, Uint64, CodeIdResponse, CodeIdsResponse, ConfigResponse, InstantiateMsg, ModuleInfo, OsCoreResponse, Core } from "../contracts/VersionControlContract";
-import { VersionControlQueryClient } from "../contracts/VersionControlContract";
+import { InstantiateMsg, ModuleInfo, QueryApiAddressesResponse, ContractVersion, Uint64, QueryCodeIdResponse, QueryConfigResponse, Addr, QueryOsCoreResponse, Core } from "./VersionControlContract";
+import { VersionControlQueryClient } from "./VersionControlContract.ts";
 export interface VersionControlApiAddressesQuery {
   client: VersionControlQueryClient;
   options?: UseQueryOptions<ApiAddressesResponse, Error, ApiAddressesResponse, (string | undefined)[]>;

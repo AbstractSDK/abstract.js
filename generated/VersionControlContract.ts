@@ -6,42 +6,43 @@
 
 import { CosmWasmClient, ExecuteResult, SigningCosmWasmClient } from "@cosmjs/cosmwasm-stargate";
 import { Coin, StdFee } from "@cosmjs/amino";
-export type Addr = string;
-export interface ApiAddressResponse {
-  address: Addr;
-  info: ContractVersion;
-}
-export interface ContractVersion {
-  contract: string;
-  version: string;
-}
-export interface ApiAddressesResponse {
-  api_addresses: [ContractVersion, string][];
-}
-export type Uint64 = string;
-export interface CodeIdResponse {
-  code_id: Uint64;
-  info: ContractVersion;
-}
-export interface CodeIdsResponse {
-  module_code_ids: [ContractVersion, number][];
-}
-export interface ConfigResponse {
-  admin: string;
-  factory: string;
-}
 export interface InstantiateMsg {
+  [k: string]: unknown;
 }
 export interface ModuleInfo {
   name: string;
   version?: string | null;
+  [k: string]: unknown;
 }
-export interface OsCoreResponse {
+export interface QueryApiAddressesResponse {
+  api_addresses: [ContractVersion, string][];
+  [k: string]: unknown;
+}
+export interface ContractVersion {
+  contract: string;
+  version: string;
+  [k: string]: unknown;
+}
+export type Uint64 = string;
+export interface QueryCodeIdResponse {
+  code_id: Uint64;
+  info: ContractVersion;
+  [k: string]: unknown;
+}
+export interface QueryConfigResponse {
+  admin: string;
+  factory: string;
+  [k: string]: unknown;
+}
+export type Addr = string;
+export interface QueryOsCoreResponse {
   os_core: Core;
+  [k: string]: unknown;
 }
 export interface Core {
   manager: Addr;
   proxy: Addr;
+  [k: string]: unknown;
 }
 export interface VersionControlReadOnlyInterface {
   contractAddress: string;
