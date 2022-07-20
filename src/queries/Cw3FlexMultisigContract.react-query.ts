@@ -24,8 +24,8 @@ export function useCw3FlexMultisigListVotersQuery({
     limit: args.limit,
     startAfter: args.startAfter
   }) : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface Cw3FlexMultisigVoterQuery {
@@ -43,8 +43,8 @@ export function useCw3FlexMultisigVoterQuery({
   return useQuery<VoterResponse | undefined, Error, VoterResponse, (string | undefined)[]>(["cw3FlexMultisigVoter", client?.contractAddress], () => client ? client.voter({
     address: args.address
   }) : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface Cw3FlexMultisigListVotesQuery {
@@ -66,8 +66,8 @@ export function useCw3FlexMultisigListVotesQuery({
     proposalId: args.proposalId,
     startAfter: args.startAfter
   }) : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface Cw3FlexMultisigVoteQuery {
@@ -87,8 +87,8 @@ export function useCw3FlexMultisigVoteQuery({
     proposalId: args.proposalId,
     voter: args.voter
   }) : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface Cw3FlexMultisigReverseProposalsQuery {
@@ -108,8 +108,8 @@ export function useCw3FlexMultisigReverseProposalsQuery({
     limit: args.limit,
     startBefore: args.startBefore
   }) : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface Cw3FlexMultisigListProposalsQuery {
@@ -129,8 +129,8 @@ export function useCw3FlexMultisigListProposalsQuery({
     limit: args.limit,
     startAfter: args.startAfter
   }) : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface Cw3FlexMultisigProposalQuery {
@@ -148,8 +148,8 @@ export function useCw3FlexMultisigProposalQuery({
   return useQuery<ProposalResponse | undefined, Error, ProposalResponse, (string | undefined)[]>(["cw3FlexMultisigProposal", client?.contractAddress], () => client ? client.proposal({
     proposalId: args.proposalId
   }) : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface Cw3FlexMultisigThresholdQuery {
@@ -161,7 +161,7 @@ export function useCw3FlexMultisigThresholdQuery({
   options
 }: Cw3FlexMultisigThresholdQuery) {
   return useQuery<ThresholdResponse | undefined, Error, ThresholdResponse, (string | undefined)[]>(["cw3FlexMultisigThreshold", client?.contractAddress], () => client ? client.threshold() : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }

@@ -22,8 +22,8 @@ export function useSubscriptionContributorStateQuery({
   return useQuery<ContributorStateResponse | undefined, Error, ContributorStateResponse, (string | undefined)[]>(["subscriptionContributorState", client?.contractAddress], () => client ? client.contributorState({
     osId: args.osId
   }) : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface SubscriptionSubscriberStateQuery {
@@ -41,8 +41,8 @@ export function useSubscriptionSubscriberStateQuery({
   return useQuery<SubscriberStateResponse | undefined, Error, SubscriberStateResponse, (string | undefined)[]>(["subscriptionSubscriberState", client?.contractAddress], () => client ? client.subscriberState({
     osId: args.osId
   }) : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface SubscriptionFeeQuery {
@@ -54,8 +54,8 @@ export function useSubscriptionFeeQuery({
   options
 }: SubscriptionFeeQuery) {
   return useQuery<FeeResponse | undefined, Error, FeeResponse, (string | undefined)[]>(["subscriptionFee", client?.contractAddress], () => client ? client.fee() : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface SubscriptionConfigQuery {
@@ -67,8 +67,8 @@ export function useSubscriptionConfigQuery({
   options
 }: SubscriptionConfigQuery) {
   return useQuery<ConfigResponse | undefined, Error, ConfigResponse, (string | undefined)[]>(["subscriptionConfig", client?.contractAddress], () => client ? client.config() : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface SubscriptionStateQuery {
@@ -80,8 +80,8 @@ export function useSubscriptionStateQuery({
   options
 }: SubscriptionStateQuery) {
   return useQuery<StateResponse | undefined, Error, StateResponse, (string | undefined)[]>(["subscriptionState", client?.contractAddress], () => client ? client.state() : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface SubscriptionBaseQuery {
@@ -93,7 +93,7 @@ export function useSubscriptionBaseQuery({
   options
 }: SubscriptionBaseQuery) {
   return useQuery<BaseResponse | undefined, Error, BaseResponse, (string | undefined)[]>(["subscriptionBase", client?.contractAddress], () => client ? client.queryBase() : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }

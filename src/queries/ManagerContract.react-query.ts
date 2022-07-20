@@ -16,8 +16,8 @@ export function useManagerQueryOsConfigQuery({
   options
 }: ManagerQueryOsConfigQuery) {
   return useQuery<QueryOsConfigResponse | undefined, Error, QueryOsConfigResponse, (string | undefined)[]>(["managerQueryOsConfig", client?.contractAddress], () => client ? client.queryOsConfig() : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface ManagerQueryEnabledModulesQuery {
@@ -29,8 +29,8 @@ export function useManagerQueryEnabledModulesQuery({
   options
 }: ManagerQueryEnabledModulesQuery) {
   return useQuery<QueryEnabledModulesResponse | undefined, Error, QueryEnabledModulesResponse, (string | undefined)[]>(["managerQueryEnabledModules", client?.contractAddress], () => client ? client.queryEnabledModules() : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface ManagerQueryModulesQuery {
@@ -48,8 +48,8 @@ export function useManagerQueryModulesQuery({
   return useQuery<QueryModulesResponse | undefined, Error, QueryModulesResponse, (string | undefined)[]>(["managerQueryModules", client?.contractAddress], () => client ? client.queryModules({
     names: args.names
   }) : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface ManagerQueryVersionsQuery {
@@ -67,7 +67,7 @@ export function useManagerQueryVersionsQuery({
   return useQuery<QueryVersionsResponse | undefined, Error, QueryVersionsResponse, (string | undefined)[]>(["managerQueryVersions", client?.contractAddress], () => client ? client.queryVersions({
     names: args.names
   }) : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }

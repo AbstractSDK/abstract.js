@@ -16,8 +16,8 @@ export function useCw4GroupHooksQuery({
   options
 }: Cw4GroupHooksQuery) {
   return useQuery<HooksResponse | undefined, Error, HooksResponse, (string | undefined)[]>(["cw4GroupHooks", client?.contractAddress], () => client ? client.hooks() : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface Cw4GroupMemberQuery {
@@ -37,8 +37,8 @@ export function useCw4GroupMemberQuery({
     addr: args.addr,
     atHeight: args.atHeight
   }) : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface Cw4GroupListMembersQuery {
@@ -58,8 +58,8 @@ export function useCw4GroupListMembersQuery({
     limit: args.limit,
     startAfter: args.startAfter
   }) : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface Cw4GroupTotalWeightQuery {
@@ -71,8 +71,8 @@ export function useCw4GroupTotalWeightQuery({
   options
 }: Cw4GroupTotalWeightQuery) {
   return useQuery<TotalWeightResponse | undefined, Error, TotalWeightResponse, (string | undefined)[]>(["cw4GroupTotalWeight", client?.contractAddress], () => client ? client.totalWeight() : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface Cw4GroupAdminQuery {
@@ -84,7 +84,7 @@ export function useCw4GroupAdminQuery({
   options
 }: Cw4GroupAdminQuery) {
   return useQuery<AdminResponse | undefined, Error, AdminResponse, (string | undefined)[]>(["cw4GroupAdmin", client?.contractAddress], () => client ? client.admin() : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }

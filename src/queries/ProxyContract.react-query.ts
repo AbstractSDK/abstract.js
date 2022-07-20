@@ -24,8 +24,8 @@ export function useProxyProxyAssetsQuery({
     iterLimit: args.iterLimit,
     lastAssetName: args.lastAssetName
   }) : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface ProxyProxyAssetConfigQuery {
@@ -43,8 +43,8 @@ export function useProxyProxyAssetConfigQuery({
   return useQuery<ProxyAssetConfigResponse | undefined, Error, ProxyAssetConfigResponse, (string | undefined)[]>(["proxyProxyAssetConfig", client?.contractAddress], () => client ? client.proxyAssetConfig({
     identifier: args.identifier
   }) : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface ProxyHoldingAmountQuery {
@@ -62,8 +62,8 @@ export function useProxyHoldingAmountQuery({
   return useQuery<HoldingAmountResponse | undefined, Error, HoldingAmountResponse, (string | undefined)[]>(["proxyHoldingAmount", client?.contractAddress], () => client ? client.holdingAmount({
     identifier: args.identifier
   }) : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface ProxyHoldingValueQuery {
@@ -81,8 +81,8 @@ export function useProxyHoldingValueQuery({
   return useQuery<HoldingValueResponse | undefined, Error, HoldingValueResponse, (string | undefined)[]>(["proxyHoldingValue", client?.contractAddress], () => client ? client.holdingValue({
     identifier: args.identifier
   }) : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface ProxyTotalValueQuery {
@@ -94,8 +94,8 @@ export function useProxyTotalValueQuery({
   options
 }: ProxyTotalValueQuery) {
   return useQuery<TotalValueResponse | undefined, Error, TotalValueResponse, (string | undefined)[]>(["proxyTotalValue", client?.contractAddress], () => client ? client.totalValue() : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
 export interface ProxyConfigQuery {
@@ -107,7 +107,7 @@ export function useProxyConfigQuery({
   options
 }: ProxyConfigQuery) {
   return useQuery<ConfigResponse | undefined, Error, ConfigResponse, (string | undefined)[]>(["proxyConfig", client?.contractAddress], () => client ? client.config() : undefined, {
-    enabled: !!client,
-    ...options
+    ...options,
+    enabled: !!client  && options?.enabled
   });
 }
