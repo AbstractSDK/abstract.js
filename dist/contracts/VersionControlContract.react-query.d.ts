@@ -8,12 +8,12 @@ import { ConfigResponse, ModuleInfo, QueryCodeIdResponse, QueryEnabledModulesRes
 import { VersionControlQueryClient } from "./VersionControlContract";
 export interface VersionControlConfigQuery {
     client: VersionControlQueryClient;
-    options?: UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
 }
 export declare function useVersionControlConfigQuery({ client, options }: VersionControlConfigQuery): import("react-query").UseQueryResult<ConfigResponse, Error>;
 export interface VersionControlQueryCodeIdQuery {
     client: VersionControlQueryClient;
-    options?: UseQueryOptions<QueryCodeIdResponse, Error, QueryCodeIdResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<QueryCodeIdResponse, Error, QueryCodeIdResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
     args: {
         module: ModuleInfo;
     };
@@ -21,7 +21,7 @@ export interface VersionControlQueryCodeIdQuery {
 export declare function useVersionControlQueryCodeIdQuery({ client, args, options }: VersionControlQueryCodeIdQuery): import("react-query").UseQueryResult<QueryCodeIdResponse, Error>;
 export interface VersionControlQueryOsAddressQuery {
     client: VersionControlQueryClient;
-    options?: UseQueryOptions<QueryOsAddressResponse, Error, QueryOsAddressResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<QueryOsAddressResponse, Error, QueryOsAddressResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
     args: {
         osId: number;
     };
@@ -29,7 +29,7 @@ export interface VersionControlQueryOsAddressQuery {
 export declare function useVersionControlQueryOsAddressQuery({ client, args, options }: VersionControlQueryOsAddressQuery): import("react-query").UseQueryResult<QueryOsAddressResponse, Error>;
 export interface VersionControlQueryEnabledModulesQuery {
     client: VersionControlQueryClient;
-    options?: UseQueryOptions<QueryEnabledModulesResponse, Error, QueryEnabledModulesResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<QueryEnabledModulesResponse, Error, QueryEnabledModulesResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
     args: {
         osAddress: string;
     };

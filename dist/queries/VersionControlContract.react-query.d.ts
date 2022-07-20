@@ -3,53 +3,65 @@
 * DO NOT MODIFY IT BY HAND. Instead, modify the source JSONSchema file,
 * and run the cosmwasm-typescript-gen generate command to regenerate this file.
 */
-import { UseQueryOptions } from "react-query";
+import { UseQueryOptions } from '@tanstack/react-query';
 import { ApiAddressResponse, ContractVersion, ApiAddressesResponse, CodeIdResponse, CodeIdsResponse, ConfigResponse, ModuleInfo, OsCoreResponse } from "../contracts/VersionControlContract";
 import { VersionControlQueryClient } from "../contracts/VersionControlContract";
 export interface VersionControlApiAddressesQuery {
     client: VersionControlQueryClient;
-    options?: UseQueryOptions<ApiAddressesResponse, Error, ApiAddressesResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ApiAddressesResponse, Error, ApiAddressesResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
     args: {
         iterLimit?: number;
         lastApiModule?: ContractVersion;
     };
 }
-export declare function useVersionControlApiAddressesQuery({ client, args, options }: VersionControlApiAddressesQuery): import("react-query").UseQueryResult<ApiAddressesResponse, Error>;
+export declare function useVersionControlApiAddressesQuery({ client, args, options }: VersionControlApiAddressesQuery): import("@tanstack/react-query").UseQueryResult<ApiAddressesResponse, Error>;
 export interface VersionControlCodeIdsQuery {
     client: VersionControlQueryClient;
-    options?: UseQueryOptions<CodeIdsResponse, Error, CodeIdsResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<CodeIdsResponse, Error, CodeIdsResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
     args: {
         iterLimit?: number;
         lastModule?: ContractVersion;
     };
 }
-export declare function useVersionControlCodeIdsQuery({ client, args, options }: VersionControlCodeIdsQuery): import("react-query").UseQueryResult<CodeIdsResponse, Error>;
+export declare function useVersionControlCodeIdsQuery({ client, args, options }: VersionControlCodeIdsQuery): import("@tanstack/react-query").UseQueryResult<CodeIdsResponse, Error>;
 export interface VersionControlConfigQuery {
     client: VersionControlQueryClient;
-    options?: UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
 }
-export declare function useVersionControlConfigQuery({ client, options }: VersionControlConfigQuery): import("react-query").UseQueryResult<ConfigResponse, Error>;
+export declare function useVersionControlConfigQuery({ client, options }: VersionControlConfigQuery): import("@tanstack/react-query").UseQueryResult<ConfigResponse, Error>;
 export interface VersionControlApiAddressQuery {
     client: VersionControlQueryClient;
-    options?: UseQueryOptions<ApiAddressResponse, Error, ApiAddressResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ApiAddressResponse, Error, ApiAddressResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
     args: {
         module: ModuleInfo;
     };
 }
-export declare function useVersionControlApiAddressQuery({ client, args, options }: VersionControlApiAddressQuery): import("react-query").UseQueryResult<ApiAddressResponse, Error>;
+export declare function useVersionControlApiAddressQuery({ client, args, options }: VersionControlApiAddressQuery): import("@tanstack/react-query").UseQueryResult<ApiAddressResponse, Error>;
 export interface VersionControlCodeIdQuery {
     client: VersionControlQueryClient;
-    options?: UseQueryOptions<CodeIdResponse, Error, CodeIdResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<CodeIdResponse, Error, CodeIdResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
     args: {
         module: ModuleInfo;
     };
 }
-export declare function useVersionControlCodeIdQuery({ client, args, options }: VersionControlCodeIdQuery): import("react-query").UseQueryResult<CodeIdResponse, Error>;
+export declare function useVersionControlCodeIdQuery({ client, args, options }: VersionControlCodeIdQuery): import("@tanstack/react-query").UseQueryResult<CodeIdResponse, Error>;
 export interface VersionControlOsCoreQuery {
     client: VersionControlQueryClient;
-    options?: UseQueryOptions<OsCoreResponse, Error, OsCoreResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<OsCoreResponse, Error, OsCoreResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
     args: {
         osId: number;
     };
 }
-export declare function useVersionControlOsCoreQuery({ client, args, options }: VersionControlOsCoreQuery): import("react-query").UseQueryResult<OsCoreResponse, Error>;
+export declare function useVersionControlOsCoreQuery({ client, args, options }: VersionControlOsCoreQuery): import("@tanstack/react-query").UseQueryResult<OsCoreResponse, Error>;

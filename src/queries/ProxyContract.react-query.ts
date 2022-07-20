@@ -4,12 +4,12 @@
 * and run the cosmwasm-typescript-gen generate command to regenerate this file.
 */
 
-import { useQuery, UseQueryOptions } from "react-query";
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { ConfigResponse,HoldingAmountResponse, HoldingValueResponse,  ProxyAssetConfigResponse, ProxyAssetsResponse, TotalValueResponse } from "../contracts/ProxyContract";
 import { ProxyQueryClient } from "../contracts/ProxyContract";
 export interface ProxyProxyAssetsQuery {
   client?: ProxyQueryClient;
-  options?: UseQueryOptions<ProxyAssetsResponse | undefined, Error, ProxyAssetsResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<ProxyAssetsResponse | undefined, Error, ProxyAssetsResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
   args: {
     iterLimit?: number;
     lastAssetName?: string;
@@ -30,7 +30,7 @@ export function useProxyProxyAssetsQuery({
 }
 export interface ProxyProxyAssetConfigQuery {
   client?: ProxyQueryClient;
-  options?: UseQueryOptions<ProxyAssetConfigResponse | undefined, Error, ProxyAssetConfigResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<ProxyAssetConfigResponse | undefined, Error, ProxyAssetConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
   args: {
     identifier: string;
   };
@@ -49,7 +49,7 @@ export function useProxyProxyAssetConfigQuery({
 }
 export interface ProxyHoldingAmountQuery {
   client?: ProxyQueryClient;
-  options?: UseQueryOptions<HoldingAmountResponse | undefined, Error, HoldingAmountResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<HoldingAmountResponse | undefined, Error, HoldingAmountResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
   args: {
     identifier: string;
   };
@@ -68,7 +68,7 @@ export function useProxyHoldingAmountQuery({
 }
 export interface ProxyHoldingValueQuery {
   client?: ProxyQueryClient;
-  options?: UseQueryOptions<HoldingValueResponse | undefined, Error, HoldingValueResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<HoldingValueResponse | undefined, Error, HoldingValueResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
   args: {
     identifier: string;
   };
@@ -87,7 +87,7 @@ export function useProxyHoldingValueQuery({
 }
 export interface ProxyTotalValueQuery {
   client?: ProxyQueryClient;
-  options?: UseQueryOptions<TotalValueResponse | undefined, Error, TotalValueResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<TotalValueResponse | undefined, Error, TotalValueResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
 }
 export function useProxyTotalValueQuery({
   client,
@@ -100,7 +100,7 @@ export function useProxyTotalValueQuery({
 }
 export interface ProxyConfigQuery {
   client?: ProxyQueryClient;
-  options?: UseQueryOptions<ConfigResponse | undefined, Error, ConfigResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<ConfigResponse | undefined, Error, ConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
 }
 export function useProxyConfigQuery({
   client,

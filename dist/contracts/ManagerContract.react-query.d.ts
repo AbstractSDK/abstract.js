@@ -8,7 +8,7 @@ import { ConfigResponse, HoldingAmountResponse, HoldingValueResponse, TotalValue
 import { ManagerQueryClient } from "./ManagerContract";
 export interface ManagerVaultAssetConfigQuery {
     client: ManagerQueryClient;
-    options?: UseQueryOptions<VaultAssetConfigResponse, Error, VaultAssetConfigResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<VaultAssetConfigResponse, Error, VaultAssetConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
     args: {
         identifier: string;
     };
@@ -16,7 +16,7 @@ export interface ManagerVaultAssetConfigQuery {
 export declare function useManagerVaultAssetConfigQuery({ client, args, options }: ManagerVaultAssetConfigQuery): import("react-query").UseQueryResult<VaultAssetConfigResponse, Error>;
 export interface ManagerHoldingAmountQuery {
     client: ManagerQueryClient;
-    options?: UseQueryOptions<HoldingAmountResponse, Error, HoldingAmountResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<HoldingAmountResponse, Error, HoldingAmountResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
     args: {
         identifier: string;
     };
@@ -24,7 +24,7 @@ export interface ManagerHoldingAmountQuery {
 export declare function useManagerHoldingAmountQuery({ client, args, options }: ManagerHoldingAmountQuery): import("react-query").UseQueryResult<HoldingAmountResponse, Error>;
 export interface ManagerHoldingValueQuery {
     client: ManagerQueryClient;
-    options?: UseQueryOptions<HoldingValueResponse, Error, HoldingValueResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<HoldingValueResponse, Error, HoldingValueResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
     args: {
         identifier: string;
     };
@@ -32,11 +32,11 @@ export interface ManagerHoldingValueQuery {
 export declare function useManagerHoldingValueQuery({ client, args, options }: ManagerHoldingValueQuery): import("react-query").UseQueryResult<HoldingValueResponse, Error>;
 export interface ManagerTotalValueQuery {
     client: ManagerQueryClient;
-    options?: UseQueryOptions<TotalValueResponse, Error, TotalValueResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<TotalValueResponse, Error, TotalValueResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
 }
 export declare function useManagerTotalValueQuery({ client, options }: ManagerTotalValueQuery): import("react-query").UseQueryResult<TotalValueResponse, Error>;
 export interface ManagerConfigQuery {
     client: ManagerQueryClient;
-    options?: UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
 }
 export declare function useManagerConfigQuery({ client, options }: ManagerConfigQuery): import("react-query").UseQueryResult<ConfigResponse, Error>;

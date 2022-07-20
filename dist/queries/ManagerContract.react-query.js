@@ -6,7 +6,7 @@
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useManagerModuleVersionsQuery = exports.useManagerModuleAddressesQuery = exports.useManagerModuleInfosQuery = exports.useManagerConfigQuery = exports.useManagerInfoQuery = void 0;
-const react_query_1 = require("react-query");
+const react_query_1 = require("@tanstack/react-query");
 function useManagerInfoQuery({ client, options }) {
     return (0, react_query_1.useQuery)(["managerInfo", client === null || client === void 0 ? void 0 : client.contractAddress], () => client ? client.info() : undefined, Object.assign(Object.assign({}, options), { enabled: !!client && (options === null || options === void 0 ? void 0 : options.enabled) }));
 }

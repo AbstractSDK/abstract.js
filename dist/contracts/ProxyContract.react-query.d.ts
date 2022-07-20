@@ -8,7 +8,7 @@ import { ConfigResponse, HoldingAmountResponse, HoldingValueResponse, TotalValue
 import { ProxyQueryClient } from "./ProxyContract";
 export interface ProxyVaultAssetConfigQuery {
     client: ProxyQueryClient;
-    options?: UseQueryOptions<VaultAssetConfigResponse, Error, VaultAssetConfigResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<VaultAssetConfigResponse, Error, VaultAssetConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
     args: {
         identifier: string;
     };
@@ -16,7 +16,7 @@ export interface ProxyVaultAssetConfigQuery {
 export declare function useProxyVaultAssetConfigQuery({ client, args, options }: ProxyVaultAssetConfigQuery): import("react-query").UseQueryResult<VaultAssetConfigResponse, Error>;
 export interface ProxyHoldingAmountQuery {
     client: ProxyQueryClient;
-    options?: UseQueryOptions<HoldingAmountResponse, Error, HoldingAmountResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<HoldingAmountResponse, Error, HoldingAmountResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
     args: {
         identifier: string;
     };
@@ -24,7 +24,7 @@ export interface ProxyHoldingAmountQuery {
 export declare function useProxyHoldingAmountQuery({ client, args, options }: ProxyHoldingAmountQuery): import("react-query").UseQueryResult<HoldingAmountResponse, Error>;
 export interface ProxyHoldingValueQuery {
     client: ProxyQueryClient;
-    options?: UseQueryOptions<HoldingValueResponse, Error, HoldingValueResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<HoldingValueResponse, Error, HoldingValueResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
     args: {
         identifier: string;
     };
@@ -32,11 +32,11 @@ export interface ProxyHoldingValueQuery {
 export declare function useProxyHoldingValueQuery({ client, args, options }: ProxyHoldingValueQuery): import("react-query").UseQueryResult<HoldingValueResponse, Error>;
 export interface ProxyTotalValueQuery {
     client: ProxyQueryClient;
-    options?: UseQueryOptions<TotalValueResponse, Error, TotalValueResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<TotalValueResponse, Error, TotalValueResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
 }
 export declare function useProxyTotalValueQuery({ client, options }: ProxyTotalValueQuery): import("react-query").UseQueryResult<TotalValueResponse, Error>;
 export interface ProxyConfigQuery {
     client: ProxyQueryClient;
-    options?: UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
 }
 export declare function useProxyConfigQuery({ client, options }: ProxyConfigQuery): import("react-query").UseQueryResult<ConfigResponse, Error>;

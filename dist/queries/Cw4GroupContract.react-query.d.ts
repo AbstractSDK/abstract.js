@@ -3,39 +3,49 @@
 * DO NOT MODIFY IT BY HAND. Instead, modify the source JSONSchema file,
 * and run the cosmwasm-typescript-gen generate command to regenerate this file.
 */
-import { UseQueryOptions } from "react-query";
+import { UseQueryOptions } from '@tanstack/react-query';
 import { AdminResponse, HooksResponse, ListMembersResponse, MemberResponse, TotalWeightResponse } from "../contracts/Cw4GroupContract";
 import { Cw4GroupQueryClient } from "../contracts/Cw4GroupContract";
 export interface Cw4GroupHooksQuery {
     client?: Cw4GroupQueryClient;
-    options?: UseQueryOptions<HooksResponse | undefined, Error, HooksResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<HooksResponse | undefined, Error, HooksResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
 }
-export declare function useCw4GroupHooksQuery({ client, options }: Cw4GroupHooksQuery): import("react-query").UseQueryResult<HooksResponse, Error>;
+export declare function useCw4GroupHooksQuery({ client, options }: Cw4GroupHooksQuery): import("@tanstack/react-query").UseQueryResult<HooksResponse, Error>;
 export interface Cw4GroupMemberQuery {
     client?: Cw4GroupQueryClient;
-    options?: UseQueryOptions<MemberResponse | undefined, Error, MemberResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<MemberResponse | undefined, Error, MemberResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
     args: {
         addr: string;
         atHeight?: number;
     };
 }
-export declare function useCw4GroupMemberQuery({ client, args, options }: Cw4GroupMemberQuery): import("react-query").UseQueryResult<MemberResponse, Error>;
+export declare function useCw4GroupMemberQuery({ client, args, options }: Cw4GroupMemberQuery): import("@tanstack/react-query").UseQueryResult<MemberResponse, Error>;
 export interface Cw4GroupListMembersQuery {
     client?: Cw4GroupQueryClient;
-    options?: UseQueryOptions<ListMembersResponse | undefined, Error, ListMembersResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ListMembersResponse | undefined, Error, ListMembersResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
     args: {
         limit?: number;
         startAfter?: string;
     };
 }
-export declare function useCw4GroupListMembersQuery({ client, args, options }: Cw4GroupListMembersQuery): import("react-query").UseQueryResult<ListMembersResponse, Error>;
+export declare function useCw4GroupListMembersQuery({ client, args, options }: Cw4GroupListMembersQuery): import("@tanstack/react-query").UseQueryResult<ListMembersResponse, Error>;
 export interface Cw4GroupTotalWeightQuery {
     client?: Cw4GroupQueryClient;
-    options?: UseQueryOptions<TotalWeightResponse | undefined, Error, TotalWeightResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<TotalWeightResponse | undefined, Error, TotalWeightResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
 }
-export declare function useCw4GroupTotalWeightQuery({ client, options }: Cw4GroupTotalWeightQuery): import("react-query").UseQueryResult<TotalWeightResponse, Error>;
+export declare function useCw4GroupTotalWeightQuery({ client, options }: Cw4GroupTotalWeightQuery): import("@tanstack/react-query").UseQueryResult<TotalWeightResponse, Error>;
 export interface Cw4GroupAdminQuery {
     client?: Cw4GroupQueryClient;
-    options?: UseQueryOptions<AdminResponse | undefined, Error, AdminResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<AdminResponse | undefined, Error, AdminResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
 }
-export declare function useCw4GroupAdminQuery({ client, options }: Cw4GroupAdminQuery): import("react-query").UseQueryResult<AdminResponse, Error>;
+export declare function useCw4GroupAdminQuery({ client, options }: Cw4GroupAdminQuery): import("@tanstack/react-query").UseQueryResult<AdminResponse, Error>;

@@ -3,11 +3,13 @@
 * DO NOT MODIFY IT BY HAND. Instead, modify the source JSONSchema file,
 * and run the cosmwasm-typescript-gen generate command to regenerate this file.
 */
-import { UseQueryOptions } from "react-query";
+import { UseQueryOptions } from '@tanstack/react-query';
 import { ConfigResponse } from "../contracts/FactoryContract";
 import { FactoryQueryClient } from "../contracts/FactoryContract";
 export interface FactoryConfigQuery {
     client: FactoryQueryClient;
-    options?: UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
 }
-export declare function useFactoryConfigQuery({ client, options }: FactoryConfigQuery): import("react-query").UseQueryResult<ConfigResponse, Error>;
+export declare function useFactoryConfigQuery({ client, options }: FactoryConfigQuery): import("@tanstack/react-query").UseQueryResult<ConfigResponse, Error>;

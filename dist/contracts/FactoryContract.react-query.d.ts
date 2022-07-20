@@ -8,6 +8,6 @@ import { ConfigResponse } from "./FactoryContract";
 import { FactoryQueryClient } from "./FactoryContract";
 export interface FactoryConfigQuery {
     client: FactoryQueryClient;
-    options?: UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
 }
 export declare function useFactoryConfigQuery({ client, options }: FactoryConfigQuery): import("react-query").UseQueryResult<ConfigResponse, Error>;

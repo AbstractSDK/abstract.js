@@ -6,7 +6,7 @@
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useFactoryConfigQuery = void 0;
-const react_query_1 = require("react-query");
+const react_query_1 = require("@tanstack/react-query");
 function useFactoryConfigQuery({ client, options }) {
     return (0, react_query_1.useQuery)(["factoryConfig", client.contractAddress], () => client.config(), options);
 }

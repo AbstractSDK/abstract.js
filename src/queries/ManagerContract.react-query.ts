@@ -4,12 +4,12 @@
 * and run the cosmwasm-typescript-gen generate command to regenerate this file.
 */
 
-import { useQuery, UseQueryOptions } from "react-query";
+import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 import { ConfigResponse, InfoResponse, ModuleAddressesResponse, ModuleInfosResponse, ModuleVersionsResponse } from "../contracts/ManagerContract";
 import { ManagerQueryClient } from "../contracts/ManagerContract";
 export interface ManagerInfoQuery {
   client?: ManagerQueryClient;
-  options?: UseQueryOptions<InfoResponse | undefined, Error, InfoResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<InfoResponse | undefined, Error, InfoResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
 }
 export function useManagerInfoQuery({
   client,
@@ -22,7 +22,7 @@ export function useManagerInfoQuery({
 }
 export interface ManagerConfigQuery {
   client?: ManagerQueryClient;
-  options?: UseQueryOptions<ConfigResponse | undefined, Error, ConfigResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<ConfigResponse | undefined, Error, ConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
 }
 export function useManagerConfigQuery({
   client,
@@ -35,7 +35,7 @@ export function useManagerConfigQuery({
 }
 export interface ManagerModuleInfosQuery {
   client?: ManagerQueryClient;
-  options?: UseQueryOptions<ModuleInfosResponse | undefined, Error, ModuleInfosResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<ModuleInfosResponse | undefined, Error, ModuleInfosResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
   args: {
     iterLimit?: number;
     lastModuleName?: string;
@@ -56,7 +56,7 @@ export function useManagerModuleInfosQuery({
 }
 export interface ManagerModuleAddressesQuery {
   client?: ManagerQueryClient;
-  options?: UseQueryOptions<ModuleAddressesResponse | undefined, Error, ModuleAddressesResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<ModuleAddressesResponse | undefined, Error, ModuleAddressesResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
   args: {
     names: string[];
   };
@@ -75,7 +75,7 @@ export function useManagerModuleAddressesQuery({
 }
 export interface ManagerModuleVersionsQuery {
   client?: ManagerQueryClient;
-  options?: UseQueryOptions<ModuleVersionsResponse | undefined, Error, ModuleVersionsResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<ModuleVersionsResponse | undefined, Error, ModuleVersionsResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
   args: {
     names: string[];
   };

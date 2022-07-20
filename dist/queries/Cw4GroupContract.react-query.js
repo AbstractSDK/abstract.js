@@ -6,7 +6,7 @@
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useCw4GroupAdminQuery = exports.useCw4GroupTotalWeightQuery = exports.useCw4GroupListMembersQuery = exports.useCw4GroupMemberQuery = exports.useCw4GroupHooksQuery = void 0;
-const react_query_1 = require("react-query");
+const react_query_1 = require("@tanstack/react-query");
 function useCw4GroupHooksQuery({ client, options }) {
     return (0, react_query_1.useQuery)(["cw4GroupHooks", client === null || client === void 0 ? void 0 : client.contractAddress], () => client ? client.hooks() : undefined, Object.assign(Object.assign({}, options), { enabled: !!client && (options === null || options === void 0 ? void 0 : options.enabled) }));
 }

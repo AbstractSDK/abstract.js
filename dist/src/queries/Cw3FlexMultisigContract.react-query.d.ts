@@ -8,7 +8,7 @@ import { ThresholdResponse, ListProposalsResponse, ListVotersResponse, ListVotes
 import { Cw3FlexMultisigQueryClient } from "../contracts/Cw3FlexMultisigContract";
 export interface Cw3FlexMultisigListVotersQuery {
     client?: Cw3FlexMultisigQueryClient;
-    options?: UseQueryOptions<ListVotersResponse | undefined, Error, ListVotersResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ListVotersResponse | undefined, Error, ListVotersResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
     args: {
         limit?: number;
         startAfter?: string;
@@ -17,7 +17,7 @@ export interface Cw3FlexMultisigListVotersQuery {
 export declare function useCw3FlexMultisigListVotersQuery({ client, args, options }: Cw3FlexMultisigListVotersQuery): import("react-query").UseQueryResult<ListVotersResponse, Error>;
 export interface Cw3FlexMultisigVoterQuery {
     client?: Cw3FlexMultisigQueryClient;
-    options?: UseQueryOptions<VoterResponse | undefined, Error, VoterResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<VoterResponse | undefined, Error, VoterResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
     args: {
         address: string;
     };
@@ -25,7 +25,7 @@ export interface Cw3FlexMultisigVoterQuery {
 export declare function useCw3FlexMultisigVoterQuery({ client, args, options }: Cw3FlexMultisigVoterQuery): import("react-query").UseQueryResult<VoterResponse, Error>;
 export interface Cw3FlexMultisigListVotesQuery {
     client?: Cw3FlexMultisigQueryClient;
-    options?: UseQueryOptions<ListVotesResponse | undefined, Error, ListVotesResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ListVotesResponse | undefined, Error, ListVotesResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
     args: {
         limit?: number;
         proposalId: number;
@@ -35,7 +35,7 @@ export interface Cw3FlexMultisigListVotesQuery {
 export declare function useCw3FlexMultisigListVotesQuery({ client, args, options }: Cw3FlexMultisigListVotesQuery): import("react-query").UseQueryResult<ListVotesResponse, Error>;
 export interface Cw3FlexMultisigVoteQuery {
     client?: Cw3FlexMultisigQueryClient;
-    options?: UseQueryOptions<VoteResponse | undefined, Error, VoteResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<VoteResponse | undefined, Error, VoteResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
     args: {
         proposalId: number;
         voter: string;
@@ -44,7 +44,7 @@ export interface Cw3FlexMultisigVoteQuery {
 export declare function useCw3FlexMultisigVoteQuery({ client, args, options }: Cw3FlexMultisigVoteQuery): import("react-query").UseQueryResult<VoteResponse, Error>;
 export interface Cw3FlexMultisigReverseProposalsQuery {
     client?: Cw3FlexMultisigQueryClient;
-    options?: UseQueryOptions<ReverseProposalsResponse | undefined, Error, ReverseProposalsResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ReverseProposalsResponse | undefined, Error, ReverseProposalsResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
     args: {
         limit?: number;
         startBefore?: number;
@@ -53,7 +53,7 @@ export interface Cw3FlexMultisigReverseProposalsQuery {
 export declare function useCw3FlexMultisigReverseProposalsQuery({ client, args, options }: Cw3FlexMultisigReverseProposalsQuery): import("react-query").UseQueryResult<ReverseProposalsResponse, Error>;
 export interface Cw3FlexMultisigListProposalsQuery {
     client?: Cw3FlexMultisigQueryClient;
-    options?: UseQueryOptions<ListProposalsResponse | undefined, Error, ListProposalsResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ListProposalsResponse | undefined, Error, ListProposalsResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
     args: {
         limit?: number;
         startAfter?: number;
@@ -62,7 +62,7 @@ export interface Cw3FlexMultisigListProposalsQuery {
 export declare function useCw3FlexMultisigListProposalsQuery({ client, args, options }: Cw3FlexMultisigListProposalsQuery): import("react-query").UseQueryResult<ListProposalsResponse, Error>;
 export interface Cw3FlexMultisigProposalQuery {
     client?: Cw3FlexMultisigQueryClient;
-    options?: UseQueryOptions<ProposalResponse | undefined, Error, ProposalResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ProposalResponse | undefined, Error, ProposalResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
     args: {
         proposalId: number;
     };
@@ -70,6 +70,6 @@ export interface Cw3FlexMultisigProposalQuery {
 export declare function useCw3FlexMultisigProposalQuery({ client, args, options }: Cw3FlexMultisigProposalQuery): import("react-query").UseQueryResult<ProposalResponse, Error>;
 export interface Cw3FlexMultisigThresholdQuery {
     client?: Cw3FlexMultisigQueryClient;
-    options?: UseQueryOptions<ThresholdResponse | undefined, Error, ThresholdResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ThresholdResponse | undefined, Error, ThresholdResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
 }
 export declare function useCw3FlexMultisigThresholdQuery({ client, options }: Cw3FlexMultisigThresholdQuery): import("react-query").UseQueryResult<ThresholdResponse, Error>;

@@ -4,12 +4,12 @@
 * and run the cosmwasm-typescript-gen generate command to regenerate this file.
 */
 
-import { useQuery, UseQueryOptions } from "react-query";
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { CosmosMsg_for_Empty, BankMsg, Uint128, StakingMsg, DistributionMsg, WasmMsg, Binary, Coin, Empty, Executor, Addr, Duration, Threshold, Decimal, InstantiateMsg, Expiration, Timestamp, Uint64, Status, ThresholdResponse, ListProposalsResponse, ProposalResponseFor_Empty, ListVotersResponse, VoterDetail, Vote, ListVotesResponse, VoteInfo, ProposalResponse, ReverseProposalsResponse, VoteResponse, VoterResponse } from "../contracts/Cw3FlexMultisigContract";
 import { Cw3FlexMultisigQueryClient } from "../contracts/Cw3FlexMultisigContract";
 export interface Cw3FlexMultisigListVotersQuery {
   client?: Cw3FlexMultisigQueryClient;
-  options?: UseQueryOptions<ListVotersResponse | undefined, Error, ListVotersResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<ListVotersResponse | undefined, Error, ListVotersResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
   args: {
     limit?: number;
     startAfter?: string;
@@ -30,7 +30,7 @@ export function useCw3FlexMultisigListVotersQuery({
 }
 export interface Cw3FlexMultisigVoterQuery {
   client?: Cw3FlexMultisigQueryClient;
-  options?: UseQueryOptions<VoterResponse | undefined, Error, VoterResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<VoterResponse | undefined, Error, VoterResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
   args: {
     address: string;
   };
@@ -49,7 +49,7 @@ export function useCw3FlexMultisigVoterQuery({
 }
 export interface Cw3FlexMultisigListVotesQuery {
   client?: Cw3FlexMultisigQueryClient;
-  options?: UseQueryOptions<ListVotesResponse | undefined, Error, ListVotesResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<ListVotesResponse | undefined, Error, ListVotesResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
   args: {
     limit?: number;
     proposalId: number;
@@ -72,7 +72,7 @@ export function useCw3FlexMultisigListVotesQuery({
 }
 export interface Cw3FlexMultisigVoteQuery {
   client?: Cw3FlexMultisigQueryClient;
-  options?: UseQueryOptions<VoteResponse | undefined, Error, VoteResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<VoteResponse | undefined, Error, VoteResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
   args: {
     proposalId: number;
     voter: string;
@@ -93,7 +93,7 @@ export function useCw3FlexMultisigVoteQuery({
 }
 export interface Cw3FlexMultisigReverseProposalsQuery {
   client?: Cw3FlexMultisigQueryClient;
-  options?: UseQueryOptions<ReverseProposalsResponse | undefined, Error, ReverseProposalsResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<ReverseProposalsResponse | undefined, Error, ReverseProposalsResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
   args: {
     limit?: number;
     startBefore?: number;
@@ -114,7 +114,7 @@ export function useCw3FlexMultisigReverseProposalsQuery({
 }
 export interface Cw3FlexMultisigListProposalsQuery {
   client?: Cw3FlexMultisigQueryClient;
-  options?: UseQueryOptions<ListProposalsResponse | undefined, Error, ListProposalsResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<ListProposalsResponse | undefined, Error, ListProposalsResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
   args: {
     limit?: number;
     startAfter?: number;
@@ -135,7 +135,7 @@ export function useCw3FlexMultisigListProposalsQuery({
 }
 export interface Cw3FlexMultisigProposalQuery {
   client?: Cw3FlexMultisigQueryClient;
-  options?: UseQueryOptions<ProposalResponse | undefined, Error, ProposalResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<ProposalResponse | undefined, Error, ProposalResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
   args: {
     proposalId: number;
   };
@@ -154,7 +154,7 @@ export function useCw3FlexMultisigProposalQuery({
 }
 export interface Cw3FlexMultisigThresholdQuery {
   client?: Cw3FlexMultisigQueryClient;
-  options?: UseQueryOptions<ThresholdResponse | undefined, Error, ThresholdResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<ThresholdResponse | undefined, Error, ThresholdResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
 }
 export function useCw3FlexMultisigThresholdQuery({
   client,

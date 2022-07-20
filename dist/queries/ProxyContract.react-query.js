@@ -6,7 +6,7 @@
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useProxyConfigQuery = exports.useProxyTotalValueQuery = exports.useProxyHoldingValueQuery = exports.useProxyHoldingAmountQuery = exports.useProxyProxyAssetConfigQuery = exports.useProxyProxyAssetsQuery = void 0;
-const react_query_1 = require("react-query");
+const react_query_1 = require("@tanstack/react-query");
 function useProxyProxyAssetsQuery({ client, args, options }) {
     return (0, react_query_1.useQuery)(["proxyProxyAssets", client === null || client === void 0 ? void 0 : client.contractAddress], () => client ? client.proxyAssets({
         iterLimit: args.iterLimit,

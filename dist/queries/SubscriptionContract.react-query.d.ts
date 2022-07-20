@@ -3,42 +3,54 @@
 * DO NOT MODIFY IT BY HAND. Instead, modify the source JSONSchema file,
 * and run the cosmwasm-typescript-gen generate command to regenerate this file.
 */
-import { UseQueryOptions } from "react-query";
+import { UseQueryOptions } from '@tanstack/react-query';
 import { BaseResponse, ConfigResponse, ContributorStateResponse, FeeResponse, StateResponse, SubscriberStateResponse } from "../contracts/SubscriptionContract";
 import { SubscriptionQueryClient } from "../contracts/SubscriptionContract";
 export interface SubscriptionContributorStateQuery {
     client?: SubscriptionQueryClient;
-    options?: UseQueryOptions<ContributorStateResponse | undefined, Error, ContributorStateResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ContributorStateResponse | undefined, Error, ContributorStateResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
     args: {
         osId: number;
     };
 }
-export declare function useSubscriptionContributorStateQuery({ client, args, options }: SubscriptionContributorStateQuery): import("react-query").UseQueryResult<ContributorStateResponse, Error>;
+export declare function useSubscriptionContributorStateQuery({ client, args, options }: SubscriptionContributorStateQuery): import("@tanstack/react-query").UseQueryResult<ContributorStateResponse, Error>;
 export interface SubscriptionSubscriberStateQuery {
     client?: SubscriptionQueryClient;
-    options?: UseQueryOptions<SubscriberStateResponse | undefined, Error, SubscriberStateResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<SubscriberStateResponse | undefined, Error, SubscriberStateResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
     args: {
         osId: number;
     };
 }
-export declare function useSubscriptionSubscriberStateQuery({ client, args, options }: SubscriptionSubscriberStateQuery): import("react-query").UseQueryResult<SubscriberStateResponse, Error>;
+export declare function useSubscriptionSubscriberStateQuery({ client, args, options }: SubscriptionSubscriberStateQuery): import("@tanstack/react-query").UseQueryResult<SubscriberStateResponse, Error>;
 export interface SubscriptionFeeQuery {
     client?: SubscriptionQueryClient;
-    options?: UseQueryOptions<FeeResponse | undefined, Error, FeeResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<FeeResponse | undefined, Error, FeeResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
 }
-export declare function useSubscriptionFeeQuery({ client, options }: SubscriptionFeeQuery): import("react-query").UseQueryResult<FeeResponse, Error>;
+export declare function useSubscriptionFeeQuery({ client, options }: SubscriptionFeeQuery): import("@tanstack/react-query").UseQueryResult<FeeResponse, Error>;
 export interface SubscriptionConfigQuery {
     client?: SubscriptionQueryClient;
-    options?: UseQueryOptions<ConfigResponse | undefined, Error, ConfigResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ConfigResponse | undefined, Error, ConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
 }
-export declare function useSubscriptionConfigQuery({ client, options }: SubscriptionConfigQuery): import("react-query").UseQueryResult<ConfigResponse, Error>;
+export declare function useSubscriptionConfigQuery({ client, options }: SubscriptionConfigQuery): import("@tanstack/react-query").UseQueryResult<ConfigResponse, Error>;
 export interface SubscriptionStateQuery {
     client?: SubscriptionQueryClient;
-    options?: UseQueryOptions<StateResponse | undefined, Error, StateResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<StateResponse | undefined, Error, StateResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
 }
-export declare function useSubscriptionStateQuery({ client, options }: SubscriptionStateQuery): import("react-query").UseQueryResult<StateResponse, Error>;
+export declare function useSubscriptionStateQuery({ client, options }: SubscriptionStateQuery): import("@tanstack/react-query").UseQueryResult<StateResponse, Error>;
 export interface SubscriptionBaseQuery {
     client?: SubscriptionQueryClient;
-    options?: UseQueryOptions<BaseResponse | undefined, Error, BaseResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<BaseResponse | undefined, Error, BaseResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
 }
-export declare function useSubscriptionBaseQuery({ client, options }: SubscriptionBaseQuery): import("react-query").UseQueryResult<BaseResponse, Error>;
+export declare function useSubscriptionBaseQuery({ client, options }: SubscriptionBaseQuery): import("@tanstack/react-query").UseQueryResult<BaseResponse, Error>;

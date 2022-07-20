@@ -4,12 +4,12 @@
 * and run the cosmwasm-typescript-gen generate command to regenerate this file.
 */
 
-import { useQuery, UseQueryOptions } from "react-query";
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { Addr, ApiAddressResponse, ContractVersion, ApiAddressesResponse, Uint64, CodeIdResponse, CodeIdsResponse, ConfigResponse, InstantiateMsg, ModuleInfo, OsCoreResponse, Core } from "../contracts/VersionControlContract";
 import { VersionControlQueryClient } from "../contracts/VersionControlContract";
 export interface VersionControlApiAddressesQuery {
   client: VersionControlQueryClient;
-  options?: UseQueryOptions<ApiAddressesResponse, Error, ApiAddressesResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<ApiAddressesResponse, Error, ApiAddressesResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
   args: {
     iterLimit?: number;
     lastApiModule?: ContractVersion;
@@ -27,7 +27,7 @@ export function useVersionControlApiAddressesQuery({
 }
 export interface VersionControlCodeIdsQuery {
   client: VersionControlQueryClient;
-  options?: UseQueryOptions<CodeIdsResponse, Error, CodeIdsResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<CodeIdsResponse, Error, CodeIdsResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
   args: {
     iterLimit?: number;
     lastModule?: ContractVersion;
@@ -45,7 +45,7 @@ export function useVersionControlCodeIdsQuery({
 }
 export interface VersionControlConfigQuery {
   client: VersionControlQueryClient;
-  options?: UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
 }
 export function useVersionControlConfigQuery({
   client,
@@ -55,7 +55,7 @@ export function useVersionControlConfigQuery({
 }
 export interface VersionControlApiAddressQuery {
   client: VersionControlQueryClient;
-  options?: UseQueryOptions<ApiAddressResponse, Error, ApiAddressResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<ApiAddressResponse, Error, ApiAddressResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
   args: {
     module: ModuleInfo;
   };
@@ -71,7 +71,7 @@ export function useVersionControlApiAddressQuery({
 }
 export interface VersionControlCodeIdQuery {
   client: VersionControlQueryClient;
-  options?: UseQueryOptions<CodeIdResponse, Error, CodeIdResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<CodeIdResponse, Error, CodeIdResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
   args: {
     module: ModuleInfo;
   };
@@ -87,7 +87,7 @@ export function useVersionControlCodeIdQuery({
 }
 export interface VersionControlOsCoreQuery {
   client: VersionControlQueryClient;
-  options?: UseQueryOptions<OsCoreResponse, Error, OsCoreResponse, (string | undefined)[]>;
+  options?: Omit<UseQueryOptions<OsCoreResponse, Error, OsCoreResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
   args: {
     osId: number;
   };

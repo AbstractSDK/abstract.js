@@ -3,41 +3,51 @@
 * DO NOT MODIFY IT BY HAND. Instead, modify the source JSONSchema file,
 * and run the cosmwasm-typescript-gen generate command to regenerate this file.
 */
-import { UseQueryOptions } from "react-query";
+import { UseQueryOptions } from "@tanstack/react-query";
 import { ConfigResponse, InfoResponse, ModuleAddressesResponse, ModuleInfosResponse, ModuleVersionsResponse } from "../contracts/ManagerContract";
 import { ManagerQueryClient } from "../contracts/ManagerContract";
 export interface ManagerInfoQuery {
     client?: ManagerQueryClient;
-    options?: UseQueryOptions<InfoResponse | undefined, Error, InfoResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<InfoResponse | undefined, Error, InfoResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
 }
-export declare function useManagerInfoQuery({ client, options }: ManagerInfoQuery): import("react-query").UseQueryResult<InfoResponse, Error>;
+export declare function useManagerInfoQuery({ client, options }: ManagerInfoQuery): import("@tanstack/react-query").UseQueryResult<InfoResponse, Error>;
 export interface ManagerConfigQuery {
     client?: ManagerQueryClient;
-    options?: UseQueryOptions<ConfigResponse | undefined, Error, ConfigResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ConfigResponse | undefined, Error, ConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
 }
-export declare function useManagerConfigQuery({ client, options }: ManagerConfigQuery): import("react-query").UseQueryResult<ConfigResponse, Error>;
+export declare function useManagerConfigQuery({ client, options }: ManagerConfigQuery): import("@tanstack/react-query").UseQueryResult<ConfigResponse, Error>;
 export interface ManagerModuleInfosQuery {
     client?: ManagerQueryClient;
-    options?: UseQueryOptions<ModuleInfosResponse | undefined, Error, ModuleInfosResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ModuleInfosResponse | undefined, Error, ModuleInfosResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
     args: {
         iterLimit?: number;
         lastModuleName?: string;
     };
 }
-export declare function useManagerModuleInfosQuery({ client, args, options }: ManagerModuleInfosQuery): import("react-query").UseQueryResult<ModuleInfosResponse, Error>;
+export declare function useManagerModuleInfosQuery({ client, args, options }: ManagerModuleInfosQuery): import("@tanstack/react-query").UseQueryResult<ModuleInfosResponse, Error>;
 export interface ManagerModuleAddressesQuery {
     client?: ManagerQueryClient;
-    options?: UseQueryOptions<ModuleAddressesResponse | undefined, Error, ModuleAddressesResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ModuleAddressesResponse | undefined, Error, ModuleAddressesResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
     args: {
         names: string[];
     };
 }
-export declare function useManagerModuleAddressesQuery({ client, args, options }: ManagerModuleAddressesQuery): import("react-query").UseQueryResult<ModuleAddressesResponse, Error>;
+export declare function useManagerModuleAddressesQuery({ client, args, options }: ManagerModuleAddressesQuery): import("@tanstack/react-query").UseQueryResult<ModuleAddressesResponse, Error>;
 export interface ManagerModuleVersionsQuery {
     client?: ManagerQueryClient;
-    options?: UseQueryOptions<ModuleVersionsResponse | undefined, Error, ModuleVersionsResponse, (string | undefined)[]>;
+    options?: Omit<UseQueryOptions<ModuleVersionsResponse | undefined, Error, ModuleVersionsResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+        initialData?: () => undefined;
+    };
     args: {
         names: string[];
     };
 }
-export declare function useManagerModuleVersionsQuery({ client, args, options }: ManagerModuleVersionsQuery): import("react-query").UseQueryResult<ModuleVersionsResponse, Error>;
+export declare function useManagerModuleVersionsQuery({ client, args, options }: ManagerModuleVersionsQuery): import("@tanstack/react-query").UseQueryResult<ModuleVersionsResponse, Error>;

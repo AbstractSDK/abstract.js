@@ -6,7 +6,7 @@
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useVersionControlOsCoreQuery = exports.useVersionControlCodeIdQuery = exports.useVersionControlApiAddressQuery = exports.useVersionControlConfigQuery = exports.useVersionControlCodeIdsQuery = exports.useVersionControlApiAddressesQuery = void 0;
-const react_query_1 = require("react-query");
+const react_query_1 = require("@tanstack/react-query");
 function useVersionControlApiAddressesQuery({ client, args, options }) {
     return (0, react_query_1.useQuery)(["versionControlApiAddresses", client.contractAddress], () => client.apiAddresses({
         iterLimit: args.iterLimit,
