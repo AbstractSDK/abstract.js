@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Cw4GroupQueryClient = exports.Cw4GroupClient = exports.Cw3FlexMultisigQueryClient = exports.Cw3FlexMultisigClient = exports.SubscriptionQueryClient = exports.SubscriptionClient = exports.VersionControlQueryClient = exports.VersionControlClient = exports.ManagerQueryClient = exports.ManagerClient = exports.FactoryQueryClient = exports.FactoryClient = exports.ProxyQueryClient = exports.ProxyClient = void 0;
+exports.Cw20IcsQueryClient = exports.Cw20IcsClient = exports.Cw20QueryClient = exports.Cw4GroupQueryClient = exports.Cw4GroupClient = exports.Cw3FlexMultisigQueryClient = exports.Cw3FlexMultisigClient = exports.SubscriptionQueryClient = exports.SubscriptionClient = exports.VersionControlQueryClient = exports.VersionControlClient = exports.ManagerQueryClient = exports.ManagerClient = exports.FactoryQueryClient = exports.FactoryClient = exports.ProxyQueryClient = exports.ProxyClient = void 0;
 var ProxyContract_1 = require("./ProxyContract");
 Object.defineProperty(exports, "ProxyClient", { enumerable: true, get: function () { return ProxyContract_1.ProxyClient; } });
 Object.defineProperty(exports, "ProxyQueryClient", { enumerable: true, get: function () { return ProxyContract_1.ProxyQueryClient; } });
@@ -22,4 +22,9 @@ Object.defineProperty(exports, "Cw3FlexMultisigQueryClient", { enumerable: true,
 var Cw4GroupContract_1 = require("./Cw4GroupContract");
 Object.defineProperty(exports, "Cw4GroupClient", { enumerable: true, get: function () { return Cw4GroupContract_1.Cw4GroupClient; } });
 Object.defineProperty(exports, "Cw4GroupQueryClient", { enumerable: true, get: function () { return Cw4GroupContract_1.Cw4GroupQueryClient; } });
+var Cw20Contract_1 = require("./Cw20Contract");
+Object.defineProperty(exports, "Cw20QueryClient", { enumerable: true, get: function () { return Cw20Contract_1.Cw20QueryClient; } });
+var Cw20IcsContract_1 = require("./Cw20IcsContract");
+Object.defineProperty(exports, "Cw20IcsClient", { enumerable: true, get: function () { return Cw20IcsContract_1.Cw20IcsClient; } });
+Object.defineProperty(exports, "Cw20IcsQueryClient", { enumerable: true, get: function () { return Cw20IcsContract_1.Cw20IcsQueryClient; } });
 //# sourceMappingURL=index.js.map

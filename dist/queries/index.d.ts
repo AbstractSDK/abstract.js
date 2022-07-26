@@ -5,3 +5,5 @@ export * from './SubscriptionContract.react-query';
 export * from './ManagerContract.react-query';
 export * from './Cw3FlexMultisigContract.react-query';
 export * from './Cw4GroupContract.react-query';
+export * from './Cw20Contract.react-query';
+export * from './Cw20IcsContract.react-query';

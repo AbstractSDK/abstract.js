@@ -21,4 +21,6 @@ __exportStar(require("./SubscriptionContract.react-query"), exports);
 __exportStar(require("./ManagerContract.react-query"), exports);
 __exportStar(require("./Cw3FlexMultisigContract.react-query"), exports);
 __exportStar(require("./Cw4GroupContract.react-query"), exports);
+__exportStar(require("./Cw20Contract.react-query"), exports);
+__exportStar(require("./Cw20IcsContract.react-query"), exports);
 //# sourceMappingURL=index.js.map
