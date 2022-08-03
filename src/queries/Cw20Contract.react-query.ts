@@ -154,81 +154,66 @@ export function useCw20BalanceQuery({
 }
 export interface Cw20UploadLogoMutation {
   client: Cw20Client;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20UploadLogoMutation>, "mutationFn">;
 }
-export function useCw20UploadLogoMutation({
-  client,
-  options
-}: Cw20UploadLogoMutation) {
-  return useMutation<ExecuteResult, Error, Cw20UploadLogoMutation>(() => client.uploadLogo(), options);
+export function useCw20UploadLogoMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20UploadLogoMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw20UploadLogoMutation>(({
+    client
+  }) => client.uploadLogo(), options);
 }
 export interface Cw20UpdateMarketingMutation {
   client: Cw20Client;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw20UpdateMarketingMutation, "args">>, "mutationFn">;
   args: {
     description?: string;
     marketing?: string;
     project?: string;
   };
 }
-export function useCw20UpdateMarketingMutation({
-  client,
-  options
-}: Omit<Cw20UpdateMarketingMutation, "args">) {
-  return useMutation<ExecuteResult, Error, Pick<Cw20UpdateMarketingMutation, "args">>(({
+export function useCw20UpdateMarketingMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20UpdateMarketingMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw20UpdateMarketingMutation>(({
+    client,
     args
   }) => client.updateMarketing(args), options);
 }
 export interface Cw20UpdateMinterMutation {
   client: Cw20Client;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw20UpdateMinterMutation, "args">>, "mutationFn">;
   args: {
     newMinter: string;
   };
 }
-export function useCw20UpdateMinterMutation({
-  client,
-  options
-}: Omit<Cw20UpdateMinterMutation, "args">) {
-  return useMutation<ExecuteResult, Error, Pick<Cw20UpdateMinterMutation, "args">>(({
+export function useCw20UpdateMinterMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20UpdateMinterMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw20UpdateMinterMutation>(({
+    client,
     args
   }) => client.updateMinter(args), options);
 }
 export interface Cw20MintMutation {
   client: Cw20Client;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw20MintMutation, "args">>, "mutationFn">;
   args: {
     amount: string;
     recipient: string;
   };
 }
-export function useCw20MintMutation({
-  client,
-  options
-}: Omit<Cw20MintMutation, "args">) {
-  return useMutation<ExecuteResult, Error, Pick<Cw20MintMutation, "args">>(({
+export function useCw20MintMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20MintMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw20MintMutation>(({
+    client,
     args
   }) => client.mint(args), options);
 }
 export interface Cw20BurnFromMutation {
   client: Cw20Client;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw20BurnFromMutation, "args">>, "mutationFn">;
   args: {
     amount: string;
     owner: string;
   };
 }
-export function useCw20BurnFromMutation({
-  client,
-  options
-}: Omit<Cw20BurnFromMutation, "args">) {
-  return useMutation<ExecuteResult, Error, Pick<Cw20BurnFromMutation, "args">>(({
+export function useCw20BurnFromMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20BurnFromMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw20BurnFromMutation>(({
+    client,
     args
   }) => client.burnFrom(args), options);
 }
 export interface Cw20SendFromMutation {
   client: Cw20Client;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw20SendFromMutation, "args">>, "mutationFn">;
   args: {
     amount: string;
     contract: string;
@@ -236,110 +221,90 @@ export interface Cw20SendFromMutation {
     owner: string;
   };
 }
-export function useCw20SendFromMutation({
-  client,
-  options
-}: Omit<Cw20SendFromMutation, "args">) {
-  return useMutation<ExecuteResult, Error, Pick<Cw20SendFromMutation, "args">>(({
+export function useCw20SendFromMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20SendFromMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw20SendFromMutation>(({
+    client,
     args
   }) => client.sendFrom(args), options);
 }
 export interface Cw20TransferFromMutation {
   client: Cw20Client;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw20TransferFromMutation, "args">>, "mutationFn">;
   args: {
     amount: string;
     owner: string;
     recipient: string;
   };
 }
-export function useCw20TransferFromMutation({
-  client,
-  options
-}: Omit<Cw20TransferFromMutation, "args">) {
-  return useMutation<ExecuteResult, Error, Pick<Cw20TransferFromMutation, "args">>(({
+export function useCw20TransferFromMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20TransferFromMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw20TransferFromMutation>(({
+    client,
     args
   }) => client.transferFrom(args), options);
 }
 export interface Cw20DecreaseAllowanceMutation {
   client: Cw20Client;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw20DecreaseAllowanceMutation, "args">>, "mutationFn">;
   args: {
     amount: string;
     expires?: Expiration;
     spender: string;
   };
 }
-export function useCw20DecreaseAllowanceMutation({
-  client,
-  options
-}: Omit<Cw20DecreaseAllowanceMutation, "args">) {
-  return useMutation<ExecuteResult, Error, Pick<Cw20DecreaseAllowanceMutation, "args">>(({
+export function useCw20DecreaseAllowanceMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20DecreaseAllowanceMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw20DecreaseAllowanceMutation>(({
+    client,
     args
   }) => client.decreaseAllowance(args), options);
 }
 export interface Cw20IncreaseAllowanceMutation {
   client: Cw20Client;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw20IncreaseAllowanceMutation, "args">>, "mutationFn">;
   args: {
     amount: string;
     expires?: Expiration;
     spender: string;
   };
 }
-export function useCw20IncreaseAllowanceMutation({
-  client,
-  options
-}: Omit<Cw20IncreaseAllowanceMutation, "args">) {
-  return useMutation<ExecuteResult, Error, Pick<Cw20IncreaseAllowanceMutation, "args">>(({
+export function useCw20IncreaseAllowanceMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20IncreaseAllowanceMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw20IncreaseAllowanceMutation>(({
+    client,
     args
   }) => client.increaseAllowance(args), options);
 }
 export interface Cw20SendMutation {
   client: Cw20Client;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw20SendMutation, "args">>, "mutationFn">;
   args: {
     amount: string;
     contract: string;
     msg: string;
   };
 }
-export function useCw20SendMutation({
-  client,
-  options
-}: Omit<Cw20SendMutation, "args">) {
-  return useMutation<ExecuteResult, Error, Pick<Cw20SendMutation, "args">>(({
+export function useCw20SendMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20SendMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw20SendMutation>(({
+    client,
     args
   }) => client.send(args), options);
 }
 export interface Cw20BurnMutation {
   client: Cw20Client;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw20BurnMutation, "args">>, "mutationFn">;
   args: {
     amount: string;
   };
 }
-export function useCw20BurnMutation({
-  client,
-  options
-}: Omit<Cw20BurnMutation, "args">) {
-  return useMutation<ExecuteResult, Error, Pick<Cw20BurnMutation, "args">>(({
+export function useCw20BurnMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20BurnMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw20BurnMutation>(({
+    client,
     args
   }) => client.burn(args), options);
 }
 export interface Cw20TransferMutation {
   client: Cw20Client;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw20TransferMutation, "args">>, "mutationFn">;
   args: {
     amount: string;
     recipient: string;
   };
 }
-export function useCw20TransferMutation({
-  client,
-  options
-}: Omit<Cw20TransferMutation, "args">) {
-  return useMutation<ExecuteResult, Error, Pick<Cw20TransferMutation, "args">>(({
+export function useCw20TransferMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20TransferMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw20TransferMutation>(({
+    client,
     args
   }) => client.transfer(args), options);
 }

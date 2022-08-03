@@ -3,9 +3,10 @@
 * DO NOT MODIFY IT BY HAND. Instead, modify the source JSONSchema file,
 * and run the cosmwasm-typescript-gen generate command to regenerate this file.
 */
-import { UseQueryOptions } from '@tanstack/react-query';
-import { ConfigResponse } from "../contracts/FactoryContract";
-import { FactoryQueryClient } from "../contracts/FactoryContract";
+import { ExecuteResult } from "@cosmjs/cosmwasm-stargate";
+import { UseQueryOptions, UseMutationOptions } from "@tanstack/react-query";
+import { ConfigResponse, GovernanceDetails } from "../contracts/FactoryContract";
+import { FactoryQueryClient, FactoryClient } from "../contracts/FactoryContract";
 export interface FactoryConfigQuery {
     client: FactoryQueryClient;
     options?: Omit<UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
@@ -13,3 +14,24 @@ export interface FactoryConfigQuery {
     };
 }
 export declare function useFactoryConfigQuery({ client, options }: FactoryConfigQuery): import("@tanstack/react-query").UseQueryResult<ConfigResponse, Error>;
+export interface FactoryCreateOsMutation {
+    client: FactoryClient;
+    args: {
+        description?: string;
+        governance: GovernanceDetails;
+        link?: string;
+        osName: string;
+    };
+}
+export declare function useFactoryCreateOsMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, FactoryCreateOsMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, FactoryCreateOsMutation, unknown>;
+export interface FactoryUpdateConfigMutation {
+    client: FactoryClient;
+    args: {
+        admin?: string;
+        memoryContract?: string;
+        moduleFactoryAddress?: string;
+        subscriptionAddress?: string;
+        versionControlContract?: string;
+    };
+}
+export declare function useFactoryUpdateConfigMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, FactoryUpdateConfigMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, FactoryUpdateConfigMutation, unknown>;

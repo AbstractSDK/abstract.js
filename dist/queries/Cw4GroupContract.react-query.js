@@ -33,20 +33,20 @@ function useCw4GroupAdminQuery({ client, options }) {
     return (0, react_query_1.useQuery)(["cw4GroupAdmin", client === null || client === void 0 ? void 0 : client.contractAddress], () => client ? client.admin() : undefined, Object.assign(Object.assign({}, options), { enabled: !!client && (options === null || options === void 0 ? void 0 : options.enabled) }));
 }
 exports.useCw4GroupAdminQuery = useCw4GroupAdminQuery;
-function useCw4GroupRemoveHookMutation({ client, options }) {
-    return (0, react_query_1.useMutation)(({ args }) => client.removeHook(args), options);
+function useCw4GroupRemoveHookMutation(options) {
+    return (0, react_query_1.useMutation)(({ client, args }) => client.removeHook(args), options);
 }
 exports.useCw4GroupRemoveHookMutation = useCw4GroupRemoveHookMutation;
-function useCw4GroupAddHookMutation({ client, options }) {
-    return (0, react_query_1.useMutation)(({ args }) => client.addHook(args), options);
+function useCw4GroupAddHookMutation(options) {
+    return (0, react_query_1.useMutation)(({ client, args }) => client.addHook(args), options);
 }
 exports.useCw4GroupAddHookMutation = useCw4GroupAddHookMutation;
-function useCw4GroupUpdateMembersMutation({ client, options }) {
-    return (0, react_query_1.useMutation)(({ args }) => client.updateMembers(args), options);
+function useCw4GroupUpdateMembersMutation(options) {
+    return (0, react_query_1.useMutation)(({ client, args }) => client.updateMembers(args), options);
 }
 exports.useCw4GroupUpdateMembersMutation = useCw4GroupUpdateMembersMutation;
-function useCw4GroupUpdateAdminMutation({ client, options }) {
-    return (0, react_query_1.useMutation)(({ args }) => client.updateAdmin(args), options);
+function useCw4GroupUpdateAdminMutation(options) {
+    return (0, react_query_1.useMutation)(({ client, args }) => client.updateAdmin(args), options);
 }
 exports.useCw4GroupUpdateAdminMutation = useCw4GroupUpdateAdminMutation;
 //# sourceMappingURL=Cw4GroupContract.react-query.js.map

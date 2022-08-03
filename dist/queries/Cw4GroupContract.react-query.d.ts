@@ -52,34 +52,30 @@ export interface Cw4GroupAdminQuery {
 export declare function useCw4GroupAdminQuery({ client, options }: Cw4GroupAdminQuery): import("@tanstack/react-query").UseQueryResult<AdminResponse, Error>;
 export interface Cw4GroupRemoveHookMutation {
     client: Cw4GroupClient;
-    options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw4GroupRemoveHookMutation, "args">>, "mutationFn">;
     args: {
         addr: string;
     };
 }
-export declare function useCw4GroupRemoveHookMutation({ client, options }: Omit<Cw4GroupRemoveHookMutation, "args">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Pick<Cw4GroupRemoveHookMutation, "args">, unknown>;
+export declare function useCw4GroupRemoveHookMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw4GroupRemoveHookMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw4GroupRemoveHookMutation, unknown>;
 export interface Cw4GroupAddHookMutation {
     client: Cw4GroupClient;
-    options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw4GroupAddHookMutation, "args">>, "mutationFn">;
     args: {
         addr: string;
     };
 }
-export declare function useCw4GroupAddHookMutation({ client, options }: Omit<Cw4GroupAddHookMutation, "args">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Pick<Cw4GroupAddHookMutation, "args">, unknown>;
+export declare function useCw4GroupAddHookMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw4GroupAddHookMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw4GroupAddHookMutation, unknown>;
 export interface Cw4GroupUpdateMembersMutation {
     client: Cw4GroupClient;
-    options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw4GroupUpdateMembersMutation, "args">>, "mutationFn">;
     args: {
         add: Member[];
         remove: string[];
     };
 }
-export declare function useCw4GroupUpdateMembersMutation({ client, options }: Omit<Cw4GroupUpdateMembersMutation, "args">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Pick<Cw4GroupUpdateMembersMutation, "args">, unknown>;
+export declare function useCw4GroupUpdateMembersMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw4GroupUpdateMembersMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw4GroupUpdateMembersMutation, unknown>;
 export interface Cw4GroupUpdateAdminMutation {
     client: Cw4GroupClient;
-    options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw4GroupUpdateAdminMutation, "args">>, "mutationFn">;
     args: {
         admin?: string;
     };
 }
-export declare function useCw4GroupUpdateAdminMutation({ client, options }: Omit<Cw4GroupUpdateAdminMutation, "args">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Pick<Cw4GroupUpdateAdminMutation, "args">, unknown>;
+export declare function useCw4GroupUpdateAdminMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw4GroupUpdateAdminMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw4GroupUpdateAdminMutation, unknown>;

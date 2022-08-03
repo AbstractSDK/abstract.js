@@ -59,24 +59,24 @@ function useCw3FlexMultisigThresholdQuery({ client, options }) {
     return (0, react_query_1.useQuery)(["cw3FlexMultisigThreshold", client === null || client === void 0 ? void 0 : client.contractAddress], () => client ? client.threshold() : undefined, Object.assign(Object.assign({}, options), { enabled: !!client && (options === null || options === void 0 ? void 0 : options.enabled) }));
 }
 exports.useCw3FlexMultisigThresholdQuery = useCw3FlexMultisigThresholdQuery;
-function useCw3FlexMultisigMemberChangedHookMutation({ client, options }) {
-    return (0, react_query_1.useMutation)(({ args }) => client.memberChangedHook(args), options);
+function useCw3FlexMultisigMemberChangedHookMutation(options) {
+    return (0, react_query_1.useMutation)(({ client, args }) => client.memberChangedHook(args), options);
 }
 exports.useCw3FlexMultisigMemberChangedHookMutation = useCw3FlexMultisigMemberChangedHookMutation;
-function useCw3FlexMultisigCloseMutation({ client, options }) {
-    return (0, react_query_1.useMutation)(({ args }) => client.close(args), options);
+function useCw3FlexMultisigCloseMutation(options) {
+    return (0, react_query_1.useMutation)(({ client, args }) => client.close(args), options);
 }
 exports.useCw3FlexMultisigCloseMutation = useCw3FlexMultisigCloseMutation;
-function useCw3FlexMultisigExecuteMutation({ client, options }) {
-    return (0, react_query_1.useMutation)(({ args }) => client.execute(args), options);
+function useCw3FlexMultisigExecuteMutation(options) {
+    return (0, react_query_1.useMutation)(({ client, args }) => client.execute(args), options);
 }
 exports.useCw3FlexMultisigExecuteMutation = useCw3FlexMultisigExecuteMutation;
-function useCw3FlexMultisigVoteMutation({ client, options }) {
-    return (0, react_query_1.useMutation)(({ args }) => client.vote(args), options);
+function useCw3FlexMultisigVoteMutation(options) {
+    return (0, react_query_1.useMutation)(({ client, args }) => client.vote(args), options);
 }
 exports.useCw3FlexMultisigVoteMutation = useCw3FlexMultisigVoteMutation;
-function useCw3FlexMultisigProposeMutation({ client, options }) {
-    return (0, react_query_1.useMutation)(({ args }) => client.propose(args), options);
+function useCw3FlexMultisigProposeMutation(options) {
+    return (0, react_query_1.useMutation)(({ client, args }) => client.propose(args), options);
 }
 exports.useCw3FlexMultisigProposeMutation = useCw3FlexMultisigProposeMutation;
 //# sourceMappingURL=Cw3FlexMultisigContract.react-query.js.map

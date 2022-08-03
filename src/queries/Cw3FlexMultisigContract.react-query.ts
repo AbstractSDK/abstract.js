@@ -176,68 +176,55 @@ export function useCw3FlexMultisigThresholdQuery({
 }
 export interface Cw3FlexMultisigMemberChangedHookMutation {
   client: Cw3FlexMultisigClient;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw3FlexMultisigMemberChangedHookMutation, "args">>, "mutationFn">;
   args: {
     diffs: MemberDiff[];
   };
 }
-export function useCw3FlexMultisigMemberChangedHookMutation({
-  client,
-  options
-}: Omit<Cw3FlexMultisigMemberChangedHookMutation, "args">) {
-  return useMutation<ExecuteResult, Error, Pick<Cw3FlexMultisigMemberChangedHookMutation, "args">>(({
+export function useCw3FlexMultisigMemberChangedHookMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw3FlexMultisigMemberChangedHookMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw3FlexMultisigMemberChangedHookMutation>(({
+    client,
     args
   }) => client.memberChangedHook(args), options);
 }
 export interface Cw3FlexMultisigCloseMutation {
   client: Cw3FlexMultisigClient;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw3FlexMultisigCloseMutation, "args">>, "mutationFn">;
   args: {
     proposalId: number;
   };
 }
-export function useCw3FlexMultisigCloseMutation({
-  client,
-  options
-}: Omit<Cw3FlexMultisigCloseMutation, "args">) {
-  return useMutation<ExecuteResult, Error, Pick<Cw3FlexMultisigCloseMutation, "args">>(({
+export function useCw3FlexMultisigCloseMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw3FlexMultisigCloseMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw3FlexMultisigCloseMutation>(({
+    client,
     args
   }) => client.close(args), options);
 }
 export interface Cw3FlexMultisigExecuteMutation {
   client: Cw3FlexMultisigClient;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw3FlexMultisigExecuteMutation, "args">>, "mutationFn">;
   args: {
     proposalId: number;
   };
 }
-export function useCw3FlexMultisigExecuteMutation({
-  client,
-  options
-}: Omit<Cw3FlexMultisigExecuteMutation, "args">) {
-  return useMutation<ExecuteResult, Error, Pick<Cw3FlexMultisigExecuteMutation, "args">>(({
+export function useCw3FlexMultisigExecuteMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw3FlexMultisigExecuteMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw3FlexMultisigExecuteMutation>(({
+    client,
     args
   }) => client.execute(args), options);
 }
 export interface Cw3FlexMultisigVoteMutation {
   client: Cw3FlexMultisigClient;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw3FlexMultisigVoteMutation, "args">>, "mutationFn">;
   args: {
     proposalId: number;
     vote: string;
   };
 }
-export function useCw3FlexMultisigVoteMutation({
-  client,
-  options
-}: Omit<Cw3FlexMultisigVoteMutation, "args">) {
-  return useMutation<ExecuteResult, Error, Pick<Cw3FlexMultisigVoteMutation, "args">>(({
+export function useCw3FlexMultisigVoteMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw3FlexMultisigVoteMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw3FlexMultisigVoteMutation>(({
+    client,
     args
   }) => client.vote(args), options);
 }
 export interface Cw3FlexMultisigProposeMutation {
   client: Cw3FlexMultisigClient;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw3FlexMultisigProposeMutation, "args">>, "mutationFn">;
   args: {
     description: string;
     latest?: Expiration;
@@ -245,11 +232,9 @@ export interface Cw3FlexMultisigProposeMutation {
     title: string;
   };
 }
-export function useCw3FlexMultisigProposeMutation({
-  client,
-  options
-}: Omit<Cw3FlexMultisigProposeMutation, "args">) {
-  return useMutation<ExecuteResult, Error, Pick<Cw3FlexMultisigProposeMutation, "args">>(({
+export function useCw3FlexMultisigProposeMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw3FlexMultisigProposeMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw3FlexMultisigProposeMutation>(({
+    client,
     args
   }) => client.propose(args), options);
 }

@@ -5,10 +5,18 @@
 * and run the cosmwasm-typescript-gen generate command to regenerate this file.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.useFactoryConfigQuery = void 0;
+exports.useFactoryUpdateConfigMutation = exports.useFactoryCreateOsMutation = exports.useFactoryConfigQuery = void 0;
 const react_query_1 = require("@tanstack/react-query");
 function useFactoryConfigQuery({ client, options }) {
     return (0, react_query_1.useQuery)(["factoryConfig", client.contractAddress], () => client.config(), options);
 }
 exports.useFactoryConfigQuery = useFactoryConfigQuery;
+function useFactoryCreateOsMutation(options) {
+    return (0, react_query_1.useMutation)(({ client, args }) => client.createOs(args), options);
+}
+exports.useFactoryCreateOsMutation = useFactoryCreateOsMutation;
+function useFactoryUpdateConfigMutation(options) {
+    return (0, react_query_1.useMutation)(({ client, args }) => client.updateConfig(args), options);
+}
+exports.useFactoryUpdateConfigMutation = useFactoryUpdateConfigMutation;
 //# sourceMappingURL=FactoryContract.react-query.js.map

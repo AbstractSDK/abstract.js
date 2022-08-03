@@ -92,40 +92,35 @@ export interface Cw3FlexMultisigThresholdQuery {
 export declare function useCw3FlexMultisigThresholdQuery({ client, options }: Cw3FlexMultisigThresholdQuery): import("@tanstack/react-query").UseQueryResult<ThresholdResponse, Error>;
 export interface Cw3FlexMultisigMemberChangedHookMutation {
     client: Cw3FlexMultisigClient;
-    options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw3FlexMultisigMemberChangedHookMutation, "args">>, "mutationFn">;
     args: {
         diffs: MemberDiff[];
     };
 }
-export declare function useCw3FlexMultisigMemberChangedHookMutation({ client, options }: Omit<Cw3FlexMultisigMemberChangedHookMutation, "args">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Pick<Cw3FlexMultisigMemberChangedHookMutation, "args">, unknown>;
+export declare function useCw3FlexMultisigMemberChangedHookMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw3FlexMultisigMemberChangedHookMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw3FlexMultisigMemberChangedHookMutation, unknown>;
 export interface Cw3FlexMultisigCloseMutation {
     client: Cw3FlexMultisigClient;
-    options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw3FlexMultisigCloseMutation, "args">>, "mutationFn">;
     args: {
         proposalId: number;
     };
 }
-export declare function useCw3FlexMultisigCloseMutation({ client, options }: Omit<Cw3FlexMultisigCloseMutation, "args">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Pick<Cw3FlexMultisigCloseMutation, "args">, unknown>;
+export declare function useCw3FlexMultisigCloseMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw3FlexMultisigCloseMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw3FlexMultisigCloseMutation, unknown>;
 export interface Cw3FlexMultisigExecuteMutation {
     client: Cw3FlexMultisigClient;
-    options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw3FlexMultisigExecuteMutation, "args">>, "mutationFn">;
     args: {
         proposalId: number;
     };
 }
-export declare function useCw3FlexMultisigExecuteMutation({ client, options }: Omit<Cw3FlexMultisigExecuteMutation, "args">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Pick<Cw3FlexMultisigExecuteMutation, "args">, unknown>;
+export declare function useCw3FlexMultisigExecuteMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw3FlexMultisigExecuteMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw3FlexMultisigExecuteMutation, unknown>;
 export interface Cw3FlexMultisigVoteMutation {
     client: Cw3FlexMultisigClient;
-    options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw3FlexMultisigVoteMutation, "args">>, "mutationFn">;
     args: {
         proposalId: number;
         vote: string;
     };
 }
-export declare function useCw3FlexMultisigVoteMutation({ client, options }: Omit<Cw3FlexMultisigVoteMutation, "args">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Pick<Cw3FlexMultisigVoteMutation, "args">, unknown>;
+export declare function useCw3FlexMultisigVoteMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw3FlexMultisigVoteMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw3FlexMultisigVoteMutation, unknown>;
 export interface Cw3FlexMultisigProposeMutation {
     client: Cw3FlexMultisigClient;
-    options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw3FlexMultisigProposeMutation, "args">>, "mutationFn">;
     args: {
         description: string;
         latest?: Expiration;
@@ -133,4 +128,4 @@ export interface Cw3FlexMultisigProposeMutation {
         title: string;
     };
 }
-export declare function useCw3FlexMultisigProposeMutation({ client, options }: Omit<Cw3FlexMultisigProposeMutation, "args">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Pick<Cw3FlexMultisigProposeMutation, "args">, unknown>;
+export declare function useCw3FlexMultisigProposeMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw3FlexMultisigProposeMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw3FlexMultisigProposeMutation, unknown>;

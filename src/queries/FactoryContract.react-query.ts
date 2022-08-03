@@ -4,9 +4,10 @@
 * and run the cosmwasm-typescript-gen generate command to regenerate this file.
 */
 
-import { useQuery, UseQueryOptions } from '@tanstack/react-query';
-import { ConfigResponse, GovernanceDetails, InstantiateMsg } from "../contracts/FactoryContract";
-import { FactoryQueryClient } from "../contracts/FactoryContract";
+import { ExecuteResult } from "@cosmjs/cosmwasm-stargate";
+import { useQuery, UseQueryOptions, UseMutationOptions, useMutation } from "@tanstack/react-query";
+import { ConfigResponse,GovernanceDetails, InstantiateMsg } from "../contracts/FactoryContract";
+import { FactoryQueryClient, FactoryClient } from "../contracts/FactoryContract";
 export interface FactoryConfigQuery {
   client: FactoryQueryClient;
   options?: Omit<UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }
@@ -16,4 +17,36 @@ export function useFactoryConfigQuery({
   options
 }: FactoryConfigQuery) {
   return useQuery<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>(["factoryConfig", client.contractAddress], () => client.config(), options);
+}
+
+export interface FactoryCreateOsMutation {
+  client: FactoryClient;
+  args: {
+    description?: string;
+    governance: GovernanceDetails;
+    link?: string;
+    osName: string;
+  };
+}
+export function useFactoryCreateOsMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, FactoryCreateOsMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, FactoryCreateOsMutation>(({
+    client,
+    args
+  }) => client.createOs(args), options);
+}
+export interface FactoryUpdateConfigMutation {
+  client: FactoryClient;
+  args: {
+    admin?: string;
+    memoryContract?: string;
+    moduleFactoryAddress?: string;
+    subscriptionAddress?: string;
+    versionControlContract?: string;
+  };
+}
+export function useFactoryUpdateConfigMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, FactoryUpdateConfigMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, FactoryUpdateConfigMutation>(({
+    client,
+    args
+  }) => client.updateConfig(args), options);
 }

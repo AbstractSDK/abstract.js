@@ -96,62 +96,50 @@ export function useCw4GroupAdminQuery({
 }
 export interface Cw4GroupRemoveHookMutation {
   client: Cw4GroupClient;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw4GroupRemoveHookMutation, "args">>, "mutationFn">;
   args: {
     addr: string;
   };
 }
-export function useCw4GroupRemoveHookMutation({
-  client,
-  options
-}: Omit<Cw4GroupRemoveHookMutation, "args">) {
-  return useMutation<ExecuteResult, Error, Pick<Cw4GroupRemoveHookMutation, "args">>(({
+export function useCw4GroupRemoveHookMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw4GroupRemoveHookMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw4GroupRemoveHookMutation>(({
+    client,
     args
   }) => client.removeHook(args), options);
 }
 export interface Cw4GroupAddHookMutation {
   client: Cw4GroupClient;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw4GroupAddHookMutation, "args">>, "mutationFn">;
   args: {
     addr: string;
   };
 }
-export function useCw4GroupAddHookMutation({
-  client,
-  options
-}: Omit<Cw4GroupAddHookMutation, "args">) {
-  return useMutation<ExecuteResult, Error, Pick<Cw4GroupAddHookMutation, "args">>(({
+export function useCw4GroupAddHookMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw4GroupAddHookMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw4GroupAddHookMutation>(({
+    client,
     args
   }) => client.addHook(args), options);
 }
 export interface Cw4GroupUpdateMembersMutation {
   client: Cw4GroupClient;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw4GroupUpdateMembersMutation, "args">>, "mutationFn">;
   args: {
     add: Member[];
     remove: string[];
   };
 }
-export function useCw4GroupUpdateMembersMutation({
-  client,
-  options
-}: Omit<Cw4GroupUpdateMembersMutation, "args">) {
-  return useMutation<ExecuteResult, Error, Pick<Cw4GroupUpdateMembersMutation, "args">>(({
+export function useCw4GroupUpdateMembersMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw4GroupUpdateMembersMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw4GroupUpdateMembersMutation>(({
+    client,
     args
   }) => client.updateMembers(args), options);
 }
 export interface Cw4GroupUpdateAdminMutation {
   client: Cw4GroupClient;
-  options?: Omit<UseMutationOptions<ExecuteResult, Error, Pick<Cw4GroupUpdateAdminMutation, "args">>, "mutationFn">;
   args: {
     admin?: string;
   };
 }
-export function useCw4GroupUpdateAdminMutation({
-  client,
-  options
-}: Omit<Cw4GroupUpdateAdminMutation, "args">) {
-  return useMutation<ExecuteResult, Error, Pick<Cw4GroupUpdateAdminMutation, "args">>(({
+export function useCw4GroupUpdateAdminMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw4GroupUpdateAdminMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, Cw4GroupUpdateAdminMutation>(({
+    client,
     args
   }) => client.updateAdmin(args), options);
 }
