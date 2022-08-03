@@ -5,6 +5,7 @@
 */
 
 import { ExecuteResult } from "@cosmjs/cosmwasm-stargate";
+import { Coin, StdFee } from "@cosmjs/amino";
 import { useQuery, UseQueryOptions, UseMutationOptions, useMutation } from "@tanstack/react-query";
 import { AllAccountsResponse, Uint128, Expiration, Timestamp, Uint64, AllAllowancesResponse, AllowanceInfo, AllowanceResponse, BalanceResponse, Binary, DownloadLogoResponse, ExecuteMsg, Logo, EmbeddedLogo, InstantiateMsg, Cw20Coin, InstantiateMarketingInfo, MinterResponse, LogoInfo, Addr, MarketingInfoResponse, QueryMsg, TokenInfoResponse } from "../contracts/Cw20Contract";
 import { Cw20QueryClient, Cw20Client } from "../contracts/Cw20Contract";
@@ -154,157 +155,277 @@ export function useCw20BalanceQuery({
 }
 export interface Cw20UploadLogoMutation {
   client: Cw20Client;
+  args: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
 }
-export function useCw20UploadLogoMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20UploadLogoMutation>, "mutationFn">) {
+export function useCw20UploadLogoMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20UploadLogoMutation>, "mutationFn">) {
   return useMutation<ExecuteResult, Error, Cw20UploadLogoMutation>(({
-    client
-  }) => client.uploadLogo(), options);
+    client,
+    args: {
+      fee,
+      memo,
+      funds
+    }
+  }) => client.uploadLogo(fee, memo, funds), options);
 }
 export interface Cw20UpdateMarketingMutation {
   client: Cw20Client;
-  args: {
+  msg: {
     description?: string;
     marketing?: string;
     project?: string;
   };
+  args: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
 }
-export function useCw20UpdateMarketingMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20UpdateMarketingMutation>, "mutationFn">) {
+export function useCw20UpdateMarketingMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20UpdateMarketingMutation>, "mutationFn">) {
   return useMutation<ExecuteResult, Error, Cw20UpdateMarketingMutation>(({
     client,
-    args
-  }) => client.updateMarketing(args), options);
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    }
+  }) => client.updateMarketing(msg, fee, memo, funds), options);
 }
 export interface Cw20UpdateMinterMutation {
   client: Cw20Client;
-  args: {
+  msg: {
     newMinter: string;
   };
+  args: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
 }
-export function useCw20UpdateMinterMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20UpdateMinterMutation>, "mutationFn">) {
+export function useCw20UpdateMinterMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20UpdateMinterMutation>, "mutationFn">) {
   return useMutation<ExecuteResult, Error, Cw20UpdateMinterMutation>(({
     client,
-    args
-  }) => client.updateMinter(args), options);
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    }
+  }) => client.updateMinter(msg, fee, memo, funds), options);
 }
 export interface Cw20MintMutation {
   client: Cw20Client;
-  args: {
+  msg: {
     amount: string;
     recipient: string;
   };
+  args: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
 }
-export function useCw20MintMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20MintMutation>, "mutationFn">) {
+export function useCw20MintMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20MintMutation>, "mutationFn">) {
   return useMutation<ExecuteResult, Error, Cw20MintMutation>(({
     client,
-    args
-  }) => client.mint(args), options);
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    }
+  }) => client.mint(msg, fee, memo, funds), options);
 }
 export interface Cw20BurnFromMutation {
   client: Cw20Client;
-  args: {
+  msg: {
     amount: string;
     owner: string;
   };
+  args: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
 }
-export function useCw20BurnFromMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20BurnFromMutation>, "mutationFn">) {
+export function useCw20BurnFromMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20BurnFromMutation>, "mutationFn">) {
   return useMutation<ExecuteResult, Error, Cw20BurnFromMutation>(({
     client,
-    args
-  }) => client.burnFrom(args), options);
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    }
+  }) => client.burnFrom(msg, fee, memo, funds), options);
 }
 export interface Cw20SendFromMutation {
   client: Cw20Client;
-  args: {
+  msg: {
     amount: string;
     contract: string;
     msg: string;
     owner: string;
   };
+  args: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
 }
-export function useCw20SendFromMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20SendFromMutation>, "mutationFn">) {
+export function useCw20SendFromMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20SendFromMutation>, "mutationFn">) {
   return useMutation<ExecuteResult, Error, Cw20SendFromMutation>(({
     client,
-    args
-  }) => client.sendFrom(args), options);
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    }
+  }) => client.sendFrom(msg, fee, memo, funds), options);
 }
 export interface Cw20TransferFromMutation {
   client: Cw20Client;
-  args: {
+  msg: {
     amount: string;
     owner: string;
     recipient: string;
   };
+  args: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
 }
-export function useCw20TransferFromMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20TransferFromMutation>, "mutationFn">) {
+export function useCw20TransferFromMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20TransferFromMutation>, "mutationFn">) {
   return useMutation<ExecuteResult, Error, Cw20TransferFromMutation>(({
     client,
-    args
-  }) => client.transferFrom(args), options);
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    }
+  }) => client.transferFrom(msg, fee, memo, funds), options);
 }
 export interface Cw20DecreaseAllowanceMutation {
   client: Cw20Client;
-  args: {
+  msg: {
     amount: string;
     expires?: Expiration;
     spender: string;
   };
+  args: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
 }
-export function useCw20DecreaseAllowanceMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20DecreaseAllowanceMutation>, "mutationFn">) {
+export function useCw20DecreaseAllowanceMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20DecreaseAllowanceMutation>, "mutationFn">) {
   return useMutation<ExecuteResult, Error, Cw20DecreaseAllowanceMutation>(({
     client,
-    args
-  }) => client.decreaseAllowance(args), options);
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    }
+  }) => client.decreaseAllowance(msg, fee, memo, funds), options);
 }
 export interface Cw20IncreaseAllowanceMutation {
   client: Cw20Client;
-  args: {
+  msg: {
     amount: string;
     expires?: Expiration;
     spender: string;
   };
+  args: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
 }
-export function useCw20IncreaseAllowanceMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20IncreaseAllowanceMutation>, "mutationFn">) {
+export function useCw20IncreaseAllowanceMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20IncreaseAllowanceMutation>, "mutationFn">) {
   return useMutation<ExecuteResult, Error, Cw20IncreaseAllowanceMutation>(({
     client,
-    args
-  }) => client.increaseAllowance(args), options);
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    }
+  }) => client.increaseAllowance(msg, fee, memo, funds), options);
 }
 export interface Cw20SendMutation {
   client: Cw20Client;
-  args: {
+  msg: {
     amount: string;
     contract: string;
     msg: string;
   };
+  args: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
 }
-export function useCw20SendMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20SendMutation>, "mutationFn">) {
+export function useCw20SendMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20SendMutation>, "mutationFn">) {
   return useMutation<ExecuteResult, Error, Cw20SendMutation>(({
     client,
-    args
-  }) => client.send(args), options);
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    }
+  }) => client.send(msg, fee, memo, funds), options);
 }
 export interface Cw20BurnMutation {
   client: Cw20Client;
-  args: {
+  msg: {
     amount: string;
   };
+  args: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
 }
-export function useCw20BurnMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20BurnMutation>, "mutationFn">) {
+export function useCw20BurnMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20BurnMutation>, "mutationFn">) {
   return useMutation<ExecuteResult, Error, Cw20BurnMutation>(({
     client,
-    args
-  }) => client.burn(args), options);
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    }
+  }) => client.burn(msg, fee, memo, funds), options);
 }
 export interface Cw20TransferMutation {
   client: Cw20Client;
-  args: {
+  msg: {
     amount: string;
     recipient: string;
   };
+  args: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
 }
-export function useCw20TransferMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20TransferMutation>, "mutationFn">) {
+export function useCw20TransferMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20TransferMutation>, "mutationFn">) {
   return useMutation<ExecuteResult, Error, Cw20TransferMutation>(({
     client,
-    args
-  }) => client.transfer(args), options);
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    }
+  }) => client.transfer(msg, fee, memo, funds), options);
 }

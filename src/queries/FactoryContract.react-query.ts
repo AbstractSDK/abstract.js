@@ -5,6 +5,7 @@
 */
 
 import { ExecuteResult } from "@cosmjs/cosmwasm-stargate";
+import { Coin, StdFee } from "@cosmjs/amino";
 import { useQuery, UseQueryOptions, UseMutationOptions, useMutation } from "@tanstack/react-query";
 import { ConfigResponse,GovernanceDetails, InstantiateMsg } from "../contracts/FactoryContract";
 import { FactoryQueryClient, FactoryClient } from "../contracts/FactoryContract";
@@ -18,35 +19,54 @@ export function useFactoryConfigQuery({
 }: FactoryConfigQuery) {
   return useQuery<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>(["factoryConfig", client.contractAddress], () => client.config(), options);
 }
-
 export interface FactoryCreateOsMutation {
   client: FactoryClient;
-  args: {
+  msg: {
     description?: string;
     governance: GovernanceDetails;
     link?: string;
     osName: string;
   };
+  args: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
 }
 export function useFactoryCreateOsMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, FactoryCreateOsMutation>, "mutationFn">) {
   return useMutation<ExecuteResult, Error, FactoryCreateOsMutation>(({
     client,
-    args
-  }) => client.createOs(args), options);
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    }
+  }) => client.createOs(msg, fee, memo, funds), options);
 }
 export interface FactoryUpdateConfigMutation {
   client: FactoryClient;
-  args: {
+  msg: {
     admin?: string;
     memoryContract?: string;
     moduleFactoryAddress?: string;
     subscriptionAddress?: string;
     versionControlContract?: string;
   };
+  args: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
 }
 export function useFactoryUpdateConfigMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, FactoryUpdateConfigMutation>, "mutationFn">) {
   return useMutation<ExecuteResult, Error, FactoryUpdateConfigMutation>(({
     client,
-    args
-  }) => client.updateConfig(args), options);
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    }
+  }) => client.updateConfig(msg, fee, memo, funds), options);
 }

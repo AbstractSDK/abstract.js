@@ -52,51 +52,51 @@ function useCw20BalanceQuery({ client, args, options }) {
 }
 exports.useCw20BalanceQuery = useCw20BalanceQuery;
 function useCw20UploadLogoMutation(options) {
-    return (0, react_query_1.useMutation)(({ client }) => client.uploadLogo(), options);
+    return (0, react_query_1.useMutation)(({ client, args: { fee, memo, funds } }) => client.uploadLogo(fee, memo, funds), options);
 }
 exports.useCw20UploadLogoMutation = useCw20UploadLogoMutation;
 function useCw20UpdateMarketingMutation(options) {
-    return (0, react_query_1.useMutation)(({ client, args }) => client.updateMarketing(args), options);
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } }) => client.updateMarketing(msg, fee, memo, funds), options);
 }
 exports.useCw20UpdateMarketingMutation = useCw20UpdateMarketingMutation;
 function useCw20UpdateMinterMutation(options) {
-    return (0, react_query_1.useMutation)(({ client, args }) => client.updateMinter(args), options);
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } }) => client.updateMinter(msg, fee, memo, funds), options);
 }
 exports.useCw20UpdateMinterMutation = useCw20UpdateMinterMutation;
 function useCw20MintMutation(options) {
-    return (0, react_query_1.useMutation)(({ client, args }) => client.mint(args), options);
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } }) => client.mint(msg, fee, memo, funds), options);
 }
 exports.useCw20MintMutation = useCw20MintMutation;
 function useCw20BurnFromMutation(options) {
-    return (0, react_query_1.useMutation)(({ client, args }) => client.burnFrom(args), options);
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } }) => client.burnFrom(msg, fee, memo, funds), options);
 }
 exports.useCw20BurnFromMutation = useCw20BurnFromMutation;
 function useCw20SendFromMutation(options) {
-    return (0, react_query_1.useMutation)(({ client, args }) => client.sendFrom(args), options);
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } }) => client.sendFrom(msg, fee, memo, funds), options);
 }
 exports.useCw20SendFromMutation = useCw20SendFromMutation;
 function useCw20TransferFromMutation(options) {
-    return (0, react_query_1.useMutation)(({ client, args }) => client.transferFrom(args), options);
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } }) => client.transferFrom(msg, fee, memo, funds), options);
 }
 exports.useCw20TransferFromMutation = useCw20TransferFromMutation;
 function useCw20DecreaseAllowanceMutation(options) {
-    return (0, react_query_1.useMutation)(({ client, args }) => client.decreaseAllowance(args), options);
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } }) => client.decreaseAllowance(msg, fee, memo, funds), options);
 }
 exports.useCw20DecreaseAllowanceMutation = useCw20DecreaseAllowanceMutation;
 function useCw20IncreaseAllowanceMutation(options) {
-    return (0, react_query_1.useMutation)(({ client, args }) => client.increaseAllowance(args), options);
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } }) => client.increaseAllowance(msg, fee, memo, funds), options);
 }
 exports.useCw20IncreaseAllowanceMutation = useCw20IncreaseAllowanceMutation;
 function useCw20SendMutation(options) {
-    return (0, react_query_1.useMutation)(({ client, args }) => client.send(args), options);
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } }) => client.send(msg, fee, memo, funds), options);
 }
 exports.useCw20SendMutation = useCw20SendMutation;
 function useCw20BurnMutation(options) {
-    return (0, react_query_1.useMutation)(({ client, args }) => client.burn(args), options);
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } }) => client.burn(msg, fee, memo, funds), options);
 }
 exports.useCw20BurnMutation = useCw20BurnMutation;
 function useCw20TransferMutation(options) {
-    return (0, react_query_1.useMutation)(({ client, args }) => client.transfer(args), options);
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } }) => client.transfer(msg, fee, memo, funds), options);
 }
 exports.useCw20TransferMutation = useCw20TransferMutation;
 //# sourceMappingURL=Cw20Contract.react-query.js.map

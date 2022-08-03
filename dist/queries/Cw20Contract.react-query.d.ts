@@ -4,6 +4,7 @@
 * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
 */
 import { ExecuteResult } from "@cosmjs/cosmwasm-stargate";
+import { Coin, StdFee } from "@cosmjs/amino";
 import { UseQueryOptions, UseMutationOptions } from "@tanstack/react-query";
 import { AllAccountsResponse, Expiration, AllAllowancesResponse, AllowanceResponse, BalanceResponse, DownloadLogoResponse, MinterResponse, MarketingInfoResponse, TokenInfoResponse } from "../contracts/Cw20Contract";
 import { Cw20QueryClient, Cw20Client } from "../contracts/Cw20Contract";
@@ -81,98 +82,158 @@ export interface Cw20BalanceQuery {
 export declare function useCw20BalanceQuery({ client, args, options }: Cw20BalanceQuery): import("@tanstack/react-query").UseQueryResult<BalanceResponse, Error>;
 export interface Cw20UploadLogoMutation {
     client: Cw20Client;
+    args: {
+        fee?: number | StdFee | "auto";
+        memo?: string;
+        funds?: readonly Coin[];
+    };
 }
-export declare function useCw20UploadLogoMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20UploadLogoMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20UploadLogoMutation, unknown>;
+export declare function useCw20UploadLogoMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20UploadLogoMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20UploadLogoMutation, unknown>;
 export interface Cw20UpdateMarketingMutation {
     client: Cw20Client;
-    args: {
+    msg: {
         description?: string;
         marketing?: string;
         project?: string;
     };
+    args: {
+        fee?: number | StdFee | "auto";
+        memo?: string;
+        funds?: readonly Coin[];
+    };
 }
-export declare function useCw20UpdateMarketingMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20UpdateMarketingMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20UpdateMarketingMutation, unknown>;
+export declare function useCw20UpdateMarketingMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20UpdateMarketingMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20UpdateMarketingMutation, unknown>;
 export interface Cw20UpdateMinterMutation {
     client: Cw20Client;
-    args: {
+    msg: {
         newMinter: string;
     };
+    args: {
+        fee?: number | StdFee | "auto";
+        memo?: string;
+        funds?: readonly Coin[];
+    };
 }
-export declare function useCw20UpdateMinterMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20UpdateMinterMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20UpdateMinterMutation, unknown>;
+export declare function useCw20UpdateMinterMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20UpdateMinterMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20UpdateMinterMutation, unknown>;
 export interface Cw20MintMutation {
     client: Cw20Client;
-    args: {
+    msg: {
         amount: string;
         recipient: string;
     };
+    args: {
+        fee?: number | StdFee | "auto";
+        memo?: string;
+        funds?: readonly Coin[];
+    };
 }
-export declare function useCw20MintMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20MintMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20MintMutation, unknown>;
+export declare function useCw20MintMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20MintMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20MintMutation, unknown>;
 export interface Cw20BurnFromMutation {
     client: Cw20Client;
-    args: {
+    msg: {
         amount: string;
         owner: string;
     };
+    args: {
+        fee?: number | StdFee | "auto";
+        memo?: string;
+        funds?: readonly Coin[];
+    };
 }
-export declare function useCw20BurnFromMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20BurnFromMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20BurnFromMutation, unknown>;
+export declare function useCw20BurnFromMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20BurnFromMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20BurnFromMutation, unknown>;
 export interface Cw20SendFromMutation {
     client: Cw20Client;
-    args: {
+    msg: {
         amount: string;
         contract: string;
         msg: string;
         owner: string;
     };
+    args: {
+        fee?: number | StdFee | "auto";
+        memo?: string;
+        funds?: readonly Coin[];
+    };
 }
-export declare function useCw20SendFromMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20SendFromMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20SendFromMutation, unknown>;
+export declare function useCw20SendFromMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20SendFromMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20SendFromMutation, unknown>;
 export interface Cw20TransferFromMutation {
     client: Cw20Client;
-    args: {
+    msg: {
         amount: string;
         owner: string;
         recipient: string;
     };
+    args: {
+        fee?: number | StdFee | "auto";
+        memo?: string;
+        funds?: readonly Coin[];
+    };
 }
-export declare function useCw20TransferFromMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20TransferFromMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20TransferFromMutation, unknown>;
+export declare function useCw20TransferFromMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20TransferFromMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20TransferFromMutation, unknown>;
 export interface Cw20DecreaseAllowanceMutation {
     client: Cw20Client;
-    args: {
+    msg: {
         amount: string;
         expires?: Expiration;
         spender: string;
     };
+    args: {
+        fee?: number | StdFee | "auto";
+        memo?: string;
+        funds?: readonly Coin[];
+    };
 }
-export declare function useCw20DecreaseAllowanceMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20DecreaseAllowanceMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20DecreaseAllowanceMutation, unknown>;
+export declare function useCw20DecreaseAllowanceMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20DecreaseAllowanceMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20DecreaseAllowanceMutation, unknown>;
 export interface Cw20IncreaseAllowanceMutation {
     client: Cw20Client;
-    args: {
+    msg: {
         amount: string;
         expires?: Expiration;
         spender: string;
     };
+    args: {
+        fee?: number | StdFee | "auto";
+        memo?: string;
+        funds?: readonly Coin[];
+    };
 }
-export declare function useCw20IncreaseAllowanceMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20IncreaseAllowanceMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20IncreaseAllowanceMutation, unknown>;
+export declare function useCw20IncreaseAllowanceMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20IncreaseAllowanceMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20IncreaseAllowanceMutation, unknown>;
 export interface Cw20SendMutation {
     client: Cw20Client;
-    args: {
+    msg: {
         amount: string;
         contract: string;
         msg: string;
     };
-}
-export declare function useCw20SendMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20SendMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20SendMutation, unknown>;
-export interface Cw20BurnMutation {
-    client: Cw20Client;
     args: {
-        amount: string;
+        fee?: number | StdFee | "auto";
+        memo?: string;
+        funds?: readonly Coin[];
     };
 }
-export declare function useCw20BurnMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20BurnMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20BurnMutation, unknown>;
+export declare function useCw20SendMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20SendMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20SendMutation, unknown>;
+export interface Cw20BurnMutation {
+    client: Cw20Client;
+    msg: {
+        amount: string;
+    };
+    args: {
+        fee?: number | StdFee | "auto";
+        memo?: string;
+        funds?: readonly Coin[];
+    };
+}
+export declare function useCw20BurnMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20BurnMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20BurnMutation, unknown>;
 export interface Cw20TransferMutation {
     client: Cw20Client;
-    args: {
+    msg: {
         amount: string;
         recipient: string;
     };
+    args: {
+        fee?: number | StdFee | "auto";
+        memo?: string;
+        funds?: readonly Coin[];
+    };
 }
-export declare function useCw20TransferMutation(options: Omit<UseMutationOptions<ExecuteResult, Error, Cw20TransferMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20TransferMutation, unknown>;
+export declare function useCw20TransferMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, Cw20TransferMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, Cw20TransferMutation, unknown>;

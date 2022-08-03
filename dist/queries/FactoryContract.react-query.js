@@ -12,11 +12,11 @@ function useFactoryConfigQuery({ client, options }) {
 }
 exports.useFactoryConfigQuery = useFactoryConfigQuery;
 function useFactoryCreateOsMutation(options) {
-    return (0, react_query_1.useMutation)(({ client, args }) => client.createOs(args), options);
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } }) => client.createOs(msg, fee, memo, funds), options);
 }
 exports.useFactoryCreateOsMutation = useFactoryCreateOsMutation;
 function useFactoryUpdateConfigMutation(options) {
-    return (0, react_query_1.useMutation)(({ client, args }) => client.updateConfig(args), options);
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } }) => client.updateConfig(msg, fee, memo, funds), options);
 }
 exports.useFactoryUpdateConfigMutation = useFactoryUpdateConfigMutation;
 //# sourceMappingURL=FactoryContract.react-query.js.map
