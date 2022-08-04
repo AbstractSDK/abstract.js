@@ -8,39 +8,39 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.useVersionControlOsCoreQuery = exports.useVersionControlCodeIdQuery = exports.useVersionControlApiAddressQuery = exports.useVersionControlConfigQuery = exports.useVersionControlCodeIdsQuery = exports.useVersionControlApiAddressesQuery = void 0;
 const react_query_1 = require("@tanstack/react-query");
 function useVersionControlApiAddressesQuery({ client, args, options, }) {
-    return (0, react_query_1.useQuery)(['versionControlApiAddresses', client.contractAddress], () => client.apiAddresses({
+    return (0, react_query_1.useQuery)(['versionControlApiAddresses', client === null || client === void 0 ? void 0 : client.contractAddress], () => client ? client.apiAddresses({
         iterLimit: args.iterLimit,
         lastApiModule: args.lastApiModule,
-    }), options);
+    }) : undefined, Object.assign(Object.assign({}, options), { enabled: !!client && ((options === null || options === void 0 ? void 0 : options.enabled) != undefined ? options.enabled : true) }));
 }
 exports.useVersionControlApiAddressesQuery = useVersionControlApiAddressesQuery;
 function useVersionControlCodeIdsQuery({ client, args, options, }) {
-    return (0, react_query_1.useQuery)(['versionControlCodeIds', client.contractAddress], () => client.codeIds({
+    return (0, react_query_1.useQuery)(['versionControlCodeIds', client === null || client === void 0 ? void 0 : client.contractAddress], () => client ? client.codeIds({
         iterLimit: args.iterLimit,
         lastModule: args.lastModule,
-    }), options);
+    }) : undefined, Object.assign(Object.assign({}, options), { enabled: !!client && ((options === null || options === void 0 ? void 0 : options.enabled) != undefined ? options.enabled : true) }));
 }
 exports.useVersionControlCodeIdsQuery = useVersionControlCodeIdsQuery;
 function useVersionControlConfigQuery({ client, options }) {
-    return (0, react_query_1.useQuery)(['versionControlConfig', client.contractAddress], () => client.config(), options);
+    return (0, react_query_1.useQuery)(['versionControlConfig', client === null || client === void 0 ? void 0 : client.contractAddress], () => client ? client.config() : undefined, Object.assign(Object.assign({}, options), { enabled: !!client && ((options === null || options === void 0 ? void 0 : options.enabled) != undefined ? options.enabled : true) }));
 }
 exports.useVersionControlConfigQuery = useVersionControlConfigQuery;
 function useVersionControlApiAddressQuery({ client, args, options, }) {
-    return (0, react_query_1.useQuery)(['versionControlApiAddress', client.contractAddress], () => client.apiAddress({
+    return (0, react_query_1.useQuery)(['versionControlApiAddress', client === null || client === void 0 ? void 0 : client.contractAddress], () => client ? client.apiAddress({
         module: args.module,
-    }), options);
+    }) : undefined, Object.assign(Object.assign({}, options), { enabled: !!client && ((options === null || options === void 0 ? void 0 : options.enabled) != undefined ? options.enabled : true) }));
 }
 exports.useVersionControlApiAddressQuery = useVersionControlApiAddressQuery;
 function useVersionControlCodeIdQuery({ client, args, options }) {
-    return (0, react_query_1.useQuery)(['versionControlCodeId', client.contractAddress], () => client.codeId({
+    return (0, react_query_1.useQuery)(['versionControlCodeId', client === null || client === void 0 ? void 0 : client.contractAddress], () => client ? client.codeId({
         module: args.module,
-    }), options);
+    }) : undefined, Object.assign(Object.assign({}, options), { enabled: !!client && ((options === null || options === void 0 ? void 0 : options.enabled) != undefined ? options.enabled : true) }));
 }
 exports.useVersionControlCodeIdQuery = useVersionControlCodeIdQuery;
 function useVersionControlOsCoreQuery({ client, args, options }) {
-    return (0, react_query_1.useQuery)(['versionControlOsCore', client.contractAddress], () => client.osCore({
+    return (0, react_query_1.useQuery)(['versionControlOsCore', client === null || client === void 0 ? void 0 : client.contractAddress], () => client ? client.osCore({
         osId: args.osId,
-    }), options);
+    }) : undefined, Object.assign(Object.assign({}, options), { enabled: !!client && ((options === null || options === void 0 ? void 0 : options.enabled) != undefined ? options.enabled : true) }));
 }
 exports.useVersionControlOsCoreQuery = useVersionControlOsCoreQuery;
 //# sourceMappingURL=VersionControlContract.react-query.js.map

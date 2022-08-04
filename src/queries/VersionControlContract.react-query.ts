@@ -21,9 +21,9 @@ import {
 } from '../contracts/VersionControlContract'
 import { VersionControlQueryClient } from '../contracts/VersionControlContract'
 export interface VersionControlApiAddressesQuery {
-  client: VersionControlQueryClient
+  client?: VersionControlQueryClient
   options?: Omit<
-    UseQueryOptions<ApiAddressesResponse, Error, ApiAddressesResponse, (string | undefined)[]>,
+    UseQueryOptions<ApiAddressesResponse | undefined, Error, ApiAddressesResponse, (string | undefined)[]>,
     'queryKey' | 'queryFn' | 'initialData'
   > & { initialData?: () => undefined }
   args: {
@@ -36,20 +36,20 @@ export function useVersionControlApiAddressesQuery({
   args,
   options,
 }: VersionControlApiAddressesQuery) {
-  return useQuery<ApiAddressesResponse, Error, ApiAddressesResponse, (string | undefined)[]>(
-    ['versionControlApiAddresses', client.contractAddress],
+  return useQuery<ApiAddressesResponse | undefined, Error, ApiAddressesResponse, (string | undefined)[]>(
+    ['versionControlApiAddresses', client?.contractAddress],
     () =>
-      client.apiAddresses({
+      client ? client.apiAddresses({
         iterLimit: args.iterLimit,
         lastApiModule: args.lastApiModule,
-      }),
-    options
+      }) : undefined,
+    { ...options, enabled: !!client && (options?.enabled != undefined ? options.enabled : true) }
   )
 }
 export interface VersionControlCodeIdsQuery {
-  client: VersionControlQueryClient
+  client?: VersionControlQueryClient
   options?: Omit<
-    UseQueryOptions<CodeIdsResponse, Error, CodeIdsResponse, (string | undefined)[]>,
+    UseQueryOptions<CodeIdsResponse | undefined, Error, CodeIdsResponse, (string | undefined)[]>,
     'queryKey' | 'queryFn' | 'initialData'
   > & { initialData?: () => undefined }
   args: {
@@ -62,34 +62,34 @@ export function useVersionControlCodeIdsQuery({
   args,
   options,
 }: VersionControlCodeIdsQuery) {
-  return useQuery<CodeIdsResponse, Error, CodeIdsResponse, (string | undefined)[]>(
-    ['versionControlCodeIds', client.contractAddress],
+  return useQuery<CodeIdsResponse | undefined, Error, CodeIdsResponse, (string | undefined)[]>(
+    ['versionControlCodeIds', client?.contractAddress],
     () =>
-      client.codeIds({
+      client ? client.codeIds({
         iterLimit: args.iterLimit,
         lastModule: args.lastModule,
-      }),
-    options
+      }) : undefined,
+    { ...options, enabled: !!client && (options?.enabled != undefined ? options.enabled : true) }
   )
 }
 export interface VersionControlConfigQuery {
-  client: VersionControlQueryClient
+  client?: VersionControlQueryClient
   options?: Omit<
-    UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>,
+    UseQueryOptions<ConfigResponse | undefined, Error, ConfigResponse, (string | undefined)[]>,
     'queryKey' | 'queryFn' | 'initialData'
   > & { initialData?: () => undefined }
 }
 export function useVersionControlConfigQuery({ client, options }: VersionControlConfigQuery) {
-  return useQuery<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>(
-    ['versionControlConfig', client.contractAddress],
-    () => client.config(),
-    options
+  return useQuery<ConfigResponse | undefined, Error, ConfigResponse, (string | undefined)[]>(
+    ['versionControlConfig', client?.contractAddress],
+    () => client?  client.config() : undefined,
+    { ...options, enabled: !!client && (options?.enabled != undefined ? options.enabled : true) }
   )
 }
 export interface VersionControlApiAddressQuery {
-  client: VersionControlQueryClient
+  client?: VersionControlQueryClient
   options?: Omit<
-    UseQueryOptions<ApiAddressResponse, Error, ApiAddressResponse, (string | undefined)[]>,
+    UseQueryOptions<ApiAddressResponse | undefined, Error, ApiAddressResponse, (string | undefined)[]>,
     'queryKey' | 'queryFn' | 'initialData'
   > & { initialData?: () => undefined }
   args: {
@@ -101,19 +101,19 @@ export function useVersionControlApiAddressQuery({
   args,
   options,
 }: VersionControlApiAddressQuery) {
-  return useQuery<ApiAddressResponse, Error, ApiAddressResponse, (string | undefined)[]>(
-    ['versionControlApiAddress', client.contractAddress],
+  return useQuery<ApiAddressResponse | undefined, Error, ApiAddressResponse, (string | undefined)[]>(
+    ['versionControlApiAddress', client?.contractAddress],
     () =>
-      client.apiAddress({
+      client ? client.apiAddress({
         module: args.module,
-      }),
-    options
+      }) : undefined,
+    { ...options, enabled: !!client && (options?.enabled != undefined ? options.enabled : true) }
   )
 }
 export interface VersionControlCodeIdQuery {
-  client: VersionControlQueryClient
+  client?: VersionControlQueryClient
   options?: Omit<
-    UseQueryOptions<CodeIdResponse, Error, CodeIdResponse, (string | undefined)[]>,
+    UseQueryOptions<CodeIdResponse | undefined, Error, CodeIdResponse, (string | undefined)[]>,
     'queryKey' | 'queryFn' | 'initialData'
   > & { initialData?: () => undefined }
   args: {
@@ -121,19 +121,19 @@ export interface VersionControlCodeIdQuery {
   }
 }
 export function useVersionControlCodeIdQuery({ client, args, options }: VersionControlCodeIdQuery) {
-  return useQuery<CodeIdResponse, Error, CodeIdResponse, (string | undefined)[]>(
-    ['versionControlCodeId', client.contractAddress],
+  return useQuery<CodeIdResponse | undefined, Error, CodeIdResponse, (string | undefined)[]>(
+    ['versionControlCodeId', client?.contractAddress],
     () =>
-      client.codeId({
+      client ? client.codeId({
         module: args.module,
-      }),
-    options
+      }) : undefined,
+    { ...options, enabled: !!client && (options?.enabled != undefined ? options.enabled : true) }
   )
 }
 export interface VersionControlOsCoreQuery {
-  client: VersionControlQueryClient
+  client?: VersionControlQueryClient
   options?: Omit<
-    UseQueryOptions<OsCoreResponse, Error, OsCoreResponse, (string | undefined)[]>,
+    UseQueryOptions<OsCoreResponse | undefined, Error, OsCoreResponse, (string | undefined)[]>,
     'queryKey' | 'queryFn' | 'initialData'
   > & { initialData?: () => undefined }
   args: {
@@ -141,12 +141,12 @@ export interface VersionControlOsCoreQuery {
   }
 }
 export function useVersionControlOsCoreQuery({ client, args, options }: VersionControlOsCoreQuery) {
-  return useQuery<OsCoreResponse, Error, OsCoreResponse, (string | undefined)[]>(
-    ['versionControlOsCore', client.contractAddress],
+  return useQuery<OsCoreResponse | undefined, Error, OsCoreResponse, (string | undefined)[]>(
+    ['versionControlOsCore', client?.contractAddress],
     () =>
-      client.osCore({
+      client ? client.osCore({
         osId: args.osId,
-      }),
-    options
+      }) : undefined,
+    { ...options, enabled: !!client && (options?.enabled != undefined ? options.enabled : true) }
   )
 }

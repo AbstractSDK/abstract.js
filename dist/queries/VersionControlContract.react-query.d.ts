@@ -7,8 +7,8 @@ import { UseQueryOptions } from '@tanstack/react-query';
 import { ApiAddressResponse, ContractVersion, ApiAddressesResponse, CodeIdResponse, CodeIdsResponse, ConfigResponse, ModuleInfo, OsCoreResponse } from '../contracts/VersionControlContract';
 import { VersionControlQueryClient } from '../contracts/VersionControlContract';
 export interface VersionControlApiAddressesQuery {
-    client: VersionControlQueryClient;
-    options?: Omit<UseQueryOptions<ApiAddressesResponse, Error, ApiAddressesResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+    client?: VersionControlQueryClient;
+    options?: Omit<UseQueryOptions<ApiAddressesResponse | undefined, Error, ApiAddressesResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
         initialData?: () => undefined;
     };
     args: {
@@ -18,8 +18,8 @@ export interface VersionControlApiAddressesQuery {
 }
 export declare function useVersionControlApiAddressesQuery({ client, args, options, }: VersionControlApiAddressesQuery): import("@tanstack/react-query").UseQueryResult<ApiAddressesResponse, Error>;
 export interface VersionControlCodeIdsQuery {
-    client: VersionControlQueryClient;
-    options?: Omit<UseQueryOptions<CodeIdsResponse, Error, CodeIdsResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+    client?: VersionControlQueryClient;
+    options?: Omit<UseQueryOptions<CodeIdsResponse | undefined, Error, CodeIdsResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
         initialData?: () => undefined;
     };
     args: {
@@ -29,15 +29,15 @@ export interface VersionControlCodeIdsQuery {
 }
 export declare function useVersionControlCodeIdsQuery({ client, args, options, }: VersionControlCodeIdsQuery): import("@tanstack/react-query").UseQueryResult<CodeIdsResponse, Error>;
 export interface VersionControlConfigQuery {
-    client: VersionControlQueryClient;
-    options?: Omit<UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+    client?: VersionControlQueryClient;
+    options?: Omit<UseQueryOptions<ConfigResponse | undefined, Error, ConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
         initialData?: () => undefined;
     };
 }
 export declare function useVersionControlConfigQuery({ client, options }: VersionControlConfigQuery): import("@tanstack/react-query").UseQueryResult<ConfigResponse, Error>;
 export interface VersionControlApiAddressQuery {
-    client: VersionControlQueryClient;
-    options?: Omit<UseQueryOptions<ApiAddressResponse, Error, ApiAddressResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+    client?: VersionControlQueryClient;
+    options?: Omit<UseQueryOptions<ApiAddressResponse | undefined, Error, ApiAddressResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
         initialData?: () => undefined;
     };
     args: {
@@ -46,8 +46,8 @@ export interface VersionControlApiAddressQuery {
 }
 export declare function useVersionControlApiAddressQuery({ client, args, options, }: VersionControlApiAddressQuery): import("@tanstack/react-query").UseQueryResult<ApiAddressResponse, Error>;
 export interface VersionControlCodeIdQuery {
-    client: VersionControlQueryClient;
-    options?: Omit<UseQueryOptions<CodeIdResponse, Error, CodeIdResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+    client?: VersionControlQueryClient;
+    options?: Omit<UseQueryOptions<CodeIdResponse | undefined, Error, CodeIdResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
         initialData?: () => undefined;
     };
     args: {
@@ -56,8 +56,8 @@ export interface VersionControlCodeIdQuery {
 }
 export declare function useVersionControlCodeIdQuery({ client, args, options }: VersionControlCodeIdQuery): import("@tanstack/react-query").UseQueryResult<CodeIdResponse, Error>;
 export interface VersionControlOsCoreQuery {
-    client: VersionControlQueryClient;
-    options?: Omit<UseQueryOptions<OsCoreResponse, Error, OsCoreResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+    client?: VersionControlQueryClient;
+    options?: Omit<UseQueryOptions<OsCoreResponse | undefined, Error, OsCoreResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
         initialData?: () => undefined;
     };
     args: {
