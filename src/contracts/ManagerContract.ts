@@ -14,6 +14,53 @@ export interface ConfigResponse {
   root: string
   version_control_address: string
 }
+
+export type ExecuteMsg = {
+  set_admin: {
+    admin: string;
+    governance_type?: string | null;
+  };
+} | {
+  create_module: {
+    init_msg?: Binary | null;
+    module: Module;
+  };
+} | {
+  register_module: {
+    module: Module;
+    module_addr: string;
+  };
+} | {
+  remove_module: {
+    module_name: string;
+  };
+} | {
+  exec_on_module: {
+    exec_msg: Binary;
+    module_name: string;
+  };
+} | {
+  update_config: {
+    root?: string | null;
+    vc_addr?: string | null;
+  };
+} | {
+  upgrade: {
+    migrate_msg?: Binary | null;
+    module: Module;
+  };
+} | {
+  suspend_os: {
+    new_status: boolean;
+  };
+} | {
+  update_info: {
+    description?: string | null;
+    link?: string | null;
+    os_name?: string | null;
+  };
+};
+export type ManagerExecuteMsg = ExecuteMsg
 export interface InfoResponse {
   info: OsInfo
 }
