@@ -101,6 +101,7 @@ export declare type ExecuteMsg = {
 } | {
     upload_logo: Logo;
 };
+export declare type Cw20ExecuteMsg = ExecuteMsg;
 export declare type Logo = {
     url: string;
 } | {

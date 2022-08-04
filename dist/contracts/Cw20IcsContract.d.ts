@@ -56,6 +56,7 @@ export declare type ExecuteMsg = {
         admin: string;
     };
 };
+export declare type Cw20IcsExecuteMsg = ExecuteMsg;
 export declare type Binary = string;
 export interface Cw20ReceiveMsg {
     amount: Uint128;

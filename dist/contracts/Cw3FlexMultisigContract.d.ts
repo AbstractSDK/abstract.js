@@ -120,6 +120,7 @@ export declare type Expiration = {
 } | {
     never: {};
 };
+export declare type Cw3FlexMultisigExecuteMsg = ExecuteMsg;
 export declare type Timestamp = Uint64;
 export declare type Uint64 = string;
 export declare type Vote = 'yes' | 'no' | 'abstain' | 'veto';

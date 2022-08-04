@@ -90,7 +90,7 @@ function useCw3FlexMultisigVoteMutation(options) {
 }
 exports.useCw3FlexMultisigVoteMutation = useCw3FlexMultisigVoteMutation;
 function useCw3FlexMultisigProposeMutation(options) {
-    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } }) => client.propose(msg, fee, memo, funds), options);
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } = {} }) => client.propose(msg, fee, memo, funds), options);
 }
 exports.useCw3FlexMultisigProposeMutation = useCw3FlexMultisigProposeMutation;
 //# sourceMappingURL=Cw3FlexMultisigContract.react-query.js.map

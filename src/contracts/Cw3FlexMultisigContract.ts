@@ -107,6 +107,7 @@ export interface Coin {
   denom: string
 }
 export interface Empty {}
+
 export type ExecuteMsg =
   | {
       propose: {
@@ -145,6 +146,8 @@ export type Expiration =
   | {
       never: {}
     }
+export type Cw3FlexMultisigExecuteMsg = ExecuteMsg
+
 export type Timestamp = Uint64
 export type Uint64 = string
 export type Vote = 'yes' | 'no' | 'abstain' | 'veto'

@@ -63,6 +63,8 @@ export type ExecuteMsg =
         admin: string
       }
     }
+export type Cw20IcsExecuteMsg = ExecuteMsg
+
 export type Binary = string
 export interface Cw20ReceiveMsg {
   amount: Uint128

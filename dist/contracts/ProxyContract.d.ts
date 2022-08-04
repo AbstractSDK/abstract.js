@@ -121,6 +121,7 @@ export declare type ExecuteMsg = {
         to_remove: string[];
     };
 };
+export declare type ProxyExecuteMsg = ExecuteMsg;
 export declare type UncheckedValueRef = {
     pool: {
         pair: string;

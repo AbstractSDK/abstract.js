@@ -405,7 +405,7 @@ export interface Cw3FlexMultisigProposeMutation {
     msgs: CosmosMsgForEmpty[]
     title: string
   }
-  args: {
+  args?: {
     fee?: number | StdFee | 'auto'
     memo?: string
     funds?: readonly Coin[]
@@ -418,7 +418,7 @@ export function useCw3FlexMultisigProposeMutation(
   >
 ) {
   return useMutation<ExecuteResult, Error, Cw3FlexMultisigProposeMutation>(
-    ({ client, msg, args: { fee, memo, funds } }) => client.propose(msg, fee, memo, funds),
+    ({ client, msg, args: { fee, memo, funds } = {} }) => client.propose(msg, fee, memo, funds),
     options
   )
 }

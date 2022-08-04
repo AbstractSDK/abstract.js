@@ -31,6 +31,8 @@ export type ExecuteMsg =
         addr: string
       }
     }
+export type Cw4GroupExecuteMsg = ExecuteMsg
+
 export interface Member {
   addr: string
   weight: number

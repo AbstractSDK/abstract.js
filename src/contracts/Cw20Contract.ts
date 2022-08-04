@@ -117,6 +117,8 @@ export type ExecuteMsg =
   | {
       upload_logo: Logo
     }
+export type Cw20ExecuteMsg = ExecuteMsg
+
 export type Logo =
   | {
       url: string

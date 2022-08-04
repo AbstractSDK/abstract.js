@@ -26,6 +26,7 @@ export declare type ExecuteMsg = {
         addr: string;
     };
 };
+export declare type Cw4GroupExecuteMsg = ExecuteMsg;
 export interface Member {
     addr: string;
     weight: number;

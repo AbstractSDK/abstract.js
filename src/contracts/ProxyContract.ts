@@ -145,6 +145,8 @@ export type ExecuteMsg =
         to_remove: string[]
       }
     }
+export type ProxyExecuteMsg = ExecuteMsg
+
 export type UncheckedValueRef =
   | {
       pool: {

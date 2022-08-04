@@ -148,7 +148,7 @@ export interface Cw3FlexMultisigProposeMutation {
         msgs: CosmosMsgForEmpty[];
         title: string;
     };
-    args: {
+    args?: {
         fee?: number | StdFee | 'auto';
         memo?: string;
         funds?: readonly Coin[];
