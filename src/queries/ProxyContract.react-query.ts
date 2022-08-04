@@ -4,14 +4,19 @@
  * and run the cosmwasm-typescript-gen generate command to regenerate this file.
  */
 
-import { useQuery, UseQueryOptions } from '@tanstack/react-query'
+import { StdFee } from '@cosmjs/amino'
+import { ExecuteResult } from '@cosmjs/cosmwasm-stargate'
+import { useMutation, UseMutationOptions, useQuery, UseQueryOptions } from '@tanstack/react-query'
 import {
+  Coin,
   ConfigResponse,
   HoldingAmountResponse,
   HoldingValueResponse,
   ProxyAssetConfigResponse,
   ProxyAssetsResponse,
+  ProxyClient,
   TotalValueResponse,
+  UncheckedProxyAsset,
 } from '../contracts/ProxyContract'
 import { ProxyQueryClient } from '../contracts/ProxyContract'
 export interface ProxyProxyAssetsQuery {
@@ -203,4 +208,29 @@ export function useProxyConfigQuery({ client, options }: ProxyConfigQuery) {
       enabled: !!client && options?.enabled,
     }
   )
+}
+
+export interface ProxyUpdateAssetsMutation {
+  client: ProxyClient;
+  msg: {
+    toAdd: UncheckedProxyAsset[];
+    toRemove: string[];
+  };
+  args: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
+}
+
+export function useProxyUpdateAssetsMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, ProxyUpdateAssetsMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, ProxyUpdateAssetsMutation>(({
+    client,
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    }
+  }) => client.updateAssets(msg, fee, memo, funds), options);
 }

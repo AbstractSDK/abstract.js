@@ -55,13 +55,16 @@ export interface VersionControlCodeIdQuery {
     };
 }
 export declare function useVersionControlCodeIdQuery({ client, args, options }: VersionControlCodeIdQuery): import("@tanstack/react-query").UseQueryResult<CodeIdResponse, Error>;
-export interface VersionControlOsCoreQuery {
+interface VersionControlReactQuery<QueryResponse> {
     client?: VersionControlQueryClient;
-    options?: Omit<UseQueryOptions<OsCoreResponse | undefined, Error, OsCoreResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
+    options?: Omit<UseQueryOptions<QueryResponse | undefined, Error, QueryResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & {
         initialData?: () => undefined;
     };
+}
+export interface VersionControlOsCoreQuery extends VersionControlReactQuery<OsCoreResponse> {
     args: {
         osId: number;
     };
 }
 export declare function useVersionControlOsCoreQuery({ client, args, options }: VersionControlOsCoreQuery): import("@tanstack/react-query").UseQueryResult<OsCoreResponse, Error>;
+export {};

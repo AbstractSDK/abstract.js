@@ -5,7 +5,7 @@
  * and run the cosmwasm-typescript-gen generate command to regenerate this file.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.useProxyConfigQuery = exports.useProxyTotalValueQuery = exports.useProxyHoldingValueQuery = exports.useProxyHoldingAmountQuery = exports.useProxyProxyAssetConfigQuery = exports.useProxyProxyAssetsQuery = void 0;
+exports.useProxyUpdateAssetsMutation = exports.useProxyConfigQuery = exports.useProxyTotalValueQuery = exports.useProxyHoldingValueQuery = exports.useProxyHoldingAmountQuery = exports.useProxyProxyAssetConfigQuery = exports.useProxyProxyAssetsQuery = void 0;
 const react_query_1 = require("@tanstack/react-query");
 function useProxyProxyAssetsQuery({ client, args, options }) {
     return (0, react_query_1.useQuery)(['proxyProxyAssets', client === null || client === void 0 ? void 0 : client.contractAddress], () => client
@@ -48,4 +48,8 @@ function useProxyConfigQuery({ client, options }) {
     return (0, react_query_1.useQuery)(['proxyConfig', client === null || client === void 0 ? void 0 : client.contractAddress], () => (client ? client.config() : undefined), Object.assign(Object.assign({}, options), { enabled: !!client && (options === null || options === void 0 ? void 0 : options.enabled) }));
 }
 exports.useProxyConfigQuery = useProxyConfigQuery;
+function useProxyUpdateAssetsMutation(options) {
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } }) => client.updateAssets(msg, fee, memo, funds), options);
+}
+exports.useProxyUpdateAssetsMutation = useProxyUpdateAssetsMutation;
 //# sourceMappingURL=ProxyContract.react-query.js.map

@@ -130,12 +130,15 @@ export function useVersionControlCodeIdQuery({ client, args, options }: VersionC
     { ...options, enabled: !!client && (options?.enabled != undefined ? options.enabled : true) }
   )
 }
-export interface VersionControlOsCoreQuery {
+
+interface VersionControlReactQuery<QueryResponse> {
   client?: VersionControlQueryClient
   options?: Omit<
-    UseQueryOptions<OsCoreResponse | undefined, Error, OsCoreResponse, (string | undefined)[]>,
+    UseQueryOptions<QueryResponse | undefined, Error, QueryResponse, (string | undefined)[]>,
     'queryKey' | 'queryFn' | 'initialData'
   > & { initialData?: () => undefined }
+}
+export interface VersionControlOsCoreQuery extends VersionControlReactQuery<OsCoreResponse> {
   args: {
     osId: number
   }

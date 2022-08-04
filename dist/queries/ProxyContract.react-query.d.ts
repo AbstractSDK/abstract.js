@@ -3,8 +3,10 @@
  * DO NOT MODIFY IT BY HAND. Instead, modify the source JSONSchema file,
  * and run the cosmwasm-typescript-gen generate command to regenerate this file.
  */
-import { UseQueryOptions } from '@tanstack/react-query';
-import { ConfigResponse, HoldingAmountResponse, HoldingValueResponse, ProxyAssetConfigResponse, ProxyAssetsResponse, TotalValueResponse } from '../contracts/ProxyContract';
+import { StdFee } from '@cosmjs/amino';
+import { ExecuteResult } from '@cosmjs/cosmwasm-stargate';
+import { UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
+import { Coin, ConfigResponse, HoldingAmountResponse, HoldingValueResponse, ProxyAssetConfigResponse, ProxyAssetsResponse, ProxyClient, TotalValueResponse, UncheckedProxyAsset } from '../contracts/ProxyContract';
 import { ProxyQueryClient } from '../contracts/ProxyContract';
 export interface ProxyProxyAssetsQuery {
     client?: ProxyQueryClient;
@@ -61,3 +63,16 @@ export interface ProxyConfigQuery {
     };
 }
 export declare function useProxyConfigQuery({ client, options }: ProxyConfigQuery): import("@tanstack/react-query").UseQueryResult<ConfigResponse, Error>;
+export interface ProxyUpdateAssetsMutation {
+    client: ProxyClient;
+    msg: {
+        toAdd: UncheckedProxyAsset[];
+        toRemove: string[];
+    };
+    args: {
+        fee?: number | StdFee | "auto";
+        memo?: string;
+        funds?: readonly Coin[];
+    };
+}
+export declare function useProxyUpdateAssetsMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, ProxyUpdateAssetsMutation>, "mutationFn">): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, ProxyUpdateAssetsMutation, unknown>;
