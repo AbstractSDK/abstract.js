@@ -4,8 +4,8 @@
 * and run the cosmwasm-typescript-gen generate command to regenerate this file.
 */
 import { UseQueryOptions } from "react-query";
-import { ConfigResponse, ModuleInfo, QueryCodeIdResponse, QueryEnabledModulesResponse, QueryOsAddressResponse } from "./VersionControlContract";
-import { VersionControlQueryClient } from "./VersionControlContract";
+import { ConfigResponse, ModuleInfo, QueryCodeIdResponse, QueryEnabledModulesResponse, QueryOsAddressResponse } from "../contracts/VersionControlContract";
+import { VersionControlQueryClient } from "../contracts/VersionControlContract";
 export interface VersionControlConfigQuery {
     client: VersionControlQueryClient;
     options?: Omit<UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }

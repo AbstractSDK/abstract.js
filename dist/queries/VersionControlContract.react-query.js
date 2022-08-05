@@ -5,7 +5,7 @@
  * and run the cosmwasm-typescript-gen generate command to regenerate this file.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.useVersionControlOsCoreQuery = exports.useVersionControlCodeIdQuery = exports.useVersionControlApiAddressQuery = exports.useVersionControlConfigQuery = exports.useVersionControlCodeIdsQuery = exports.useVersionControlApiAddressesQuery = void 0;
+exports.useVersionControlAddCodeIdMutation = exports.useVersionControlRemoveCodeIdMutation = exports.useVersionControlAddApiMutation = exports.useVersionControlRemoveApiMutation = exports.useVersionControlAddOsMutation = exports.useVersionControlSetAdminMutation = exports.useVersionControlSetFactoryMutation = exports.useVersionControlOsCoreQuery = exports.useVersionControlCodeIdQuery = exports.useVersionControlApiAddressQuery = exports.useVersionControlConfigQuery = exports.useVersionControlCodeIdsQuery = exports.useVersionControlApiAddressesQuery = void 0;
 const react_query_1 = require("@tanstack/react-query");
 function useVersionControlApiAddressesQuery({ client, args, options, }) {
     return (0, react_query_1.useQuery)(['versionControlApiAddresses', client === null || client === void 0 ? void 0 : client.contractAddress], () => client ? client.apiAddresses({
@@ -43,4 +43,32 @@ function useVersionControlOsCoreQuery({ client, args, options }) {
     }) : undefined, Object.assign(Object.assign({}, options), { enabled: !!client && ((options === null || options === void 0 ? void 0 : options.enabled) != undefined ? options.enabled : true) }));
 }
 exports.useVersionControlOsCoreQuery = useVersionControlOsCoreQuery;
+function useVersionControlSetFactoryMutation(options) {
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } = {} }) => client.setFactory(msg, fee, memo, funds), options);
+}
+exports.useVersionControlSetFactoryMutation = useVersionControlSetFactoryMutation;
+function useVersionControlSetAdminMutation(options) {
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } = {} }) => client.setAdmin(msg, fee, memo, funds), options);
+}
+exports.useVersionControlSetAdminMutation = useVersionControlSetAdminMutation;
+function useVersionControlAddOsMutation(options) {
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } = {} }) => client.addOs(msg, fee, memo, funds), options);
+}
+exports.useVersionControlAddOsMutation = useVersionControlAddOsMutation;
+function useVersionControlRemoveApiMutation(options) {
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } = {} }) => client.removeApi(msg, fee, memo, funds), options);
+}
+exports.useVersionControlRemoveApiMutation = useVersionControlRemoveApiMutation;
+function useVersionControlAddApiMutation(options) {
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } = {} }) => client.addApi(msg, fee, memo, funds), options);
+}
+exports.useVersionControlAddApiMutation = useVersionControlAddApiMutation;
+function useVersionControlRemoveCodeIdMutation(options) {
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } = {} }) => client.removeCodeId(msg, fee, memo, funds), options);
+}
+exports.useVersionControlRemoveCodeIdMutation = useVersionControlRemoveCodeIdMutation;
+function useVersionControlAddCodeIdMutation(options) {
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } = {} }) => client.addCodeId(msg, fee, memo, funds), options);
+}
+exports.useVersionControlAddCodeIdMutation = useVersionControlAddCodeIdMutation;
 //# sourceMappingURL=VersionControlContract.react-query.js.map

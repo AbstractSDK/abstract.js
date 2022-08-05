@@ -4,8 +4,8 @@
 * and run the cosmwasm-typescript-gen generate command to regenerate this file.
 */
 import { UseQueryOptions } from "react-query";
-import { ConfigResponse, HoldingAmountResponse, HoldingValueResponse, TotalValueResponse, VaultAssetConfigResponse } from "./ManagerContract";
-import { ManagerQueryClient } from "./ManagerContract";
+import { ConfigResponse, HoldingAmountResponse, HoldingValueResponse, TotalValueResponse, VaultAssetConfigResponse } from "../contracts/ManagerContract";
+import { ManagerQueryClient } from "../contracts/ManagerContract";
 export interface ManagerVaultAssetConfigQuery {
     client: ManagerQueryClient;
     options?: Omit<UseQueryOptions<VaultAssetConfigResponse, Error, VaultAssetConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }

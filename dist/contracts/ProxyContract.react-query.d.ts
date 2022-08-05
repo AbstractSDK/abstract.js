@@ -4,8 +4,8 @@
 * and run the cosmwasm-typescript-gen generate command to regenerate this file.
 */
 import { UseQueryOptions } from "react-query";
-import { ConfigResponse, HoldingAmountResponse, HoldingValueResponse, TotalValueResponse, VaultAssetConfigResponse } from "./ProxyContract";
-import { ProxyQueryClient } from "./ProxyContract";
+import { ConfigResponse, HoldingAmountResponse, HoldingValueResponse, TotalValueResponse, VaultAssetConfigResponse } from "../contracts/ProxyContract";
+import { ProxyQueryClient } from "../contracts/ProxyContract";
 export interface ProxyVaultAssetConfigQuery {
     client: ProxyQueryClient;
     options?: Omit<UseQueryOptions<VaultAssetConfigResponse, Error, VaultAssetConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }

@@ -1,6 +1,6 @@
 
 {
-  "include": ["src/**/*", "generated/ManagerContract.react-query.ts"],
+  "include": ["src/**/*", "src/queries/ManagerContract.react-query.ts"],
   "exclude": ["/node_modules/", "./src/**/*.spec.ts", "src/**/*.no-commit.*", "generated"],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,

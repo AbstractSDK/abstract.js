@@ -4,8 +4,8 @@
 * and run the cosmwasm-typescript-gen generate command to regenerate this file.
 */
 import { UseQueryOptions } from "react-query";
-import { ConfigResponse } from "./FactoryContract";
-import { FactoryQueryClient } from "./FactoryContract";
+import { ConfigResponse } from "../contracts/FactoryContract";
+import { FactoryQueryClient } from "../contracts/FactoryContract";
 export interface FactoryConfigQuery {
     client: FactoryQueryClient;
     options?: Omit<UseQueryOptions<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined }

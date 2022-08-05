@@ -4,23 +4,12 @@
  * and run the cosmwasm-typescript-gen generate command to regenerate this file.
  */
 
-import { useQuery, UseQueryOptions } from '@tanstack/react-query'
-import {
-  Addr,
-  ApiAddressResponse,
-  ContractVersion,
-  ApiAddressesResponse,
-  Uint64,
-  CodeIdResponse,
-  CodeIdsResponse,
-  ConfigResponse,
-  InstantiateMsg,
-  ModuleInfo,
-  OsCoreResponse,
-  Core,
-} from '../contracts/VersionControlContract'
-import { VersionControlQueryClient } from '../contracts/VersionControlContract'
-export interface VersionControlApiAddressesQuery {
+ import { ExecuteResult } from "@cosmjs/cosmwasm-stargate";
+ import { Coin, StdFee } from "@cosmjs/amino";
+ import { useQuery, UseQueryOptions, useMutation, UseMutationOptions } from "@tanstack/react-query";
+ import { Addr, ApiAddressResponse, ContractVersion, ApiAddressesResponse, Uint64, CodeIdResponse, CodeIdsResponse, ConfigResponse, InstantiateMsg, ModuleInfo, OsCoreResponse, Core } from "../contracts/VersionControlContract";
+ import { VersionControlQueryClient, VersionControlClient } from "../contracts/VersionControlContract";
+ export interface VersionControlApiAddressesQuery {
   client?: VersionControlQueryClient
   options?: Omit<
     UseQueryOptions<ApiAddressesResponse | undefined, Error, ApiAddressesResponse, (string | undefined)[]>,
@@ -152,4 +141,168 @@ export function useVersionControlOsCoreQuery({ client, args, options }: VersionC
       }) : undefined,
     { ...options, enabled: !!client && (options?.enabled != undefined ? options.enabled : true) }
   )
+}
+
+
+export interface VersionControlSetFactoryMutation {
+  client: VersionControlClient;
+  msg: {
+    newFactory: string;
+  };
+  args?: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
+}
+export function useVersionControlSetFactoryMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, VersionControlSetFactoryMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, VersionControlSetFactoryMutation>(({
+    client,
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    } = {}
+  }) => client.setFactory(msg, fee, memo, funds), options);
+}
+export interface VersionControlSetAdminMutation {
+  client: VersionControlClient;
+  msg: {
+    newAdmin: string;
+  };
+  args?: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
+}
+export function useVersionControlSetAdminMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, VersionControlSetAdminMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, VersionControlSetAdminMutation>(({
+    client,
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    } = {}
+  }) => client.setAdmin(msg, fee, memo, funds), options);
+}
+export interface VersionControlAddOsMutation {
+  client: VersionControlClient;
+  msg: {
+    managerAddress: string;
+    osId: number;
+    proxyAddress: string;
+  };
+  args?: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
+}
+export function useVersionControlAddOsMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, VersionControlAddOsMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, VersionControlAddOsMutation>(({
+    client,
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    } = {}
+  }) => client.addOs(msg, fee, memo, funds), options);
+}
+export interface VersionControlRemoveApiMutation {
+  client: VersionControlClient;
+  msg: {
+    module: string;
+    version: string;
+  };
+  args?: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
+}
+export function useVersionControlRemoveApiMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, VersionControlRemoveApiMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, VersionControlRemoveApiMutation>(({
+    client,
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    } = {}
+  }) => client.removeApi(msg, fee, memo, funds), options);
+}
+export interface VersionControlAddApiMutation {
+  client: VersionControlClient;
+  msg: {
+    address: string;
+    module: string;
+    version: string;
+  };
+  args?: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
+}
+export function useVersionControlAddApiMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, VersionControlAddApiMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, VersionControlAddApiMutation>(({
+    client,
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    } = {}
+  }) => client.addApi(msg, fee, memo, funds), options);
+}
+export interface VersionControlRemoveCodeIdMutation {
+  client: VersionControlClient;
+  msg: {
+    module: string;
+    version: string;
+  };
+  args?: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
+}
+export function useVersionControlRemoveCodeIdMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, VersionControlRemoveCodeIdMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, VersionControlRemoveCodeIdMutation>(({
+    client,
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    } = {}
+  }) => client.removeCodeId(msg, fee, memo, funds), options);
+}
+export interface VersionControlAddCodeIdMutation {
+  client: VersionControlClient;
+  msg: {
+    codeId: number;
+    module: string;
+    version: string;
+  };
+  args?: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: readonly Coin[];
+  };
+}
+export function useVersionControlAddCodeIdMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, VersionControlAddCodeIdMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, VersionControlAddCodeIdMutation>(({
+    client,
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    } = {}
+  }) => client.addCodeId(msg, fee, memo, funds), options);
 }
