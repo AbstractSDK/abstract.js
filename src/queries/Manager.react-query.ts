@@ -11,7 +11,7 @@ import { Binary, Uint64, ConfigResponse, ExecuteMsg, ModuleKind, Module, ModuleI
 import { ManagerQueryClient, ManagerClient } from "../contracts/Manager.client";
 export interface ManagerReactQuery<TResponse> {
   client: ManagerQueryClient | undefined;
-  options?: Omit<UseQueryOptions<TResponse, Error, TResponse, (string | undefined)[]>, "'queryKey' | 'queryFn' | 'initialData'"> & {
+  options?: Omit<UseQueryOptions<TResponse, Error, unknown, (string | undefined)[]>, "'queryKey' | 'queryFn' | 'initialData'"> & {
     initialData?: undefined;
   };
 }
@@ -20,7 +20,7 @@ export function useManagerInfoQuery({
   client,
   options
 }: ManagerInfoQuery) {
-  return useQuery<InfoResponse, Error, InfoResponse, (string | undefined)[]>(["managerInfo", client?.contractAddress], () => client ? client.info() : Promise.reject(new Error("Invalid client")), { ...options,
+  return useQuery<InfoResponse, Error, unknown, (string | undefined)[]>(["managerInfo", client?.contractAddress], () => client ? client.info() : Promise.reject(new Error("Invalid client")), { ...options,
     enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
   });
 }
@@ -29,7 +29,7 @@ export function useManagerConfigQuery({
   client,
   options
 }: ManagerConfigQuery) {
-  return useQuery<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>(["managerConfig", client?.contractAddress], () => client ? client.config() : Promise.reject(new Error("Invalid client")), { ...options,
+  return useQuery<ConfigResponse, Error, unknown, (string | undefined)[]>(["managerConfig", client?.contractAddress], () => client ? client.config() : Promise.reject(new Error("Invalid client")), { ...options,
     enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
   });
 }
@@ -44,7 +44,7 @@ export function useManagerModuleInfosQuery({
   args,
   options
 }: ManagerModuleInfosQuery) {
-  return useQuery<ModuleInfosResponse, Error, ModuleInfosResponse, (string | undefined)[]>(["managerModuleInfos", client?.contractAddress, JSON.stringify(args)], () => client ? client.moduleInfos({
+  return useQuery<ModuleInfosResponse, Error, unknown, (string | undefined)[]>(["managerModuleInfos", client?.contractAddress, JSON.stringify(args)], () => client ? client.moduleInfos({
     iterLimit: args.iterLimit,
     lastModuleName: args.lastModuleName
   }) : Promise.reject(new Error("Invalid client")), { ...options,
@@ -61,7 +61,7 @@ export function useManagerModuleAddressesQuery({
   args,
   options
 }: ManagerModuleAddressesQuery) {
-  return useQuery<ModuleAddressesResponse, Error, ModuleAddressesResponse, (string | undefined)[]>(["managerModuleAddresses", client?.contractAddress, JSON.stringify(args)], () => client ? client.moduleAddresses({
+  return useQuery<ModuleAddressesResponse, Error, unknown, (string | undefined)[]>(["managerModuleAddresses", client?.contractAddress, JSON.stringify(args)], () => client ? client.moduleAddresses({
     names: args.names
   }) : Promise.reject(new Error("Invalid client")), { ...options,
     enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
@@ -77,7 +77,7 @@ export function useManagerModuleVersionsQuery({
   args,
   options
 }: ManagerModuleVersionsQuery) {
-  return useQuery<ModuleVersionsResponse, Error, ModuleVersionsResponse, (string | undefined)[]>(["managerModuleVersions", client?.contractAddress, JSON.stringify(args)], () => client ? client.moduleVersions({
+  return useQuery<ModuleVersionsResponse, Error, unknown, (string | undefined)[]>(["managerModuleVersions", client?.contractAddress, JSON.stringify(args)], () => client ? client.moduleVersions({
     names: args.names
   }) : Promise.reject(new Error("Invalid client")), { ...options,
     enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
