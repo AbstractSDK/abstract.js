@@ -10,7 +10,7 @@ import { ApiAddressResponse, ContractVersion, ApiAddressesResponse, CodeIdRespon
 import { VersionControlQueryClient, VersionControlClient } from '../contracts/VersionControl.client';
 export interface VersionControlReactQuery<TResponse> {
     client: VersionControlQueryClient | undefined;
-    options?: Omit<UseQueryOptions<TResponse, Error, TResponse, (string | undefined)[]>, "'queryKey' | 'queryFn' | 'initialData'"> & {
+    options?: Omit<UseQueryOptions<TResponse, Error, unknown, (string | undefined)[]>, "'queryKey' | 'queryFn' | 'initialData'"> & {
         initialData?: undefined;
     };
 }
@@ -20,35 +20,35 @@ export interface VersionControlApiAddressesQuery extends VersionControlReactQuer
         lastApiModule?: ContractVersion;
     };
 }
-export declare function useVersionControlApiAddressesQuery({ client, args, options, }: VersionControlApiAddressesQuery): import("@tanstack/react-query").UseQueryResult<ApiAddressesResponse, Error>;
+export declare function useVersionControlApiAddressesQuery({ client, args, options, }: VersionControlApiAddressesQuery): import("@tanstack/react-query").UseQueryResult<unknown, Error>;
 export interface VersionControlCodeIdsQuery extends VersionControlReactQuery<CodeIdsResponse> {
     args: {
         iterLimit?: number;
         lastModule?: ContractVersion;
     };
 }
-export declare function useVersionControlCodeIdsQuery({ client, args, options, }: VersionControlCodeIdsQuery): import("@tanstack/react-query").UseQueryResult<CodeIdsResponse, Error>;
+export declare function useVersionControlCodeIdsQuery({ client, args, options, }: VersionControlCodeIdsQuery): import("@tanstack/react-query").UseQueryResult<unknown, Error>;
 export interface VersionControlConfigQuery extends VersionControlReactQuery<ConfigResponse> {
 }
-export declare function useVersionControlConfigQuery({ client, options }: VersionControlConfigQuery): import("@tanstack/react-query").UseQueryResult<ConfigResponse, Error>;
+export declare function useVersionControlConfigQuery({ client, options }: VersionControlConfigQuery): import("@tanstack/react-query").UseQueryResult<unknown, Error>;
 export interface VersionControlApiAddressQuery extends VersionControlReactQuery<ApiAddressResponse> {
     args: {
         module: ModuleInfo;
     };
 }
-export declare function useVersionControlApiAddressQuery({ client, args, options, }: VersionControlApiAddressQuery): import("@tanstack/react-query").UseQueryResult<ApiAddressResponse, Error>;
+export declare function useVersionControlApiAddressQuery({ client, args, options, }: VersionControlApiAddressQuery): import("@tanstack/react-query").UseQueryResult<unknown, Error>;
 export interface VersionControlCodeIdQuery extends VersionControlReactQuery<CodeIdResponse> {
     args: {
         module: ModuleInfo;
     };
 }
-export declare function useVersionControlCodeIdQuery({ client, args, options }: VersionControlCodeIdQuery): import("@tanstack/react-query").UseQueryResult<CodeIdResponse, Error>;
+export declare function useVersionControlCodeIdQuery({ client, args, options }: VersionControlCodeIdQuery): import("@tanstack/react-query").UseQueryResult<unknown, Error>;
 export interface VersionControlOsCoreQuery extends VersionControlReactQuery<OsCoreResponse> {
     args: {
         osId: number;
     };
 }
-export declare function useVersionControlOsCoreQuery({ client, args, options }: VersionControlOsCoreQuery): import("@tanstack/react-query").UseQueryResult<OsCoreResponse, Error>;
+export declare function useVersionControlOsCoreQuery({ client, args, options }: VersionControlOsCoreQuery): import("@tanstack/react-query").UseQueryResult<unknown, Error>;
 export interface VersionControlSetFactoryMutation {
     client: VersionControlClient;
     msg: {

@@ -27,7 +27,7 @@ import { VersionControlQueryClient, VersionControlClient } from '../contracts/Ve
 export interface VersionControlReactQuery<TResponse> {
   client: VersionControlQueryClient | undefined
   options?: Omit<
-    UseQueryOptions<TResponse, Error, TResponse, (string | undefined)[]>,
+    UseQueryOptions<TResponse, Error, unknown, (string | undefined)[]>,
     "'queryKey' | 'queryFn' | 'initialData'"
   > & {
     initialData?: undefined
@@ -45,7 +45,7 @@ export function useVersionControlApiAddressesQuery({
   args,
   options,
 }: VersionControlApiAddressesQuery) {
-  return useQuery<ApiAddressesResponse, Error, ApiAddressesResponse, (string | undefined)[]>(
+  return useQuery<ApiAddressesResponse, Error, unknown, (string | undefined)[]>(
     ['versionControlApiAddresses', client?.contractAddress, JSON.stringify(args)],
     () =>
       client
@@ -68,7 +68,7 @@ export function useVersionControlCodeIdsQuery({
   args,
   options,
 }: VersionControlCodeIdsQuery) {
-  return useQuery<CodeIdsResponse, Error, CodeIdsResponse, (string | undefined)[]>(
+  return useQuery<CodeIdsResponse, Error, unknown, (string | undefined)[]>(
     ['versionControlCodeIds', client?.contractAddress, JSON.stringify(args)],
     () =>
       client
@@ -82,7 +82,7 @@ export function useVersionControlCodeIdsQuery({
 }
 export interface VersionControlConfigQuery extends VersionControlReactQuery<ConfigResponse> {}
 export function useVersionControlConfigQuery({ client, options }: VersionControlConfigQuery) {
-  return useQuery<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>(
+  return useQuery<ConfigResponse, Error, unknown, (string | undefined)[]>(
     ['versionControlConfig', client?.contractAddress],
     () => (client ? client.config() : Promise.reject(new Error('Invalid client'))),
     { ...options, enabled: !!client && (options?.enabled != undefined ? options.enabled : true) }
@@ -99,7 +99,7 @@ export function useVersionControlApiAddressQuery({
   args,
   options,
 }: VersionControlApiAddressQuery) {
-  return useQuery<ApiAddressResponse, Error, ApiAddressResponse, (string | undefined)[]>(
+  return useQuery<ApiAddressResponse, Error, unknown, (string | undefined)[]>(
     ['versionControlApiAddress', client?.contractAddress, JSON.stringify(args)],
     () =>
       client
@@ -116,7 +116,7 @@ export interface VersionControlCodeIdQuery extends VersionControlReactQuery<Code
   }
 }
 export function useVersionControlCodeIdQuery({ client, args, options }: VersionControlCodeIdQuery) {
-  return useQuery<CodeIdResponse, Error, CodeIdResponse, (string | undefined)[]>(
+  return useQuery<CodeIdResponse, Error, unknown, (string | undefined)[]>(
     ['versionControlCodeId', client?.contractAddress, JSON.stringify(args)],
     () =>
       client
@@ -133,7 +133,7 @@ export interface VersionControlOsCoreQuery extends VersionControlReactQuery<OsCo
   }
 }
 export function useVersionControlOsCoreQuery({ client, args, options }: VersionControlOsCoreQuery) {
-  return useQuery<OsCoreResponse, Error, OsCoreResponse, (string | undefined)[]>(
+  return useQuery<OsCoreResponse, Error, unknown, (string | undefined)[]>(
     ['versionControlOsCore', client?.contractAddress, JSON.stringify(args)],
     () =>
       client
