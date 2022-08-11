@@ -18,7 +18,7 @@ __exportStar(require("./ProxyContract.react-query"), exports);
 __exportStar(require("./FactoryContract.react-query"), exports);
 __exportStar(require("./VersionControlContract.react-query"), exports);
 __exportStar(require("./SubscriptionContract.react-query"), exports);
-__exportStar(require("./ManagerContract.react-query"), exports);
+__exportStar(require("./Manager.react-query"), exports);
 __exportStar(require("./Cw3FlexMultisigContract.react-query"), exports);
 __exportStar(require("./Cw4GroupContract.react-query"), exports);
 __exportStar(require("./Cw20Contract.react-query"), exports);

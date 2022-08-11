@@ -1,6 +1,6 @@
 export { ProxyClient, ProxyQueryClient } from './ProxyContract'
 export { FactoryClient, FactoryQueryClient } from './FactoryContract'
-export { ManagerClient, ManagerQueryClient } from './ManagerContract'
+export { ManagerClient, ManagerQueryClient } from './Manager.client'
 export { VersionControlClient, VersionControlQueryClient } from './VersionControlContract'
 export { SubscriptionClient, SubscriptionQueryClient } from './SubscriptionContract'
 export { Cw3FlexMultisigClient, Cw3FlexMultisigQueryClient } from './Cw3FlexMultisigContract'

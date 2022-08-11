@@ -7,9 +7,9 @@ Object.defineProperty(exports, "ProxyQueryClient", { enumerable: true, get: func
 var FactoryContract_1 = require("./FactoryContract");
 Object.defineProperty(exports, "FactoryClient", { enumerable: true, get: function () { return FactoryContract_1.FactoryClient; } });
 Object.defineProperty(exports, "FactoryQueryClient", { enumerable: true, get: function () { return FactoryContract_1.FactoryQueryClient; } });
-var ManagerContract_1 = require("./ManagerContract");
-Object.defineProperty(exports, "ManagerClient", { enumerable: true, get: function () { return ManagerContract_1.ManagerClient; } });
-Object.defineProperty(exports, "ManagerQueryClient", { enumerable: true, get: function () { return ManagerContract_1.ManagerQueryClient; } });
+var Manager_client_1 = require("./Manager.client");
+Object.defineProperty(exports, "ManagerClient", { enumerable: true, get: function () { return Manager_client_1.ManagerClient; } });
+Object.defineProperty(exports, "ManagerQueryClient", { enumerable: true, get: function () { return Manager_client_1.ManagerQueryClient; } });
 var VersionControlContract_1 = require("./VersionControlContract");
 Object.defineProperty(exports, "VersionControlClient", { enumerable: true, get: function () { return VersionControlContract_1.VersionControlClient; } });
 Object.defineProperty(exports, "VersionControlQueryClient", { enumerable: true, get: function () { return VersionControlContract_1.VersionControlQueryClient; } });
