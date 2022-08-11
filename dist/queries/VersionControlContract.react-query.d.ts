@@ -10,7 +10,7 @@ import { ApiAddressResponse, ContractVersion, ApiAddressesResponse, CodeIdRespon
 import { VersionControlQueryClient, VersionControlClient } from '../contracts/VersionControl.client';
 export interface VersionControlReactQuery<TResponse, TData = TResponse> {
     client: VersionControlQueryClient | undefined;
-    options?: Omit<UseQueryOptions<TResponse, Error, TData, (string | undefined)[]>, "'queryKey' | 'queryFn' | 'initialData'"> & {
+    options?: Omit<UseQueryOptions<TResponse, Error, TData>, "'queryKey' | 'queryFn' | 'initialData'"> & {
         initialData?: undefined;
     };
 }
