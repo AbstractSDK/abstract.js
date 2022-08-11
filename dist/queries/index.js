@@ -16,7 +16,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./ProxyContract.react-query"), exports);
 __exportStar(require("./FactoryContract.react-query"), exports);
-__exportStar(require("./VersionControlContract.react-query"), exports);
+__exportStar(require("./VersionControl.react-query"), exports);
 __exportStar(require("./SubscriptionContract.react-query"), exports);
 __exportStar(require("./Manager.react-query"), exports);
 __exportStar(require("./Cw3FlexMultisigContract.react-query"), exports);

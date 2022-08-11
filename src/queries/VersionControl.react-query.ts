@@ -33,19 +33,19 @@ export interface VersionControlReactQuery<TResponse, TData = TResponse> {
     initialData?: undefined
   }
 }
-export interface VersionControlApiAddressesQuery
-  extends VersionControlReactQuery<ApiAddressesResponse> {
+export interface VersionControlApiAddressesQuery<TData>
+  extends VersionControlReactQuery<ApiAddressesResponse, TData> {
   args: {
     iterLimit?: number
     lastApiModule?: ContractVersion
   }
 }
-export function useVersionControlApiAddressesQuery({
+export function useVersionControlApiAddressesQuery<TData = ApiAddressesResponse>({
   client,
   args,
   options,
-}: VersionControlApiAddressesQuery) {
-  return useQuery<ApiAddressesResponse, Error, ApiAddressesResponse>(
+}: VersionControlApiAddressesQuery<TData>) {
+  return useQuery<ApiAddressesResponse, Error, TData>(
     ['versionControlApiAddresses', client?.contractAddress, JSON.stringify(args)],
     () =>
       client
@@ -57,18 +57,19 @@ export function useVersionControlApiAddressesQuery({
     { ...options, enabled: !!client && (options?.enabled != undefined ? options.enabled : true) }
   )
 }
-export interface VersionControlCodeIdsQuery extends VersionControlReactQuery<CodeIdsResponse> {
+export interface VersionControlCodeIdsQuery<TData>
+  extends VersionControlReactQuery<CodeIdsResponse, TData> {
   args: {
     iterLimit?: number
     lastModule?: ContractVersion
   }
 }
-export function useVersionControlCodeIdsQuery({
+export function useVersionControlCodeIdsQuery<TData = CodeIdsResponse>({
   client,
   args,
   options,
-}: VersionControlCodeIdsQuery) {
-  return useQuery<CodeIdsResponse, Error, CodeIdsResponse>(
+}: VersionControlCodeIdsQuery<TData>) {
+  return useQuery<CodeIdsResponse, Error, TData>(
     ['versionControlCodeIds', client?.contractAddress, JSON.stringify(args)],
     () =>
       client
@@ -80,26 +81,30 @@ export function useVersionControlCodeIdsQuery({
     { ...options, enabled: !!client && (options?.enabled != undefined ? options.enabled : true) }
   )
 }
-export interface VersionControlConfigQuery extends VersionControlReactQuery<ConfigResponse> {}
-export function useVersionControlConfigQuery({ client, options }: VersionControlConfigQuery) {
-  return useQuery<ConfigResponse, Error, ConfigResponse>(
+export interface VersionControlConfigQuery<TData>
+  extends VersionControlReactQuery<ConfigResponse, TData> {}
+export function useVersionControlConfigQuery<TData = ConfigResponse>({
+  client,
+  options,
+}: VersionControlConfigQuery<TData>) {
+  return useQuery<ConfigResponse, Error, TData>(
     ['versionControlConfig', client?.contractAddress],
     () => (client ? client.config() : Promise.reject(new Error('Invalid client'))),
     { ...options, enabled: !!client && (options?.enabled != undefined ? options.enabled : true) }
   )
 }
-export interface VersionControlApiAddressQuery
-  extends VersionControlReactQuery<ApiAddressResponse> {
+export interface VersionControlApiAddressQuery<TData>
+  extends VersionControlReactQuery<ApiAddressResponse, TData> {
   args: {
     module: ModuleInfo
   }
 }
-export function useVersionControlApiAddressQuery({
+export function useVersionControlApiAddressQuery<TData = ApiAddressResponse>({
   client,
   args,
   options,
-}: VersionControlApiAddressQuery) {
-  return useQuery<ApiAddressResponse, Error, ApiAddressResponse>(
+}: VersionControlApiAddressQuery<TData>) {
+  return useQuery<ApiAddressResponse, Error, TData>(
     ['versionControlApiAddress', client?.contractAddress, JSON.stringify(args)],
     () =>
       client
@@ -110,13 +115,18 @@ export function useVersionControlApiAddressQuery({
     { ...options, enabled: !!client && (options?.enabled != undefined ? options.enabled : true) }
   )
 }
-export interface VersionControlCodeIdQuery extends VersionControlReactQuery<CodeIdResponse> {
+export interface VersionControlCodeIdQuery<TData>
+  extends VersionControlReactQuery<CodeIdResponse, TData> {
   args: {
     module: ModuleInfo
   }
 }
-export function useVersionControlCodeIdQuery({ client, args, options }: VersionControlCodeIdQuery) {
-  return useQuery<CodeIdResponse, Error, CodeIdResponse>(
+export function useVersionControlCodeIdQuery<TData = CodeIdResponse>({
+  client,
+  args,
+  options,
+}: VersionControlCodeIdQuery<TData>) {
+  return useQuery<CodeIdResponse, Error, TData>(
     ['versionControlCodeId', client?.contractAddress, JSON.stringify(args)],
     () =>
       client
@@ -127,15 +137,19 @@ export function useVersionControlCodeIdQuery({ client, args, options }: VersionC
     { ...options, enabled: !!client && (options?.enabled != undefined ? options.enabled : true) }
   )
 }
-export interface VersionControlOsCoreQuery<TData> extends VersionControlReactQuery<OsCoreResponse, TData> {
+export interface VersionControlOsCoreQuery<TData>
+  extends VersionControlReactQuery<OsCoreResponse, TData> {
   args: {
     osId: number
   }
 }
-export function useVersionControlOsCoreQuery<TData = OsCoreResponse>({ client, args, options }: VersionControlOsCoreQuery<TData>) {
-  const stringArgs = JSON.stringify(args)
+export function useVersionControlOsCoreQuery<TData = OsCoreResponse>({
+  client,
+  args,
+  options,
+}: VersionControlOsCoreQuery<TData>) {
   return useQuery<OsCoreResponse, Error, TData>(
-    ['versionControlOsCore', client?.contractAddress, stringArgs],
+    ['versionControlOsCore', client?.contractAddress, JSON.stringify(args)],
     () =>
       client
         ? client.osCore({
