@@ -10,35 +10,35 @@ import { Binary, ConfigResponse, Module, InfoResponse, ModuleAddressesResponse, 
 import { ManagerQueryClient, ManagerClient } from "../contracts/Manager.client";
 export interface ManagerReactQuery<TResponse> {
     client: ManagerQueryClient | undefined;
-    options?: Omit<UseQueryOptions<TResponse, Error, TResponse, (string | undefined)[]>, "'queryKey' | 'queryFn' | 'initialData'"> & {
+    options?: Omit<UseQueryOptions<TResponse, Error, unknown, (string | undefined)[]>, "'queryKey' | 'queryFn' | 'initialData'"> & {
         initialData?: undefined;
     };
 }
 export interface ManagerInfoQuery extends ManagerReactQuery<InfoResponse> {
 }
-export declare function useManagerInfoQuery({ client, options }: ManagerInfoQuery): import("@tanstack/react-query").UseQueryResult<InfoResponse, Error>;
+export declare function useManagerInfoQuery({ client, options }: ManagerInfoQuery): import("@tanstack/react-query").UseQueryResult<unknown, Error>;
 export interface ManagerConfigQuery extends ManagerReactQuery<ConfigResponse> {
 }
-export declare function useManagerConfigQuery({ client, options }: ManagerConfigQuery): import("@tanstack/react-query").UseQueryResult<ConfigResponse, Error>;
+export declare function useManagerConfigQuery({ client, options }: ManagerConfigQuery): import("@tanstack/react-query").UseQueryResult<unknown, Error>;
 export interface ManagerModuleInfosQuery extends ManagerReactQuery<ModuleInfosResponse> {
     args: {
         iterLimit?: number;
         lastModuleName?: string;
     };
 }
-export declare function useManagerModuleInfosQuery({ client, args, options }: ManagerModuleInfosQuery): import("@tanstack/react-query").UseQueryResult<ModuleInfosResponse, Error>;
+export declare function useManagerModuleInfosQuery({ client, args, options }: ManagerModuleInfosQuery): import("@tanstack/react-query").UseQueryResult<unknown, Error>;
 export interface ManagerModuleAddressesQuery extends ManagerReactQuery<ModuleAddressesResponse> {
     args: {
         names: string[];
     };
 }
-export declare function useManagerModuleAddressesQuery({ client, args, options }: ManagerModuleAddressesQuery): import("@tanstack/react-query").UseQueryResult<ModuleAddressesResponse, Error>;
+export declare function useManagerModuleAddressesQuery({ client, args, options }: ManagerModuleAddressesQuery): import("@tanstack/react-query").UseQueryResult<unknown, Error>;
 export interface ManagerModuleVersionsQuery extends ManagerReactQuery<ModuleVersionsResponse> {
     args: {
         names: string[];
     };
 }
-export declare function useManagerModuleVersionsQuery({ client, args, options }: ManagerModuleVersionsQuery): import("@tanstack/react-query").UseQueryResult<ModuleVersionsResponse, Error>;
+export declare function useManagerModuleVersionsQuery({ client, args, options }: ManagerModuleVersionsQuery): import("@tanstack/react-query").UseQueryResult<unknown, Error>;
 export interface ManagerUpdateInfoMutation {
     client: ManagerClient;
     msg: {
