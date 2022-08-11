@@ -8,9 +8,9 @@ import { ExecuteResult } from '@cosmjs/cosmwasm-stargate';
 import { StdFee, Coin } from '@cosmjs/amino';
 import { ApiAddressResponse, ContractVersion, ApiAddressesResponse, CodeIdResponse, CodeIdsResponse, ConfigResponse, ModuleInfo, OsCoreResponse } from '../types/VersionControl.types';
 import { VersionControlQueryClient, VersionControlClient } from '../contracts/VersionControl.client';
-export interface VersionControlReactQuery<TResponse> {
+export interface VersionControlReactQuery<TResponse, TData = TResponse> {
     client: VersionControlQueryClient | undefined;
-    options?: Omit<UseQueryOptions<TResponse, Error>, "'queryKey' | 'queryFn' | 'initialData'"> & {
+    options?: Omit<UseQueryOptions<TResponse, Error, TData, (string | undefined)[]>, "'queryKey' | 'queryFn' | 'initialData'"> & {
         initialData?: undefined;
     };
 }
@@ -43,12 +43,12 @@ export interface VersionControlCodeIdQuery extends VersionControlReactQuery<Code
     };
 }
 export declare function useVersionControlCodeIdQuery({ client, args, options }: VersionControlCodeIdQuery): import("@tanstack/react-query").UseQueryResult<CodeIdResponse, Error>;
-export interface VersionControlOsCoreQuery extends VersionControlReactQuery<OsCoreResponse> {
+export interface VersionControlOsCoreQuery<TData> extends VersionControlReactQuery<OsCoreResponse, TData> {
     args: {
         osId: number;
     };
 }
-export declare function useVersionControlOsCoreQuery({ client, args, options }: VersionControlOsCoreQuery): import("@tanstack/react-query").UseQueryResult<OsCoreResponse, Error>;
+export declare function useVersionControlOsCoreQuery<TData = OsCoreResponse>({ client, args, options }: VersionControlOsCoreQuery<TData>): import("@tanstack/react-query").UseQueryResult<TData, Error>;
 export interface VersionControlSetFactoryMutation {
     client: VersionControlClient;
     msg: {
