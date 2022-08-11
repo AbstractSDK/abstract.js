@@ -133,8 +133,9 @@ export interface VersionControlOsCoreQuery<TData> extends VersionControlReactQue
   }
 }
 export function useVersionControlOsCoreQuery<TData = OsCoreResponse>({ client, args, options }: VersionControlOsCoreQuery<TData>) {
+  const stringArgs = JSON.stringify(args)
   return useQuery<OsCoreResponse, Error, TData>(
-    ['versionControlOsCore', client?.contractAddress, { ...args }],
+    ['versionControlOsCore', client?.contractAddress, stringArgs],
     () =>
       client
         ? client.osCore({

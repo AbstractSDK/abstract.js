@@ -26,8 +26,7 @@
   "peerDependencies": {
     "@cosmjs/amino": ">=0.28.4",
     "@cosmjs/cosmwasm-stargate": ">=0.28.4",
-    "@tanstack/react-query": ">=4.0.0",
-    "react-query": ">=3.39.0"
+    "@tanstack/react-query": ">=4.0.0"
   },
   "devDependencies": {
     "@cosmjs/amino": "^0.28.11",

@@ -46,7 +46,8 @@ function useVersionControlCodeIdQuery({ client, args, options }) {
 }
 exports.useVersionControlCodeIdQuery = useVersionControlCodeIdQuery;
 function useVersionControlOsCoreQuery({ client, args, options }) {
-    return (0, react_query_1.useQuery)(['versionControlOsCore', client === null || client === void 0 ? void 0 : client.contractAddress, Object.assign({}, args)], () => client
+    const stringArgs = JSON.stringify(args);
+    return (0, react_query_1.useQuery)(['versionControlOsCore', client === null || client === void 0 ? void 0 : client.contractAddress, stringArgs], () => client
         ? client.osCore({
             osId: args.osId,
         })
