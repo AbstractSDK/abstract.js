@@ -16,9 +16,9 @@ Object.defineProperty(exports, "VersionControlQueryClient", { enumerable: true, 
 var SubscriptionContract_1 = require("./SubscriptionContract");
 Object.defineProperty(exports, "SubscriptionClient", { enumerable: true, get: function () { return SubscriptionContract_1.SubscriptionClient; } });
 Object.defineProperty(exports, "SubscriptionQueryClient", { enumerable: true, get: function () { return SubscriptionContract_1.SubscriptionQueryClient; } });
-var Cw3FlexMultisigContract_1 = require("./Cw3FlexMultisigContract");
-Object.defineProperty(exports, "Cw3FlexMultisigClient", { enumerable: true, get: function () { return Cw3FlexMultisigContract_1.Cw3FlexMultisigClient; } });
-Object.defineProperty(exports, "Cw3FlexMultisigQueryClient", { enumerable: true, get: function () { return Cw3FlexMultisigContract_1.Cw3FlexMultisigQueryClient; } });
+var Cw3FlexMultisig_client_1 = require("./Cw3FlexMultisig.client");
+Object.defineProperty(exports, "Cw3FlexMultisigClient", { enumerable: true, get: function () { return Cw3FlexMultisig_client_1.Cw3FlexMultisigClient; } });
+Object.defineProperty(exports, "Cw3FlexMultisigQueryClient", { enumerable: true, get: function () { return Cw3FlexMultisig_client_1.Cw3FlexMultisigQueryClient; } });
 var Cw4GroupContract_1 = require("./Cw4GroupContract");
 Object.defineProperty(exports, "Cw4GroupClient", { enumerable: true, get: function () { return Cw4GroupContract_1.Cw4GroupClient; } });
 Object.defineProperty(exports, "Cw4GroupQueryClient", { enumerable: true, get: function () { return Cw4GroupContract_1.Cw4GroupQueryClient; } });
