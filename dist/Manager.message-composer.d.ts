@@ -6,6 +6,27 @@
 import { Coin } from "@cosmjs/amino";
 import { MsgExecuteContractEncodeObject } from "cosmwasm";
 import { Binary, Module } from "./types/Manager.types";
+export interface RawManagerMessage {
+    setAdmin: ({ admin, governanceType }: {
+        admin: string;
+        governanceType?: string;
+    }) => Record<string, unknown>;
+    createModule: ({ initMsg, module }: {
+        initMsg?: Binary;
+        module: Module;
+    }) => Record<string, unknown>;
+}
+export declare class RawManagerMessageComposer implements RawManagerMessage {
+    constructor();
+    setAdmin: ({ admin, governanceType }: {
+        admin: string;
+        governanceType?: string | undefined;
+    }) => Record<string, unknown>;
+    createModule: ({ initMsg, module }: {
+        initMsg?: string | undefined;
+        module: Module;
+    }) => Record<string, unknown>;
+}
 export interface ManagerMessage {
     contractAddress: string;
     sender: string;

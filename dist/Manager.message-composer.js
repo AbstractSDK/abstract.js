@@ -5,9 +5,38 @@
 * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ManagerMessageComposer = void 0;
+exports.ManagerMessageComposer = exports.RawManagerMessageComposer = void 0;
 const tx_1 = require("cosmjs-types/cosmwasm/wasm/v1/tx");
 const encoding_1 = require("@cosmjs/encoding");
+class RawManagerMessageComposer {
+    constructor() {
+        Object.defineProperty(this, "setAdmin", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: ({ admin, governanceType }) => ({
+                set_admin: {
+                    admin,
+                    governance_type: governanceType
+                }
+            })
+        });
+        Object.defineProperty(this, "createModule", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: ({ initMsg, module }) => ({
+                create_module: {
+                    init_msg: initMsg,
+                    module
+                }
+            })
+        });
+        this.setAdmin = this.setAdmin.bind(this);
+        this.createModule = this.createModule.bind(this);
+    }
+}
+exports.RawManagerMessageComposer = RawManagerMessageComposer;
 class ManagerMessageComposer {
     constructor(sender, contractAddress) {
         Object.defineProperty(this, "sender", {

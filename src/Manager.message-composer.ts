@@ -9,6 +9,58 @@ import { MsgExecuteContractEncodeObject } from "cosmwasm";
 import { MsgExecuteContract } from "cosmjs-types/cosmwasm/wasm/v1/tx";
 import { toUtf8 } from "@cosmjs/encoding";
 import { Binary, Uint64, ConfigResponse, ExecuteMsg, ModuleKind, Module, ModuleInfo, InfoResponse, OsInfo, InstantiateMsg, ManagerModuleInfo, ContractVersion, ModuleAddressesResponse, ModuleInfosResponse, ModuleVersionsResponse, QueryMsg, QueryOsConfigResponse } from "./types/Manager.types";
+
+export interface RawManagerMessage {
+  setAdmin: ({
+    admin,
+    governanceType
+  }: {
+    admin: string;
+    governanceType?: string;
+  }) => Record<string, unknown>
+  createModule: ({
+    initMsg,
+    module
+  }: {
+    initMsg?: Binary;
+    module: Module;
+  }) => Record<string, unknown>
+}
+
+export class RawManagerMessageComposer implements RawManagerMessage {
+
+  constructor() {
+    this.setAdmin = this.setAdmin.bind(this);
+    this.createModule = this.createModule.bind(this);
+  }
+
+  setAdmin = ({
+    admin,
+    governanceType
+  }: {
+    admin: string;
+    governanceType?: string;
+  }): Record<string, unknown> => (
+    {
+    set_admin: {
+      admin,
+      governance_type: governanceType
+    }
+  });
+  createModule = ({
+    initMsg,
+    module
+  }: {
+    initMsg?: Binary;
+    module: Module;
+  }): Record<string, unknown> => ({
+    create_module: {
+      init_msg: initMsg,
+      module
+    }
+  });
+}
+
 export interface ManagerMessage {
   contractAddress: string;
   sender: string;
