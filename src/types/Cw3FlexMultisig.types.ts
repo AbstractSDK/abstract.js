@@ -104,8 +104,7 @@ export interface Coin {
   amount: Uint128
   denom: string
 }
-export interface Empty {
-}
+export interface Empty {}
 export type ExecuteMsg =
   | {
       propose: {
@@ -142,8 +141,7 @@ export type Expiration =
       at_time: Timestamp
     }
   | {
-      never: {
-      }
+      never: {}
     }
 export type Timestamp = Uint64
 export type Uint64 = string
@@ -253,8 +251,7 @@ export interface ProposalResponse {
 }
 export type QueryMsg =
   | {
-      threshold: {
-      }
+      threshold: {}
     }
   | {
       proposal: {

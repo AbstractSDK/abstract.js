@@ -5,10 +5,10 @@
  * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Cw3FlexMultisigMessageComposer = void 0;
+exports.Cw4GroupMessageComposer = void 0;
 const tx_1 = require("cosmjs-types/cosmwasm/wasm/v1/tx");
 const encoding_1 = require("@cosmjs/encoding");
-class Cw3FlexMultisigMessageComposer {
+class Cw4GroupMessageComposer {
     constructor(sender, contractAddress) {
         Object.defineProperty(this, "sender", {
             enumerable: true,
@@ -22,22 +22,19 @@ class Cw3FlexMultisigMessageComposer {
             writable: true,
             value: void 0
         });
-        Object.defineProperty(this, "propose", {
+        Object.defineProperty(this, "updateAdmin", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: ({ description, latest, msgs, title, }, funds) => {
+            value: ({ admin, }, funds) => {
                 return {
                     typeUrl: '/cosmwasm.wasm.v1.MsgExecuteContract',
                     value: tx_1.MsgExecuteContract.fromPartial({
                         sender: this.sender,
                         contract: this.contractAddress,
                         msg: (0, encoding_1.toUtf8)(JSON.stringify({
-                            propose: {
-                                description,
-                                latest,
-                                msgs,
-                                title,
+                            update_admin: {
+                                admin,
                             },
                         })),
                         funds,
@@ -45,20 +42,20 @@ class Cw3FlexMultisigMessageComposer {
                 };
             }
         });
-        Object.defineProperty(this, "vote", {
+        Object.defineProperty(this, "updateMembers", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: ({ proposalId, vote, }, funds) => {
+            value: ({ add, remove, }, funds) => {
                 return {
                     typeUrl: '/cosmwasm.wasm.v1.MsgExecuteContract',
                     value: tx_1.MsgExecuteContract.fromPartial({
                         sender: this.sender,
                         contract: this.contractAddress,
                         msg: (0, encoding_1.toUtf8)(JSON.stringify({
-                            vote: {
-                                proposal_id: proposalId,
-                                vote,
+                            update_members: {
+                                add,
+                                remove,
                             },
                         })),
                         funds,
@@ -66,19 +63,19 @@ class Cw3FlexMultisigMessageComposer {
                 };
             }
         });
-        Object.defineProperty(this, "execute", {
+        Object.defineProperty(this, "addHook", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: ({ proposalId, }, funds) => {
+            value: ({ addr, }, funds) => {
                 return {
                     typeUrl: '/cosmwasm.wasm.v1.MsgExecuteContract',
                     value: tx_1.MsgExecuteContract.fromPartial({
                         sender: this.sender,
                         contract: this.contractAddress,
                         msg: (0, encoding_1.toUtf8)(JSON.stringify({
-                            execute: {
-                                proposal_id: proposalId,
+                            add_hook: {
+                                addr,
                             },
                         })),
                         funds,
@@ -86,39 +83,19 @@ class Cw3FlexMultisigMessageComposer {
                 };
             }
         });
-        Object.defineProperty(this, "close", {
+        Object.defineProperty(this, "removeHook", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: ({ proposalId, }, funds) => {
+            value: ({ addr, }, funds) => {
                 return {
                     typeUrl: '/cosmwasm.wasm.v1.MsgExecuteContract',
                     value: tx_1.MsgExecuteContract.fromPartial({
                         sender: this.sender,
                         contract: this.contractAddress,
                         msg: (0, encoding_1.toUtf8)(JSON.stringify({
-                            close: {
-                                proposal_id: proposalId,
-                            },
-                        })),
-                        funds,
-                    }),
-                };
-            }
-        });
-        Object.defineProperty(this, "memberChangedHook", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: ({ diffs, }, funds) => {
-                return {
-                    typeUrl: '/cosmwasm.wasm.v1.MsgExecuteContract',
-                    value: tx_1.MsgExecuteContract.fromPartial({
-                        sender: this.sender,
-                        contract: this.contractAddress,
-                        msg: (0, encoding_1.toUtf8)(JSON.stringify({
-                            member_changed_hook: {
-                                diffs,
+                            remove_hook: {
+                                addr,
                             },
                         })),
                         funds,
@@ -128,12 +105,11 @@ class Cw3FlexMultisigMessageComposer {
         });
         this.sender = sender;
         this.contractAddress = contractAddress;
-        this.propose = this.propose.bind(this);
-        this.vote = this.vote.bind(this);
-        this.execute = this.execute.bind(this);
-        this.close = this.close.bind(this);
-        this.memberChangedHook = this.memberChangedHook.bind(this);
+        this.updateAdmin = this.updateAdmin.bind(this);
+        this.updateMembers = this.updateMembers.bind(this);
+        this.addHook = this.addHook.bind(this);
+        this.removeHook = this.removeHook.bind(this);
     }
 }
-exports.Cw3FlexMultisigMessageComposer = Cw3FlexMultisigMessageComposer;
-//# sourceMappingURL=Cw3FlexMultisig.message-composer.js.map
+exports.Cw4GroupMessageComposer = Cw4GroupMessageComposer;
+//# sourceMappingURL=Cw4Group.message-composer.js.map

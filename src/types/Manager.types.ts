@@ -132,12 +132,10 @@ export type QueryMsg =
       }
     }
   | {
-      config: {
-      }
+      config: {}
     }
   | {
-      info: {
-      }
+      info: {}
     }
 export interface QueryOsConfigResponse {
   module_factory_address: string
