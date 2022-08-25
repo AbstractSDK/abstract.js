@@ -17,7 +17,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./ProxyContract.react-query"), exports);
 __exportStar(require("./Factory.react-query"), exports);
 __exportStar(require("./VersionControl.react-query"), exports);
-__exportStar(require("./SubscriptionContract.react-query"), exports);
 __exportStar(require("./Manager.react-query"), exports);
 __exportStar(require("./Cw3FlexMultisig.react-query"), exports);
 __exportStar(require("./Cw4Group.react-query"), exports);
