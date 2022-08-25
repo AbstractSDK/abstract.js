@@ -19,7 +19,7 @@ import {
   MemberResponse,
   QueryMsg,
   TotalWeightResponse,
-} from './types/Cw4Group.types'
+} from '../types/Cw4Group.types'
 export interface Cw4GroupMessage {
   contractAddress: string
   sender: string

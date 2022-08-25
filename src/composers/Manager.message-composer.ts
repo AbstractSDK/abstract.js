@@ -26,7 +26,7 @@ import {
   ModuleVersionsResponse,
   QueryMsg,
   QueryOsConfigResponse,
-} from './types/Manager.types'
+} from '../types/Manager.types'
 
 export interface RawManagerMessage {
   setAdmin: ({

@@ -43,7 +43,7 @@ import {
   ReverseProposalsResponse,
   VoteResponse,
   VoterResponse,
-} from './types/Cw3FlexMultisig.types'
+} from '../types/Cw3FlexMultisig.types'
 export interface Cw3FlexMultisigMessage {
   contractAddress: string
   sender: string

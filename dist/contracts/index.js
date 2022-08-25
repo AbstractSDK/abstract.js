@@ -4,9 +4,9 @@ exports.MemoryQueryClient = exports.Cw20IcsQueryClient = exports.Cw20IcsClient =
 var ProxyContract_1 = require("./ProxyContract");
 Object.defineProperty(exports, "ProxyClient", { enumerable: true, get: function () { return ProxyContract_1.ProxyClient; } });
 Object.defineProperty(exports, "ProxyQueryClient", { enumerable: true, get: function () { return ProxyContract_1.ProxyQueryClient; } });
-var FactoryContract_1 = require("./FactoryContract");
-Object.defineProperty(exports, "FactoryClient", { enumerable: true, get: function () { return FactoryContract_1.FactoryClient; } });
-Object.defineProperty(exports, "FactoryQueryClient", { enumerable: true, get: function () { return FactoryContract_1.FactoryQueryClient; } });
+var Factory_client_1 = require("./Factory.client");
+Object.defineProperty(exports, "FactoryClient", { enumerable: true, get: function () { return Factory_client_1.FactoryClient; } });
+Object.defineProperty(exports, "FactoryQueryClient", { enumerable: true, get: function () { return Factory_client_1.FactoryQueryClient; } });
 var Manager_client_1 = require("./Manager.client");
 Object.defineProperty(exports, "ManagerClient", { enumerable: true, get: function () { return Manager_client_1.ManagerClient; } });
 Object.defineProperty(exports, "ManagerQueryClient", { enumerable: true, get: function () { return Manager_client_1.ManagerQueryClient; } });
