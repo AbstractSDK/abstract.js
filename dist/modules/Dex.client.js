@@ -14,8 +14,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FactoryClient = exports.FactoryQueryClient = void 0;
-class FactoryQueryClient {
+exports.DexClient = exports.DexQueryClient = void 0;
+class DexQueryClient {
     constructor(client, contractAddress) {
         Object.defineProperty(this, "client", {
             enumerable: true,
@@ -39,13 +39,26 @@ class FactoryQueryClient {
                 });
             })
         });
+        Object.defineProperty(this, "traders", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: ({ proxyAddress }) => __awaiter(this, void 0, void 0, function* () {
+                return this.client.queryContractSmart(this.contractAddress, {
+                    traders: {
+                        proxy_address: proxyAddress,
+                    },
+                });
+            })
+        });
         this.client = client;
         this.contractAddress = contractAddress;
         this.config = this.config.bind(this);
+        this.traders = this.traders.bind(this);
     }
 }
-exports.FactoryQueryClient = FactoryQueryClient;
-class FactoryClient extends FactoryQueryClient {
+exports.DexQueryClient = DexQueryClient;
+class DexClient extends DexQueryClient {
     constructor(client, sender, contractAddress) {
         super(client, contractAddress);
         Object.defineProperty(this, "client", {
@@ -66,47 +79,15 @@ class FactoryClient extends FactoryQueryClient {
             writable: true,
             value: void 0
         });
-        Object.defineProperty(this, "receive", {
+        Object.defineProperty(this, "request", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: ({ amount, msg, sender, }, fee = 'auto', memo, funds) => __awaiter(this, void 0, void 0, function* () {
+            value: ({ proxyAddress, request, }, fee = 'auto', memo, funds) => __awaiter(this, void 0, void 0, function* () {
                 return yield this.client.execute(this.sender, this.contractAddress, {
-                    receive: {
-                        amount,
-                        msg,
-                        sender,
-                    },
-                }, fee, memo, funds);
-            })
-        });
-        Object.defineProperty(this, "updateConfig", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: ({ admin, memoryContract, moduleFactoryAddress, subscriptionAddress, versionControlContract, }, fee = 'auto', memo, funds) => __awaiter(this, void 0, void 0, function* () {
-                return yield this.client.execute(this.sender, this.contractAddress, {
-                    update_config: {
-                        admin,
-                        memory_contract: memoryContract,
-                        module_factory_address: moduleFactoryAddress,
-                        subscription_address: subscriptionAddress,
-                        version_control_contract: versionControlContract,
-                    },
-                }, fee, memo, funds);
-            })
-        });
-        Object.defineProperty(this, "createOs", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: ({ description, governance, link, name, }, fee = 'auto', memo, funds) => __awaiter(this, void 0, void 0, function* () {
-                return yield this.client.execute(this.sender, this.contractAddress, {
-                    create_os: {
-                        description,
-                        governance,
-                        link,
-                        name,
+                    Request: {
+                        proxy_address: proxyAddress,
+                        request,
                     },
                 }, fee, memo, funds);
             })
@@ -114,10 +95,8 @@ class FactoryClient extends FactoryQueryClient {
         this.client = client;
         this.sender = sender;
         this.contractAddress = contractAddress;
-        this.receive = this.receive.bind(this);
-        this.updateConfig = this.updateConfig.bind(this);
-        this.createOs = this.createOs.bind(this);
+        this.request = this.request.bind(this);
     }
 }
-exports.FactoryClient = FactoryClient;
-//# sourceMappingURL=Factory.client.js.map
+exports.DexClient = DexClient;
+//# sourceMappingURL=Dex.client.js.map

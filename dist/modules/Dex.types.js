@@ -5,4 +5,4 @@
  * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-//# sourceMappingURL=Factory.types.js.map
+//# sourceMappingURL=Dex.types.js.map
