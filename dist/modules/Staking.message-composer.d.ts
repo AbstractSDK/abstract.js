@@ -5,8 +5,8 @@
 */
 import { Coin } from "@cosmjs/amino";
 import { MsgExecuteContractEncodeObject } from "cosmwasm";
-import { RequestMsg } from "./Dex.types";
-export interface DexMessage {
+import { RequestMsg } from "./Staking.types";
+export interface StakingMessage {
     contractAddress: string;
     sender: string;
     request: ({ proxyAddress, request }: {
@@ -15,7 +15,7 @@ export interface DexMessage {
     }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
     configure: (funds?: Coin[]) => MsgExecuteContractEncodeObject;
 }
-export declare class DexMessageComposer implements DexMessage {
+export declare class StakingMessageComposer implements StakingMessage {
     sender: string;
     contractAddress: string;
     constructor(sender: string, contractAddress: string);

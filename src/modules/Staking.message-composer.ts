@@ -8,8 +8,8 @@ import { Coin } from "@cosmjs/amino";
 import { MsgExecuteContractEncodeObject } from "cosmwasm";
 import { MsgExecuteContract } from "cosmjs-types/cosmwasm/wasm/v1/tx";
 import { toUtf8 } from "@cosmjs/encoding";
-import { Addr, ConfigResponse, ExecuteMsg, RequestMsg, AssetEntry, Uint128, Decimal, ApiRequestMsgForRequestMsg, QueryMsg, TradersResponse } from "./Dex.types";
-export interface DexMessage {
+import { RequestMsg, } from "./Staking.types";
+export interface StakingMessage {
   contractAddress: string;
   sender: string;
   request: ({
@@ -21,7 +21,7 @@ export interface DexMessage {
   }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
   configure: (funds?: Coin[]) => MsgExecuteContractEncodeObject;
 }
-export class DexMessageComposer implements DexMessage {
+export class StakingMessageComposer implements StakingMessage {
   sender: string;
   contractAddress: string;
 

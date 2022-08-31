@@ -5,10 +5,10 @@
 * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DexMessageComposer = void 0;
+exports.StakingMessageComposer = void 0;
 const tx_1 = require("cosmjs-types/cosmwasm/wasm/v1/tx");
 const encoding_1 = require("@cosmjs/encoding");
-class DexMessageComposer {
+class StakingMessageComposer {
     constructor(sender, contractAddress) {
         Object.defineProperty(this, "sender", {
             enumerable: true,
@@ -67,5 +67,5 @@ class DexMessageComposer {
         this.configure = this.configure.bind(this);
     }
 }
-exports.DexMessageComposer = DexMessageComposer;
-//# sourceMappingURL=Dex.message-composer.js.map
+exports.StakingMessageComposer = StakingMessageComposer;
+//# sourceMappingURL=Staking.message-composer.js.map

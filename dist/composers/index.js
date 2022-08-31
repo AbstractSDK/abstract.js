@@ -18,4 +18,5 @@ __exportStar(require("./Cw3FlexMultisig.message-composer"), exports);
 __exportStar(require("./Factory.message-composer"), exports);
 __exportStar(require("./Cw4Group.message-composer"), exports);
 __exportStar(require("./Manager.message-composer"), exports);
+__exportStar(require("../modules/Dex.message-composer"), exports);
 //# sourceMappingURL=index.js.map
