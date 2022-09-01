@@ -20,7 +20,5 @@ __exportStar(require("./VersionControl.react-query"), exports);
 __exportStar(require("./Manager.react-query"), exports);
 __exportStar(require("./Cw3FlexMultisig.react-query"), exports);
 __exportStar(require("./Cw4Group.react-query"), exports);
-__exportStar(require("./Cw20Contract.react-query"), exports);
-__exportStar(require("./Cw20IcsContract.react-query"), exports);
 __exportStar(require("./MemoryContract.react-query"), exports);
 //# sourceMappingURL=index.js.map

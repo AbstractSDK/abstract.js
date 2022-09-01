@@ -29,8 +29,8 @@ import {
   ListChannelsResponse,
   PortResponse,
   QueryMsg,
-} from '../contracts/Cw20IcsContract'
-import { Cw20IcsQueryClient, Cw20IcsClient } from '../contracts/Cw20IcsContract'
+} from './Cw20Ics.types'
+import { Cw20IcsQueryClient, Cw20IcsClient } from './Cw20Ics.client'
 export interface Cw20IcsReactQuery<TResponse> {
   client: Cw20IcsQueryClient | undefined
   options?: Omit<

@@ -5,4 +5,4 @@
  * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-//# sourceMappingURL=Staking.types.js.map
+//# sourceMappingURL=Cw20.types.js.map
