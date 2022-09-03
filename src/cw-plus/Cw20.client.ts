@@ -634,7 +634,7 @@ export class Cw20Client extends Cw20QueryClient implements Cw20Interface {
       this.contractAddress,
       {
         upload_logo: {
-          ...msg
+          ...msg,
         },
       },
       fee,

@@ -1,6 +1,6 @@
 
 {
-  "include": ["src/**/*", "generated/Manager.client.ts"],
+  "include": ["src/**/*", "generated/Manager.client.ts", "generated/Manager.types.ts"],
   "exclude": ["/node_modules/", "./src/**/*.spec.ts", "src/**/*.no-commit.*", "generated"],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,

@@ -1,9 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MemoryQueryClient = exports.Cw4GroupQueryClient = exports.Cw4GroupClient = exports.Cw3FlexMultisigQueryClient = exports.Cw3FlexMultisigClient = exports.VersionControlQueryClient = exports.VersionControlClient = exports.ManagerQueryClient = exports.ManagerClient = exports.FactoryQueryClient = exports.FactoryClient = exports.ProxyQueryClient = exports.ProxyClient = void 0;
-var ProxyContract_1 = require("./ProxyContract");
-Object.defineProperty(exports, "ProxyClient", { enumerable: true, get: function () { return ProxyContract_1.ProxyClient; } });
-Object.defineProperty(exports, "ProxyQueryClient", { enumerable: true, get: function () { return ProxyContract_1.ProxyQueryClient; } });
+exports.Cw4GroupQueryClient = exports.Cw4GroupClient = exports.Cw3FlexMultisigQueryClient = exports.Cw3FlexMultisigClient = exports.VersionControlQueryClient = exports.VersionControlClient = exports.ManagerQueryClient = exports.ManagerClient = exports.FactoryQueryClient = exports.FactoryClient = void 0;
 var Factory_client_1 = require("./Factory.client");
 Object.defineProperty(exports, "FactoryClient", { enumerable: true, get: function () { return Factory_client_1.FactoryClient; } });
 Object.defineProperty(exports, "FactoryQueryClient", { enumerable: true, get: function () { return Factory_client_1.FactoryQueryClient; } });
@@ -19,6 +16,4 @@ Object.defineProperty(exports, "Cw3FlexMultisigQueryClient", { enumerable: true,
 var Cw4Group_client_1 = require("./Cw4Group.client");
 Object.defineProperty(exports, "Cw4GroupClient", { enumerable: true, get: function () { return Cw4Group_client_1.Cw4GroupClient; } });
 Object.defineProperty(exports, "Cw4GroupQueryClient", { enumerable: true, get: function () { return Cw4Group_client_1.Cw4GroupQueryClient; } });
-var MemoryContract_1 = require("./MemoryContract");
-Object.defineProperty(exports, "MemoryQueryClient", { enumerable: true, get: function () { return MemoryContract_1.MemoryQueryClient; } });
 //# sourceMappingURL=index.js.map

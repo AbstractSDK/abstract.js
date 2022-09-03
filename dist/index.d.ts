@@ -4,3 +4,5 @@ export * from './composers';
 export * from './QueryProvider';
 export * from './modules';
 export * from './cw-plus';
+export * from './native';
+export * from './core';

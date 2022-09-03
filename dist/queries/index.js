@@ -14,11 +14,9 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./ProxyContract.react-query"), exports);
 __exportStar(require("./Factory.react-query"), exports);
 __exportStar(require("./VersionControl.react-query"), exports);
 __exportStar(require("./Manager.react-query"), exports);
 __exportStar(require("./Cw3FlexMultisig.react-query"), exports);
 __exportStar(require("./Cw4Group.react-query"), exports);
-__exportStar(require("./MemoryContract.react-query"), exports);
 //# sourceMappingURL=index.js.map
