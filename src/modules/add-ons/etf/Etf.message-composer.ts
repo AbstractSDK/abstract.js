@@ -4,13 +4,15 @@
 * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
 */
 
+import { Coin } from "@cosmjs/amino";
 import { MsgExecuteContractEncodeObject } from "cosmwasm";
 import { MsgExecuteContract } from "cosmjs-types/cosmwasm/wasm/v1/tx";
 import { toUtf8 } from "@cosmjs/encoding";
-import { AdminResponse, AllowedResponse, Amount, Uint128, ChannelResponse, Coin, Cw20Coin, ChannelInfo, IbcEndpoint, ConfigResponse, ExecuteMsg, Binary, Cw20ReceiveMsg, TransferMsg, AllowMsg, InitMsg, ListAllowedResponse, AllowedInfo, ListChannelsResponse, PortResponse, QueryMsg } from "./Cw20Ics.types";
-export interface Cw20IcsMessage {
+import { Addr, AddOnState, Memory, BaseResponse, ExecuteMsg, AddOnExecuteMsg, Uint128, Binary, AssetInfoBaseForString, Decimal, Cw20ReceiveMsg, AssetBaseForString, InstantiateMsg, AddOnInstantiateMsg, QueryMsg, AddOnQueryMsg, StateResponse } from "./Etf.types";
+export interface EtfMessage {
   contractAddress: string;
   sender: string;
+  base: (funds?: Coin[]) => MsgExecuteContractEncodeObject;
   receive: ({
     amount,
     msg,
@@ -20,41 +22,55 @@ export interface Cw20IcsMessage {
     msg: Binary;
     sender: string;
   }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
-  transfer: ({
-    channel,
-    remoteAddress,
-    timeout
+  provideLiquidity: ({
+    asset
   }: {
-    channel: string;
-    remoteAddress: string;
-    timeout?: number;
+    asset: AssetBaseForString;
   }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
-  allow: ({
-    contract,
-    gasLimit
+  updatePool: ({
+    assetsToAdd,
+    assetsToRemove,
+    depositAsset
   }: {
-    contract: string;
-    gasLimit?: number;
+    assetsToAdd: string[];
+    assetsToRemove: string[];
+    depositAsset?: string;
   }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
-  updateAdmin: ({
-    admin
+  import: (funds?: Coin[]) => MsgExecuteContractEncodeObject;
+  setFee: ({
+    fee
   }: {
-    admin: string;
+    fee: Decimal;
   }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
 }
-export class Cw20IcsMessageComposer implements Cw20IcsMessage {
+export class EtfMessageComposer implements EtfMessage {
   sender: string;
   contractAddress: string;
 
   constructor(sender: string, contractAddress: string) {
     this.sender = sender;
     this.contractAddress = contractAddress;
+    this.base = this.base.bind(this);
     this.receive = this.receive.bind(this);
-    this.transfer = this.transfer.bind(this);
-    this.allow = this.allow.bind(this);
-    this.updateAdmin = this.updateAdmin.bind(this);
+    this.provideLiquidity = this.provideLiquidity.bind(this);
+    this.updatePool = this.updatePool.bind(this);
+    this.import = this.import.bind(this);
+    this.setFee = this.setFee.bind(this);
   }
 
+  base = (funds?: Coin[]): MsgExecuteContractEncodeObject => {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
+      value: MsgExecuteContract.fromPartial({
+        sender: this.sender,
+        contract: this.contractAddress,
+        msg: toUtf8(JSON.stringify({
+          base: {}
+        })),
+        funds
+      })
+    };
+  };
   receive = ({
     amount,
     msg,
@@ -80,14 +96,10 @@ export class Cw20IcsMessageComposer implements Cw20IcsMessage {
       })
     };
   };
-  transfer = ({
-    channel,
-    remoteAddress,
-    timeout
+  provideLiquidity = ({
+    asset
   }: {
-    channel: string;
-    remoteAddress: string;
-    timeout?: number;
+    asset: AssetBaseForString;
   }, funds?: Coin[]): MsgExecuteContractEncodeObject => {
     return {
       typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
@@ -95,22 +107,22 @@ export class Cw20IcsMessageComposer implements Cw20IcsMessage {
         sender: this.sender,
         contract: this.contractAddress,
         msg: toUtf8(JSON.stringify({
-          transfer: {
-            channel,
-            remote_address: remoteAddress,
-            timeout
+          provide_liquidity: {
+            asset
           }
         })),
         funds
       })
     };
   };
-  allow = ({
-    contract,
-    gasLimit
+  updatePool = ({
+    assetsToAdd,
+    assetsToRemove,
+    depositAsset
   }: {
-    contract: string;
-    gasLimit?: number;
+    assetsToAdd: string[];
+    assetsToRemove: string[];
+    depositAsset?: string;
   }, funds?: Coin[]): MsgExecuteContractEncodeObject => {
     return {
       typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
@@ -118,19 +130,33 @@ export class Cw20IcsMessageComposer implements Cw20IcsMessage {
         sender: this.sender,
         contract: this.contractAddress,
         msg: toUtf8(JSON.stringify({
-          allow: {
-            contract,
-            gas_limit: gasLimit
+          update_pool: {
+            assets_to_add: assetsToAdd,
+            assets_to_remove: assetsToRemove,
+            deposit_asset: depositAsset
           }
         })),
         funds
       })
     };
   };
-  updateAdmin = ({
-    admin
+  import = (funds?: Coin[]): MsgExecuteContractEncodeObject => {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
+      value: MsgExecuteContract.fromPartial({
+        sender: this.sender,
+        contract: this.contractAddress,
+        msg: toUtf8(JSON.stringify({
+          import: {}
+        })),
+        funds
+      })
+    };
+  };
+  setFee = ({
+    fee
   }: {
-    admin: string;
+    fee: Decimal;
   }, funds?: Coin[]): MsgExecuteContractEncodeObject => {
     return {
       typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
@@ -138,8 +164,8 @@ export class Cw20IcsMessageComposer implements Cw20IcsMessage {
         sender: this.sender,
         contract: this.contractAddress,
         msg: toUtf8(JSON.stringify({
-          update_admin: {
-            admin
+          set_fee: {
+            fee
           }
         })),
         funds

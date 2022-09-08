@@ -4,11 +4,12 @@
 * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
 */
 
+import { Coin } from "@cosmjs/amino";
 import { MsgExecuteContractEncodeObject } from "cosmwasm";
 import { MsgExecuteContract } from "cosmjs-types/cosmwasm/wasm/v1/tx";
 import { toUtf8 } from "@cosmjs/encoding";
-import { AdminResponse, AllowedResponse, Amount, Uint128, ChannelResponse, Coin, Cw20Coin, ChannelInfo, IbcEndpoint, ConfigResponse, ExecuteMsg, Binary, Cw20ReceiveMsg, TransferMsg, AllowMsg, InitMsg, ListAllowedResponse, AllowedInfo, ListChannelsResponse, PortResponse, QueryMsg } from "./Cw20Ics.types";
-export interface Cw20IcsMessage {
+import { ConfigResponse, ExecuteMsg, Uint128, Binary, GovernanceDetails, Cw20ReceiveMsg, InstantiateMsg, QueryMsg } from "./Factory.types";
+export interface FactoryMessage {
   contractAddress: string;
   sender: string;
   receive: ({
@@ -20,29 +21,32 @@ export interface Cw20IcsMessage {
     msg: Binary;
     sender: string;
   }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
-  transfer: ({
-    channel,
-    remoteAddress,
-    timeout
+  updateConfig: ({
+    admin,
+    memoryContract,
+    moduleFactoryAddress,
+    subscriptionAddress,
+    versionControlContract
   }: {
-    channel: string;
-    remoteAddress: string;
-    timeout?: number;
+    admin?: string;
+    memoryContract?: string;
+    moduleFactoryAddress?: string;
+    subscriptionAddress?: string;
+    versionControlContract?: string;
   }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
-  allow: ({
-    contract,
-    gasLimit
+  createOs: ({
+    description,
+    governance,
+    link,
+    name
   }: {
-    contract: string;
-    gasLimit?: number;
-  }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
-  updateAdmin: ({
-    admin
-  }: {
-    admin: string;
+    description?: string;
+    governance: GovernanceDetails;
+    link?: string;
+    name: string;
   }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
 }
-export class Cw20IcsMessageComposer implements Cw20IcsMessage {
+export class FactoryMessageComposer implements FactoryMessage {
   sender: string;
   contractAddress: string;
 
@@ -50,9 +54,8 @@ export class Cw20IcsMessageComposer implements Cw20IcsMessage {
     this.sender = sender;
     this.contractAddress = contractAddress;
     this.receive = this.receive.bind(this);
-    this.transfer = this.transfer.bind(this);
-    this.allow = this.allow.bind(this);
-    this.updateAdmin = this.updateAdmin.bind(this);
+    this.updateConfig = this.updateConfig.bind(this);
+    this.createOs = this.createOs.bind(this);
   }
 
   receive = ({
@@ -80,14 +83,18 @@ export class Cw20IcsMessageComposer implements Cw20IcsMessage {
       })
     };
   };
-  transfer = ({
-    channel,
-    remoteAddress,
-    timeout
+  updateConfig = ({
+    admin,
+    memoryContract,
+    moduleFactoryAddress,
+    subscriptionAddress,
+    versionControlContract
   }: {
-    channel: string;
-    remoteAddress: string;
-    timeout?: number;
+    admin?: string;
+    memoryContract?: string;
+    moduleFactoryAddress?: string;
+    subscriptionAddress?: string;
+    versionControlContract?: string;
   }, funds?: Coin[]): MsgExecuteContractEncodeObject => {
     return {
       typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
@@ -95,22 +102,28 @@ export class Cw20IcsMessageComposer implements Cw20IcsMessage {
         sender: this.sender,
         contract: this.contractAddress,
         msg: toUtf8(JSON.stringify({
-          transfer: {
-            channel,
-            remote_address: remoteAddress,
-            timeout
+          update_config: {
+            admin,
+            memory_contract: memoryContract,
+            module_factory_address: moduleFactoryAddress,
+            subscription_address: subscriptionAddress,
+            version_control_contract: versionControlContract
           }
         })),
         funds
       })
     };
   };
-  allow = ({
-    contract,
-    gasLimit
+  createOs = ({
+    description,
+    governance,
+    link,
+    name
   }: {
-    contract: string;
-    gasLimit?: number;
+    description?: string;
+    governance: GovernanceDetails;
+    link?: string;
+    name: string;
   }, funds?: Coin[]): MsgExecuteContractEncodeObject => {
     return {
       typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
@@ -118,28 +131,11 @@ export class Cw20IcsMessageComposer implements Cw20IcsMessage {
         sender: this.sender,
         contract: this.contractAddress,
         msg: toUtf8(JSON.stringify({
-          allow: {
-            contract,
-            gas_limit: gasLimit
-          }
-        })),
-        funds
-      })
-    };
-  };
-  updateAdmin = ({
-    admin
-  }: {
-    admin: string;
-  }, funds?: Coin[]): MsgExecuteContractEncodeObject => {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
-      value: MsgExecuteContract.fromPartial({
-        sender: this.sender,
-        contract: this.contractAddress,
-        msg: toUtf8(JSON.stringify({
-          update_admin: {
-            admin
+          create_os: {
+            description,
+            governance,
+            link,
+            name
           }
         })),
         funds

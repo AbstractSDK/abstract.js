@@ -7,75 +7,68 @@
 import { MsgExecuteContractEncodeObject } from "cosmwasm";
 import { MsgExecuteContract } from "cosmjs-types/cosmwasm/wasm/v1/tx";
 import { toUtf8 } from "@cosmjs/encoding";
-import { AssetInfoBaseForAddr, Addr, AssetEntry, ValueRef, Decimal, BaseAssetResponse, ProxyAsset, ContractEntry, CheckValidityResponse, ConfigResponse, CosmosMsgForEmpty, BankMsg, Uint128, StakingMsg, DistributionMsg, WasmMsg, Binary, Coin, Empty, ExecuteMsg, UncheckedValueRef, UncheckedProxyAsset, HoldingAmountResponse, HoldingValueResponse, InstantiateMsg, ProxyAssetConfigResponse, ProxyAssetsResponse, QueryMsg, State, TotalValueResponse } from "./Proxy.types";
-export interface ProxyMessage {
+import { CosmosMsgForEmpty, BankMsg, Uint128, StakingMsg, DistributionMsg, WasmMsg, Binary, Coin, Empty, ExecuteMsg, Expiration, Timestamp, Uint64, Vote, MemberChangedHookMsg, MemberDiff, Executor, Addr, Duration, Threshold, Decimal, InstantiateMsg, Status, ThresholdResponse, ListProposalsResponse, ProposalResponseForEmpty, ListVotersResponse, VoterDetail, ListVotesResponse, VoteInfo, ProposalResponse, QueryMsg, ReverseProposalsResponse, VoteResponse, VoterResponse } from "./Cw3FlexMultisig.types";
+export interface Cw3FlexMultisigMessage {
   contractAddress: string;
   sender: string;
-  setAdmin: ({
-    admin
+  propose: ({
+    description,
+    latest,
+    msgs,
+    title
   }: {
-    admin: string;
-  }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
-  moduleAction: ({
-    msgs
-  }: {
+    description: string;
+    latest?: Expiration;
     msgs: CosmosMsgForEmpty[];
+    title: string;
   }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
-  addModule: ({
-    module
+  vote: ({
+    proposalId,
+    vote
   }: {
-    module: string;
+    proposalId: number;
+    vote: Vote;
   }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
-  removeModule: ({
-    module
+  execute: ({
+    proposalId
   }: {
-    module: string;
+    proposalId: number;
   }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
-  updateAssets: ({
-    toAdd,
-    toRemove
+  close: ({
+    proposalId
   }: {
-    toAdd: UncheckedProxyAsset[];
-    toRemove: string[];
+    proposalId: number;
+  }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
+  memberChangedHook: ({
+    diffs
+  }: {
+    diffs: MemberDiff[];
   }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
 }
-export class ProxyMessageComposer implements ProxyMessage {
+export class Cw3FlexMultisigMessageComposer implements Cw3FlexMultisigMessage {
   sender: string;
   contractAddress: string;
 
   constructor(sender: string, contractAddress: string) {
     this.sender = sender;
     this.contractAddress = contractAddress;
-    this.setAdmin = this.setAdmin.bind(this);
-    this.moduleAction = this.moduleAction.bind(this);
-    this.addModule = this.addModule.bind(this);
-    this.removeModule = this.removeModule.bind(this);
-    this.updateAssets = this.updateAssets.bind(this);
+    this.propose = this.propose.bind(this);
+    this.vote = this.vote.bind(this);
+    this.execute = this.execute.bind(this);
+    this.close = this.close.bind(this);
+    this.memberChangedHook = this.memberChangedHook.bind(this);
   }
 
-  setAdmin = ({
-    admin
+  propose = ({
+    description,
+    latest,
+    msgs,
+    title
   }: {
-    admin: string;
-  }, funds?: Coin[]): MsgExecuteContractEncodeObject => {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
-      value: MsgExecuteContract.fromPartial({
-        sender: this.sender,
-        contract: this.contractAddress,
-        msg: toUtf8(JSON.stringify({
-          set_admin: {
-            admin
-          }
-        })),
-        funds
-      })
-    };
-  };
-  moduleAction = ({
-    msgs
-  }: {
+    description: string;
+    latest?: Expiration;
     msgs: CosmosMsgForEmpty[];
+    title: string;
   }, funds?: Coin[]): MsgExecuteContractEncodeObject => {
     return {
       typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
@@ -83,18 +76,23 @@ export class ProxyMessageComposer implements ProxyMessage {
         sender: this.sender,
         contract: this.contractAddress,
         msg: toUtf8(JSON.stringify({
-          module_action: {
-            msgs
+          propose: {
+            description,
+            latest,
+            msgs,
+            title
           }
         })),
         funds
       })
     };
   };
-  addModule = ({
-    module
+  vote = ({
+    proposalId,
+    vote
   }: {
-    module: string;
+    proposalId: number;
+    vote: Vote;
   }, funds?: Coin[]): MsgExecuteContractEncodeObject => {
     return {
       typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
@@ -102,18 +100,19 @@ export class ProxyMessageComposer implements ProxyMessage {
         sender: this.sender,
         contract: this.contractAddress,
         msg: toUtf8(JSON.stringify({
-          add_module: {
-            module
+          vote: {
+            proposal_id: proposalId,
+            vote
           }
         })),
         funds
       })
     };
   };
-  removeModule = ({
-    module
+  execute = ({
+    proposalId
   }: {
-    module: string;
+    proposalId: number;
   }, funds?: Coin[]): MsgExecuteContractEncodeObject => {
     return {
       typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
@@ -121,20 +120,18 @@ export class ProxyMessageComposer implements ProxyMessage {
         sender: this.sender,
         contract: this.contractAddress,
         msg: toUtf8(JSON.stringify({
-          remove_module: {
-            module
+          execute: {
+            proposal_id: proposalId
           }
         })),
         funds
       })
     };
   };
-  updateAssets = ({
-    toAdd,
-    toRemove
+  close = ({
+    proposalId
   }: {
-    toAdd: UncheckedProxyAsset[];
-    toRemove: string[];
+    proposalId: number;
   }, funds?: Coin[]): MsgExecuteContractEncodeObject => {
     return {
       typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
@@ -142,9 +139,27 @@ export class ProxyMessageComposer implements ProxyMessage {
         sender: this.sender,
         contract: this.contractAddress,
         msg: toUtf8(JSON.stringify({
-          update_assets: {
-            to_add: toAdd,
-            to_remove: toRemove
+          close: {
+            proposal_id: proposalId
+          }
+        })),
+        funds
+      })
+    };
+  };
+  memberChangedHook = ({
+    diffs
+  }: {
+    diffs: MemberDiff[];
+  }, funds?: Coin[]): MsgExecuteContractEncodeObject => {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
+      value: MsgExecuteContract.fromPartial({
+        sender: this.sender,
+        contract: this.contractAddress,
+        msg: toUtf8(JSON.stringify({
+          member_changed_hook: {
+            diffs
           }
         })),
         funds

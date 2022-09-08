@@ -8,90 +8,50 @@ import { Coin } from "@cosmjs/amino";
 import { MsgExecuteContractEncodeObject } from "cosmwasm";
 import { MsgExecuteContract } from "cosmjs-types/cosmwasm/wasm/v1/tx";
 import { toUtf8 } from "@cosmjs/encoding";
-import { AssetEntry, AssetInfoBaseForAddr, Addr, AssetListResponse, AssetsResponse, ContractListResponse, ContractEntry, ContractsResponse, ExecuteMsg, AssetInfoBaseForString, UncheckedContractEntry, InstantiateMsg, QueryMsg } from "./Memory.types";
-export interface MemoryMessage {
+import { AdminResponse, ExecuteMsg, Member, HooksResponse, InstantiateMsg, ListMembersResponse, MemberListResponse, MemberResponse, QueryMsg, TotalWeightResponse } from "./Cw4Group.types";
+export interface Cw4GroupMessage {
   contractAddress: string;
   sender: string;
-  updateContractAddresses: ({
-    toAdd,
-    toRemove
-  }: {
-    toAdd: UncheckedContractEntry[][];
-    toRemove: UncheckedContractEntry[];
-  }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
-  updateAssetAddresses: ({
-    toAdd,
-    toRemove
-  }: {
-    toAdd: string[][];
-    toRemove: string[];
-  }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
-  setAdmin: ({
+  updateAdmin: ({
     admin
   }: {
-    admin: string;
+    admin?: string;
+  }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
+  updateMembers: ({
+    add,
+    remove
+  }: {
+    add: Member[];
+    remove: string[];
+  }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
+  addHook: ({
+    addr
+  }: {
+    addr: string;
+  }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
+  removeHook: ({
+    addr
+  }: {
+    addr: string;
   }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
 }
-export class MemoryMessageComposer implements MemoryMessage {
+export class Cw4GroupMessageComposer implements Cw4GroupMessage {
   sender: string;
   contractAddress: string;
 
   constructor(sender: string, contractAddress: string) {
     this.sender = sender;
     this.contractAddress = contractAddress;
-    this.updateContractAddresses = this.updateContractAddresses.bind(this);
-    this.updateAssetAddresses = this.updateAssetAddresses.bind(this);
-    this.setAdmin = this.setAdmin.bind(this);
+    this.updateAdmin = this.updateAdmin.bind(this);
+    this.updateMembers = this.updateMembers.bind(this);
+    this.addHook = this.addHook.bind(this);
+    this.removeHook = this.removeHook.bind(this);
   }
 
-  updateContractAddresses = ({
-    toAdd,
-    toRemove
-  }: {
-    toAdd: UncheckedContractEntry[][];
-    toRemove: UncheckedContractEntry[];
-  }, funds?: Coin[]): MsgExecuteContractEncodeObject => {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
-      value: MsgExecuteContract.fromPartial({
-        sender: this.sender,
-        contract: this.contractAddress,
-        msg: toUtf8(JSON.stringify({
-          update_contract_addresses: {
-            to_add: toAdd,
-            to_remove: toRemove
-          }
-        })),
-        funds
-      })
-    };
-  };
-  updateAssetAddresses = ({
-    toAdd,
-    toRemove
-  }: {
-    toAdd: string[][];
-    toRemove: string[];
-  }, funds?: Coin[]): MsgExecuteContractEncodeObject => {
-    return {
-      typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
-      value: MsgExecuteContract.fromPartial({
-        sender: this.sender,
-        contract: this.contractAddress,
-        msg: toUtf8(JSON.stringify({
-          update_asset_addresses: {
-            to_add: toAdd,
-            to_remove: toRemove
-          }
-        })),
-        funds
-      })
-    };
-  };
-  setAdmin = ({
+  updateAdmin = ({
     admin
   }: {
-    admin: string;
+    admin?: string;
   }, funds?: Coin[]): MsgExecuteContractEncodeObject => {
     return {
       typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
@@ -99,8 +59,68 @@ export class MemoryMessageComposer implements MemoryMessage {
         sender: this.sender,
         contract: this.contractAddress,
         msg: toUtf8(JSON.stringify({
-          set_admin: {
+          update_admin: {
             admin
+          }
+        })),
+        funds
+      })
+    };
+  };
+  updateMembers = ({
+    add,
+    remove
+  }: {
+    add: Member[];
+    remove: string[];
+  }, funds?: Coin[]): MsgExecuteContractEncodeObject => {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
+      value: MsgExecuteContract.fromPartial({
+        sender: this.sender,
+        contract: this.contractAddress,
+        msg: toUtf8(JSON.stringify({
+          update_members: {
+            add,
+            remove
+          }
+        })),
+        funds
+      })
+    };
+  };
+  addHook = ({
+    addr
+  }: {
+    addr: string;
+  }, funds?: Coin[]): MsgExecuteContractEncodeObject => {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
+      value: MsgExecuteContract.fromPartial({
+        sender: this.sender,
+        contract: this.contractAddress,
+        msg: toUtf8(JSON.stringify({
+          add_hook: {
+            addr
+          }
+        })),
+        funds
+      })
+    };
+  };
+  removeHook = ({
+    addr
+  }: {
+    addr: string;
+  }, funds?: Coin[]): MsgExecuteContractEncodeObject => {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
+      value: MsgExecuteContract.fromPartial({
+        sender: this.sender,
+        contract: this.contractAddress,
+        msg: toUtf8(JSON.stringify({
+          remove_hook: {
+            addr
           }
         })),
         funds
