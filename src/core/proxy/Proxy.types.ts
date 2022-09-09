@@ -9,41 +9,33 @@ export type ValueRef =
   | {
       pool: {
         pair: ContractEntry
-        [k: string]: unknown
       }
     }
   | {
-      liquidity_token: {
-        [k: string]: unknown
-      }
+      liquidity_token: {}
     }
   | {
       value_as: {
         asset: AssetEntry
         multiplier: Decimal
-        [k: string]: unknown
       }
     }
   | {
       external: {
         api_name: string
-        [k: string]: unknown
       }
     }
 export type Decimal = string
 export interface AssetConfigResponse {
   proxy_asset: ProxyAsset
-  [k: string]: unknown
 }
 export interface ProxyAsset {
   asset: AssetEntry
   value_reference?: ValueRef | null
-  [k: string]: unknown
 }
 export interface ContractEntry {
   contract: string
   protocol: string
-  [k: string]: unknown
 }
 export type AssetInfoBaseForAddr =
   | {
@@ -58,20 +50,16 @@ export type AssetInfoBaseForAddr =
 export type Addr = string
 export interface AssetsResponse {
   assets: [AssetEntry, ProxyAsset][]
-  [k: string]: unknown
 }
 export interface BaseAssetResponse {
   base_asset: ProxyAsset
-  [k: string]: unknown
 }
 export interface CheckValidityResponse {
   missing_dependencies?: AssetEntry[] | null
   unresolvable_assets?: AssetEntry[] | null
-  [k: string]: unknown
 }
 export interface ConfigResponse {
   modules: string[]
-  [k: string]: unknown
 }
 export type CosmosMsgForEmpty =
   | {
@@ -94,13 +82,11 @@ export type BankMsg =
       send: {
         amount: Coin[]
         to_address: string
-        [k: string]: unknown
       }
     }
   | {
       burn: {
         amount: Coin[]
-        [k: string]: unknown
       }
     }
 export type Uint128 = string
@@ -109,14 +95,12 @@ export type StakingMsg =
       delegate: {
         amount: Coin
         validator: string
-        [k: string]: unknown
       }
     }
   | {
       undelegate: {
         amount: Coin
         validator: string
-        [k: string]: unknown
       }
     }
   | {
@@ -124,20 +108,17 @@ export type StakingMsg =
         amount: Coin
         dst_validator: string
         src_validator: string
-        [k: string]: unknown
       }
     }
 export type DistributionMsg =
   | {
       set_withdraw_address: {
         address: string
-        [k: string]: unknown
       }
     }
   | {
       withdraw_delegator_reward: {
         validator: string
-        [k: string]: unknown
       }
     }
 export type WasmMsg =
@@ -146,7 +127,6 @@ export type WasmMsg =
         contract_addr: string
         funds: Coin[]
         msg: Binary
-        [k: string]: unknown
       }
     }
   | {
@@ -156,7 +136,6 @@ export type WasmMsg =
         funds: Coin[]
         label: string
         msg: Binary
-        [k: string]: unknown
       }
     }
   | {
@@ -164,61 +143,50 @@ export type WasmMsg =
         contract_addr: string
         msg: Binary
         new_code_id: number
-        [k: string]: unknown
       }
     }
   | {
       update_admin: {
         admin: string
         contract_addr: string
-        [k: string]: unknown
       }
     }
   | {
       clear_admin: {
         contract_addr: string
-        [k: string]: unknown
       }
     }
 export type Binary = string
 export interface Coin {
   amount: Uint128
   denom: string
-  [k: string]: unknown
 }
-export interface Empty {
-  [k: string]: unknown
-}
+export interface Empty {}
 export type ExecuteMsg =
   | {
       set_admin: {
         admin: string
-        [k: string]: unknown
       }
     }
   | {
       module_action: {
         msgs: CosmosMsgForEmpty[]
-        [k: string]: unknown
       }
     }
   | {
       add_module: {
         module: string
-        [k: string]: unknown
       }
     }
   | {
       remove_module: {
         module: string
-        [k: string]: unknown
       }
     }
   | {
       update_assets: {
         to_add: UncheckedProxyAsset[]
         to_remove: string[]
-        [k: string]: unknown
       }
     }
 export type UncheckedValueRef =
@@ -226,96 +194,73 @@ export type UncheckedValueRef =
       pool: {
         exchange: string
         pair: string
-        [k: string]: unknown
       }
     }
   | {
-      liquidity_token: {
-        [k: string]: unknown
-      }
+      liquidity_token: {}
     }
   | {
       value_as: {
         asset: string
         multiplier: Decimal
-        [k: string]: unknown
       }
     }
   | {
       external: {
         api_name: string
-        [k: string]: unknown
       }
     }
 export interface UncheckedProxyAsset {
   asset: string
   value_reference?: UncheckedValueRef | null
-  [k: string]: unknown
 }
 export interface HoldingAmountResponse {
   amount: Uint128
-  [k: string]: unknown
 }
 export interface HoldingValueResponse {
   value: Uint128
-  [k: string]: unknown
 }
 export interface InstantiateMsg {
   memory_address: string
   os_id: number
-  [k: string]: unknown
 }
 export type QueryMsg =
   | {
-      config: {
-        [k: string]: unknown
-      }
+      config: {}
     }
   | {
-      total_value: {
-        [k: string]: unknown
-      }
+      total_value: {}
     }
   | {
       holding_value: {
         identifier: string
-        [k: string]: unknown
       }
     }
   | {
       holding_amount: {
         identifier: string
-        [k: string]: unknown
       }
     }
   | {
       asset_config: {
         identifier: string
-        [k: string]: unknown
       }
     }
   | {
       assets: {
         page_size?: number | null
         page_token?: string | null
-        [k: string]: unknown
       }
     }
   | {
-      check_validity: {
-        [k: string]: unknown
-      }
+      check_validity: {}
     }
   | {
-      base_asset: {
-        [k: string]: unknown
-      }
+      base_asset: {}
     }
 export interface State {
   modules: Addr[]
-  [k: string]: unknown
 }
 export interface TotalValueResponse {
   value: Uint128
-  [k: string]: unknown
 }

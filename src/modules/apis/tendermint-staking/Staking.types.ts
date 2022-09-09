@@ -6,14 +6,10 @@
 
 export type BaseResponse =
   | {
-      config: {
-        [k: string]: unknown
-      }
+      config: {}
     }
   | {
-      admin: {
-        [k: string]: unknown
-      }
+      admin: {}
     }
 export type ExecuteMsg =
   | {
@@ -27,45 +23,36 @@ export type RequestMsg =
       delegate: {
         amount: Uint128
         validator: string
-        [k: string]: unknown
       }
     }
   | {
       undelegate_from: {
         amount?: Uint128 | null
         validator: string
-        [k: string]: unknown
       }
     }
   | {
-      undelegate_all: {
-        [k: string]: unknown
-      }
+      undelegate_all: {}
     }
   | {
       redelegate: {
         amount?: Uint128 | null
         destination_validator: string
         source_validator: string
-        [k: string]: unknown
       }
     }
   | {
       set_withdraw_address: {
         new_withdraw_address: string
-        [k: string]: unknown
       }
     }
   | {
       withdraw_delegator_reward: {
         validator: string
-        [k: string]: unknown
       }
     }
   | {
-      withdraw_all_rewards: {
-        [k: string]: unknown
-      }
+      withdraw_all_rewards: {}
     }
 export type Uint128 = string
 export type BaseExecuteMsg =
@@ -73,17 +60,13 @@ export type BaseExecuteMsg =
       update_traders: {
         to_add?: string[] | null
         to_remove?: string[] | null
-        [k: string]: unknown
       }
     }
   | {
-      remove: {
-        [k: string]: unknown
-      }
+      remove: {}
     }
 export interface ApiRequestMsgForRequestMsg {
   proxy_address?: string | null
   request: RequestMsg
-  [k: string]: unknown
 }
 export type QueryMsg = string

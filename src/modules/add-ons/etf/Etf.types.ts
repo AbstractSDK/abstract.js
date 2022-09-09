@@ -8,22 +8,16 @@ export type Addr = string
 export interface AddOnState {
   memory: Memory
   proxy_address: Addr
-  [k: string]: unknown
 }
 export interface Memory {
   address: Addr
-  [k: string]: unknown
 }
 export type BaseResponse =
   | {
-      config: {
-        [k: string]: unknown
-      }
+      config: {}
     }
   | {
-      admin: {
-        [k: string]: unknown
-      }
+      admin: {}
     }
 export type ExecuteMsg =
   | {
@@ -35,7 +29,6 @@ export type ExecuteMsg =
   | {
       provide_liquidity: {
         asset: AssetBaseForString
-        [k: string]: unknown
       }
     }
   | {
@@ -43,24 +36,19 @@ export type ExecuteMsg =
         assets_to_add: string[]
         assets_to_remove: string[]
         deposit_asset?: string | null
-        [k: string]: unknown
       }
     }
   | {
-      import: {
-        [k: string]: unknown
-      }
+      import: {}
     }
   | {
       set_fee: {
         fee: Decimal
-        [k: string]: unknown
       }
     }
 export type AddOnExecuteMsg = {
   update_config: {
     memory_address?: string | null
-    [k: string]: unknown
   }
 }
 export type Uint128 = string
@@ -80,12 +68,10 @@ export interface Cw20ReceiveMsg {
   amount: Uint128
   msg: Binary
   sender: string
-  [k: string]: unknown
 }
 export interface AssetBaseForString {
   amount: Uint128
   info: AssetInfoBaseForString
-  [k: string]: unknown
 }
 export interface InstantiateMsg {
   base: AddOnInstantiateMsg
@@ -95,33 +81,24 @@ export interface InstantiateMsg {
   token_code_id: number
   token_name?: string | null
   token_symbol?: string | null
-  [k: string]: unknown
 }
 export interface AddOnInstantiateMsg {
   memory_address: string
-  [k: string]: unknown
 }
 export type QueryMsg =
   | {
       base: AddOnQueryMsg
     }
   | {
-      state: {
-        [k: string]: unknown
-      }
+      state: {}
     }
 export type AddOnQueryMsg =
   | {
-      config: {
-        [k: string]: unknown
-      }
+      config: {}
     }
   | {
-      admin: {
-        [k: string]: unknown
-      }
+      admin: {}
     }
 export interface StateResponse {
   liquidity_token: string
-  [k: string]: unknown
 }

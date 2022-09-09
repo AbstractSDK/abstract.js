@@ -8,31 +8,25 @@ export type Addr = string
 export interface ApiAddressResponse {
   address: Addr
   info: ContractVersion
-  [k: string]: unknown
 }
 export interface ContractVersion {
   contract: string
   version: string
-  [k: string]: unknown
 }
 export interface ApiAddressesResponse {
   api_addresses: [ContractVersion, string][]
-  [k: string]: unknown
 }
 export type Uint64 = string
 export interface CodeIdResponse {
   code_id: Uint64
   info: ContractVersion
-  [k: string]: unknown
 }
 export interface CodeIdsResponse {
   module_code_ids: [ContractVersion, number][]
-  [k: string]: unknown
 }
 export interface ConfigResponse {
   admin: string
   factory: string
-  [k: string]: unknown
 }
 export type ExecuteMsg =
   | {
@@ -40,14 +34,12 @@ export type ExecuteMsg =
         code_id: number
         module: string
         version: string
-        [k: string]: unknown
       }
     }
   | {
       remove_code_id: {
         module: string
         version: string
-        [k: string]: unknown
       }
     }
   | {
@@ -55,14 +47,12 @@ export type ExecuteMsg =
         address: string
         module: string
         version: string
-        [k: string]: unknown
       }
     }
   | {
       remove_api: {
         module: string
         version: string
-        [k: string]: unknown
       }
     }
   | {
@@ -70,73 +60,58 @@ export type ExecuteMsg =
         manager_address: string
         os_id: number
         proxy_address: string
-        [k: string]: unknown
       }
     }
   | {
       set_admin: {
         new_admin: string
-        [k: string]: unknown
       }
     }
   | {
       set_factory: {
         new_factory: string
-        [k: string]: unknown
       }
     }
-export interface InstantiateMsg {
-  [k: string]: unknown
-}
+export interface InstantiateMsg {}
 export interface ModuleInfo {
   name: string
   version?: string | null
-  [k: string]: unknown
 }
 export interface OsCoreResponse {
   os_core: Core
-  [k: string]: unknown
 }
 export interface Core {
   manager: Addr
   proxy: Addr
-  [k: string]: unknown
 }
 export type QueryMsg =
   | {
       os_core: {
         os_id: number
-        [k: string]: unknown
       }
     }
   | {
       code_id: {
         module: ModuleInfo
-        [k: string]: unknown
       }
     }
   | {
       api_address: {
         module: ModuleInfo
-        [k: string]: unknown
       }
     }
   | {
-      config: {
-        [k: string]: unknown
-      }
+      config: {}
     }
   | {
       code_ids: {
         page_size?: number | null
         page_token?: ContractVersion | null
-        [k: string]: unknown
       }
     }
   | {
       api_addresses: {
         page_size?: number | null
         page_token?: ContractVersion | null
-        [k: string]: unknown
       }
     }

@@ -18,44 +18,36 @@ export type AssetInfoBaseForAddr =
 export type Addr = string
 export interface AssetListResponse {
   assets: [AssetEntry, AssetInfoBaseForAddr][]
-  [k: string]: unknown
 }
 export interface AssetsResponse {
   assets: [AssetEntry, AssetInfoBaseForAddr][]
-  [k: string]: unknown
 }
 export interface ContractListResponse {
   contracts: [ContractEntry, string][]
-  [k: string]: unknown
 }
 export interface ContractEntry {
   contract: string
   protocol: string
-  [k: string]: unknown
 }
 export interface ContractsResponse {
   contracts: [ContractEntry, string][]
-  [k: string]: unknown
 }
 export type ExecuteMsg =
   | {
       update_contract_addresses: {
         to_add: [UncheckedContractEntry, string][]
         to_remove: UncheckedContractEntry[]
-        [k: string]: unknown
       }
     }
   | {
       update_asset_addresses: {
         to_add: [string, AssetInfoBaseForString][]
         to_remove: string[]
-        [k: string]: unknown
       }
     }
   | {
       set_admin: {
         admin: string
-        [k: string]: unknown
       }
     }
 export type AssetInfoBaseForString =
@@ -71,35 +63,28 @@ export type AssetInfoBaseForString =
 export interface UncheckedContractEntry {
   contract: string
   protocol: string
-  [k: string]: unknown
 }
-export interface InstantiateMsg {
-  [k: string]: unknown
-}
+export interface InstantiateMsg {}
 export type QueryMsg =
   | {
       assets: {
         names: string[]
-        [k: string]: unknown
       }
     }
   | {
       contracts: {
         names: ContractEntry[]
-        [k: string]: unknown
       }
     }
   | {
       contract_list: {
         page_size?: number | null
         page_token?: ContractEntry | null
-        [k: string]: unknown
       }
     }
   | {
       asset_list: {
         page_size?: number | null
         page_token?: string | null
-        [k: string]: unknown
       }
     }

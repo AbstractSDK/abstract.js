@@ -18,4 +18,5 @@ __exportStar(require("./core"), exports);
 __exportStar(require("./native"), exports);
 __exportStar(require("./modules"), exports);
 __exportStar(require("./cw-plus"), exports);
+__exportStar(require("./QueryProvider"), exports);
 //# sourceMappingURL=index.js.map
