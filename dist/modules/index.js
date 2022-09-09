@@ -14,10 +14,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./Dex.client"), exports);
-__exportStar(require("./Dex.react-query"), exports);
-__exportStar(require("./Dex.message-composer"), exports);
-__exportStar(require("./Subscription.client"), exports);
-__exportStar(require("./Subscription.react-query"), exports);
-__exportStar(require("./Subscription.message-composer"), exports);
+__exportStar(require("./apis"), exports);
+__exportStar(require("./add-ons"), exports);
 //# sourceMappingURL=index.js.map
