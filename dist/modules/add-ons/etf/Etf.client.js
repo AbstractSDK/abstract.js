@@ -29,16 +29,6 @@ class EtfQueryClient {
             writable: true,
             value: void 0
         });
-        Object.defineProperty(this, "queryBase", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: () => __awaiter(this, void 0, void 0, function* () {
-                return this.client.queryContractSmart(this.contractAddress, {
-                    base: {},
-                });
-            })
-        });
         Object.defineProperty(this, "state", {
             enumerable: true,
             configurable: true,
@@ -49,10 +39,20 @@ class EtfQueryClient {
                 });
             })
         });
+        Object.defineProperty(this, "configValidity", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: () => __awaiter(this, void 0, void 0, function* () {
+                return this.client.queryContractSmart(this.contractAddress, {
+                    config_validity: {},
+                });
+            })
+        });
         this.client = client;
         this.contractAddress = contractAddress;
-        this.queryBase = this.queryBase.bind(this);
         this.state = this.state.bind(this);
+        this.configValidity = this.configValidity.bind(this);
     }
 }
 exports.EtfQueryClient = EtfQueryClient;
@@ -81,9 +81,9 @@ class EtfClient extends EtfQueryClient {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: (fee = 'auto', memo, funds) => __awaiter(this, void 0, void 0, function* () {
+            value: (execMsg, fee = 'auto', memo, funds) => __awaiter(this, void 0, void 0, function* () {
                 return yield this.client.execute(this.sender, this.contractAddress, {
-                    base: {},
+                    base: execMsg,
                 }, fee, memo, funds);
             })
         });
@@ -141,12 +141,12 @@ class EtfClient extends EtfQueryClient {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: ({ fee, }, txFee = 'auto', memo, funds) => __awaiter(this, void 0, void 0, function* () {
+            value: ({ newFee, }, fee = 'auto', memo, funds) => __awaiter(this, void 0, void 0, function* () {
                 return yield this.client.execute(this.sender, this.contractAddress, {
                     set_fee: {
-                        fee,
+                        newFee,
                     },
-                }, txFee, memo, funds);
+                }, fee, memo, funds);
             })
         });
         this.client = client;

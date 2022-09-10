@@ -10,7 +10,6 @@ export interface ConfigResponse {
     owner: string;
     subscription_address?: string | null;
     version_control_contract: string;
-    [k: string]: unknown;
 }
 export declare type ExecuteMsg = {
     receive: Cw20ReceiveMsg;
@@ -21,7 +20,6 @@ export declare type ExecuteMsg = {
         module_factory_address?: string | null;
         subscription_address?: string | null;
         version_control_contract?: string | null;
-        [k: string]: unknown;
     };
 } | {
     create_os: {
@@ -29,7 +27,6 @@ export declare type ExecuteMsg = {
         governance: GovernanceDetails;
         link?: string | null;
         name: string;
-        [k: string]: unknown;
     };
 };
 export declare type Uint128 = string;
@@ -37,29 +34,23 @@ export declare type Binary = string;
 export declare type GovernanceDetails = {
     monarchy: {
         monarch: string;
-        [k: string]: unknown;
     };
 } | {
     external: {
         governance_address: string;
         governance_type: string;
-        [k: string]: unknown;
     };
 };
 export interface Cw20ReceiveMsg {
     amount: Uint128;
     msg: Binary;
     sender: string;
-    [k: string]: unknown;
 }
 export interface InstantiateMsg {
     memory_address: string;
     module_factory_address: string;
     version_control_address: string;
-    [k: string]: unknown;
 }
 export declare type QueryMsg = {
-    config: {
-        [k: string]: unknown;
-    };
+    config: {};
 };

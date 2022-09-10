@@ -10,70 +10,58 @@ export interface ConfigResponse {
     os_id: Uint64;
     root: string;
     version_control_address: string;
-    [k: string]: unknown;
 }
 export declare type ExecuteMsg = {
     exec_on_module: {
         exec_msg: Binary;
-        module_name: string;
-        [k: string]: unknown;
+        module_id: string;
     };
 } | {
     create_module: {
         init_msg?: Binary | null;
         module: Module;
-        [k: string]: unknown;
     };
 } | {
     register_module: {
         module: Module;
         module_addr: string;
-        [k: string]: unknown;
     };
 } | {
     remove_module: {
         module_name: string;
-        [k: string]: unknown;
     };
 } | {
     upgrade: {
         migrate_msg?: Binary | null;
         module: Module;
-        [k: string]: unknown;
     };
 } | {
     update_info: {
         description?: string | null;
         link?: string | null;
         name?: string | null;
-        [k: string]: unknown;
     };
 } | {
     set_root: {
         governance_type?: string | null;
         root: string;
-        [k: string]: unknown;
     };
 } | {
     suspend_os: {
         new_status: boolean;
-        [k: string]: unknown;
     };
 };
 export declare type ModuleKind = 'add_on' | 'a_p_i' | 'service' | 'perk';
 export interface Module {
     info: ModuleInfo;
     kind: ModuleKind;
-    [k: string]: unknown;
 }
 export interface ModuleInfo {
     name: string;
     version?: string | null;
-    [k: string]: unknown;
 }
 export interface InfoResponse {
     info: OsInfo;
-    [k: string]: unknown;
 }
 export interface OsInfo {
     chain_id: string;
@@ -81,7 +69,6 @@ export interface OsInfo {
     governance_type: string;
     link?: string | null;
     name: string;
-    [k: string]: unknown;
 }
 export interface InstantiateMsg {
     description?: string | null;
@@ -93,60 +80,46 @@ export interface InstantiateMsg {
     root_user: string;
     subscription_address?: string | null;
     version_control_address: string;
-    [k: string]: unknown;
 }
 export interface ManagerModuleInfo {
     address: string;
     name: string;
     version: ContractVersion;
-    [k: string]: unknown;
 }
 export interface ContractVersion {
     contract: string;
     version: string;
-    [k: string]: unknown;
 }
 export interface ModuleAddressesResponse {
     modules: [string, string][];
-    [k: string]: unknown;
 }
 export interface ModuleInfosResponse {
     module_infos: ManagerModuleInfo[];
-    [k: string]: unknown;
 }
 export interface ModuleVersionsResponse {
     versions: ContractVersion[];
-    [k: string]: unknown;
 }
 export declare type QueryMsg = {
     module_versions: {
         names: string[];
-        [k: string]: unknown;
     };
 } | {
     module_addresses: {
         names: string[];
-        [k: string]: unknown;
     };
 } | {
     module_infos: {
         page_size?: number | null;
         page_token?: string | null;
-        [k: string]: unknown;
     };
 } | {
-    config: {
-        [k: string]: unknown;
-    };
+    config: {};
 } | {
-    info: {
-        [k: string]: unknown;
-    };
+    info: {};
 };
 export interface QueryOsConfigResponse {
     module_factory_address: string;
     os_id: Uint64;
     root: string;
     version_control_address: string;
-    [k: string]: unknown;
 }

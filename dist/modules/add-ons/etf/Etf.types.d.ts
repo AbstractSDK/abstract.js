@@ -7,21 +7,13 @@ export declare type Addr = string;
 export interface AddOnState {
     memory: Memory;
     proxy_address: Addr;
-    [k: string]: unknown;
 }
 export interface Memory {
     address: Addr;
-    [k: string]: unknown;
 }
-export declare type BaseResponse = {
-    config: {
-        [k: string]: unknown;
-    };
-} | {
-    admin: {
-        [k: string]: unknown;
-    };
-};
+export interface ConfigValidityResponse {
+    is_valid: boolean;
+}
 export declare type ExecuteMsg = {
     base: AddOnExecuteMsg;
 } | {
@@ -29,29 +21,23 @@ export declare type ExecuteMsg = {
 } | {
     provide_liquidity: {
         asset: AssetBaseForString;
-        [k: string]: unknown;
     };
 } | {
     update_pool: {
         assets_to_add: string[];
         assets_to_remove: string[];
         deposit_asset?: string | null;
-        [k: string]: unknown;
     };
 } | {
-    import: {
-        [k: string]: unknown;
-    };
+    import: {};
 } | {
     set_fee: {
         fee: Decimal;
-        [k: string]: unknown;
     };
 };
 export declare type AddOnExecuteMsg = {
     update_config: {
         memory_address?: string | null;
-        [k: string]: unknown;
     };
 };
 export declare type Uint128 = string;
@@ -68,12 +54,10 @@ export interface Cw20ReceiveMsg {
     amount: Uint128;
     msg: Binary;
     sender: string;
-    [k: string]: unknown;
 }
 export interface AssetBaseForString {
     amount: Uint128;
     info: AssetInfoBaseForString;
-    [k: string]: unknown;
 }
 export interface InstantiateMsg {
     base: AddOnInstantiateMsg;
@@ -83,29 +67,25 @@ export interface InstantiateMsg {
     token_code_id: number;
     token_name?: string | null;
     token_symbol?: string | null;
-    [k: string]: unknown;
 }
 export interface AddOnInstantiateMsg {
     memory_address: string;
-    [k: string]: unknown;
 }
 export declare type QueryMsg = {
     base: AddOnQueryMsg;
 } | {
-    state: {
-        [k: string]: unknown;
-    };
+    state: {};
+} | {
+    config_validity: {};
 };
 export declare type AddOnQueryMsg = {
-    config: {
-        [k: string]: unknown;
-    };
+    config: {};
 } | {
-    admin: {
-        [k: string]: unknown;
-    };
+    admin: {};
 };
+export declare type AssetEntry = string;
 export interface StateResponse {
+    deposit_asset: AssetEntry;
+    etf_assets: AssetEntry[];
     liquidity_token: string;
-    [k: string]: unknown;
 }

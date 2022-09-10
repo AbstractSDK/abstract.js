@@ -11,7 +11,7 @@ import {
   Addr,
   AddOnState,
   Memory,
-  BaseResponse,
+  ConfigValidityResponse,
   ExecuteMsg,
   AddOnExecuteMsg,
   Uint128,
@@ -24,6 +24,7 @@ import {
   AddOnInstantiateMsg,
   QueryMsg,
   AddOnQueryMsg,
+  AssetEntry,
   StateResponse,
 } from './Etf.types'
 import { EtfQueryClient, EtfClient } from './Etf.client'
@@ -39,6 +40,8 @@ export const etfQueryKeys = {
     [{ ...etfQueryKeys.address(contractAddress)[0], method: 'base', args }] as const,
   state: (contractAddress: string | undefined, args?: Record<string, unknown>) =>
     [{ ...etfQueryKeys.address(contractAddress)[0], method: 'state', args }] as const,
+  configValidity: (contractAddress: string | undefined, args?: Record<string, unknown>) =>
+    [{ ...etfQueryKeys.address(contractAddress)[0], method: 'config_validity', args }] as const,
 }
 export interface EtfReactQuery<TResponse, TData = TResponse> {
   client: EtfQueryClient | undefined
@@ -49,6 +52,18 @@ export interface EtfReactQuery<TResponse, TData = TResponse> {
     initialData?: undefined
   }
 }
+export interface EtfConfigValidityQuery<TData>
+  extends EtfReactQuery<ConfigValidityResponse, TData> {}
+export function useEtfConfigValidityQuery<TData = ConfigValidityResponse>({
+  client,
+  options,
+}: EtfConfigValidityQuery<TData>) {
+  return useQuery<ConfigValidityResponse, Error, TData>(
+    etfQueryKeys.configValidity(client?.contractAddress),
+    () => (client ? client.configValidity() : Promise.reject(new Error('Invalid client'))),
+    { ...options, enabled: !!client && (options?.enabled != undefined ? options.enabled : true) }
+  )
+}
 export interface EtfStateQuery<TData> extends EtfReactQuery<StateResponse, TData> {}
 export function useEtfStateQuery<TData = StateResponse>({ client, options }: EtfStateQuery<TData>) {
   return useQuery<StateResponse, Error, TData>(
@@ -57,18 +72,10 @@ export function useEtfStateQuery<TData = StateResponse>({ client, options }: Etf
     { ...options, enabled: !!client && (options?.enabled != undefined ? options.enabled : true) }
   )
 }
-export interface EtfBaseQuery<TData> extends EtfReactQuery<BaseResponse, TData> {}
-export function useEtfBaseQuery<TData = BaseResponse>({ client, options }: EtfBaseQuery<TData>) {
-  return useQuery<BaseResponse, Error, TData>(
-    etfQueryKeys.base(client?.contractAddress),
-    () => (client ? client.queryBase() : Promise.reject(new Error('Invalid client'))),
-    { ...options, enabled: !!client && (options?.enabled != undefined ? options.enabled : true) }
-  )
-}
 export interface EtfSetFeeMutation {
   client: EtfClient
   msg: {
-    fee: Decimal
+    newFee: Decimal
   }
   args?: {
     fee?: number | StdFee | 'auto'
@@ -158,6 +165,23 @@ export function useEtfReceiveMutation(
 ) {
   return useMutation<ExecuteResult, Error, EtfReceiveMutation>(
     ({ client, msg, args: { fee, memo, funds } = {} }) => client.receive(msg, fee, memo, funds),
+    options
+  )
+}
+export interface EtfBaseMutation {
+  client: EtfClient
+  msg: AddOnExecuteMsg
+  args?: {
+    fee?: number | StdFee | 'auto'
+    memo?: string
+    funds?: Coin[]
+  }
+}
+export function useEtfBaseMutation(
+  options?: Omit<UseMutationOptions<ExecuteResult, Error, EtfBaseMutation>, 'mutationFn'>
+) {
+  return useMutation<ExecuteResult, Error, EtfBaseMutation>(
+    ({ client, msg, args: { fee, memo, funds } = {} }) => client.base(msg, fee, memo, funds),
     options
   )
 }

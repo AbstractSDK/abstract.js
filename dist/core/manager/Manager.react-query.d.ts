@@ -172,7 +172,7 @@ export interface ManagerExecOnModuleMutation {
     client: ManagerClient;
     msg: {
         execMsg: Binary;
-        moduleName: string;
+        moduleId: string;
     };
     args?: {
         fee?: number | StdFee | 'auto';

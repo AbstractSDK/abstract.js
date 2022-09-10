@@ -33,10 +33,10 @@ export interface ManagerMessage {
   execOnModule: (
     {
       execMsg,
-      moduleName,
+      moduleId,
     }: {
       execMsg: Binary
-      moduleName: string
+      moduleId: string
     },
     funds?: Coin[]
   ) => MsgExecuteContractEncodeObject
@@ -129,10 +129,10 @@ export class ManagerMessageComposer implements ManagerMessage {
   execOnModule = (
     {
       execMsg,
-      moduleName,
+      moduleId,
     }: {
       execMsg: Binary
-      moduleName: string
+      moduleId: string
     },
     funds?: Coin[]
   ): MsgExecuteContractEncodeObject => {
@@ -145,7 +145,7 @@ export class ManagerMessageComposer implements ManagerMessage {
           JSON.stringify({
             exec_on_module: {
               exec_msg: execMsg,
-              module_name: moduleName,
+              module_id: moduleId,
             },
           })
         ),

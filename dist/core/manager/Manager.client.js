@@ -121,11 +121,11 @@ class ManagerClient extends ManagerQueryClient {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: ({ execMsg, moduleName, }, fee = 'auto', memo, funds) => __awaiter(this, void 0, void 0, function* () {
+            value: ({ execMsg, moduleId, }, fee = 'auto', memo, funds) => __awaiter(this, void 0, void 0, function* () {
                 return yield this.client.execute(this.sender, this.contractAddress, {
                     exec_on_module: {
                         exec_msg: execMsg,
-                        module_name: moduleName,
+                        module_id: moduleId,
                     },
                 }, fee, memo, funds);
             })

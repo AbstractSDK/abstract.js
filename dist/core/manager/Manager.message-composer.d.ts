@@ -9,9 +9,9 @@ import { Binary, Module } from './Manager.types';
 export interface ManagerMessage {
     contractAddress: string;
     sender: string;
-    execOnModule: ({ execMsg, moduleName, }: {
+    execOnModule: ({ execMsg, moduleId, }: {
         execMsg: Binary;
-        moduleName: string;
+        moduleId: string;
     }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
     createModule: ({ initMsg, module, }: {
         initMsg?: Binary;
@@ -45,9 +45,9 @@ export declare class ManagerMessageComposer implements ManagerMessage {
     sender: string;
     contractAddress: string;
     constructor(sender: string, contractAddress: string);
-    execOnModule: ({ execMsg, moduleName, }: {
+    execOnModule: ({ execMsg, moduleId, }: {
         execMsg: Binary;
-        moduleName: string;
+        moduleId: string;
     }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
     createModule: ({ initMsg, module, }: {
         initMsg?: string | undefined;

@@ -6,7 +6,7 @@
 import { UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 import { ExecuteResult } from '@cosmjs/cosmwasm-stargate';
 import { StdFee, Coin } from '@cosmjs/amino';
-import { BaseResponse, Decimal, Cw20ReceiveMsg, AssetBaseForString, StateResponse } from './Etf.types';
+import { ConfigValidityResponse, AddOnExecuteMsg, Decimal, Cw20ReceiveMsg, AssetBaseForString, StateResponse } from './Etf.types';
 import { EtfQueryClient, EtfClient } from './Etf.client';
 export declare const etfQueryKeys: {
     contract: readonly [{
@@ -28,6 +28,12 @@ export declare const etfQueryKeys: {
         readonly address: string | undefined;
         readonly contract: "etf";
     }];
+    configValidity: (contractAddress: string | undefined, args?: Record<string, unknown>) => readonly [{
+        readonly method: "config_validity";
+        readonly args: Record<string, unknown> | undefined;
+        readonly address: string | undefined;
+        readonly contract: "etf";
+    }];
 };
 export interface EtfReactQuery<TResponse, TData = TResponse> {
     client: EtfQueryClient | undefined;
@@ -35,16 +41,16 @@ export interface EtfReactQuery<TResponse, TData = TResponse> {
         initialData?: undefined;
     };
 }
+export interface EtfConfigValidityQuery<TData> extends EtfReactQuery<ConfigValidityResponse, TData> {
+}
+export declare function useEtfConfigValidityQuery<TData = ConfigValidityResponse>({ client, options, }: EtfConfigValidityQuery<TData>): import("@tanstack/react-query").UseQueryResult<TData, Error>;
 export interface EtfStateQuery<TData> extends EtfReactQuery<StateResponse, TData> {
 }
 export declare function useEtfStateQuery<TData = StateResponse>({ client, options }: EtfStateQuery<TData>): import("@tanstack/react-query").UseQueryResult<TData, Error>;
-export interface EtfBaseQuery<TData> extends EtfReactQuery<BaseResponse, TData> {
-}
-export declare function useEtfBaseQuery<TData = BaseResponse>({ client, options }: EtfBaseQuery<TData>): import("@tanstack/react-query").UseQueryResult<TData, Error>;
 export interface EtfSetFeeMutation {
     client: EtfClient;
     msg: {
-        fee: Decimal;
+        newFee: Decimal;
     };
     args?: {
         fee?: number | StdFee | 'auto';
@@ -98,3 +104,13 @@ export interface EtfReceiveMutation {
     };
 }
 export declare function useEtfReceiveMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, EtfReceiveMutation>, 'mutationFn'>): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, EtfReceiveMutation, unknown>;
+export interface EtfBaseMutation {
+    client: EtfClient;
+    msg: AddOnExecuteMsg;
+    args?: {
+        fee?: number | StdFee | 'auto';
+        memo?: string;
+        funds?: Coin[];
+    };
+}
+export declare function useEtfBaseMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, EtfBaseMutation>, 'mutationFn'>): import("@tanstack/react-query").UseMutationResult<ExecuteResult, Error, EtfBaseMutation, unknown>;

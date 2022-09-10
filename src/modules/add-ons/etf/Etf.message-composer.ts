@@ -12,7 +12,7 @@ import {
   Addr,
   AddOnState,
   Memory,
-  BaseResponse,
+  ConfigValidityResponse,
   ExecuteMsg,
   AddOnExecuteMsg,
   Uint128,
@@ -25,6 +25,7 @@ import {
   AddOnInstantiateMsg,
   QueryMsg,
   AddOnQueryMsg,
+  AssetEntry,
   StateResponse,
 } from './Etf.types'
 export interface EtfMessage {

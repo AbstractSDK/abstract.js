@@ -10,7 +10,7 @@ import {
   Addr,
   AddOnState,
   Memory,
-  BaseResponse,
+  ConfigValidityResponse,
   ExecuteMsg,
   AddOnExecuteMsg,
   Uint128,
@@ -23,12 +23,13 @@ import {
   AddOnInstantiateMsg,
   QueryMsg,
   AddOnQueryMsg,
+  AssetEntry,
   StateResponse,
 } from './Etf.types'
 export interface EtfReadOnlyInterface {
   contractAddress: string
-  queryBase: () => Promise<BaseResponse>
   state: () => Promise<StateResponse>
+  configValidity: () => Promise<ConfigValidityResponse>
 }
 export class EtfQueryClient implements EtfReadOnlyInterface {
   client: CosmWasmClient
@@ -37,25 +38,29 @@ export class EtfQueryClient implements EtfReadOnlyInterface {
   constructor(client: CosmWasmClient, contractAddress: string) {
     this.client = client
     this.contractAddress = contractAddress
-    this.queryBase = this.queryBase.bind(this)
     this.state = this.state.bind(this)
-  }
-
-  queryBase = async (): Promise<BaseResponse> => {
-    return this.client.queryContractSmart(this.contractAddress, {
-      base: {},
-    })
+    this.configValidity = this.configValidity.bind(this)
   }
   state = async (): Promise<StateResponse> => {
     return this.client.queryContractSmart(this.contractAddress, {
       state: {},
     })
   }
+  configValidity = async (): Promise<ConfigValidityResponse> => {
+    return this.client.queryContractSmart(this.contractAddress, {
+      config_validity: {},
+    })
+  }
 }
 export interface EtfInterface extends EtfReadOnlyInterface {
   contractAddress: string
   sender: string
-  base: (fee?: number | StdFee | 'auto', memo?: string, funds?: Coin[]) => Promise<ExecuteResult>
+  base: (
+    msg: AddOnExecuteMsg,
+    fee?: number | StdFee | 'auto',
+    memo?: string,
+    funds?: Coin[]
+  ) => Promise<ExecuteResult>
   receive: (
     {
       amount,
@@ -97,11 +102,11 @@ export interface EtfInterface extends EtfReadOnlyInterface {
   import: (fee?: number | StdFee | 'auto', memo?: string, funds?: Coin[]) => Promise<ExecuteResult>
   setFee: (
     {
-      fee,
+      newFee,
     }: {
-      fee: Decimal
+      newFee: Decimal
     },
-    txfee?: number | StdFee | 'auto',
+    fee?: number | StdFee | 'auto',
     memo?: string,
     funds?: Coin[]
   ) => Promise<ExecuteResult>
@@ -125,6 +130,7 @@ export class EtfClient extends EtfQueryClient implements EtfInterface {
   }
 
   base = async (
+    execMsg: AddOnExecuteMsg,
     fee: number | StdFee | 'auto' = 'auto',
     memo?: string,
     funds?: Coin[]
@@ -133,7 +139,7 @@ export class EtfClient extends EtfQueryClient implements EtfInterface {
       this.sender,
       this.contractAddress,
       {
-        base: {},
+        base: execMsg,
       },
       fee,
       memo,
@@ -239,11 +245,11 @@ export class EtfClient extends EtfQueryClient implements EtfInterface {
   }
   setFee = async (
     {
-      fee,
+      newFee,
     }: {
-      fee: Decimal
+      newFee: Decimal
     },
-    txFee: number | StdFee | 'auto' = 'auto',
+    fee: number | StdFee | 'auto' = 'auto',
     memo?: string,
     funds?: Coin[]
   ): Promise<ExecuteResult> => {
@@ -252,10 +258,10 @@ export class EtfClient extends EtfQueryClient implements EtfInterface {
       this.contractAddress,
       {
         set_fee: {
-          fee,
+          newFee,
         },
       },
-      txFee,
+      fee,
       memo,
       funds
     )

@@ -5,23 +5,23 @@
  */
 import { CosmWasmClient, SigningCosmWasmClient, ExecuteResult } from '@cosmjs/cosmwasm-stargate';
 import { Coin, StdFee } from '@cosmjs/amino';
-import { BaseResponse, Uint128, Binary, Decimal, AssetBaseForString, StateResponse } from './Etf.types';
+import { ConfigValidityResponse, AddOnExecuteMsg, Uint128, Binary, Decimal, AssetBaseForString, StateResponse } from './Etf.types';
 export interface EtfReadOnlyInterface {
     contractAddress: string;
-    queryBase: () => Promise<BaseResponse>;
     state: () => Promise<StateResponse>;
+    configValidity: () => Promise<ConfigValidityResponse>;
 }
 export declare class EtfQueryClient implements EtfReadOnlyInterface {
     client: CosmWasmClient;
     contractAddress: string;
     constructor(client: CosmWasmClient, contractAddress: string);
-    queryBase: () => Promise<BaseResponse>;
     state: () => Promise<StateResponse>;
+    configValidity: () => Promise<ConfigValidityResponse>;
 }
 export interface EtfInterface extends EtfReadOnlyInterface {
     contractAddress: string;
     sender: string;
-    base: (fee?: number | StdFee | 'auto', memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
+    base: (msg: AddOnExecuteMsg, fee?: number | StdFee | 'auto', memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
     receive: ({ amount, msg, sender, }: {
         amount: Uint128;
         msg: Binary;
@@ -36,16 +36,16 @@ export interface EtfInterface extends EtfReadOnlyInterface {
         depositAsset?: string;
     }, fee?: number | StdFee | 'auto', memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
     import: (fee?: number | StdFee | 'auto', memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
-    setFee: ({ fee, }: {
-        fee: Decimal;
-    }, txfee?: number | StdFee | 'auto', memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
+    setFee: ({ newFee, }: {
+        newFee: Decimal;
+    }, fee?: number | StdFee | 'auto', memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
 }
 export declare class EtfClient extends EtfQueryClient implements EtfInterface {
     client: SigningCosmWasmClient;
     sender: string;
     contractAddress: string;
     constructor(client: SigningCosmWasmClient, sender: string, contractAddress: string);
-    base: (fee?: number | StdFee | 'auto', memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
+    base: (execMsg: AddOnExecuteMsg, fee?: number | StdFee | 'auto', memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
     receive: ({ amount, msg, sender, }: {
         amount: Uint128;
         msg: Binary;
@@ -60,7 +60,7 @@ export declare class EtfClient extends EtfQueryClient implements EtfInterface {
         depositAsset?: string | undefined;
     }, fee?: number | StdFee | 'auto', memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
     import: (fee?: number | StdFee | 'auto', memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
-    setFee: ({ fee, }: {
-        fee: Decimal;
-    }, txFee?: number | StdFee | 'auto', memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
+    setFee: ({ newFee, }: {
+        newFee: Decimal;
+    }, fee?: number | StdFee | 'auto', memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
 }

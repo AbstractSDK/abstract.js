@@ -16,7 +16,7 @@ export type ExecuteMsg =
   | {
       exec_on_module: {
         exec_msg: Binary
-        module_name: string
+        module_id: string
       }
     }
   | {

@@ -12,13 +12,9 @@ export interface AddOnState {
 export interface Memory {
   address: Addr
 }
-export type BaseResponse =
-  | {
-      config: {}
-    }
-  | {
-      admin: {}
-    }
+export interface ConfigValidityResponse {
+  is_valid: boolean
+}
 export type ExecuteMsg =
   | {
       base: AddOnExecuteMsg
@@ -92,6 +88,9 @@ export type QueryMsg =
   | {
       state: {}
     }
+  | {
+      config_validity: {}
+    }
 export type AddOnQueryMsg =
   | {
       config: {}
@@ -99,6 +98,9 @@ export type AddOnQueryMsg =
   | {
       admin: {}
     }
+export type AssetEntry = string
 export interface StateResponse {
+  deposit_asset: AssetEntry
+  etf_assets: AssetEntry[]
   liquidity_token: string
 }

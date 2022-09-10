@@ -98,10 +98,10 @@ export interface ManagerInterface extends ManagerReadOnlyInterface {
   execOnModule: (
     {
       execMsg,
-      moduleName,
+      moduleId,
     }: {
       execMsg: Binary
-      moduleName: string
+      moduleId: string
     },
     fee?: number | StdFee | 'auto',
     memo?: string,
@@ -213,10 +213,10 @@ export class ManagerClient extends ManagerQueryClient implements ManagerInterfac
   execOnModule = async (
     {
       execMsg,
-      moduleName,
+      moduleId,
     }: {
       execMsg: Binary
-      moduleName: string
+      moduleId: string
     },
     fee: number | StdFee | 'auto' = 'auto',
     memo?: string,
@@ -228,7 +228,7 @@ export class ManagerClient extends ManagerQueryClient implements ManagerInterfac
       {
         exec_on_module: {
           exec_msg: execMsg,
-          module_name: moduleName,
+          module_id: moduleId,
         },
       },
       fee,

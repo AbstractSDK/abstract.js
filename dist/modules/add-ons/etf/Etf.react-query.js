@@ -5,7 +5,7 @@
  * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.useEtfReceiveMutation = exports.useEtfProvideLiquidityMutation = exports.useEtfUpdatePoolMutation = exports.useEtfImportMutation = exports.useEtfSetFeeMutation = exports.useEtfBaseQuery = exports.useEtfStateQuery = exports.etfQueryKeys = void 0;
+exports.useEtfBaseMutation = exports.useEtfReceiveMutation = exports.useEtfProvideLiquidityMutation = exports.useEtfUpdatePoolMutation = exports.useEtfImportMutation = exports.useEtfSetFeeMutation = exports.useEtfStateQuery = exports.useEtfConfigValidityQuery = exports.etfQueryKeys = void 0;
 const react_query_1 = require("@tanstack/react-query");
 exports.etfQueryKeys = {
     contract: [
@@ -16,15 +16,16 @@ exports.etfQueryKeys = {
     address: (contractAddress) => [Object.assign(Object.assign({}, exports.etfQueryKeys.contract[0]), { address: contractAddress })],
     base: (contractAddress, args) => [Object.assign(Object.assign({}, exports.etfQueryKeys.address(contractAddress)[0]), { method: 'base', args })],
     state: (contractAddress, args) => [Object.assign(Object.assign({}, exports.etfQueryKeys.address(contractAddress)[0]), { method: 'state', args })],
+    configValidity: (contractAddress, args) => [Object.assign(Object.assign({}, exports.etfQueryKeys.address(contractAddress)[0]), { method: 'config_validity', args })],
 };
+function useEtfConfigValidityQuery({ client, options, }) {
+    return (0, react_query_1.useQuery)(exports.etfQueryKeys.configValidity(client === null || client === void 0 ? void 0 : client.contractAddress), () => (client ? client.configValidity() : Promise.reject(new Error('Invalid client'))), Object.assign(Object.assign({}, options), { enabled: !!client && ((options === null || options === void 0 ? void 0 : options.enabled) != undefined ? options.enabled : true) }));
+}
+exports.useEtfConfigValidityQuery = useEtfConfigValidityQuery;
 function useEtfStateQuery({ client, options }) {
     return (0, react_query_1.useQuery)(exports.etfQueryKeys.state(client === null || client === void 0 ? void 0 : client.contractAddress), () => (client ? client.state() : Promise.reject(new Error('Invalid client'))), Object.assign(Object.assign({}, options), { enabled: !!client && ((options === null || options === void 0 ? void 0 : options.enabled) != undefined ? options.enabled : true) }));
 }
 exports.useEtfStateQuery = useEtfStateQuery;
-function useEtfBaseQuery({ client, options }) {
-    return (0, react_query_1.useQuery)(exports.etfQueryKeys.base(client === null || client === void 0 ? void 0 : client.contractAddress), () => (client ? client.queryBase() : Promise.reject(new Error('Invalid client'))), Object.assign(Object.assign({}, options), { enabled: !!client && ((options === null || options === void 0 ? void 0 : options.enabled) != undefined ? options.enabled : true) }));
-}
-exports.useEtfBaseQuery = useEtfBaseQuery;
 function useEtfSetFeeMutation(options) {
     return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } = {} }) => client.setFee(msg, fee, memo, funds), options);
 }
@@ -45,4 +46,8 @@ function useEtfReceiveMutation(options) {
     return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } = {} }) => client.receive(msg, fee, memo, funds), options);
 }
 exports.useEtfReceiveMutation = useEtfReceiveMutation;
+function useEtfBaseMutation(options) {
+    return (0, react_query_1.useMutation)(({ client, msg, args: { fee, memo, funds } = {} }) => client.base(msg, fee, memo, funds), options);
+}
+exports.useEtfBaseMutation = useEtfBaseMutation;
 //# sourceMappingURL=Etf.react-query.js.map

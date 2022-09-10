@@ -26,7 +26,7 @@ class ManagerMessageComposer {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: ({ execMsg, moduleName, }, funds) => {
+            value: ({ execMsg, moduleId, }, funds) => {
                 return {
                     typeUrl: '/cosmwasm.wasm.v1.MsgExecuteContract',
                     value: tx_1.MsgExecuteContract.fromPartial({
@@ -35,7 +35,7 @@ class ManagerMessageComposer {
                         msg: (0, encoding_1.toUtf8)(JSON.stringify({
                             exec_on_module: {
                                 exec_msg: execMsg,
-                                module_name: moduleName,
+                                module_id: moduleId,
                             },
                         })),
                         funds,

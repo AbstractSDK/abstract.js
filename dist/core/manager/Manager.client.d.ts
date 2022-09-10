@@ -41,9 +41,9 @@ export declare class ManagerQueryClient implements ManagerReadOnlyInterface {
 export interface ManagerInterface extends ManagerReadOnlyInterface {
     contractAddress: string;
     sender: string;
-    execOnModule: ({ execMsg, moduleName, }: {
+    execOnModule: ({ execMsg, moduleId, }: {
         execMsg: Binary;
-        moduleName: string;
+        moduleId: string;
     }, fee?: number | StdFee | 'auto', memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
     createModule: ({ initMsg, module, }: {
         initMsg?: Binary;
@@ -78,9 +78,9 @@ export declare class ManagerClient extends ManagerQueryClient implements Manager
     sender: string;
     contractAddress: string;
     constructor(client: SigningCosmWasmClient, sender: string, contractAddress: string);
-    execOnModule: ({ execMsg, moduleName, }: {
+    execOnModule: ({ execMsg, moduleId, }: {
         execMsg: Binary;
-        moduleName: string;
+        moduleId: string;
     }, fee?: number | StdFee | 'auto', memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
     createModule: ({ initMsg, module, }: {
         initMsg?: string | undefined;
