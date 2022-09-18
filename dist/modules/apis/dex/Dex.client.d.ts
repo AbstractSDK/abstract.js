@@ -5,16 +5,16 @@
  */
 import { CosmWasmClient, SigningCosmWasmClient, ExecuteResult } from '@cosmjs/cosmwasm-stargate';
 import { Coin, StdFee } from '@cosmjs/amino';
-import { ApiResponse, BaseExecuteMsg, Empty } from './Dex.types';
+import { ApiResponse, BaseExecuteMsg, Empty, QueryMsg1 } from './Dex.types';
 export interface DexReadOnlyInterface {
     contractAddress: string;
-    api: () => Promise<ApiResponse>;
+    api: (query: QueryMsg1) => Promise<ApiResponse>;
 }
 export declare class DexQueryClient implements DexReadOnlyInterface {
     client: CosmWasmClient;
     contractAddress: string;
     constructor(client: CosmWasmClient, contractAddress: string);
-    api: () => Promise<ApiResponse>;
+    api: (query: QueryMsg1) => Promise<ApiResponse>;
 }
 export interface DexInterface extends DexReadOnlyInterface {
     contractAddress: string;

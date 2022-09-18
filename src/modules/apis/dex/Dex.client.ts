@@ -28,7 +28,7 @@ import {
 } from './Dex.types'
 export interface DexReadOnlyInterface {
   contractAddress: string
-  api: () => Promise<ApiResponse>
+  api: (query: QueryMsg1) => Promise<ApiResponse>
 }
 export class DexQueryClient implements DexReadOnlyInterface {
   client: CosmWasmClient
@@ -40,9 +40,9 @@ export class DexQueryClient implements DexReadOnlyInterface {
     this.api = this.api.bind(this)
   }
 
-  api = async (): Promise<ApiResponse> => {
+  api = async (query: QueryMsg1): Promise<ApiResponse> => {
     return this.client.queryContractSmart(this.contractAddress, {
-      api: {},
+      api: query,
     })
   }
 }

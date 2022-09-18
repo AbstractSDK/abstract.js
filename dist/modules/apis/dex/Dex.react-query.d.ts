@@ -6,7 +6,7 @@
 import { UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 import { ExecuteResult } from '@cosmjs/cosmwasm-stargate';
 import { StdFee, Coin } from '@cosmjs/amino';
-import { ApiResponse, BaseExecuteMsg, ApiRequestMsgForEmpty } from './Dex.types';
+import { ApiResponse, BaseExecuteMsg, ApiRequestMsgForEmpty, QueryMsg1 } from './Dex.types';
 import { DexQueryClient, DexClient } from './Dex.client';
 export declare const dexQueryKeys: {
     contract: readonly [{
@@ -36,8 +36,9 @@ export interface DexReactQuery<TResponse, TData = TResponse> {
     };
 }
 export interface DexApiQuery<TData> extends DexReactQuery<ApiResponse, TData> {
+    args: QueryMsg1;
 }
-export declare function useDexApiQuery<TData = ApiResponse>({ client, options }: DexApiQuery<TData>): import("@tanstack/react-query").UseQueryResult<TData, Error>;
+export declare function useDexApiQuery<TData = ApiResponse>({ client, options, args }: DexApiQuery<TData>): import("@tanstack/react-query").UseQueryResult<TData, Error>;
 export interface DexConfigureMutation {
     client: DexClient;
     msg: BaseExecuteMsg;

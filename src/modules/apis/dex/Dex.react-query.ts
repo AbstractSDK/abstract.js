@@ -50,11 +50,13 @@ export interface DexReactQuery<TResponse, TData = TResponse> {
     initialData?: undefined
   }
 }
-export interface DexApiQuery<TData> extends DexReactQuery<ApiResponse, TData> {}
-export function useDexApiQuery<TData = ApiResponse>({ client, options }: DexApiQuery<TData>) {
+export interface DexApiQuery<TData> extends DexReactQuery<ApiResponse, TData> {
+  args: QueryMsg1
+}
+export function useDexApiQuery<TData = ApiResponse>({ client, options, args }: DexApiQuery<TData>) {
   return useQuery<ApiResponse, Error, TData>(
-    dexQueryKeys.api(client?.contractAddress),
-    () => (client ? client.api() : Promise.reject(new Error('Invalid client'))),
+    dexQueryKeys.api(client?.contractAddress, args),
+    () => (client ? client.api(args) : Promise.reject(new Error('Invalid client'))),
     { ...options, enabled: !!client && (options?.enabled != undefined ? options.enabled : true) }
   )
 }

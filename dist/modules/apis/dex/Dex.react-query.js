@@ -17,8 +17,8 @@ exports.dexQueryKeys = {
     api: (contractAddress, args) => [Object.assign(Object.assign({}, exports.dexQueryKeys.address(contractAddress)[0]), { method: 'api', args })],
     base: (contractAddress, args) => [Object.assign(Object.assign({}, exports.dexQueryKeys.address(contractAddress)[0]), { method: 'base', args })],
 };
-function useDexApiQuery({ client, options }) {
-    return (0, react_query_1.useQuery)(exports.dexQueryKeys.api(client === null || client === void 0 ? void 0 : client.contractAddress), () => (client ? client.api() : Promise.reject(new Error('Invalid client'))), Object.assign(Object.assign({}, options), { enabled: !!client && ((options === null || options === void 0 ? void 0 : options.enabled) != undefined ? options.enabled : true) }));
+function useDexApiQuery({ client, options, args }) {
+    return (0, react_query_1.useQuery)(exports.dexQueryKeys.api(client === null || client === void 0 ? void 0 : client.contractAddress, args), () => (client ? client.api(args) : Promise.reject(new Error('Invalid client'))), Object.assign(Object.assign({}, options), { enabled: !!client && ((options === null || options === void 0 ? void 0 : options.enabled) != undefined ? options.enabled : true) }));
 }
 exports.useDexApiQuery = useDexApiQuery;
 function useDexConfigureMutation(options) {

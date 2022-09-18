@@ -33,9 +33,9 @@ class DexQueryClient {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: () => __awaiter(this, void 0, void 0, function* () {
+            value: (query) => __awaiter(this, void 0, void 0, function* () {
                 return this.client.queryContractSmart(this.contractAddress, {
-                    api: {},
+                    api: query,
                 });
             })
         });
