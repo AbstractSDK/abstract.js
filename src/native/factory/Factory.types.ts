@@ -36,21 +36,18 @@ export type GovernanceDetails =
   | {
       Monarchy: {
         monarch: string
-
       }
     }
   | {
       External: {
         governance_address: string
         governance_type: string
-
       }
     }
 export interface Cw20ReceiveMsg {
   amount: Uint128
   msg: Binary
   sender: string
-
 }
 export type QueryMsg = {
   config: {}
