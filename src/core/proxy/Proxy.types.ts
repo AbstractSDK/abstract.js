@@ -56,13 +56,11 @@ export type BankMsg =
       send: {
         amount: Coin[]
         to_address: string
-        [k: string]: unknown
       }
     }
   | {
       burn: {
         amount: Coin[]
-        [k: string]: unknown
       }
     }
 export type Uint128 = string
@@ -71,14 +69,12 @@ export type StakingMsg =
       delegate: {
         amount: Coin
         validator: string
-        [k: string]: unknown
       }
     }
   | {
       undelegate: {
         amount: Coin
         validator: string
-        [k: string]: unknown
       }
     }
   | {
@@ -86,20 +82,17 @@ export type StakingMsg =
         amount: Coin
         dst_validator: string
         src_validator: string
-        [k: string]: unknown
       }
     }
 export type DistributionMsg =
   | {
       set_withdraw_address: {
         address: string
-        [k: string]: unknown
       }
     }
   | {
       withdraw_delegator_reward: {
         validator: string
-        [k: string]: unknown
       }
     }
 export type WasmMsg =
@@ -108,7 +101,6 @@ export type WasmMsg =
         contract_addr: string
         funds: Coin[]
         msg: Binary
-        [k: string]: unknown
       }
     }
   | {
@@ -118,7 +110,6 @@ export type WasmMsg =
         funds: Coin[]
         label: string
         msg: Binary
-        [k: string]: unknown
       }
     }
   | {
@@ -126,20 +117,17 @@ export type WasmMsg =
         contract_addr: string
         msg: Binary
         new_code_id: number
-        [k: string]: unknown
       }
     }
   | {
       update_admin: {
         admin: string
         contract_addr: string
-        [k: string]: unknown
       }
     }
   | {
       clear_admin: {
         contract_addr: string
-        [k: string]: unknown
       }
     }
 export type Binary = string
@@ -148,40 +136,31 @@ export type UncheckedValueRef =
       Pool: {
         exchange: string
         pair: string
-        [k: string]: unknown
       }
     }
   | {
-      LiquidityToken: {
-        [k: string]: unknown
-      }
+      LiquidityToken: {}
     }
   | {
       ValueAs: {
         asset: string
         multiplier: Decimal
-        [k: string]: unknown
       }
     }
   | {
       External: {
         api_name: string
-        [k: string]: unknown
       }
     }
 export type Decimal = string
 export interface Coin {
   amount: Uint128
   denom: string
-  [k: string]: unknown
 }
-export interface Empty {
-  [k: string]: unknown
-}
+export interface Empty {}
 export interface UncheckedProxyAsset {
   asset: string
   value_reference?: UncheckedValueRef | null
-  [k: string]: unknown
 }
 export type QueryMsg =
   | {
@@ -223,25 +202,20 @@ export type ValueRef =
   | {
       Pool: {
         pair: ContractEntry
-        [k: string]: unknown
       }
     }
   | {
-      LiquidityToken: {
-        [k: string]: unknown
-      }
+      LiquidityToken: {}
     }
   | {
       ValueAs: {
         asset: AssetEntry
         multiplier: Decimal
-        [k: string]: unknown
       }
     }
   | {
       External: {
         api_name: string
-        [k: string]: unknown
       }
     }
 export interface AssetConfigResponse {
@@ -250,12 +224,10 @@ export interface AssetConfigResponse {
 export interface ProxyAsset {
   asset: AssetEntry
   value_reference?: ValueRef | null
-  [k: string]: unknown
 }
 export interface ContractEntry {
   contract: string
   protocol: string
-  [k: string]: unknown
 }
 export interface AssetsResponse {
   assets: [AssetEntry, ProxyAsset][]
