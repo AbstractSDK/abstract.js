@@ -44,12 +44,10 @@ export declare type BankMsg = {
     send: {
         amount: Coin[];
         to_address: string;
-        ;
     };
 } | {
     burn: {
         amount: Coin[];
-        ;
     };
 };
 export declare type Uint128 = string;
@@ -57,31 +55,26 @@ export declare type StakingMsg = {
     delegate: {
         amount: Coin;
         validator: string;
-        ;
     };
 } | {
     undelegate: {
         amount: Coin;
         validator: string;
-        ;
     };
 } | {
     redelegate: {
         amount: Coin;
         dst_validator: string;
         src_validator: string;
-        ;
     };
 };
 export declare type DistributionMsg = {
     set_withdraw_address: {
         address: string;
-        ;
     };
 } | {
     withdraw_delegator_reward: {
         validator: string;
-        ;
     };
 };
 export declare type WasmMsg = {
@@ -89,7 +82,6 @@ export declare type WasmMsg = {
         contract_addr: string;
         funds: Coin[];
         msg: Binary;
-        ;
     };
 } | {
     instantiate: {
@@ -98,25 +90,21 @@ export declare type WasmMsg = {
         funds: Coin[];
         label: string;
         msg: Binary;
-        ;
     };
 } | {
     migrate: {
         contract_addr: string;
         msg: Binary;
         new_code_id: number;
-        ;
     };
 } | {
     update_admin: {
         admin: string;
         contract_addr: string;
-        ;
     };
 } | {
     clear_admin: {
         contract_addr: string;
-        ;
     };
 };
 export declare type Binary = string;
@@ -124,37 +112,29 @@ export declare type UncheckedValueRef = {
     Pool: {
         exchange: string;
         pair: string;
-        ;
     };
 } | {
-    LiquidityToken: {
-        ;
-    };
+    LiquidityToken: {};
 } | {
     ValueAs: {
         asset: string;
         multiplier: Decimal;
-        ;
     };
 } | {
     External: {
         api_name: string;
-        ;
     };
 };
 export declare type Decimal = string;
 export interface Coin {
     amount: Uint128;
     denom: string;
-    ;
 }
 export interface Empty {
-    ;
 }
 export interface UncheckedProxyAsset {
     asset: string;
     value_reference?: UncheckedValueRef | null;
-    ;
 }
 export declare type QueryMsg = {
     config: {};
@@ -188,22 +168,17 @@ export declare type AssetEntry = string;
 export declare type ValueRef = {
     Pool: {
         pair: ContractEntry;
-        ;
     };
 } | {
-    LiquidityToken: {
-        ;
-    };
+    LiquidityToken: {};
 } | {
     ValueAs: {
         asset: AssetEntry;
         multiplier: Decimal;
-        ;
     };
 } | {
     External: {
         api_name: string;
-        ;
     };
 };
 export interface AssetConfigResponse {
@@ -212,12 +187,10 @@ export interface AssetConfigResponse {
 export interface ProxyAsset {
     asset: AssetEntry;
     value_reference?: ValueRef | null;
-    ;
 }
 export interface ContractEntry {
     contract: string;
     protocol: string;
-    ;
 }
 export interface AssetsResponse {
     assets: [AssetEntry, ProxyAsset][];
