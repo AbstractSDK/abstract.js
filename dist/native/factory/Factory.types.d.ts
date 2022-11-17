@@ -4,7 +4,7 @@
  * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
  */
 export interface InstantiateMsg {
-    memory_address: string;
+    ans_host_address: string;
     module_factory_address: string;
     version_control_address: string;
 }
@@ -13,7 +13,7 @@ export declare type ExecuteMsg = {
 } | {
     update_config: {
         admin?: string | null;
-        memory_contract?: string | null;
+        ans_host_contract?: string | null;
         module_factory_address?: string | null;
         subscription_address?: string | null;
         version_control_contract?: string | null;
@@ -31,13 +31,11 @@ export declare type Binary = string;
 export declare type GovernanceDetails = {
     Monarchy: {
         monarch: string;
-        [k: string]: unknown;
     };
 } | {
     External: {
         governance_address: string;
         governance_type: string;
-        [k: string]: unknown;
     };
 };
 export interface Cw20ReceiveMsg {
@@ -51,7 +49,7 @@ export declare type QueryMsg = {
 export interface MigrateMsg {
 }
 export interface ConfigResponse {
-    memory_contract: string;
+    ans_host_contract: string;
     module_factory_address: string;
     next_os_id: number;
     owner: string;

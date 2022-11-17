@@ -14,9 +14,9 @@ export interface FactoryMessage {
         msg: Binary;
         sender: string;
     }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
-    updateConfig: ({ admin, memoryContract, moduleFactoryAddress, subscriptionAddress, versionControlContract, }: {
+    updateConfig: ({ admin, ansHostContract, moduleFactoryAddress, subscriptionAddress, versionControlContract, }: {
         admin?: string;
-        memoryContract?: string;
+        ansHostContract?: string;
         moduleFactoryAddress?: string;
         subscriptionAddress?: string;
         versionControlContract?: string;
@@ -37,9 +37,9 @@ export declare class FactoryMessageComposer implements FactoryMessage {
         msg: Binary;
         sender: string;
     }, funds?: Coin[]) => MsgExecuteContractEncodeObject;
-    updateConfig: ({ admin, memoryContract, moduleFactoryAddress, subscriptionAddress, versionControlContract, }: {
+    updateConfig: ({ admin, ansHostContract, moduleFactoryAddress, subscriptionAddress, versionControlContract, }: {
         admin?: string | undefined;
-        memoryContract?: string | undefined;
+        ansHostContract?: string | undefined;
         moduleFactoryAddress?: string | undefined;
         subscriptionAddress?: string | undefined;
         versionControlContract?: string | undefined;

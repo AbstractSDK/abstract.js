@@ -84,11 +84,11 @@ class FactoryClient extends FactoryQueryClient {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: ({ admin, memoryContract, moduleFactoryAddress, subscriptionAddress, versionControlContract, }, fee = 'auto', memo, funds) => __awaiter(this, void 0, void 0, function* () {
+            value: ({ admin, ansHostContract, moduleFactoryAddress, subscriptionAddress, versionControlContract, }, fee = 'auto', memo, funds) => __awaiter(this, void 0, void 0, function* () {
                 return yield this.client.execute(this.sender, this.contractAddress, {
                     update_config: {
                         admin,
-                        memory_contract: memoryContract,
+                        ans_host_contract: ansHostContract,
                         module_factory_address: moduleFactoryAddress,
                         subscription_address: subscriptionAddress,
                         version_control_contract: versionControlContract,

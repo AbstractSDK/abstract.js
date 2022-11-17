@@ -24,9 +24,9 @@ export interface FactoryInterface extends FactoryReadOnlyInterface {
         msg: Binary;
         sender: string;
     }, fee?: number | StdFee | 'auto', memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
-    updateConfig: ({ admin, memoryContract, moduleFactoryAddress, subscriptionAddress, versionControlContract, }: {
+    updateConfig: ({ admin, ansHostContract, moduleFactoryAddress, subscriptionAddress, versionControlContract, }: {
         admin?: string;
-        memoryContract?: string;
+        ansHostContract?: string;
         moduleFactoryAddress?: string;
         subscriptionAddress?: string;
         versionControlContract?: string;
@@ -48,9 +48,9 @@ export declare class FactoryClient extends FactoryQueryClient implements Factory
         msg: Binary;
         sender: string;
     }, fee?: number | StdFee | 'auto', memo?: string, funds?: Coin[]) => Promise<ExecuteResult>;
-    updateConfig: ({ admin, memoryContract, moduleFactoryAddress, subscriptionAddress, versionControlContract, }: {
+    updateConfig: ({ admin, ansHostContract, moduleFactoryAddress, subscriptionAddress, versionControlContract, }: {
         admin?: string | undefined;
-        memoryContract?: string | undefined;
+        ansHostContract?: string | undefined;
         moduleFactoryAddress?: string | undefined;
         subscriptionAddress?: string | undefined;
         versionControlContract?: string | undefined;

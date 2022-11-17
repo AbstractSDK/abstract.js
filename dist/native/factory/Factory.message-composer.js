@@ -48,7 +48,7 @@ class FactoryMessageComposer {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: ({ admin, memoryContract, moduleFactoryAddress, subscriptionAddress, versionControlContract, }, funds) => {
+            value: ({ admin, ansHostContract, moduleFactoryAddress, subscriptionAddress, versionControlContract, }, funds) => {
                 return {
                     typeUrl: '/cosmwasm.wasm.v1.MsgExecuteContract',
                     value: tx_1.MsgExecuteContract.fromPartial({
@@ -57,7 +57,7 @@ class FactoryMessageComposer {
                         msg: (0, encoding_1.toUtf8)(JSON.stringify({
                             update_config: {
                                 admin,
-                                memory_contract: memoryContract,
+                                ans_host_contract: ansHostContract,
                                 module_factory_address: moduleFactoryAddress,
                                 subscription_address: subscriptionAddress,
                                 version_control_contract: versionControlContract,

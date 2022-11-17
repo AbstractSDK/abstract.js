@@ -57,13 +57,13 @@ export interface FactoryInterface extends FactoryReadOnlyInterface {
   updateConfig: (
     {
       admin,
-      memoryContract,
+      ansHostContract,
       moduleFactoryAddress,
       subscriptionAddress,
       versionControlContract,
     }: {
       admin?: string
-      memoryContract?: string
+      ansHostContract?: string
       moduleFactoryAddress?: string
       subscriptionAddress?: string
       versionControlContract?: string
@@ -136,13 +136,13 @@ export class FactoryClient extends FactoryQueryClient implements FactoryInterfac
   updateConfig = async (
     {
       admin,
-      memoryContract,
+      ansHostContract,
       moduleFactoryAddress,
       subscriptionAddress,
       versionControlContract,
     }: {
       admin?: string
-      memoryContract?: string
+      ansHostContract?: string
       moduleFactoryAddress?: string
       subscriptionAddress?: string
       versionControlContract?: string
@@ -157,7 +157,7 @@ export class FactoryClient extends FactoryQueryClient implements FactoryInterfac
       {
         update_config: {
           admin,
-          memory_contract: memoryContract,
+          ans_host_contract: ansHostContract,
           module_factory_address: moduleFactoryAddress,
           subscription_address: subscriptionAddress,
           version_control_contract: versionControlContract,

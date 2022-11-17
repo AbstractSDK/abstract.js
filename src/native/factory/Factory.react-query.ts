@@ -87,7 +87,7 @@ export interface FactoryUpdateConfigMutation {
   client: FactoryClient
   msg: {
     admin?: string
-    memoryContract?: string
+    ansHostContract?: string
     moduleFactoryAddress?: string
     subscriptionAddress?: string
     versionControlContract?: string
