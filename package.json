@@ -1,10 +1,14 @@
 {
   "name": "@abstract-os/abstract.js",
-  "version": "v0.2.0-beta.6.1",
-  "description": "Typings for our smart contracts",
+  "version": "v0.3.0-beta.1.1",
+  "description": "Typings for Abstract smart contracts",
   "homepage": "https://github.com/Abstract-OS/abstract.js#readme",
   "author": "adairrr",
   "license": "ISC",
+  "main": "lib/index.js",
+  "module": "esm/index.js",
+  "types": "lib/index.d.ts",
+  "typings": "lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Abstract-OS/abstract.js.git"
@@ -13,7 +17,10 @@
     "url": "https://github.com/Abstract-OS/abstract.js/issues"
   },
   "scripts": {
-    "build": "tsc",
+    "buildold": "tsc",
+    "build:cjs": "tsc",
+    "build:es": "tsc -m esNext --outDir esm",
+    "build": "yarn build:cjs && yarn build:es",
     "test": "echo \"Error: no test specified\" && exit 1",
     "fix": "./fixes.sh",
     "format": "prettier --write ./src/**/**/*.ts",
@@ -21,8 +28,6 @@
     "lint:fix": "eslint 'src/**/*.ts{,x}' --quiet --fix",
     "prepublishOnly": "yarn run build"
   },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "peerDependencies": {
     "@cosmjs/amino": ">=0.28.4",
     "@cosmjs/cosmwasm-stargate": ">=0.28.4",

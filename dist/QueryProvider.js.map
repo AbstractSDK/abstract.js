@@ -1,1 +1,0 @@
-{"version":3,"file":"QueryProvider.js","sourceRoot":"","sources":["../src/QueryProvider.tsx"],"names":[],"mappings":";;;;AACA,uDAAoG;AAK7F,MAAM,mBAAmB,GAAoD,CAAC,EAAE,WAAW,EAAE,QAAQ,EAAE,EAAE,EAAE;IAChH,OAAO,CAAC,uBAAC,iCAAwB,kBAAC,MAAM,EAAE,WAAW,EAAE,cAAc,EAAE,IAAI,gBAAG,QAAQ,IAA4B,CAAC,CAAA;AACrH,CAAC,CAAA;AAFY,QAAA,mBAAmB,uBAE/B"}

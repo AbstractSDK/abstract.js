@@ -1,3 +1,3 @@
 export * from './factory'
-export * from './version_control'
-export  * from './ans-host'
+export * from './version-control'
+export * from './ans-host'

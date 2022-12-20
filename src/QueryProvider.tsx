@@ -1,9 +1,12 @@
 import React, { FC, PropsWithChildren } from 'react'
-import { QueryClient, QueryClientProvider as ReactQueryClientProvider } from '@tanstack/react-query'
+import {
+  QueryClientProvider as ReactQueryClientProvider,
+  QueryClientProviderProps,
+} from '@tanstack/react-query'
 
-interface QueryClientProviderProps {
-  queryClient: QueryClient
-}
-export const QueryClientProvider: FC<PropsWithChildren<QueryClientProviderProps>> = ({ queryClient, children }) => {
-  return (<ReactQueryClientProvider client={queryClient} contextSharing={true}>{children}</ReactQueryClientProvider>)
+export const QueryClientProvider: FC<PropsWithChildren<QueryClientProviderProps>> = ({
+ children,
+ ...props
+}) => {
+  return <ReactQueryClientProvider {...props}>{children}</ReactQueryClientProvider>
 }
