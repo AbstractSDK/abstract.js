@@ -36,14 +36,14 @@ export type GovernanceDetails =
   | {
       Monarchy: {
         monarch: string
-        [k: string]: unknown
+        
       }
     }
   | {
       External: {
         governance_address: string
         governance_type: string
-        [k: string]: unknown
+        
       }
     }
 export interface Cw20ReceiveMsg {

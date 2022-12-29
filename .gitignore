@@ -18,3 +18,5 @@ generated
 !.yarn/versions
 
 target
+esm
+lib

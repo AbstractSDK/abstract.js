@@ -63,18 +63,18 @@ export type UniquePoolId = number
 export interface UncheckedContractEntry {
   contract: string
   protocol: string
-  [k: string]: unknown
+  
 }
 export interface UncheckedChannelEntry {
   connected_chain: string
   protocol: string
-  [k: string]: unknown
+  
 }
 export interface PoolMetadata {
   assets: string[]
   dex: string
   pool_type: PoolType
-  [k: string]: unknown
+  
 }
 export type QueryMsg =
   | {
@@ -141,12 +141,12 @@ export type DexAssetPairing = [string, string, string]
 export interface ContractEntry {
   contract: string
   protocol: string
-  [k: string]: unknown
+  
 }
 export interface ChannelEntry {
   connected_chain: string
   protocol: string
-  [k: string]: unknown
+  
 }
 export interface AssetPairingFilter {
   asset_pair?: [string, string] | null

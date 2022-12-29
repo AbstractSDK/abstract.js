@@ -57,7 +57,7 @@ export type CosmosMsgForEmpty =
       stargate: {
         type_url: string
         value: Binary
-        [k: string]: unknown
+        
       }
     }
   | {
@@ -74,13 +74,13 @@ export type BankMsg =
       send: {
         amount: Coin[]
         to_address: string
-        [k: string]: unknown
+        
       }
     }
   | {
       burn: {
         amount: Coin[]
-        [k: string]: unknown
+        
       }
     }
 export type Uint128 = string
@@ -89,14 +89,14 @@ export type StakingMsg =
       delegate: {
         amount: Coin
         validator: string
-        [k: string]: unknown
+        
       }
     }
   | {
       undelegate: {
         amount: Coin
         validator: string
-        [k: string]: unknown
+        
       }
     }
   | {
@@ -104,20 +104,20 @@ export type StakingMsg =
         amount: Coin
         dst_validator: string
         src_validator: string
-        [k: string]: unknown
+        
       }
     }
 export type DistributionMsg =
   | {
       set_withdraw_address: {
         address: string
-        [k: string]: unknown
+        
       }
     }
   | {
       withdraw_delegator_reward: {
         validator: string
-        [k: string]: unknown
+        
       }
     }
 export type Binary = string
@@ -128,7 +128,7 @@ export type IbcMsg =
         channel_id: string
         timeout: IbcTimeout
         to_address: string
-        [k: string]: unknown
+        
       }
     }
   | {
@@ -136,13 +136,13 @@ export type IbcMsg =
         channel_id: string
         data: Binary
         timeout: IbcTimeout
-        [k: string]: unknown
+        
       }
     }
   | {
       close_channel: {
         channel_id: string
-        [k: string]: unknown
+        
       }
     }
 export type Timestamp = Uint64
@@ -153,7 +153,7 @@ export type WasmMsg =
         contract_addr: string
         funds: Coin[]
         msg: Binary
-        [k: string]: unknown
+        
       }
     }
   | {
@@ -163,7 +163,7 @@ export type WasmMsg =
         funds: Coin[]
         label: string
         msg: Binary
-        [k: string]: unknown
+        
       }
     }
   | {
@@ -171,27 +171,27 @@ export type WasmMsg =
         contract_addr: string
         msg: Binary
         new_code_id: number
-        [k: string]: unknown
+        
       }
     }
   | {
       update_admin: {
         admin: string
         contract_addr: string
-        [k: string]: unknown
+        
       }
     }
   | {
       clear_admin: {
         contract_addr: string
-        [k: string]: unknown
+        
       }
     }
 export type GovMsg = {
   vote: {
     proposal_id: number
     vote: VoteOption
-    [k: string]: unknown
+    
   }
 }
 export type VoteOption = 'yes' | 'no' | 'abstain' | 'no_with_veto'
@@ -270,7 +270,7 @@ export type QueryRequestForEmpty =
       stargate: {
         data: Binary
         path: string
-        [k: string]: unknown
+        
       }
     }
   | {
@@ -284,62 +284,62 @@ export type BankQuery =
       balance: {
         address: string
         denom: string
-        [k: string]: unknown
+        
       }
     }
   | {
       all_balances: {
         address: string
-        [k: string]: unknown
+        
       }
     }
 export type StakingQuery =
   | {
       bonded_denom: {
-        [k: string]: unknown
+        
       }
     }
   | {
       all_delegations: {
         delegator: string
-        [k: string]: unknown
+        
       }
     }
   | {
       delegation: {
         delegator: string
         validator: string
-        [k: string]: unknown
+        
       }
     }
   | {
       all_validators: {
-        [k: string]: unknown
+        
       }
     }
   | {
       validator: {
         address: string
-        [k: string]: unknown
+        
       }
     }
 export type IbcQuery =
   | {
       port_id: {
-        [k: string]: unknown
+        
       }
     }
   | {
       list_channels: {
         port_id?: string | null
-        [k: string]: unknown
+        
       }
     }
   | {
       channel: {
         channel_id: string
         port_id?: string | null
-        [k: string]: unknown
+        
       }
     }
 export type WasmQuery =
@@ -347,20 +347,20 @@ export type WasmQuery =
       smart: {
         contract_addr: string
         msg: Binary
-        [k: string]: unknown
+        
       }
     }
   | {
       raw: {
         contract_addr: string
         key: Binary
-        [k: string]: unknown
+        
       }
     }
   | {
       contract_info: {
         contract_addr: string
-        [k: string]: unknown
+        
       }
     }
 export type InternalAction =
@@ -375,45 +375,45 @@ export type UncheckedValueRef =
       Pool: {
         exchange: string
         pair: string
-        [k: string]: unknown
+        
       }
     }
   | {
       LiquidityToken: {
-        [k: string]: unknown
+        
       }
     }
   | {
       ValueAs: {
         asset: string
         multiplier: Decimal
-        [k: string]: unknown
+        
       }
     }
   | {
       External: {
         api_name: string
-        [k: string]: unknown
+        
       }
     }
 export type Decimal = string
 export interface Coin {
   amount: Uint128
   denom: string
-  [k: string]: unknown
+  
 }
 export interface Empty {
-  [k: string]: unknown
+  
 }
 export interface IbcTimeout {
   block?: IbcTimeoutBlock | null
   timestamp?: Timestamp | null
-  [k: string]: unknown
+  
 }
 export interface IbcTimeoutBlock {
   height: number
   revision: number
-  [k: string]: unknown
+  
 }
 export interface CallbackInfo {
   id: string
@@ -422,7 +422,7 @@ export interface CallbackInfo {
 export interface UncheckedProxyAsset {
   asset: string
   value_reference?: UncheckedValueRef | null
-  [k: string]: unknown
+  
 }
 export type QueryMsg =
   | {
@@ -470,25 +470,25 @@ export type ValueRef =
   | {
       Pool: {
         pair: ContractEntry
-        [k: string]: unknown
+        
       }
     }
   | {
       LiquidityToken: {
-        [k: string]: unknown
+        
       }
     }
   | {
       ValueAs: {
         asset: AssetEntry
         multiplier: Decimal
-        [k: string]: unknown
+        
       }
     }
   | {
       External: {
         api_name: string
-        [k: string]: unknown
+        
       }
     }
 export interface AssetConfigResponse {
@@ -497,12 +497,12 @@ export interface AssetConfigResponse {
 export interface ProxyAsset {
   asset: AssetEntry
   value_reference?: ValueRef | null
-  [k: string]: unknown
+  
 }
 export interface ContractEntry {
   contract: string
   protocol: string
-  [k: string]: unknown
+  
 }
 export interface AssetsResponse {
   assets: [AssetEntry, ProxyAsset][]

@@ -22,8 +22,10 @@ __metadata:
     eslint: ^8.17.0
     prettier: ^2.7.0
     ts-node: ^10.8.1
+    ts-pattern: ^4.0.6
     typescript: ^4.7.3
   peerDependencies:
+    "@abstract-os/cw-query-hooks": ^0.1.0
     "@cosmjs/amino": ">=0.28.4"
     "@cosmjs/cosmwasm-stargate": ">=0.28.4"
     "@tanstack/react-query": ">=4.0.0"
@@ -5181,6 +5183,13 @@ __metadata:
     ts-node-transpile-only: dist/bin-transpile.js
     ts-script: dist/bin-script-deprecated.js
   checksum: 480adb076fdab6dbabd726c6056d651ddc567feda0d3e4770d809c01d000715a0f61f80be0e4a92ef87b7f4a494b79d9595d62de4a3931d740122ae26f0e10d8
+  languageName: node
+  linkType: hard
+
+"ts-pattern@npm:^4.0.6":
+  version: 4.0.6
+  resolution: "ts-pattern@npm:4.0.6"
+  checksum: d65d715f5269d6264253e11e89a6f2ff576382e7efecc080747540454cda489d302ffe0c8f096fac72efe0b106ee1d6bfd662d1a5d77dbc831801ec490bef95c
   languageName: node
   linkType: hard
 
