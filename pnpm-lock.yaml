@@ -166,9 +166,6 @@ importers:
       typedoc:
         specifier: ^0.23.25
         version: 0.23.25(typescript@4.9.3)
-      typedoc-plugin-markdown:
-        specifier: ^3.14.0
-        version: 3.14.0(typedoc@0.23.25)
       typescript:
         specifier: 4.9.3
         version: 4.9.3
@@ -4997,19 +4994,6 @@ packages:
     resolution: {integrity: sha512-QdH5qfLcdF209UsCdM0ZNZ9Dwm2PHvMfeLZtivBrjX3Y/df4US2pwsUC4HBfWhye/mx/t6puODeC7Oacb/Ol8g==}
     dev: true
 
-  /handlebars@4.7.8:
-    resolution: {integrity: sha512-vafaFqs8MZkRrSX7sFVUdo3ap/eNiLnb4IakshzvP56X5Nr1iGKAIqdX6tMlm6HcNRIkr6AxO5jFEoJzzpT8aQ==}
-    engines: {node: '>=0.4.7'}
-    hasBin: true
-    dependencies:
-      minimist: 1.2.8
-      neo-async: 2.6.2
-      source-map: 0.6.1
-      wordwrap: 1.0.0
-    optionalDependencies:
-      uglify-js: 3.17.4
-    dev: true
-
   /has-bigints@1.0.2:
     resolution: {integrity: sha512-tSvCKtBr9lkF0Ex0aQiP9N+OpV4zi2r/Nee5VkRDbaqv35RLYMzbwQfFSZZH0kR+Rd6302UJZ2p/bJCEoR3VoQ==}
     dev: true
@@ -6817,10 +6801,6 @@ packages:
     engines: {node: '>= 0.6'}
     dev: true
 
-  /neo-async@2.6.2:
-    resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
-    dev: true
-
   /node-int64@0.4.0:
     resolution: {integrity: sha512-O5lz91xSOeoXP6DulyHfllpq+Eg00MWitZIbtPfoSEvqIHdl5gfcY6hYzDWnj0qD5tz52PI08u9qUvSVeUBeHw==}
     dev: true
@@ -8397,15 +8377,6 @@ packages:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
     dev: true
 
-  /typedoc-plugin-markdown@3.14.0(typedoc@0.23.25):
-    resolution: {integrity: sha512-UyQLkLRkfTFhLdhSf3RRpA3nNInGn+k6sll2vRXjflaMNwQAAiB61SYbisNZTg16t4K1dt1bPQMMGLrxS0GZ0Q==}
-    peerDependencies:
-      typedoc: '>=0.23.0'
-    dependencies:
-      handlebars: 4.7.8
-      typedoc: 0.23.25(typescript@4.9.3)
-    dev: true
-
   /typedoc@0.23.25(typescript@4.9.3):
     resolution: {integrity: sha512-O1he153qVyoCgJYSvIyY3bPP1wAJTegZfa6tL3APinSZhJOf8CSd8F/21M6ex8pUY/fuY6n0jAsT4fIuMGA6sA==}
     engines: {node: '>= 14.14'}
@@ -8424,14 +8395,6 @@ packages:
     resolution: {integrity: sha512-CIfGzTelbKNEnLpLdGFgdyKhG23CKdKgQPOBc+OUNrkJ2vr+KSzsSV5kq5iWhEQbok+quxgGzrAtGWCyU7tHnA==}
     engines: {node: '>=4.2.0'}
     hasBin: true
-
-  /uglify-js@3.17.4:
-    resolution: {integrity: sha512-T9q82TJI9e/C1TAxYvfb16xO120tMVFZrGA3f9/P4424DNu6ypK103y0GPFVa17yotwSyZW5iYXgjYHkGrJW/g==}
-    engines: {node: '>=0.8.0'}
-    hasBin: true
-    requiresBuild: true
-    dev: true
-    optional: true
 
   /unbox-primitive@1.0.2:
     resolution: {integrity: sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw==}
@@ -8808,10 +8771,6 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       string-width: 5.1.2
-    dev: true
-
-  /wordwrap@1.0.0:
-    resolution: {integrity: sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==}
     dev: true
 
   /wrap-ansi@7.0.0:
