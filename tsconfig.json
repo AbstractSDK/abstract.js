@@ -1,34 +1,25 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "jsx": "react",
-    "declaration": true,
-    "pretty": true,
-    "rootDir": "src",
-    "sourceMap": false,
-    "strict": true,
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "outDir": "lib",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
-    "importHelpers": true
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react",
+    "strictNullChecks": true,
+    "useDefineForClassFields": true,
+    "experimentalDecorators": true,
   },
-  "exclude": [
-    "node_modules",
-    "lib",
-    "esm",
-    "tests",
-    "stories",
-    "jest.config.ts",
-    "jest.config.*.ts",
-    "generated"
-  ]
+  "include": [
+  ],
+  "exclude": ["node_modules", "dist", "functions/**/*"],
 }

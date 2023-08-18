@@ -1,0 +1,36 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", "lib/**", "esm/**"]
+    },
+    "dapp#build": {
+      "env": [
+        "VITE_WEB3AUTH_CLIENT_ID",
+        "VITE_SUBGRAPH_URL"
+      ]
+    },
+    "subgraph#build": {
+      "env": [
+        "PORT",
+        "NETWORK_CONFIGURATION_MAP"
+      ]
+    },
+    "lint": {
+      "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts"],
+      "outputs": []
+    },
+    "lint:fix": {
+      "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts"],
+      "outputs": []
+    },
+    "format": {
+      "outputs": []
+    },
+    "deploy": {
+      "dependsOn": ["build", "lint"],
+      "outputs": []
+    }
+  }
+}

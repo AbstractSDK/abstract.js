@@ -1,56 +1,86 @@
 {
-  "name": "@abstract-os/abstract.js",
-  "version": "v0.3.0-beta.2.2",
-  "description": "Typings for Abstract smart contracts",
-  "homepage": "https://github.com/Abstract-OS/abstract.js#readme",
-  "author": "adairrr",
-  "license": "ISC",
-  "main": "lib/index.js",
-  "module": "esm/index.js",
-  "types": "lib/index.d.ts",
-  "typings": "lib/index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Abstract-OS/abstract.js.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Abstract-OS/abstract.js/issues"
-  },
+  "name": "abstract-money",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "buildold": "tsc",
-    "build:cjs": "rm -rf ./lib && tsc",
-    "build:es": "rm -rf ./esm && tsc -m esNext --outDir esm",
-    "build": "yarn build:cjs && yarn build:es",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "fix": "./fixes.sh",
-    "format": "prettier --write ./src/**/**/*.ts",
-    "lint": "eslint 'src/**/*.ts{,x}'",
-    "lint:fix": "eslint 'src/**/*.ts{,x}' --quiet --fix",
-    "prepublishOnly": "yarn run build"
+    "preinstall": "npx only-allow pnpm",
+    "lint:fix": "turbo run lint:fix",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "format": "turbo run format",
+    "start": "pnpm dapp start"
   },
-  "peerDependencies": {
-    "@abstract-os/cw-query-hooks": "^0.1.0",
-    "@cosmjs/amino": ">=0.28.4",
-    "@cosmjs/cosmwasm-stargate": ">=0.28.4",
-    "@tanstack/react-query": ">=4.0.0",
-    "cosmwasm": "^1.1.1"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "multiplerun": {
+    "dev": [
+      "pnpm run tsc --watch --noEmit",
+      [
+        "VITE_APP_VERSION=$(git rev-parse --short HEAD) && pnpm run vite"
+      ]
+    ]
+  },
+  "lint-staged": {
+    "src/{**/*,*}/*.{ts,tsx,json}": [
+      "prettier --write --cache",
+      "eslint --quiet --cache --fix"
+    ]
   },
   "devDependencies": {
-    "@cosmjs/amino": "^0.28.11",
-    "@cosmjs/cosmwasm-stargate": "^0.28.11",
-    "@tanstack/react-query": "^4.0.5",
-    "@types/ledgerhq__hw-transport": "^4.21.4",
-    "@types/node": "^17.0.43",
-    "@types/react": "^18.0.15",
-    "@typescript-eslint/eslint-plugin": "^5.28.0",
-    "@typescript-eslint/parser": "^5.28.0",
-    "cosmwasm": "^1.1.1",
-    "cosmwasm-typescript-gen": "^0.2.9",
-    "eslint": "^8.17.0",
-    "prettier": "^2.7.0",
-    "ts-node": "^10.8.1",
-    "ts-pattern": "^4.0.6",
-    "typescript": "^4.7.3"
+    "@pnpm/filter-workspace-packages": "^4.1.11",
+    "@pnpm/logger": "^4.0.0",
+    "@types/eslint": "^8",
+    "@types/prettier": "^2",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.21.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-plugin-mdx": "^2.0.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.31.8",
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "eslint-plugin-tsdoc": "^0.2.17",
+    "globby": "^12.0.2",
+    "prettier": "^2.7.1",
+    "tar": "^6.1.11",
+    "turbo": "^1.9.1"
   },
-  "packageManager": "yarn@3.2.1"
+  "dependencies": {
+    "eslint-config-turbo": "^0.0.7",
+    "rimraf": "^3.0.2",
+    "typescript": "4.9.3"
+  },
+  "resolutions": {
+    "@types/eslint": "8.44.2",
+    "@cosmjs/amino": "^0.31.0",
+    "@cosmjs/encoding": "^0.31.0",
+    "@cosmjs/math": "^0.31.0",
+    "@cosmjs/crypto": "^0.31.0",
+    "@cosmjs/proto-signing": "^0.31.0",
+    "@cosmjs/socket": "^0.31.0",
+    "@cosmjs/stargate": "^0.31.0",
+    "@cosmjs/stream": "^0.31.0",
+    "@cosmjs/utils": "^0.31.0",
+    "@cosmjs/tendermint-rpc": "^0.31.0",
+    "crypto-addr-codec": "npm:crypto-addr-codec-vite@0.1.6",
+    "loader-utils": "^2.0.3",
+    "trim": "^0.0.3",
+    "trim-newlines": "^3.0.1",
+    "@tanstack/query-core": "4.32.5",
+    "@tanstack/query-sync-storage-persister": "4.32.5",
+    "@tanstack/react-query": "4.32.5",
+    "@tanstack/react-query-devtools": "4.32.5",
+    "@tanstack/react-query-persist-client": "4.32.5"
+  }
 }
