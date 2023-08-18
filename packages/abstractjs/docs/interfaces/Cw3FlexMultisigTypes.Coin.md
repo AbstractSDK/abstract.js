@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:104](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L104)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:104](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L104)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:105](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L105)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:105](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L105)

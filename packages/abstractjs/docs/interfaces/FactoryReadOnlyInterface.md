@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.client.ts:12](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.client.ts#L12)
+[packages/abstractjs/src/native/factory/Factory.client.ts:25](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.client.ts#L25)
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.client.ts:11](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.client.ts#L11)
+[packages/abstractjs/src/native/factory/Factory.client.ts:24](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.client.ts#L24)
 
 ___
 
@@ -64,4 +64,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.client.ts:13](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.client.ts#L13)
+[packages/abstractjs/src/native/factory/Factory.client.ts:26](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.client.ts#L26)

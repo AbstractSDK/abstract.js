@@ -4,10 +4,6 @@
 
 [ProxyTypes](../modules/ProxyTypes.md).Coin
 
-## Indexable
-
-▪ [k: `string`]: `unknown`
-
 ## Table of contents
 
 ### Properties
@@ -23,7 +19,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.types.ts:399](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.types.ts#L399)
+[packages/abstractjs/src/account/proxy/Proxy.types.ts:364](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.types.ts#L364)
 
 ___
 
@@ -33,4 +29,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.types.ts:400](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.types.ts#L400)
+[packages/abstractjs/src/account/proxy/Proxy.types.ts:365](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.types.ts#L365)

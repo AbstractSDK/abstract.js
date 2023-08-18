@@ -42,7 +42,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:60](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L60)
+[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:60](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L60)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:34](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L34)
+[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:34](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L34)
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:36](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L36)
+[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:36](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L36)
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:35](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L35)
+[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:35](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L35)
 
 ___
 
@@ -118,7 +118,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:48](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L48)
+[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:48](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L48)
 
 ___
 
@@ -144,4 +144,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:70](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L70)
+[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:70](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L70)

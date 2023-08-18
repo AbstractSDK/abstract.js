@@ -24,7 +24,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.message-composer.ts:14](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L14)
+[packages/abstractjs/src/native/factory/Factory.message-composer.ts:14](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L14)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.message-composer.ts:28](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L28)
+[packages/abstractjs/src/native/factory/Factory.message-composer.ts:28](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L28)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.message-composer.ts:15](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L15)
+[packages/abstractjs/src/native/factory/Factory.message-composer.ts:15](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L15)
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.message-composer.ts:16](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L16)
+[packages/abstractjs/src/native/factory/Factory.message-composer.ts:16](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L16)
 
 ___
 
@@ -116,4 +116,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.message-composer.ts:42](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L42)
+[packages/abstractjs/src/native/factory/Factory.message-composer.ts:42](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L42)

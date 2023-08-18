@@ -13,7 +13,7 @@
 - [ansHostAddress](IAbstractQueryClient.md#anshostaddress)
 - [client](IAbstractQueryClient.md#client)
 - [factoryAddress](IAbstractQueryClient.md#factoryaddress)
-- [versionControlAddress](IAbstractQueryClient.md#versioncontroladdress)
+- [registryAddress](IAbstractQueryClient.md#registryaddress)
 
 ### Methods
 
@@ -27,7 +27,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractClient.ts:19](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L19)
+[packages/abstractjs/src/clients/AbstractClient.ts:25](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L25)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractClient.ts:17](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L17)
+[packages/abstractjs/src/clients/AbstractClient.ts:23](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L23)
 
 ___
 
@@ -47,17 +47,17 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractClient.ts:20](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L20)
+[packages/abstractjs/src/clients/AbstractClient.ts:26](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L26)
 
 ___
 
-### versionControlAddress
+### registryAddress
 
-• `Readonly` **versionControlAddress**: `string`
+• `Readonly` **registryAddress**: `string`
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractClient.ts:18](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L18)
+[packages/abstractjs/src/clients/AbstractClient.ts:24](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L24)
 
 ## Methods
 
@@ -78,4 +78,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractClient.ts:21](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L21)
+[packages/abstractjs/src/clients/AbstractClient.ts:27](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L27)

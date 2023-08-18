@@ -65,7 +65,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:238](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L238)
+[packages/abstractjs/src/account/manager/Manager.client.ts:238](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L238)
 
 ## Properties
 
@@ -79,7 +79,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:234](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L234)
+[packages/abstractjs/src/account/manager/Manager.client.ts:234](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L234)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:236](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L236)
+[packages/abstractjs/src/account/manager/Manager.client.ts:236](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L236)
 
 ___
 
@@ -111,7 +111,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:235](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L235)
+[packages/abstractjs/src/account/manager/Manager.client.ts:235](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L235)
 
 ## Methods
 
@@ -137,7 +137,7 @@ ManagerInterface.callback
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:496](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L496)
+[packages/abstractjs/src/account/manager/Manager.client.ts:496](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L496)
 
 ___
 
@@ -159,7 +159,7 @@ ManagerInterface.config
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:96](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L96)
+[packages/abstractjs/src/account/manager/Manager.client.ts:96](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L96)
 
 ___
 
@@ -188,7 +188,7 @@ ManagerInterface.execOnModule
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:257](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L257)
+[packages/abstractjs/src/account/manager/Manager.client.ts:257](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L257)
 
 ___
 
@@ -210,7 +210,7 @@ ManagerInterface.info
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:101](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L101)
+[packages/abstractjs/src/account/manager/Manager.client.ts:101](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L101)
 
 ___
 
@@ -239,7 +239,7 @@ ManagerInterface.installModule
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:300](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L300)
+[packages/abstractjs/src/account/manager/Manager.client.ts:300](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L300)
 
 ___
 
@@ -268,7 +268,7 @@ ManagerInterface.moduleAddresses
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:75](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L75)
+[packages/abstractjs/src/account/manager/Manager.client.ts:75](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L75)
 
 ___
 
@@ -298,7 +298,7 @@ ManagerInterface.moduleInfos
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:82](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L82)
+[packages/abstractjs/src/account/manager/Manager.client.ts:82](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L82)
 
 ___
 
@@ -327,7 +327,7 @@ ManagerInterface.moduleVersions
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:68](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L68)
+[packages/abstractjs/src/account/manager/Manager.client.ts:68](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L68)
 
 ___
 
@@ -349,7 +349,7 @@ ManagerInterface.ownership
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:106](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L106)
+[packages/abstractjs/src/account/manager/Manager.client.ts:106](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L106)
 
 ___
 
@@ -378,7 +378,7 @@ ManagerInterface.registerModule
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:326](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L326)
+[packages/abstractjs/src/account/manager/Manager.client.ts:326](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L326)
 
 ___
 
@@ -406,7 +406,7 @@ ManagerInterface.setOwner
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:427](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L427)
+[packages/abstractjs/src/account/manager/Manager.client.ts:427](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L427)
 
 ___
 
@@ -434,7 +434,7 @@ ManagerInterface.uninstallModule
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:352](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L352)
+[packages/abstractjs/src/account/manager/Manager.client.ts:352](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L352)
 
 ___
 
@@ -464,7 +464,7 @@ ManagerInterface.updateInfo
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:398](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L398)
+[packages/abstractjs/src/account/manager/Manager.client.ts:398](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L398)
 
 ___
 
@@ -491,7 +491,7 @@ ManagerInterface.updateInternalConfig
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:283](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L283)
+[packages/abstractjs/src/account/manager/Manager.client.ts:283](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L283)
 
 ___
 
@@ -518,7 +518,7 @@ ManagerInterface.updateOwnership
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:512](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L512)
+[packages/abstractjs/src/account/manager/Manager.client.ts:512](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L512)
 
 ___
 
@@ -546,7 +546,7 @@ ManagerInterface.updateSettings
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:473](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L473)
+[packages/abstractjs/src/account/manager/Manager.client.ts:473](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L473)
 
 ___
 
@@ -574,7 +574,7 @@ ManagerInterface.updateStatus
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:450](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L450)
+[packages/abstractjs/src/account/manager/Manager.client.ts:450](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L450)
 
 ___
 
@@ -602,4 +602,4 @@ ManagerInterface.upgrade
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:375](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L375)
+[packages/abstractjs/src/account/manager/Manager.client.ts:375](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L375)

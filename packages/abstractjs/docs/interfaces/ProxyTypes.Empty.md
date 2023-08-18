@@ -3,7 +3,3 @@
 # Interface: Empty
 
 [ProxyTypes](../modules/ProxyTypes.md).Empty
-
-## Indexable
-
-▪ [k: `string`]: `unknown`

@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.types.ts:27](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.types.ts#L27)
+[packages/abstractjs/src/cw-plus/Cw20.types.ts:27](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.types.ts#L27)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.types.ts:28](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.types.ts#L28)
+[packages/abstractjs/src/cw-plus/Cw20.types.ts:28](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.types.ts#L28)
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.types.ts:29](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.types.ts#L29)
+[packages/abstractjs/src/cw-plus/Cw20.types.ts:29](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.types.ts#L29)

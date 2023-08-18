@@ -23,7 +23,7 @@
 
 ### adapter
 
-▸ `Static` **adapter**<`TAppMsg`\>(`ansHostAddress`, `versionControlAddress`, `adapterInitMsg`): [`ModuleInstantiateMsg`](../modules.md#moduleinstantiatemsg)<[`AdapterBaseInitMsg`](../modules.md#adapterbaseinitmsg), `TAppMsg`\>
+▸ `Static` **adapter**<`TAppMsg`\>(`ansHostAddress`, `registryAddress`, `adapterInitMsg`): [`ModuleInstantiateMsg`](../modules.md#moduleinstantiatemsg)<[`AdapterBaseInitMsg`](../modules.md#adapterbaseinitmsg), `TAppMsg`\>
 
 #### Type parameters
 
@@ -36,7 +36,7 @@
 | Name | Type |
 | :------ | :------ |
 | `ansHostAddress` | `string` |
-| `versionControlAddress` | `string` |
+| `registryAddress` | `string` |
 | `adapterInitMsg` | `TAppMsg` |
 
 #### Returns
@@ -45,7 +45,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/modules/Module.msg-factory.ts:70](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/Module.msg-factory.ts#L70)
+[packages/abstractjs/src/modules/Module.msg-factory.ts:70](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/Module.msg-factory.ts#L70)
 
 ___
 
@@ -72,4 +72,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/Module.msg-factory.ts:58](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/Module.msg-factory.ts#L58)
+[packages/abstractjs/src/modules/Module.msg-factory.ts:58](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/Module.msg-factory.ts#L58)

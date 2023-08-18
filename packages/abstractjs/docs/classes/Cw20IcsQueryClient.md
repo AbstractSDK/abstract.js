@@ -48,7 +48,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.client.ts:52](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.client.ts#L52)
+[packages/abstractjs/src/cw-plus/Cw20Ics.client.ts:52](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.client.ts#L52)
 
 ## Properties
 
@@ -58,7 +58,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.client.ts:49](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.client.ts#L49)
+[packages/abstractjs/src/cw-plus/Cw20Ics.client.ts:49](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.client.ts#L49)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.client.ts:50](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.client.ts#L50)
+[packages/abstractjs/src/cw-plus/Cw20Ics.client.ts:50](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.client.ts#L50)
 
 ## Methods
 
@@ -90,7 +90,7 @@ Cw20IcsReadOnlyInterface.admin
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.client.ts:86](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.client.ts#L86)
+[packages/abstractjs/src/cw-plus/Cw20Ics.client.ts:86](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.client.ts#L86)
 
 ___
 
@@ -115,7 +115,7 @@ Cw20IcsReadOnlyInterface.allowed
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.client.ts:91](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.client.ts#L91)
+[packages/abstractjs/src/cw-plus/Cw20Ics.client.ts:91](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.client.ts#L91)
 
 ___
 
@@ -140,7 +140,7 @@ Cw20IcsReadOnlyInterface.channel
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.client.ts:74](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.client.ts#L74)
+[packages/abstractjs/src/cw-plus/Cw20Ics.client.ts:74](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.client.ts#L74)
 
 ___
 
@@ -158,7 +158,7 @@ Cw20IcsReadOnlyInterface.config
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.client.ts:81](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.client.ts#L81)
+[packages/abstractjs/src/cw-plus/Cw20Ics.client.ts:81](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.client.ts#L81)
 
 ___
 
@@ -184,7 +184,7 @@ Cw20IcsReadOnlyInterface.listAllowed
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.client.ts:98](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.client.ts#L98)
+[packages/abstractjs/src/cw-plus/Cw20Ics.client.ts:98](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.client.ts#L98)
 
 ___
 
@@ -202,7 +202,7 @@ Cw20IcsReadOnlyInterface.listChannels
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.client.ts:69](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.client.ts#L69)
+[packages/abstractjs/src/cw-plus/Cw20Ics.client.ts:69](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.client.ts#L69)
 
 ___
 
@@ -220,4 +220,4 @@ Cw20IcsReadOnlyInterface.port
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.client.ts:64](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.client.ts#L64)
+[packages/abstractjs/src/cw-plus/Cw20Ics.client.ts:64](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.client.ts#L64)

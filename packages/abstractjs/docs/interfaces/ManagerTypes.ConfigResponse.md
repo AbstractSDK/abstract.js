@@ -21,7 +21,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.types.ts:173](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.types.ts#L173)
+[packages/abstractjs/src/account/manager/Manager.types.ts:171](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.types.ts#L171)
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.types.ts:174](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.types.ts#L174)
+[packages/abstractjs/src/account/manager/Manager.types.ts:172](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.types.ts#L172)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.types.ts:175](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.types.ts#L175)
+[packages/abstractjs/src/account/manager/Manager.types.ts:173](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.types.ts#L173)
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.types.ts:176](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.types.ts#L176)
+[packages/abstractjs/src/account/manager/Manager.types.ts:174](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.types.ts#L174)

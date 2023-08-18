@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:9](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L9)
+[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:9](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L9)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:10](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L10)
+[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:10](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L10)

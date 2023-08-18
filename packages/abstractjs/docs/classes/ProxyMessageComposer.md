@@ -42,7 +42,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:125](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L125)
+[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:125](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L125)
 
 ## Properties
 
@@ -56,7 +56,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:123](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L123)
+[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:123](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L123)
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:122](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L122)
+[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:122](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L122)
 
 ## Methods
 
@@ -96,7 +96,7 @@ ProxyMessage.addModule
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:229](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L229)
+[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:229](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L229)
 
 ___
 
@@ -122,7 +122,7 @@ ProxyMessage.ibcAction
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:206](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L206)
+[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:206](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L206)
 
 ___
 
@@ -148,7 +148,7 @@ ProxyMessage.moduleAction
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:160](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L160)
+[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:160](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L160)
 
 ___
 
@@ -174,7 +174,7 @@ ProxyMessage.moduleActionWithData
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:183](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L183)
+[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:183](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L183)
 
 ___
 
@@ -200,7 +200,7 @@ ProxyMessage.removeModule
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:252](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L252)
+[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:252](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L252)
 
 ___
 
@@ -226,7 +226,7 @@ ProxyMessage.setAdmin
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:137](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L137)
+[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:137](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L137)
 
 ___
 
@@ -253,4 +253,4 @@ ProxyMessage.updateAssets
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:275](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L275)
+[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:275](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L275)

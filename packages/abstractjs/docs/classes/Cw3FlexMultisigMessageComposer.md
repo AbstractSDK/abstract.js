@@ -40,7 +40,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts:103](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts#L103)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts:103](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts#L103)
 
 ## Properties
 
@@ -54,7 +54,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts:101](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts#L101)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts:101](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts#L101)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts:100](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts#L100)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts:100](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts#L100)
 
 ## Methods
 
@@ -94,7 +94,7 @@ Cw3FlexMultisigMessage.close
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts:197](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts#L197)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts:197](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts#L197)
 
 ___
 
@@ -120,7 +120,7 @@ Cw3FlexMultisigMessage.execute
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts:173](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts#L173)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts:173](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts#L173)
 
 ___
 
@@ -146,7 +146,7 @@ Cw3FlexMultisigMessage.memberChangedHook
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts:221](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts#L221)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts:221](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts#L221)
 
 ___
 
@@ -175,7 +175,7 @@ Cw3FlexMultisigMessage.propose
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts:113](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts#L113)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts:113](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts#L113)
 
 ___
 
@@ -202,4 +202,4 @@ Cw3FlexMultisigMessage.vote
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts:146](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts#L146)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts:146](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.message-composer.ts#L146)

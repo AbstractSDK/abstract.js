@@ -45,7 +45,7 @@ Build a base query msg for an Abstract module. Works for all modules.
 
 #### Defined in
 
-[packages/abstractjs/src/modules/Module.msg-factory.ts:40](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/Module.msg-factory.ts#L40)
+[packages/abstractjs/src/modules/Module.msg-factory.ts:40](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/Module.msg-factory.ts#L40)
 
 ___
 
@@ -71,4 +71,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/Module.msg-factory.ts:48](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/Module.msg-factory.ts#L48)
+[packages/abstractjs/src/modules/Module.msg-factory.ts:48](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/Module.msg-factory.ts#L48)

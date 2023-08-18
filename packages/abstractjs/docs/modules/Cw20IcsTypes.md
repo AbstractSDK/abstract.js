@@ -39,7 +39,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.types.ts:14](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.types.ts#L14)
+[packages/abstractjs/src/cw-plus/Cw20Ics.types.ts:14](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.types.ts#L14)
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.types.ts:64](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.types.ts#L64)
+[packages/abstractjs/src/cw-plus/Cw20Ics.types.ts:64](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.types.ts#L64)
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.types.ts:49](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.types.ts#L49)
+[packages/abstractjs/src/cw-plus/Cw20Ics.types.ts:49](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.types.ts#L49)
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.types.ts:98](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.types.ts#L98)
+[packages/abstractjs/src/cw-plus/Cw20Ics.types.ts:98](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.types.ts#L98)
 
 ___
 
@@ -79,4 +79,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.types.ts:21](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.types.ts#L21)
+[packages/abstractjs/src/cw-plus/Cw20Ics.types.ts:21](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.types.ts#L21)

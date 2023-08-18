@@ -18,4 +18,4 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.types.ts:509](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.types.ts#L509)
+[packages/abstractjs/src/account/proxy/Proxy.types.ts:466](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.types.ts#L466)

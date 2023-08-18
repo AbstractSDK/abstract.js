@@ -39,7 +39,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:83](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L83)
+[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:83](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L83)
 
 ## Properties
 
@@ -53,7 +53,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:81](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L81)
+[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:81](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L81)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:80](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L80)
+[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:80](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L80)
 
 ## Methods
 
@@ -94,7 +94,7 @@ Cw20IcsMessage.allow
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:152](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L152)
+[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:152](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L152)
 
 ___
 
@@ -122,7 +122,7 @@ Cw20IcsMessage.receive
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:92](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L92)
+[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:92](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L92)
 
 ___
 
@@ -150,7 +150,7 @@ Cw20IcsMessage.transfer
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:122](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L122)
+[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:122](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L122)
 
 ___
 
@@ -176,4 +176,4 @@ Cw20IcsMessage.updateAdmin
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:179](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L179)
+[packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts:179](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.message-composer.ts#L179)

@@ -18,4 +18,4 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.types.ts:203](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.types.ts#L203)
+[packages/abstractjs/src/account/manager/Manager.types.ts:199](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.types.ts#L199)

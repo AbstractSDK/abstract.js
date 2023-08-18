@@ -21,7 +21,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:238](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L238)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:238](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L238)
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:239](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L239)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:239](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L239)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:240](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L240)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:240](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L240)
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:241](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L241)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:241](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L241)

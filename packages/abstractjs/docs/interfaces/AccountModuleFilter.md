@@ -17,7 +17,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractClient.ts:31](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L31)
+[packages/abstractjs/src/clients/AbstractClient.ts:37](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L37)
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractClient.ts:32](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L32)
+[packages/abstractjs/src/clients/AbstractClient.ts:38](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L38)

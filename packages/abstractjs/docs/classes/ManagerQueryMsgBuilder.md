@@ -35,7 +35,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.msg-builder.ts:259](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.msg-builder.ts#L259)
+[packages/abstractjs/src/account/manager/Manager.msg-builder.ts:259](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.msg-builder.ts#L259)
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.msg-builder.ts:264](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.msg-builder.ts#L264)
+[packages/abstractjs/src/account/manager/Manager.msg-builder.ts:264](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.msg-builder.ts#L264)
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.msg-builder.ts:225](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.msg-builder.ts#L225)
+[packages/abstractjs/src/account/manager/Manager.msg-builder.ts:225](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.msg-builder.ts#L225)
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.msg-builder.ts:241](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.msg-builder.ts#L241)
+[packages/abstractjs/src/account/manager/Manager.msg-builder.ts:241](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.msg-builder.ts#L241)
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.msg-builder.ts:209](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.msg-builder.ts#L209)
+[packages/abstractjs/src/account/manager/Manager.msg-builder.ts:209](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.msg-builder.ts#L209)
 
 ___
 
@@ -127,4 +127,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.msg-builder.ts:269](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.msg-builder.ts#L269)
+[packages/abstractjs/src/account/manager/Manager.msg-builder.ts:269](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.msg-builder.ts#L269)

@@ -41,7 +41,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:44](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L44)
+[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:44](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L44)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:24](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L24)
+[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:24](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L24)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:52](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L52)
+[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:52](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L52)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:25](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L25)
+[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:25](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L25)
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:26](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L26)
+[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:26](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L26)
 
 ___
 
@@ -140,4 +140,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:34](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L34)
+[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:34](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L34)

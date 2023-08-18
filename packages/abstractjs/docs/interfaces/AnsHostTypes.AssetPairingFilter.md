@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.types.ts:168](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.types.ts#L168)
+[packages/abstractjs/src/native/ans-host/AnsHost.types.ts:195](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.types.ts#L195)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.types.ts:169](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.types.ts#L169)
+[packages/abstractjs/src/native/ans-host/AnsHost.types.ts:196](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.types.ts#L196)

@@ -4,7 +4,7 @@
 
 ## Implements
 
-- [`ModuleInfo`](../interfaces/VersionControlTypes.ModuleInfo.md)
+- [`ModuleInfo`](../interfaces/RegistryTypes.ModuleInfo.md)
 
 ## Table of contents
 
@@ -14,18 +14,15 @@
 
 ### Properties
 
-- [\_name](ModuleInfo.md#_name)
-- [\_namespace](ModuleInfo.md#_namespace)
-- [\_version](ModuleInfo.md#_version)
+- [name](ModuleInfo.md#name)
+- [namespace](ModuleInfo.md#namespace)
+- [version](ModuleInfo.md#version)
 - [ABSTRACT\_PROVIDER](ModuleInfo.md#abstract_provider)
 
 ### Accessors
 
 - [id](ModuleInfo.md#id)
 - [idWithVersion](ModuleInfo.md#idwithversion)
-- [name](ModuleInfo.md#name)
-- [namespace](ModuleInfo.md#namespace)
-- [version](ModuleInfo.md#version)
 - [versionString](ModuleInfo.md#versionstring)
 
 ### Methods
@@ -50,37 +47,49 @@
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/ModuleInfo.ts:35
+[packages/abstractjs/src/clients/objects/moduleInfo.ts:35](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/moduleInfo.ts#L35)
 
 ## Properties
 
-### \_name
+### name
 
-• **\_name**: `string`
+• **name**: `string`
+
+#### Implementation of
+
+[ModuleInfo](../interfaces/RegistryTypes.ModuleInfo.md).[name](../interfaces/RegistryTypes.ModuleInfo.md#name)
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/ModuleInfo.ts:22
+[packages/abstractjs/src/clients/objects/moduleInfo.ts:22](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/moduleInfo.ts#L22)
 
 ___
 
-### \_namespace
+### namespace
 
-• **\_namespace**: `string`
+• **namespace**: `string`
+
+#### Implementation of
+
+[ModuleInfo](../interfaces/RegistryTypes.ModuleInfo.md).[namespace](../interfaces/RegistryTypes.ModuleInfo.md#namespace)
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/ModuleInfo.ts:23
+[packages/abstractjs/src/clients/objects/moduleInfo.ts:23](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/moduleInfo.ts#L23)
 
 ___
 
-### \_version
+### version
 
-• **\_version**: [`ModuleVersion`](../modules/VersionControlTypes.md#moduleversion)
+• **version**: [`ModuleVersion`](../modules/RegistryTypes.md#moduleversion)
+
+#### Implementation of
+
+[ModuleInfo](../interfaces/RegistryTypes.ModuleInfo.md).[version](../interfaces/RegistryTypes.ModuleInfo.md#version)
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/ModuleInfo.ts:24
+[packages/abstractjs/src/clients/objects/moduleInfo.ts:24](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/moduleInfo.ts#L24)
 
 ___
 
@@ -90,7 +99,7 @@ ___
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/ModuleInfo.ts:26
+[packages/abstractjs/src/clients/objects/moduleInfo.ts:26](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/moduleInfo.ts#L26)
 
 ## Accessors
 
@@ -106,7 +115,7 @@ Return the full module id with the namespace and name.
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/ModuleInfo.ts:66
+[packages/abstractjs/src/clients/objects/moduleInfo.ts:54](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/moduleInfo.ts#L54)
 
 ___
 
@@ -114,7 +123,7 @@ ___
 
 • `get` **idWithVersion**(): `string`
 
-Return the full module id with the namespace and name concatinated with the version.
+Return the full module id with the namespace and name concatenated with the version.
 
 #### Returns
 
@@ -122,61 +131,7 @@ Return the full module id with the namespace and name concatinated with the vers
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/ModuleInfo.ts:73
-
-___
-
-### name
-
-• `get` **name**(): `string`
-
-#### Returns
-
-`string`
-
-#### Implementation of
-
-[ModuleInfo](../interfaces/VersionControlTypes.ModuleInfo.md).[name](../interfaces/VersionControlTypes.ModuleInfo.md#name)
-
-#### Defined in
-
-packages/abstractjs/src/clients/objects/ModuleInfo.ts:55
-
-___
-
-### namespace
-
-• `get` **namespace**(): `string`
-
-#### Returns
-
-`string`
-
-#### Implementation of
-
-[ModuleInfo](../interfaces/VersionControlTypes.ModuleInfo.md).[namespace](../interfaces/VersionControlTypes.ModuleInfo.md#namespace)
-
-#### Defined in
-
-packages/abstractjs/src/clients/objects/ModuleInfo.ts:51
-
-___
-
-### version
-
-• `get` **version**(): [`ModuleVersion`](../modules/VersionControlTypes.md#moduleversion)
-
-#### Returns
-
-[`ModuleVersion`](../modules/VersionControlTypes.md#moduleversion)
-
-#### Implementation of
-
-[ModuleInfo](../interfaces/VersionControlTypes.ModuleInfo.md).[version](../interfaces/VersionControlTypes.ModuleInfo.md#version)
-
-#### Defined in
-
-packages/abstractjs/src/clients/objects/ModuleInfo.ts:59
+[packages/abstractjs/src/clients/objects/moduleInfo.ts:61](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/moduleInfo.ts#L61)
 
 ___
 
@@ -193,7 +148,7 @@ Latest version returns "latest".
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/ModuleInfo.ts:81
+[packages/abstractjs/src/clients/objects/moduleInfo.ts:69](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/moduleInfo.ts#L69)
 
 ## Methods
 
@@ -216,7 +171,7 @@ Build abstract module info from the given name and version.
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/ModuleInfo.ts:113
+[packages/abstractjs/src/clients/objects/moduleInfo.ts:101](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/moduleInfo.ts#L101)
 
 ___
 
@@ -228,7 +183,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `moduleInfo` | [`ModuleInfo`](../interfaces/VersionControlTypes.ModuleInfo.md) |
+| `moduleInfo` | [`ModuleInfo`](../interfaces/RegistryTypes.ModuleInfo.md) |
 
 #### Returns
 
@@ -236,7 +191,7 @@ ___
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/ModuleInfo.ts:85
+[packages/abstractjs/src/clients/objects/moduleInfo.ts:73](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/moduleInfo.ts#L73)
 
 ___
 
@@ -258,7 +213,7 @@ Transform a string formatted like "namespace:name:version" into a ModuleInfo obj
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/ModuleInfo.ts:125
+[packages/abstractjs/src/clients/objects/moduleInfo.ts:113](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/moduleInfo.ts#L113)
 
 ___
 
@@ -278,7 +233,7 @@ ___
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/ModuleInfo.ts:104
+[packages/abstractjs/src/clients/objects/moduleInfo.ts:92](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/moduleInfo.ts#L92)
 
 ___
 
@@ -290,7 +245,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `version` | [`ModuleVersion`](../modules/VersionControlTypes.md#moduleversion) |
+| `version` | [`ModuleVersion`](../modules/RegistryTypes.md#moduleversion) |
 
 #### Returns
 
@@ -298,4 +253,4 @@ ___
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/ModuleInfo.ts:95
+[packages/abstractjs/src/clients/objects/moduleInfo.ts:83](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/moduleInfo.ts#L83)

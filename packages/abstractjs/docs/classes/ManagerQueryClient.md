@@ -47,7 +47,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:57](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L57)
+[packages/abstractjs/src/account/manager/Manager.client.ts:57](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L57)
 
 ## Properties
 
@@ -57,7 +57,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:54](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L54)
+[packages/abstractjs/src/account/manager/Manager.client.ts:54](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L54)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:55](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L55)
+[packages/abstractjs/src/account/manager/Manager.client.ts:55](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L55)
 
 ## Methods
 
@@ -89,7 +89,7 @@ ManagerReadOnlyInterface.config
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:96](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L96)
+[packages/abstractjs/src/account/manager/Manager.client.ts:96](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L96)
 
 ___
 
@@ -107,7 +107,7 @@ ManagerReadOnlyInterface.info
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:101](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L101)
+[packages/abstractjs/src/account/manager/Manager.client.ts:101](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L101)
 
 ___
 
@@ -132,7 +132,7 @@ ManagerReadOnlyInterface.moduleAddresses
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:75](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L75)
+[packages/abstractjs/src/account/manager/Manager.client.ts:75](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L75)
 
 ___
 
@@ -158,7 +158,7 @@ ManagerReadOnlyInterface.moduleInfos
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:82](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L82)
+[packages/abstractjs/src/account/manager/Manager.client.ts:82](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L82)
 
 ___
 
@@ -183,7 +183,7 @@ ManagerReadOnlyInterface.moduleVersions
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:68](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L68)
+[packages/abstractjs/src/account/manager/Manager.client.ts:68](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L68)
 
 ___
 
@@ -201,4 +201,4 @@ ManagerReadOnlyInterface.ownership
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:106](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L106)
+[packages/abstractjs/src/account/manager/Manager.client.ts:106](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L106)

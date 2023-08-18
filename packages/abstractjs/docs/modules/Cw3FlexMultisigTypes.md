@@ -53,7 +53,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:162](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L162)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:162](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L162)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:23](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L23)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:23](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L23)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:102](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L102)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:102](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L102)
 
 ___
 
@@ -87,7 +87,7 @@ and run the @cosmwasm/ts-codegen generate command to regenerate this file.
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:7](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L7)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:7](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L7)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:187](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L187)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:187](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L187)
 
 ___
 
@@ -107,7 +107,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:56](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L56)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:56](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L56)
 
 ___
 
@@ -117,7 +117,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:163](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L163)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:163](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L163)
 
 ___
 
@@ -127,7 +127,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:108](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L108)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:108](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L108)
 
 ___
 
@@ -137,7 +137,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:157](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L157)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:157](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L157)
 
 ___
 
@@ -147,7 +147,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:136](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L136)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:136](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L136)
 
 ___
 
@@ -157,7 +157,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:252](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L252)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:252](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L252)
 
 ___
 
@@ -167,7 +167,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:36](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L36)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:36](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L36)
 
 ___
 
@@ -177,7 +177,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:194](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L194)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:194](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L194)
 
 ___
 
@@ -187,7 +187,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:170](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L170)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:170](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L170)
 
 ___
 
@@ -197,7 +197,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:195](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L195)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:195](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L195)
 
 ___
 
@@ -207,7 +207,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:146](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L146)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:146](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L146)
 
 ___
 
@@ -217,7 +217,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:35](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L35)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:35](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L35)
 
 ___
 
@@ -227,7 +227,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:147](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L147)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:147](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L147)
 
 ___
 
@@ -237,7 +237,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:148](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L148)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:148](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L148)
 
 ___
 
@@ -247,4 +247,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:67](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L67)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts:67](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.types.ts#L67)

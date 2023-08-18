@@ -67,7 +67,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:49](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L49)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:49](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L49)
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:40](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L40)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:40](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L40)
 
 ___
 
@@ -128,7 +128,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:39](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L39)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:39](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L39)
 
 ___
 
@@ -157,7 +157,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:36](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L36)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:36](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L36)
 
 ___
 
@@ -185,7 +185,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:164](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L164)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:164](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L164)
 
 ___
 
@@ -214,7 +214,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:246](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L246)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:246](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L246)
 
 ___
 
@@ -228,7 +228,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:150](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L150)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:150](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L150)
 
 ___
 
@@ -258,7 +258,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:202](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L202)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:202](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L202)
 
 ___
 
@@ -280,7 +280,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:57](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L57)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:57](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L57)
 
 ___
 
@@ -310,7 +310,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:188](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L188)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:188](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L188)
 
 ___
 
@@ -332,7 +332,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:56](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L56)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:56](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L56)
 
 ___
 
@@ -361,7 +361,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:258](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L258)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:258](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L258)
 
 ___
 
@@ -383,7 +383,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:38](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L38)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:38](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L38)
 
 ___
 
@@ -413,7 +413,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:174](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L174)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:174](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L174)
 
 ___
 
@@ -444,7 +444,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:230](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L230)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:230](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L230)
 
 ___
 
@@ -454,7 +454,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:151](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L151)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:151](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L151)
 
 ___
 
@@ -476,7 +476,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:37](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L37)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:37](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L37)
 
 ___
 
@@ -505,7 +505,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:152](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L152)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:152](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L152)
 
 ___
 
@@ -535,7 +535,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:216](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L216)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:216](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L216)
 
 ___
 
@@ -565,7 +565,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:280](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L280)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:280](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L280)
 
 ___
 
@@ -593,7 +593,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:270](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L270)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:270](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L270)
 
 ___
 
@@ -620,4 +620,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:294](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L294)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:294](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L294)

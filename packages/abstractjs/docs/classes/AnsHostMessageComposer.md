@@ -41,7 +41,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:116](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L116)
+[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:116](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L116)
 
 ## Properties
 
@@ -55,7 +55,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:114](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L114)
+[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:114](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L114)
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:113](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L113)
+[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:113](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L113)
 
 ## Methods
 
@@ -96,7 +96,7 @@ AnsHostMessage.updateAssetAddresses
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:153](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L153)
+[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:153](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L153)
 
 ___
 
@@ -123,7 +123,7 @@ AnsHostMessage.updateChannels
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:179](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L179)
+[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:179](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L179)
 
 ___
 
@@ -150,7 +150,7 @@ AnsHostMessage.updateContractAddresses
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:127](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L127)
+[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:127](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L127)
 
 ___
 
@@ -177,7 +177,7 @@ AnsHostMessage.updateDexes
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:205](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L205)
+[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:205](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L205)
 
 ___
 
@@ -202,7 +202,7 @@ AnsHostMessage.updateOwnership
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:257](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L257)
+[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:257](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L257)
 
 ___
 
@@ -229,4 +229,4 @@ AnsHostMessage.updatePools
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:231](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L231)
+[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:231](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L231)

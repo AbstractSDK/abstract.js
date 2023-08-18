@@ -21,7 +21,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.types.ts:63](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.types.ts#L63)
+[packages/abstractjs/src/native/factory/Factory.types.ts:74](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.types.ts#L74)
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.types.ts:64](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.types.ts#L64)
+[packages/abstractjs/src/native/factory/Factory.types.ts:75](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.types.ts#L75)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.types.ts:65](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.types.ts#L65)
+[packages/abstractjs/src/native/factory/Factory.types.ts:76](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.types.ts#L76)
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.types.ts:66](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.types.ts#L66)
+[packages/abstractjs/src/native/factory/Factory.types.ts:77](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.types.ts#L77)

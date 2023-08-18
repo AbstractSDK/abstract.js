@@ -42,4 +42,4 @@
 
 #### Defined in
 
-[packages/abstractjs/src/modules/Module.msg-factory.ts:86](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/Module.msg-factory.ts#L86)
+[packages/abstractjs/src/modules/Module.msg-factory.ts:86](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/Module.msg-factory.ts#L86)

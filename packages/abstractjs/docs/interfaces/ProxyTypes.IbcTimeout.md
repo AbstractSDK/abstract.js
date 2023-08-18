@@ -4,10 +4,6 @@
 
 [ProxyTypes](../modules/ProxyTypes.md).IbcTimeout
 
-## Indexable
-
-▪ [k: `string`]: `unknown`
-
 ## Table of contents
 
 ### Properties
@@ -23,7 +19,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.types.ts:407](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.types.ts#L407)
+[packages/abstractjs/src/account/proxy/Proxy.types.ts:369](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.types.ts#L369)
 
 ___
 
@@ -33,4 +29,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.types.ts:408](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.types.ts#L408)
+[packages/abstractjs/src/account/proxy/Proxy.types.ts:370](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.types.ts#L370)

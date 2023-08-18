@@ -40,7 +40,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/clients/objects/AnsName.ts:2](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/objects/AnsName.ts#L2)
+[packages/abstractjs/src/clients/objects/AnsName.ts:2](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/AnsName.ts#L2)
 
 ___
 
@@ -62,7 +62,7 @@ asset names sorted by name and lowercased
 
 #### Defined in
 
-[packages/abstractjs/src/clients/objects/AnsName.ts:21](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/objects/AnsName.ts#L21)
+[packages/abstractjs/src/clients/objects/AnsName.ts:21](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/AnsName.ts#L21)
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/clients/objects/AnsName.ts:16](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/objects/AnsName.ts#L16)
+[packages/abstractjs/src/clients/objects/AnsName.ts:16](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/AnsName.ts#L16)
 
 ___
 
@@ -108,4 +108,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/clients/objects/AnsName.ts:9](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/objects/AnsName.ts#L9)
+[packages/abstractjs/src/clients/objects/AnsName.ts:9](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/AnsName.ts#L9)

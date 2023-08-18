@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.types.ts:417](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.types.ts#L417)
+[packages/abstractjs/src/account/proxy/Proxy.types.ts:377](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.types.ts#L377)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.types.ts:418](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.types.ts#L418)
+[packages/abstractjs/src/account/proxy/Proxy.types.ts:378](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.types.ts#L378)

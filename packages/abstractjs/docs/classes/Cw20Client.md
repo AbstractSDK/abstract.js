@@ -67,7 +67,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:306](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L306)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:306](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L306)
 
 ## Properties
 
@@ -81,7 +81,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:302](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L302)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:302](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L302)
 
 ___
 
@@ -99,7 +99,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:304](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L304)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:304](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L304)
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:303](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L303)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:303](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L303)
 
 ## Methods
 
@@ -143,7 +143,7 @@ Cw20Interface.allAccounts
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:124](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L124)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:124](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L124)
 
 ___
 
@@ -174,7 +174,7 @@ Cw20Interface.allAllowances
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:107](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L107)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:107](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L107)
 
 ___
 
@@ -204,7 +204,7 @@ Cw20Interface.allowance
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:93](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L93)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:93](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L93)
 
 ___
 
@@ -233,7 +233,7 @@ Cw20Interface.balance
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:76](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L76)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:76](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L76)
 
 ___
 
@@ -261,7 +261,7 @@ Cw20Interface.burn
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:351](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L351)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:351](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L351)
 
 ___
 
@@ -290,7 +290,7 @@ Cw20Interface.burnFrom
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:522](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L522)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:522](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L522)
 
 ___
 
@@ -320,7 +320,7 @@ Cw20Interface.decreaseAllowance
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:432](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L432)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:432](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L432)
 
 ___
 
@@ -342,7 +342,7 @@ Cw20Interface.downloadLogo
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:143](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L143)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:143](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L143)
 
 ___
 
@@ -372,7 +372,7 @@ Cw20Interface.increaseAllowance
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:403](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L403)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:403](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L403)
 
 ___
 
@@ -394,7 +394,7 @@ Cw20Interface.marketingInfo
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:138](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L138)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:138](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L138)
 
 ___
 
@@ -423,7 +423,7 @@ Cw20Interface.mint
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:548](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L548)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:548](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L548)
 
 ___
 
@@ -445,7 +445,7 @@ Cw20Interface.minter
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:88](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L88)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:88](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L88)
 
 ___
 
@@ -475,7 +475,7 @@ Cw20Interface.send
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:374](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L374)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:374](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L374)
 
 ___
 
@@ -506,7 +506,7 @@ Cw20Interface.sendFrom
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:490](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L490)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:490](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L490)
 
 ___
 
@@ -528,7 +528,7 @@ Cw20Interface.tokenInfo
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:83](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L83)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:83](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L83)
 
 ___
 
@@ -557,7 +557,7 @@ Cw20Interface.transfer
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:325](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L325)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:325](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L325)
 
 ___
 
@@ -587,7 +587,7 @@ Cw20Interface.transferFrom
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:461](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L461)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:461](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L461)
 
 ___
 
@@ -617,7 +617,7 @@ Cw20Interface.updateMarketing
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:597](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L597)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:597](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L597)
 
 ___
 
@@ -645,7 +645,7 @@ Cw20Interface.updateMinter
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:574](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L574)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:574](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L574)
 
 ___
 
@@ -672,4 +672,4 @@ Cw20Interface.uploadLogo
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.client.ts:626](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.client.ts#L626)
+[packages/abstractjs/src/cw-plus/Cw20.client.ts:626](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.client.ts#L626)

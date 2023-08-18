@@ -34,7 +34,7 @@ Base app admin query.
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/App.msg-factory.ts:74](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/App.msg-factory.ts#L74)
+[packages/abstractjs/src/modules/apps/App.msg-factory.ts:74](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/App.msg-factory.ts#L74)
 
 ___
 
@@ -50,7 +50,7 @@ Base app config query.
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/App.msg-factory.ts:65](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/App.msg-factory.ts#L65)
+[packages/abstractjs/src/modules/apps/App.msg-factory.ts:65](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/App.msg-factory.ts#L65)
 
 ___
 
@@ -78,4 +78,4 @@ Query an app module.
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/App.msg-factory.ts:59](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/App.msg-factory.ts#L59)
+[packages/abstractjs/src/modules/apps/App.msg-factory.ts:59](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/App.msg-factory.ts#L59)

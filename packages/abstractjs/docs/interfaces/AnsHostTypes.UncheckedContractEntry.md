@@ -4,10 +4,6 @@
 
 [AnsHostTypes](../modules/AnsHostTypes.md).UncheckedContractEntry
 
-## Indexable
-
-▪ [k: `string`]: `unknown`
-
 ## Table of contents
 
 ### Properties
@@ -23,7 +19,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.types.ts:70](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.types.ts#L70)
+[packages/abstractjs/src/native/ans-host/AnsHost.types.ts:87](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.types.ts#L87)
 
 ___
 
@@ -33,4 +29,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.types.ts:71](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.types.ts#L71)
+[packages/abstractjs/src/native/ans-host/AnsHost.types.ts:88](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.types.ts#L88)

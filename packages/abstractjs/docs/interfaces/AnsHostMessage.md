@@ -27,7 +27,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:58](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L58)
+[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:58](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L58)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:59](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L59)
+[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:59](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L59)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:70](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L70)
+[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:70](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L70)
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:80](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L80)
+[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:80](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L80)
 
 ___
 
@@ -118,7 +118,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:60](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L60)
+[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:60](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L60)
 
 ___
 
@@ -145,7 +145,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:90](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L90)
+[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:90](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L90)
 
 ___
 
@@ -170,7 +170,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:110](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L110)
+[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:110](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L110)
 
 ___
 
@@ -197,4 +197,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:100](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L100)
+[packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts:100](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.message-composer.ts#L100)

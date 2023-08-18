@@ -22,4 +22,4 @@ and run the @cosmwasm/ts-codegen generate command to regenerate this file.
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20Ics.types.ts:8](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20Ics.types.ts#L8)
+[packages/abstractjs/src/cw-plus/Cw20Ics.types.ts:8](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20Ics.types.ts#L8)

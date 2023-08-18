@@ -54,7 +54,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:118](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L118)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:118](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L118)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:23](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L23)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:23](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L23)
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:94](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L94)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:94](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L94)
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:33](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L33)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:33](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L33)
 
 ___
 
@@ -142,7 +142,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:25](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L25)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:25](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L25)
 
 ___
 
@@ -172,7 +172,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:32](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L32)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:32](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L32)
 
 ___
 
@@ -200,7 +200,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:128](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L128)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:128](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L128)
 
 ___
 
@@ -210,7 +210,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:95](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L95)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:95](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L95)
 
 ___
 
@@ -232,7 +232,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:24](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L24)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:24](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L24)
 
 ___
 
@@ -260,7 +260,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:96](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L96)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:96](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L96)
 
 ___
 
@@ -289,4 +289,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:106](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L106)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:106](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L106)

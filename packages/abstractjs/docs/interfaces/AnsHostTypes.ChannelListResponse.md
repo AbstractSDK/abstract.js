@@ -18,4 +18,4 @@
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.types.ts:191](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.types.ts#L191)
+[packages/abstractjs/src/native/ans-host/AnsHost.types.ts:220](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.types.ts#L220)

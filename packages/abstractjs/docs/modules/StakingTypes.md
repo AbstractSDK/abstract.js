@@ -24,7 +24,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.types.ts:8](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.types.ts#L8)
+[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.types.ts:8](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.types.ts#L8)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.types.ts:45](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.types.ts#L45)
+[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.types.ts:45](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.types.ts#L45)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.types.ts:47](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.types.ts#L47)
+[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.types.ts:47](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.types.ts#L47)
 
 ___
 
@@ -54,4 +54,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.types.ts:44](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.types.ts#L44)
+[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.types.ts:44](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.types.ts#L44)

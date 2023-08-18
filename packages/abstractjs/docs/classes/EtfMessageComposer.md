@@ -41,7 +41,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:81](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L81)
+[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:81](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L81)
 
 ## Properties
 
@@ -55,7 +55,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:79](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L79)
+[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:79](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L79)
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:78](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L78)
+[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:78](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L78)
 
 ## Methods
 
@@ -93,7 +93,7 @@ EtfMessage.base
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:92](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L92)
+[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:92](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L92)
 
 ___
 
@@ -117,7 +117,7 @@ EtfMessage.import
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:191](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L191)
+[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:191](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L191)
 
 ___
 
@@ -143,7 +143,7 @@ EtfMessage.provideLiquidity
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:137](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L137)
+[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:137](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L137)
 
 ___
 
@@ -171,7 +171,7 @@ EtfMessage.receive
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:107](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L107)
+[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:107](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L107)
 
 ___
 
@@ -197,7 +197,7 @@ EtfMessage.setFee
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:206](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L206)
+[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:206](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L206)
 
 ___
 
@@ -225,4 +225,4 @@ EtfMessage.updatePool
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:161](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L161)
+[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:161](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L161)

@@ -38,7 +38,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.message-composer.ts:48](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L48)
+[packages/abstractjs/src/native/factory/Factory.message-composer.ts:48](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L48)
 
 ## Properties
 
@@ -52,7 +52,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.message-composer.ts:46](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L46)
+[packages/abstractjs/src/native/factory/Factory.message-composer.ts:46](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L46)
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.message-composer.ts:45](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L45)
+[packages/abstractjs/src/native/factory/Factory.message-composer.ts:45](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L45)
 
 ## Methods
 
@@ -95,7 +95,7 @@ FactoryMessage.createAccount
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.message-composer.ts:85](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L85)
+[packages/abstractjs/src/native/factory/Factory.message-composer.ts:85](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L85)
 
 ___
 
@@ -123,7 +123,7 @@ FactoryMessage.updateConfig
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.message-composer.ts:56](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L56)
+[packages/abstractjs/src/native/factory/Factory.message-composer.ts:56](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L56)
 
 ___
 
@@ -148,4 +148,4 @@ FactoryMessage.updateOwnership
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.message-composer.ts:117](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L117)
+[packages/abstractjs/src/native/factory/Factory.message-composer.ts:117](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.message-composer.ts#L117)

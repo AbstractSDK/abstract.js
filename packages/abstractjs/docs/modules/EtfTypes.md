@@ -43,7 +43,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:45](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L45)
+[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:45](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L45)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:94](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L94)
+[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:94](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L94)
 
 ___
 
@@ -67,7 +67,7 @@ and run the @cosmwasm/ts-codegen generate command to regenerate this file.
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:7](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L7)
+[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:7](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L7)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:101](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L101)
+[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:101](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L101)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:52](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L52)
+[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:52](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L52)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:51](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L51)
+[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:51](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L51)
 
 ___
 
@@ -107,7 +107,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:62](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L62)
+[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:62](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L62)
 
 ___
 
@@ -117,7 +117,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:18](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L18)
+[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:18](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L18)
 
 ___
 
@@ -127,7 +127,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:84](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L84)
+[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:84](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L84)
 
 ___
 
@@ -137,4 +137,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:50](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L50)
+[packages/abstractjs/src/modules/apps/etf/Etf.types.ts:50](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.types.ts#L50)

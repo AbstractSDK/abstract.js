@@ -24,7 +24,7 @@ and run the @cosmwasm/ts-codegen generate command to regenerate this file.
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.types.ts:8](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.types.ts#L8)
+[packages/abstractjs/src/native/factory/Factory.types.ts:8](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.types.ts#L8)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.types.ts:9](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.types.ts#L9)
+[packages/abstractjs/src/native/factory/Factory.types.ts:9](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.types.ts#L9)
 
 ___
 
@@ -44,4 +44,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.types.ts:10](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.types.ts#L10)
+[packages/abstractjs/src/native/factory/Factory.types.ts:10](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.types.ts#L10)

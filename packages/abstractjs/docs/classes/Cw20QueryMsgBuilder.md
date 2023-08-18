@@ -45,7 +45,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts:290](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts#L290)
+[packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts:290](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts#L290)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts:270](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts#L270)
+[packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts:270](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts#L270)
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts:252](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts#L252)
+[packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts:252](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts#L252)
 
 ___
 
@@ -111,7 +111,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts:226](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts#L226)
+[packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts:226](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts#L226)
 
 ___
 
@@ -125,7 +125,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts:313](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts#L313)
+[packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts:313](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts#L313)
 
 ___
 
@@ -139,7 +139,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts:308](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts#L308)
+[packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts:308](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts#L308)
 
 ___
 
@@ -153,7 +153,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts:247](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts#L247)
+[packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts:247](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts#L247)
 
 ___
 
@@ -167,4 +167,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts:242](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts#L242)
+[packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts:242](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.msg-builder.ts#L242)

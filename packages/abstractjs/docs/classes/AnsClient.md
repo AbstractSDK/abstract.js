@@ -76,7 +76,7 @@ Mixin(AnsHostClient, AnsQueryClient).constructor
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AnsClient.ts:198](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AnsClient.ts#L198)
+[packages/abstractjs/src/clients/AnsClient.ts:198](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AnsClient.ts#L198)
 
 ## Properties
 
@@ -90,9 +90,9 @@ Mixin(AnsHostClient, AnsQueryClient).client
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:349](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L349)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:375](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L375)
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:101](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L101)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:121](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L121)
 
 ___
 
@@ -110,9 +110,9 @@ Mixin(AnsHostClient, AnsQueryClient).contractAddress
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:351](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L351)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:377](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L377)
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:102](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L102)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:122](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L122)
 
 ___
 
@@ -130,7 +130,7 @@ Mixin(AnsHostClient, AnsQueryClient).sender
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:350](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L350)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:376](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L376)
 
 ## Methods
 
@@ -161,7 +161,7 @@ Mixin(AnsHostClient, AnsQueryClient).assetInfoList
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:168](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L168)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:180](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L180)
 
 ___
 
@@ -190,7 +190,7 @@ Mixin(AnsHostClient, AnsQueryClient).assetInfos
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:157](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L157)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:173](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L173)
 
 ___
 
@@ -221,7 +221,7 @@ Mixin(AnsHostClient, AnsQueryClient).assetList
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:140](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L140)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:156](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L156)
 
 ___
 
@@ -250,7 +250,7 @@ Mixin(AnsHostClient, AnsQueryClient).assets
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:129](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L129)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:149](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L149)
 
 ___
 
@@ -281,7 +281,7 @@ Mixin(AnsHostClient, AnsQueryClient).channelList
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:224](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L224)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:228](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L228)
 
 ___
 
@@ -310,7 +310,7 @@ Mixin(AnsHostClient, AnsQueryClient).channels
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:213](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L213)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:221](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L221)
 
 ___
 
@@ -332,7 +332,7 @@ Mixin(AnsHostClient, AnsQueryClient).config
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:124](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L124)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:144](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L144)
 
 ___
 
@@ -363,7 +363,7 @@ Mixin(AnsHostClient, AnsQueryClient).contractList
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:196](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L196)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:204](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L204)
 
 ___
 
@@ -392,7 +392,7 @@ Mixin(AnsHostClient, AnsQueryClient).contracts
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:185](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L185)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:197](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L197)
 
 ___
 
@@ -423,7 +423,7 @@ Mixin(AnsHostClient, AnsQueryClient).filterAssets
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AnsClient.ts:99](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AnsClient.ts#L99)
+[packages/abstractjs/src/clients/AnsClient.ts:99](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AnsClient.ts#L99)
 
 ___
 
@@ -454,7 +454,7 @@ Mixin(AnsHostClient, AnsQueryClient).filterChannels
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AnsClient.ts:139](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AnsClient.ts#L139)
+[packages/abstractjs/src/clients/AnsClient.ts:139](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AnsClient.ts#L139)
 
 ___
 
@@ -485,7 +485,7 @@ Mixin(AnsHostClient, AnsQueryClient).filterContracts
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AnsClient.ts:178](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AnsClient.ts#L178)
+[packages/abstractjs/src/clients/AnsClient.ts:178](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AnsClient.ts#L178)
 
 ___
 
@@ -516,7 +516,7 @@ Mixin(AnsHostClient, AnsQueryClient).listAssets
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AnsClient.ts:69](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AnsClient.ts#L69)
+[packages/abstractjs/src/clients/AnsClient.ts:69](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AnsClient.ts#L69)
 
 ___
 
@@ -547,7 +547,7 @@ Mixin(AnsHostClient, AnsQueryClient).listChannels
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AnsClient.ts:109](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AnsClient.ts#L109)
+[packages/abstractjs/src/clients/AnsClient.ts:109](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AnsClient.ts#L109)
 
 ___
 
@@ -576,7 +576,7 @@ Mixin(AnsHostClient, AnsQueryClient).listContracts
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AnsClient.ts:149](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AnsClient.ts#L149)
+[packages/abstractjs/src/clients/AnsClient.ts:149](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AnsClient.ts#L149)
 
 ___
 
@@ -598,7 +598,7 @@ Mixin(AnsHostClient, AnsQueryClient).ownership
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:302](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L302)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:298](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L298)
 
 ___
 
@@ -629,7 +629,7 @@ Mixin(AnsHostClient, AnsQueryClient).poolList
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:257](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L257)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:257](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L257)
 
 ___
 
@@ -660,7 +660,7 @@ Mixin(AnsHostClient, AnsQueryClient).poolMetadataList
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:285](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L285)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:281](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L281)
 
 ___
 
@@ -689,7 +689,7 @@ Mixin(AnsHostClient, AnsQueryClient).poolMetadatas
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:274](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L274)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:274](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L274)
 
 ___
 
@@ -718,7 +718,7 @@ Mixin(AnsHostClient, AnsQueryClient).pools
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:246](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L246)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:250](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L250)
 
 ___
 
@@ -740,7 +740,7 @@ Mixin(AnsHostClient, AnsQueryClient).registeredDexes
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:241](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L241)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:245](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L245)
 
 ___
 
@@ -755,7 +755,7 @@ ___
 | `«destructured»` | `Object` | `undefined` |
 | › `toAdd` | `string`[][] | `undefined` |
 | › `toRemove` | `string`[] | `undefined` |
-| `fee` | `number` \| ``"auto"`` \| `StdFee` | `"auto"` |
+| `fee` | `number` \| ``"auto"`` \| `StdFee` | `'auto'` |
 | `memo?` | `string` | `undefined` |
 | `_funds?` | `Coin`[] | `undefined` |
 
@@ -773,7 +773,7 @@ Mixin(AnsHostClient, AnsQueryClient).updateAssetAddresses
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:380](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L380)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:418](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L418)
 
 ___
 
@@ -788,7 +788,7 @@ ___
 | `«destructured»` | `Object` | `undefined` |
 | › `toAdd` | [`UncheckedChannelEntry`](../interfaces/AnsHostTypes.UncheckedChannelEntry.md)[][] | `undefined` |
 | › `toRemove` | [`UncheckedChannelEntry`](../interfaces/AnsHostTypes.UncheckedChannelEntry.md)[] | `undefined` |
-| `fee` | `number` \| ``"auto"`` \| `StdFee` | `"auto"` |
+| `fee` | `number` \| ``"auto"`` \| `StdFee` | `'auto'` |
 | `memo?` | `string` | `undefined` |
 | `_funds?` | `Coin`[] | `undefined` |
 
@@ -806,7 +806,7 @@ Mixin(AnsHostClient, AnsQueryClient).updateChannels
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:394](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L394)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:444](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L444)
 
 ___
 
@@ -821,7 +821,7 @@ ___
 | `«destructured»` | `Object` | `undefined` |
 | › `toAdd` | [`UncheckedContractEntry`](../interfaces/AnsHostTypes.UncheckedContractEntry.md)[][] | `undefined` |
 | › `toRemove` | [`UncheckedContractEntry`](../interfaces/AnsHostTypes.UncheckedContractEntry.md)[] | `undefined` |
-| `fee` | `number` \| ``"auto"`` \| `StdFee` | `"auto"` |
+| `fee` | `number` \| ``"auto"`` \| `StdFee` | `'auto'` |
 | `memo?` | `string` | `undefined` |
 | `_funds?` | `Coin`[] | `undefined` |
 
@@ -839,7 +839,7 @@ Mixin(AnsHostClient, AnsQueryClient).updateContractAddresses
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:366](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L366)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:392](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L392)
 
 ___
 
@@ -854,7 +854,7 @@ ___
 | `«destructured»` | `Object` | `undefined` |
 | › `toAdd` | `string`[] | `undefined` |
 | › `toRemove` | `string`[] | `undefined` |
-| `fee` | `number` \| ``"auto"`` \| `StdFee` | `"auto"` |
+| `fee` | `number` \| ``"auto"`` \| `StdFee` | `'auto'` |
 | `memo?` | `string` | `undefined` |
 | `_funds?` | `Coin`[] | `undefined` |
 
@@ -872,7 +872,7 @@ Mixin(AnsHostClient, AnsQueryClient).updateDexes
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:408](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L408)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:470](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L470)
 
 ___
 
@@ -885,7 +885,7 @@ ___
 | Name | Type | Default value |
 | :------ | :------ | :------ |
 | `action` | [`Action`](../modules/AnsHostTypes.md#action) | `undefined` |
-| `fee` | `number` \| ``"auto"`` \| `StdFee` | `"auto"` |
+| `fee` | `number` \| ``"auto"`` \| `StdFee` | `'auto'` |
 | `memo?` | `string` | `undefined` |
 | `_funds?` | `Coin`[] | `undefined` |
 
@@ -903,7 +903,7 @@ Mixin(AnsHostClient, AnsQueryClient).updateOwnership
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:436](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L436)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:522](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L522)
 
 ___
 
@@ -918,7 +918,7 @@ ___
 | `«destructured»` | `Object` | `undefined` |
 | › `toAdd` | [`PoolAddressBaseForString`](../modules/AnsHostTypes.md#pooladdressbaseforstring)[][] | `undefined` |
 | › `toRemove` | `number`[] | `undefined` |
-| `fee` | `number` \| ``"auto"`` \| `StdFee` | `"auto"` |
+| `fee` | `number` \| ``"auto"`` \| `StdFee` | `'auto'` |
 | `memo?` | `string` | `undefined` |
 | `_funds?` | `Coin`[] | `undefined` |
 
@@ -936,4 +936,4 @@ Mixin(AnsHostClient, AnsQueryClient).updatePools
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:422](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L422)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:496](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L496)

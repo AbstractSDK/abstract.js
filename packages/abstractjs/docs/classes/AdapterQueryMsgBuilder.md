@@ -40,7 +40,7 @@ Base adapter authorized addresses query.
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/Adapter.msg-builder.ts:81](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/Adapter.msg-builder.ts#L81)
+[packages/abstractjs/src/modules/adapters/Adapter.msg-builder.ts:81](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/Adapter.msg-builder.ts#L81)
 
 ___
 
@@ -56,7 +56,7 @@ Base adapter config query.
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/Adapter.msg-builder.ts:92](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/Adapter.msg-builder.ts#L92)
+[packages/abstractjs/src/modules/adapters/Adapter.msg-builder.ts:92](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/Adapter.msg-builder.ts#L92)
 
 ___
 
@@ -84,4 +84,4 @@ Query an adatper module.
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/Adapter.msg-builder.ts:73](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/Adapter.msg-builder.ts#L73)
+[packages/abstractjs/src/modules/adapters/Adapter.msg-builder.ts:73](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/Adapter.msg-builder.ts#L73)

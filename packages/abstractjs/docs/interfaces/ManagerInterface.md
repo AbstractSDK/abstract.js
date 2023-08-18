@@ -61,7 +61,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:221](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L221)
+[packages/abstractjs/src/account/manager/Manager.client.ts:221](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L221)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:49](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L49)
+[packages/abstractjs/src/account/manager/Manager.client.ts:49](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L49)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:113](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L113)
+[packages/abstractjs/src/account/manager/Manager.client.ts:113](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L113)
 
 ___
 
@@ -126,7 +126,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:115](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L115)
+[packages/abstractjs/src/account/manager/Manager.client.ts:115](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L115)
 
 ___
 
@@ -148,7 +148,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:50](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L50)
+[packages/abstractjs/src/account/manager/Manager.client.ts:50](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L50)
 
 ___
 
@@ -177,7 +177,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:133](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L133)
+[packages/abstractjs/src/account/manager/Manager.client.ts:133](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L133)
 
 ___
 
@@ -206,7 +206,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:41](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L41)
+[packages/abstractjs/src/account/manager/Manager.client.ts:41](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L41)
 
 ___
 
@@ -236,7 +236,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:42](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L42)
+[packages/abstractjs/src/account/manager/Manager.client.ts:42](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L42)
 
 ___
 
@@ -265,7 +265,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:40](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L40)
+[packages/abstractjs/src/account/manager/Manager.client.ts:40](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L40)
 
 ___
 
@@ -287,7 +287,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:51](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L51)
+[packages/abstractjs/src/account/manager/Manager.client.ts:51](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L51)
 
 ___
 
@@ -316,7 +316,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:145](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L145)
+[packages/abstractjs/src/account/manager/Manager.client.ts:145](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L145)
 
 ___
 
@@ -326,7 +326,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:114](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L114)
+[packages/abstractjs/src/account/manager/Manager.client.ts:114](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L114)
 
 ___
 
@@ -354,7 +354,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:191](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L191)
+[packages/abstractjs/src/account/manager/Manager.client.ts:191](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L191)
 
 ___
 
@@ -382,7 +382,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:157](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L157)
+[packages/abstractjs/src/account/manager/Manager.client.ts:157](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L157)
 
 ___
 
@@ -412,7 +412,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:177](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L177)
+[packages/abstractjs/src/account/manager/Manager.client.ts:177](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L177)
 
 ___
 
@@ -439,7 +439,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:127](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L127)
+[packages/abstractjs/src/account/manager/Manager.client.ts:127](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L127)
 
 ___
 
@@ -466,7 +466,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:226](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L226)
+[packages/abstractjs/src/account/manager/Manager.client.ts:226](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L226)
 
 ___
 
@@ -494,7 +494,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:211](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L211)
+[packages/abstractjs/src/account/manager/Manager.client.ts:211](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L211)
 
 ___
 
@@ -522,7 +522,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:201](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L201)
+[packages/abstractjs/src/account/manager/Manager.client.ts:201](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L201)
 
 ___
 
@@ -550,4 +550,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.client.ts:167](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.client.ts#L167)
+[packages/abstractjs/src/account/manager/Manager.client.ts:167](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.client.ts#L167)

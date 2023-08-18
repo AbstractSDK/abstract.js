@@ -55,7 +55,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:119](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L119)
+[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:119](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L119)
 
 ## Properties
 
@@ -69,7 +69,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:115](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L115)
+[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:115](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L115)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:117](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L117)
+[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:117](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L117)
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:116](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L116)
+[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:116](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L116)
 
 ## Methods
 
@@ -128,7 +128,7 @@ EtfInterface.base
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:132](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L132)
+[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:132](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L132)
 
 ___
 
@@ -150,7 +150,7 @@ EtfInterface.configValidity
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:49](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L49)
+[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:49](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L49)
 
 ___
 
@@ -176,7 +176,7 @@ EtfInterface.import
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:230](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L230)
+[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:230](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L230)
 
 ___
 
@@ -204,7 +204,7 @@ EtfInterface.provideLiquidity
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:178](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L178)
+[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:178](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L178)
 
 ___
 
@@ -234,7 +234,7 @@ EtfInterface.receive
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:149](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L149)
+[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:149](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L149)
 
 ___
 
@@ -262,7 +262,7 @@ EtfInterface.setFee
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:246](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L246)
+[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:246](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L246)
 
 ___
 
@@ -284,7 +284,7 @@ EtfInterface.state
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:44](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L44)
+[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:44](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L44)
 
 ___
 
@@ -314,4 +314,4 @@ EtfInterface.updatePool
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:201](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L201)
+[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:201](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L201)

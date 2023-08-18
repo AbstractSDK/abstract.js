@@ -43,7 +43,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.client.ts:19](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.client.ts#L19)
+[packages/abstractjs/src/native/factory/Factory.client.ts:32](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.client.ts#L32)
 
 ## Properties
 
@@ -53,7 +53,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.client.ts:16](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.client.ts#L16)
+[packages/abstractjs/src/native/factory/Factory.client.ts:29](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.client.ts#L29)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.client.ts:17](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.client.ts#L17)
+[packages/abstractjs/src/native/factory/Factory.client.ts:30](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.client.ts#L30)
 
 ## Methods
 
@@ -85,7 +85,7 @@ FactoryReadOnlyInterface.config
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.client.ts:26](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.client.ts#L26)
+[packages/abstractjs/src/native/factory/Factory.client.ts:39](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.client.ts#L39)
 
 ___
 
@@ -103,4 +103,4 @@ FactoryReadOnlyInterface.ownership
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.client.ts:31](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.client.ts#L31)
+[packages/abstractjs/src/native/factory/Factory.client.ts:44](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.client.ts#L44)

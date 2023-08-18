@@ -47,7 +47,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:126](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L126)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:126](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L126)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:41](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L41)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:41](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L41)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:43](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L43)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:43](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L43)
 
 ___
 
@@ -111,7 +111,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:54](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L54)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:54](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L54)
 
 ___
 
@@ -138,7 +138,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:64](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L64)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:64](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L64)
 
 ___
 
@@ -148,7 +148,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:42](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L42)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:42](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L42)
 
 ___
 
@@ -174,7 +174,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:102](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L102)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:102](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L102)
 
 ___
 
@@ -200,7 +200,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:74](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L74)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:74](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L74)
 
 ___
 
@@ -228,7 +228,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:90](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L90)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:90](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L90)
 
 ___
 
@@ -252,7 +252,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:53](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L53)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:53](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L53)
 
 ___
 
@@ -277,7 +277,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:127](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L127)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:127](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L127)
 
 ___
 
@@ -303,7 +303,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:118](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L118)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:118](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L118)
 
 ___
 
@@ -329,7 +329,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:110](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L110)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:110](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L110)
 
 ___
 
@@ -355,4 +355,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:82](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L82)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:82](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L82)

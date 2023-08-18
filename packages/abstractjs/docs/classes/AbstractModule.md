@@ -6,7 +6,7 @@ A class representing an abstract module.
 
 ## Implements
 
-- [`Module`](../interfaces/VersionControlTypes.Module.md)
+- [`Module`](../interfaces/RegistryTypes.Module.md)
 
 ## Table of contents
 
@@ -16,6 +16,7 @@ A class representing an abstract module.
 
 ### Properties
 
+- [\_data](AbstractModule.md#_data)
 - [config](AbstractModule.md#config)
 - [info](AbstractModule.md#info)
 - [reference](AbstractModule.md#reference)
@@ -25,12 +26,15 @@ A class representing an abstract module.
 - [address](AbstractModule.md#address)
 - [codeId](AbstractModule.md#codeid)
 - [name](AbstractModule.md#name)
+- [type](AbstractModule.md#type)
 
 ### Methods
 
+- [getModuleData](AbstractModule.md#getmoduledata)
 - [fromResponse](AbstractModule.md#fromresponse)
 - [loadById](AbstractModule.md#loadbyid)
 - [loadByInfo](AbstractModule.md#loadbyinfo)
+- [loadByInfos](AbstractModule.md#loadbyinfos)
 
 ## Constructors
 
@@ -42,22 +46,32 @@ A class representing an abstract module.
 
 | Name | Type |
 | :------ | :------ |
-| `«destructured»` | [`Module`](../interfaces/VersionControlTypes.Module.md) |
-| `config` | [`ModuleConfiguration`](../interfaces/VersionControlTypes.ModuleConfiguration.md) |
+| `«destructured»` | [`Module`](../interfaces/RegistryTypes.Module.md) |
+| `config` | [`ModuleConfiguration`](../interfaces/RegistryTypes.ModuleConfiguration.md) |
 
 #### Defined in
 
-[packages/abstractjs/src/clients/objects/AbstractModule.ts:24](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/objects/AbstractModule.ts#L24)
+[packages/abstractjs/src/clients/objects/AbstractModule.ts:30](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/AbstractModule.ts#L30)
 
 ## Properties
 
-### config
+### \_data
 
-• **config**: [`ModuleConfiguration`](../interfaces/VersionControlTypes.ModuleConfiguration.md)
+• **\_data**: ``null`` \| [`ModuleData`](../interfaces/ModuleData.md)
 
 #### Defined in
 
-[packages/abstractjs/src/clients/objects/AbstractModule.ts:22](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/objects/AbstractModule.ts#L22)
+[packages/abstractjs/src/clients/objects/AbstractModule.ts:28](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/AbstractModule.ts#L28)
+
+___
+
+### config
+
+• **config**: [`ModuleConfiguration`](../interfaces/RegistryTypes.ModuleConfiguration.md)
+
+#### Defined in
+
+[packages/abstractjs/src/clients/objects/AbstractModule.ts:27](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/AbstractModule.ts#L27)
 
 ___
 
@@ -67,25 +81,25 @@ ___
 
 #### Implementation of
 
-[Module](../interfaces/VersionControlTypes.Module.md).[info](../interfaces/VersionControlTypes.Module.md#info)
+[Module](../interfaces/RegistryTypes.Module.md).[info](../interfaces/RegistryTypes.Module.md#info)
 
 #### Defined in
 
-[packages/abstractjs/src/clients/objects/AbstractModule.ts:20](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/objects/AbstractModule.ts#L20)
+[packages/abstractjs/src/clients/objects/AbstractModule.ts:25](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/AbstractModule.ts#L25)
 
 ___
 
 ### reference
 
-• **reference**: [`ModuleReference`](../modules/VersionControlTypes.md#modulereference)
+• **reference**: [`ModuleReference`](../modules/RegistryTypes.md#modulereference)
 
 #### Implementation of
 
-[Module](../interfaces/VersionControlTypes.Module.md).[reference](../interfaces/VersionControlTypes.Module.md#reference)
+[Module](../interfaces/RegistryTypes.Module.md).[reference](../interfaces/RegistryTypes.Module.md#reference)
 
 #### Defined in
 
-[packages/abstractjs/src/clients/objects/AbstractModule.ts:21](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/objects/AbstractModule.ts#L21)
+[packages/abstractjs/src/clients/objects/AbstractModule.ts:26](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/AbstractModule.ts#L26)
 
 ## Accessors
 
@@ -99,7 +113,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/clients/objects/AbstractModule.ts:77](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/objects/AbstractModule.ts#L77)
+[packages/abstractjs/src/clients/objects/AbstractModule.ts:115](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/AbstractModule.ts#L115)
 
 ___
 
@@ -113,7 +127,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/clients/objects/AbstractModule.ts:86](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/objects/AbstractModule.ts#L86)
+[packages/abstractjs/src/clients/objects/AbstractModule.ts:124](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/AbstractModule.ts#L124)
 
 ___
 
@@ -130,9 +144,53 @@ Example: abstract:bank
 
 #### Defined in
 
-[packages/abstractjs/src/clients/objects/AbstractModule.ts:47](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/objects/AbstractModule.ts#L47)
+[packages/abstractjs/src/clients/objects/AbstractModule.ts:54](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/AbstractModule.ts#L54)
+
+___
+
+### type
+
+• `get` **type**(): [`ModuleType`](../modules.md#moduletype)
+
+Get the type of this module.
+
+#### Returns
+
+[`ModuleType`](../modules.md#moduletype)
+
+#### Defined in
+
+[packages/abstractjs/src/clients/objects/AbstractModule.ts:103](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/AbstractModule.ts#L103)
 
 ## Methods
+
+### getModuleData
+
+▸ **getModuleData**(`client`): `Promise`<``null`` \| [`ModuleData`](../interfaces/ModuleData.md)\>
+
+Retrieve the module data for a given module.
+
+**`Throws`**
+
+Error if module not found
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `client` | `CosmWasmClient` |
+
+#### Returns
+
+`Promise`<``null`` \| [`ModuleData`](../interfaces/ModuleData.md)\>
+
+module data if instantiated, null otherwise
+
+#### Defined in
+
+[packages/abstractjs/src/clients/objects/AbstractModule.ts:139](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/AbstractModule.ts#L139)
+
+___
 
 ### fromResponse
 
@@ -144,7 +202,7 @@ Create an Abstract module from the chain response.
 
 | Name | Type |
 | :------ | :------ |
-| `response` | [`ModuleResponse`](../interfaces/VersionControlTypes.ModuleResponse.md) |
+| `response` | [`ModuleResponse`](../interfaces/RegistryTypes.ModuleResponse.md) |
 
 #### Returns
 
@@ -152,19 +210,19 @@ Create an Abstract module from the chain response.
 
 #### Defined in
 
-[packages/abstractjs/src/clients/objects/AbstractModule.ts:34](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/objects/AbstractModule.ts#L34)
+[packages/abstractjs/src/clients/objects/AbstractModule.ts:41](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/AbstractModule.ts#L41)
 
 ___
 
 ### loadById
 
-▸ `Static` **loadById**(`versionControlClient`, `moduleId`, `version?`): `Promise`<[`AbstractModule`](AbstractModule.md)\>
+▸ `Static` **loadById**(`registryClient`, `moduleId`, `version?`): `Promise`<[`AbstractModule`](AbstractModule.md)\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `versionControlClient` | [`VersionControlQueryClient`](VersionControlQueryClient.md) |
+| `registryClient` | [`RegistryQueryClient`](RegistryQueryClient.md) |
 | `moduleId` | `string` |
 | `version?` | `string` |
 
@@ -174,20 +232,20 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/clients/objects/AbstractModule.ts:51](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/objects/AbstractModule.ts#L51)
+[packages/abstractjs/src/clients/objects/AbstractModule.ts:58](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/AbstractModule.ts#L58)
 
 ___
 
 ### loadByInfo
 
-▸ `Static` **loadByInfo**(`versionControlClient`, `moduleInfo`): `Promise`<[`AbstractModule`](AbstractModule.md)\>
+▸ `Static` **loadByInfo**(`registryClient`, `moduleInfo`): `Promise`<[`AbstractModule`](AbstractModule.md)\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `versionControlClient` | [`VersionControlQueryClient`](VersionControlQueryClient.md) |
-| `moduleInfo` | [`ModuleInfo`](../interfaces/VersionControlTypes.ModuleInfo.md) |
+| `registryClient` | [`RegistryQueryClient`](RegistryQueryClient.md) |
+| `moduleInfo` | [`ModuleInfo`](../interfaces/RegistryTypes.ModuleInfo.md) |
 
 #### Returns
 
@@ -195,4 +253,25 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/clients/objects/AbstractModule.ts:60](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/objects/AbstractModule.ts#L60)
+[packages/abstractjs/src/clients/objects/AbstractModule.ts:67](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/AbstractModule.ts#L67)
+
+___
+
+### loadByInfos
+
+▸ `Static` **loadByInfos**(`registryClient`, `moduleInfos`): `Promise`<[`AbstractModule`](AbstractModule.md)[]\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `registryClient` | [`RegistryQueryClient`](RegistryQueryClient.md) |
+| `moduleInfos` | [`ModuleInfo`](../interfaces/RegistryTypes.ModuleInfo.md)[] |
+
+#### Returns
+
+`Promise`<[`AbstractModule`](AbstractModule.md)[]\>
+
+#### Defined in
+
+[packages/abstractjs/src/clients/objects/AbstractModule.ts:87](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/AbstractModule.ts#L87)

@@ -45,7 +45,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts:157](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts#L157)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts:157](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts#L157)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts:247](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts#L247)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts:247](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts#L247)
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts:211](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts#L211)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts:211](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts#L211)
 
 ___
 
@@ -111,7 +111,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts:141](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts#L141)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts:141](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts#L141)
 
 ___
 
@@ -133,7 +133,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts:175](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts#L175)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts:175](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts#L175)
 
 ___
 
@@ -147,7 +147,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts:136](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts#L136)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts:136](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts#L136)
 
 ___
 
@@ -169,7 +169,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts:193](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts#L193)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts:193](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts#L193)
 
 ___
 
@@ -190,4 +190,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts:231](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts#L231)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts:231](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.msg-builder.ts#L231)

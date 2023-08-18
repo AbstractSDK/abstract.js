@@ -22,7 +22,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.types.ts:196](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.types.ts#L196)
+[packages/abstractjs/src/account/manager/Manager.types.ts:192](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.types.ts#L192)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.types.ts:197](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.types.ts#L197)
+[packages/abstractjs/src/account/manager/Manager.types.ts:193](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.types.ts#L193)
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.types.ts:198](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.types.ts#L198)
+[packages/abstractjs/src/account/manager/Manager.types.ts:194](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.types.ts#L194)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.types.ts:199](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.types.ts#L199)
+[packages/abstractjs/src/account/manager/Manager.types.ts:195](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.types.ts#L195)
 
 ___
 
@@ -62,4 +62,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.types.ts:200](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.types.ts#L200)
+[packages/abstractjs/src/account/manager/Manager.types.ts:196](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.types.ts#L196)

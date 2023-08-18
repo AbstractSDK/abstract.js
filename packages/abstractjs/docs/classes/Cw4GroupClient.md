@@ -56,7 +56,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:144](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L144)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:144](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L144)
 
 ## Properties
 
@@ -70,7 +70,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:140](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L140)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:140](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L140)
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:142](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L142)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:142](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L142)
 
 ___
 
@@ -102,7 +102,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:141](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L141)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:141](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L141)
 
 ## Methods
 
@@ -130,7 +130,7 @@ Cw4GroupInterface.addHook
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:204](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L204)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:204](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L204)
 
 ___
 
@@ -152,7 +152,7 @@ Cw4GroupInterface.admin
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:49](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L49)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:49](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L49)
 
 ___
 
@@ -174,7 +174,7 @@ Cw4GroupInterface.hooks
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:87](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L87)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:87](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L87)
 
 ___
 
@@ -204,7 +204,7 @@ Cw4GroupInterface.listMembers
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:59](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L59)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:59](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L59)
 
 ___
 
@@ -234,7 +234,7 @@ Cw4GroupInterface.member
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:73](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L73)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:73](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L73)
 
 ___
 
@@ -262,7 +262,7 @@ Cw4GroupInterface.removeHook
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:227](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L227)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:227](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L227)
 
 ___
 
@@ -284,7 +284,7 @@ Cw4GroupInterface.totalWeight
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:54](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L54)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:54](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L54)
 
 ___
 
@@ -312,7 +312,7 @@ Cw4GroupInterface.updateAdmin
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:155](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L155)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:155](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L155)
 
 ___
 
@@ -341,4 +341,4 @@ Cw4GroupInterface.updateMembers
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:178](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L178)
+[packages/abstractjs/src/cw-plus/Cw4Group.client.ts:178](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.client.ts#L178)

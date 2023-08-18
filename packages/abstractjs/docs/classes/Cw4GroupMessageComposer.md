@@ -39,7 +39,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:65](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L65)
+[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:65](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L65)
 
 ## Properties
 
@@ -53,7 +53,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:63](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L63)
+[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:63](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L63)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:62](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L62)
+[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:62](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L62)
 
 ## Methods
 
@@ -93,7 +93,7 @@ Cw4GroupMessage.addHook
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:125](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L125)
+[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:125](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L125)
 
 ___
 
@@ -119,7 +119,7 @@ Cw4GroupMessage.removeHook
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:149](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L149)
+[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:149](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L149)
 
 ___
 
@@ -145,7 +145,7 @@ Cw4GroupMessage.updateAdmin
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:74](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L74)
+[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:74](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L74)
 
 ___
 
@@ -172,4 +172,4 @@ Cw4GroupMessage.updateMembers
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:98](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L98)
+[packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts:98](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.message-composer.ts#L98)

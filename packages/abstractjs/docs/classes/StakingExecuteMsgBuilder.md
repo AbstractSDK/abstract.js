@@ -44,7 +44,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts:11](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts#L11)
+[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts:11](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts#L11)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts:52](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts#L52)
+[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts:52](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts#L52)
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts:72](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts#L72)
+[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts:72](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts#L72)
 
 ___
 
@@ -102,7 +102,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts:47](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts#L47)
+[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts:47](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts#L47)
 
 ___
 
@@ -124,7 +124,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts:29](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts#L29)
+[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts:29](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts#L29)
 
 ___
 
@@ -138,7 +138,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts:104](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts#L104)
+[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts:104](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts#L104)
 
 ___
 
@@ -159,4 +159,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts:88](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts#L88)
+[packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts:88](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/tendermint-staking/Staking.msg-builder.ts#L88)

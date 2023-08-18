@@ -49,7 +49,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.client.ts:64](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.client.ts#L64)
+[packages/abstractjs/src/account/proxy/Proxy.client.ts:64](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.client.ts#L64)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.client.ts:65](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.client.ts#L65)
+[packages/abstractjs/src/account/proxy/Proxy.client.ts:65](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.client.ts#L65)
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.client.ts:72](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.client.ts#L72)
+[packages/abstractjs/src/account/proxy/Proxy.client.ts:72](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.client.ts#L72)
 
 ___
 
@@ -119,7 +119,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.client.ts:79](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.client.ts#L79)
+[packages/abstractjs/src/account/proxy/Proxy.client.ts:79](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.client.ts#L79)
 
 ___
 
@@ -137,7 +137,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.client.ts:60](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.client.ts#L60)
+[packages/abstractjs/src/account/proxy/Proxy.client.ts:60](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.client.ts#L60)
 
 ___
 
@@ -147,7 +147,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.client.ts:59](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.client.ts#L59)
+[packages/abstractjs/src/account/proxy/Proxy.client.ts:59](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.client.ts#L59)
 
 ___
 
@@ -172,7 +172,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.client.ts:63](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.client.ts#L63)
+[packages/abstractjs/src/account/proxy/Proxy.client.ts:63](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.client.ts#L63)
 
 ___
 
@@ -197,7 +197,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.client.ts:62](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.client.ts#L62)
+[packages/abstractjs/src/account/proxy/Proxy.client.ts:62](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.client.ts#L62)
 
 ___
 
@@ -215,4 +215,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.client.ts:61](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.client.ts#L61)
+[packages/abstractjs/src/account/proxy/Proxy.client.ts:61](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.client.ts#L61)

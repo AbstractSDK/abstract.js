@@ -43,7 +43,7 @@ From osmosis -> terra, it is osmosis>juno>dao
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/AnsAsset.tsx:16
+[packages/abstractjs/src/clients/objects/ansAsset.tsx:16](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/ansAsset.tsx#L16)
 
 ## Properties
 
@@ -53,7 +53,7 @@ packages/abstractjs/src/clients/objects/AnsAsset.tsx:16
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/AnsAsset.tsx:15
+[packages/abstractjs/src/clients/objects/ansAsset.tsx:15](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/ansAsset.tsx#L15)
 
 ## Accessors
 
@@ -67,7 +67,7 @@ packages/abstractjs/src/clients/objects/AnsAsset.tsx:15
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/AnsAsset.tsx:28
+[packages/abstractjs/src/clients/objects/ansAsset.tsx:28](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/ansAsset.tsx#L28)
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/AnsAsset.tsx:41
+[packages/abstractjs/src/clients/objects/ansAsset.tsx:41](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/ansAsset.tsx#L41)
 
 ___
 
@@ -98,7 +98,7 @@ astroport/x,y -> astroport
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/AnsAsset.tsx:24
+[packages/abstractjs/src/clients/objects/ansAsset.tsx:24](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/ansAsset.tsx#L24)
 
 ___
 
@@ -115,7 +115,7 @@ osmosis>juno>dao -> juno>dao
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/AnsAsset.tsx:49
+[packages/abstractjs/src/clients/objects/ansAsset.tsx:49](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/ansAsset.tsx#L49)
 
 ___
 
@@ -132,4 +132,4 @@ astroport/x,y -> x,y
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/AnsAsset.tsx:36
+[packages/abstractjs/src/clients/objects/ansAsset.tsx:36](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/ansAsset.tsx#L36)

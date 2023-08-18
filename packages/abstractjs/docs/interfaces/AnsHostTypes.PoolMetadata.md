@@ -4,10 +4,6 @@
 
 [AnsHostTypes](../modules/AnsHostTypes.md).PoolMetadata
 
-## Indexable
-
-▪ [k: `string`]: `unknown`
-
 ## Table of contents
 
 ### Properties
@@ -24,7 +20,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.types.ts:80](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.types.ts#L80)
+[packages/abstractjs/src/native/ans-host/AnsHost.types.ts:95](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.types.ts#L95)
 
 ___
 
@@ -34,7 +30,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.types.ts:81](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.types.ts#L81)
+[packages/abstractjs/src/native/ans-host/AnsHost.types.ts:96](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.types.ts#L96)
 
 ___
 
@@ -44,4 +40,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.types.ts:82](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.types.ts#L82)
+[packages/abstractjs/src/native/ans-host/AnsHost.types.ts:97](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.types.ts#L97)

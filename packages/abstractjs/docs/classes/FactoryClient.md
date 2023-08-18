@@ -52,7 +52,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.client.ts:67](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.client.ts#L67)
+[packages/abstractjs/src/native/factory/Factory.client.ts:95](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.client.ts#L95)
 
 ## Properties
 
@@ -66,7 +66,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.client.ts:63](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.client.ts#L63)
+[packages/abstractjs/src/native/factory/Factory.client.ts:91](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.client.ts#L91)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.client.ts:65](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.client.ts#L65)
+[packages/abstractjs/src/native/factory/Factory.client.ts:93](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.client.ts#L93)
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.client.ts:64](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.client.ts#L64)
+[packages/abstractjs/src/native/factory/Factory.client.ts:92](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.client.ts#L92)
 
 ## Methods
 
@@ -120,7 +120,7 @@ FactoryInterface.config
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.client.ts:26](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.client.ts#L26)
+[packages/abstractjs/src/native/factory/Factory.client.ts:39](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.client.ts#L39)
 
 ___
 
@@ -137,7 +137,7 @@ ___
 | › `governance` | [`GovernanceDetailsForString`](../modules/FactoryTypes.md#governancedetailsforstring) | `undefined` |
 | › `link?` | `string` | `undefined` |
 | › `name` | `string` | `undefined` |
-| `fee` | `number` \| ``"auto"`` \| `StdFee` | `"auto"` |
+| `fee` | `number` \| ``"auto"`` \| `StdFee` | `'auto'` |
 | `memo?` | `string` | `undefined` |
 | `_funds?` | `Coin`[] | `undefined` |
 
@@ -151,7 +151,7 @@ FactoryInterface.createAccount
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.client.ts:94](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.client.ts#L94)
+[packages/abstractjs/src/native/factory/Factory.client.ts:134](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.client.ts#L134)
 
 ___
 
@@ -173,7 +173,7 @@ FactoryInterface.ownership
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.client.ts:31](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.client.ts#L31)
+[packages/abstractjs/src/native/factory/Factory.client.ts:44](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.client.ts#L44)
 
 ___
 
@@ -189,7 +189,7 @@ ___
 | › `ansHostContract?` | `string` | `undefined` |
 | › `moduleFactoryAddress?` | `string` | `undefined` |
 | › `versionControlContract?` | `string` | `undefined` |
-| `fee` | `number` \| ``"auto"`` \| `StdFee` | `"auto"` |
+| `fee` | `number` \| ``"auto"`` \| `StdFee` | `'auto'` |
 | `memo?` | `string` | `undefined` |
 | `_funds?` | `Coin`[] | `undefined` |
 
@@ -203,7 +203,7 @@ FactoryInterface.updateConfig
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.client.ts:77](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.client.ts#L77)
+[packages/abstractjs/src/native/factory/Factory.client.ts:105](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.client.ts#L105)
 
 ___
 
@@ -216,7 +216,7 @@ ___
 | Name | Type | Default value |
 | :------ | :------ | :------ |
 | `action` | [`Action`](../modules/FactoryTypes.md#action) | `undefined` |
-| `fee` | `number` \| ``"auto"`` \| `StdFee` | `"auto"` |
+| `fee` | `number` \| ``"auto"`` \| `StdFee` | `'auto'` |
 | `memo?` | `string` | `undefined` |
 | `_funds?` | `Coin`[] | `undefined` |
 
@@ -230,4 +230,4 @@ FactoryInterface.updateOwnership
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.client.ts:114](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.client.ts#L114)
+[packages/abstractjs/src/native/factory/Factory.client.ts:166](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.client.ts#L166)

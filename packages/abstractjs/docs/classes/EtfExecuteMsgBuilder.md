@@ -38,7 +38,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.msg-builder.ts:11](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.msg-builder.ts#L11)
+[packages/abstractjs/src/modules/apps/etf/Etf.msg-builder.ts:11](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.msg-builder.ts#L11)
 
 ___
 
@@ -59,4 +59,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.msg-builder.ts:27](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.msg-builder.ts#L27)
+[packages/abstractjs/src/modules/apps/etf/Etf.msg-builder.ts:27](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.msg-builder.ts#L27)

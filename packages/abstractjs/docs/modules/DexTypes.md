@@ -31,7 +31,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/dex/Dex.types.ts:44](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/dex/Dex.types.ts#L44)
+[packages/abstractjs/src/modules/adapters/dex/Dex.types.ts:44](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/dex/Dex.types.ts#L44)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/dex/Dex.types.ts:45](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/dex/Dex.types.ts#L45)
+[packages/abstractjs/src/modules/adapters/dex/Dex.types.ts:45](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/dex/Dex.types.ts#L45)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/dex/Dex.types.ts:8](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/dex/Dex.types.ts#L8)
+[packages/abstractjs/src/modules/adapters/dex/Dex.types.ts:8](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/dex/Dex.types.ts#L8)
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/dex/Dex.types.ts:67](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/dex/Dex.types.ts#L67)
+[packages/abstractjs/src/modules/adapters/dex/Dex.types.ts:67](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/dex/Dex.types.ts#L67)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/dex/Dex.types.ts:74](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/dex/Dex.types.ts#L74)
+[packages/abstractjs/src/modules/adapters/dex/Dex.types.ts:74](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/dex/Dex.types.ts#L74)
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/dex/Dex.types.ts:59](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/dex/Dex.types.ts#L59)
+[packages/abstractjs/src/modules/adapters/dex/Dex.types.ts:59](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/dex/Dex.types.ts#L59)
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/dex/Dex.types.ts:46](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/dex/Dex.types.ts#L46)
+[packages/abstractjs/src/modules/adapters/dex/Dex.types.ts:46](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/dex/Dex.types.ts#L46)
 
 ___
 
@@ -110,4 +110,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/dex/Dex.types.ts:43](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/dex/Dex.types.ts#L43)
+[packages/abstractjs/src/modules/adapters/dex/Dex.types.ts:43](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/dex/Dex.types.ts#L43)

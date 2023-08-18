@@ -53,7 +53,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:124](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L124)
+[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:208](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L208)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:113](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L113)
+[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:192](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L192)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:98](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L98)
+[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:172](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L172)
 
 ___
 
@@ -118,7 +118,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:87](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L87)
+[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:156](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L156)
 
 ___
 
@@ -141,7 +141,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:176](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L176)
+[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:280](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L280)
 
 ___
 
@@ -162,7 +162,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:165](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L165)
+[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:264](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L264)
 
 ___
 
@@ -176,7 +176,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:82](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L82)
+[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:151](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L151)
 
 ___
 
@@ -199,7 +199,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:150](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L150)
+[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:244](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L244)
 
 ___
 
@@ -220,7 +220,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:139](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L139)
+[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:228](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L228)
 
 ___
 
@@ -234,7 +234,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:248](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L248)
+[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:377](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L377)
 
 ___
 
@@ -257,7 +257,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:207](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L207)
+[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:321](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L321)
 
 ___
 
@@ -280,7 +280,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:233](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L233)
+[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:357](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L357)
 
 ___
 
@@ -301,7 +301,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:222](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L222)
+[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:341](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L341)
 
 ___
 
@@ -322,7 +322,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:196](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L196)
+[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:305](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L305)
 
 ___
 
@@ -336,4 +336,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:191](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L191)
+[packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts:300](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.msg-builder.ts#L300)

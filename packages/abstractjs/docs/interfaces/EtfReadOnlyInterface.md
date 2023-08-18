@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:32](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L32)
+[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:32](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L32)
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:30](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L30)
+[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:30](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L30)
 
 ___
 
@@ -64,4 +64,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:31](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L31)
+[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:31](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L31)

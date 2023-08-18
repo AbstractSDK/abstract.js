@@ -49,7 +49,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:49](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L49)
+[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:49](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L49)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:119](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L119)
+[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:119](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L119)
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:37](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L37)
+[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:37](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L37)
 
 ___
 
@@ -114,7 +114,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:81](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L81)
+[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:81](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L81)
 
 ___
 
@@ -142,7 +142,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:69](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L69)
+[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:69](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L69)
 
 ___
 
@@ -169,7 +169,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:129](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L129)
+[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:129](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L129)
 
 ___
 
@@ -197,7 +197,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:57](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L57)
+[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:57](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L57)
 
 ___
 
@@ -226,7 +226,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:105](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L105)
+[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:105](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L105)
 
 ___
 
@@ -236,7 +236,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:38](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L38)
+[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:38](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L38)
 
 ___
 
@@ -263,7 +263,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:39](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L39)
+[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:39](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L39)
 
 ___
 
@@ -291,7 +291,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:93](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L93)
+[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:93](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L93)
 
 ___
 
@@ -319,7 +319,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:147](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L147)
+[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:147](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L147)
 
 ___
 
@@ -345,7 +345,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:139](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L139)
+[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:139](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L139)
 
 ___
 
@@ -369,4 +369,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:159](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L159)
+[packages/abstractjs/src/cw-plus/Cw20.message-composer.ts:159](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.message-composer.ts#L159)

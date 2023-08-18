@@ -31,7 +31,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.types.ts:40](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.types.ts#L40)
+[packages/abstractjs/src/native/factory/Factory.types.ts:43](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.types.ts#L43)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.types.ts:61](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.types.ts#L61)
+[packages/abstractjs/src/native/factory/Factory.types.ts:72](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.types.ts#L72)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.types.ts:12](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.types.ts#L12)
+[packages/abstractjs/src/native/factory/Factory.types.ts:12](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.types.ts#L12)
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.types.ts:46](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.types.ts#L46)
+[packages/abstractjs/src/native/factory/Factory.types.ts:52](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.types.ts#L52)
 
 ___
 
@@ -71,17 +71,17 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.types.ts:73](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.types.ts#L73)
+[packages/abstractjs/src/native/factory/Factory.types.ts:84](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.types.ts#L84)
 
 ___
 
 ### GovernanceDetailsForString
 
-Ƭ **GovernanceDetailsForString**: { `Monarchy`: { `[k: string]`: `unknown`; `monarch`: `string`  }  } \| { `External`: { `[k: string]`: `unknown`; `governance_address`: `string` ; `governance_type`: `string`  }  }
+Ƭ **GovernanceDetailsForString**: { `Monarchy`: { `monarch`: `string`  }  } \| { `External`: { `governance_address`: `string` ; `governance_type`: `string`  }  }
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.types.ts:28](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.types.ts#L28)
+[packages/abstractjs/src/native/factory/Factory.types.ts:31](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.types.ts#L31)
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.types.ts:55](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.types.ts#L55)
+[packages/abstractjs/src/native/factory/Factory.types.ts:64](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.types.ts#L64)
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.types.ts:53](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.types.ts#L53)
+[packages/abstractjs/src/native/factory/Factory.types.ts:62](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.types.ts#L62)
 
 ___
 
@@ -111,4 +111,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.types.ts:54](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.types.ts#L54)
+[packages/abstractjs/src/native/factory/Factory.types.ts:63](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.types.ts#L63)

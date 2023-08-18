@@ -49,7 +49,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.client.ts:85](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.client.ts#L85)
+[packages/abstractjs/src/account/proxy/Proxy.client.ts:85](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.client.ts#L85)
 
 ## Properties
 
@@ -59,7 +59,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.client.ts:82](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.client.ts#L82)
+[packages/abstractjs/src/account/proxy/Proxy.client.ts:82](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.client.ts#L82)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.client.ts:83](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.client.ts#L83)
+[packages/abstractjs/src/account/proxy/Proxy.client.ts:83](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.client.ts#L83)
 
 ## Methods
 
@@ -98,7 +98,7 @@ ProxyReadOnlyInterface.assetConfig
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.client.ts:126](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.client.ts#L126)
+[packages/abstractjs/src/account/proxy/Proxy.client.ts:126](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.client.ts#L126)
 
 ___
 
@@ -124,7 +124,7 @@ ProxyReadOnlyInterface.assetsConfig
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.client.ts:137](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.client.ts#L137)
+[packages/abstractjs/src/account/proxy/Proxy.client.ts:137](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.client.ts#L137)
 
 ___
 
@@ -150,7 +150,7 @@ ProxyReadOnlyInterface.assetsInfo
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.client.ts:151](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.client.ts#L151)
+[packages/abstractjs/src/account/proxy/Proxy.client.ts:151](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.client.ts#L151)
 
 ___
 
@@ -168,7 +168,7 @@ ProxyReadOnlyInterface.baseAsset
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.client.ts:165](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.client.ts#L165)
+[packages/abstractjs/src/account/proxy/Proxy.client.ts:165](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.client.ts#L165)
 
 ___
 
@@ -186,7 +186,7 @@ ProxyReadOnlyInterface.config
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.client.ts:98](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.client.ts#L98)
+[packages/abstractjs/src/account/proxy/Proxy.client.ts:98](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.client.ts#L98)
 
 ___
 
@@ -211,7 +211,7 @@ ProxyReadOnlyInterface.holdingAmount
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.client.ts:115](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.client.ts#L115)
+[packages/abstractjs/src/account/proxy/Proxy.client.ts:115](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.client.ts#L115)
 
 ___
 
@@ -236,7 +236,7 @@ ProxyReadOnlyInterface.tokenValue
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.client.ts:108](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.client.ts#L108)
+[packages/abstractjs/src/account/proxy/Proxy.client.ts:108](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.client.ts#L108)
 
 ___
 
@@ -254,4 +254,4 @@ ProxyReadOnlyInterface.totalValue
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.client.ts:103](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.client.ts#L103)
+[packages/abstractjs/src/account/proxy/Proxy.client.ts:103](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.client.ts#L103)

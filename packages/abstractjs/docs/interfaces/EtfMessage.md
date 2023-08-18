@@ -41,7 +41,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:34](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L34)
+[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:34](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L34)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:32](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L32)
+[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:32](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L32)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:67](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L67)
+[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:67](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L67)
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:47](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L47)
+[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:47](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L47)
 
 ___
 
@@ -129,7 +129,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:35](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L35)
+[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:35](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L35)
 
 ___
 
@@ -139,7 +139,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:33](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L33)
+[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:33](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L33)
 
 ___
 
@@ -165,7 +165,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:68](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L68)
+[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:68](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L68)
 
 ___
 
@@ -193,4 +193,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:55](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L55)
+[packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts:55](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.message-composer.ts#L55)

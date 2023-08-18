@@ -8,7 +8,7 @@ This client provides base functionality for querying data from the blockchain,
 but does not support write operations (transactions).
 
 It provides access to various sub-clients that interact with specific parts of the blockchain,
-like the Abstract Name Service, Version Control, and Account Factory.
+like the Abstract Name Service, Registry, and Account Factory.
 
 To perform write operations, use the [AbstractClient](AbstractClient.md) class.
 
@@ -18,7 +18,7 @@ An instance of CosmWasmClient, used for blockchain interactions.
 
 **`Property`**
 
-The address of the version control contract.
+The address of the registry contract.
 
 **`Property`**
 
@@ -46,23 +46,25 @@ The address of the Account Factory.
 
 ### Properties
 
+- [accountCache](AbstractQueryClient.md#accountcache)
 - [ansHostAddress](AbstractQueryClient.md#anshostaddress)
 - [client](AbstractQueryClient.md#client)
 - [factoryAddress](AbstractQueryClient.md#factoryaddress)
-- [versionControlAddress](AbstractQueryClient.md#versioncontroladdress)
+- [registryAddress](AbstractQueryClient.md#registryaddress)
 
 ### Accessors
 
 - [ansQueryClient](AbstractQueryClient.md#ansqueryclient)
 - [factoryQueryClient](AbstractQueryClient.md#factoryqueryclient)
-- [vcQueryClient](AbstractQueryClient.md#vcqueryclient)
-- [versionControlQueryClient](AbstractQueryClient.md#versioncontrolqueryclient)
+- [registryQueryClient](AbstractQueryClient.md#registryqueryclient)
 
 ### Methods
 
+- [clearAccountCache](AbstractQueryClient.md#clearaccountcache)
 - [connectSigningClient](AbstractQueryClient.md#connectsigningclient)
 - [filterAccounts](AbstractQueryClient.md#filteraccounts)
 - [loadAccount](AbstractQueryClient.md#loadaccount)
+- [loadAccounts](AbstractQueryClient.md#loadaccounts)
 - [connect](AbstractQueryClient.md#connect)
 - [connectToChain](AbstractQueryClient.md#connecttochain)
 
@@ -80,9 +82,19 @@ The address of the Account Factory.
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractClient.ts:68](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L68)
+[packages/abstractjs/src/clients/AbstractClient.ts:92](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L92)
 
 ## Properties
+
+### accountCache
+
+• **accountCache**: `Map`<`number`, [`AbstractAccountQueryClient`](AbstractAccountQueryClient.md)\>
+
+#### Defined in
+
+[packages/abstractjs/src/clients/AbstractClient.ts:90](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L90)
+
+___
 
 ### ansHostAddress
 
@@ -94,7 +106,7 @@ The address of the Account Factory.
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractClient.ts:66](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L66)
+[packages/abstractjs/src/clients/AbstractClient.ts:89](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L89)
 
 ___
 
@@ -108,7 +120,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractClient.ts:63](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L63)
+[packages/abstractjs/src/clients/AbstractClient.ts:86](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L86)
 
 ___
 
@@ -122,21 +134,21 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractClient.ts:65](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L65)
+[packages/abstractjs/src/clients/AbstractClient.ts:88](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L88)
 
 ___
 
-### versionControlAddress
+### registryAddress
 
-• `Readonly` **versionControlAddress**: `string`
+• `Readonly` **registryAddress**: `string`
 
 #### Implementation of
 
-[IAbstractQueryClient](../interfaces/IAbstractQueryClient.md).[versionControlAddress](../interfaces/IAbstractQueryClient.md#versioncontroladdress)
+[IAbstractQueryClient](../interfaces/IAbstractQueryClient.md).[registryAddress](../interfaces/IAbstractQueryClient.md#registryaddress)
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractClient.ts:64](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L64)
+[packages/abstractjs/src/clients/AbstractClient.ts:87](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L87)
 
 ## Accessors
 
@@ -152,7 +164,7 @@ Get the Abstract Name Service query client.
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractClient.ts:187](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L187)
+[packages/abstractjs/src/clients/AbstractClient.ts:217](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L217)
 
 ___
 
@@ -168,45 +180,41 @@ Get the Abstract account factory query client.
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractClient.ts:180](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L180)
+[packages/abstractjs/src/clients/AbstractClient.ts:210](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L210)
 
 ___
 
-### vcQueryClient
+### registryQueryClient
 
-• `get` **vcQueryClient**(): [`VcQueryClient`](VcQueryClient.md)
+• `get` **registryQueryClient**(): [`RegistryQueryClient`](RegistryQueryClient.md)
 
-Get the version control query client.
-
-**`See`**
-
-AbstractQueryClient#versionControlQueryClient
+Get the registry query client.
 
 #### Returns
 
-[`VcQueryClient`](VcQueryClient.md)
+[`RegistryQueryClient`](RegistryQueryClient.md)
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractClient.ts:173](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L173)
-
-___
-
-### versionControlQueryClient
-
-• `get` **versionControlQueryClient**(): [`VcQueryClient`](VcQueryClient.md)
-
-Get the version control query client.
-
-#### Returns
-
-[`VcQueryClient`](VcQueryClient.md)
-
-#### Defined in
-
-[packages/abstractjs/src/clients/AbstractClient.ts:165](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L165)
+[packages/abstractjs/src/clients/AbstractClient.ts:203](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L203)
 
 ## Methods
+
+### clearAccountCache
+
+▸ **clearAccountCache**(): `void`
+
+Clear the account cache.
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[packages/abstractjs/src/clients/AbstractClient.ts:319](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L319)
+
+___
 
 ### connectSigningClient
 
@@ -235,7 +243,7 @@ AbstractClient#fromQueryClient
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractClient.ts:246](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L246)
+[packages/abstractjs/src/clients/AbstractClient.ts:309](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L309)
 
 ___
 
@@ -258,25 +266,22 @@ This method is extremely inefficient if querying live (as opposed to archive) no
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractClient.ts:205](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L205)
+[packages/abstractjs/src/clients/AbstractClient.ts:266](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L266)
 
 ___
 
 ### loadAccount
 
-▸ **loadAccount**(`accountId`): `Promise`<[`AbstractAccountQueryClient`](AbstractAccountQueryClient.md)\>
+▸ **loadAccount**(`accountId`, `refetch?`): `Promise`<[`AbstractAccountQueryClient`](AbstractAccountQueryClient.md)\>
 
 Load an Account query client.
 
-**`Todo`**
-
-cache the accounts in memory
-
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `accountId` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `accountId` | `number` |  |
+| `refetch?` | `boolean` | If true, the account will be loaded from the blockchain, even if it is already in the cache. |
 
 #### Returns
 
@@ -284,23 +289,47 @@ cache the accounts in memory
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractClient.ts:196](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L196)
+[packages/abstractjs/src/clients/AbstractClient.ts:227](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L227)
+
+___
+
+### loadAccounts
+
+▸ **loadAccounts**(`startAfter?`, `count?`): `Promise`<[`AbstractAccountQueryClient`](AbstractAccountQueryClient.md)[]\>
+
+Load all accounts.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `startAfter?` | `number` |
+| `count?` | `number` |
+
+#### Returns
+
+`Promise`<[`AbstractAccountQueryClient`](AbstractAccountQueryClient.md)[]\>
+
+#### Defined in
+
+[packages/abstractjs/src/clients/AbstractClient.ts:244](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L244)
 
 ___
 
 ### connect
 
-▸ `Static` **connect**(`endpoint`, `versionControlAddress`, `version?`): `Promise`<[`AbstractQueryClient`](AbstractQueryClient.md)\>
+▸ `Static` **connect**(`endpoint`, `registryAddress`, `version?`, `options?`): `Promise`<[`AbstractQueryClient`](AbstractQueryClient.md)\>
 
-Connect to a specific instance of Abstract via its Version Control address.
+Connect to a specific instance of Abstract via its Registry address.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `endpoint` | `string` \| `HttpEndpoint` |  |
-| `versionControlAddress` | `string` |  |
-| `version?` | `string` | the version of abstract to load |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `endpoint` | `string` \| `HttpEndpoint` | `undefined` |  |
+| `registryAddress` | `string` | `undefined` |  |
+| `version?` | `string` | `undefined` | the version of abstract to load |
+| `options` | [`AbstractQueryClientOptions`](../interfaces/AbstractQueryClientOptions.md) | `DEFAULT_ABSTRACT_QUERY_CLIENT_OPTIONS` | options for the query client |
 
 #### Returns
 
@@ -308,21 +337,23 @@ Connect to a specific instance of Abstract via its Version Control address.
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractClient.ts:88](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L88)
+[packages/abstractjs/src/clients/AbstractClient.ts:113](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L113)
 
 ___
 
 ### connectToChain
 
-▸ `Static` **connectToChain**(`chainId`): `Promise`<[`AbstractQueryClient`](AbstractQueryClient.md)\>
+▸ `Static` **connectToChain**(`chainId`, `options?`): `Promise`<[`AbstractQueryClient`](AbstractQueryClient.md)\>
 
-Connect to Abstract on a specific chain.
+Connect to Abstract on a specific chain. This will query the Abstract API to find the
+addresses of the deployed contracts on the chain.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `chainId` | `string` | The chain ID to connect to. For example, 'juno-1'. |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `chainId` | `string` | `undefined` | The chain ID to connect to. For example, 'juno-1'. |
+| `options` | [`AbstractQueryClientOptions`](../interfaces/AbstractQueryClientOptions.md) | `DEFAULT_ABSTRACT_QUERY_CLIENT_OPTIONS` | Options for the query client. Allows overriding of certain defaults such as the RPC url. |
 
 #### Returns
 
@@ -330,4 +361,4 @@ Connect to Abstract on a specific chain.
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractClient.ts:124](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractClient.ts#L124)
+[packages/abstractjs/src/clients/AbstractClient.ts:152](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractClient.ts#L152)

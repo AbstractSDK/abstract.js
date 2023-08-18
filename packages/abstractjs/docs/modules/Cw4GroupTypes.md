@@ -28,7 +28,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.types.ts:10](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.types.ts#L10)
+[packages/abstractjs/src/cw-plus/Cw4Group.types.ts:10](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.types.ts#L10)
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.types.ts:52](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.types.ts#L52)
+[packages/abstractjs/src/cw-plus/Cw4Group.types.ts:52](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.types.ts#L52)

@@ -44,7 +44,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts:216](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts#L216)
+[packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts:216](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts#L216)
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts:232](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts#L232)
+[packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts:232](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts#L232)
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts:250](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts#L250)
+[packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts:250](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts#L250)
 
 ___
 
@@ -102,7 +102,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts:268](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts#L268)
+[packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts:268](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts#L268)
 
 ___
 
@@ -116,7 +116,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts:174](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts#L174)
+[packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts:174](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts#L174)
 
 ___
 
@@ -137,7 +137,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts:200](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts#L200)
+[packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts:200](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts#L200)
 
 ___
 
@@ -158,7 +158,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts:184](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts#L184)
+[packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts:184](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts#L184)
 
 ___
 
@@ -172,4 +172,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts:179](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts#L179)
+[packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts:179](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.msg-builder.ts#L179)

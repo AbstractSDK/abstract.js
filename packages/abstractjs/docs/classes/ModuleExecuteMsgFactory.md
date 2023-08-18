@@ -43,7 +43,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/modules/Module.msg-factory.ts:18](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/Module.msg-factory.ts#L18)
+[packages/abstractjs/src/modules/Module.msg-factory.ts:18](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/Module.msg-factory.ts#L18)
 
 ___
 
@@ -69,4 +69,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/Module.msg-factory.ts:26](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/Module.msg-factory.ts#L26)
+[packages/abstractjs/src/modules/Module.msg-factory.ts:26](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/Module.msg-factory.ts#L26)

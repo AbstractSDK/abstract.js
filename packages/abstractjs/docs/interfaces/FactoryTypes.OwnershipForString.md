@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.types.ts:69](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.types.ts#L69)
+[packages/abstractjs/src/native/factory/Factory.types.ts:80](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.types.ts#L80)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.types.ts:70](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.types.ts#L70)
+[packages/abstractjs/src/native/factory/Factory.types.ts:81](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.types.ts#L81)
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.types.ts:71](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.types.ts#L71)
+[packages/abstractjs/src/native/factory/Factory.types.ts:82](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.types.ts#L82)

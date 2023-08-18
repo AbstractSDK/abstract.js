@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.types.ts:151](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.types.ts#L151)
+[packages/abstractjs/src/cw-plus/Cw20.types.ts:151](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.types.ts#L151)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw20.types.ts:152](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw20.types.ts#L152)
+[packages/abstractjs/src/cw-plus/Cw20.types.ts:152](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw20.types.ts#L152)

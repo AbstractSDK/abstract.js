@@ -47,7 +47,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:133](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L133)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:133](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L133)
 
 ## Properties
 
@@ -61,7 +61,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:131](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L131)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:131](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L131)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:130](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L130)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:130](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L130)
 
 ## Methods
 
@@ -99,7 +99,7 @@ ManagerMessage.callback
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:386](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L386)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:386](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L386)
 
 ___
 
@@ -126,7 +126,7 @@ ManagerMessage.execOnModule
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:150](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L150)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:150](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L150)
 
 ___
 
@@ -153,7 +153,7 @@ ManagerMessage.installModule
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:190](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L190)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:190](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L190)
 
 ___
 
@@ -180,7 +180,7 @@ ManagerMessage.registerModule
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:216](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L216)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:216](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L216)
 
 ___
 
@@ -206,7 +206,7 @@ ManagerMessage.setOwner
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:317](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L317)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:317](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L317)
 
 ___
 
@@ -232,7 +232,7 @@ ManagerMessage.uninstallModule
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:242](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L242)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:242](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L242)
 
 ___
 
@@ -260,7 +260,7 @@ ManagerMessage.updateInfo
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:288](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L288)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:288](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L288)
 
 ___
 
@@ -284,7 +284,7 @@ ManagerMessage.updateInternalConfig
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:176](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L176)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:176](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L176)
 
 ___
 
@@ -309,7 +309,7 @@ ManagerMessage.updateOwnership
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:400](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L400)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:400](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L400)
 
 ___
 
@@ -335,7 +335,7 @@ ManagerMessage.updateSettings
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:363](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L363)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:363](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L363)
 
 ___
 
@@ -361,7 +361,7 @@ ManagerMessage.updateStatus
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:340](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L340)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:340](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L340)
 
 ___
 
@@ -387,4 +387,4 @@ ManagerMessage.upgrade
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.message-composer.ts:265](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L265)
+[packages/abstractjs/src/account/manager/Manager.message-composer.ts:265](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.message-composer.ts#L265)

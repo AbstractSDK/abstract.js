@@ -47,7 +47,7 @@ Make a request to an app module.
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/App.msg-factory.ts:34](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/App.msg-factory.ts#L34)
+[packages/abstractjs/src/modules/apps/App.msg-factory.ts:34](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/App.msg-factory.ts#L34)
 
 ___
 
@@ -70,4 +70,4 @@ Update an app module's config.
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/App.msg-factory.ts:41](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/App.msg-factory.ts#L41)
+[packages/abstractjs/src/modules/apps/App.msg-factory.ts:41](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/App.msg-factory.ts#L41)

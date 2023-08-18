@@ -44,7 +44,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:94](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L94)
+[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:94](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L94)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:60](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L60)
+[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:60](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L60)
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:86](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L86)
+[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:86](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L86)
 
 ___
 
@@ -106,7 +106,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:70](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L70)
+[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:70](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L70)
 
 ___
 
@@ -132,7 +132,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:78](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L78)
+[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:78](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L78)
 
 ___
 
@@ -158,7 +158,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:102](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L102)
+[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:102](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L102)
 
 ___
 
@@ -168,7 +168,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:61](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L61)
+[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:61](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L61)
 
 ___
 
@@ -194,7 +194,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:62](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L62)
+[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:62](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L62)
 
 ___
 
@@ -221,4 +221,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:110](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L110)
+[packages/abstractjs/src/account/proxy/Proxy.message-composer.ts:110](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.message-composer.ts#L110)

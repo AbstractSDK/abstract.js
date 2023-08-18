@@ -14,8 +14,8 @@
 
 ### assets
 
-• **assets**: [`string`, [`UncheckedPriceSource`](../modules/ProxyTypes.md#uncheckedpricesource)][]
+• **assets**: [`UncheckedProxyAsset`](../modules/ProxyTypes.md#uncheckedproxyasset)[]
 
 #### Defined in
 
-[packages/abstractjs/src/account/proxy/Proxy.types.ts:470](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/proxy/Proxy.types.ts#L470)
+[packages/abstractjs/src/account/proxy/Proxy.types.ts:430](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/proxy/Proxy.types.ts#L430)

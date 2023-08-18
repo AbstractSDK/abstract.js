@@ -41,6 +41,7 @@ The proxy address associated with the account.
 
 ### Properties
 
+- [\_owner](AbstractAccountQueryClient.md#_owner)
 - [abstract](AbstractAccountQueryClient.md#abstract)
 - [accountId](AbstractAccountQueryClient.md#accountid)
 - [managerAddress](AbstractAccountQueryClient.md#manageraddress)
@@ -79,9 +80,19 @@ The proxy address associated with the account.
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractAccountClient.ts:68](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractAccountClient.ts#L68)
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:69](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L69)
 
 ## Properties
+
+### \_owner
+
+• `Optional` **\_owner**: ``null`` \| `string`
+
+#### Defined in
+
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:67](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L67)
+
+___
 
 ### abstract
 
@@ -93,7 +104,7 @@ IAbstractAccountQueryClient.abstract
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractAccountClient.ts:63](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractAccountClient.ts#L63)
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:63](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L63)
 
 ___
 
@@ -107,7 +118,7 @@ IAbstractAccountQueryClient.accountId
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractAccountClient.ts:64](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractAccountClient.ts#L64)
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:64](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L64)
 
 ___
 
@@ -121,7 +132,7 @@ IAbstractAccountQueryClient.managerAddress
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractAccountClient.ts:65](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractAccountClient.ts#L65)
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:65](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L65)
 
 ___
 
@@ -135,7 +146,7 @@ IAbstractAccountQueryClient.proxyAddress
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractAccountClient.ts:66](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractAccountClient.ts#L66)
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:66](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L66)
 
 ## Accessors
 
@@ -151,7 +162,7 @@ Get the manager query client.
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractAccountClient.ts:99](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractAccountClient.ts#L99)
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:100](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L100)
 
 ___
 
@@ -167,7 +178,7 @@ Get the proxy query client.
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractAccountClient.ts:106](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractAccountClient.ts#L106)
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:107](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L107)
 
 ## Methods
 
@@ -193,7 +204,7 @@ AbstractAccountClient#fromQueryClient
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractAccountClient.ts:202](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractAccountClient.ts#L202)
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:219](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L219)
 
 ___
 
@@ -220,7 +231,7 @@ AbstractAccountClient#fromQueryClient
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractAccountClient.ts:210](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractAccountClient.ts#L210)
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:227](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L227)
 
 ___
 
@@ -238,13 +249,13 @@ the base asset.
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractAccountClient.ts:154](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractAccountClient.ts#L154)
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:167](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L167)
 
 ___
 
 ### getModuleAddress
 
-▸ **getModuleAddress**(`moduleId`): `Promise`<`string`\>
+▸ **getModuleAddress**(`moduleId`): `Promise`<``null`` \| `string`\>
 
 Given the **moduleId**, get the address of the module installed on this Account.
 
@@ -256,11 +267,13 @@ Given the **moduleId**, get the address of the module installed on this Account.
 
 #### Returns
 
-`Promise`<`string`\>
+`Promise`<``null`` \| `string`\>
+
+null if not installed
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractAccountClient.ts:162](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractAccountClient.ts#L162)
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:176](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L176)
 
 ___
 
@@ -276,7 +289,7 @@ Load the module information for those installed on this Account.
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractAccountClient.ts:121](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractAccountClient.ts#L121)
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:122](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L122)
 
 ___
 
@@ -294,25 +307,31 @@ the namespace or null if no namespace is registered.
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractAccountClient.ts:133](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractAccountClient.ts#L133)
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:134](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L134)
 
 ___
 
 ### getOwner
 
-▸ **getOwner**(): `Promise`<``null`` \| `string`\>
+▸ **getOwner**(`invalidateCache?`): `Promise`<``null`` \| `string`\>
 
 Return the owner of the Account.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `invalidateCache?` | `boolean` | If true, refetch the owner from the managerQueryClient. |
 
 #### Returns
 
 `Promise`<``null`` \| `string`\>
 
-the owner address, or null if no owner is set.
+The owner address, or null if no owner is set.
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractAccountClient.ts:146](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractAccountClient.ts#L146)
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:149](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L149)
 
 ___
 
@@ -334,7 +353,7 @@ Query a module. Not recommended to use directly, use the module specific query m
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractAccountClient.ts:189](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractAccountClient.ts#L189)
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:203](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L203)
 
 ___
 
@@ -350,7 +369,7 @@ Return the total value of the Abstract Account against its base asset.
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractAccountClient.ts:113](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractAccountClient.ts#L113)
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:114](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L114)
 
 ___
 
@@ -375,7 +394,7 @@ default case.
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractAccountClient.ts:176](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractAccountClient.ts#L176)
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:190](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L190)
 
 ___
 
@@ -398,4 +417,4 @@ Load the abstract account client given the **accountId** and the **abstractClien
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractAccountClient.ts:80](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractAccountClient.ts#L80)
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:81](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L81)

@@ -43,7 +43,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:38](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L38)
+[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:38](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L38)
 
 ## Properties
 
@@ -53,7 +53,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:35](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L35)
+[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:35](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L35)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:36](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L36)
+[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:36](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L36)
 
 ## Methods
 
@@ -85,7 +85,7 @@ EtfReadOnlyInterface.configValidity
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:49](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L49)
+[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:49](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L49)
 
 ___
 
@@ -103,4 +103,4 @@ EtfReadOnlyInterface.state
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:44](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L44)
+[packages/abstractjs/src/modules/apps/etf/Etf.client.ts:44](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/etf/Etf.client.ts#L44)

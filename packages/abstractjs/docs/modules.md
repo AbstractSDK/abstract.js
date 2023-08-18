@@ -16,8 +16,8 @@
 - [FactoryTypes](modules/FactoryTypes.md)
 - [ManagerTypes](modules/ManagerTypes.md)
 - [ProxyTypes](modules/ProxyTypes.md)
+- [RegistryTypes](modules/RegistryTypes.md)
 - [StakingTypes](modules/StakingTypes.md)
-- [VersionControlTypes](modules/VersionControlTypes.md)
 
 ### Classes
 
@@ -40,6 +40,7 @@
 - [AnsQueryClient](classes/AnsQueryClient.md)
 - [AppExecuteMsgFactory](classes/AppExecuteMsgFactory.md)
 - [AppQueryMsgFactory](classes/AppQueryMsgFactory.md)
+- [BatchCosmWasmClient](classes/BatchCosmWasmClient.md)
 - [Cw20Client](classes/Cw20Client.md)
 - [Cw20ExecuteMsgBuilder](classes/Cw20ExecuteMsgBuilder.md)
 - [Cw20IcsClient](classes/Cw20IcsClient.md)
@@ -77,6 +78,7 @@
 - [ManagerQueryClient](classes/ManagerQueryClient.md)
 - [ManagerQueryMsgBuilder](classes/ManagerQueryMsgBuilder.md)
 - [ModuleExecuteMsgFactory](classes/ModuleExecuteMsgFactory.md)
+- [ModuleId](classes/ModuleId.md)
 - [ModuleInfo](classes/ModuleInfo.md)
 - [ModuleInitMsgFactory](classes/ModuleInitMsgFactory.md)
 - [ModuleMigrateMsgFactory](classes/ModuleMigrateMsgFactory.md)
@@ -87,19 +89,20 @@
 - [ProxyMessageComposer](classes/ProxyMessageComposer.md)
 - [ProxyQueryClient](classes/ProxyQueryClient.md)
 - [ProxyQueryMsgBuilder](classes/ProxyQueryMsgBuilder.md)
-- [StakingExecuteMsgBuilder](classes/StakingExecuteMsgBuilder.md)
-- [VcClient](classes/VcClient.md)
-- [VcQueryClient](classes/VcQueryClient.md)
-- [VersionControlClient](classes/VersionControlClient.md)
+- [RegistryClient](classes/RegistryClient.md)
 - [RegistryExecuteMsgBuilder](classes/RegistryExecuteMsgBuilder.md)
-- [VersionControlMessageComposer](classes/VersionControlMessageComposer.md)
-- [VersionControlQueryClient](classes/VersionControlQueryClient.md)
-- [VersionControlQueryMsgBuilder](classes/VersionControlQueryMsgBuilder.md)
+- [RegistryMessageComposer](classes/RegistryMessageComposer.md)
+- [RegistryQueryClient](classes/RegistryQueryClient.md)
+- [RegistryQueryMsgBuilder](classes/RegistryQueryMsgBuilder.md)
+- [StakingExecuteMsgBuilder](classes/StakingExecuteMsgBuilder.md)
 
 ### Interfaces
 
+- [AbstractQueryClientOptions](interfaces/AbstractQueryClientOptions.md)
 - [AccountFilter](interfaces/AccountFilter.md)
 - [AccountModuleFilter](interfaces/AccountModuleFilter.md)
+- [AdapterAuthorizedAddressesResponse](interfaces/AdapterAuthorizedAddressesResponse.md)
+- [AdapterConfigResponse](interfaces/AdapterConfigResponse.md)
 - [AnsHostInterface](interfaces/AnsHostInterface.md)
 - [AnsHostMessage](interfaces/AnsHostMessage.md)
 - [AnsHostReadOnlyInterface](interfaces/AnsHostReadOnlyInterface.md)
@@ -125,12 +128,13 @@
 - [ManagerInterface](interfaces/ManagerInterface.md)
 - [ManagerMessage](interfaces/ManagerMessage.md)
 - [ManagerReadOnlyInterface](interfaces/ManagerReadOnlyInterface.md)
+- [ModuleData](interfaces/ModuleData.md)
 - [ProxyInterface](interfaces/ProxyInterface.md)
 - [ProxyMessage](interfaces/ProxyMessage.md)
 - [ProxyReadOnlyInterface](interfaces/ProxyReadOnlyInterface.md)
-- [VersionControlInterface](interfaces/VersionControlInterface.md)
-- [VersionControlMessage](interfaces/VersionControlMessage.md)
-- [VersionControlReadOnlyInterface](interfaces/VersionControlReadOnlyInterface.md)
+- [RegistryInterface](interfaces/RegistryInterface.md)
+- [RegistryMessage](interfaces/RegistryMessage.md)
+- [RegistryReadOnlyInterface](interfaces/RegistryReadOnlyInterface.md)
 
 ### Type Aliases
 
@@ -161,6 +165,9 @@
 ### Variables
 
 - [ABSTRACT\_CONSTANTS](modules.md#abstract_constants)
+- [ABSTRACT\_VERSION](modules.md#abstract_version)
+- [MODULE\_DELIMITER](modules.md#module_delimiter)
+- [RAW\_QUERY\_KEYS](modules.md#raw_query_keys)
 
 ### Functions
 
@@ -183,7 +190,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/Adapter.types.ts:3](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/Adapter.types.ts#L3)
+[packages/abstractjs/src/modules/adapters/Adapter.types.ts:3](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/Adapter.types.ts#L3)
 
 ___
 
@@ -200,7 +207,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/Adapter.types.ts:30](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/Adapter.types.ts#L30)
+[packages/abstractjs/src/modules/adapters/Adapter.types.ts:30](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/Adapter.types.ts#L30)
 
 ___
 
@@ -210,7 +217,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/Adapter.types.ts:18](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/Adapter.types.ts#L18)
+[packages/abstractjs/src/modules/adapters/Adapter.types.ts:18](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/Adapter.types.ts#L18)
 
 ___
 
@@ -226,7 +233,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/Adapter.types.ts:14](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/Adapter.types.ts#L14)
+[packages/abstractjs/src/modules/adapters/Adapter.types.ts:14](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/Adapter.types.ts#L14)
 
 ___
 
@@ -242,7 +249,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/Adapter.types.ts:28](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/Adapter.types.ts#L28)
+[packages/abstractjs/src/modules/adapters/Adapter.types.ts:28](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/Adapter.types.ts#L28)
 
 ___
 
@@ -265,7 +272,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/Adapter.types.ts:9](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/Adapter.types.ts#L9)
+[packages/abstractjs/src/modules/adapters/Adapter.types.ts:9](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/Adapter.types.ts#L9)
 
 ___
 
@@ -275,7 +282,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AnsClient.ts:12](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AnsClient.ts#L12)
+[packages/abstractjs/src/clients/AnsClient.ts:12](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AnsClient.ts#L12)
 
 ___
 
@@ -285,7 +292,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AnsClient.ts:14](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AnsClient.ts#L14)
+[packages/abstractjs/src/clients/AnsClient.ts:14](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AnsClient.ts#L14)
 
 ___
 
@@ -295,7 +302,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AnsClient.ts:13](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AnsClient.ts#L13)
+[packages/abstractjs/src/clients/AnsClient.ts:13](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AnsClient.ts#L13)
 
 ___
 
@@ -312,7 +319,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/App.types.ts:3](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/App.types.ts#L3)
+[packages/abstractjs/src/modules/apps/App.types.ts:3](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/App.types.ts#L3)
 
 ___
 
@@ -328,7 +335,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/App.types.ts:20](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/App.types.ts#L20)
+[packages/abstractjs/src/modules/apps/App.types.ts:20](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/App.types.ts#L20)
 
 ___
 
@@ -338,7 +345,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/App.types.ts:25](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/App.types.ts#L25)
+[packages/abstractjs/src/modules/apps/App.types.ts:25](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/App.types.ts#L25)
 
 ___
 
@@ -348,7 +355,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/App.types.ts:10](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/App.types.ts#L10)
+[packages/abstractjs/src/modules/apps/App.types.ts:10](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/App.types.ts#L10)
 
 ___
 
@@ -364,7 +371,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/App.types.ts:9](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/App.types.ts#L9)
+[packages/abstractjs/src/modules/apps/App.types.ts:9](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/App.types.ts#L9)
 
 ___
 
@@ -380,7 +387,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/apps/App.types.ts:18](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/apps/App.types.ts#L18)
+[packages/abstractjs/src/modules/apps/App.types.ts:18](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/apps/App.types.ts#L18)
 
 ___
 
@@ -390,7 +397,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/clients/index.ts:9](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/index.ts#L9)
+[packages/abstractjs/src/clients/index.ts:8](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/index.ts#L8)
 
 ___
 
@@ -400,7 +407,7 @@ ___
 
 #### Defined in
 
-packages/abstractjs/src/clients/objects/ModuleInfo.ts:19
+[packages/abstractjs/src/clients/objects/moduleInfo.ts:19](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/moduleInfo.ts#L19)
 
 ___
 
@@ -417,7 +424,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/Module.types.ts:3](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/Module.types.ts#L3)
+[packages/abstractjs/src/modules/Module.types.ts:3](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/Module.types.ts#L3)
 
 ___
 
@@ -441,7 +448,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/Module.types.ts:19](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/Module.types.ts#L19)
+[packages/abstractjs/src/modules/Module.types.ts:19](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/Module.types.ts#L19)
 
 ___
 
@@ -449,7 +456,7 @@ ___
 
 Ƭ **ModuleMigrateMsg**<`TBaseMsg`, `TAppMsg`\>: `Object`
 
-MigrateMsg for modules. Note that APIs CANNOT be migrated.
+MigrateMsg for modules. Note that Adapters CANNOT be migrated.
 
 #### Type parameters
 
@@ -467,7 +474,7 @@ MigrateMsg for modules. Note that APIs CANNOT be migrated.
 
 #### Defined in
 
-[packages/abstractjs/src/modules/Module.types.ts:27](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/Module.types.ts#L27)
+[packages/abstractjs/src/modules/Module.types.ts:27](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/Module.types.ts#L27)
 
 ___
 
@@ -484,27 +491,27 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/Module.types.ts:11](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/Module.types.ts#L11)
+[packages/abstractjs/src/modules/Module.types.ts:11](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/Module.types.ts#L11)
 
 ___
 
 ### ModuleType
 
-Ƭ **ModuleType**: `VariantKeys`<[`ModuleReference`](modules/VersionControlTypes.md#modulereference)\>
+Ƭ **ModuleType**: `VariantKeys`<[`ModuleReference`](modules/RegistryTypes.md#modulereference)\>
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractAccountClient.ts:33](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractAccountClient.ts#L33)
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:33](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L33)
 
 ___
 
 ### VcModuleEntry
 
-Ƭ **VcModuleEntry**: [[`ModuleInfo`](interfaces/VersionControlTypes.ModuleInfo.md), [`ModuleReference`](modules/VersionControlTypes.md#modulereference)]
+Ƭ **VcModuleEntry**: [[`ModuleInfo`](classes/ModuleInfo.md), [`ModuleReference`](modules/RegistryTypes.md#modulereference)]
 
 #### Defined in
 
-[packages/abstractjs/src/clients/VcClient.ts:20](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/VcClient.ts#L20)
+[packages/abstractjs/src/native/registry/RegistryClient.ts:20](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/registry/RegistryClient.ts#L20)
 
 ## Variables
 
@@ -523,7 +530,44 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/constants.ts:1](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/constants.ts#L1)
+[packages/abstractjs/src/constants.ts:1](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/constants.ts#L1)
+
+___
+
+### ABSTRACT\_VERSION
+
+• `Const` **ABSTRACT\_VERSION**: ``"0.17.4"``
+
+#### Defined in
+
+[packages/abstractjs/src/constants.ts:8](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/constants.ts#L8)
+
+___
+
+### MODULE\_DELIMITER
+
+• `Const` **MODULE\_DELIMITER**: ``":"``
+
+#### Defined in
+
+[packages/abstractjs/src/clients/objects/ModuleId.ts:1](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/objects/ModuleId.ts#L1)
+
+___
+
+### RAW\_QUERY\_KEYS
+
+• `Const` **RAW\_QUERY\_KEYS**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `ContractInfo` | ``"contract_info"`` |
+| `ModuleData` | ``"module_data"`` |
+
+#### Defined in
+
+[packages/abstractjs/src/constants.ts:10](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/constants.ts#L10)
 
 ## Functions
 
@@ -967,4 +1011,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AbstractAccountClient.ts:415](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AbstractAccountClient.ts#L415)
+[packages/abstractjs/src/clients/AbstractAccountClient.ts:432](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AbstractAccountClient.ts#L432)

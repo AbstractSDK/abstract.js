@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "preinstall": "npx only-allow pnpm",
+    "abstractjs": "pnpm --filter @abstract-money/abstract.js",
+    "docs:gen": "pnpm abstractjs docs:gen",
     "lint:fix": "turbo run lint:fix",
     "build": "turbo run build",
     "lint": "turbo run lint",

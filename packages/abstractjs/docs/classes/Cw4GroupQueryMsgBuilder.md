@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.msg-builder.ts:89](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.msg-builder.ts#L89)
+[packages/abstractjs/src/cw-plus/Cw4Group.msg-builder.ts:89](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.msg-builder.ts#L89)
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.msg-builder.ts:135](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.msg-builder.ts#L135)
+[packages/abstractjs/src/cw-plus/Cw4Group.msg-builder.ts:135](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.msg-builder.ts#L135)
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.msg-builder.ts:99](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.msg-builder.ts#L99)
+[packages/abstractjs/src/cw-plus/Cw4Group.msg-builder.ts:99](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.msg-builder.ts#L99)
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.msg-builder.ts:117](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.msg-builder.ts#L117)
+[packages/abstractjs/src/cw-plus/Cw4Group.msg-builder.ts:117](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.msg-builder.ts#L117)
 
 ___
 
@@ -106,4 +106,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw4Group.msg-builder.ts:94](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw4Group.msg-builder.ts#L94)
+[packages/abstractjs/src/cw-plus/Cw4Group.msg-builder.ts:94](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw4Group.msg-builder.ts#L94)

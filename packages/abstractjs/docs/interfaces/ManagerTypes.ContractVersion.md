@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.types.ts:214](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.types.ts#L214)
+[packages/abstractjs/src/account/manager/Manager.types.ts:210](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.types.ts#L210)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/account/manager/Manager.types.ts:215](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/account/manager/Manager.types.ts#L215)
+[packages/abstractjs/src/account/manager/Manager.types.ts:211](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/account/manager/Manager.types.ts#L211)

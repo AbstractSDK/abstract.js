@@ -68,7 +68,7 @@ A query client for interacting with Abstract Name Service.
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AnsClient.ts:55](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AnsClient.ts#L55)
+[packages/abstractjs/src/clients/AnsClient.ts:55](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AnsClient.ts#L55)
 
 ## Properties
 
@@ -82,7 +82,7 @@ A query client for interacting with Abstract Name Service.
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:101](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L101)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:121](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L121)
 
 ___
 
@@ -100,7 +100,7 @@ IAnsQueryClient.contractAddress
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:102](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L102)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:122](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L122)
 
 ## Methods
 
@@ -131,7 +131,7 @@ IAnsQueryClient.assetInfoList
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:168](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L168)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:180](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L180)
 
 ___
 
@@ -160,7 +160,7 @@ IAnsQueryClient.assetInfos
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:157](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L157)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:173](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L173)
 
 ___
 
@@ -191,7 +191,7 @@ IAnsQueryClient.assetList
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:140](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L140)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:156](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L156)
 
 ___
 
@@ -220,7 +220,7 @@ IAnsQueryClient.assets
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:129](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L129)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:149](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L149)
 
 ___
 
@@ -251,7 +251,7 @@ IAnsQueryClient.channelList
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:224](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L224)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:228](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L228)
 
 ___
 
@@ -280,7 +280,7 @@ IAnsQueryClient.channels
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:213](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L213)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:221](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L221)
 
 ___
 
@@ -302,7 +302,7 @@ IAnsQueryClient.config
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:124](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L124)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:144](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L144)
 
 ___
 
@@ -333,7 +333,7 @@ IAnsQueryClient.contractList
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:196](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L196)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:204](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L204)
 
 ___
 
@@ -362,7 +362,7 @@ IAnsQueryClient.contracts
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:185](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L185)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:197](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L197)
 
 ___
 
@@ -389,7 +389,7 @@ IAnsQueryClient.filterAssets
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AnsClient.ts:99](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AnsClient.ts#L99)
+[packages/abstractjs/src/clients/AnsClient.ts:99](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AnsClient.ts#L99)
 
 ___
 
@@ -416,7 +416,7 @@ IAnsQueryClient.filterChannels
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AnsClient.ts:139](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AnsClient.ts#L139)
+[packages/abstractjs/src/clients/AnsClient.ts:139](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AnsClient.ts#L139)
 
 ___
 
@@ -443,7 +443,7 @@ IAnsQueryClient.filterContracts
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AnsClient.ts:178](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AnsClient.ts#L178)
+[packages/abstractjs/src/clients/AnsClient.ts:178](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AnsClient.ts#L178)
 
 ___
 
@@ -470,7 +470,7 @@ IAnsQueryClient.listAssets
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AnsClient.ts:69](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AnsClient.ts#L69)
+[packages/abstractjs/src/clients/AnsClient.ts:69](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AnsClient.ts#L69)
 
 ___
 
@@ -497,7 +497,7 @@ IAnsQueryClient.listChannels
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AnsClient.ts:109](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AnsClient.ts#L109)
+[packages/abstractjs/src/clients/AnsClient.ts:109](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AnsClient.ts#L109)
 
 ___
 
@@ -522,7 +522,7 @@ IAnsQueryClient.listContracts
 
 #### Defined in
 
-[packages/abstractjs/src/clients/AnsClient.ts:149](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/clients/AnsClient.ts#L149)
+[packages/abstractjs/src/clients/AnsClient.ts:149](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/clients/AnsClient.ts#L149)
 
 ___
 
@@ -544,7 +544,7 @@ IAnsQueryClient.ownership
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:302](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L302)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:298](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L298)
 
 ___
 
@@ -575,7 +575,7 @@ IAnsQueryClient.poolList
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:257](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L257)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:257](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L257)
 
 ___
 
@@ -606,7 +606,7 @@ IAnsQueryClient.poolMetadataList
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:285](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L285)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:281](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L281)
 
 ___
 
@@ -635,7 +635,7 @@ IAnsQueryClient.poolMetadatas
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:274](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L274)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:274](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L274)
 
 ___
 
@@ -664,7 +664,7 @@ IAnsQueryClient.pools
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:246](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L246)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:250](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L250)
 
 ___
 
@@ -686,4 +686,4 @@ IAnsQueryClient.registeredDexes
 
 #### Defined in
 
-[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:241](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L241)
+[packages/abstractjs/src/native/ans-host/AnsHost.client.ts:245](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/ans-host/AnsHost.client.ts#L245)

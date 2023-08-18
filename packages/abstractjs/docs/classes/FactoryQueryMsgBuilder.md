@@ -31,7 +31,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.msg-builder.ts:49](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.msg-builder.ts#L49)
+[packages/abstractjs/src/native/factory/Factory.msg-builder.ts:72](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.msg-builder.ts#L72)
 
 ___
 
@@ -45,4 +45,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/native/factory/Factory.msg-builder.ts:54](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/native/factory/Factory.msg-builder.ts#L54)
+[packages/abstractjs/src/native/factory/Factory.msg-builder.ts:77](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/native/factory/Factory.msg-builder.ts#L77)

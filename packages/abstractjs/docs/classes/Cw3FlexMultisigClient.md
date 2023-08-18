@@ -60,7 +60,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:263](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L263)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:263](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L263)
 
 ## Properties
 
@@ -74,7 +74,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:259](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L259)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:259](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L259)
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:261](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L261)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:261](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L261)
 
 ___
 
@@ -106,7 +106,7 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:260](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L260)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:260](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L260)
 
 ## Methods
 
@@ -134,7 +134,7 @@ Cw3FlexMultisigInterface.close
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:356](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L356)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:356](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L356)
 
 ___
 
@@ -162,7 +162,7 @@ Cw3FlexMultisigInterface.execute
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:333](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L333)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:333](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L333)
 
 ___
 
@@ -192,7 +192,7 @@ Cw3FlexMultisigInterface.listProposals
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:112](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L112)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:112](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L112)
 
 ___
 
@@ -222,7 +222,7 @@ Cw3FlexMultisigInterface.listVoters
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:178](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L178)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:178](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L178)
 
 ___
 
@@ -253,7 +253,7 @@ Cw3FlexMultisigInterface.listVotes
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:154](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L154)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:154](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L154)
 
 ___
 
@@ -281,7 +281,7 @@ Cw3FlexMultisigInterface.memberChangedHook
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:379](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L379)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:379](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L379)
 
 ___
 
@@ -310,7 +310,7 @@ Cw3FlexMultisigInterface.proposal
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:105](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L105)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:105](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L105)
 
 ___
 
@@ -341,7 +341,7 @@ Cw3FlexMultisigInterface.propose
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:275](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L275)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:275](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L275)
 
 ___
 
@@ -371,7 +371,7 @@ Cw3FlexMultisigInterface.queryVote
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:140](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L140)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:140](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L140)
 
 ___
 
@@ -401,7 +401,7 @@ Cw3FlexMultisigInterface.reverseProposals
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:126](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L126)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:126](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L126)
 
 ___
 
@@ -423,7 +423,7 @@ Cw3FlexMultisigInterface.threshold
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:100](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L100)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:100](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L100)
 
 ___
 
@@ -452,7 +452,7 @@ Cw3FlexMultisigInterface.vote
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:307](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L307)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:307](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L307)
 
 ___
 
@@ -481,4 +481,4 @@ Cw3FlexMultisigInterface.voter
 
 #### Defined in
 
-[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:171](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L171)
+[packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts:171](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/cw-plus/Cw3FlexMultisig.client.ts#L171)

@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/dex/Dex.types.ts:56](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/dex/Dex.types.ts#L56)
+[packages/abstractjs/src/modules/adapters/dex/Dex.types.ts:56](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/dex/Dex.types.ts#L56)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 #### Defined in
 
-[packages/abstractjs/src/modules/adapters/dex/Dex.types.ts:57](https://github.com/AbstractSDK/frontend/blob/07410073/packages/abstractjs/src/modules/adapters/dex/Dex.types.ts#L57)
+[packages/abstractjs/src/modules/adapters/dex/Dex.types.ts:57](https://github.com/Abstract-OS/abstract.js/blob/c46b309/packages/abstractjs/src/modules/adapters/dex/Dex.types.ts#L57)
