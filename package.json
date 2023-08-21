@@ -9,6 +9,7 @@
     "lint:fix": "turbo run lint:fix",
     "build": "turbo run build",
     "lint": "turbo run lint",
+    "docgen": "turbo run docgen",
     "format": "turbo run format",
     "start": "pnpm dapp start"
   },
