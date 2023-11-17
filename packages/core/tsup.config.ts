@@ -1,0 +1,23 @@
+import { defineConfig } from 'tsup'
+
+import { getConfig } from '../../scripts/tsup'
+import { dependencies, peerDependencies } from './package.json'
+
+export default defineConfig(
+  getConfig({
+    dev: process.env.DEV === 'true',
+    entry: [
+      'src/index.ts',
+      'src/account/index.ts',
+      'src/api/index.ts',
+      'src/apps/index.ts',
+      'src/chain-registry/index.ts',
+      'src/clients/index.ts',
+      'src/cw-plus/index.ts',
+      'src/modules/index.ts',
+      'src/native/index.ts',
+      'src/tools/index.ts',
+    ],
+    external: [...Object.keys(dependencies), ...Object.keys(peerDependencies)],
+  }),
+)

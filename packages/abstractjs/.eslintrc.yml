@@ -1,8 +1,0 @@
-
-ignorePatterns:
-  - src/core
-  - src/cw-plus
-  - src/native
-  - src/modules/apps/etf
-  - src/modules/adapters/dex
-  - src/modules/adapters/tendermint-staking

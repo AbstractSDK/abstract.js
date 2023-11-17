@@ -1,0 +1,12 @@
+schema: "../../apps/subgraph/schema.graphql"
+
+documents: ['./src/**/*.ts', '!src/__generated__/gql/**/*']
+generates:
+  ./src/__generated__/gql/:
+    preset: client
+    presetConfig:
+      gqlTagName: gql
+      immutableTypes: true
+    config:
+      immutableTypes: true
+      useTypeImports: true

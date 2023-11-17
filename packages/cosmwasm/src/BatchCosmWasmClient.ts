@@ -8,12 +8,13 @@ import {
 export const DEFAULT_BATCH_SIZE_LIMIT = 25
 export const DEFAULT_DISPATCH_INTERVAL = 300
 
-export const DEFAULT_BATCH_COSMWASM_CLIENT_OPTIONS: BatchCosmWasmClientOptions = {
-  batchSizeLimit: DEFAULT_BATCH_SIZE_LIMIT,
-  dispatchInterval: DEFAULT_DISPATCH_INTERVAL,
-}
+export const DEFAULT_BATCH_COSMWASM_CLIENT_OPTIONS: BatchCosmWasmClientOptions =
+  {
+    batchSizeLimit: DEFAULT_BATCH_SIZE_LIMIT,
+    dispatchInterval: DEFAULT_DISPATCH_INTERVAL,
+  }
 
-export interface BatchCosmWasmClientOptions extends HttpBatchClientOptions {}
+export type BatchCosmWasmClientOptions = HttpBatchClientOptions
 
 /**
  * BatchCosmWasmClient is an extension of CosmWasmClient that allows batch processing of rpc requests.
@@ -24,7 +25,7 @@ export class BatchCosmWasmClient extends CosmWasmClient {
 
   constructor(
     tmClient: Tendermint34Client | undefined,
-    options: BatchCosmWasmClientOptions = DEFAULT_BATCH_COSMWASM_CLIENT_OPTIONS
+    options: BatchCosmWasmClientOptions = DEFAULT_BATCH_COSMWASM_CLIENT_OPTIONS,
   ) {
     super(tmClient)
     this._batchSizeLimit = options.batchSizeLimit
@@ -39,13 +40,13 @@ export class BatchCosmWasmClient extends CosmWasmClient {
    */
   static async connect(
     endpoint: string | HttpEndpoint,
-    options: BatchCosmWasmClientOptions = DEFAULT_BATCH_COSMWASM_CLIENT_OPTIONS
+    options: BatchCosmWasmClientOptions = DEFAULT_BATCH_COSMWASM_CLIENT_OPTIONS,
   ): Promise<CosmWasmClient> {
     const tendermint = await Tendermint34Client.create(
       new HttpBatchClient(endpoint, {
         batchSizeLimit: options.batchSizeLimit,
         dispatchInterval: options.dispatchInterval,
-      })
+      }),
     )
     return new this(tendermint, options)
   }

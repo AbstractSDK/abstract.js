@@ -16,7 +16,7 @@ This monorepo contains the Typescript-based SDKs for AbstractSDK.
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/AbstractSDK/abstract.js.git abstractjs
+   git clone https://github.com/AbstractSDK/core.git abstractjs
    cd abstractjs
    ```
    

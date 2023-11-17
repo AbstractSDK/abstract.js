@@ -1,25 +1,39 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": true,
-    "skipLibCheck": true,
+    "baseUrl": ".",
+    "downlevelIteration": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "resolveJsonModule": true,
     "isolatedModules": true,
+    "jsx": "react-jsx",
+    "lib": ["es2021", "dom"],
+    "module": "esnext",
+    "moduleResolution": "node",
     "noEmit": true,
-    "jsx": "react",
+    "noImplicitAny": true,
+    "noUncheckedIndexedAccess": true,
+    // TODO: change to true
+    "noUnusedLocals": false,
+    "noUnusedParameters": true,
+    "paths": {
+      "@abstract-money/core": ["packages/core/src"],
+      "@abstract-money/core/*": ["packages/core/src/*"],
+      "@abstract-money/react": ["packages/react/src"],
+      "@abstract-money/react/*": ["packages/react/src/*"],
+      "@abstract-money/cosmwasm": ["packages/cosmwasm/src"],
+      "@abstract-money/cosmwasm/*": ["packages/cosmwasm/src/*"]
+    },
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
     "strictNullChecks": true,
-    "useDefineForClassFields": true,
-    "experimentalDecorators": true,
+    "target": "es2021",
+    "types": ["node"]
   },
+  "exclude": ["**/node_modules/**", "**/dist/**"],
   "include": [
-  ],
-  "exclude": ["node_modules", "dist", "functions/**/*"],
+    "examples/**/*",
+    "packages/**/*",
+    "scripts/**/*"
+  ]
 }
