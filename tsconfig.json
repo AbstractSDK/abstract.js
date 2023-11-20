@@ -35,7 +35,7 @@
     "strict": true,
     "strictNullChecks": true,
     "target": "es2021",
-    "types": ["node"]
+    "types": ["node", "@types/jest"]
   },
   "exclude": ["**/node_modules/**", "**/dist/**"],
   "include": [
