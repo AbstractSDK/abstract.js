@@ -1,6 +1,6 @@
 {
   "name": "@abstract-money/react",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "React Hooks for Abstract SDK",
   "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
   "author": "adairrr",
@@ -21,6 +21,9 @@
     "@abstract-money/core": "workspace:*"
   },
   "peerDependencies": {
+    "@cosmjs/amino": ">=0.28",
+    "@cosmjs/cosmwasm-stargate": ">=0.28",
+    "@cosmjs/encoding": ">=0.28",
     "react": ">=18.0.0",
     "typescript": ">=5.0.4",
     "graz": ">=0.0.51"
@@ -31,7 +34,11 @@
     }
   },
   "devDependencies": {
-    "@tanstack/react-query": ">=4",
+    "@cosmjs/amino": "^0.31.0",
+    "@cosmjs/cosmwasm-stargate": "^0.31.0",
+    "@cosmjs/encoding": "^0.31.0",
+    "@cosmjs/stargate": "^0.31.0",
+    "@tanstack/react-query": ">4",
     "@types/node": "^18.11.10",
     "@types/react": "^18.2.0",
     "rome": "^12.1.2",
@@ -41,7 +48,17 @@
     "tsup": "^6.5.0",
     "graz": "^0.0.51"
   },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./hooks": {
+      "types": "./dist/hooks/index.d.ts",
+      "default": "./dist/hooks/index.js"
+    },
     "./internal": {
       "types": "./dist/internal/index.d.ts",
       "default": "./dist/internal/index.js"
@@ -85,15 +102,9 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "/internal/account",
-    "/internal/apps/challenge",
-    "/internal/cw-plus/cw-20",
-    "/internal/cw-plus/cw-20-ics",
-    "/internal/cw-plus/cw-3-flex-multisig",
-    "/internal/cw-plus/cw-4-group",
-    "/internal/native/ans",
-    "/internal/native/factory",
-    "/internal/native/registry"
+    "/hooks",
+    "/internal",
+    "/dist"
   ],
   "simple-git-hooks": {
     "pre-commit": "pnpm format && pnpm lint:fix"

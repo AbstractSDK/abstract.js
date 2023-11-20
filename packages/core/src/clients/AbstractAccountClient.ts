@@ -1,3 +1,13 @@
+import { type Coin } from '@cosmjs/amino'
+import {
+  type ExecuteResult,
+  type MsgExecuteContractEncodeObject,
+  type SigningCosmWasmClient,
+} from '@cosmjs/cosmwasm-stargate'
+import { type JsonObject } from '@cosmjs/cosmwasm-stargate/build/modules'
+import { toBase64, toUtf8 } from '@cosmjs/encoding'
+import { match } from 'ts-pattern'
+import { type ContractMsg } from '.'
 import {
   ManagerClient,
   ManagerExecuteMsgBuilder,
@@ -8,30 +18,20 @@ import {
   ProxyMessageComposer,
   ProxyQueryClient,
 } from '../account'
-import { type AbstractClient, type AbstractQueryClient } from './AbstractClient'
-import { toBase64, toUtf8 } from '@cosmjs/encoding'
-import {
-  type ExecuteResult,
-  type MsgExecuteContractEncodeObject,
-  type SigningCosmWasmClient,
-} from '@cosmjs/cosmwasm-stargate'
-import { type ContractMsg } from '.'
 import { type ManagerModuleInfo } from '../account/manager/Manager.types'
+import {
+  type AssetInfoBaseForAddr,
+  CosmosMsgForEmpty,
+} from '../account/proxy/Proxy.types'
 import { ABSTRACT_CONSTANTS } from '../constants'
-import { type ModuleReference } from '../native/registry/Registry.types'
-import { match } from 'ts-pattern'
 import {
   AdapterExecuteMsgFactory,
   AdapterQueryMsgBuilder,
   AppExecuteMsgFactory,
   AppQueryMsgFactory,
 } from '../modules'
-import { type JsonObject } from '@cosmjs/cosmwasm-stargate/build/modules'
-import { type Coin } from '@cosmjs/amino'
-import {
-  type AssetInfoBaseForAddr,
-  CosmosMsgForEmpty,
-} from '../account/proxy/Proxy.types'
+import { type ModuleReference } from '../native/registry/Registry.types'
+import { type AbstractClient, type AbstractQueryClient } from './AbstractClient'
 import { AbstractAccountId } from './objects/AbstractAccountId'
 
 type VariantKeys<T> = T extends T ? keyof T : never
@@ -151,7 +151,7 @@ export class AbstractAccountQueryClient implements IAbstractAccountQueryClient {
    * Retrieve the list of subaccount ids for this Account.
    * @returns the list of subaccount ids.
    */
-  public async getSubAccountSequences(): Promise<Array<number>> {
+  public async getSubAccountSequences(): Promise<number[]> {
     return this.managerQueryClient
       .subAccountIds({
         limit: ABSTRACT_CONSTANTS.MAX_PAGE_SIZE,
@@ -163,7 +163,7 @@ export class AbstractAccountQueryClient implements IAbstractAccountQueryClient {
    * Retrieve the list of subaccount ids for this Account.
    * @returns the list of subaccount ids.
    */
-  public async getSubAccountIds(): Promise<Array<AbstractAccountId>> {
+  public async getSubAccountIds(): Promise<AbstractAccountId[]> {
     const chainName = await this.abstract.getChainName()
     return this.managerQueryClient
       .subAccountIds({
@@ -178,7 +178,7 @@ export class AbstractAccountQueryClient implements IAbstractAccountQueryClient {
   /**
    * Retrieve the list of sub-accounts for this Account.
    */
-  public async getSubAccounts(): Promise<Array<AbstractAccountQueryClient>> {
+  public async getSubAccounts(): Promise<AbstractAccountQueryClient[]> {
     const subAccountIds = await this.getSubAccountSequences()
     return Promise.all(
       subAccountIds.map((subAccountId) =>
@@ -521,7 +521,7 @@ export class AbstractAccountClient extends AbstractAccountQueryClient {
    */
   public async withdraw(
     recipient: string,
-    funds: Array<Coin>,
+    funds: Coin[],
   ): Promise<ExecuteResult> {
     if (!funds.length) {
       throw new Error('No funds to withdraw')

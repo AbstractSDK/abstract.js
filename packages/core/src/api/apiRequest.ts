@@ -1,5 +1,5 @@
-import request, { type RequestDocument, type Variables } from 'graphql-request'
 import { type TypedDocumentNode } from '@graphql-typed-document-node/core'
+import request, { type RequestDocument, type Variables } from 'graphql-request'
 import type { VariablesAndRequestHeadersArgs } from 'graphql-request/build/esm/types'
 import { ABSTRACT_API_URL } from '../constants'
 

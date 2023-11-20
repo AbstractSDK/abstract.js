@@ -4,8 +4,8 @@
  * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
  */
 
-import { QueryMsg } from './Dex.types'
 import { CamelCasedProperties } from 'type-fest'
+import { QueryMsg } from './Dex.types'
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export abstract class DexQueryMsgBuilder {

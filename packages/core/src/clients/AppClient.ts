@@ -4,17 +4,17 @@
  * and run the @abstract-money/ts-codegen generate command to regenerate this file.
  */
 
+import { Coin, StdFee } from '@cosmjs/amino'
+import { ExecuteResult, SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { CamelCasedProperties } from 'type-fest'
-import { SigningCosmWasmClient, ExecuteResult } from '@cosmjs/cosmwasm-stargate'
-import { StdFee, Coin } from '@cosmjs/amino'
-import { AppExecuteMsg, AppExecuteMsgFactory } from '../modules'
-import {
-  AbstractAccountQueryClient,
-  AbstractAccountClient,
-} from './AbstractAccountClient'
-import { AbstractQueryClient, AbstractClient } from './AbstractClient'
 import { ContractMsg } from '.'
+import { AppExecuteMsg, AppExecuteMsgFactory } from '../modules'
 import { AccountId } from '../native/registry/Registry.types'
+import {
+  AbstractAccountClient,
+  AbstractAccountQueryClient,
+} from './AbstractAccountClient'
+import { AbstractClient, AbstractQueryClient } from './AbstractClient'
 import { AbstractAccountId } from './objects/AbstractAccountId'
 
 export interface IAppQueryClient<TQueryMsg extends ContractMsg> {

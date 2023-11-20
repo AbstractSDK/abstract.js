@@ -6,9 +6,9 @@
 
 import { Coin } from '@cosmjs/amino'
 import { MsgExecuteContractEncodeObject } from '@cosmjs/cosmwasm-stargate'
-import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
 import { toUtf8 } from '@cosmjs/encoding'
-import { Uint128, Binary, Decimal, AssetBaseForString } from './Etf.types'
+import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
+import { AssetBaseForString, Binary, Decimal, Uint128 } from './Etf.types'
 export interface EtfMessage {
   contractAddress: string
   sender: string

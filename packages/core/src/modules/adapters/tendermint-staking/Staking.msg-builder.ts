@@ -4,8 +4,8 @@
  * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
  */
 
-import { ExecuteMsg } from './Staking.types'
 import { CamelCasedProperties } from 'type-fest'
+import { ExecuteMsg } from './Staking.types'
 
 export abstract class StakingExecuteMsgBuilder {
   static delegate = ({

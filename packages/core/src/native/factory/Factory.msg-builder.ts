@@ -4,27 +4,27 @@
  * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
  */
 
+import { CamelCasedProperties } from 'type-fest'
 import {
-  InstantiateMsg,
-  ExecuteMsg,
-  AssetEntry,
-  GovernanceDetailsForString,
-  Binary,
-  Namespace,
-  ModuleVersion,
   Action,
+  Addr,
+  AssetEntry,
+  Binary,
+  ConfigResponse,
+  ExecuteMsg,
   Expiration,
+  GovernanceDetailsForString,
+  InstantiateMsg,
+  MigrateMsg,
+  ModuleInfo,
+  ModuleInstallConfig,
+  ModuleVersion,
+  Namespace,
+  OwnershipForString,
+  QueryMsg,
   Timestamp,
   Uint64,
-  ModuleInstallConfig,
-  ModuleInfo,
-  QueryMsg,
-  MigrateMsg,
-  Addr,
-  ConfigResponse,
-  OwnershipForString,
 } from './Factory.types'
-import { CamelCasedProperties } from 'type-fest'
 export abstract class FactoryExecuteMsgBuilder {
   static updateConfig = ({
     ansHostContract,

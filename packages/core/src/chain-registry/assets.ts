@@ -149,7 +149,7 @@ const PION_1_ASSETS: AssetList = {
   ],
 }
 
-const NEUTRON_1_ASSETS: AssetList = {
+const _NEUTRON_1_ASSETS: AssetList = {
   chain_name: 'neutron',
   assets: [
     {

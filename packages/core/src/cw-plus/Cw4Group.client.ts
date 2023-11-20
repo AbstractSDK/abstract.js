@@ -4,19 +4,19 @@
  * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
  */
 
+import { Coin, StdFee } from '@cosmjs/amino'
 import {
   CosmWasmClient,
-  SigningCosmWasmClient,
   ExecuteResult,
+  SigningCosmWasmClient,
 } from '@cosmjs/cosmwasm-stargate'
-import { Coin, StdFee } from '@cosmjs/amino'
 import {
   AdminResponse,
   ExecuteMsg,
-  Member,
   HooksResponse,
   InstantiateMsg,
   ListMembersResponse,
+  Member,
   MemberListResponse,
   MemberResponse,
   QueryMsg,

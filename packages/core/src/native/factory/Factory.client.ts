@@ -4,31 +4,31 @@
  * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
  */
 
-import {
-  CosmWasmClient,
-  SigningCosmWasmClient,
-  ExecuteResult,
-} from '@cosmjs/cosmwasm-stargate'
 import { Coin, StdFee } from '@cosmjs/amino'
 import {
-  InstantiateMsg,
-  ExecuteMsg,
-  AssetEntry,
-  GovernanceDetailsForString,
-  Binary,
-  Namespace,
-  ModuleVersion,
+  CosmWasmClient,
+  ExecuteResult,
+  SigningCosmWasmClient,
+} from '@cosmjs/cosmwasm-stargate'
+import {
   Action,
+  Addr,
+  AssetEntry,
+  Binary,
+  ConfigResponse,
+  ExecuteMsg,
   Expiration,
+  GovernanceDetailsForString,
+  InstantiateMsg,
+  MigrateMsg,
+  ModuleInfo,
+  ModuleInstallConfig,
+  ModuleVersion,
+  Namespace,
+  OwnershipForString,
+  QueryMsg,
   Timestamp,
   Uint64,
-  ModuleInstallConfig,
-  ModuleInfo,
-  QueryMsg,
-  MigrateMsg,
-  Addr,
-  ConfigResponse,
-  OwnershipForString,
 } from './Factory.types'
 export interface FactoryReadOnlyInterface {
   contractAddress: string

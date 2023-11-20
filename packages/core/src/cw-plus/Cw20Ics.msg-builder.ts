@@ -4,8 +4,8 @@
  * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
  */
 
-import { ExecuteMsg, QueryMsg } from './Cw20Ics.types'
 import { CamelCasedProperties } from 'type-fest'
+import { ExecuteMsg, QueryMsg } from './Cw20Ics.types'
 
 export abstract class Cw20IcsExecuteMsgBuilder {
   static receive = ({

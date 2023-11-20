@@ -1,8 +1,8 @@
 import { CosmWasmClient, HttpEndpoint } from '@cosmjs/cosmwasm-stargate'
 import {
   HttpBatchClient,
-  Tendermint34Client,
   type HttpBatchClientOptions,
+  Tendermint34Client,
 } from '@cosmjs/tendermint-rpc'
 
 export const DEFAULT_BATCH_SIZE_LIMIT = 25

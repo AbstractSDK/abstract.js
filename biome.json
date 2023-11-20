@@ -11,7 +11,7 @@
     "enabled": true,
     "formatWithErrors": false,
     "indentStyle": "space",
-    "indentSize": 2,
+    "indentWidth": 2,
     "lineWidth": 80
   },
   "linter": {
@@ -19,14 +19,15 @@
     "rules": {
       "recommended": true,
       "complexity": {
-        "noExtraSemicolon": "off"
+        "noStaticOnlyClass": "off",
+        "noBannedTypes": "off",
+        "noForEach": "off"
       },
       "correctness": {
-        "noUnusedVariables": "error"
+        "noUnusedVariables": "off",
+        "useExhaustiveDependencies": "off"
       },
       "nursery": {
-        "noBannedTypes": "off",
-        "useExhaustiveDependencies": "error",
         "useGroupedTypeImport": "off"
       },
       "performance": {
@@ -34,7 +35,8 @@
       },
       "style": {
         "noNonNullAssertion": "off",
-        "useShorthandArrayType": "error"
+        "useShorthandArrayType": "error",
+        "noParameterAssign": "off"
       },
       "suspicious": {
         "noArrayIndexKey": "off",

@@ -1,29 +1,29 @@
-import { AnsName } from '../clients'
 import _ from 'lodash'
-import { type Chain, type AssetList, type Asset } from './types'
+import { AnsName } from '../clients'
+import { type Asset, type AssetList, type Chain } from './types'
 
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends Array<infer U>
-    ? Array<DeepPartial<U>>
+    ? DeepPartial<U>[]
     : T[P] extends ReadonlyArray<infer U>
-    ? ReadonlyArray<DeepPartial<U>>
+    ? readonly DeepPartial<U>[]
     : DeepPartial<T[P]>
 }
 
 export class ChainRegistryClient {
-  _chains: ReadonlyArray<Chain>
-  _assetLists: ReadonlyArray<AssetList>
+  _chains: readonly Chain[]
+  _assetLists: readonly AssetList[]
 
-  constructor(chains: Array<Chain>, assetLists: Array<AssetList>) {
+  constructor(chains: Chain[], assetLists: AssetList[]) {
     this._chains = chains
     this._assetLists = assetLists
   }
 
-  get chains(): ReadonlyArray<Chain> {
+  get chains(): readonly Chain[] {
     return this._chains
   }
 
-  get assetLists(): ReadonlyArray<AssetList> {
+  get assetLists(): readonly AssetList[] {
     return this._assetLists
   }
 
@@ -61,7 +61,7 @@ export class ChainRegistryClient {
     filters: {
       [P in K]?: Chain[P]
     },
-  ): ReadonlyArray<Chain> {
+  ): readonly Chain[] {
     let filteredChains = this.chains
 
     // Apply each filter
@@ -92,7 +92,7 @@ export class ChainRegistryClient {
   ): Asset[] {
     let filteredAssets = this.assetLists
       .filter(({ chain_name }) =>
-        options.chainNameFilter ? options.chainNameFilter == chain_name : true,
+        options.chainNameFilter ? options.chainNameFilter === chain_name : true,
       )
       .flatMap(({ assets }) => assets)
 

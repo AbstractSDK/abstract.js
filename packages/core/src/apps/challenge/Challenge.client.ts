@@ -4,59 +4,59 @@
  * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
  */
 
+import { Coin, StdFee } from '@cosmjs/amino'
+import { ExecuteResult, SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { CamelCasedProperties } from 'type-fest'
-import { SigningCosmWasmClient, ExecuteResult } from '@cosmjs/cosmwasm-stargate'
 import {
-  AbstractQueryClient,
-  AbstractAccountQueryClient,
   AbstractAccountClient,
+  AbstractAccountId,
+  AbstractAccountQueryClient,
+  AbstractClient,
+  AbstractQueryClient,
   AppExecuteMsg,
   AppExecuteMsgFactory,
-  AbstractClient,
-  AbstractAccountId,
 } from '../..'
-import { StdFee, Coin } from '@cosmjs/amino'
 import {
-  Threshold,
-  Decimal,
-  Uint64,
-  InstantiateMsg,
-  VoteConfig,
-  ExecuteMsg,
-  FriendForString,
+  ChallengeExecuteMsgBuilder,
+  ChallengeQueryMsgBuilder,
+} from './Challenge.msg-builder'
+import {
+  AccountId,
   AccountTrace,
-  ChainName,
+  Addr,
+  AdminStrikes,
   AssetEntry,
+  ChainName,
+  ChallengeEntryResponse,
+  ChallengeEntryUpdate,
+  ChallengeRequest,
+  ChallengeResponse,
+  ChallengesResponse,
+  Decimal,
+  ExecuteMsg,
+  FriendByAddrForAddr,
+  FriendByAddrForString,
+  FriendForAddr,
+  FriendForString,
+  FriendsResponse,
+  InstantiateMsg,
+  MigrateMsg,
+  ProposalInfo,
+  ProposalOutcome,
+  ProposalStatus,
+  ProposalsResponse,
+  QueryMsg,
   StrikeStrategy,
+  Threshold,
+  Timestamp,
+  Uint64,
   Uint128,
   UpdateFriendsOpKind,
-  ChallengeRequest,
-  FriendByAddrForString,
-  AccountId,
-  ChallengeEntryUpdate,
   Vote,
-  QueryMsg,
-  Addr,
-  MigrateMsg,
-  Timestamp,
-  ProposalStatus,
-  ProposalOutcome,
-  ChallengeResponse,
-  ChallengeEntryResponse,
-  ProposalInfo,
-  AdminStrikes,
-  ChallengesResponse,
-  FriendForAddr,
-  FriendsResponse,
-  FriendByAddrForAddr,
-  ProposalsResponse,
+  VoteConfig,
   VoteResponse,
   VotesResponse,
 } from './Challenge.types'
-import {
-  ChallengeQueryMsgBuilder,
-  ChallengeExecuteMsgBuilder,
-} from './Challenge.msg-builder'
 export interface IChallengeAppQueryClient {
   moduleId: string
   accountQueryClient: AbstractAccountQueryClient

@@ -1,0 +1,12 @@
+# Generated file. Do not edit directly.
+hooks/**
+internal/**
+internal/account/**
+internal/apps/challenge/**
+internal/cw-plus/cw-20/**
+internal/cw-plus/cw-20-ics/**
+internal/cw-plus/cw-3-flex-multisig/**
+internal/cw-plus/cw-4-group/**
+internal/native/ans/**
+internal/native/factory/**
+internal/native/registry/**

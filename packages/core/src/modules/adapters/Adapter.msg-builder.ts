@@ -19,17 +19,17 @@
  */
 
 import { CamelCasedProperties } from 'type-fest'
+import { ContractMsg } from '../../clients'
+import {
+  ModuleExecuteMsgFactory,
+  ModuleQueryMsgFactory,
+} from '../Module.msg-factory'
 import {
   AdapterBaseExecuteMsg,
   AdapterExecuteMsg,
   AdapterQueryMsg,
   AdapterRequestMsg,
 } from './Adapter.types'
-import {
-  ModuleExecuteMsgFactory,
-  ModuleQueryMsgFactory,
-} from '../Module.msg-factory'
-import { ContractMsg } from '../../clients'
 
 export abstract class AdapterExecuteMsgFactory {
   /**

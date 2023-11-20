@@ -4,19 +4,19 @@
  * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
  */
 
+import { CamelCasedProperties } from 'type-fest'
 import {
   AdminResponse,
   ExecuteMsg,
-  Member,
   HooksResponse,
   InstantiateMsg,
   ListMembersResponse,
+  Member,
   MemberListResponse,
   MemberResponse,
   QueryMsg,
   TotalWeightResponse,
 } from './Cw4Group.types'
-import { CamelCasedProperties } from 'type-fest'
 export abstract class Cw4GroupExecuteMsgBuilder {
   static updateAdmin = ({
     admin,

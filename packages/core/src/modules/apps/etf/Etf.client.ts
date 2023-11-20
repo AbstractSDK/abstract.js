@@ -4,20 +4,20 @@
  * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
  */
 
-import {
-  CosmWasmClient,
-  SigningCosmWasmClient,
-  ExecuteResult,
-} from '@cosmjs/cosmwasm-stargate'
 import { Coin, StdFee } from '@cosmjs/amino'
 import {
-  ConfigValidityResponse,
+  CosmWasmClient,
+  ExecuteResult,
+  SigningCosmWasmClient,
+} from '@cosmjs/cosmwasm-stargate'
+import {
   AddOnExecuteMsg,
-  Uint128,
-  Binary,
-  Decimal,
   AssetBaseForString,
+  Binary,
+  ConfigValidityResponse,
+  Decimal,
   StateResponse,
+  Uint128,
 } from './Etf.types'
 export interface EtfReadOnlyInterface {
   contractAddress: string

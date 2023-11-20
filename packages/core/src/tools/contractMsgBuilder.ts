@@ -1,13 +1,13 @@
+import { type Coin } from '@cosmjs/amino'
 import {
   CosmWasmClient,
   type ExecuteResult,
   type MsgExecuteContractEncodeObject,
   type SigningCosmWasmClient,
 } from '@cosmjs/cosmwasm-stargate'
-import { type Coin } from '@cosmjs/amino'
-import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
 import { toUtf8 } from '@cosmjs/encoding'
 import { type StdFee } from '@cosmjs/stargate'
+import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
 import { ContractMsg } from '../clients'
 
 /**
@@ -19,7 +19,7 @@ export type VariantKeys<T> = T extends T ? keyof T : never
  * A type helper that extracts the corresponding parameters type based on the key
  */
 export type VariantValue<T, K extends VariantKeys<T>> = T extends {
-  [P in K]: infer U
+  [_P in K]: infer U
 }
   ? U
   : never

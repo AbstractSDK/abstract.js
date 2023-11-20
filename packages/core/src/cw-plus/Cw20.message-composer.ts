@@ -6,32 +6,32 @@
 
 import { Coin } from '@cosmjs/amino'
 import { MsgExecuteContractEncodeObject } from '@cosmjs/cosmwasm-stargate'
-import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
 import { toUtf8 } from '@cosmjs/encoding'
+import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
 import {
+  Addr,
   AllAccountsResponse,
-  Uint128,
-  Expiration,
-  Timestamp,
-  Uint64,
   AllAllowancesResponse,
   AllowanceInfo,
   AllowanceResponse,
   BalanceResponse,
   Binary,
-  DownloadLogoResponse,
-  ExecuteMsg,
-  Logo,
-  EmbeddedLogo,
-  InstantiateMsg,
   Cw20Coin,
+  DownloadLogoResponse,
+  EmbeddedLogo,
+  ExecuteMsg,
+  Expiration,
   InstantiateMarketingInfo,
-  MinterResponse,
+  InstantiateMsg,
+  Logo,
   LogoInfo,
-  Addr,
   MarketingInfoResponse,
+  MinterResponse,
   QueryMsg,
+  Timestamp,
   TokenInfoResponse,
+  Uint64,
+  Uint128,
 } from './Cw20.types'
 export interface Cw20Message {
   contractAddress: string

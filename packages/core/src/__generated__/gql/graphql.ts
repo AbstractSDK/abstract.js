@@ -38,7 +38,7 @@ export type AbstractAccount = {
   /** Manager address of the Account */
   manager: Scalars['String']
   /** Modules installed on the Account */
-  modules: Array<AccountModule>
+  modules: AccountModule[]
   /** The namespace of the Account */
   namespace?: Maybe<Scalars['String']>
   /**  Root admin of the Account  */
@@ -46,7 +46,7 @@ export type AbstractAccount = {
   /**  Proxy address of the Account  */
   proxy: Scalars['String']
   /** The subAccounts of the account */
-  subAccounts: Array<AbstractAccount>
+  subAccounts: AbstractAccount[]
   /** Details about the vault of the Account */
   vault?: Maybe<Vault>
 }
@@ -55,16 +55,16 @@ export type AbstractAccount = {
 export type AbstractNameService = {
   __typename?: 'AbstractNameService'
   asset?: Maybe<AnsAsset>
-  assets: Array<AnsAsset>
+  assets: AnsAsset[]
   channel?: Maybe<AnsChannel>
-  channels: Array<AnsChannel>
+  channels: AnsChannel[]
   contract?: Maybe<AnsContract>
-  contracts: Array<AnsContract>
+  contracts: AnsContract[]
   id: Scalars['ID']
   namespace?: Maybe<AnsNamespace>
-  namespaces: Array<AnsNamespace>
+  namespaces: AnsNamespace[]
   pool?: Maybe<AnsPool>
-  pools: Array<AnsPool>
+  pools: AnsPool[]
 }
 
 /** Abstract Name Service is used to resolve names to addresses and vice versa. */
@@ -122,7 +122,7 @@ export type AbstractNameServicePoolsArgs = {
 
 export type AccountFilter = {
   /** Filter by the module and their version installed on the Account */
-  modules?: InputMaybe<Array<AccountModuleFilter>>
+  modules?: InputMaybe<AccountModuleFilter[]>
   owner?: InputMaybe<Scalars['Bech32Address']>
 }
 
@@ -136,18 +136,18 @@ export type AccountId = {
   __typename?: 'AccountId'
   chainName: Scalars['String']
   sequence: Scalars['Int']
-  trace?: Maybe<Array<Scalars['String']>>
+  trace?: Maybe<Scalars['String'][]>
 }
 
 export type AccountIdInput = {
   sequence: Scalars['Int']
-  trace?: InputMaybe<Array<Scalars['String']>>
+  trace?: InputMaybe<Scalars['String'][]>
 }
 
 export type AccountIdWithChain = {
   chain: Scalars['String']
   sequence: Scalars['Int']
-  trace?: InputMaybe<Array<Scalars['String']>>
+  trace?: InputMaybe<Scalars['String'][]>
 }
 
 export type AccountInfo = {
@@ -220,7 +220,7 @@ export type AnsPool = {
   __typename?: 'AnsPool'
   /** The pool address, a string or number */
   address: Scalars['String']
-  assets: Array<Scalars['String']>
+  assets: Scalars['String'][]
   dex: Scalars['String']
   /** Abstract Pool Id (number) */
   id: Scalars['ID']
@@ -287,19 +287,19 @@ export type Deployment = {
 
 export type EntriesFilter = {
   /** Filter by specific JSON Entries */
-  entries?: InputMaybe<Array<Scalars['String']>>
+  entries?: InputMaybe<Scalars['String'][]>
 }
 
 export type IdsFilter = {
   /** Filter by specific IDs */
-  ids?: InputMaybe<Array<Scalars['String']>>
+  ids?: InputMaybe<Scalars['String'][]>
 }
 
 export type Module = {
   __typename?: 'Module'
   address?: Maybe<Scalars['Bech32Address']>
   codeId?: Maybe<Scalars['String']>
-  dependencies: Array<ModuleDependency>
+  dependencies: ModuleDependency[]
   /** namespace:name:version */
   id: Scalars['ID']
   metadata?: Maybe<ModuleMetadata>
@@ -317,7 +317,7 @@ export type Module = {
 export type ModuleDependency = {
   __typename?: 'ModuleDependency'
   moduleId: Scalars['String']
-  versionRequirements: Array<Scalars['String']>
+  versionRequirements: Scalars['String'][]
 }
 
 export type ModuleFilter = {
@@ -342,7 +342,7 @@ export type ModuleMetadata = {
   id: Scalars['ID']
   name?: Maybe<Scalars['String']>
   readme?: Maybe<Scalars['String']>
-  tags: Array<Scalars['String']>
+  tags: Scalars['String'][]
   /** @deprecated Use Module.type */
   type: ModuleType
   website?: Maybe<Scalars['String']>
@@ -415,7 +415,7 @@ export type Page = {
 
 export type PoolFilter = {
   /** The assets in the pool. Must have exactly 2 elements. */
-  assetPair?: InputMaybe<Array<Scalars['String']>>
+  assetPair?: InputMaybe<Scalars['String'][]>
   dex?: InputMaybe<Scalars['String']>
 }
 
@@ -431,25 +431,25 @@ export type Query = {
   /** Query an Account by its ID */
   account?: Maybe<AbstractAccount>
   /** List the Accounts registered in Abstract for the given chain */
-  accounts: Array<AbstractAccount>
+  accounts: AbstractAccount[]
   /** Query multiple Accounts by their IDs */
-  accountsByIds: Array<AbstractAccount>
+  accountsByIds: AbstractAccount[]
   /** Query Abstract Name Service */
   ans: AbstractNameService
   /** Query info on a Cosmos chain */
   chainInfo: ChainInfo
   /** List the chains supported by this subgraph */
-  chains: Array<Scalars['String']>
+  chains: Scalars['String'][]
   /** Retrieve Abstract's deployment details for the given chain and optional version */
   deployment: Deployment
   /** Retrieve each Abstract deployment */
-  deployments: Array<Deployment>
+  deployments: Deployment[]
   /** Query the key-value pair for a given address */
   keyValueByAddress?: Maybe<Scalars['JSON']>
   /** Query a module in Version Control by its moduleId. If version is not provided, will return latest */
   module?: Maybe<Module>
   /** List the modules registered in Version Control */
-  modules: Array<Module>
+  modules: Module[]
   /** Retrieve the nonce from the cloudflare worker for setting a key value */
   nextKeyValueByAddressNonce: Scalars['Int']
   test: Scalars['String']
@@ -464,13 +464,13 @@ export type QueryAccountArgs = {
 
 export type QueryAccountsArgs = {
   chain?: InputMaybe<Scalars['ID']>
-  chains: Array<Scalars['ID']>
+  chains: Scalars['ID'][]
   filter?: InputMaybe<AccountFilter>
   page?: InputMaybe<Page>
 }
 
 export type QueryAccountsByIdsArgs = {
-  ids: Array<AccountIdWithChain>
+  ids: AccountIdWithChain[]
 }
 
 export type QueryAnsArgs = {
@@ -512,7 +512,7 @@ export type QueryNextKeyValueByAddressNonceArgs = {
 export type Vault = {
   __typename?: 'Vault'
   /** The assets registered to the Account */
-  assets: Array<VaultAsset>
+  assets: VaultAsset[]
   /** Base asset used for value calculation on the Account */
   baseAsset?: Maybe<Scalars['String']>
   /** Proxy address */

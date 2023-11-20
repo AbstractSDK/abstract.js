@@ -1,6 +1,6 @@
-import { AccountId, AccountTrace } from '../../native/registry/Registry.types'
-import { match, P } from 'ts-pattern'
+import { P, match } from 'ts-pattern'
 import * as Yup from 'yup'
+import { AccountId, AccountTrace } from '../../native/registry/Registry.types'
 
 export const ACCOUNT_ID_CHAIN_DELIMITER = '>'
 export const ACCOUNT_ID_SEQUENCE_DELIMITER = '-'
@@ -15,7 +15,7 @@ export const ACCOUNT_ID_SCHEMA: Yup.ObjectSchema<
   _trace: Yup.mixed<AccountTrace>().required(),
 })
 
-type AnyAccountTrace = AccountTrace | Array<string> | string | null | undefined
+type AnyAccountTrace = AccountTrace | string[] | string | null | undefined
 
 /**
  * juno-1 = account juno with sequence 1, trace local
@@ -82,7 +82,7 @@ export class AbstractAccountId {
     return this._trace
   }
 
-  get nullableTrace(): null | Array<string> {
+  get nullableTrace(): null | string[] {
     return this.trace === 'local' ? null : this.trace.remote
   }
 
@@ -188,7 +188,7 @@ export class AbstractAccountId {
   public toApi(): {
     chain: string
     sequence: number
-    trace: null | Array<string>
+    trace: null | string[]
   } {
     return {
       chain: this.chainName,

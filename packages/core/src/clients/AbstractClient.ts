@@ -1,8 +1,19 @@
 import {
+  BatchCosmWasmClient,
+  type BatchCosmWasmClientOptions,
+} from '@abstract-money/cosmwasm'
+import { Coin } from '@cosmjs/amino'
+import {
   CosmWasmClient,
   type HttpEndpoint,
   type SigningCosmWasmClient,
 } from '@cosmjs/cosmwasm-stargate'
+import semverSatisfies from 'semver/functions/satisfies'
+import { gql } from '../__generated__/gql'
+import { graphqlRequest } from '../api'
+import { ChainRegistryClient, assets, chains } from '../chain-registry'
+import { AbstractModule } from '../clients/objects'
+import { ABSTRACT_API_URL } from '../constants'
 import {
   AnsHostMessageComposer,
   FactoryClient,
@@ -10,26 +21,15 @@ import {
   FactoryQueryClient,
   RegistryMessageComposer,
 } from '../native'
-import { AnsClient, AnsQueryClient } from './AnsClient'
-import { AbstractAccountQueryClient } from './AbstractAccountClient'
-import { AbstractModule } from '../clients/objects'
+import { type GovernanceDetailsForString } from '../native/factory/Factory.types'
 import {
   RegistryClient,
   RegistryQueryClient,
 } from '../native/registry/RegistryClient'
-import semverSatisfies from 'semver/functions/satisfies'
-import { type GovernanceDetailsForString } from '../native/factory/Factory.types'
+import { AbstractAccountQueryClient } from './AbstractAccountClient'
+import { AnsClient, AnsQueryClient } from './AnsClient'
 import { findAbstractAttribute } from './events'
-import {
-  BatchCosmWasmClient,
-  type BatchCosmWasmClientOptions,
-} from '@abstract-money/cosmwasm'
 import { AbstractAccountId, AccountSequence } from './objects/AbstractAccountId'
-import { assets, ChainRegistryClient, chains } from '../chain-registry'
-import { Coin } from '@cosmjs/amino'
-import { ABSTRACT_API_URL } from '../constants'
-import { gql } from '../__generated__/gql'
-import { graphqlRequest } from '../api'
 
 export interface IAbstractQueryClient {
   client: CosmWasmClient

@@ -1,5 +1,5 @@
-import { type Chain as ChainRegistryChain } from './types'
 import { chains as chainRegistryChains } from 'chain-registry'
+import { type Chain as ChainRegistryChain } from './types'
 
 const LOCAL_JUNO_CHAIN: ChainRegistryChain = {
   $schema: '../../chain.schema.json',
@@ -327,7 +327,7 @@ const INJECTIVE_888_CHAIN: ChainRegistryChain = {
   ],
 }
 
-const HARPOON_4_CHAIN: ChainRegistryChain = {
+const _HARPOON_4_CHAIN: ChainRegistryChain = {
   $schema: '../../chain.schema.json',
   chain_name: 'kujiratestnet',
   chain_id: 'harpoon-4',

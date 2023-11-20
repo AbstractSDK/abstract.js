@@ -1,5 +1,5 @@
-import { Mixin } from 'ts-mixer'
 import { BatchCosmWasmClient } from '@abstract-money/cosmwasm'
+import { Mixin } from 'ts-mixer'
 export * from './errors'
 export * from './AbstractClient'
 export * from './AbstractAccountClient'

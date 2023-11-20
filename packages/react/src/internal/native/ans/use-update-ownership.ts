@@ -2,57 +2,57 @@ import { AnsHostExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
 import { useCallback } from 'react'
 
-type UpdateOwnerhsipMsg = Extract<
-  ReturnType<typeof AnsHostExecuteMsgBuilder.updateOwnerhsip>,
-  { update_ownerhsip: unknown }
+type UpdateOwnershipMsg = Extract<
+  ReturnType<typeof AnsHostExecuteMsgBuilder.updateOwnership>,
+  { update_ownership: unknown }
 >
 
-type UpdateOwnerhsipMsgBuilderParameters = Parameters<
-  typeof AnsHostExecuteMsgBuilder.updateOwnerhsip
+type UpdateOwnershipMsgBuilderParameters = Parameters<
+  typeof AnsHostExecuteMsgBuilder.updateOwnership
 >
 
-type UseUpdateOwnerhsipArgs = Parameters<
-  typeof useExecuteContract<UpdateOwnerhsipMsg>
+type UseUpdateOwnershipArgs = Parameters<
+  typeof useExecuteContract<UpdateOwnershipMsg>
 >[0]
 
-function buildUpdateOwnerhsipMsg(
-  ...args: UpdateOwnerhsipMsgBuilderParameters
-): UpdateOwnerhsipMsg {
-  return AnsHostExecuteMsgBuilder.updateOwnerhsip(...args) as UpdateOwnerhsipMsg
+function buildUpdateOwnershipMsg(
+  ...args: UpdateOwnershipMsgBuilderParameters
+): UpdateOwnershipMsg {
+  return AnsHostExecuteMsgBuilder.updateOwnership(...args) as UpdateOwnershipMsg
 }
 
-export function useUpdateOwnerhsip({
+export function useUpdateOwnership({
   contractAddress,
   ...restInput
-}: UseUpdateOwnerhsipArgs) {
+}: UseUpdateOwnershipArgs) {
   const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
-    useExecuteContract<UpdateOwnerhsipMsg>({
+    useExecuteContract<UpdateOwnershipMsg>({
       contractAddress,
       ...restInput,
     })
 
-  const updateOwnerhsip = useCallback(
-    function updateOwnerhsip(...args: UpdateOwnerhsipMsgBuilderParameters) {
+  const updateOwnership = useCallback(
+    function updateOwnership(...args: UpdateOwnershipMsgBuilderParameters) {
       return executeContract({
         signingClient,
-        msg: buildUpdateOwnerhsipMsg(...args),
+        msg: buildUpdateOwnershipMsg(...args),
       })
     },
     [executeContract, signingClient],
   )
 
-  const updateOwnerhsipAsync = useCallback(
-    function updateOwnerhsipAsync(
-      ...args: UpdateOwnerhsipMsgBuilderParameters
+  const updateOwnershipAsync = useCallback(
+    function updateOwnershipAsync(
+      ...args: UpdateOwnershipMsgBuilderParameters
     ) {
       return executeContractAsync({
         signingClient,
-        msg: buildUpdateOwnerhsipMsg(...args),
+        msg: buildUpdateOwnershipMsg(...args),
       })
     },
     [executeContractAsync, signingClient],
   )
 
-  return { updateOwnerhsip, updateOwnerhsipAsync, ...restOutput }
+  return { updateOwnership, updateOwnershipAsync, ...restOutput }
 }

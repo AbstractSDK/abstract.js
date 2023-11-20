@@ -4,36 +4,36 @@
  * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
  */
 
-import {
-  CosmWasmClient,
-  SigningCosmWasmClient,
-  ExecuteResult,
-} from '@cosmjs/cosmwasm-stargate'
 import { Coin, StdFee } from '@cosmjs/amino'
 import {
+  CosmWasmClient,
+  ExecuteResult,
+  SigningCosmWasmClient,
+} from '@cosmjs/cosmwasm-stargate'
+import {
+  Addr,
   AllAccountsResponse,
-  Uint128,
-  Expiration,
-  Timestamp,
-  Uint64,
   AllAllowancesResponse,
   AllowanceInfo,
   AllowanceResponse,
   BalanceResponse,
   Binary,
-  DownloadLogoResponse,
-  ExecuteMsg,
-  Logo,
-  EmbeddedLogo,
-  InstantiateMsg,
   Cw20Coin,
+  DownloadLogoResponse,
+  EmbeddedLogo,
+  ExecuteMsg,
+  Expiration,
   InstantiateMarketingInfo,
-  MinterResponse,
+  InstantiateMsg,
+  Logo,
   LogoInfo,
-  Addr,
   MarketingInfoResponse,
+  MinterResponse,
   QueryMsg,
+  Timestamp,
   TokenInfoResponse,
+  Uint64,
+  Uint128,
 } from './Cw20.types'
 export interface Cw20ReadOnlyInterface {
   contractAddress: string

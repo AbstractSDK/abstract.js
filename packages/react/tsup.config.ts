@@ -10,6 +10,8 @@ export default defineConfig(
     },
     dev: process.env.DEV === 'true',
     entry: [
+      'src/index.ts',
+      'src/hooks/index.ts',
       'src/internal/index.ts',
       'src/internal/account/index.ts',
       'src/internal/apps/challenge/index.ts',

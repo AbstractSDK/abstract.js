@@ -110,7 +110,7 @@ async function generateExports(entry: string[], noExport?: string[]) {
   packageJson.exports = exports
   await fs.writeFile(
     'package.json',
-    JSON.stringify(packageJson, null, 2) + '\n',
+    `${JSON.stringify(packageJson, null, 2)}\n`,
   )
 
   return exports
@@ -153,7 +153,7 @@ async function generateProxyPackages(exports: Exports) {
   packageJson.files = [...files.values()]
   await fs.writeFile(
     'package.json',
-    JSON.stringify(packageJson, null, 2) + '\n',
+    `${JSON.stringify(packageJson, null, 2)}\n`,
   )
 
   if (ignorePaths.length === 0) return

@@ -1,12 +1,14 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@1.6.3/schema.json",
-  "changelog": ["@changesets/changelog-github", { "repo": "AbstractSDK/core" }],
+  "changelog": [
+    "@changesets/changelog-github",
+    { "repo": "AbstractSDK/abstract.js" }
+  ],
   "commit": false,
   "access": "public",
-  "baseBranch": "main",
+  "baseBranch": "mainline",
   "updateInternalDependencies": "patch",
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "onlyUpdatePeerDependentsWhenOutOfRange": true
-  },
-  "ignore": ["docs", "example-dev"]
+  }
 }

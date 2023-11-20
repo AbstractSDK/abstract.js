@@ -1,5 +1,5 @@
-import { fromAscii, toAscii } from '@cosmjs/encoding'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { fromAscii, toAscii } from '@cosmjs/encoding'
 
 type RawQuery = {
   client: CosmWasmClient | undefined

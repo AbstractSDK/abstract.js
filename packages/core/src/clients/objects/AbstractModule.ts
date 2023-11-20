@@ -1,3 +1,9 @@
+import { type CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { P, match } from 'ts-pattern'
+import { type ModuleType } from '../../clients/AbstractAccountClient'
+import { RAW_QUERY_KEYS } from '../../constants'
+import { type ModuleData } from '../../modules/Module.types'
+import { type RegistryQueryClient } from '../../native'
 import {
   type Module as VcModule,
   type ModuleConfiguration,
@@ -5,15 +11,9 @@ import {
   type ModuleReference,
   type ModuleResponse,
 } from '../../native/registry/Registry.types'
-import { ModuleInfo } from './moduleInfo'
-import { match, P } from 'ts-pattern'
-import { type RegistryQueryClient } from '../../native'
 import { ModuleNotFoundError } from '../errors'
-import { type ModuleType } from '../../clients/AbstractAccountClient'
-import { type CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { type ModuleData } from '../../modules/Module.types'
-import { RAW_QUERY_KEYS } from '../../constants'
 import { rawQuery } from '../helpers'
+import { ModuleInfo } from './moduleInfo'
 
 interface IAbstractModule extends VcModule {
   config: ModuleConfiguration
@@ -86,8 +86,8 @@ export class AbstractModule implements VcModule {
 
   static async loadByInfos(
     registryClient: RegistryQueryClient,
-    moduleInfos: Array<VcModuleInfo>,
-  ): Promise<Array<AbstractModule>> {
+    moduleInfos: VcModuleInfo[],
+  ): Promise<AbstractModule[]> {
     const modules = await registryClient
       .modules({
         infos: moduleInfos,

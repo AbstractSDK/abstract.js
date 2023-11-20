@@ -4,8 +4,8 @@
  * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
  */
 
-import { ExecuteMsg, QueryMsg } from './Etf.types'
 import { CamelCasedProperties } from 'type-fest'
+import { ExecuteMsg, QueryMsg } from './Etf.types'
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export abstract class EtfExecuteMsgBuilder {

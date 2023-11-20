@@ -21,7 +21,14 @@
       "@abstract-money/react": ["packages/react/src"],
       "@abstract-money/react/*": ["packages/react/src/*"],
       "@abstract-money/cosmwasm": ["packages/cosmwasm/src"],
-      "@abstract-money/cosmwasm/*": ["packages/cosmwasm/src/*"]
+      "@abstract-money/cosmwasm/*": ["packages/cosmwasm/src/*"],
+      // TODO: Remove once issue is fixed
+      // https://github.com/microsoft/TypeScript/issues/48212
+      "@cosmjs/cosmwasm-stargate": [
+        "packages/core/node_modules/@cosmjs/cosmwasm-stargate/build"
+      ],
+      "@tanstack/react-query": ["node_modules/@tanstack/react-query/src"],
+      "@tanstack/query-core": ["node_modules/@tanstack/query-core/src"]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,

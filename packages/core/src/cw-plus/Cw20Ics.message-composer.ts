@@ -5,30 +5,30 @@
  */
 
 import { MsgExecuteContractEncodeObject } from '@cosmjs/cosmwasm-stargate'
-import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
 import { toUtf8 } from '@cosmjs/encoding'
+import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
 import {
   AdminResponse,
+  AllowMsg,
+  AllowedInfo,
   AllowedResponse,
   Amount,
-  Uint128,
+  Binary,
+  ChannelInfo,
   ChannelResponse,
   Coin,
-  Cw20Coin,
-  ChannelInfo,
-  IbcEndpoint,
   ConfigResponse,
-  ExecuteMsg,
-  Binary,
+  Cw20Coin,
   Cw20ReceiveMsg,
-  TransferMsg,
-  AllowMsg,
+  ExecuteMsg,
+  IbcEndpoint,
   InitMsg,
   ListAllowedResponse,
-  AllowedInfo,
   ListChannelsResponse,
   PortResponse,
   QueryMsg,
+  TransferMsg,
+  Uint128,
 } from './Cw20Ics.types'
 export interface Cw20IcsMessage {
   contractAddress: string

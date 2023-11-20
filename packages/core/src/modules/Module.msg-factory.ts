@@ -1,9 +1,9 @@
+import { ContractMsg } from '../clients'
 import {
   ModuleExecuteMsg,
   ModuleInstantiateMsg,
   ModuleMigrateMsg,
 } from './Module.types'
-import { ContractMsg } from '../clients'
 import {
   AdapterBaseExecuteMsg,
   AdapterBaseInitMsg,

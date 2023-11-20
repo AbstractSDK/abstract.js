@@ -5,8 +5,8 @@
  */
 
 import { MsgExecuteContractEncodeObject } from '@cosmjs/cosmwasm-stargate'
-import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
 import { toUtf8 } from '@cosmjs/encoding'
+import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
 import { AssetEntry, Coin, CosmosMsgForEmpty, ExecuteMsg } from './Proxy.types'
 
 export interface ProxyMessage {

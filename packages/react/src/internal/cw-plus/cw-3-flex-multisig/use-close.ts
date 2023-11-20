@@ -1,42 +1,45 @@
-import { Cw3FlexMultisigCloseMsgBuilder } from '@abstract-money/core'
-import { useCloseContract, useCosmWasmSigningClient } from 'graz'
+import { Cw3FlexMultisigExecuteMsgBuilder } from '@abstract-money/core'
+import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
 import { useCallback } from 'react'
 
 type CloseMsg = Extract<
-  ReturnType<typeof Cw3FlexMultisigCloseMsgBuilder.close>,
+  ReturnType<typeof Cw3FlexMultisigExecuteMsgBuilder.close>,
   { close: unknown }
 >
 
 type CloseMsgBuilderParameters = Parameters<
-  typeof Cw3FlexMultisigCloseMsgBuilder.close
+  typeof Cw3FlexMultisigExecuteMsgBuilder.close
 >
 
-type UseCloseArgs = Parameters<typeof useCloseContract<CloseMsg>>[0]
+type UseCloseArgs = Parameters<typeof useExecuteContract<CloseMsg>>[0]
 
 function buildCloseMsg(...args: CloseMsgBuilderParameters): CloseMsg {
-  return Cw3FlexMultisigCloseMsgBuilder.close(...args) as CloseMsg
+  return Cw3FlexMultisigExecuteMsgBuilder.close(...args) as CloseMsg
 }
 
 export function useClose({ contractAddress, ...restInput }: UseCloseArgs) {
   const { data: signingClient } = useCosmWasmSigningClient()
-  const { closeContract, closeContractAsync, ...restOutput } =
-    useCloseContract<CloseMsg>({
+  const { executeContract, executeContractAsync, ...restOutput } =
+    useExecuteContract<CloseMsg>({
       contractAddress,
       ...restInput,
     })
 
   const close = useCallback(
     function close(...args: CloseMsgBuilderParameters) {
-      return closeContract({ signingClient, msg: buildCloseMsg(...args) })
+      return executeContract({ signingClient, msg: buildCloseMsg(...args) })
     },
-    [closeContract, signingClient],
+    [executeContract, signingClient],
   )
 
   const closeAsync = useCallback(
     function closeAsync(...args: CloseMsgBuilderParameters) {
-      return closeContractAsync({ signingClient, msg: buildCloseMsg(...args) })
+      return executeContractAsync({
+        signingClient,
+        msg: buildCloseMsg(...args),
+      })
     },
-    [closeContractAsync, signingClient],
+    [executeContractAsync, signingClient],
   )
 
   return { close, closeAsync, ...restOutput }

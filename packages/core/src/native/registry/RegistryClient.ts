@@ -1,3 +1,9 @@
+import { type CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { Mixin } from 'ts-mixer'
+import { P, match } from 'ts-pattern'
+import { ModuleInfo } from '../../clients'
+import { AbstractModule } from '../../clients/objects/AbstractModule'
+import { ABSTRACT_CONSTANTS } from '../../constants'
 import {
   type RegistryInterface,
   type RegistryReadOnlyInterface,
@@ -12,12 +18,6 @@ import {
   type ModuleReference,
   ModuleResponse,
 } from '../registry/Registry.types'
-import { ABSTRACT_CONSTANTS } from '../../constants'
-import { type CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { Mixin } from 'ts-mixer'
-import { AbstractModule } from '../../clients/objects/AbstractModule'
-import { ModuleInfo } from '../../clients'
-import { match, P } from 'ts-pattern'
 
 export type VcModuleEntry = [ModuleInfo, ModuleReference]
 interface IRegistryQueryClient extends RegistryReadOnlyInterface {
