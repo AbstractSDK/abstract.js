@@ -7,7 +7,6 @@
 import { CamelCasedProperties } from 'type-fest'
 import { ExecuteMsg, QueryMsg } from './Etf.types'
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export abstract class EtfExecuteMsgBuilder {
   static provideLiquidity = ({
     asset,
@@ -42,7 +41,6 @@ export abstract class EtfExecuteMsgBuilder {
     }
   }
 }
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export abstract class EtfQueryMsgBuilder {
   static state = (): QueryMsg => {
     return {

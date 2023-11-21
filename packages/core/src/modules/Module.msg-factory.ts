@@ -18,7 +18,6 @@ import {
 
 type ModuleBaseExecuteMsg = AdapterBaseExecuteMsg | AppBaseExecuteMsg
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export abstract class ModuleExecuteMsgFactory {
   static base = <TBaseMsg extends ModuleBaseExecuteMsg>(
     baseMsg: TBaseMsg,
@@ -43,7 +42,6 @@ type ModuleBaseQueryMsg = AdapterBaseQueryMsg | AppBaseQueryMsg
  * Allows building of a module instantiation msg for an Abstract module.
  */
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export abstract class ModuleQueryMsgFactory {
   static base = <TBaseMsg extends ModuleBaseQueryMsg>(
     baseMsg: TBaseMsg,
@@ -66,7 +64,6 @@ export abstract class ModuleQueryMsgFactory {
  * Allows building of a module instantiation msg for an Abstract module.
  */
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export abstract class ModuleInitMsgFactory {
   /**
    * Build a module instantiation msg for an Abstract app module.
@@ -109,7 +106,6 @@ export abstract class ModuleInitMsgFactory {
   }
 }
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export abstract class ModuleMigrateMsgFactory {
   static app = <TAppMsg extends ContractMsg>(
     appMigrateMsg?: TAppMsg,

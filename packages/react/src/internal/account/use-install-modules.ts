@@ -33,7 +33,7 @@ export function useInstallModules({
     })
 
   const installModules = useCallback(
-    function installmodules(...args: InstallModulesMsgBuilderParameters) {
+    function installModules(...args: InstallModulesMsgBuilderParameters) {
       return executeContract({
         signingClient,
         msg: buildInstallModulesMsg(...args),
@@ -43,7 +43,7 @@ export function useInstallModules({
   )
 
   const installModulesAsync = useCallback(
-    function installmodulesAsync(...args: InstallModulesMsgBuilderParameters) {
+    function installModulesAsync(...args: InstallModulesMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,
         msg: buildInstallModulesMsg(...args),

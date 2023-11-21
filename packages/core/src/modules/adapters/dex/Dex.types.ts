@@ -4,7 +4,6 @@
  * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
  */
 
-// biome-ignore lint/complexity/noBannedTypes: <explanation>
 export type InstantiateMsg = {}
 export type DexAction =
   | {

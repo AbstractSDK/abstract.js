@@ -4,7 +4,10 @@
       "CHANGELOG.md",
       "pnpm-lock.yaml",
       "tsconfig.json",
-      "tsconfig.*.json"
+      "tsconfig.*.json",
+      "lib",
+      "dist",
+      "esm"
     ]
   },
   "formatter": {

@@ -1,5 +1,4 @@
 export * from './use-account-base'
-export * from './use-add-account'
 export * from './use-approve-or-reject-modules'
 export * from './use-claim-namespace'
 export * from './use-config'

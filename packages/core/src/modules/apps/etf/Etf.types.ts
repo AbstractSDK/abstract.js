@@ -35,7 +35,6 @@ export type ExecuteMsg =
       }
     }
   | {
-      // biome-ignore lint/complexity/noBannedTypes: <explanation>
       import: {}
     }
   | {
@@ -87,20 +86,16 @@ export type QueryMsg =
       base: AddOnQueryMsg
     }
   | {
-      // biome-ignore lint/complexity/noBannedTypes: <explanation>
       state: {}
     }
   | {
-      // biome-ignore lint/complexity/noBannedTypes: <explanation>
       config_validity: {}
     }
 export type AddOnQueryMsg =
   | {
-      // biome-ignore lint/complexity/noBannedTypes: <explanation>
       config: {}
     }
   | {
-      // biome-ignore lint/complexity/noBannedTypes: <explanation>
       admin: {}
     }
 export type AssetEntry = string

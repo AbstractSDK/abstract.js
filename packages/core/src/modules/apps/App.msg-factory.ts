@@ -34,7 +34,6 @@ import {
  * Helper class to build messages to send to Abstract modules.
  */
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export abstract class AppExecuteMsgFactory {
   /**
    * Make a request to an app module.
@@ -62,7 +61,6 @@ export abstract class AppExecuteMsgFactory {
   }
 }
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export abstract class AppQueryMsgFactory {
   /**
    * Query an app module.

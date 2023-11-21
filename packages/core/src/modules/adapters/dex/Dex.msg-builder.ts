@@ -7,7 +7,6 @@
 import { CamelCasedProperties } from 'type-fest'
 import { QueryMsg } from './Dex.types'
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export abstract class DexQueryMsgBuilder {
   static simulateSwap = ({
     askAsset,
