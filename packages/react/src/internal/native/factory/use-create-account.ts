@@ -1,6 +1,6 @@
 import { FactoryExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type CreateAccountMsg = Extract<
   ReturnType<typeof FactoryExecuteMsgBuilder.createAccount>,
@@ -32,7 +32,7 @@ export function useCreateAccount({
       ...restInput,
     })
 
-  const createAccount = useCallback(
+  const createAccount = React.useCallback(
     function createAccount(...args: CreateAccountMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -42,7 +42,7 @@ export function useCreateAccount({
     [executeContract, signingClient],
   )
 
-  const createAccountAsync = useCallback(
+  const createAccountAsync = React.useCallback(
     function createAccountAsync(...args: CreateAccountMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

@@ -30,7 +30,7 @@ export function useListProposals({
   const { data: listProposals, ...restOutput } = useQuerySmart<
     ListProposalsResponse,
     Error
-  >(contractAddress, buildListProposalsMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildListProposalsMsg(restInput) })
 
   return { listProposals, ...restOutput }
 }

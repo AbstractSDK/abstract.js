@@ -28,7 +28,7 @@ export function useContracts({
   const { data: contracts, ...restOutput } = useQuerySmart<
     ContractsResponse,
     Error
-  >(contractAddress, buildContractsMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildContractsMsg(restInput) })
 
   return { contracts, ...restOutput }
 }

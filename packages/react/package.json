@@ -3,30 +3,37 @@
   "version": "0.0.0",
   "description": "React Hooks for Abstract SDK",
   "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
-  "author": "adairrr",
+  "author": "h0tw4t3r <vlad@abstract.money>",
+  "contributors": [
+    "h0tw4t3r <vlad@abstract.money>",
+    "adairrr <adair@abstract.money>"
+  ],
   "license": "ISC",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AbstractSDK/abstract.js.git"
+    "url": "git+https://github.com/AbstractSDK/abstract.js.git",
+    "directory": "packages/react"
   },
   "bugs": {
     "url": "https://github.com/AbstractSDK/abstract.js/issues"
   },
   "scripts": {
-    "build": "tsup",
-    "dev": "DEV=true tsup"
+    "build": "NODE_OPTIONS='--max-old-space-size=16384' tsup",
+    "dev": "NODE_OPTIONS='--max-old-space-size=16384' DEV=true tsup"
   },
   "dependencies": {
-    "@abstract-money/core": "workspace:*"
+    "@abstract-money/core": "workspace:*",
+    "@tanstack/react-query": "^4",
+    "zustand": "^4.4.6"
   },
   "peerDependencies": {
     "@cosmjs/amino": ">=0.28",
     "@cosmjs/cosmwasm-stargate": ">=0.28",
     "@cosmjs/encoding": ">=0.28",
+    "graz": ">=0.1.1",
     "react": ">=18.0.0",
-    "typescript": ">=5.0.4",
-    "graz": ">=0.0.51"
+    "typescript": ">=5.0.4"
   },
   "peerDependenciesMeta": {
     "typescript": {
@@ -38,15 +45,15 @@
     "@cosmjs/cosmwasm-stargate": "^0.31.0",
     "@cosmjs/encoding": "^0.31.0",
     "@cosmjs/stargate": "^0.31.0",
-    "@tanstack/react-query": ">4",
+    "@keplr-wallet/types": "^0.12.44",
     "@types/node": "^18.11.10",
     "@types/react": "^18.2.0",
+    "graz": "^0.1.1",
     "rome": "^12.1.2",
     "simple-git-hooks": "^2.8.1",
     "ts-pattern": "^4.0.6",
     "tslib": "^2.3.1",
-    "tsup": "^6.5.0",
-    "graz": "^0.0.51"
+    "tsup": "^6.5.0"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -55,9 +62,9 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./hooks": {
-      "types": "./dist/hooks/index.d.ts",
-      "default": "./dist/hooks/index.js"
+    "./utils": {
+      "types": "./dist/utils/index.d.ts",
+      "default": "./dist/utils/index.js"
     },
     "./internal": {
       "types": "./dist/internal/index.d.ts",
@@ -102,7 +109,7 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "/hooks",
+    "/utils",
     "/internal",
     "/dist"
   ],

@@ -1,6 +1,6 @@
 import { AnsHostExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type UpdateChannelsMsg = Extract<
   ReturnType<typeof AnsHostExecuteMsgBuilder.updateChannels>,
@@ -32,7 +32,7 @@ export function useUpdateChannels({
       ...restInput,
     })
 
-  const updateChannels = useCallback(
+  const updateChannels = React.useCallback(
     function updateChannels(...args: UpdateChannelsMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -42,7 +42,7 @@ export function useUpdateChannels({
     [executeContract, signingClient],
   )
 
-  const updateChannelsAsync = useCallback(
+  const updateChannelsAsync = React.useCallback(
     function updateChannelsAsync(...args: UpdateChannelsMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

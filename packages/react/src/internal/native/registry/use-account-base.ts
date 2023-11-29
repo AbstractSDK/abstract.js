@@ -28,7 +28,7 @@ export function useAccountBase({
   const { data: accountBase, ...restOutput } = useQuerySmart<
     AccountBaseResponse,
     Error
-  >(contractAddress, buildAccountBaseMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildAccountBaseMsg(restInput) })
 
   return { accountBase, ...restOutput }
 }

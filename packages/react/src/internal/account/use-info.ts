@@ -16,10 +16,10 @@ function buildInfoMsg(...args: InfoMsgBuilderParameters): InfoMsg {
 }
 
 export function useInfo({ contractAddress }: UseInfoArgs) {
-  const { data: info, ...restOutput } = useQuerySmart<InfoResponse, Error>(
-    contractAddress,
-    buildInfoMsg(),
-  )
+  const { data: info, ...restOutput } = useQuerySmart<InfoResponse, Error>({
+    address: contractAddress,
+    queryMsg: buildInfoMsg(),
+  })
 
   return { info, ...restOutput }
 }

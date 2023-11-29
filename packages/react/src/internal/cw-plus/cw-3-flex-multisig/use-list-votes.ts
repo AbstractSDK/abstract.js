@@ -28,7 +28,7 @@ export function useListVotes({
   const { data: listVotes, ...restOutput } = useQuerySmart<
     ListVotesResponse,
     Error
-  >(contractAddress, buildListVotesMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildListVotesMsg(restInput) })
 
   return { listVotes, ...restOutput }
 }

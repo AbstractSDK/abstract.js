@@ -28,7 +28,7 @@ export function useListMembers({
   const { data: listMembers, ...restOutput } = useQuerySmart<
     ListMembersResponse,
     Error
-  >(contractAddress, buildListMembersMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildListMembersMsg(restInput) })
 
   return { listMembers, ...restOutput }
 }

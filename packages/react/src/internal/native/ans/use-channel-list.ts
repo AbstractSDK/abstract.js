@@ -28,7 +28,7 @@ export function useChannelList({
   const { data: channelList, ...restOutput } = useQuerySmart<
     ChannelListResponse,
     Error
-  >(contractAddress, buildChannelListMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildChannelListMsg(restInput) })
 
   return { channelList, ...restOutput }
 }

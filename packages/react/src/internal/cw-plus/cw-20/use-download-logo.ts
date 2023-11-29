@@ -23,7 +23,7 @@ export function useDownloadLogo({ contractAddress }: UseDownloadLogoArgs) {
   const { data: downloadLogo, ...restOutput } = useQuerySmart<
     DownloadLogoResponse,
     Error
-  >(contractAddress, buildDownloadLogoMsg())
+  >({ address: contractAddress, queryMsg: buildDownloadLogoMsg() })
 
   return { downloadLogo, ...restOutput }
 }

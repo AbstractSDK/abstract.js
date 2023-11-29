@@ -26,7 +26,7 @@ export function usePoolList({
   const { data: poolList, ...restOutput } = useQuerySmart<
     PoolAddressListResponse,
     Error
-  >(contractAddress, buildPoolListMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildPoolListMsg(restInput) })
 
   return { poolList, ...restOutput }
 }

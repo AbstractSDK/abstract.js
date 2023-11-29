@@ -28,7 +28,7 @@ export function useHoldingAmount({
   const { data: holdingAmount, ...restOutput } = useQuerySmart<
     HoldingAmountResponse,
     Error
-  >(contractAddress, buildHoldingAmountMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildHoldingAmountMsg(restInput) })
 
   return { holdingAmount, ...restOutput }
 }

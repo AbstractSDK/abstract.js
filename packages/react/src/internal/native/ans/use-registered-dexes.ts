@@ -25,7 +25,7 @@ export function useRegisteredDexes({
   const { data: registeredDexes, ...restOutput } = useQuerySmart<
     RegisteredDexesResponse,
     Error
-  >(contractAddress, buildRegisteredDexesMsg())
+  >({ address: contractAddress, queryMsg: buildRegisteredDexesMsg() })
 
   return { registeredDexes, ...restOutput }
 }

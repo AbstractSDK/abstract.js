@@ -1,6 +1,6 @@
 import { RegistryExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type RemoveModuleMsg = Extract<
   ReturnType<typeof RegistryExecuteMsgBuilder.removeModule>,
@@ -32,7 +32,7 @@ export function useRemoveModule({
       ...restInput,
     })
 
-  const removeModule = useCallback(
+  const removeModule = React.useCallback(
     function removeModule(...args: RemoveModuleMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -42,7 +42,7 @@ export function useRemoveModule({
     [executeContract, signingClient],
   )
 
-  const removeModuleAsync = useCallback(
+  const removeModuleAsync = React.useCallback(
     function removeModuleAsync(...args: RemoveModuleMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

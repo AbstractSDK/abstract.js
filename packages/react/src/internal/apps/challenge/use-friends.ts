@@ -23,7 +23,7 @@ export function useFriends({ contractAddress, ...restInput }: UseFriendsArgs) {
   const { data: friends, ...restOutput } = useQuerySmart<
     FriendsResponse,
     Error
-  >(contractAddress, buildFriendsMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildFriendsMsg(restInput) })
 
   return { friends, ...restOutput }
 }

@@ -1,6 +1,6 @@
 import { AnsHostExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type UpdateAssetAddressesMsg = Extract<
   ReturnType<typeof AnsHostExecuteMsgBuilder.updateAssetAddresses>,
@@ -34,7 +34,7 @@ export function useUpdateAssetAddresses({
       ...restInput,
     })
 
-  const updateAssetAddresses = useCallback(
+  const updateAssetAddresses = React.useCallback(
     function updateAssetAddresses(
       ...args: UpdateAssetAddressesMsgBuilderParameters
     ) {
@@ -46,7 +46,7 @@ export function useUpdateAssetAddresses({
     [executeContract, signingClient],
   )
 
-  const updateAssetAddressesAsync = useCallback(
+  const updateAssetAddressesAsync = React.useCallback(
     function updateAssetAddressesAsync(
       ...args: UpdateAssetAddressesMsgBuilderParameters
     ) {

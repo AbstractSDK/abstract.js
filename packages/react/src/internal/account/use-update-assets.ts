@@ -1,6 +1,6 @@
 import { ProxyExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type UpdateAssetsMsg = Extract<
   ReturnType<typeof ProxyExecuteMsgBuilder.updateAssets>,
@@ -32,7 +32,7 @@ export function useUpdateAssets({
       ...restInput,
     })
 
-  const updateAssets = useCallback(
+  const updateAssets = React.useCallback(
     function updateAssets(...args: UpdateAssetsMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -42,7 +42,7 @@ export function useUpdateAssets({
     [executeContract, signingClient],
   )
 
-  const updateAssetsAsync = useCallback(
+  const updateAssetsAsync = React.useCallback(
     function updateAssetsAsync(...args: UpdateAssetsMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

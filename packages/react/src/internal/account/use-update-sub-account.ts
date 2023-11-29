@@ -1,6 +1,6 @@
 import { ManagerExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type UpdateSubAccountMsg = Extract<
   ReturnType<typeof ManagerExecuteMsgBuilder.updateSubAccount>,
@@ -34,7 +34,7 @@ export function useUpdateSubAccount({
       ...restInput,
     })
 
-  const updateSubAccount = useCallback(
+  const updateSubAccount = React.useCallback(
     function updateSubAccount(...args: UpdateSubAccountMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -44,7 +44,7 @@ export function useUpdateSubAccount({
     [executeContract, signingClient],
   )
 
-  const updateSubAccountAsync = useCallback(
+  const updateSubAccountAsync = React.useCallback(
     function updateSubAccountAsync(
       ...args: UpdateSubAccountMsgBuilderParameters
     ) {

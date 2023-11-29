@@ -1,6 +1,6 @@
 import { RegistryExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type SetFactoryMsg = Extract<
   ReturnType<typeof RegistryExecuteMsgBuilder.setFactory>,
@@ -30,7 +30,7 @@ export function useSetFactory({
       ...restInput,
     })
 
-  const setFactory = useCallback(
+  const setFactory = React.useCallback(
     function setFactory(...args: SetFactoryMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -40,7 +40,7 @@ export function useSetFactory({
     [executeContract, signingClient],
   )
 
-  const setFactoryAsync = useCallback(
+  const setFactoryAsync = React.useCallback(
     function setFactoryAsync(...args: SetFactoryMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

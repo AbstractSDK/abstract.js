@@ -28,7 +28,7 @@ export function useAssetInfos({
   const { data: assetInfos, ...restOutput } = useQuerySmart<
     AssetsResponse,
     Error
-  >(contractAddress, buildAssetInfosMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildAssetInfosMsg(restInput) })
 
   return { assetInfos, ...restOutput }
 }

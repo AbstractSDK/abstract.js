@@ -1,6 +1,6 @@
 import { Cw3FlexMultisigExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type MemberChangedHookMsg = Extract<
   ReturnType<typeof Cw3FlexMultisigExecuteMsgBuilder.memberChangedHook>,
@@ -34,7 +34,7 @@ export function useMemberChangedHook({
       ...restInput,
     })
 
-  const memberChangedHook = useCallback(
+  const memberChangedHook = React.useCallback(
     function memberChangedHook(...args: MemberChangedHookMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -44,7 +44,7 @@ export function useMemberChangedHook({
     [executeContract, signingClient],
   )
 
-  const memberChangedHookAsync = useCallback(
+  const memberChangedHookAsync = React.useCallback(
     function memberChangedHookAsync(
       ...args: MemberChangedHookMsgBuilderParameters
     ) {

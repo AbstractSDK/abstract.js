@@ -28,7 +28,7 @@ export function useListAllowed({
   const { data: allowed, ...restOutput } = useQuerySmart<
     ListAllowedResponse,
     Error
-  >(contractAddress, buildListAllowedMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildListAllowedMsg(restInput) })
 
   return { allowed, ...restOutput }
 }

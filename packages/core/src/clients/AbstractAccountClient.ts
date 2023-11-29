@@ -84,10 +84,7 @@ export class AbstractAccountQueryClient implements IAbstractAccountQueryClient {
   }
 
   /**
-   * Load the abstract account client given the **accountId** and the **abstractClient**.
-   * @param abstractClient Abstract client connected to the chain.
-   * @param accountId The account id.
-   */
+   * Load the abstract account client given the **accountId** and the **abstractClient**. @param abstractClient Abstract client connected to the chain. @param accountId The account id. */
   public static async load(
     abstractClient: AbstractQueryClient,
     accountId: AbstractAccountId,

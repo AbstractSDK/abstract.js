@@ -1,6 +1,6 @@
 import { RegistryExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type YankModuleMsg = Extract<
   ReturnType<typeof RegistryExecuteMsgBuilder.yankModule>,
@@ -30,7 +30,7 @@ export function useYankModule({
       ...restInput,
     })
 
-  const yankModule = useCallback(
+  const yankModule = React.useCallback(
     function yankModule(...args: YankModuleMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -40,7 +40,7 @@ export function useYankModule({
     [executeContract, signingClient],
   )
 
-  const yankModuleAsync = useCallback(
+  const yankModuleAsync = React.useCallback(
     function yankModuleAsync(...args: YankModuleMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

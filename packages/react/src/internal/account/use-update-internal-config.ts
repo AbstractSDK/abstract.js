@@ -1,6 +1,6 @@
 import { ManagerExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type UpdateInternalConfigMsg = Extract<
   ReturnType<typeof ManagerExecuteMsgBuilder.updateInternalConfig>,
@@ -34,7 +34,7 @@ export function useUpdateInternalConfig({
       ...restInput,
     })
 
-  const updateInternalConfig = useCallback(
+  const updateInternalConfig = React.useCallback(
     function updateInternalConfig(
       ...args: UpdateInternalConfigMsgBuilderParameters
     ) {
@@ -46,7 +46,7 @@ export function useUpdateInternalConfig({
     [executeContract, signingClient],
   )
 
-  const updateInternalConfigAsync = useCallback(
+  const updateInternalConfigAsync = React.useCallback(
     function updateInternalConfigAsync(
       ...args: UpdateInternalConfigMsgBuilderParameters
     ) {

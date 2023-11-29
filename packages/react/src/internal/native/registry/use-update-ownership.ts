@@ -1,6 +1,6 @@
 import { RegistryExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type UpdateOwnershipMsg = Extract<
   ReturnType<typeof RegistryExecuteMsgBuilder.updateOwnership>,
@@ -34,7 +34,7 @@ export function useUpdateOwnership({
       ...restInput,
     })
 
-  const updateOwnership = useCallback(
+  const updateOwnership = React.useCallback(
     function updateOwnership(...args: UpdateOwnershipMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -44,7 +44,7 @@ export function useUpdateOwnership({
     [executeContract, signingClient],
   )
 
-  const updateOwnershipAsync = useCallback(
+  const updateOwnershipAsync = React.useCallback(
     function updateOwnershipAsync(
       ...args: UpdateOwnershipMsgBuilderParameters
     ) {

@@ -5,7 +5,6 @@
     "downlevelIteration": true,
     "esModuleInterop": true,
     "isolatedModules": true,
-    "jsx": "react-jsx",
     "lib": ["es2021", "dom"],
     "module": "esnext",
     "moduleResolution": "node",
@@ -27,7 +26,7 @@
       "@cosmjs/cosmwasm-stargate": [
         "packages/core/node_modules/@cosmjs/cosmwasm-stargate/build"
       ],
-      "@tanstack/react-query": ["node_modules/@tanstack/react-query/src"],
+      "@tanstack/react-query": ["packages/react/node_modules/@tanstack/react-query/src"],
       "@tanstack/query-core": ["node_modules/@tanstack/query-core/src"]
     },
     "resolveJsonModule": true,

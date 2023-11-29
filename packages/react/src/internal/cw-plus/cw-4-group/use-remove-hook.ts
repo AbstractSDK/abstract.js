@@ -1,6 +1,6 @@
 import { Cw4GroupExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type RemoveHookMsg = Extract<
   ReturnType<typeof Cw4GroupExecuteMsgBuilder.removeHook>,
@@ -30,7 +30,7 @@ export function useRemoveHook({
       ...restInput,
     })
 
-  const removeHook = useCallback(
+  const removeHook = React.useCallback(
     function removeHook(...args: RemoveHookMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -40,7 +40,7 @@ export function useRemoveHook({
     [executeContract, signingClient],
   )
 
-  const removeHookAsync = useCallback(
+  const removeHookAsync = React.useCallback(
     function removeHookAsync(...args: RemoveHookMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

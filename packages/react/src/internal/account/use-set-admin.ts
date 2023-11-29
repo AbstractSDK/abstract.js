@@ -1,6 +1,6 @@
 import { ProxyExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type SetAdminMsg = Extract<
   ReturnType<typeof ProxyExecuteMsgBuilder.setAdmin>,
@@ -28,14 +28,14 @@ export function useSetAdmin({
       ...restInput,
     })
 
-  const setAdmin = useCallback(
+  const setAdmin = React.useCallback(
     function setAdmin(...args: SetAdminMsgBuilderParameters) {
       return executeContract({ signingClient, msg: buildSetAdminMsg(...args) })
     },
     [executeContract, signingClient],
   )
 
-  const setAdminAsync = useCallback(
+  const setAdminAsync = React.useCallback(
     function setAdminAsync(...args: SetAdminMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

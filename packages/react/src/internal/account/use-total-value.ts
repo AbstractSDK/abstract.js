@@ -23,7 +23,7 @@ export function useTotalValue({ contractAddress }: UseTotalValueArgs) {
   const { data: totalValue, ...restOutput } = useQuerySmart<
     AssetBaseForAddr,
     Error
-  >(contractAddress, buildTotalValueMsg())
+  >({ address: contractAddress, queryMsg: buildTotalValueMsg() })
 
   return { totalValue, ...restOutput }
 }

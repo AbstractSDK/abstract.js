@@ -1,6 +1,6 @@
 import { ManagerExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type UpdateInfoMsg = Extract<
   ReturnType<typeof ManagerExecuteMsgBuilder.updateInfo>,
@@ -30,7 +30,7 @@ export function useUpdateInfo({
       ...restInput,
     })
 
-  const updateInfo = useCallback(
+  const updateInfo = React.useCallback(
     function updateInfo(...args: UpdateInfoMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -40,7 +40,7 @@ export function useUpdateInfo({
     [executeContract, signingClient],
   )
 
-  const updateInfoAsync = useCallback(
+  const updateInfoAsync = React.useCallback(
     function updateInfoAsync(...args: UpdateInfoMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

@@ -1,6 +1,6 @@
 import { ManagerExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type UpgradeMsg = Extract<
   ReturnType<typeof ManagerExecuteMsgBuilder.upgrade>,
@@ -25,14 +25,14 @@ export function useUpgrade({ contractAddress, ...restInput }: UseUpgradeArgs) {
       ...restInput,
     })
 
-  const upgrade = useCallback(
+  const upgrade = React.useCallback(
     function upgrade(...args: UpgradeMsgBuilderParameters) {
       return executeContract({ signingClient, msg: buildUpgradeMsg(...args) })
     },
     [executeContract, signingClient],
   )
 
-  const upgradeAsync = useCallback(
+  const upgradeAsync = React.useCallback(
     function upgradeAsync(...args: UpgradeMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

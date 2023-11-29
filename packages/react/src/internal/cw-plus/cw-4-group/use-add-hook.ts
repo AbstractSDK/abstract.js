@@ -1,6 +1,6 @@
 import { Cw4GroupExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type AddHookMsg = Extract<
   ReturnType<typeof Cw4GroupExecuteMsgBuilder.addHook>,
@@ -25,14 +25,14 @@ export function useAddHook({ contractAddress, ...restInput }: UseAddHookArgs) {
       ...restInput,
     })
 
-  const addHook = useCallback(
+  const addHook = React.useCallback(
     function addHook(...args: AddHookMsgBuilderParameters) {
       return executeContract({ signingClient, msg: buildAddHookMsg(...args) })
     },
     [executeContract, signingClient],
   )
 
-  const addHookAsync = useCallback(
+  const addHookAsync = React.useCallback(
     function addHookAsync(...args: AddHookMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

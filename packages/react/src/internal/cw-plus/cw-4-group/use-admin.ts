@@ -18,10 +18,10 @@ function buildAdminMsg(...args: AdminMsgBuilderParameters): AdminMsg {
 }
 
 export function useAdmin({ contractAddress }: UseAdminArgs) {
-  const { data: admin, ...restOutput } = useQuerySmart<AdminResponse, Error>(
-    contractAddress,
-    buildAdminMsg(),
-  )
+  const { data: admin, ...restOutput } = useQuerySmart<AdminResponse, Error>({
+    address: contractAddress,
+    queryMsg: buildAdminMsg(),
+  })
 
   return { admin, ...restOutput }
 }

@@ -1,6 +1,6 @@
 import { ManagerExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type CreateSubAccountMsg = Extract<
   ReturnType<typeof ManagerExecuteMsgBuilder.createSubAccount>,
@@ -34,7 +34,7 @@ export function useCreateSubAccount({
       ...restInput,
     })
 
-  const createSubAccount = useCallback(
+  const createSubAccount = React.useCallback(
     function createsubaccount(...args: CreateSubAccountMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -44,7 +44,7 @@ export function useCreateSubAccount({
     [executeContract, signingClient],
   )
 
-  const createSubAccountAsync = useCallback(
+  const createSubAccountAsync = React.useCallback(
     function createsubaccountAsync(
       ...args: CreateSubAccountMsgBuilderParameters
     ) {

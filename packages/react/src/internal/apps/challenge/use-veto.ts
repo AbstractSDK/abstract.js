@@ -1,6 +1,6 @@
 import { ChallengeExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type VetoMsg = Extract<
   ReturnType<typeof ChallengeExecuteMsgBuilder.veto>,
@@ -25,14 +25,14 @@ export function useVeto({ contractAddress, ...restInput }: UseVetoArgs) {
       ...restInput,
     })
 
-  const veto = useCallback(
+  const veto = React.useCallback(
     function veto(...args: VetoMsgBuilderParameters) {
       return executeContract({ signingClient, msg: buildVetoMsg(...args) })
     },
     [executeContract, signingClient],
   )
 
-  const vetoAsync = useCallback(
+  const vetoAsync = React.useCallback(
     function vetoAsync(...args: VetoMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

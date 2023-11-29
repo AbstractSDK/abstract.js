@@ -28,7 +28,7 @@ export function useAllAccounts({
   const { data: accounts, ...restOutput } = useQuerySmart<
     AllAccountsResponse,
     Error
-  >(contractAddress, buildAllAccountsMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildAllAccountsMsg(restInput) })
 
   return { accounts, ...restOutput }
 }

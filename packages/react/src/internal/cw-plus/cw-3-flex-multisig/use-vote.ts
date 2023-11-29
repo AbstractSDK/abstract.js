@@ -1,6 +1,6 @@
 import { Cw3FlexMultisigExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type VoteMsg = Extract<
   ReturnType<typeof Cw3FlexMultisigExecuteMsgBuilder.vote>,
@@ -25,14 +25,14 @@ export function useVote({ contractAddress, ...restInput }: UseVoteArgs) {
       ...restInput,
     })
 
-  const vote = useCallback(
+  const vote = React.useCallback(
     function vote(...args: VoteMsgBuilderParameters) {
       return executeContract({ signingClient, msg: buildVoteMsg(...args) })
     },
     [executeContract, signingClient],
   )
 
-  const voteAsync = useCallback(
+  const voteAsync = React.useCallback(
     function voteAsync(...args: VoteMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

@@ -3,11 +3,16 @@
   "version": "0.0.0",
   "description": "Typings for Abstract smart contracts",
   "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
-  "author": "adairrr",
+  "author": "adairrr <adair@abstract.money>",
+  "contributors": [
+    "h0tw4t3r <vlad@abstract.money>",
+    "adairrr <adair@abstract.money>"
+  ],
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AbstractSDK/abstract.js.git"
+    "url": "git+https://github.com/AbstractSDK/abstract.js.git",
+    "directory": "packages/core"
   },
   "bugs": {
     "url": "https://github.com/AbstractSDK/abstract.js/issues"

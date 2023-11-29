@@ -26,7 +26,7 @@ export function useBalance({
   const { data: balance, ...restOutput } = useQuerySmart<
     BalanceResponse,
     Error
-  >(contractAddress, buildChallengeMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildChallengeMsg(restInput) })
 
   return { balance, ...restOutput }
 }

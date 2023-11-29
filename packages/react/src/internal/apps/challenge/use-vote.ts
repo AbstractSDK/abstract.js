@@ -16,10 +16,10 @@ function buildVoteMsg(...args: VoteMsgBuilderParameters): VoteMsg {
 }
 
 export function useVote({ contractAddress, ...restInput }: UseVoteArgs) {
-  const { data: vote, ...restOutput } = useQuerySmart<VoteResponse, Error>(
-    contractAddress,
-    buildVoteMsg(restInput),
-  )
+  const { data: vote, ...restOutput } = useQuerySmart<VoteResponse, Error>({
+    address: contractAddress,
+    queryMsg: buildVoteMsg(restInput),
+  })
 
   return { vote, ...restOutput }
 }

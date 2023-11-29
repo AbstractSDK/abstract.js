@@ -23,7 +23,7 @@ export function useListChannels({ contractAddress }: UseListChannelsArgs) {
   const { data: channels, ...restOutput } = useQuerySmart<
     ListChannelsResponse,
     Error
-  >(contractAddress, buildListChannelsMsg())
+  >({ address: contractAddress, queryMsg: buildListChannelsMsg() })
 
   return { channels, ...restOutput }
 }

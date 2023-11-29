@@ -26,7 +26,7 @@ export function useProposal({
   const { data: proposal, ...restOutput } = useQuerySmart<
     ProposalResponse,
     Error
-  >(contractAddress, buildProposalMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildProposalMsg(restInput) })
 
   return { proposal, ...restOutput }
 }

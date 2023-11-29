@@ -23,7 +23,7 @@ export function useOwnership({ contractAddress }: UseOwnershipArgs) {
   const { data: ownership, ...restOutput } = useQuerySmart<
     OwnershipForString,
     Error
-  >(contractAddress, buildOwnershipMsg())
+  >({ address: contractAddress, queryMsg: buildOwnershipMsg() })
 
   return { ownership, ...restOutput }
 }

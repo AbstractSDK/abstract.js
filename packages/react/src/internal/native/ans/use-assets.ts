@@ -20,10 +20,10 @@ function buildAssetsMsg(...args: AssetsMsgBuilderParameters): AssetsMsg {
 }
 
 export function useAssets({ contractAddress, ...restInput }: UseAssetsArgs) {
-  const { data: assets, ...restOutput } = useQuerySmart<AssetsResponse, Error>(
-    contractAddress,
-    buildAssetsMsg(restInput),
-  )
+  const { data: assets, ...restOutput } = useQuerySmart<AssetsResponse, Error>({
+    address: contractAddress,
+    queryMsg: buildAssetsMsg(restInput),
+  })
 
   return { assets, ...restOutput }
 }

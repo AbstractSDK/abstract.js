@@ -1,6 +1,6 @@
 import { RegistryExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type ApproveOrRejectModulesMsg = Extract<
   ReturnType<typeof RegistryExecuteMsgBuilder.approveOrRejectModules>,
@@ -34,7 +34,7 @@ export function useApproveOrRejectModules({
       ...restInput,
     })
 
-  const approveOrRejectModules = useCallback(
+  const approveOrRejectModules = React.useCallback(
     function approveOrRejectModules(
       ...args: ApproveOrRejectModulesMsgBuilderParameters
     ) {
@@ -46,7 +46,7 @@ export function useApproveOrRejectModules({
     [executeContract, signingClient],
   )
 
-  const approveOrRejectModulesAsync = useCallback(
+  const approveOrRejectModulesAsync = React.useCallback(
     function approveOrRejectModulesAsync(
       ...args: ApproveOrRejectModulesMsgBuilderParameters
     ) {

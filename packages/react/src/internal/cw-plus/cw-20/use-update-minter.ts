@@ -1,6 +1,6 @@
 import { Cw20ExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type UpdateMinterMsg = Extract<
   ReturnType<typeof Cw20ExecuteMsgBuilder.updateMinter>,
@@ -32,7 +32,7 @@ export function useUpdateMinter({
       ...restInput,
     })
 
-  const updateMinter = useCallback(
+  const updateMinter = React.useCallback(
     function updateMinter(...args: UpdateMinterMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -42,7 +42,7 @@ export function useUpdateMinter({
     [executeContract, signingClient],
   )
 
-  const updateMinterAsync = useCallback(
+  const updateMinterAsync = React.useCallback(
     function updateMinterAsync(...args: UpdateMinterMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

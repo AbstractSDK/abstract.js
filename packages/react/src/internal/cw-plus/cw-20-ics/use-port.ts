@@ -16,10 +16,10 @@ function buildPortMsg(...args: PortMsgBuilderParameters): PortMsg {
 }
 
 export function usePort({ contractAddress }: UsePortArgs) {
-  const { data: accounts, ...restOutput } = useQuerySmart<PortResponse, Error>(
-    contractAddress,
-    buildPortMsg(),
-  )
+  const { data: accounts, ...restOutput } = useQuerySmart<PortResponse, Error>({
+    address: contractAddress,
+    queryMsg: buildPortMsg(),
+  })
 
   return { accounts, ...restOutput }
 }

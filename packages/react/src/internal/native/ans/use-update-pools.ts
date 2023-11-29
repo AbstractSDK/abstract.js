@@ -1,6 +1,6 @@
 import { AnsHostExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type UpdatePoolsMsg = Extract<
   ReturnType<typeof AnsHostExecuteMsgBuilder.updatePools>,
@@ -32,7 +32,7 @@ export function useUpdatePools({
       ...restInput,
     })
 
-  const updatePools = useCallback(
+  const updatePools = React.useCallback(
     function updatePools(...args: UpdatePoolsMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -42,7 +42,7 @@ export function useUpdatePools({
     [executeContract, signingClient],
   )
 
-  const updatePoolsAsync = useCallback(
+  const updatePoolsAsync = React.useCallback(
     function updatePoolsAsync(...args: UpdatePoolsMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

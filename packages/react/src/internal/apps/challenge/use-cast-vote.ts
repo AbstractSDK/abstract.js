@@ -1,6 +1,6 @@
 import { ChallengeExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type CastVoteMsg = Extract<
   ReturnType<typeof ChallengeExecuteMsgBuilder.castVote>,
@@ -28,14 +28,14 @@ export function useCastVote({
       ...restInput,
     })
 
-  const castVote = useCallback(
+  const castVote = React.useCallback(
     function castVote(...args: CastVoteMsgBuilderParameters) {
       return executeContract({ signingClient, msg: buildCastVoteMsg(...args) })
     },
     [executeContract, signingClient],
   )
 
-  const castVoteAsync = useCallback(
+  const castVoteAsync = React.useCallback(
     function castVoteAsync(...args: CastVoteMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

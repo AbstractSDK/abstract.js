@@ -28,7 +28,7 @@ export function useContractList({
   const { data: contractList, ...restOutput } = useQuerySmart<
     ContractListResponse,
     Error
-  >(contractAddress, buildContractListMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildContractListMsg(restInput) })
 
   return { contractList, ...restOutput }
 }

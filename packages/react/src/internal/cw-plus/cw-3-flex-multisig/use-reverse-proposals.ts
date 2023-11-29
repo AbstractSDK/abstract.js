@@ -30,7 +30,7 @@ export function useReverseProposals({
   const { data: reverseProposals, ...restOutput } = useQuerySmart<
     ReverseProposalsResponse,
     Error
-  >(contractAddress, buildReverseProposalsMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildReverseProposalsMsg(restInput) })
 
   return { reverseProposals, ...restOutput }
 }

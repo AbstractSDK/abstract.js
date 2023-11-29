@@ -23,7 +23,7 @@ export function useModules({ contractAddress, ...restInput }: UseModulesArgs) {
   const { data: modules, ...restOutput } = useQuerySmart<
     ModulesResponse,
     Error
-  >(contractAddress, buildModulesMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildModulesMsg(restInput) })
 
   return { modules, ...restOutput }
 }

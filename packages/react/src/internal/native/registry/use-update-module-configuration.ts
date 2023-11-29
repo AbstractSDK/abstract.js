@@ -1,6 +1,6 @@
 import { RegistryExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type UpdateModuleConfigurationMsg = Extract<
   ReturnType<typeof RegistryExecuteMsgBuilder.updateModuleConfiguration>,
@@ -34,7 +34,7 @@ export function useUpdateModuleConfiguration({
       ...restInput,
     })
 
-  const updateModuleConfiguration = useCallback(
+  const updateModuleConfiguration = React.useCallback(
     function updateModuleConfiguration(
       ...args: UpdateModuleConfigurationMsgBuilderParameters
     ) {
@@ -46,7 +46,7 @@ export function useUpdateModuleConfiguration({
     [executeContract, signingClient],
   )
 
-  const updateModuleConfigurationAsync = useCallback(
+  const updateModuleConfigurationAsync = React.useCallback(
     function updateModuleConfigurationAsync(
       ...args: UpdateModuleConfigurationMsgBuilderParameters
     ) {

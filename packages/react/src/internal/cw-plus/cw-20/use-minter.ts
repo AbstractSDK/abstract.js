@@ -16,10 +16,10 @@ function buildMinterMsg(...args: MinterMsgBuilderParameters): MinterMsg {
 }
 
 export function useMinter({ contractAddress }: UseMinterArgs) {
-  const { data: minter, ...restOutput } = useQuerySmart<MinterResponse, Error>(
-    contractAddress,
-    buildMinterMsg(),
-  )
+  const { data: minter, ...restOutput } = useQuerySmart<MinterResponse, Error>({
+    address: contractAddress,
+    queryMsg: buildMinterMsg(),
+  })
 
   return { minter, ...restOutput }
 }

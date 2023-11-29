@@ -1,6 +1,6 @@
 import { ChallengeExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type CancelChallengeMsg = Extract<
   ReturnType<typeof ChallengeExecuteMsgBuilder.cancelChallenge>,
@@ -34,7 +34,7 @@ export function useCancelChallenge({
       ...restInput,
     })
 
-  const cancelChallenge = useCallback(
+  const cancelChallenge = React.useCallback(
     function cancelChallenge(...args: CancelChallengeMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -44,7 +44,7 @@ export function useCancelChallenge({
     [executeContract, signingClient],
   )
 
-  const cancelChallengeAsync = useCallback(
+  const cancelChallengeAsync = React.useCallback(
     function cancelChallengeAsync(
       ...args: CancelChallengeMsgBuilderParameters
     ) {

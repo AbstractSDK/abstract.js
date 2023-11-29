@@ -1,5 +1,5 @@
 # Generated file. Do not edit directly.
-hooks/**
+utils/**
 internal/**
 internal/account/**
 internal/apps/challenge/**

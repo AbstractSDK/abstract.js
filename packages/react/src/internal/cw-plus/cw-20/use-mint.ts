@@ -1,6 +1,6 @@
 import { Cw20ExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type MintMsg = Extract<
   ReturnType<typeof Cw20ExecuteMsgBuilder.mint>,
@@ -23,14 +23,14 @@ export function useMint({ contractAddress, ...restInput }: UseMintArgs) {
       ...restInput,
     })
 
-  const mint = useCallback(
+  const mint = React.useCallback(
     function mint(...args: MintMsgBuilderParameters) {
       return executeContract({ signingClient, msg: buildMintMsg(...args) })
     },
     [executeContract, signingClient],
   )
 
-  const mintAsync = useCallback(
+  const mintAsync = React.useCallback(
     function mintAsync(...args: MintMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

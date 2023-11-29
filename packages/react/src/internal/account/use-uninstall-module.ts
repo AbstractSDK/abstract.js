@@ -1,6 +1,6 @@
 import { ManagerExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type UninstallModuleMsg = Extract<
   ReturnType<typeof ManagerExecuteMsgBuilder.uninstallModule>,
@@ -32,7 +32,7 @@ export function useUninstallModule({
       ...restInput,
     })
 
-  const uninstallModule = useCallback(
+  const uninstallModule = React.useCallback(
     function uninstallModule(...args: UninstallModuleMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -42,7 +42,7 @@ export function useUninstallModule({
     [executeContract, signingClient],
   )
 
-  const uninstallModuleAsync = useCallback(
+  const uninstallModuleAsync = React.useCallback(
     function uninstallModuleAsync(
       ...args: UninstallModuleMsgBuilderParameters
     ) {

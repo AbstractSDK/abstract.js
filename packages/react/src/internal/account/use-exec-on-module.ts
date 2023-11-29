@@ -1,6 +1,6 @@
 import { ManagerExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type ExecOnModuleMsg = Extract<
   ReturnType<typeof ManagerExecuteMsgBuilder.execOnModule>,
@@ -32,7 +32,7 @@ export function useExecOnModule({
       ...restInput,
     })
 
-  const execOnModule = useCallback(
+  const execOnModule = React.useCallback(
     function execonmodule(...args: ExecOnModuleMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -42,7 +42,7 @@ export function useExecOnModule({
     [executeContract, signingClient],
   )
 
-  const execOnModuleAsync = useCallback(
+  const execOnModuleAsync = React.useCallback(
     function execonmoduleAsync(...args: ExecOnModuleMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

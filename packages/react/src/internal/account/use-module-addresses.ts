@@ -28,7 +28,7 @@ export function useModuleAddresses({
   const { data: moduleAddresses, ...restOutput } = useQuerySmart<
     ModuleAddressesResponse,
     Error
-  >(contractAddress, buildModuleAddressesMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildModuleAddressesMsg(restInput) })
 
   return { moduleAddresses, ...restOutput }
 }

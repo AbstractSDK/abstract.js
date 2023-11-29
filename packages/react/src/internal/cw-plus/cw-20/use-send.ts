@@ -1,6 +1,6 @@
 import { Cw20ExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type SendMsg = Extract<
   ReturnType<typeof Cw20ExecuteMsgBuilder.send>,
@@ -23,14 +23,14 @@ export function useSend({ contractAddress, ...restInput }: UseSendArgs) {
       ...restInput,
     })
 
-  const send = useCallback(
+  const send = React.useCallback(
     function send(...args: SendMsgBuilderParameters) {
       return executeContract({ signingClient, msg: buildSendMsg(...args) })
     },
     [executeContract, signingClient],
   )
 
-  const sendAsync = useCallback(
+  const sendAsync = React.useCallback(
     function sendAsync(...args: SendMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

@@ -1,6 +1,6 @@
 import { Cw4GroupExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type UpdateAdminMsg = Extract<
   ReturnType<typeof Cw4GroupExecuteMsgBuilder.updateAdmin>,
@@ -32,7 +32,7 @@ export function useUpdateAdmin({
       ...restInput,
     })
 
-  const updateAdmin = useCallback(
+  const updateAdmin = React.useCallback(
     function updateAdmin(...args: UpdateAdminMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -42,7 +42,7 @@ export function useUpdateAdmin({
     [executeContract, signingClient],
   )
 
-  const updateAdminAsync = useCallback(
+  const updateAdminAsync = React.useCallback(
     function updateAdminAsync(...args: UpdateAdminMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

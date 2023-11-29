@@ -1,6 +1,6 @@
 import { RegistryExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type ClaimNamespaceMsg = Extract<
   ReturnType<typeof RegistryExecuteMsgBuilder.claimNamespace>,
@@ -32,7 +32,7 @@ export function useClaimNamespace({
       ...restInput,
     })
 
-  const claimNamespace = useCallback(
+  const claimNamespace = React.useCallback(
     function claimNamespace(...args: ClaimNamespaceMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -42,7 +42,7 @@ export function useClaimNamespace({
     [executeContract, signingClient],
   )
 
-  const claimNamespaceAsync = useCallback(
+  const claimNamespaceAsync = React.useCallback(
     function claimNamespaceAsync(...args: ClaimNamespaceMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

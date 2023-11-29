@@ -28,7 +28,7 @@ export function usePoolMetadataList({
   const { data: poolMetadataList, ...restOutput } = useQuerySmart<
     PoolMetadataListResponse,
     Error
-  >(contractAddress, buildPoolMetadataListMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildPoolMetadataListMsg(restInput) })
 
   return { poolMetadataList, ...restOutput }
 }

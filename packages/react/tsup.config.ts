@@ -1,17 +1,16 @@
 import { defineConfig } from 'tsup'
 
+import path from 'path'
+import fs from 'fs/promises'
 import { getConfig } from '../../scripts/tsup'
 import { dependencies, peerDependencies } from './package.json'
 
 export default defineConfig(
   getConfig({
-    banner: {
-      js: '"use client";',
-    },
-    dev: process.env.DEV === 'true',
+    //dev: process.env.DEV === 'true',
     entry: [
       'src/index.ts',
-      'src/hooks/index.ts',
+      'src/utils/index.ts',
       'src/internal/index.ts',
       'src/internal/account/index.ts',
       'src/internal/apps/challenge/index.ts',
@@ -25,5 +24,8 @@ export default defineConfig(
     ],
     external: [...Object.keys(dependencies), ...Object.keys(peerDependencies)],
     platform: 'browser',
+    banner: {
+      js: '"use client";',
+    },
   }),
 )

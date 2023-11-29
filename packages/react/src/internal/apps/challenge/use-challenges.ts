@@ -28,7 +28,7 @@ export function useChallenges({
   const { data: challenges, ...restOutput } = useQuerySmart<
     ChallengesResponse,
     Error
-  >(contractAddress, buildChallengesMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildChallengesMsg(restInput) })
 
   return { challenges, ...restOutput }
 }

@@ -1,6 +1,6 @@
 import { Cw20ExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type UploadLogoMsg = Extract<
   ReturnType<typeof Cw20ExecuteMsgBuilder.uploadLogo>,
@@ -30,7 +30,7 @@ export function useUploadLogo({
       ...restInput,
     })
 
-  const uploadLogo = useCallback(
+  const uploadLogo = React.useCallback(
     function uploadLogo(...args: UploadLogoMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -40,7 +40,7 @@ export function useUploadLogo({
     [executeContract, signingClient],
   )
 
-  const uploadLogoAsync = useCallback(
+  const uploadLogoAsync = React.useCallback(
     function uploadLogoAsync(...args: UploadLogoMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

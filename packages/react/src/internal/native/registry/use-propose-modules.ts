@@ -1,6 +1,6 @@
 import { RegistryExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type ProposeModulesMsg = Extract<
   ReturnType<typeof RegistryExecuteMsgBuilder.proposeModules>,
@@ -32,7 +32,7 @@ export function useProposeModules({
       ...restInput,
     })
 
-  const proposeModules = useCallback(
+  const proposeModules = React.useCallback(
     function proposeModules(...args: ProposeModulesMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -42,7 +42,7 @@ export function useProposeModules({
     [executeContract, signingClient],
   )
 
-  const proposeModulesAsync = useCallback(
+  const proposeModulesAsync = React.useCallback(
     function proposeModulesAsync(...args: ProposeModulesMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

@@ -20,10 +20,10 @@ function buildMemberMsg(...args: MemberMsgBuilderParameters): MemberMsg {
 }
 
 export function useMember({ contractAddress, ...restInput }: UseMemberArgs) {
-  const { data: member, ...restOutput } = useQuerySmart<MemberResponse, Error>(
-    contractAddress,
-    buildMemberMsg(restInput),
-  )
+  const { data: member, ...restOutput } = useQuerySmart<MemberResponse, Error>({
+    address: contractAddress,
+    queryMsg: buildMemberMsg(restInput),
+  })
 
   return { member, ...restOutput }
 }

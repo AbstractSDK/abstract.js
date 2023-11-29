@@ -28,7 +28,7 @@ export function useAssetsConfig({
   const { data: assetsConfig, ...restOutput } = useQuerySmart<
     AssetsConfigResponse,
     Error
-  >(contractAddress, buildAssetsConfigMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildAssetsConfigMsg(restInput) })
 
   return { assetsConfig, ...restOutput }
 }

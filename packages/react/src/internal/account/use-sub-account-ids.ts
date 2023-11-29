@@ -28,7 +28,7 @@ export function useSubAccountIds({
   const { data: subAccountIds, ...restOutput } = useQuerySmart<
     SubAccountIdsResponse,
     Error
-  >(contractAddress, buildSubAccountIdsMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildSubAccountIdsMsg(restInput) })
 
   return { subAccountIds, ...restOutput }
 }

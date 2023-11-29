@@ -28,7 +28,7 @@ export function useAllAllowances({
   const { data: allowances, ...restOutput } = useQuerySmart<
     AllAllowancesResponse,
     Error
-  >(contractAddress, buildAllAllowancesMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildAllAllowancesMsg(restInput) })
 
   return { allowances, ...restOutput }
 }

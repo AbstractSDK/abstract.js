@@ -28,7 +28,7 @@ export function useModuleVersions({
   const { data: moduleVersions, ...restOutput } = useQuerySmart<
     ModuleVersionsResponse,
     Error
-  >(contractAddress, buildModuleVersionsMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildModuleVersionsMsg(restInput) })
 
   return { moduleVersions, ...restOutput }
 }

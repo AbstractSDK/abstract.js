@@ -23,7 +23,7 @@ export function useMarketingInfo({ contractAddress }: UseMarketingInfoArgs) {
   const { data: marketingInfo, ...restOutput } = useQuerySmart<
     MarketingInfoResponse,
     Error
-  >(contractAddress, buildMarketingInfoMsg())
+  >({ address: contractAddress, queryMsg: buildMarketingInfoMsg() })
 
   return { marketingInfo, ...restOutput }
 }

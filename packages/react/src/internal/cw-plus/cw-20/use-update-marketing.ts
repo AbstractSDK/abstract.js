@@ -1,6 +1,6 @@
 import { Cw20ExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type UpdateMarketingMsg = Extract<
   ReturnType<typeof Cw20ExecuteMsgBuilder.updateMarketing>,
@@ -32,7 +32,7 @@ export function useUpdateMarketing({
       ...restInput,
     })
 
-  const updateMarketing = useCallback(
+  const updateMarketing = React.useCallback(
     function updateMarketing(...args: UpdateMarketingMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -42,7 +42,7 @@ export function useUpdateMarketing({
     [executeContract, signingClient],
   )
 
-  const updateMarketingAsync = useCallback(
+  const updateMarketingAsync = React.useCallback(
     function updateMarketingAsync(
       ...args: UpdateMarketingMsgBuilderParameters
     ) {

@@ -28,7 +28,7 @@ export function useNamespaceList({
   const { data: namespaceList, ...restOutput } = useQuerySmart<
     NamespaceResponse,
     Error
-  >(contractAddress, buildNamespaceListMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildNamespaceListMsg(restInput) })
 
   return { namespaceList, ...restOutput }
 }

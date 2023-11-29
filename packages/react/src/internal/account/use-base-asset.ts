@@ -23,7 +23,7 @@ export function useBaseAsset({ contractAddress }: UseBaseAssetArgs) {
   const { data: baseAsset, ...restOutput } = useQuerySmart<
     BaseAssetResponse,
     Error
-  >(contractAddress, buildBaseAssetMsg())
+  >({ address: contractAddress, queryMsg: buildBaseAssetMsg() })
 
   return { baseAsset, ...restOutput }
 }

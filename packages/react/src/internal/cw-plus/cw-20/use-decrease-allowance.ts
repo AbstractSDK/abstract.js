@@ -1,6 +1,6 @@
 import { Cw20ExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type DecreaseAllowanceMsg = Extract<
   ReturnType<typeof Cw20ExecuteMsgBuilder.decreaseAllowance>,
@@ -34,7 +34,7 @@ export function useDecreaseAllowance({
       ...restInput,
     })
 
-  const decreaseAllowance = useCallback(
+  const decreaseAllowance = React.useCallback(
     function decreaseAllowance(...args: DecreaseAllowanceMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -44,7 +44,7 @@ export function useDecreaseAllowance({
     [executeContract, signingClient],
   )
 
-  const decreaseAllowanceAsync = useCallback(
+  const decreaseAllowanceAsync = React.useCallback(
     function decreaseAllowanceAsync(
       ...args: DecreaseAllowanceMsgBuilderParameters
     ) {

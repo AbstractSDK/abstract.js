@@ -23,7 +23,7 @@ export function useTokenInfo({ contractAddress }: UseTokenInfoArgs) {
   const { data: tokenInfo, ...restOutput } = useQuerySmart<
     TokenInfoResponse,
     Error
-  >(contractAddress, buildTokenInfoMsg())
+  >({ address: contractAddress, queryMsg: buildTokenInfoMsg() })
 
   return { tokenInfo, ...restOutput }
 }

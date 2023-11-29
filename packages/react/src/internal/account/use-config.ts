@@ -16,10 +16,10 @@ function buildConfigMsg(...args: ConfigMsgBuilderParameters): ConfigMsg {
 }
 
 export function useConfig({ contractAddress }: UseConfigArgs) {
-  const { data: config, ...restOutput } = useQuerySmart<ConfigResponse, Error>(
-    contractAddress,
-    buildConfigMsg(),
-  )
+  const { data: config, ...restOutput } = useQuerySmart<ConfigResponse, Error>({
+    address: contractAddress,
+    queryMsg: buildConfigMsg(),
+  })
 
   return { config, ...restOutput }
 }

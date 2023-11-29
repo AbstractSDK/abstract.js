@@ -1,6 +1,6 @@
 import { Cw3FlexMultisigExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type ExecuteMsg = Extract<
   ReturnType<typeof Cw3FlexMultisigExecuteMsgBuilder.execute>,
@@ -25,14 +25,14 @@ export function useExecute({ contractAddress, ...restInput }: UseExecuteArgs) {
       ...restInput,
     })
 
-  const execute = useCallback(
+  const execute = React.useCallback(
     function execute(...args: ExecuteMsgBuilderParameters) {
       return executeContract({ signingClient, msg: buildExecuteMsg(...args) })
     },
     [executeContract, signingClient],
   )
 
-  const executeAsync = useCallback(
+  const executeAsync = React.useCallback(
     function executeAsync(...args: ExecuteMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

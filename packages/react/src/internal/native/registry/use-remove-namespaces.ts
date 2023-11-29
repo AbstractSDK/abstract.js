@@ -1,6 +1,6 @@
 import { RegistryExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type RemoveNamespacesMsg = Extract<
   ReturnType<typeof RegistryExecuteMsgBuilder.removeNamespaces>,
@@ -34,7 +34,7 @@ export function useRemoveNamespaces({
       ...restInput,
     })
 
-  const removeNamespaces = useCallback(
+  const removeNamespaces = React.useCallback(
     function removeNamespaces(...args: RemoveNamespacesMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -44,7 +44,7 @@ export function useRemoveNamespaces({
     [executeContract, signingClient],
   )
 
-  const removeNamespacesAsync = useCallback(
+  const removeNamespacesAsync = React.useCallback(
     function removeNamespacesAsync(
       ...args: RemoveNamespacesMsgBuilderParameters
     ) {

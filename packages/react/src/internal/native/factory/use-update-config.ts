@@ -1,6 +1,6 @@
 import { FactoryExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type UpdateConfigMsg = Extract<
   ReturnType<typeof FactoryExecuteMsgBuilder.updateConfig>,
@@ -32,7 +32,7 @@ export function useUpdateConfig({
       ...restInput,
     })
 
-  const updateConfig = useCallback(
+  const updateConfig = React.useCallback(
     function updateConfig(...args: UpdateConfigMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -42,7 +42,7 @@ export function useUpdateConfig({
     [executeContract, signingClient],
   )
 
-  const updateConfigAsync = useCallback(
+  const updateConfigAsync = React.useCallback(
     function updateConfigAsync(...args: UpdateConfigMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

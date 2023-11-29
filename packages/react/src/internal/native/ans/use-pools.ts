@@ -16,10 +16,10 @@ function buildPoolsMsg(...args: PoolsMsgBuilderParameters): PoolsMsg {
 }
 
 export function usePools({ contractAddress, ...restInput }: UsePoolsArgs) {
-  const { data: pools, ...restOutput } = useQuerySmart<PoolsResponse, Error>(
-    contractAddress,
-    buildPoolsMsg(restInput),
-  )
+  const { data: pools, ...restOutput } = useQuerySmart<PoolsResponse, Error>({
+    address: contractAddress,
+    queryMsg: buildPoolsMsg(restInput),
+  })
 
   return { pools, ...restOutput }
 }

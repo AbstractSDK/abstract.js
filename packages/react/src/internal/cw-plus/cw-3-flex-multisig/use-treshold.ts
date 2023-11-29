@@ -23,7 +23,7 @@ export function useThreshold({ contractAddress }: UseThresholdArgs) {
   const { data: threshold, ...restOutput } = useQuerySmart<
     ThresholdResponse,
     Error
-  >(contractAddress, buildThresholdMsg())
+  >({ address: contractAddress, queryMsg: buildThresholdMsg() })
 
   return { threshold, ...restOutput }
 }

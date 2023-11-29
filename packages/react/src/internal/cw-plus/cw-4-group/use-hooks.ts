@@ -18,10 +18,10 @@ function buildHooksMsg(...args: HooksMsgBuilderParameters): HooksMsg {
 }
 
 export function useHooks({ contractAddress }: UseHooksArgs) {
-  const { data: hooks, ...restOutput } = useQuerySmart<HooksResponse, Error>(
-    contractAddress,
-    buildHooksMsg(),
-  )
+  const { data: hooks, ...restOutput } = useQuerySmart<HooksResponse, Error>({
+    address: contractAddress,
+    queryMsg: buildHooksMsg(),
+  })
 
   return { hooks, ...restOutput }
 }

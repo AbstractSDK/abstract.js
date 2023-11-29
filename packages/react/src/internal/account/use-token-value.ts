@@ -28,7 +28,7 @@ export function useTokenValue({
   const { data: tokenValue, ...restOutput } = useQuerySmart<
     TokenValueResponse,
     Error
-  >(contractAddress, buildTokenValueMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildTokenValueMsg(restInput) })
 
   return { tokenValue, ...restOutput }
 }

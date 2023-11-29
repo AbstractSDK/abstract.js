@@ -23,7 +23,7 @@ export function useTotalWeight({ contractAddress }: UseTotalWeightArgs) {
   const { data: totalWeight, ...restOutput } = useQuerySmart<
     TotalWeightResponse,
     Error
-  >(contractAddress, buildTotalWeightMsg())
+  >({ address: contractAddress, queryMsg: buildTotalWeightMsg() })
 
   return { totalWeight, ...restOutput }
 }

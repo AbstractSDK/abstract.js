@@ -53,7 +53,7 @@ export interface AccountModuleFilter {
   version?: string
 }
 
-const CHAIN_DEPLOYMENT_QUERY = gql(/* GraphQL */ `
+export const CHAIN_DEPLOYMENT_QUERY = gql(/* GraphQL */ `
   query Deployment($chain: ID!) {
     version
     deployment(chain: $chain) {

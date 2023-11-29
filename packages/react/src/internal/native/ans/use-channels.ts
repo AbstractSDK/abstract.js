@@ -26,7 +26,7 @@ export function useChannels({
   const { data: channels, ...restOutput } = useQuerySmart<
     ChannelsResponse,
     Error
-  >(contractAddress, buildChannelsMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildChannelsMsg(restInput) })
 
   return { channels, ...restOutput }
 }

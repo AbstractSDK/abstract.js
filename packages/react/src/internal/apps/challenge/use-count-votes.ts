@@ -1,6 +1,6 @@
 import { ChallengeExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type CountVotesMsg = Extract<
   ReturnType<typeof ChallengeExecuteMsgBuilder.countVotes>,
@@ -30,7 +30,7 @@ export function useCountVotes({
       ...restInput,
     })
 
-  const countVotes = useCallback(
+  const countVotes = React.useCallback(
     function countVotes(...args: CountVotesMsgBuilderParameters) {
       return executeContract({
         signingClient,
@@ -40,7 +40,7 @@ export function useCountVotes({
     [executeContract, signingClient],
   )
 
-  const countVotesAsync = useCallback(
+  const countVotesAsync = React.useCallback(
     function countVotesAsync(...args: CountVotesMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

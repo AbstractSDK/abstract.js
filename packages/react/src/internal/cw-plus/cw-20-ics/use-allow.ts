@@ -1,6 +1,6 @@
 import { Cw20IcsExecuteMsgBuilder } from '@abstract-money/core'
 import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
-import { useCallback } from 'react'
+import * as React from 'react'
 
 type AllowMsg = Extract<
   ReturnType<typeof Cw20IcsExecuteMsgBuilder.allow>,
@@ -25,14 +25,14 @@ export function useAllow({ contractAddress, ...restInput }: UseAllowArgs) {
       ...restInput,
     })
 
-  const allow = useCallback(
+  const allow = React.useCallback(
     function allow(...args: AllowMsgBuilderParameters) {
       return executeContract({ signingClient, msg: buildAllowMsg(...args) })
     },
     [executeContract, signingClient],
   )
 
-  const allowAsync = useCallback(
+  const allowAsync = React.useCallback(
     function allowAsync(...args: AllowMsgBuilderParameters) {
       return executeContractAsync({
         signingClient,

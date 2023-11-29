@@ -28,7 +28,7 @@ export function useNamespaces({
   const { data: namespaces, ...restOutput } = useQuerySmart<
     NamespacesResponse,
     Error
-  >(contractAddress, buildNamespacesMsg(restInput))
+  >({ address: contractAddress, queryMsg: buildNamespacesMsg(restInput) })
 
   return { namespaces, ...restOutput }
 }
