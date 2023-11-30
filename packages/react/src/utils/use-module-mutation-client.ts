@@ -1,25 +1,21 @@
-import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { useCosmWasmClient, useRecentChains } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { useCosmWasmSigningClient, useRecentChains, useAccount } from 'graz'
 import * as React from 'react'
 
 import {
   ABSTRACT_API_URL,
   AbstractAccountId,
-  AbstractQueryClient,
+  AbstractClient,
   CHAIN_DEPLOYMENT_QUERY,
   graphqlRequest,
 } from '@abstract-money/core'
 import { ChainInfo } from '@keplr-wallet/types'
-import {
-  UseQueryOptions,
-  UseQueryResult,
-  useQuery,
-} from '@tanstack/react-query'
+import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import { useAccountId, useConfig } from '../contexts'
 
-interface ModuleQueryClientConstructor {
+interface ModuleMutationClientConstructor {
   new (args: {
-    abstractQueryClient: AbstractQueryClient
+    abstractClient: AbstractClient
     accountId: AbstractAccountId
     managerAddress: string
     proxyAddress: string
@@ -27,9 +23,10 @@ interface ModuleQueryClientConstructor {
   }): any
 }
 
-async function getModuleQueryClient<
-  TModule extends ModuleQueryClientConstructor,
+async function getModuleMutationClient<
+  TModule extends ModuleMutationClientConstructor,
 >({
+  sender,
   client,
   chainInfos,
   overrideApiUrl = ABSTRACT_API_URL,
@@ -37,7 +34,8 @@ async function getModuleQueryClient<
   moduleId,
   Module,
 }: {
-  client: CosmWasmClient
+  sender: string
+  client: SigningCosmWasmClient
   chainInfos: [ChainInfo, ...ChainInfo[]]
   overrideApiUrl?: string
   accountId: AbstractAccountId
@@ -55,19 +53,21 @@ async function getModuleQueryClient<
     accountFactory: factoryAddress,
   } = data.deployment
 
-  const abstractQueryClient = new AbstractQueryClient({
+  const abstractClient = new AbstractClient({
+    sender,
     client,
     ansHostAddress,
     registryAddress,
     factoryAddress,
   })
 
-  const { account_base } =
-    await abstractQueryClient.registryQueryClient.accountBase({
+  const { account_base } = await abstractClient.registryQueryClient.accountBase(
+    {
       accountId: accountId.into(),
-    })
+    },
+  )
   return new Module({
-    abstractQueryClient,
+    abstractClient: abstractClient,
     accountId,
     managerAddress: account_base.manager,
     proxyAddress: account_base.proxy,
@@ -75,23 +75,24 @@ async function getModuleQueryClient<
   }) as InstanceType<TModule>
 }
 
-type TQueryFnData<TModule extends ModuleQueryClientConstructor> =
+type TQueryFnData<TModule extends ModuleMutationClientConstructor> =
   | InstanceType<TModule>
   | undefined
-type TQueryData<TModule extends ModuleQueryClientConstructor> =
+type TQueryData<TModule extends ModuleMutationClientConstructor> =
   | InstanceType<TModule>
   | undefined
 type TQueryKey = readonly [
-  'module-query-client',
+  'module-mutation-client',
   string,
+  string | undefined,
   AbstractAccountId,
   ChainInfo[] | undefined,
   string,
-  CosmWasmClient | undefined,
+  SigningCosmWasmClient | undefined,
 ]
 
-export function useModuleQueryClient<
-  TModule extends ModuleQueryClientConstructor,
+export function useModuleMutationClient<
+  TModule extends ModuleMutationClientConstructor,
 >(
   {
     moduleId,
@@ -113,30 +114,37 @@ export function useModuleQueryClient<
   // TODO: propagate the query states and errors from those hooks
   // Although `isLoading` will be correct, `isStale` and error-related results
   // would be incorrect.
-  const { data: client } = useCosmWasmClient()
+  const { data: client } = useCosmWasmSigningClient()
   const { accountId } = useAccountId()
   const { data: chainInfos } = useRecentChains()
   const { apiUrl } = useConfig()
+  const { data: account } = useAccount()
+
+  const sender = account?.bech32Address
 
   const queryKey = React.useMemo(
     () =>
       [
-        'module-query-client',
+        'module-mutation-client',
         moduleId,
+        sender,
         accountId,
         chainInfos,
         apiUrl,
         client,
       ] as const,
-    [moduleId, accountId, chainInfos, apiUrl, client],
+    [moduleId, sender, accountId, chainInfos, apiUrl, client],
   )
 
   const queryFn = React.useCallback(() => {
     if (!client) throw new Error('client is not defined')
-    // Retrieve the first chain from the list
+    if (!sender) throw new Error('sender is not defined')
 
+    // Retrieve the first chain from the list
     if (!chainInfos?.[0]) throw new Error('chain infos are empty')
-    return getModuleQueryClient({
+
+    return getModuleMutationClient({
+      sender,
       client,
       chainInfos: chainInfos as [ChainInfo, ...ChainInfo[]],
       overrideApiUrl: apiUrl,
