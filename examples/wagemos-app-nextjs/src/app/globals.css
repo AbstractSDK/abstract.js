@@ -74,3 +74,31 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+@layer base {
+  html * {
+    font-family: var(--font-body);
+  } 
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+  h1 {
+    @apply text-5xl font-bold;
+  }
+  h2 {
+    @apply text-4xl font-bold;
+  }
+  h3 {
+    @apply text-3xl font-bold;
+  }
+  h4 {
+    @apply text-2xl font-medium;
+  }
+  h5 {
+    @apply text-xl font-medium;
+  }
+  h6 {
+    @apply text-lg font-medium;
+  }
+}
