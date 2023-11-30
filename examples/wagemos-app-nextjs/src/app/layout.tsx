@@ -1,10 +1,10 @@
 import { AbstractProvider } from '@abstract-money/react'
 import type { Metadata } from 'next'
+import { Inter, Poppins } from 'next/font/google'
+import { cn } from '~/utils'
 import { GrazProvider } from './_providers/graz'
 import { ToastProvider } from './_providers/toast'
 import './globals.css'
-import { Inter, Poppins } from 'next/font/google'
-import { cn } from '~/utils'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-body' })
 
