@@ -1,9 +1,12 @@
 'use client'
 import {
-  useModuleQueryClient,
   useModuleMutationClient,
+  useModuleQueryClient,
 } from '@abstract-money/react/utils'
 
+import { ExecuteResult } from '@cosmjs/cosmwasm-stargate'
+import { UseMutationOptions } from '@tanstack/react-query'
+import { useMemo } from 'react'
 import {
   WagemosAppClient,
   WagemosAppQueryClient,
@@ -44,9 +47,6 @@ import {
   RoundResponse,
   RoundsResponse,
 } from './cosmwasm-codegen/Wagemos.types'
-import { UseMutationOptions } from '@tanstack/react-query'
-import { ExecuteResult } from '@cosmjs/cosmwasm-stargate'
-import { useMemo } from 'react'
 
 enum ModuleType {
   APP = 'app',

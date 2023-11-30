@@ -1,5 +1,5 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { useCosmWasmSigningClient, useRecentChains, useAccount } from 'graz'
+import { useAccount, useCosmWasmSigningClient, useRecentChains } from 'graz'
 import * as React from 'react'
 
 import {
