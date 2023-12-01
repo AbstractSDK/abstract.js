@@ -1,6 +1,7 @@
 import { RegistryExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type SetFactoryMsg = Extract<
   ReturnType<typeof RegistryExecuteMsgBuilder.setFactory>,
@@ -9,21 +10,20 @@ type SetFactoryMsg = Extract<
 
 type SetFactoryMsgBuilderParameters = Parameters<
   typeof RegistryExecuteMsgBuilder.setFactory
->
+>[0]
 
 type UseSetFactoryArgs = Parameters<typeof useExecuteContract<SetFactoryMsg>>[0]
 
 function buildSetFactoryMsg(
-  ...args: SetFactoryMsgBuilderParameters
+  args: SetFactoryMsgBuilderParameters,
 ): SetFactoryMsg {
-  return RegistryExecuteMsgBuilder.setFactory(...args) as SetFactoryMsg
+  return RegistryExecuteMsgBuilder.setFactory(args) as SetFactoryMsg
 }
 
 export function useSetFactory({
   contractAddress,
   ...restInput
 }: UseSetFactoryArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<SetFactoryMsg>({
       contractAddress,
@@ -31,23 +31,39 @@ export function useSetFactory({
     })
 
   const setFactory = React.useCallback(
-    function setFactory(...args: SetFactoryMsgBuilderParameters) {
+    function setFactory({
+      senderAddress,
+      signingClient,
+      ...args
+    }: SetFactoryMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildSetFactoryMsg(...args),
+        senderAddress,
+        msg: buildSetFactoryMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const setFactoryAsync = React.useCallback(
-    function setFactoryAsync(...args: SetFactoryMsgBuilderParameters) {
+    function setFactoryAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: SetFactoryMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildSetFactoryMsg(...args),
+        senderAddress,
+        msg: buildSetFactoryMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { setFactory, setFactoryAsync, ...restOutput }

@@ -1,6 +1,7 @@
 import { Cw3FlexMultisigExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type MemberChangedHookMsg = Extract<
   ReturnType<typeof Cw3FlexMultisigExecuteMsgBuilder.memberChangedHook>,
@@ -9,17 +10,17 @@ type MemberChangedHookMsg = Extract<
 
 type MemberChangedHookMsgBuilderParameters = Parameters<
   typeof Cw3FlexMultisigExecuteMsgBuilder.memberChangedHook
->
+>[0]
 
 type UseMemberChangedHookArgs = Parameters<
   typeof useExecuteContract<MemberChangedHookMsg>
 >[0]
 
 function buildMemberChangedHookMsg(
-  ...args: MemberChangedHookMsgBuilderParameters
+  args: MemberChangedHookMsgBuilderParameters,
 ): MemberChangedHookMsg {
   return Cw3FlexMultisigExecuteMsgBuilder.memberChangedHook(
-    ...args,
+    args,
   ) as MemberChangedHookMsg
 }
 
@@ -27,7 +28,6 @@ export function useMemberChangedHook({
   contractAddress,
   ...restInput
 }: UseMemberChangedHookArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<MemberChangedHookMsg>({
       contractAddress,
@@ -35,25 +35,39 @@ export function useMemberChangedHook({
     })
 
   const memberChangedHook = React.useCallback(
-    function memberChangedHook(...args: MemberChangedHookMsgBuilderParameters) {
+    function memberChangedHook({
+      senderAddress,
+      signingClient,
+      ...args
+    }: MemberChangedHookMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildMemberChangedHookMsg(...args),
+        senderAddress,
+        msg: buildMemberChangedHookMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const memberChangedHookAsync = React.useCallback(
-    function memberChangedHookAsync(
-      ...args: MemberChangedHookMsgBuilderParameters
-    ) {
+    function memberChangedHookAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: MemberChangedHookMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildMemberChangedHookMsg(...args),
+        senderAddress,
+        msg: buildMemberChangedHookMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { memberChangedHook, memberChangedHookAsync, ...restOutput }

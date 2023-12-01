@@ -1,22 +1,22 @@
 import { Cw20ExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type MintMsg = Extract<
   ReturnType<typeof Cw20ExecuteMsgBuilder.mint>,
   { mint: unknown }
 >
 
-type MintMsgBuilderParameters = Parameters<typeof Cw20ExecuteMsgBuilder.mint>
+type MintMsgBuilderParameters = Parameters<typeof Cw20ExecuteMsgBuilder.mint>[0]
 
 type UseMintArgs = Parameters<typeof useExecuteContract<MintMsg>>[0]
 
-function buildMintMsg(...args: MintMsgBuilderParameters): MintMsg {
-  return Cw20ExecuteMsgBuilder.mint(...args) as MintMsg
+function buildMintMsg(args: MintMsgBuilderParameters): MintMsg {
+  return Cw20ExecuteMsgBuilder.mint(args) as MintMsg
 }
 
 export function useMint({ contractAddress, ...restInput }: UseMintArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<MintMsg>({
       contractAddress,
@@ -24,20 +24,39 @@ export function useMint({ contractAddress, ...restInput }: UseMintArgs) {
     })
 
   const mint = React.useCallback(
-    function mint(...args: MintMsgBuilderParameters) {
-      return executeContract({ signingClient, msg: buildMintMsg(...args) })
+    function mint({
+      senderAddress,
+      signingClient,
+      ...args
+    }: MintMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
+      return executeContract({
+        signingClient,
+        senderAddress,
+        msg: buildMintMsg(args),
+      })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const mintAsync = React.useCallback(
-    function mintAsync(...args: MintMsgBuilderParameters) {
+    function mintAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: MintMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildMintMsg(...args),
+        senderAddress,
+        msg: buildMintMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { mint, mintAsync, ...restOutput }

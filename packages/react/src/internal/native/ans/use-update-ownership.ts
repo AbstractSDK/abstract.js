@@ -1,31 +1,33 @@
 import { AnsHostExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type UpdateOwnershipMsg = Extract<
   ReturnType<typeof AnsHostExecuteMsgBuilder.updateOwnership>,
   { update_ownership: unknown }
 >
 
-type UpdateOwnershipMsgBuilderParameters = Parameters<
-  typeof AnsHostExecuteMsgBuilder.updateOwnership
->
+type UpdateOwnershipMsgBuilderParameters = {
+  action: Parameters<typeof AnsHostExecuteMsgBuilder.updateOwnership>[0]
+}
 
 type UseUpdateOwnershipArgs = Parameters<
   typeof useExecuteContract<UpdateOwnershipMsg>
 >[0]
 
 function buildUpdateOwnershipMsg(
-  ...args: UpdateOwnershipMsgBuilderParameters
+  args: UpdateOwnershipMsgBuilderParameters,
 ): UpdateOwnershipMsg {
-  return AnsHostExecuteMsgBuilder.updateOwnership(...args) as UpdateOwnershipMsg
+  return AnsHostExecuteMsgBuilder.updateOwnership(
+    args.action,
+  ) as UpdateOwnershipMsg
 }
 
 export function useUpdateOwnership({
   contractAddress,
   ...restInput
 }: UseUpdateOwnershipArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<UpdateOwnershipMsg>({
       contractAddress,
@@ -33,25 +35,39 @@ export function useUpdateOwnership({
     })
 
   const updateOwnership = React.useCallback(
-    function updateOwnership(...args: UpdateOwnershipMsgBuilderParameters) {
+    function updateOwnership({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateOwnershipMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildUpdateOwnershipMsg(...args),
+        senderAddress,
+        msg: buildUpdateOwnershipMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const updateOwnershipAsync = React.useCallback(
-    function updateOwnershipAsync(
-      ...args: UpdateOwnershipMsgBuilderParameters
-    ) {
+    function updateOwnershipAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateOwnershipMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildUpdateOwnershipMsg(...args),
+        senderAddress,
+        msg: buildUpdateOwnershipMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { updateOwnership, updateOwnershipAsync, ...restOutput }

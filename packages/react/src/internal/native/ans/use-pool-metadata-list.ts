@@ -1,6 +1,7 @@
 import { AnsHostQueryMsgBuilder } from '@abstract-money/core'
 import { type PoolMetadataListResponse } from '@abstract-money/core/native/ans-host/AnsHost.types'
-import { useQuerySmart } from 'graz'
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { useQuerySmart } from '../../../utils/use-query-smart'
 
 type PoolMetadataListMsg = Extract<
   ReturnType<typeof AnsHostQueryMsgBuilder.poolMetadataList>,
@@ -13,6 +14,7 @@ type PoolMetadataListMsgBuilderParameters = Parameters<
 
 type UsePoolMetadataListArgs = {
   contractAddress?: string
+  client?: CosmWasmClient
 } & PoolMetadataListMsgBuilderParameters[0]
 
 function buildPoolMetadataListMsg(
@@ -23,12 +25,17 @@ function buildPoolMetadataListMsg(
 
 export function usePoolMetadataList({
   contractAddress,
+  client,
   ...restInput
 }: UsePoolMetadataListArgs) {
   const { data: poolMetadataList, ...restOutput } = useQuerySmart<
     PoolMetadataListResponse,
     Error
-  >({ address: contractAddress, queryMsg: buildPoolMetadataListMsg(restInput) })
+  >({
+    address: contractAddress,
+    client,
+    queryMsg: buildPoolMetadataListMsg(restInput),
+  })
 
   return { poolMetadataList, ...restOutput }
 }

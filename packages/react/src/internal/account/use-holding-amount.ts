@@ -1,6 +1,7 @@
 import { ProxyQueryMsgBuilder } from '@abstract-money/core'
 import { type HoldingAmountResponse } from '@abstract-money/core/account/proxy/Proxy.types'
-import { useQuerySmart } from 'graz'
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { useQuerySmart } from '../../utils/use-query-smart'
 
 type HoldingAmountMsg = Extract<
   ReturnType<typeof ProxyQueryMsgBuilder.holdingAmount>,
@@ -13,6 +14,7 @@ type HoldingAmountMsgBuilderParameters = Parameters<
 
 type UseHoldingAmountArgs = {
   contractAddress?: string
+  client?: CosmWasmClient
 } & HoldingAmountMsgBuilderParameters[0]
 
 function buildHoldingAmountMsg(
@@ -23,12 +25,17 @@ function buildHoldingAmountMsg(
 
 export function useHoldingAmount({
   contractAddress,
+  client,
   ...restInput
 }: UseHoldingAmountArgs) {
   const { data: holdingAmount, ...restOutput } = useQuerySmart<
     HoldingAmountResponse,
     Error
-  >({ address: contractAddress, queryMsg: buildHoldingAmountMsg(restInput) })
+  >({
+    address: contractAddress,
+    client,
+    queryMsg: buildHoldingAmountMsg(restInput),
+  })
 
   return { holdingAmount, ...restOutput }
 }

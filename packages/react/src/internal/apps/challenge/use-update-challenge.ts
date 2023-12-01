@@ -1,6 +1,7 @@
 import { ChallengeExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type UpdateChallengeMsg = Extract<
   ReturnType<typeof ChallengeExecuteMsgBuilder.updateChallenge>,
@@ -9,25 +10,22 @@ type UpdateChallengeMsg = Extract<
 
 type UpdateChallengeMsgBuilderParameters = Parameters<
   typeof ChallengeExecuteMsgBuilder.updateChallenge
->
+>[0]
 
 type UseUpdateChallengeArgs = Parameters<
   typeof useExecuteContract<UpdateChallengeMsg>
 >[0]
 
 function buildUpdateChallengeMsg(
-  ...args: UpdateChallengeMsgBuilderParameters
+  args: UpdateChallengeMsgBuilderParameters,
 ): UpdateChallengeMsg {
-  return ChallengeExecuteMsgBuilder.updateChallenge(
-    ...args,
-  ) as UpdateChallengeMsg
+  return ChallengeExecuteMsgBuilder.updateChallenge(args) as UpdateChallengeMsg
 }
 
 export function useUpdateChallenge({
   contractAddress,
   ...restInput
 }: UseUpdateChallengeArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<UpdateChallengeMsg>({
       contractAddress,
@@ -35,25 +33,39 @@ export function useUpdateChallenge({
     })
 
   const updateChallenge = React.useCallback(
-    function updateChallenge(...args: UpdateChallengeMsgBuilderParameters) {
+    function updateChallenge({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateChallengeMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildUpdateChallengeMsg(...args),
+        senderAddress,
+        msg: buildUpdateChallengeMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const updateChallengeAsync = React.useCallback(
-    function updateChallengeAsync(
-      ...args: UpdateChallengeMsgBuilderParameters
-    ) {
+    function updateChallengeAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateChallengeMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildUpdateChallengeMsg(...args),
+        senderAddress,
+        msg: buildUpdateChallengeMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { updateChallenge, updateChallengeAsync, ...restOutput }

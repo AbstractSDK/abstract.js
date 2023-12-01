@@ -1,5 +1,4 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { useCosmWasmClient, useRecentChains } from 'graz'
 import * as React from 'react'
 
 import {
@@ -9,12 +8,7 @@ import {
   CHAIN_DEPLOYMENT_QUERY,
   graphqlRequest,
 } from '@abstract-money/core'
-import { ChainInfo } from '@keplr-wallet/types'
-import {
-  UseQueryOptions,
-  UseQueryResult,
-  useQuery,
-} from '@tanstack/react-query'
+import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import { useAccountId, useConfig } from '../contexts'
 
 interface ModuleQueryClientConstructor {
@@ -31,14 +25,14 @@ async function getModuleQueryClient<
   TModule extends ModuleQueryClientConstructor,
 >({
   client,
-  chainInfos,
+  chain,
   overrideApiUrl = ABSTRACT_API_URL,
   accountId,
   moduleId,
   Module,
 }: {
   client: CosmWasmClient
-  chainInfos: [ChainInfo, ...ChainInfo[]]
+  chain: string
   overrideApiUrl?: string
   accountId: AbstractAccountId
   moduleId: string
@@ -46,7 +40,7 @@ async function getModuleQueryClient<
 }) {
   // TODO: re-check if grabbing the first chain of the list is a good solution
   const data = await graphqlRequest(overrideApiUrl, CHAIN_DEPLOYMENT_QUERY, {
-    chain: chainInfos[0].chainId,
+    chain,
   })
 
   const {
@@ -85,7 +79,7 @@ type TQueryKey = readonly [
   'module-query-client',
   string,
   AbstractAccountId,
-  ChainInfo[] | undefined,
+  string | undefined,
   string,
   CosmWasmClient | undefined,
 ]
@@ -96,7 +90,11 @@ export function useModuleQueryClient<
   {
     moduleId,
     Module,
+    client,
+    chain,
   }: {
+    client: CosmWasmClient | undefined
+    chain: string | undefined
     moduleId: string
     Module: TModule
   },
@@ -110,12 +108,7 @@ export function useModuleQueryClient<
     TQueryKey
   > = {},
 ) {
-  // TODO: propagate the query states and errors from those hooks
-  // Although `isLoading` will be correct, `isStale` and error-related results
-  // would be incorrect.
-  const { data: client } = useCosmWasmClient()
   const { accountId } = useAccountId()
-  const { data: chainInfos } = useRecentChains()
   const { apiUrl } = useConfig()
 
   const queryKey = React.useMemo(
@@ -124,31 +117,30 @@ export function useModuleQueryClient<
         'module-query-client',
         moduleId,
         accountId,
-        chainInfos,
+        chain,
         apiUrl,
         client,
       ] as const,
-    [moduleId, accountId, chainInfos, apiUrl, client],
+    [moduleId, accountId, chain, apiUrl, client],
   )
 
   const queryFn = React.useCallback(() => {
     if (!client) throw new Error('client is not defined')
-    // Retrieve the first chain from the list
+    if (!chain) throw new Error('chain is not defined')
 
-    if (!chainInfos?.[0]) throw new Error('chain infos are empty')
     return getModuleQueryClient({
       client,
-      chainInfos: chainInfos as [ChainInfo, ...ChainInfo[]],
+      chain,
       overrideApiUrl: apiUrl,
       accountId,
       moduleId,
       Module,
     })
-  }, [client, chainInfos, apiUrl, accountId, moduleId, Module])
+  }, [client, chain, apiUrl, accountId, moduleId, Module])
 
   const enabled = React.useMemo(
-    () => Boolean(client && chainInfos?.[0] && enabled_),
-    [enabled_, client, chainInfos],
+    () => Boolean(client && chain && enabled_),
+    [enabled_, client, chain],
   )
 
   return useQuery(queryKey, queryFn, { enabled, ...rest })

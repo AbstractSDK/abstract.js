@@ -1,6 +1,7 @@
 import { Cw20ExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type UpdateMarketingMsg = Extract<
   ReturnType<typeof Cw20ExecuteMsgBuilder.updateMarketing>,
@@ -9,23 +10,22 @@ type UpdateMarketingMsg = Extract<
 
 type UpdateMarketingMsgBuilderParameters = Parameters<
   typeof Cw20ExecuteMsgBuilder.updateMarketing
->
+>[0]
 
 type UseUpdateMarketingArgs = Parameters<
   typeof useExecuteContract<UpdateMarketingMsg>
 >[0]
 
 function buildUpdateMarketingMsg(
-  ...args: UpdateMarketingMsgBuilderParameters
+  args: UpdateMarketingMsgBuilderParameters,
 ): UpdateMarketingMsg {
-  return Cw20ExecuteMsgBuilder.updateMarketing(...args) as UpdateMarketingMsg
+  return Cw20ExecuteMsgBuilder.updateMarketing(args) as UpdateMarketingMsg
 }
 
 export function useUpdateMarketing({
   contractAddress,
   ...restInput
 }: UseUpdateMarketingArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<UpdateMarketingMsg>({
       contractAddress,
@@ -33,25 +33,39 @@ export function useUpdateMarketing({
     })
 
   const updateMarketing = React.useCallback(
-    function updateMarketing(...args: UpdateMarketingMsgBuilderParameters) {
+    function updateMarketing({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateMarketingMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildUpdateMarketingMsg(...args),
+        senderAddress,
+        msg: buildUpdateMarketingMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const updateMarketingAsync = React.useCallback(
-    function updateMarketingAsync(
-      ...args: UpdateMarketingMsgBuilderParameters
-    ) {
+    function updateMarketingAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateMarketingMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildUpdateMarketingMsg(...args),
+        senderAddress,
+        msg: buildUpdateMarketingMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { updateMarketing, updateMarketingAsync, ...restOutput }

@@ -1,6 +1,7 @@
 import { FactoryExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type CreateAccountMsg = Extract<
   ReturnType<typeof FactoryExecuteMsgBuilder.createAccount>,
@@ -9,23 +10,22 @@ type CreateAccountMsg = Extract<
 
 type CreateAccountMsgBuilderParameters = Parameters<
   typeof FactoryExecuteMsgBuilder.createAccount
->
+>[0]
 
 type UseCreateAccountArgs = Parameters<
   typeof useExecuteContract<CreateAccountMsg>
 >[0]
 
 function buildCreateAccountMsg(
-  ...args: CreateAccountMsgBuilderParameters
+  args: CreateAccountMsgBuilderParameters,
 ): CreateAccountMsg {
-  return FactoryExecuteMsgBuilder.createAccount(...args) as CreateAccountMsg
+  return FactoryExecuteMsgBuilder.createAccount(args) as CreateAccountMsg
 }
 
 export function useCreateAccount({
   contractAddress,
   ...restInput
 }: UseCreateAccountArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<CreateAccountMsg>({
       contractAddress,
@@ -33,23 +33,39 @@ export function useCreateAccount({
     })
 
   const createAccount = React.useCallback(
-    function createAccount(...args: CreateAccountMsgBuilderParameters) {
+    function createAccount({
+      senderAddress,
+      signingClient,
+      ...args
+    }: CreateAccountMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildCreateAccountMsg(...args),
+        senderAddress,
+        msg: buildCreateAccountMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const createAccountAsync = React.useCallback(
-    function createAccountAsync(...args: CreateAccountMsgBuilderParameters) {
+    function createAccountAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: CreateAccountMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildCreateAccountMsg(...args),
+        senderAddress,
+        msg: buildCreateAccountMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { createAccount, createAccountAsync, ...restOutput }

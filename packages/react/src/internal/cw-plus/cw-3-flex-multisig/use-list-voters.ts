@@ -1,6 +1,7 @@
 import { Cw3FlexMultisigQueryMsgBuilder } from '@abstract-money/core'
 import { type ListVotersResponse } from '@abstract-money/core/cw-plus/Cw3FlexMultisig.types'
-import { useQuerySmart } from 'graz'
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { useQuerySmart } from '../../../utils/use-query-smart'
 
 type ListVotersMsg = Extract<
   ReturnType<typeof Cw3FlexMultisigQueryMsgBuilder.listVoters>,
@@ -13,6 +14,7 @@ type ListVotersMsgBuilderParameters = Parameters<
 
 type UseListVotersArgs = {
   contractAddress?: string
+  client?: CosmWasmClient
 } & ListVotersMsgBuilderParameters[0]
 
 function buildListVotersMsg(
@@ -23,12 +25,17 @@ function buildListVotersMsg(
 
 export function useListVoters({
   contractAddress,
+  client,
   ...restInput
 }: UseListVotersArgs) {
   const { data: listVoters, ...restOutput } = useQuerySmart<
     ListVotersResponse,
     Error
-  >({ address: contractAddress, queryMsg: buildListVotersMsg(restInput) })
+  >({
+    address: contractAddress,
+    client,
+    queryMsg: buildListVotersMsg(restInput),
+  })
 
   return { listVoters, ...restOutput }
 }

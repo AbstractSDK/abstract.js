@@ -1,5 +1,4 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { useAccount, useCosmWasmSigningClient, useRecentChains } from 'graz'
 import * as React from 'react'
 
 import {
@@ -9,7 +8,6 @@ import {
   CHAIN_DEPLOYMENT_QUERY,
   graphqlRequest,
 } from '@abstract-money/core'
-import { ChainInfo } from '@keplr-wallet/types'
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import { useAccountId, useConfig } from '../contexts'
 
@@ -28,7 +26,7 @@ async function getModuleMutationClient<
 >({
   sender,
   client,
-  chainInfos,
+  chain,
   overrideApiUrl = ABSTRACT_API_URL,
   accountId,
   moduleId,
@@ -36,7 +34,7 @@ async function getModuleMutationClient<
 }: {
   sender: string
   client: SigningCosmWasmClient
-  chainInfos: [ChainInfo, ...ChainInfo[]]
+  chain: string
   overrideApiUrl?: string
   accountId: AbstractAccountId
   moduleId: string
@@ -44,7 +42,7 @@ async function getModuleMutationClient<
 }) {
   // TODO: re-check if grabbing the first chain of the list is a good solution
   const data = await graphqlRequest(overrideApiUrl, CHAIN_DEPLOYMENT_QUERY, {
-    chain: chainInfos[0].chainId,
+    chain,
   })
 
   const {
@@ -86,7 +84,7 @@ type TQueryKey = readonly [
   string,
   string | undefined,
   AbstractAccountId,
-  ChainInfo[] | undefined,
+  string | undefined,
   string,
   SigningCosmWasmClient | undefined,
 ]
@@ -97,9 +95,15 @@ export function useModuleMutationClient<
   {
     moduleId,
     Module,
+    client,
+    chain,
+    sender,
   }: {
+    chain: string | undefined
+    sender: string | undefined
     moduleId: string
     Module: TModule
+    client: SigningCosmWasmClient | undefined
   },
   {
     enabled: enabled_ = true,
@@ -111,16 +115,8 @@ export function useModuleMutationClient<
     TQueryKey
   > = {},
 ) {
-  // TODO: propagate the query states and errors from those hooks
-  // Although `isLoading` will be correct, `isStale` and error-related results
-  // would be incorrect.
-  const { data: client } = useCosmWasmSigningClient()
   const { accountId } = useAccountId()
-  const { data: chainInfos } = useRecentChains()
   const { apiUrl } = useConfig()
-  const { data: account } = useAccount()
-
-  const sender = account?.bech32Address
 
   const queryKey = React.useMemo(
     () =>
@@ -129,34 +125,32 @@ export function useModuleMutationClient<
         moduleId,
         sender,
         accountId,
-        chainInfos,
+        chain,
         apiUrl,
         client,
       ] as const,
-    [moduleId, sender, accountId, chainInfos, apiUrl, client],
+    [moduleId, sender, accountId, chain, apiUrl, client],
   )
 
   const queryFn = React.useCallback(() => {
     if (!client) throw new Error('client is not defined')
     if (!sender) throw new Error('sender is not defined')
-
-    // Retrieve the first chain from the list
-    if (!chainInfos?.[0]) throw new Error('chain infos are empty')
+    if (!chain) throw new Error('chain is not defined')
 
     return getModuleMutationClient({
       sender,
       client,
-      chainInfos: chainInfos as [ChainInfo, ...ChainInfo[]],
+      chain,
       overrideApiUrl: apiUrl,
       accountId,
       moduleId,
       Module,
     })
-  }, [client, chainInfos, apiUrl, accountId, moduleId, Module])
+  }, [client, chain, apiUrl, accountId, moduleId, Module])
 
   const enabled = React.useMemo(
-    () => Boolean(client && chainInfos?.[0] && enabled_),
-    [enabled_, client, chainInfos],
+    () => Boolean(client && chain && enabled_),
+    [enabled_, client, chain],
   )
 
   return useQuery(queryKey, queryFn, { enabled, ...rest })

@@ -1,6 +1,7 @@
 import { AnsHostQueryMsgBuilder } from '@abstract-money/core'
 import { type ChannelsResponse } from '@abstract-money/core/native/ans-host/AnsHost.types'
-import { useQuerySmart } from 'graz'
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { useQuerySmart } from '../../../utils/use-query-smart'
 
 type ChannelsMsg = Extract<
   ReturnType<typeof AnsHostQueryMsgBuilder.channels>,
@@ -13,6 +14,7 @@ type ChannelsMsgBuilderParameters = Parameters<
 
 type UseChannelsArgs = {
   contractAddress?: string
+  client?: CosmWasmClient
 } & ChannelsMsgBuilderParameters[0]
 
 function buildChannelsMsg(...args: ChannelsMsgBuilderParameters): ChannelsMsg {
@@ -21,12 +23,13 @@ function buildChannelsMsg(...args: ChannelsMsgBuilderParameters): ChannelsMsg {
 
 export function useChannels({
   contractAddress,
+  client,
   ...restInput
 }: UseChannelsArgs) {
   const { data: channels, ...restOutput } = useQuerySmart<
     ChannelsResponse,
     Error
-  >({ address: contractAddress, queryMsg: buildChannelsMsg(restInput) })
+  >({ address: contractAddress, client, queryMsg: buildChannelsMsg(restInput) })
 
   return { channels, ...restOutput }
 }

@@ -1,6 +1,7 @@
 import { AnsHostQueryMsgBuilder } from '@abstract-money/core'
 import { type ContractsResponse } from '@abstract-money/core/native/ans-host/AnsHost.types'
-import { useQuerySmart } from 'graz'
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { useQuerySmart } from '../../../utils/use-query-smart'
 
 type ContractsMsg = Extract<
   ReturnType<typeof AnsHostQueryMsgBuilder.contracts>,
@@ -13,6 +14,7 @@ type ContractsMsgBuilderParameters = Parameters<
 
 type UseContractsArgs = {
   contractAddress?: string
+  client?: CosmWasmClient
 } & ContractsMsgBuilderParameters[0]
 
 function buildContractsMsg(
@@ -23,12 +25,17 @@ function buildContractsMsg(
 
 export function useContracts({
   contractAddress,
+  client,
   ...restInput
 }: UseContractsArgs) {
   const { data: contracts, ...restOutput } = useQuerySmart<
     ContractsResponse,
     Error
-  >({ address: contractAddress, queryMsg: buildContractsMsg(restInput) })
+  >({
+    address: contractAddress,
+    client,
+    queryMsg: buildContractsMsg(restInput),
+  })
 
   return { contracts, ...restOutput }
 }

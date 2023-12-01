@@ -1,6 +1,7 @@
 import { Cw20ExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type UpdateMinterMsg = Extract<
   ReturnType<typeof Cw20ExecuteMsgBuilder.updateMinter>,
@@ -9,23 +10,22 @@ type UpdateMinterMsg = Extract<
 
 type UpdateMinterMsgBuilderParameters = Parameters<
   typeof Cw20ExecuteMsgBuilder.updateMinter
->
+>[0]
 
 type UseUpdateMinterArgs = Parameters<
   typeof useExecuteContract<UpdateMinterMsg>
 >[0]
 
 function buildUpdateMinterMsg(
-  ...args: UpdateMinterMsgBuilderParameters
+  args: UpdateMinterMsgBuilderParameters,
 ): UpdateMinterMsg {
-  return Cw20ExecuteMsgBuilder.updateMinter(...args) as UpdateMinterMsg
+  return Cw20ExecuteMsgBuilder.updateMinter(args) as UpdateMinterMsg
 }
 
 export function useUpdateMinter({
   contractAddress,
   ...restInput
 }: UseUpdateMinterArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<UpdateMinterMsg>({
       contractAddress,
@@ -33,23 +33,39 @@ export function useUpdateMinter({
     })
 
   const updateMinter = React.useCallback(
-    function updateMinter(...args: UpdateMinterMsgBuilderParameters) {
+    function updateMinter({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateMinterMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildUpdateMinterMsg(...args),
+        senderAddress,
+        msg: buildUpdateMinterMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const updateMinterAsync = React.useCallback(
-    function updateMinterAsync(...args: UpdateMinterMsgBuilderParameters) {
+    function updateMinterAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateMinterMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildUpdateMinterMsg(...args),
+        senderAddress,
+        msg: buildUpdateMinterMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { updateMinter, updateMinterAsync, ...restOutput }

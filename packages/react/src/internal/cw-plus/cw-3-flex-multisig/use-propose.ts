@@ -1,6 +1,7 @@
 import { Cw3FlexMultisigExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type ProposeMsg = Extract<
   ReturnType<typeof Cw3FlexMultisigExecuteMsgBuilder.propose>,
@@ -9,16 +10,15 @@ type ProposeMsg = Extract<
 
 type ProposeMsgBuilderParameters = Parameters<
   typeof Cw3FlexMultisigExecuteMsgBuilder.propose
->
+>[0]
 
 type UseProposeArgs = Parameters<typeof useExecuteContract<ProposeMsg>>[0]
 
-function buildProposeMsg(...args: ProposeMsgBuilderParameters): ProposeMsg {
-  return Cw3FlexMultisigExecuteMsgBuilder.propose(...args) as ProposeMsg
+function buildProposeMsg(args: ProposeMsgBuilderParameters): ProposeMsg {
+  return Cw3FlexMultisigExecuteMsgBuilder.propose(args) as ProposeMsg
 }
 
 export function usePropose({ contractAddress, ...restInput }: UseProposeArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<ProposeMsg>({
       contractAddress,
@@ -26,20 +26,39 @@ export function usePropose({ contractAddress, ...restInput }: UseProposeArgs) {
     })
 
   const propose = React.useCallback(
-    function propose(...args: ProposeMsgBuilderParameters) {
-      return executeContract({ signingClient, msg: buildProposeMsg(...args) })
+    function propose({
+      senderAddress,
+      signingClient,
+      ...args
+    }: ProposeMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
+      return executeContract({
+        signingClient,
+        senderAddress,
+        msg: buildProposeMsg(args),
+      })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const proposeAsync = React.useCallback(
-    function proposeAsync(...args: ProposeMsgBuilderParameters) {
+    function proposeAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: ProposeMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildProposeMsg(...args),
+        senderAddress,
+        msg: buildProposeMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { propose, proposeAsync, ...restOutput }

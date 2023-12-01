@@ -1,6 +1,7 @@
 import { Cw20IcsExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type ReceiveMsg = Extract<
   ReturnType<typeof Cw20IcsExecuteMsgBuilder.receive>,
@@ -9,16 +10,15 @@ type ReceiveMsg = Extract<
 
 type ReceiveMsgBuilderParameters = Parameters<
   typeof Cw20IcsExecuteMsgBuilder.receive
->
+>[0]
 
 type UseReceiveArgs = Parameters<typeof useExecuteContract<ReceiveMsg>>[0]
 
-function buildReceiveMsg(...args: ReceiveMsgBuilderParameters): ReceiveMsg {
-  return Cw20IcsExecuteMsgBuilder.receive(...args) as ReceiveMsg
+function buildReceiveMsg(args: ReceiveMsgBuilderParameters): ReceiveMsg {
+  return Cw20IcsExecuteMsgBuilder.receive(args) as ReceiveMsg
 }
 
 export function useReceive({ contractAddress, ...restInput }: UseReceiveArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<ReceiveMsg>({
       contractAddress,
@@ -26,20 +26,39 @@ export function useReceive({ contractAddress, ...restInput }: UseReceiveArgs) {
     })
 
   const receive = React.useCallback(
-    function receive(...args: ReceiveMsgBuilderParameters) {
-      return executeContract({ signingClient, msg: buildReceiveMsg(...args) })
+    function receive({
+      senderAddress,
+      signingClient,
+      ...args
+    }: ReceiveMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
+      return executeContract({
+        signingClient,
+        senderAddress,
+        msg: buildReceiveMsg(args),
+      })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const receiveAsync = React.useCallback(
-    function receiveAsync(...args: ReceiveMsgBuilderParameters) {
+    function receiveAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: ReceiveMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildReceiveMsg(...args),
+        senderAddress,
+        msg: buildReceiveMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { receive, receiveAsync, ...restOutput }

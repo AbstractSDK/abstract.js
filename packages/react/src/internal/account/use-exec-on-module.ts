@@ -1,6 +1,7 @@
 import { ManagerExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../utils/use-execute-contract'
 
 type ExecOnModuleMsg = Extract<
   ReturnType<typeof ManagerExecuteMsgBuilder.execOnModule>,
@@ -9,23 +10,22 @@ type ExecOnModuleMsg = Extract<
 
 type ExecOnModuleMsgBuilderParameters = Parameters<
   typeof ManagerExecuteMsgBuilder.execOnModule
->
+>[0]
 
 type UseExecOnModuleArgs = Parameters<
   typeof useExecuteContract<ExecOnModuleMsg>
 >[0]
 
 function buildExecOnModuleMsg(
-  ...args: ExecOnModuleMsgBuilderParameters
+  args: ExecOnModuleMsgBuilderParameters,
 ): ExecOnModuleMsg {
-  return ManagerExecuteMsgBuilder.execOnModule(...args) as ExecOnModuleMsg
+  return ManagerExecuteMsgBuilder.execOnModule(args) as ExecOnModuleMsg
 }
 
 export function useExecOnModule({
   contractAddress,
   ...restInput
 }: UseExecOnModuleArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<ExecOnModuleMsg>({
       contractAddress,
@@ -33,23 +33,39 @@ export function useExecOnModule({
     })
 
   const execOnModule = React.useCallback(
-    function execonmodule(...args: ExecOnModuleMsgBuilderParameters) {
+    function execonmodule({
+      senderAddress,
+      signingClient,
+      ...args
+    }: ExecOnModuleMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildExecOnModuleMsg(...args),
+        senderAddress,
+        msg: buildExecOnModuleMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const execOnModuleAsync = React.useCallback(
-    function execonmoduleAsync(...args: ExecOnModuleMsgBuilderParameters) {
+    function execonmoduleAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: ExecOnModuleMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildExecOnModuleMsg(...args),
+        senderAddress,
+        msg: buildExecOnModuleMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { execOnModule, execOnModuleAsync, ...restOutput }

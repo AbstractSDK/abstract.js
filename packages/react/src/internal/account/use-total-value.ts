@@ -1,6 +1,7 @@
 import { ProxyQueryMsgBuilder } from '@abstract-money/core'
 import { type AssetBaseForAddr } from '@abstract-money/core/account/proxy/Proxy.types'
-import { useQuerySmart } from 'graz'
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { useQuerySmart } from '../../utils/use-query-smart'
 
 type TotalValueMsg = Extract<
   ReturnType<typeof ProxyQueryMsgBuilder.totalValue>,
@@ -11,7 +12,7 @@ type TotalValueMsgBuilderParameters = Parameters<
   typeof ProxyQueryMsgBuilder.totalValue
 >
 
-type UseTotalValueArgs = { contractAddress?: string }
+type UseTotalValueArgs = { contractAddress?: string; client?: CosmWasmClient }
 
 function buildTotalValueMsg(
   ...args: TotalValueMsgBuilderParameters
@@ -19,11 +20,11 @@ function buildTotalValueMsg(
   return ProxyQueryMsgBuilder.totalValue(...args) as TotalValueMsg
 }
 
-export function useTotalValue({ contractAddress }: UseTotalValueArgs) {
+export function useTotalValue({ contractAddress, client }: UseTotalValueArgs) {
   const { data: totalValue, ...restOutput } = useQuerySmart<
     AssetBaseForAddr,
     Error
-  >({ address: contractAddress, queryMsg: buildTotalValueMsg() })
+  >({ address: contractAddress, client, queryMsg: buildTotalValueMsg() })
 
   return { totalValue, ...restOutput }
 }

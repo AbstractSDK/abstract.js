@@ -1,6 +1,7 @@
 import { Cw4GroupExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type UpdateMembersMsg = Extract<
   ReturnType<typeof Cw4GroupExecuteMsgBuilder.updateMembers>,
@@ -9,23 +10,22 @@ type UpdateMembersMsg = Extract<
 
 type UpdateMembersMsgBuilderParameters = Parameters<
   typeof Cw4GroupExecuteMsgBuilder.updateMembers
->
+>[0]
 
 type UseUpdateMembersArgs = Parameters<
   typeof useExecuteContract<UpdateMembersMsg>
 >[0]
 
 function buildUpdateMembersMsg(
-  ...args: UpdateMembersMsgBuilderParameters
+  args: UpdateMembersMsgBuilderParameters,
 ): UpdateMembersMsg {
-  return Cw4GroupExecuteMsgBuilder.updateMembers(...args) as UpdateMembersMsg
+  return Cw4GroupExecuteMsgBuilder.updateMembers(args) as UpdateMembersMsg
 }
 
 export function useUpdateMembers({
   contractAddress,
   ...restInput
 }: UseUpdateMembersArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<UpdateMembersMsg>({
       contractAddress,
@@ -33,23 +33,39 @@ export function useUpdateMembers({
     })
 
   const updateMembers = React.useCallback(
-    function updateMembers(...args: UpdateMembersMsgBuilderParameters) {
+    function updateMembers({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateMembersMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildUpdateMembersMsg(...args),
+        senderAddress,
+        msg: buildUpdateMembersMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const updateMembersAsync = React.useCallback(
-    function updateMembersAsync(...args: UpdateMembersMsgBuilderParameters) {
+    function updateMembersAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateMembersMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildUpdateMembersMsg(...args),
+        senderAddress,
+        msg: buildUpdateMembersMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { updateMembers, updateMembersAsync, ...restOutput }

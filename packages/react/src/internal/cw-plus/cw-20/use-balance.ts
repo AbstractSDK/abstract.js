@@ -1,6 +1,7 @@
 import { Cw20QueryMsgBuilder } from '@abstract-money/core'
 import { type BalanceResponse } from '@abstract-money/core/cw-plus/Cw20.types'
-import { useQuerySmart } from 'graz'
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { useQuerySmart } from '../../../utils/use-query-smart'
 
 type ChallengeMsg = Extract<
   ReturnType<typeof Cw20QueryMsgBuilder.balance>,
@@ -13,6 +14,7 @@ type BalanceMsgBuilderParameters = Parameters<
 
 type UseChallengeArgs = {
   contractAddress?: string
+  client?: CosmWasmClient
 } & BalanceMsgBuilderParameters[0]
 
 function buildChallengeMsg(...args: BalanceMsgBuilderParameters): ChallengeMsg {
@@ -21,12 +23,17 @@ function buildChallengeMsg(...args: BalanceMsgBuilderParameters): ChallengeMsg {
 
 export function useBalance({
   contractAddress,
+  client,
   ...restInput
 }: UseChallengeArgs) {
   const { data: balance, ...restOutput } = useQuerySmart<
     BalanceResponse,
     Error
-  >({ address: contractAddress, queryMsg: buildChallengeMsg(restInput) })
+  >({
+    address: contractAddress,
+    client,
+    queryMsg: buildChallengeMsg(restInput),
+  })
 
   return { balance, ...restOutput }
 }

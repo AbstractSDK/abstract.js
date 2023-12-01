@@ -1,6 +1,7 @@
 import { ChallengeExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type VetoMsg = Extract<
   ReturnType<typeof ChallengeExecuteMsgBuilder.veto>,
@@ -9,16 +10,15 @@ type VetoMsg = Extract<
 
 type VetoMsgBuilderParameters = Parameters<
   typeof ChallengeExecuteMsgBuilder.veto
->
+>[0]
 
 type UseVetoArgs = Parameters<typeof useExecuteContract<VetoMsg>>[0]
 
-function buildVetoMsg(...args: VetoMsgBuilderParameters): VetoMsg {
-  return ChallengeExecuteMsgBuilder.veto(...args) as VetoMsg
+function buildVetoMsg(args: VetoMsgBuilderParameters): VetoMsg {
+  return ChallengeExecuteMsgBuilder.veto(args) as VetoMsg
 }
 
 export function useVeto({ contractAddress, ...restInput }: UseVetoArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<VetoMsg>({
       contractAddress,
@@ -26,20 +26,39 @@ export function useVeto({ contractAddress, ...restInput }: UseVetoArgs) {
     })
 
   const veto = React.useCallback(
-    function veto(...args: VetoMsgBuilderParameters) {
-      return executeContract({ signingClient, msg: buildVetoMsg(...args) })
+    function veto({
+      senderAddress,
+      signingClient,
+      ...args
+    }: VetoMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
+      return executeContract({
+        signingClient,
+        senderAddress,
+        msg: buildVetoMsg(args),
+      })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const vetoAsync = React.useCallback(
-    function vetoAsync(...args: VetoMsgBuilderParameters) {
+    function vetoAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: VetoMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildVetoMsg(...args),
+        senderAddress,
+        msg: buildVetoMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { veto, vetoAsync, ...restOutput }

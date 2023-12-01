@@ -1,6 +1,7 @@
 import { ManagerExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../utils/use-execute-contract'
 
 type InstallModulesMsg = Extract<
   ReturnType<typeof ManagerExecuteMsgBuilder.installModules>,
@@ -9,23 +10,22 @@ type InstallModulesMsg = Extract<
 
 type InstallModulesMsgBuilderParameters = Parameters<
   typeof ManagerExecuteMsgBuilder.installModules
->
+>[0]
 
 type UseInstallModulesArgs = Parameters<
   typeof useExecuteContract<InstallModulesMsg>
 >[0]
 
 function buildInstallModulesMsg(
-  ...args: InstallModulesMsgBuilderParameters
+  args: InstallModulesMsgBuilderParameters,
 ): InstallModulesMsg {
-  return ManagerExecuteMsgBuilder.installModules(...args) as InstallModulesMsg
+  return ManagerExecuteMsgBuilder.installModules(args) as InstallModulesMsg
 }
 
 export function useInstallModules({
   contractAddress,
   ...restInput
 }: UseInstallModulesArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<InstallModulesMsg>({
       contractAddress,
@@ -33,23 +33,39 @@ export function useInstallModules({
     })
 
   const installModules = React.useCallback(
-    function installModules(...args: InstallModulesMsgBuilderParameters) {
+    function installModules({
+      senderAddress,
+      signingClient,
+      ...args
+    }: InstallModulesMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildInstallModulesMsg(...args),
+        senderAddress,
+        msg: buildInstallModulesMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const installModulesAsync = React.useCallback(
-    function installModulesAsync(...args: InstallModulesMsgBuilderParameters) {
+    function installModulesAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: InstallModulesMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildInstallModulesMsg(...args),
+        senderAddress,
+        msg: buildInstallModulesMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { installModules, installModulesAsync, ...restOutput }

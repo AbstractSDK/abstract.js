@@ -1,6 +1,7 @@
 import { ChallengeExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type CancelChallengeMsg = Extract<
   ReturnType<typeof ChallengeExecuteMsgBuilder.cancelChallenge>,
@@ -9,25 +10,22 @@ type CancelChallengeMsg = Extract<
 
 type CancelChallengeMsgBuilderParameters = Parameters<
   typeof ChallengeExecuteMsgBuilder.cancelChallenge
->
+>[0]
 
 type UseCancelChallengeArgs = Parameters<
   typeof useExecuteContract<CancelChallengeMsg>
 >[0]
 
 function buildCancelChallengeMsg(
-  ...args: CancelChallengeMsgBuilderParameters
+  args: CancelChallengeMsgBuilderParameters,
 ): CancelChallengeMsg {
-  return ChallengeExecuteMsgBuilder.cancelChallenge(
-    ...args,
-  ) as CancelChallengeMsg
+  return ChallengeExecuteMsgBuilder.cancelChallenge(args) as CancelChallengeMsg
 }
 
 export function useCancelChallenge({
   contractAddress,
   ...restInput
 }: UseCancelChallengeArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<CancelChallengeMsg>({
       contractAddress,
@@ -35,25 +33,39 @@ export function useCancelChallenge({
     })
 
   const cancelChallenge = React.useCallback(
-    function cancelChallenge(...args: CancelChallengeMsgBuilderParameters) {
+    function cancelChallenge({
+      senderAddress,
+      signingClient,
+      ...args
+    }: CancelChallengeMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildCancelChallengeMsg(...args),
+        senderAddress,
+        msg: buildCancelChallengeMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const cancelChallengeAsync = React.useCallback(
-    function cancelChallengeAsync(
-      ...args: CancelChallengeMsgBuilderParameters
-    ) {
+    function cancelChallengeAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: CancelChallengeMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildCancelChallengeMsg(...args),
+        senderAddress,
+        msg: buildCancelChallengeMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { cancelChallenge, cancelChallengeAsync, ...restOutput }

@@ -1,6 +1,7 @@
 import { AnsHostExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type UpdateChannelsMsg = Extract<
   ReturnType<typeof AnsHostExecuteMsgBuilder.updateChannels>,
@@ -9,23 +10,22 @@ type UpdateChannelsMsg = Extract<
 
 type UpdateChannelsMsgBuilderParameters = Parameters<
   typeof AnsHostExecuteMsgBuilder.updateChannels
->
+>[0]
 
 type UseUpdateChannelsArgs = Parameters<
   typeof useExecuteContract<UpdateChannelsMsg>
 >[0]
 
 function buildUpdateChannelsMsg(
-  ...args: UpdateChannelsMsgBuilderParameters
+  args: UpdateChannelsMsgBuilderParameters,
 ): UpdateChannelsMsg {
-  return AnsHostExecuteMsgBuilder.updateChannels(...args) as UpdateChannelsMsg
+  return AnsHostExecuteMsgBuilder.updateChannels(args) as UpdateChannelsMsg
 }
 
 export function useUpdateChannels({
   contractAddress,
   ...restInput
 }: UseUpdateChannelsArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<UpdateChannelsMsg>({
       contractAddress,
@@ -33,23 +33,39 @@ export function useUpdateChannels({
     })
 
   const updateChannels = React.useCallback(
-    function updateChannels(...args: UpdateChannelsMsgBuilderParameters) {
+    function updateChannels({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateChannelsMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildUpdateChannelsMsg(...args),
+        senderAddress,
+        msg: buildUpdateChannelsMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const updateChannelsAsync = React.useCallback(
-    function updateChannelsAsync(...args: UpdateChannelsMsgBuilderParameters) {
+    function updateChannelsAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateChannelsMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildUpdateChannelsMsg(...args),
+        senderAddress,
+        msg: buildUpdateChannelsMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { updateChannels, updateChannelsAsync, ...restOutput }

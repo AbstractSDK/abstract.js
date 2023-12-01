@@ -1,6 +1,7 @@
 import { Cw20IcsQueryMsgBuilder } from '@abstract-money/core'
 import { type ListChannelsResponse } from '@abstract-money/core/cw-plus/Cw20Ics.types'
-import { useQuerySmart } from 'graz'
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { useQuerySmart } from '../../../utils/use-query-smart'
 
 type ListChannelsMsg = Extract<
   ReturnType<typeof Cw20IcsQueryMsgBuilder.listChannels>,
@@ -11,7 +12,7 @@ type ListChannelsMsgBuilderParameters = Parameters<
   typeof Cw20IcsQueryMsgBuilder.listChannels
 >
 
-type UseListChannelsArgs = { contractAddress?: string }
+type UseListChannelsArgs = { contractAddress?: string; client?: CosmWasmClient }
 
 function buildListChannelsMsg(
   ...args: ListChannelsMsgBuilderParameters
@@ -19,11 +20,14 @@ function buildListChannelsMsg(
   return Cw20IcsQueryMsgBuilder.listChannels(...args) as ListChannelsMsg
 }
 
-export function useListChannels({ contractAddress }: UseListChannelsArgs) {
+export function useListChannels({
+  contractAddress,
+  client,
+}: UseListChannelsArgs) {
   const { data: channels, ...restOutput } = useQuerySmart<
     ListChannelsResponse,
     Error
-  >({ address: contractAddress, queryMsg: buildListChannelsMsg() })
+  >({ address: contractAddress, client, queryMsg: buildListChannelsMsg() })
 
   return { channels, ...restOutput }
 }

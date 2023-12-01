@@ -1,6 +1,7 @@
 import { ManagerExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../utils/use-execute-contract'
 
 type UpdateSubAccountMsg = Extract<
   ReturnType<typeof ManagerExecuteMsgBuilder.updateSubAccount>,
@@ -9,25 +10,22 @@ type UpdateSubAccountMsg = Extract<
 
 type UpdateSubAccountMsgBuilderParameters = Parameters<
   typeof ManagerExecuteMsgBuilder.updateSubAccount
->
+>[0]
 
 type UseUpdateSubAccountArgs = Parameters<
   typeof useExecuteContract<UpdateSubAccountMsg>
 >[0]
 
 function buildUpdateSubAccountMsg(
-  ...args: UpdateSubAccountMsgBuilderParameters
+  args: UpdateSubAccountMsgBuilderParameters,
 ): UpdateSubAccountMsg {
-  return ManagerExecuteMsgBuilder.updateSubAccount(
-    ...args,
-  ) as UpdateSubAccountMsg
+  return ManagerExecuteMsgBuilder.updateSubAccount(args) as UpdateSubAccountMsg
 }
 
 export function useUpdateSubAccount({
   contractAddress,
   ...restInput
 }: UseUpdateSubAccountArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<UpdateSubAccountMsg>({
       contractAddress,
@@ -35,25 +33,39 @@ export function useUpdateSubAccount({
     })
 
   const updateSubAccount = React.useCallback(
-    function updateSubAccount(...args: UpdateSubAccountMsgBuilderParameters) {
+    function updateSubAccount({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateSubAccountMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildUpdateSubAccountMsg(...args),
+        senderAddress,
+        msg: buildUpdateSubAccountMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const updateSubAccountAsync = React.useCallback(
-    function updateSubAccountAsync(
-      ...args: UpdateSubAccountMsgBuilderParameters
-    ) {
+    function updateSubAccountAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateSubAccountMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildUpdateSubAccountMsg(...args),
+        senderAddress,
+        msg: buildUpdateSubAccountMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { updateSubAccount, updateSubAccountAsync, ...restOutput }

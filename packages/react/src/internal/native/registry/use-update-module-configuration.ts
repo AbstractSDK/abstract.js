@@ -1,6 +1,7 @@
 import { RegistryExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type UpdateModuleConfigurationMsg = Extract<
   ReturnType<typeof RegistryExecuteMsgBuilder.updateModuleConfiguration>,
@@ -9,17 +10,17 @@ type UpdateModuleConfigurationMsg = Extract<
 
 type UpdateModuleConfigurationMsgBuilderParameters = Parameters<
   typeof RegistryExecuteMsgBuilder.updateModuleConfiguration
->
+>[0]
 
 type UseUpdateModuleConfigurationArgs = Parameters<
   typeof useExecuteContract<UpdateModuleConfigurationMsg>
 >[0]
 
 function buildUpdateModuleConfigurationMsg(
-  ...args: UpdateModuleConfigurationMsgBuilderParameters
+  args: UpdateModuleConfigurationMsgBuilderParameters,
 ): UpdateModuleConfigurationMsg {
   return RegistryExecuteMsgBuilder.updateModuleConfiguration(
-    ...args,
+    args,
   ) as UpdateModuleConfigurationMsg
 }
 
@@ -27,7 +28,6 @@ export function useUpdateModuleConfiguration({
   contractAddress,
   ...restInput
 }: UseUpdateModuleConfigurationArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<UpdateModuleConfigurationMsg>({
       contractAddress,
@@ -35,27 +35,39 @@ export function useUpdateModuleConfiguration({
     })
 
   const updateModuleConfiguration = React.useCallback(
-    function updateModuleConfiguration(
-      ...args: UpdateModuleConfigurationMsgBuilderParameters
-    ) {
+    function updateModuleConfiguration({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateModuleConfigurationMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildUpdateModuleConfigurationMsg(...args),
+        senderAddress,
+        msg: buildUpdateModuleConfigurationMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const updateModuleConfigurationAsync = React.useCallback(
-    function updateModuleConfigurationAsync(
-      ...args: UpdateModuleConfigurationMsgBuilderParameters
-    ) {
+    function updateModuleConfigurationAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateModuleConfigurationMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildUpdateModuleConfigurationMsg(...args),
+        senderAddress,
+        msg: buildUpdateModuleConfigurationMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return {

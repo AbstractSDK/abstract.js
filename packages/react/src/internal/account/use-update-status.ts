@@ -1,6 +1,7 @@
 import { ManagerExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../utils/use-execute-contract'
 
 type UpdateStatusMsg = Extract<
   ReturnType<typeof ManagerExecuteMsgBuilder.updateStatus>,
@@ -9,23 +10,22 @@ type UpdateStatusMsg = Extract<
 
 type UpdateStatusMsgBuilderParameters = Parameters<
   typeof ManagerExecuteMsgBuilder.updateStatus
->
+>[0]
 
 type UseUpdateStatusArgs = Parameters<
   typeof useExecuteContract<UpdateStatusMsg>
 >[0]
 
 function buildUpdateStatusMsg(
-  ...args: UpdateStatusMsgBuilderParameters
+  args: UpdateStatusMsgBuilderParameters,
 ): UpdateStatusMsg {
-  return ManagerExecuteMsgBuilder.updateStatus(...args) as UpdateStatusMsg
+  return ManagerExecuteMsgBuilder.updateStatus(args) as UpdateStatusMsg
 }
 
 export function useUpdateStatus({
   contractAddress,
   ...restInput
 }: UseUpdateStatusArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<UpdateStatusMsg>({
       contractAddress,
@@ -33,23 +33,39 @@ export function useUpdateStatus({
     })
 
   const updateStatus = React.useCallback(
-    function updateStatus(...args: UpdateStatusMsgBuilderParameters) {
+    function updateStatus({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateStatusMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildUpdateStatusMsg(...args),
+        senderAddress,
+        msg: buildUpdateStatusMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const updateStatusAsync = React.useCallback(
-    function updateStatusAsync(...args: UpdateStatusMsgBuilderParameters) {
+    function updateStatusAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateStatusMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildUpdateStatusMsg(...args),
+        senderAddress,
+        msg: buildUpdateStatusMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { updateStatus, updateStatusAsync, ...restOutput }

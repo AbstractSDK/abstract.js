@@ -1,6 +1,7 @@
 import { ProxyQueryMsgBuilder } from '@abstract-money/core'
 import { type BaseAssetResponse } from '@abstract-money/core/account/proxy/Proxy.types'
-import { useQuerySmart } from 'graz'
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { useQuerySmart } from '../../utils/use-query-smart'
 
 type BaseAssetMsg = Extract<
   ReturnType<typeof ProxyQueryMsgBuilder.baseAsset>,
@@ -11,7 +12,7 @@ type BaseAssetMsgBuilderParameters = Parameters<
   typeof ProxyQueryMsgBuilder.baseAsset
 >
 
-type UseBaseAssetArgs = { contractAddress?: string }
+type UseBaseAssetArgs = { contractAddress?: string; client?: CosmWasmClient }
 
 function buildBaseAssetMsg(
   ...args: BaseAssetMsgBuilderParameters
@@ -19,11 +20,11 @@ function buildBaseAssetMsg(
   return ProxyQueryMsgBuilder.baseAsset(...args) as BaseAssetMsg
 }
 
-export function useBaseAsset({ contractAddress }: UseBaseAssetArgs) {
+export function useBaseAsset({ contractAddress, client }: UseBaseAssetArgs) {
   const { data: baseAsset, ...restOutput } = useQuerySmart<
     BaseAssetResponse,
     Error
-  >({ address: contractAddress, queryMsg: buildBaseAssetMsg() })
+  >({ address: contractAddress, client, queryMsg: buildBaseAssetMsg() })
 
   return { baseAsset, ...restOutput }
 }

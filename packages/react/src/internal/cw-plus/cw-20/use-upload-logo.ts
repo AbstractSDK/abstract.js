@@ -1,6 +1,7 @@
 import { Cw20ExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type UploadLogoMsg = Extract<
   ReturnType<typeof Cw20ExecuteMsgBuilder.uploadLogo>,
@@ -9,21 +10,20 @@ type UploadLogoMsg = Extract<
 
 type UploadLogoMsgBuilderParameters = Parameters<
   typeof Cw20ExecuteMsgBuilder.uploadLogo
->
+>[0]
 
 type UseUploadLogoArgs = Parameters<typeof useExecuteContract<UploadLogoMsg>>[0]
 
 function buildUploadLogoMsg(
-  ...args: UploadLogoMsgBuilderParameters
+  args: UploadLogoMsgBuilderParameters,
 ): UploadLogoMsg {
-  return Cw20ExecuteMsgBuilder.uploadLogo(...args) as UploadLogoMsg
+  return Cw20ExecuteMsgBuilder.uploadLogo(args) as UploadLogoMsg
 }
 
 export function useUploadLogo({
   contractAddress,
   ...restInput
 }: UseUploadLogoArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<UploadLogoMsg>({
       contractAddress,
@@ -31,23 +31,39 @@ export function useUploadLogo({
     })
 
   const uploadLogo = React.useCallback(
-    function uploadLogo(...args: UploadLogoMsgBuilderParameters) {
+    function uploadLogo({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UploadLogoMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildUploadLogoMsg(...args),
+        senderAddress,
+        msg: buildUploadLogoMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const uploadLogoAsync = React.useCallback(
-    function uploadLogoAsync(...args: UploadLogoMsgBuilderParameters) {
+    function uploadLogoAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UploadLogoMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildUploadLogoMsg(...args),
+        senderAddress,
+        msg: buildUploadLogoMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { uploadLogo, uploadLogoAsync, ...restOutput }

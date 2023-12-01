@@ -1,6 +1,7 @@
 import { ChallengeQueryMsgBuilder } from '@abstract-money/core'
 import { type ProposalsResponse } from '@abstract-money/core/apps/challenge/Challenge.types'
-import { useQuerySmart } from 'graz'
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { useQuerySmart } from '../../../utils/use-query-smart'
 
 type ProposalsMsg = Extract<
   ReturnType<typeof ChallengeQueryMsgBuilder.proposals>,
@@ -13,6 +14,7 @@ type ProposalsMsgBuilderParameters = Parameters<
 
 type UseProposalsArgs = {
   contractAddress?: string
+  client?: CosmWasmClient
 } & ProposalsMsgBuilderParameters[0]
 
 function buildProposalsMsg(
@@ -23,12 +25,17 @@ function buildProposalsMsg(
 
 export function useProposals({
   contractAddress,
+  client,
   ...restInput
 }: UseProposalsArgs) {
   const { data: proposals, ...restOutput } = useQuerySmart<
     ProposalsResponse,
     Error
-  >({ address: contractAddress, queryMsg: buildProposalsMsg(restInput) })
+  >({
+    address: contractAddress,
+    client,
+    queryMsg: buildProposalsMsg(restInput),
+  })
 
   return { proposals, ...restOutput }
 }

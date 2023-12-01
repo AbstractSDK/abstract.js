@@ -1,6 +1,7 @@
 import { Cw20IcsExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type AllowMsg = Extract<
   ReturnType<typeof Cw20IcsExecuteMsgBuilder.allow>,
@@ -9,16 +10,15 @@ type AllowMsg = Extract<
 
 type AllowMsgBuilderParameters = Parameters<
   typeof Cw20IcsExecuteMsgBuilder.allow
->
+>[0]
 
 type UseAllowArgs = Parameters<typeof useExecuteContract<AllowMsg>>[0]
 
-function buildAllowMsg(...args: AllowMsgBuilderParameters): AllowMsg {
-  return Cw20IcsExecuteMsgBuilder.allow(...args) as AllowMsg
+function buildAllowMsg(args: AllowMsgBuilderParameters): AllowMsg {
+  return Cw20IcsExecuteMsgBuilder.allow(args) as AllowMsg
 }
 
 export function useAllow({ contractAddress, ...restInput }: UseAllowArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<AllowMsg>({
       contractAddress,
@@ -26,20 +26,39 @@ export function useAllow({ contractAddress, ...restInput }: UseAllowArgs) {
     })
 
   const allow = React.useCallback(
-    function allow(...args: AllowMsgBuilderParameters) {
-      return executeContract({ signingClient, msg: buildAllowMsg(...args) })
+    function allow({
+      senderAddress,
+      signingClient,
+      ...args
+    }: AllowMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
+      return executeContract({
+        signingClient,
+        senderAddress,
+        msg: buildAllowMsg(args),
+      })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const allowAsync = React.useCallback(
-    function allowAsync(...args: AllowMsgBuilderParameters) {
+    function allowAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: AllowMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildAllowMsg(...args),
+        senderAddress,
+        msg: buildAllowMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { allow, allowAsync, ...restOutput }

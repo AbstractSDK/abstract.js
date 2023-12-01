@@ -1,6 +1,7 @@
 import { RegistryExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type YankModuleMsg = Extract<
   ReturnType<typeof RegistryExecuteMsgBuilder.yankModule>,
@@ -9,21 +10,20 @@ type YankModuleMsg = Extract<
 
 type YankModuleMsgBuilderParameters = Parameters<
   typeof RegistryExecuteMsgBuilder.yankModule
->
+>[0]
 
 type UseYankModuleArgs = Parameters<typeof useExecuteContract<YankModuleMsg>>[0]
 
 function buildYankModuleMsg(
-  ...args: YankModuleMsgBuilderParameters
+  args: YankModuleMsgBuilderParameters,
 ): YankModuleMsg {
-  return RegistryExecuteMsgBuilder.yankModule(...args) as YankModuleMsg
+  return RegistryExecuteMsgBuilder.yankModule(args) as YankModuleMsg
 }
 
 export function useYankModule({
   contractAddress,
   ...restInput
 }: UseYankModuleArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<YankModuleMsg>({
       contractAddress,
@@ -31,23 +31,39 @@ export function useYankModule({
     })
 
   const yankModule = React.useCallback(
-    function yankModule(...args: YankModuleMsgBuilderParameters) {
+    function yankModule({
+      senderAddress,
+      signingClient,
+      ...args
+    }: YankModuleMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildYankModuleMsg(...args),
+        senderAddress,
+        msg: buildYankModuleMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const yankModuleAsync = React.useCallback(
-    function yankModuleAsync(...args: YankModuleMsgBuilderParameters) {
+    function yankModuleAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: YankModuleMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildYankModuleMsg(...args),
+        senderAddress,
+        msg: buildYankModuleMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { yankModule, yankModuleAsync, ...restOutput }

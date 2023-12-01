@@ -1,6 +1,7 @@
 import { Cw20QueryMsgBuilder } from '@abstract-money/core'
 import { type AllAllowancesResponse } from '@abstract-money/core/cw-plus/Cw20.types'
-import { useQuerySmart } from 'graz'
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { useQuerySmart } from '../../../utils/use-query-smart'
 
 type AllAllowancesMsg = Extract<
   ReturnType<typeof Cw20QueryMsgBuilder.allAllowances>,
@@ -13,6 +14,7 @@ type AllAllowancesMsgBuilderParameters = Parameters<
 
 type UseAllAllowancesArgs = {
   contractAddress?: string
+  client?: CosmWasmClient
 } & AllAllowancesMsgBuilderParameters[0]
 
 function buildAllAllowancesMsg(
@@ -23,12 +25,17 @@ function buildAllAllowancesMsg(
 
 export function useAllAllowances({
   contractAddress,
+  client,
   ...restInput
 }: UseAllAllowancesArgs) {
   const { data: allowances, ...restOutput } = useQuerySmart<
     AllAllowancesResponse,
     Error
-  >({ address: contractAddress, queryMsg: buildAllAllowancesMsg(restInput) })
+  >({
+    address: contractAddress,
+    client,
+    queryMsg: buildAllAllowancesMsg(restInput),
+  })
 
   return { allowances, ...restOutput }
 }

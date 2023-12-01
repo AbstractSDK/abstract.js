@@ -1,6 +1,7 @@
 import { Cw4GroupExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type RemoveHookMsg = Extract<
   ReturnType<typeof Cw4GroupExecuteMsgBuilder.removeHook>,
@@ -9,21 +10,20 @@ type RemoveHookMsg = Extract<
 
 type RemoveHookMsgBuilderParameters = Parameters<
   typeof Cw4GroupExecuteMsgBuilder.removeHook
->
+>[0]
 
 type UseRemoveHookArgs = Parameters<typeof useExecuteContract<RemoveHookMsg>>[0]
 
 function buildRemoveHookMsg(
-  ...args: RemoveHookMsgBuilderParameters
+  args: RemoveHookMsgBuilderParameters,
 ): RemoveHookMsg {
-  return Cw4GroupExecuteMsgBuilder.removeHook(...args) as RemoveHookMsg
+  return Cw4GroupExecuteMsgBuilder.removeHook(args) as RemoveHookMsg
 }
 
 export function useRemoveHook({
   contractAddress,
   ...restInput
 }: UseRemoveHookArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<RemoveHookMsg>({
       contractAddress,
@@ -31,23 +31,39 @@ export function useRemoveHook({
     })
 
   const removeHook = React.useCallback(
-    function removeHook(...args: RemoveHookMsgBuilderParameters) {
+    function removeHook({
+      senderAddress,
+      signingClient,
+      ...args
+    }: RemoveHookMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildRemoveHookMsg(...args),
+        senderAddress,
+        msg: buildRemoveHookMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const removeHookAsync = React.useCallback(
-    function removeHookAsync(...args: RemoveHookMsgBuilderParameters) {
+    function removeHookAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: RemoveHookMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildRemoveHookMsg(...args),
+        senderAddress,
+        msg: buildRemoveHookMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { removeHook, removeHookAsync, ...restOutput }

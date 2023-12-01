@@ -1,6 +1,7 @@
 import { RegistryExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type RemoveModuleMsg = Extract<
   ReturnType<typeof RegistryExecuteMsgBuilder.removeModule>,
@@ -9,23 +10,22 @@ type RemoveModuleMsg = Extract<
 
 type RemoveModuleMsgBuilderParameters = Parameters<
   typeof RegistryExecuteMsgBuilder.removeModule
->
+>[0]
 
 type UseRemoveModuleArgs = Parameters<
   typeof useExecuteContract<RemoveModuleMsg>
 >[0]
 
 function buildRemoveModuleMsg(
-  ...args: RemoveModuleMsgBuilderParameters
+  args: RemoveModuleMsgBuilderParameters,
 ): RemoveModuleMsg {
-  return RegistryExecuteMsgBuilder.removeModule(...args) as RemoveModuleMsg
+  return RegistryExecuteMsgBuilder.removeModule(args) as RemoveModuleMsg
 }
 
 export function useRemoveModule({
   contractAddress,
   ...restInput
 }: UseRemoveModuleArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<RemoveModuleMsg>({
       contractAddress,
@@ -33,23 +33,39 @@ export function useRemoveModule({
     })
 
   const removeModule = React.useCallback(
-    function removeModule(...args: RemoveModuleMsgBuilderParameters) {
+    function removeModule({
+      senderAddress,
+      signingClient,
+      ...args
+    }: RemoveModuleMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildRemoveModuleMsg(...args),
+        senderAddress,
+        msg: buildRemoveModuleMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const removeModuleAsync = React.useCallback(
-    function removeModuleAsync(...args: RemoveModuleMsgBuilderParameters) {
+    function removeModuleAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: RemoveModuleMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildRemoveModuleMsg(...args),
+        senderAddress,
+        msg: buildRemoveModuleMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { removeModule, removeModuleAsync, ...restOutput }

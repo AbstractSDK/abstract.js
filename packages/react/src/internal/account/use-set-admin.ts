@@ -1,6 +1,7 @@
 import { ProxyExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../utils/use-execute-contract'
 
 type SetAdminMsg = Extract<
   ReturnType<typeof ProxyExecuteMsgBuilder.setAdmin>,
@@ -9,19 +10,18 @@ type SetAdminMsg = Extract<
 
 type SetAdminMsgBuilderParameters = Parameters<
   typeof ProxyExecuteMsgBuilder.setAdmin
->
+>[0]
 
 type UseSetAdminArgs = Parameters<typeof useExecuteContract<SetAdminMsg>>[0]
 
-function buildSetAdminMsg(...args: SetAdminMsgBuilderParameters): SetAdminMsg {
-  return ProxyExecuteMsgBuilder.setAdmin(...args) as SetAdminMsg
+function buildSetAdminMsg(args: SetAdminMsgBuilderParameters): SetAdminMsg {
+  return ProxyExecuteMsgBuilder.setAdmin(args) as SetAdminMsg
 }
 
 export function useSetAdmin({
   contractAddress,
   ...restInput
 }: UseSetAdminArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<SetAdminMsg>({
       contractAddress,
@@ -29,20 +29,39 @@ export function useSetAdmin({
     })
 
   const setAdmin = React.useCallback(
-    function setAdmin(...args: SetAdminMsgBuilderParameters) {
-      return executeContract({ signingClient, msg: buildSetAdminMsg(...args) })
+    function setAdmin({
+      senderAddress,
+      signingClient,
+      ...args
+    }: SetAdminMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
+      return executeContract({
+        signingClient,
+        senderAddress,
+        msg: buildSetAdminMsg(args),
+      })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const setAdminAsync = React.useCallback(
-    function setAdminAsync(...args: SetAdminMsgBuilderParameters) {
+    function setAdminAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: SetAdminMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildSetAdminMsg(...args),
+        senderAddress,
+        msg: buildSetAdminMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { setAdmin, setAdminAsync, ...restOutput }

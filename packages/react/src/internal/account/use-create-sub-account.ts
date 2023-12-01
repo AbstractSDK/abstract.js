@@ -1,6 +1,7 @@
 import { ManagerExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../utils/use-execute-contract'
 
 type CreateSubAccountMsg = Extract<
   ReturnType<typeof ManagerExecuteMsgBuilder.createSubAccount>,
@@ -9,25 +10,22 @@ type CreateSubAccountMsg = Extract<
 
 type CreateSubAccountMsgBuilderParameters = Parameters<
   typeof ManagerExecuteMsgBuilder.createSubAccount
->
+>[0]
 
 type UseCreateSubAccountArgs = Parameters<
   typeof useExecuteContract<CreateSubAccountMsg>
 >[0]
 
 function buildCreateSubAccountMsg(
-  ...args: CreateSubAccountMsgBuilderParameters
+  args: CreateSubAccountMsgBuilderParameters,
 ): CreateSubAccountMsg {
-  return ManagerExecuteMsgBuilder.createSubAccount(
-    ...args,
-  ) as CreateSubAccountMsg
+  return ManagerExecuteMsgBuilder.createSubAccount(args) as CreateSubAccountMsg
 }
 
 export function useCreateSubAccount({
   contractAddress,
   ...restInput
 }: UseCreateSubAccountArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<CreateSubAccountMsg>({
       contractAddress,
@@ -35,25 +33,40 @@ export function useCreateSubAccount({
     })
 
   const createSubAccount = React.useCallback(
-    function createsubaccount(...args: CreateSubAccountMsgBuilderParameters) {
+    function createsubaccount({
+      senderAddress,
+      signingClient,
+      ...args
+    }: CreateSubAccountMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
+      if (!contractAddress) throw new Error('contractAddress is required')
       return executeContract({
         signingClient,
-        msg: buildCreateSubAccountMsg(...args),
+        senderAddress,
+        msg: buildCreateSubAccountMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const createSubAccountAsync = React.useCallback(
-    function createsubaccountAsync(
-      ...args: CreateSubAccountMsgBuilderParameters
-    ) {
+    function createsubaccountAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: CreateSubAccountMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildCreateSubAccountMsg(...args),
+        senderAddress,
+        msg: buildCreateSubAccountMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { createSubAccount, createSubAccountAsync, ...restOutput }

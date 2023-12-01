@@ -3,6 +3,12 @@ import {
   useModuleMutationClient,
   useModuleQueryClient,
 } from '@abstract-money/react/utils'
+import {
+  useAccount,
+  useActiveChainIds,
+  useCosmWasmClient,
+  useCosmWasmSigningClient,
+} from 'graz'
 
 import { ExecuteResult } from '@cosmjs/cosmwasm-stargate'
 import { UseMutationOptions } from '@tanstack/react-query'
@@ -63,6 +69,46 @@ type Module = {
 
 const WAGEMOS_MODULE_ID = 'abstract:betting'
 
+function useGrazModuleQueryClient(
+  args: Omit<Parameters<typeof useModuleQueryClient>[0], 'chain' | 'client'>,
+  options?: Parameters<typeof useModuleQueryClient>[1],
+) {
+  const { data: client } = useCosmWasmClient()
+  const chainIds = useActiveChainIds()
+  const chain = chainIds?.[0]
+  return useModuleQueryClient(
+    {
+      chain,
+      client,
+      ...args,
+    },
+    options,
+  )
+}
+
+function useGrazModuleMutationClient(
+  args: Omit<
+    Parameters<typeof useModuleMutationClient>[0],
+    'chain' | 'client' | 'sender'
+  >,
+  options?: Parameters<typeof useModuleMutationClient>[1],
+) {
+  const { data: client } = useCosmWasmSigningClient()
+  const chainIds = useActiveChainIds()
+  const chain = chainIds?.[0]
+  const { data: account } = useAccount()
+  const sender = account?.bech32Address
+  return useModuleMutationClient(
+    {
+      chain,
+      client,
+      sender,
+      ...args,
+    },
+    options,
+  )
+}
+
 export const wagemos = {
   name: 'payment',
   type: ModuleType.APP,
@@ -78,7 +124,7 @@ export const wagemos = {
         isLoading: isWagemosQueryClientLoading,
         isError: isWagemosQueryClientError,
         error: wagemosQueryClientError,
-      } = useModuleQueryClient(
+      } = useGrazModuleQueryClient(
         {
           moduleId: WAGEMOS_MODULE_ID,
           Module: WagemosAppQueryClient,
@@ -136,7 +182,7 @@ export const wagemos = {
         isLoading: isWagemosQueryClientLoading,
         isError: isWagemosQueryClientError,
         error: wagemosQueryClientError,
-      } = useModuleQueryClient(
+      } = useGrazModuleQueryClient(
         {
           moduleId: WAGEMOS_MODULE_ID,
           Module: WagemosAppQueryClient,
@@ -193,7 +239,7 @@ export const wagemos = {
         isLoading: isWagemosQueryClientLoading,
         isError: isWagemosQueryClientError,
         error: wagemosQueryClientError,
-      } = useModuleQueryClient(
+      } = useGrazModuleQueryClient(
         {
           moduleId: WAGEMOS_MODULE_ID,
           Module: WagemosAppQueryClient,
@@ -250,7 +296,7 @@ export const wagemos = {
         isLoading: isWagemosQueryClientLoading,
         isError: isWagemosQueryClientError,
         error: wagemosQueryClientError,
-      } = useModuleQueryClient(
+      } = useGrazModuleQueryClient(
         {
           moduleId: WAGEMOS_MODULE_ID,
           Module: WagemosAppQueryClient,
@@ -307,7 +353,7 @@ export const wagemos = {
         isLoading: isWagemosQueryClientLoading,
         isError: isWagemosQueryClientError,
         error: wagemosQueryClientError,
-      } = useModuleQueryClient(
+      } = useGrazModuleQueryClient(
         {
           moduleId: WAGEMOS_MODULE_ID,
           Module: WagemosAppQueryClient,
@@ -363,7 +409,7 @@ export const wagemos = {
         isLoading: isWagemosQueryClientLoading,
         isError: isWagemosQueryClientError,
         error: wagemosQueryClientError,
-      } = useModuleQueryClient(
+      } = useGrazModuleQueryClient(
         {
           moduleId: WAGEMOS_MODULE_ID,
           Module: WagemosAppQueryClient,
@@ -428,7 +474,7 @@ export const wagemos = {
         // isLoading: isWagemosMutationClientLoading,
         // isError: isWagemosMutationClientError,
         // error: wagemosMutationClientError,
-      } = useModuleMutationClient({
+      } = useGrazModuleMutationClient({
         moduleId: WAGEMOS_MODULE_ID,
         Module: WagemosAppClient,
       })
@@ -476,7 +522,7 @@ export const wagemos = {
         // isLoading: isWagemosMutationClientLoading,
         // isError: isWagemosMutationClientError,
         // error: wagemosMutationClientError,
-      } = useModuleMutationClient({
+      } = useGrazModuleMutationClient({
         moduleId: WAGEMOS_MODULE_ID,
         Module: WagemosAppClient,
       })
@@ -524,7 +570,7 @@ export const wagemos = {
         // isLoading: isWagemosMutationClientLoading,
         // isError: isWagemosMutationClientError,
         // error: wagemosMutationClientError,
-      } = useModuleMutationClient({
+      } = useGrazModuleMutationClient({
         moduleId: WAGEMOS_MODULE_ID,
         Module: WagemosAppClient,
       })
@@ -572,7 +618,7 @@ export const wagemos = {
         // isLoading: isWagemosMutationClientLoading,
         // isError: isWagemosMutationClientError,
         // error: wagemosMutationClientError,
-      } = useModuleMutationClient({
+      } = useGrazModuleMutationClient({
         moduleId: WAGEMOS_MODULE_ID,
         Module: WagemosAppClient,
       })
@@ -620,7 +666,7 @@ export const wagemos = {
         // isLoading: isWagemosMutationClientLoading,
         // isError: isWagemosMutationClientError,
         // error: wagemosMutationClientError,
-      } = useModuleMutationClient({
+      } = useGrazModuleMutationClient({
         moduleId: WAGEMOS_MODULE_ID,
         Module: WagemosAppClient,
       })
@@ -668,7 +714,7 @@ export const wagemos = {
         // isLoading: isWagemosMutationClientLoading,
         // isError: isWagemosMutationClientError,
         // error: wagemosMutationClientError,
-      } = useModuleMutationClient({
+      } = useGrazModuleMutationClient({
         moduleId: WAGEMOS_MODULE_ID,
         Module: WagemosAppClient,
       })
@@ -716,7 +762,7 @@ export const wagemos = {
         // isLoading: isWagemosMutationClientLoading,
         // isError: isWagemosMutationClientError,
         // error: wagemosMutationClientError,
-      } = useModuleMutationClient({
+      } = useGrazModuleMutationClient({
         moduleId: WAGEMOS_MODULE_ID,
         Module: WagemosAppClient,
       })

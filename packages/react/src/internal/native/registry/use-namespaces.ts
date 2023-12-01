@@ -1,6 +1,7 @@
 import { RegistryQueryMsgBuilder } from '@abstract-money/core'
 import { type NamespacesResponse } from '@abstract-money/core/native/registry/Registry.types'
-import { useQuerySmart } from 'graz'
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { useQuerySmart } from '../../../utils/use-query-smart'
 
 type NamespacesMsg = Extract<
   ReturnType<typeof RegistryQueryMsgBuilder.namespaces>,
@@ -13,6 +14,7 @@ type NamespacesMsgBuilderParameters = Parameters<
 
 type UseNamespacesArgs = {
   contractAddress?: string
+  client?: CosmWasmClient
 } & NamespacesMsgBuilderParameters[0]
 
 function buildNamespacesMsg(
@@ -23,12 +25,17 @@ function buildNamespacesMsg(
 
 export function useNamespaces({
   contractAddress,
+  client,
   ...restInput
 }: UseNamespacesArgs) {
   const { data: namespaces, ...restOutput } = useQuerySmart<
     NamespacesResponse,
     Error
-  >({ address: contractAddress, queryMsg: buildNamespacesMsg(restInput) })
+  >({
+    address: contractAddress,
+    client,
+    queryMsg: buildNamespacesMsg(restInput),
+  })
 
   return { namespaces, ...restOutput }
 }

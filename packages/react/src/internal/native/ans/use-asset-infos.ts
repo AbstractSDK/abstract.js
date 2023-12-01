@@ -1,6 +1,7 @@
 import { AnsHostQueryMsgBuilder } from '@abstract-money/core'
 import { type AssetsResponse } from '@abstract-money/core/native/ans-host/AnsHost.types'
-import { useQuerySmart } from 'graz'
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { useQuerySmart } from '../../../utils/use-query-smart'
 
 type AssetInfosMsg = Extract<
   ReturnType<typeof AnsHostQueryMsgBuilder.assetInfos>,
@@ -13,6 +14,7 @@ type AssetInfosMsgBuilderParameters = Parameters<
 
 type UseAssetInfosArgs = {
   contractAddress?: string
+  client?: CosmWasmClient
 } & AssetInfosMsgBuilderParameters[0]
 
 function buildAssetInfosMsg(
@@ -23,12 +25,17 @@ function buildAssetInfosMsg(
 
 export function useAssetInfos({
   contractAddress,
+  client,
   ...restInput
 }: UseAssetInfosArgs) {
   const { data: assetInfos, ...restOutput } = useQuerySmart<
     AssetsResponse,
     Error
-  >({ address: contractAddress, queryMsg: buildAssetInfosMsg(restInput) })
+  >({
+    address: contractAddress,
+    client,
+    queryMsg: buildAssetInfosMsg(restInput),
+  })
 
   return { assetInfos, ...restOutput }
 }

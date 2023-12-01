@@ -1,6 +1,7 @@
 import { ManagerExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../utils/use-execute-contract'
 
 type UpdateSettingsMsg = Extract<
   ReturnType<typeof ManagerExecuteMsgBuilder.updateSettings>,
@@ -9,23 +10,22 @@ type UpdateSettingsMsg = Extract<
 
 type UpdateSettingsMsgBuilderParameters = Parameters<
   typeof ManagerExecuteMsgBuilder.updateSettings
->
+>[0]
 
 type UseUpdateSettingsArgs = Parameters<
   typeof useExecuteContract<UpdateSettingsMsg>
 >[0]
 
 function buildUpdateSettingsMsg(
-  ...args: UpdateSettingsMsgBuilderParameters
+  args: UpdateSettingsMsgBuilderParameters,
 ): UpdateSettingsMsg {
-  return ManagerExecuteMsgBuilder.updateSettings(...args) as UpdateSettingsMsg
+  return ManagerExecuteMsgBuilder.updateSettings(args) as UpdateSettingsMsg
 }
 
 export function useUpdateSettings({
   contractAddress,
   ...restInput
 }: UseUpdateSettingsArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<UpdateSettingsMsg>({
       contractAddress,
@@ -33,23 +33,39 @@ export function useUpdateSettings({
     })
 
   const updateSettings = React.useCallback(
-    function updateSettings(...args: UpdateSettingsMsgBuilderParameters) {
+    function updateSettings({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateSettingsMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildUpdateSettingsMsg(...args),
+        senderAddress,
+        msg: buildUpdateSettingsMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const updateSettingsAsync = React.useCallback(
-    function updateSettingsAsync(...args: UpdateSettingsMsgBuilderParameters) {
+    function updateSettingsAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateSettingsMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildUpdateSettingsMsg(...args),
+        senderAddress,
+        msg: buildUpdateSettingsMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { updateSettings, updateSettingsAsync, ...restOutput }

@@ -1,6 +1,7 @@
 import { ManagerExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../utils/use-execute-contract'
 
 type SetOwnerMsg = Extract<
   ReturnType<typeof ManagerExecuteMsgBuilder.setOwner>,
@@ -9,19 +10,18 @@ type SetOwnerMsg = Extract<
 
 type SetOwnerMsgBuilderParameters = Parameters<
   typeof ManagerExecuteMsgBuilder.setOwner
->
+>[0]
 
 type UseSetOwnerArgs = Parameters<typeof useExecuteContract<SetOwnerMsg>>[0]
 
-function buildSetOwnerMsg(...args: SetOwnerMsgBuilderParameters): SetOwnerMsg {
-  return ManagerExecuteMsgBuilder.setOwner(...args) as SetOwnerMsg
+function buildSetOwnerMsg(args: SetOwnerMsgBuilderParameters): SetOwnerMsg {
+  return ManagerExecuteMsgBuilder.setOwner(args) as SetOwnerMsg
 }
 
 export function useSetOwner({
   contractAddress,
   ...restInput
 }: UseSetOwnerArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<SetOwnerMsg>({
       contractAddress,
@@ -29,20 +29,39 @@ export function useSetOwner({
     })
 
   const setOwner = React.useCallback(
-    function setOwner(...args: SetOwnerMsgBuilderParameters) {
-      return executeContract({ signingClient, msg: buildSetOwnerMsg(...args) })
+    function setOwner({
+      signingClient,
+      senderAddress,
+      ...args
+    }: SetOwnerMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
+      return executeContract({
+        signingClient,
+        senderAddress,
+        msg: buildSetOwnerMsg(args),
+      })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const setOwnerAsync = React.useCallback(
-    function setOwnerAsync(...args: SetOwnerMsgBuilderParameters) {
+    function setOwnerAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: SetOwnerMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildSetOwnerMsg(...args),
+        senderAddress,
+        msg: buildSetOwnerMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { setOwner, setOwnerAsync, ...restOutput }

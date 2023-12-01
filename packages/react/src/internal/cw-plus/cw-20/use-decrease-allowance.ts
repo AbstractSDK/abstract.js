@@ -1,6 +1,7 @@
 import { Cw20ExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type DecreaseAllowanceMsg = Extract<
   ReturnType<typeof Cw20ExecuteMsgBuilder.decreaseAllowance>,
@@ -9,25 +10,22 @@ type DecreaseAllowanceMsg = Extract<
 
 type DecreaseAllowanceMsgBuilderParameters = Parameters<
   typeof Cw20ExecuteMsgBuilder.decreaseAllowance
->
+>[0]
 
 type UseDecreaseAllowanceArgs = Parameters<
   typeof useExecuteContract<DecreaseAllowanceMsg>
 >[0]
 
 function buildDecreaseAllowanceMsg(
-  ...args: DecreaseAllowanceMsgBuilderParameters
+  args: DecreaseAllowanceMsgBuilderParameters,
 ): DecreaseAllowanceMsg {
-  return Cw20ExecuteMsgBuilder.decreaseAllowance(
-    ...args,
-  ) as DecreaseAllowanceMsg
+  return Cw20ExecuteMsgBuilder.decreaseAllowance(args) as DecreaseAllowanceMsg
 }
 
 export function useDecreaseAllowance({
   contractAddress,
   ...restInput
 }: UseDecreaseAllowanceArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<DecreaseAllowanceMsg>({
       contractAddress,
@@ -35,25 +33,39 @@ export function useDecreaseAllowance({
     })
 
   const decreaseAllowance = React.useCallback(
-    function decreaseAllowance(...args: DecreaseAllowanceMsgBuilderParameters) {
+    function decreaseAllowance({
+      senderAddress,
+      signingClient,
+      ...args
+    }: DecreaseAllowanceMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildDecreaseAllowanceMsg(...args),
+        senderAddress,
+        msg: buildDecreaseAllowanceMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const decreaseAllowanceAsync = React.useCallback(
-    function decreaseAllowanceAsync(
-      ...args: DecreaseAllowanceMsgBuilderParameters
-    ) {
+    function decreaseAllowanceAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: DecreaseAllowanceMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildDecreaseAllowanceMsg(...args),
+        senderAddress,
+        msg: buildDecreaseAllowanceMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { decreaseAllowance, decreaseAllowanceAsync, ...restOutput }

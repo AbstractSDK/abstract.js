@@ -1,6 +1,7 @@
 import { AnsHostExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type UpdateAssetAddressesMsg = Extract<
   ReturnType<typeof AnsHostExecuteMsgBuilder.updateAssetAddresses>,
@@ -9,17 +10,17 @@ type UpdateAssetAddressesMsg = Extract<
 
 type UpdateAssetAddressesMsgBuilderParameters = Parameters<
   typeof AnsHostExecuteMsgBuilder.updateAssetAddresses
->
+>[0]
 
 type UseUpdateAssetAddressesArgs = Parameters<
   typeof useExecuteContract<UpdateAssetAddressesMsg>
 >[0]
 
 function buildUpdateAssetAddressesMsg(
-  ...args: UpdateAssetAddressesMsgBuilderParameters
+  args: UpdateAssetAddressesMsgBuilderParameters,
 ): UpdateAssetAddressesMsg {
   return AnsHostExecuteMsgBuilder.updateAssetAddresses(
-    ...args,
+    args,
   ) as UpdateAssetAddressesMsg
 }
 
@@ -27,7 +28,6 @@ export function useUpdateAssetAddresses({
   contractAddress,
   ...restInput
 }: UseUpdateAssetAddressesArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<UpdateAssetAddressesMsg>({
       contractAddress,
@@ -35,27 +35,39 @@ export function useUpdateAssetAddresses({
     })
 
   const updateAssetAddresses = React.useCallback(
-    function updateAssetAddresses(
-      ...args: UpdateAssetAddressesMsgBuilderParameters
-    ) {
+    function updateAssetAddresses({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateAssetAddressesMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildUpdateAssetAddressesMsg(...args),
+        senderAddress,
+        msg: buildUpdateAssetAddressesMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const updateAssetAddressesAsync = React.useCallback(
-    function updateAssetAddressesAsync(
-      ...args: UpdateAssetAddressesMsgBuilderParameters
-    ) {
+    function updateAssetAddressesAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateAssetAddressesMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildUpdateAssetAddressesMsg(...args),
+        senderAddress,
+        msg: buildUpdateAssetAddressesMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { updateAssetAddresses, updateAssetAddressesAsync, ...restOutput }

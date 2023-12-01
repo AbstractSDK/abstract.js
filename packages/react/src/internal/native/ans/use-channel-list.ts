@@ -1,6 +1,7 @@
 import { AnsHostQueryMsgBuilder } from '@abstract-money/core'
 import { type ChannelListResponse } from '@abstract-money/core/native/ans-host/AnsHost.types'
-import { useQuerySmart } from 'graz'
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { useQuerySmart } from '../../../utils/use-query-smart'
 
 type ChannelListMsg = Extract<
   ReturnType<typeof AnsHostQueryMsgBuilder.channelList>,
@@ -13,6 +14,7 @@ type ChannelListMsgBuilderParameters = Parameters<
 
 type UseChannelListArgs = {
   contractAddress?: string
+  client?: CosmWasmClient
 } & ChannelListMsgBuilderParameters[0]
 
 function buildChannelListMsg(
@@ -23,12 +25,17 @@ function buildChannelListMsg(
 
 export function useChannelList({
   contractAddress,
+  client,
   ...restInput
 }: UseChannelListArgs) {
   const { data: channelList, ...restOutput } = useQuerySmart<
     ChannelListResponse,
     Error
-  >({ address: contractAddress, queryMsg: buildChannelListMsg(restInput) })
+  >({
+    address: contractAddress,
+    client,
+    queryMsg: buildChannelListMsg(restInput),
+  })
 
   return { channelList, ...restOutput }
 }

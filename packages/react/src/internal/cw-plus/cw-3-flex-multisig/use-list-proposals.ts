@@ -1,6 +1,7 @@
 import { Cw3FlexMultisigQueryMsgBuilder } from '@abstract-money/core'
 import { type ListProposalsResponse } from '@abstract-money/core/cw-plus/Cw3FlexMultisig.types'
-import { useQuerySmart } from 'graz'
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { useQuerySmart } from '../../../utils/use-query-smart'
 
 type ListProposalsMsg = Extract<
   ReturnType<typeof Cw3FlexMultisigQueryMsgBuilder.listProposals>,
@@ -13,6 +14,7 @@ type ListProposalsMsgBuilderParameters = Parameters<
 
 type UseListProposalsArgs = {
   contractAddress?: string
+  client?: CosmWasmClient
 } & ListProposalsMsgBuilderParameters[0]
 
 function buildListProposalsMsg(
@@ -25,12 +27,17 @@ function buildListProposalsMsg(
 
 export function useListProposals({
   contractAddress,
+  client,
   ...restInput
 }: UseListProposalsArgs) {
   const { data: listProposals, ...restOutput } = useQuerySmart<
     ListProposalsResponse,
     Error
-  >({ address: contractAddress, queryMsg: buildListProposalsMsg(restInput) })
+  >({
+    address: contractAddress,
+    client,
+    queryMsg: buildListProposalsMsg(restInput),
+  })
 
   return { listProposals, ...restOutput }
 }

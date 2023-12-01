@@ -1,6 +1,7 @@
 import { AnsHostExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type UpdateDexesMsg = Extract<
   ReturnType<typeof AnsHostExecuteMsgBuilder.updateDexes>,
@@ -9,23 +10,22 @@ type UpdateDexesMsg = Extract<
 
 type UpdateDexesMsgBuilderParameters = Parameters<
   typeof AnsHostExecuteMsgBuilder.updateDexes
->
+>[0]
 
 type UseUpdateDexesArgs = Parameters<
   typeof useExecuteContract<UpdateDexesMsg>
 >[0]
 
 function buildUpdateDexesMsg(
-  ...args: UpdateDexesMsgBuilderParameters
+  args: UpdateDexesMsgBuilderParameters,
 ): UpdateDexesMsg {
-  return AnsHostExecuteMsgBuilder.updateDexes(...args) as UpdateDexesMsg
+  return AnsHostExecuteMsgBuilder.updateDexes(args) as UpdateDexesMsg
 }
 
 export function useUpdateDexes({
   contractAddress,
   ...restInput
 }: UseUpdateDexesArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<UpdateDexesMsg>({
       contractAddress,
@@ -33,23 +33,39 @@ export function useUpdateDexes({
     })
 
   const updateDexes = React.useCallback(
-    function updateDexes(...args: UpdateDexesMsgBuilderParameters) {
+    function updateDexes({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateDexesMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildUpdateDexesMsg(...args),
+        senderAddress,
+        msg: buildUpdateDexesMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const updateDexesAsync = React.useCallback(
-    function updateDexesAsync(...args: UpdateDexesMsgBuilderParameters) {
+    function updateDexesAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateDexesMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildUpdateDexesMsg(...args),
+        senderAddress,
+        msg: buildUpdateDexesMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { updateDexes, updateDexesAsync, ...restOutput }

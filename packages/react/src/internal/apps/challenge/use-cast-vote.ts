@@ -1,6 +1,7 @@
 import { ChallengeExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type CastVoteMsg = Extract<
   ReturnType<typeof ChallengeExecuteMsgBuilder.castVote>,
@@ -9,19 +10,18 @@ type CastVoteMsg = Extract<
 
 type CastVoteMsgBuilderParameters = Parameters<
   typeof ChallengeExecuteMsgBuilder.castVote
->
+>[0]
 
 type UseCastVoteArgs = Parameters<typeof useExecuteContract<CastVoteMsg>>[0]
 
-function buildCastVoteMsg(...args: CastVoteMsgBuilderParameters): CastVoteMsg {
-  return ChallengeExecuteMsgBuilder.castVote(...args) as CastVoteMsg
+function buildCastVoteMsg(args: CastVoteMsgBuilderParameters): CastVoteMsg {
+  return ChallengeExecuteMsgBuilder.castVote(args) as CastVoteMsg
 }
 
 export function useCastVote({
   contractAddress,
   ...restInput
 }: UseCastVoteArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<CastVoteMsg>({
       contractAddress,
@@ -29,20 +29,39 @@ export function useCastVote({
     })
 
   const castVote = React.useCallback(
-    function castVote(...args: CastVoteMsgBuilderParameters) {
-      return executeContract({ signingClient, msg: buildCastVoteMsg(...args) })
+    function castVote({
+      senderAddress,
+      signingClient,
+      ...args
+    }: CastVoteMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
+      return executeContract({
+        signingClient,
+        senderAddress,
+        msg: buildCastVoteMsg(args),
+      })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const castVoteAsync = React.useCallback(
-    function castVoteAsync(...args: CastVoteMsgBuilderParameters) {
+    function castVoteAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: CastVoteMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildCastVoteMsg(...args),
+        senderAddress,
+        msg: buildCastVoteMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { castVote, castVoteAsync, ...restOutput }

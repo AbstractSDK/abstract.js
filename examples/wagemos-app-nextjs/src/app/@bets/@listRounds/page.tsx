@@ -1,6 +1,6 @@
 'use client'
 
-import { wagemos } from '~/generated/wagemos'
+import { wagemos } from '~/generated/wagemos.graz'
 
 export default function ListRoundsPage() {
   const { data, isLoading, isError } = wagemos.queries.useListRounds()

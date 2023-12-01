@@ -1,6 +1,7 @@
 import { AnsHostExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type UpdatePoolsMsg = Extract<
   ReturnType<typeof AnsHostExecuteMsgBuilder.updatePools>,
@@ -9,23 +10,22 @@ type UpdatePoolsMsg = Extract<
 
 type UpdatePoolsMsgBuilderParameters = Parameters<
   typeof AnsHostExecuteMsgBuilder.updatePools
->
+>[0]
 
 type UseUpdatePoolsArgs = Parameters<
   typeof useExecuteContract<UpdatePoolsMsg>
 >[0]
 
 function buildUpdatePoolsMsg(
-  ...args: UpdatePoolsMsgBuilderParameters
+  args: UpdatePoolsMsgBuilderParameters,
 ): UpdatePoolsMsg {
-  return AnsHostExecuteMsgBuilder.updatePools(...args) as UpdatePoolsMsg
+  return AnsHostExecuteMsgBuilder.updatePools(args) as UpdatePoolsMsg
 }
 
 export function useUpdatePools({
   contractAddress,
   ...restInput
 }: UseUpdatePoolsArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<UpdatePoolsMsg>({
       contractAddress,
@@ -33,23 +33,39 @@ export function useUpdatePools({
     })
 
   const updatePools = React.useCallback(
-    function updatePools(...args: UpdatePoolsMsgBuilderParameters) {
+    function updatePools({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdatePoolsMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildUpdatePoolsMsg(...args),
+        senderAddress,
+        msg: buildUpdatePoolsMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const updatePoolsAsync = React.useCallback(
-    function updatePoolsAsync(...args: UpdatePoolsMsgBuilderParameters) {
+    function updatePoolsAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdatePoolsMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildUpdatePoolsMsg(...args),
+        senderAddress,
+        msg: buildUpdatePoolsMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { updatePools, updatePoolsAsync, ...restOutput }

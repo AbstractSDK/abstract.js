@@ -1,6 +1,7 @@
 import { Cw4GroupExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type AddHookMsg = Extract<
   ReturnType<typeof Cw4GroupExecuteMsgBuilder.addHook>,
@@ -9,16 +10,15 @@ type AddHookMsg = Extract<
 
 type AddHookMsgBuilderParameters = Parameters<
   typeof Cw4GroupExecuteMsgBuilder.addHook
->
+>[0]
 
 type UseAddHookArgs = Parameters<typeof useExecuteContract<AddHookMsg>>[0]
 
-function buildAddHookMsg(...args: AddHookMsgBuilderParameters): AddHookMsg {
-  return Cw4GroupExecuteMsgBuilder.addHook(...args) as AddHookMsg
+function buildAddHookMsg(args: AddHookMsgBuilderParameters): AddHookMsg {
+  return Cw4GroupExecuteMsgBuilder.addHook(args) as AddHookMsg
 }
 
 export function useAddHook({ contractAddress, ...restInput }: UseAddHookArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<AddHookMsg>({
       contractAddress,
@@ -26,20 +26,39 @@ export function useAddHook({ contractAddress, ...restInput }: UseAddHookArgs) {
     })
 
   const addHook = React.useCallback(
-    function addHook(...args: AddHookMsgBuilderParameters) {
-      return executeContract({ signingClient, msg: buildAddHookMsg(...args) })
+    function addHook({
+      senderAddress,
+      signingClient,
+      ...args
+    }: AddHookMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
+      return executeContract({
+        signingClient,
+        senderAddress,
+        msg: buildAddHookMsg(args),
+      })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const addHookAsync = React.useCallback(
-    function addHookAsync(...args: AddHookMsgBuilderParameters) {
+    function addHookAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: AddHookMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildAddHookMsg(...args),
+        senderAddress,
+        msg: buildAddHookMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { addHook, addHookAsync, ...restOutput }

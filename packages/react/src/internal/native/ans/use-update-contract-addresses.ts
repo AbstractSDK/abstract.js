@@ -1,6 +1,7 @@
 import { AnsHostExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type UpdateContractAddressesMsg = Extract<
   ReturnType<typeof AnsHostExecuteMsgBuilder.updateContractAddresses>,
@@ -9,17 +10,17 @@ type UpdateContractAddressesMsg = Extract<
 
 type UpdateContractAddressesMsgBuilderParameters = Parameters<
   typeof AnsHostExecuteMsgBuilder.updateContractAddresses
->
+>[0]
 
 type UseUpdateContractAddressesArgs = Parameters<
   typeof useExecuteContract<UpdateContractAddressesMsg>
 >[0]
 
 function buildUpdateContractAddressesMsg(
-  ...args: UpdateContractAddressesMsgBuilderParameters
+  args: UpdateContractAddressesMsgBuilderParameters,
 ): UpdateContractAddressesMsg {
   return AnsHostExecuteMsgBuilder.updateContractAddresses(
-    ...args,
+    args,
   ) as UpdateContractAddressesMsg
 }
 
@@ -27,7 +28,6 @@ export function useUpdateContractAddresses({
   contractAddress,
   ...restInput
 }: UseUpdateContractAddressesArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<UpdateContractAddressesMsg>({
       contractAddress,
@@ -35,27 +35,39 @@ export function useUpdateContractAddresses({
     })
 
   const updateContractAddresses = React.useCallback(
-    function updateContractAddresses(
-      ...args: UpdateContractAddressesMsgBuilderParameters
-    ) {
+    function updateContractAddresses({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateContractAddressesMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildUpdateContractAddressesMsg(...args),
+        senderAddress,
+        msg: buildUpdateContractAddressesMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const updateContractAddressesAsync = React.useCallback(
-    function updateContractAddressesAsync(
-      ...args: UpdateContractAddressesMsgBuilderParameters
-    ) {
+    function updateContractAddressesAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateContractAddressesMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildUpdateContractAddressesMsg(...args),
+        senderAddress,
+        msg: buildUpdateContractAddressesMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return {

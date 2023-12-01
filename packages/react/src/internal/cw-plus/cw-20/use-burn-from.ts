@@ -1,6 +1,7 @@
 import { Cw20ExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type BurnFromMsg = Extract<
   ReturnType<typeof Cw20ExecuteMsgBuilder.burnFrom>,
@@ -9,19 +10,18 @@ type BurnFromMsg = Extract<
 
 type BurnFromMsgBuilderParameters = Parameters<
   typeof Cw20ExecuteMsgBuilder.burnFrom
->
+>[0]
 
 type UseBurnFromArgs = Parameters<typeof useExecuteContract<BurnFromMsg>>[0]
 
-function buildBurnFromMsg(...args: BurnFromMsgBuilderParameters): BurnFromMsg {
-  return Cw20ExecuteMsgBuilder.burnFrom(...args) as BurnFromMsg
+function buildBurnFromMsg(args: BurnFromMsgBuilderParameters): BurnFromMsg {
+  return Cw20ExecuteMsgBuilder.burnFrom(args) as BurnFromMsg
 }
 
 export function useBurnFrom({
   contractAddress,
   ...restInput
 }: UseBurnFromArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<BurnFromMsg>({
       contractAddress,
@@ -29,20 +29,39 @@ export function useBurnFrom({
     })
 
   const burnFrom = React.useCallback(
-    function burnFrom(...args: BurnFromMsgBuilderParameters) {
-      return executeContract({ signingClient, msg: buildBurnFromMsg(...args) })
+    function burnFrom({
+      senderAddress,
+      signingClient,
+      ...args
+    }: BurnFromMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
+      return executeContract({
+        signingClient,
+        senderAddress,
+        msg: buildBurnFromMsg(args),
+      })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const burnFromAsync = React.useCallback(
-    function burnFromAsync(...args: BurnFromMsgBuilderParameters) {
+    function burnFromAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: BurnFromMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildBurnFromMsg(...args),
+        senderAddress,
+        msg: buildBurnFromMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { burnFrom, burnFromAsync, ...restOutput }

@@ -1,6 +1,7 @@
 import { Cw20ExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type TransferMsg = Extract<
   ReturnType<typeof Cw20ExecuteMsgBuilder.transfer>,
@@ -9,19 +10,18 @@ type TransferMsg = Extract<
 
 type TransferMsgBuilderParameters = Parameters<
   typeof Cw20ExecuteMsgBuilder.transfer
->
+>[0]
 
 type UseTransferArgs = Parameters<typeof useExecuteContract<TransferMsg>>[0]
 
-function buildTransferMsg(...args: TransferMsgBuilderParameters): TransferMsg {
-  return Cw20ExecuteMsgBuilder.transfer(...args) as TransferMsg
+function buildTransferMsg(args: TransferMsgBuilderParameters): TransferMsg {
+  return Cw20ExecuteMsgBuilder.transfer(args) as TransferMsg
 }
 
 export function useTransfer({
   contractAddress,
   ...restInput
 }: UseTransferArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<TransferMsg>({
       contractAddress,
@@ -29,20 +29,39 @@ export function useTransfer({
     })
 
   const transfer = React.useCallback(
-    function transfer(...args: TransferMsgBuilderParameters) {
-      return executeContract({ signingClient, msg: buildTransferMsg(...args) })
+    function transfer({
+      senderAddress,
+      signingClient,
+      ...args
+    }: TransferMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
+      return executeContract({
+        signingClient,
+        senderAddress,
+        msg: buildTransferMsg(args),
+      })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const transferAsync = React.useCallback(
-    function transferAsync(...args: TransferMsgBuilderParameters) {
+    function transferAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: TransferMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildTransferMsg(...args),
+        senderAddress,
+        msg: buildTransferMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { transfer, transferAsync, ...restOutput }

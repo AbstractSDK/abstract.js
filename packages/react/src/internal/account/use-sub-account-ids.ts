@@ -1,6 +1,7 @@
 import { ManagerQueryMsgBuilder } from '@abstract-money/core'
 import { type SubAccountIdsResponse } from '@abstract-money/core/account/manager/Manager.types'
-import { useQuerySmart } from 'graz'
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { useQuerySmart } from '../../utils/use-query-smart'
 
 type SubAccountIdsMsg = Extract<
   ReturnType<typeof ManagerQueryMsgBuilder.subAccountIds>,
@@ -13,6 +14,7 @@ type SubAccountIdsMsgBuilderParameters = Parameters<
 
 type UseSubAccountIdsArgs = {
   contractAddress?: string
+  client?: CosmWasmClient
 } & SubAccountIdsMsgBuilderParameters[0]
 
 function buildSubAccountIdsMsg(
@@ -23,12 +25,17 @@ function buildSubAccountIdsMsg(
 
 export function useSubAccountIds({
   contractAddress,
+  client,
   ...restInput
 }: UseSubAccountIdsArgs) {
   const { data: subAccountIds, ...restOutput } = useQuerySmart<
     SubAccountIdsResponse,
     Error
-  >({ address: contractAddress, queryMsg: buildSubAccountIdsMsg(restInput) })
+  >({
+    address: contractAddress,
+    client,
+    queryMsg: buildSubAccountIdsMsg(restInput),
+  })
 
   return { subAccountIds, ...restOutput }
 }

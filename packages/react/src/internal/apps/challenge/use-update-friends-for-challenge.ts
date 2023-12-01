@@ -1,6 +1,7 @@
 import { ChallengeExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type UpdateFriendsForChallengeMsg = Extract<
   ReturnType<typeof ChallengeExecuteMsgBuilder.updateFriendsForChallenge>,
@@ -9,17 +10,17 @@ type UpdateFriendsForChallengeMsg = Extract<
 
 type UpdateFriendsForChallengeMsgBuilderParameters = Parameters<
   typeof ChallengeExecuteMsgBuilder.updateFriendsForChallenge
->
+>[0]
 
 type UseUpdateFriendsForChallengeArgs = Parameters<
   typeof useExecuteContract<UpdateFriendsForChallengeMsg>
 >[0]
 
 function buildUpdateFriendsForChallengeMsg(
-  ...args: UpdateFriendsForChallengeMsgBuilderParameters
+  args: UpdateFriendsForChallengeMsgBuilderParameters,
 ): UpdateFriendsForChallengeMsg {
   return ChallengeExecuteMsgBuilder.updateFriendsForChallenge(
-    ...args,
+    args,
   ) as UpdateFriendsForChallengeMsg
 }
 
@@ -27,7 +28,6 @@ export function useUpdateFriendsForChallenge({
   contractAddress,
   ...restInput
 }: UseUpdateFriendsForChallengeArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<UpdateFriendsForChallengeMsg>({
       contractAddress,
@@ -35,27 +35,39 @@ export function useUpdateFriendsForChallenge({
     })
 
   const updateFriendsForChallenge = React.useCallback(
-    function updateFriendsForChallenge(
-      ...args: UpdateFriendsForChallengeMsgBuilderParameters
-    ) {
+    function updateFriendsForChallenge({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateFriendsForChallengeMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildUpdateFriendsForChallengeMsg(...args),
+        senderAddress,
+        msg: buildUpdateFriendsForChallengeMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const updateFriendsForChallengeAsync = React.useCallback(
-    function updateFriendsForChallengeAsync(
-      ...args: UpdateFriendsForChallengeMsgBuilderParameters
-    ) {
+    function updateFriendsForChallengeAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateFriendsForChallengeMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildUpdateFriendsForChallengeMsg(...args),
+        senderAddress,
+        msg: buildUpdateFriendsForChallengeMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return {

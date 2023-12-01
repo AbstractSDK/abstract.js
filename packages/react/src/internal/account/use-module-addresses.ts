@@ -1,6 +1,7 @@
 import { ManagerQueryMsgBuilder } from '@abstract-money/core'
 import { type ModuleAddressesResponse } from '@abstract-money/core/account/manager/Manager.types'
-import { useQuerySmart } from 'graz'
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { useQuerySmart } from '../../utils/use-query-smart'
 
 type ModuleAddressesMsg = Extract<
   ReturnType<typeof ManagerQueryMsgBuilder.moduleAddresses>,
@@ -13,6 +14,7 @@ type ModuleAddressesMsgBuilderParameters = Parameters<
 
 type UseModuleAddressesArgs = {
   contractAddress?: string
+  client?: CosmWasmClient
 } & ModuleAddressesMsgBuilderParameters[0]
 
 function buildModuleAddressesMsg(
@@ -23,12 +25,17 @@ function buildModuleAddressesMsg(
 
 export function useModuleAddresses({
   contractAddress,
+  client,
   ...restInput
 }: UseModuleAddressesArgs) {
   const { data: moduleAddresses, ...restOutput } = useQuerySmart<
     ModuleAddressesResponse,
     Error
-  >({ address: contractAddress, queryMsg: buildModuleAddressesMsg(restInput) })
+  >({
+    address: contractAddress,
+    client,
+    queryMsg: buildModuleAddressesMsg(restInput),
+  })
 
   return { moduleAddresses, ...restOutput }
 }

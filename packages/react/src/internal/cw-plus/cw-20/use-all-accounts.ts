@@ -1,6 +1,7 @@
 import { Cw20QueryMsgBuilder } from '@abstract-money/core'
 import { type AllAccountsResponse } from '@abstract-money/core/cw-plus/Cw20.types'
-import { useQuerySmart } from 'graz'
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { useQuerySmart } from '../../../utils/use-query-smart'
 
 type AllAccountsMsg = Extract<
   ReturnType<typeof Cw20QueryMsgBuilder.allAccounts>,
@@ -13,6 +14,7 @@ type AllAccountsMsgBuilderParameters = Parameters<
 
 type UseAllAccountsArgs = {
   contractAddress?: string
+  client?: CosmWasmClient
 } & AllAccountsMsgBuilderParameters[0]
 
 function buildAllAccountsMsg(
@@ -23,12 +25,17 @@ function buildAllAccountsMsg(
 
 export function useAllAccounts({
   contractAddress,
+  client,
   ...restInput
 }: UseAllAccountsArgs) {
   const { data: accounts, ...restOutput } = useQuerySmart<
     AllAccountsResponse,
     Error
-  >({ address: contractAddress, queryMsg: buildAllAccountsMsg(restInput) })
+  >({
+    address: contractAddress,
+    client,
+    queryMsg: buildAllAccountsMsg(restInput),
+  })
 
   return { accounts, ...restOutput }
 }

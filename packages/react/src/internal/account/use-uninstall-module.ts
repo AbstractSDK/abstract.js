@@ -1,6 +1,7 @@
 import { ManagerExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../utils/use-execute-contract'
 
 type UninstallModuleMsg = Extract<
   ReturnType<typeof ManagerExecuteMsgBuilder.uninstallModule>,
@@ -9,23 +10,22 @@ type UninstallModuleMsg = Extract<
 
 type UninstallModuleMsgBuilderParameters = Parameters<
   typeof ManagerExecuteMsgBuilder.uninstallModule
->
+>[0]
 
 type UseUninstallModuleArgs = Parameters<
   typeof useExecuteContract<UninstallModuleMsg>
 >[0]
 
 function buildUninstallModuleMsg(
-  ...args: UninstallModuleMsgBuilderParameters
+  args: UninstallModuleMsgBuilderParameters,
 ): UninstallModuleMsg {
-  return ManagerExecuteMsgBuilder.uninstallModule(...args) as UninstallModuleMsg
+  return ManagerExecuteMsgBuilder.uninstallModule(args) as UninstallModuleMsg
 }
 
 export function useUninstallModule({
   contractAddress,
   ...restInput
 }: UseUninstallModuleArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<UninstallModuleMsg>({
       contractAddress,
@@ -33,25 +33,39 @@ export function useUninstallModule({
     })
 
   const uninstallModule = React.useCallback(
-    function uninstallModule(...args: UninstallModuleMsgBuilderParameters) {
+    function uninstallModule({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UninstallModuleMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildUninstallModuleMsg(...args),
+        senderAddress,
+        msg: buildUninstallModuleMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const uninstallModuleAsync = React.useCallback(
-    function uninstallModuleAsync(
-      ...args: UninstallModuleMsgBuilderParameters
-    ) {
+    function uninstallModuleAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UninstallModuleMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildUninstallModuleMsg(...args),
+        senderAddress,
+        msg: buildUninstallModuleMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { uninstallModule, uninstallModuleAsync, ...restOutput }

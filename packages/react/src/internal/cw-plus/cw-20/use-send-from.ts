@@ -1,6 +1,7 @@
 import { Cw20ExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type SendFromMsg = Extract<
   ReturnType<typeof Cw20ExecuteMsgBuilder.sendFrom>,
@@ -9,19 +10,18 @@ type SendFromMsg = Extract<
 
 type SendFromMsgBuilderParameters = Parameters<
   typeof Cw20ExecuteMsgBuilder.sendFrom
->
+>[0]
 
 type UseSendFromArgs = Parameters<typeof useExecuteContract<SendFromMsg>>[0]
 
-function buildSendFromMsg(...args: SendFromMsgBuilderParameters): SendFromMsg {
-  return Cw20ExecuteMsgBuilder.sendFrom(...args) as SendFromMsg
+function buildSendFromMsg(args: SendFromMsgBuilderParameters): SendFromMsg {
+  return Cw20ExecuteMsgBuilder.sendFrom(args) as SendFromMsg
 }
 
 export function useSendFrom({
   contractAddress,
   ...restInput
 }: UseSendFromArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<SendFromMsg>({
       contractAddress,
@@ -29,20 +29,39 @@ export function useSendFrom({
     })
 
   const sendFrom = React.useCallback(
-    function sendFrom(...args: SendFromMsgBuilderParameters) {
-      return executeContract({ signingClient, msg: buildSendFromMsg(...args) })
+    function sendFrom({
+      senderAddress,
+      signingClient,
+      ...args
+    }: SendFromMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
+      return executeContract({
+        signingClient,
+        senderAddress,
+        msg: buildSendFromMsg(args),
+      })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const sendFromAsync = React.useCallback(
-    function sendFromAsync(...args: SendFromMsgBuilderParameters) {
+    function sendFromAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: SendFromMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildSendFromMsg(...args),
+        senderAddress,
+        msg: buildSendFromMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { sendFrom, sendFromAsync, ...restOutput }

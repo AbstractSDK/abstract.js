@@ -1,6 +1,7 @@
 import { ProxyQueryMsgBuilder } from '@abstract-money/core'
 import { type ConfigResponse } from '@abstract-money/core/account/proxy/Proxy.types'
-import { useQuerySmart } from 'graz'
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { useQuerySmart } from '../../utils/use-query-smart'
 
 type ConfigMsg = Extract<
   ReturnType<typeof ProxyQueryMsgBuilder.config>,
@@ -9,15 +10,16 @@ type ConfigMsg = Extract<
 
 type ConfigMsgBuilderParameters = Parameters<typeof ProxyQueryMsgBuilder.config>
 
-type UseConfigArgs = { contractAddress?: string }
+type UseConfigArgs = { contractAddress?: string; client?: CosmWasmClient }
 
 function buildConfigMsg(...args: ConfigMsgBuilderParameters): ConfigMsg {
   return ProxyQueryMsgBuilder.config(...args) as ConfigMsg
 }
 
-export function useConfig({ contractAddress }: UseConfigArgs) {
+export function useConfig({ contractAddress, client }: UseConfigArgs) {
   const { data: config, ...restOutput } = useQuerySmart<ConfigResponse, Error>({
     address: contractAddress,
+    client,
     queryMsg: buildConfigMsg(),
   })
 

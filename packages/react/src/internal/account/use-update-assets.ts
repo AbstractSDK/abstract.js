@@ -1,6 +1,7 @@
 import { ProxyExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../utils/use-execute-contract'
 
 type UpdateAssetsMsg = Extract<
   ReturnType<typeof ProxyExecuteMsgBuilder.updateAssets>,
@@ -9,23 +10,22 @@ type UpdateAssetsMsg = Extract<
 
 type UpdateAssetsMsgBuilderParameters = Parameters<
   typeof ProxyExecuteMsgBuilder.updateAssets
->
+>[0]
 
 type UseUpdateAssetsArgs = Parameters<
   typeof useExecuteContract<UpdateAssetsMsg>
 >[0]
 
 function buildUpdateAssetsMsg(
-  ...args: UpdateAssetsMsgBuilderParameters
+  args: UpdateAssetsMsgBuilderParameters,
 ): UpdateAssetsMsg {
-  return ProxyExecuteMsgBuilder.updateAssets(...args) as UpdateAssetsMsg
+  return ProxyExecuteMsgBuilder.updateAssets(args) as UpdateAssetsMsg
 }
 
 export function useUpdateAssets({
   contractAddress,
   ...restInput
 }: UseUpdateAssetsArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<UpdateAssetsMsg>({
       contractAddress,
@@ -33,23 +33,39 @@ export function useUpdateAssets({
     })
 
   const updateAssets = React.useCallback(
-    function updateAssets(...args: UpdateAssetsMsgBuilderParameters) {
+    function updateAssets({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateAssetsMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildUpdateAssetsMsg(...args),
+        senderAddress,
+        msg: buildUpdateAssetsMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const updateAssetsAsync = React.useCallback(
-    function updateAssetsAsync(...args: UpdateAssetsMsgBuilderParameters) {
+    function updateAssetsAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: UpdateAssetsMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildUpdateAssetsMsg(...args),
+        senderAddress,
+        msg: buildUpdateAssetsMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { updateAssets, updateAssetsAsync, ...restOutput }

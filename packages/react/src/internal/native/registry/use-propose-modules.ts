@@ -1,6 +1,7 @@
 import { RegistryExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type ProposeModulesMsg = Extract<
   ReturnType<typeof RegistryExecuteMsgBuilder.proposeModules>,
@@ -9,23 +10,22 @@ type ProposeModulesMsg = Extract<
 
 type ProposeModulesMsgBuilderParameters = Parameters<
   typeof RegistryExecuteMsgBuilder.proposeModules
->
+>[0]
 
 type UseProposeModulesArgs = Parameters<
   typeof useExecuteContract<ProposeModulesMsg>
 >[0]
 
 function buildProposeModulesMsg(
-  ...args: ProposeModulesMsgBuilderParameters
+  args: ProposeModulesMsgBuilderParameters,
 ): ProposeModulesMsg {
-  return RegistryExecuteMsgBuilder.proposeModules(...args) as ProposeModulesMsg
+  return RegistryExecuteMsgBuilder.proposeModules(args) as ProposeModulesMsg
 }
 
 export function useProposeModules({
   contractAddress,
   ...restInput
 }: UseProposeModulesArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<ProposeModulesMsg>({
       contractAddress,
@@ -33,23 +33,39 @@ export function useProposeModules({
     })
 
   const proposeModules = React.useCallback(
-    function proposeModules(...args: ProposeModulesMsgBuilderParameters) {
+    function proposeModules({
+      senderAddress,
+      signingClient,
+      ...args
+    }: ProposeModulesMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildProposeModulesMsg(...args),
+        senderAddress,
+        msg: buildProposeModulesMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const proposeModulesAsync = React.useCallback(
-    function proposeModulesAsync(...args: ProposeModulesMsgBuilderParameters) {
+    function proposeModulesAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: ProposeModulesMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildProposeModulesMsg(...args),
+        senderAddress,
+        msg: buildProposeModulesMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { proposeModules, proposeModulesAsync, ...restOutput }

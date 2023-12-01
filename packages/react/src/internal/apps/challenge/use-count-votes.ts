@@ -1,6 +1,7 @@
 import { ChallengeExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type CountVotesMsg = Extract<
   ReturnType<typeof ChallengeExecuteMsgBuilder.countVotes>,
@@ -9,21 +10,20 @@ type CountVotesMsg = Extract<
 
 type CountVotesMsgBuilderParameters = Parameters<
   typeof ChallengeExecuteMsgBuilder.countVotes
->
+>[0]
 
 type UseCountVotesArgs = Parameters<typeof useExecuteContract<CountVotesMsg>>[0]
 
 function buildCountVotesMsg(
-  ...args: CountVotesMsgBuilderParameters
+  args: CountVotesMsgBuilderParameters,
 ): CountVotesMsg {
-  return ChallengeExecuteMsgBuilder.countVotes(...args) as CountVotesMsg
+  return ChallengeExecuteMsgBuilder.countVotes(args) as CountVotesMsg
 }
 
 export function useCountVotes({
   contractAddress,
   ...restInput
 }: UseCountVotesArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<CountVotesMsg>({
       contractAddress,
@@ -31,23 +31,39 @@ export function useCountVotes({
     })
 
   const countVotes = React.useCallback(
-    function countVotes(...args: CountVotesMsgBuilderParameters) {
+    function countVotes({
+      senderAddress,
+      signingClient,
+      ...args
+    }: CountVotesMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildCountVotesMsg(...args),
+        senderAddress,
+        msg: buildCountVotesMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const countVotesAsync = React.useCallback(
-    function countVotesAsync(...args: CountVotesMsgBuilderParameters) {
+    function countVotesAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: CountVotesMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildCountVotesMsg(...args),
+        senderAddress,
+        msg: buildCountVotesMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { countVotes, countVotesAsync, ...restOutput }

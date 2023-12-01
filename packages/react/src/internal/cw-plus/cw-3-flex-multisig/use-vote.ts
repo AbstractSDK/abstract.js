@@ -1,6 +1,7 @@
 import { Cw3FlexMultisigExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type VoteMsg = Extract<
   ReturnType<typeof Cw3FlexMultisigExecuteMsgBuilder.vote>,
@@ -9,16 +10,15 @@ type VoteMsg = Extract<
 
 type VoteMsgBuilderParameters = Parameters<
   typeof Cw3FlexMultisigExecuteMsgBuilder.vote
->
+>[0]
 
 type UseVoteArgs = Parameters<typeof useExecuteContract<VoteMsg>>[0]
 
-function buildVoteMsg(...args: VoteMsgBuilderParameters): VoteMsg {
-  return Cw3FlexMultisigExecuteMsgBuilder.vote(...args) as VoteMsg
+function buildVoteMsg(args: VoteMsgBuilderParameters): VoteMsg {
+  return Cw3FlexMultisigExecuteMsgBuilder.vote(args) as VoteMsg
 }
 
 export function useVote({ contractAddress, ...restInput }: UseVoteArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<VoteMsg>({
       contractAddress,
@@ -26,20 +26,39 @@ export function useVote({ contractAddress, ...restInput }: UseVoteArgs) {
     })
 
   const vote = React.useCallback(
-    function vote(...args: VoteMsgBuilderParameters) {
-      return executeContract({ signingClient, msg: buildVoteMsg(...args) })
+    function vote({
+      senderAddress,
+      signingClient,
+      ...args
+    }: VoteMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
+      return executeContract({
+        signingClient,
+        senderAddress,
+        msg: buildVoteMsg(args),
+      })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const voteAsync = React.useCallback(
-    function voteAsync(...args: VoteMsgBuilderParameters) {
+    function voteAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: VoteMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildVoteMsg(...args),
+        senderAddress,
+        msg: buildVoteMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { vote, voteAsync, ...restOutput }

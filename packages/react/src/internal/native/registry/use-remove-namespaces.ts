@@ -1,6 +1,7 @@
 import { RegistryExecuteMsgBuilder } from '@abstract-money/core'
-import { useCosmWasmSigningClient, useExecuteContract } from 'graz'
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
+import { useExecuteContract } from '../../../utils/use-execute-contract'
 
 type RemoveNamespacesMsg = Extract<
   ReturnType<typeof RegistryExecuteMsgBuilder.removeNamespaces>,
@@ -9,25 +10,22 @@ type RemoveNamespacesMsg = Extract<
 
 type RemoveNamespacesMsgBuilderParameters = Parameters<
   typeof RegistryExecuteMsgBuilder.removeNamespaces
->
+>[0]
 
 type UseRemoveNamespacesArgs = Parameters<
   typeof useExecuteContract<RemoveNamespacesMsg>
 >[0]
 
 function buildRemoveNamespacesMsg(
-  ...args: RemoveNamespacesMsgBuilderParameters
+  args: RemoveNamespacesMsgBuilderParameters,
 ): RemoveNamespacesMsg {
-  return RegistryExecuteMsgBuilder.removeNamespaces(
-    ...args,
-  ) as RemoveNamespacesMsg
+  return RegistryExecuteMsgBuilder.removeNamespaces(args) as RemoveNamespacesMsg
 }
 
 export function useRemoveNamespaces({
   contractAddress,
   ...restInput
 }: UseRemoveNamespacesArgs) {
-  const { data: signingClient } = useCosmWasmSigningClient()
   const { executeContract, executeContractAsync, ...restOutput } =
     useExecuteContract<RemoveNamespacesMsg>({
       contractAddress,
@@ -35,25 +33,39 @@ export function useRemoveNamespaces({
     })
 
   const removeNamespaces = React.useCallback(
-    function removeNamespaces(...args: RemoveNamespacesMsgBuilderParameters) {
+    function removeNamespaces({
+      senderAddress,
+      signingClient,
+      ...args
+    }: RemoveNamespacesMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContract({
         signingClient,
-        msg: buildRemoveNamespacesMsg(...args),
+        senderAddress,
+        msg: buildRemoveNamespacesMsg(args),
       })
     },
-    [executeContract, signingClient],
+    [executeContract],
   )
 
   const removeNamespacesAsync = React.useCallback(
-    function removeNamespacesAsync(
-      ...args: RemoveNamespacesMsgBuilderParameters
-    ) {
+    function removeNamespacesAsync({
+      senderAddress,
+      signingClient,
+      ...args
+    }: RemoveNamespacesMsgBuilderParameters & {
+      senderAddress: string
+      signingClient: SigningCosmWasmClient
+    }) {
       return executeContractAsync({
         signingClient,
-        msg: buildRemoveNamespacesMsg(...args),
+        senderAddress,
+        msg: buildRemoveNamespacesMsg(args),
       })
     },
-    [executeContractAsync, signingClient],
+    [executeContractAsync],
   )
 
   return { removeNamespaces, removeNamespacesAsync, ...restOutput }
