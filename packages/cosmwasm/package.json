@@ -10,18 +10,14 @@
   },
   "scripts": {
     "build": "tsup",
+    "typecheck": "tsc --noEmit",
     "dev": "DEV=true tsup"
   },
   "dependencies": {
     "@cosmjs/encoding": "^0.31.0",
     "@cosmjs/cosmwasm-stargate": "^0.31.0",
-    "@cosmjs/tendermint-rpc": "^0.31.0"
-  },
-  "peerDependencies": {
-    "@cosmjs/cosmwasm-stargate": ">=0.31.0",
-    "@cosmjs/tendermint-rpc": "^>=0.31.0",
-    "@cosmjs/encoding": ">=0.31.0",
-    "typescript": ">=5.0.4"
+    "@cosmjs/tendermint-rpc": "^0.31.0",
+    "@cosmjs/stargate": "^0.31.0"
   },
   "peerDependenciesMeta": {
     "typescript": {
@@ -29,13 +25,11 @@
     }
   },
   "devDependencies": {
-    "@cosmjs/cosmwasm-stargate": "^0.31.0",
-    "@cosmjs/encoding": "^0.31.0",
-    "@cosmjs/stargate": "^0.31.0",
-    "@cosmjs/tendermint-rpc": "^0.31.0",
     "@types/node": "^18.11.10",
     "tsup": "^6.5.0"
   },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

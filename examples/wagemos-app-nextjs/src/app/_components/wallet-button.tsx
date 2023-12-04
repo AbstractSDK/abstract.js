@@ -7,14 +7,14 @@ import {
   useDisconnect,
 } from 'graz'
 import { useState } from 'react'
-import { Button } from '~/components/ui/button'
+import { Button } from '../../components/ui/button'
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from '~/components/ui/dialog'
-import { useToast } from '~/components/ui/use-toast'
+} from '../../components/ui/dialog'
+import { useToast } from '../../components/ui/use-toast'
 
 function DisconnectButton() {
   const { disconnect } = useDisconnect()

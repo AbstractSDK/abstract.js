@@ -1,6 +1,6 @@
 'use client'
 
-import { wagemos } from '~/generated/wagemos.graz'
+import { wagemos } from '../../generated/wagemos.graz'
 import { PlaceBetDialog } from './_components/place-bet-dialog'
 import {
   Round,

@@ -22,11 +22,12 @@
     "dev": "DEV=true tsup",
     "docs:gen": "typedoc",
     "docs:serve": "serve ./docs -l 3050",
+    "typecheck": "tsc --noEmit --jsx react-jsx",
     "codegen": "graphql-codegen --config codegen.yml",
     "codegen:watch": "graphql-codegen --watch"
   },
   "dependencies": {
-    "@abstract-money/cosmwasm": "workspace:*",
+    "@abstract-money/cosmwasm": "workspace:@abstract-money/cosmwasm@*",
     "@chain-registry/types": "^0.13.1",
     "@cosmjs/amino": "^0.31.0",
     "@cosmjs/cosmwasm-stargate": "^0.31.0",
@@ -76,6 +77,8 @@
     "typedoc": "^0.23.25",
     "typedoc-plugin-markdown": "^3.14.0"
   },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

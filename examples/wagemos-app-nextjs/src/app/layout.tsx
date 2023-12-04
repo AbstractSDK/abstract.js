@@ -1,8 +1,8 @@
 import { AbstractProvider } from '@abstract-money/react'
 import type { Metadata } from 'next'
 import { Inter, Poppins } from 'next/font/google'
-import { Toaster } from '~/components/ui/toaster'
-import { cn } from '~/utils'
+import { Toaster } from '../components/ui/toaster'
+import { cn } from '../utils'
 import { GrazProvider } from './_providers/graz'
 import './globals.css'
 

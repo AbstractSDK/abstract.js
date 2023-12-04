@@ -87,10 +87,10 @@ importers:
   examples/wagemos-app-nextjs:
     dependencies:
       '@abstract-money/core':
-        specifier: workspace:*
+        specifier: workspace:@abstract-money/core@*
         version: link:../../packages/core
       '@abstract-money/react':
-        specifier: workspace:*
+        specifier: workspace:@abstract-money/react@*
         version: link:../../packages/react
       '@cosmjs/amino':
         specifier: ^0.31.0
@@ -205,7 +205,7 @@ importers:
   packages/core:
     dependencies:
       '@abstract-money/cosmwasm':
-        specifier: workspace:*
+        specifier: workspace:@abstract-money/cosmwasm@*
         version: link:../cosmwasm
       '@chain-registry/types':
         specifier: ^0.13.1
@@ -310,16 +310,13 @@ importers:
       '@cosmjs/encoding':
         specifier: ^0.31.0
         version: 0.31.3
-      '@cosmjs/tendermint-rpc':
-        specifier: ^0.31.0
-        version: 0.31.3
-      typescript:
-        specifier: '>=5.0.4'
-        version: 5.3.2
-    devDependencies:
       '@cosmjs/stargate':
         specifier: ^0.31.0
         version: 0.31.3
+      '@cosmjs/tendermint-rpc':
+        specifier: ^0.31.0
+        version: 0.31.3
+    devDependencies:
       '@types/node':
         specifier: ^18.11.10
         version: 18.18.13
@@ -330,7 +327,7 @@ importers:
   packages/react:
     dependencies:
       '@abstract-money/core':
-        specifier: workspace:*
+        specifier: workspace:@abstract-money/core@*
         version: link:../core
       '@tanstack/react-query':
         specifier: ^4

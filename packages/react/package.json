@@ -20,10 +20,11 @@
   },
   "scripts": {
     "build": "NODE_OPTIONS='--max-old-space-size=16384' tsup",
+    "typecheck": "tsc --noEmit",
     "dev": "NODE_OPTIONS='--max-old-space-size=16384' DEV=true tsup"
   },
   "dependencies": {
-    "@abstract-money/core": "workspace:*",
+    "@abstract-money/core": "workspace:@abstract-money/core@*",
     "@tanstack/react-query": "^4",
     "zustand": "^4.4.6"
   },

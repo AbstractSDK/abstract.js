@@ -2,6 +2,7 @@
   "compilerOptions": {
     "allowJs": true,
     "baseUrl": ".",
+    "jsx": "react-jsx",
     "downlevelIteration": true,
     "esModuleInterop": true,
     "isolatedModules": true,
@@ -15,17 +16,13 @@
     "noUnusedLocals": false,
     "noUnusedParameters": true,
     "paths": {
-      "@abstract-money/core": ["packages/core/src"],
-      "@abstract-money/core/*": ["packages/core/src/*"],
-      "@abstract-money/react": ["packages/react/src"],
-      "@abstract-money/react/*": ["packages/react/src/*"],
-      "@abstract-money/cosmwasm": ["packages/cosmwasm/src"],
-      "@abstract-money/cosmwasm/*": ["packages/cosmwasm/src/*"],
       // TODO: Remove once issue is fixed
       // https://github.com/microsoft/TypeScript/issues/48212
       "@cosmjs/cosmwasm-stargate": [
         "packages/core/node_modules/@cosmjs/cosmwasm-stargate/build"
       ],
+      "@abstract-money/core": ["node_modules/@abstract-money/core/dist"],
+      "@abstract-money/core/*": ["node_modules/@abstract-money/core/dist/*"],
       "@tanstack/react-query": ["packages/react/node_modules/@tanstack/react-query/src"],
       "@tanstack/query-core": ["node_modules/@tanstack/query-core/src"]
     },
@@ -34,12 +31,10 @@
     "strict": true,
     "strictNullChecks": true,
     "target": "es2021",
-    "types": ["node", "@types/jest"]
+    "types": ["node", "@types/jest", "@abstract-money/core"]
   },
   "exclude": ["**/node_modules/**", "**/dist/**"],
   "include": [
-    "examples/**/*",
-    "packages/**/*",
-    "scripts/**/*"
+    "src/**/*",
   ]
 }

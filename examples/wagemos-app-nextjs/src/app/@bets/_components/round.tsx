@@ -1,6 +1,6 @@
 import { ComponentProps } from 'react'
-import { Badge } from '~/components/ui/badge'
-import { cn } from '~/utils'
+import { Badge } from '../../../components/ui/badge'
+import { cn } from '../../../utils'
 
 export function Round({ className, ...rest }: ComponentProps<'div'>) {
   return (

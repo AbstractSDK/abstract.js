@@ -3,7 +3,7 @@ import { type VariantProps, cva } from 'class-variance-authority'
 import { X } from 'lucide-react'
 import * as React from 'react'
 
-import { cn } from '~/utils'
+import { cn } from '../../utils'
 
 const ToastProvider = ToastPrimitives.Provider
 
@@ -81,7 +81,7 @@ const ToastClose = React.forwardRef<
     toast-close=""
     {...props}
   >
-    <X className="h-4 w-4" />
+    <X className="w-4 h-4" />
   </ToastPrimitives.Close>
 ))
 ToastClose.displayName = ToastPrimitives.Close.displayName
