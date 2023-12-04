@@ -11,6 +11,7 @@ import {
 } from 'graz'
 
 import { ExecuteResult } from '@cosmjs/cosmwasm-stargate'
+import { GasPrice } from '@cosmjs/stargate'
 import { UseMutationOptions } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import {
@@ -459,7 +460,7 @@ export const wagemos = {
   },
   mutations: {
     useCreateRound: (
-      options: Omit<
+      options?: Omit<
         UseMutationOptions<
           ExecuteResult,
           Error,
@@ -490,7 +491,7 @@ export const wagemos = {
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
-          options: Parameters<typeof mutate_>[1],
+          options?: Parameters<typeof mutate_>[1],
         ) => mutate_({ client: wagemosMutationClient, ...variables }, options)
       }, [mutate_, wagemosMutationClient])
 
@@ -499,7 +500,7 @@ export const wagemos = {
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
-          options: Parameters<typeof mutateAsync_>[1],
+          options?: Parameters<typeof mutateAsync_>[1],
         ) =>
           mutateAsync_({ client: wagemosMutationClient, ...variables }, options)
       }, [mutateAsync_, wagemosMutationClient])
@@ -507,7 +508,7 @@ export const wagemos = {
       return { mutate, mutateAsync, ...rest } as const
     },
     useRegister: (
-      options: Omit<
+      options?: Omit<
         UseMutationOptions<
           ExecuteResult,
           Error,
@@ -538,7 +539,7 @@ export const wagemos = {
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
-          options: Parameters<typeof mutate_>[1],
+          options?: Parameters<typeof mutate_>[1],
         ) => mutate_({ client: wagemosMutationClient, ...variables }, options)
       }, [mutate_, wagemosMutationClient])
 
@@ -547,7 +548,7 @@ export const wagemos = {
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
-          options: Parameters<typeof mutateAsync_>[1],
+          options?: Parameters<typeof mutateAsync_>[1],
         ) =>
           mutateAsync_({ client: wagemosMutationClient, ...variables }, options)
       }, [mutateAsync_, wagemosMutationClient])
@@ -555,7 +556,7 @@ export const wagemos = {
       return { mutate, mutateAsync, ...rest } as const
     },
     useUpdateAccounts: (
-      options: Omit<
+      options?: Omit<
         UseMutationOptions<
           ExecuteResult,
           Error,
@@ -586,7 +587,7 @@ export const wagemos = {
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
-          options: Parameters<typeof mutate_>[1],
+          options?: Parameters<typeof mutate_>[1],
         ) => mutate_({ client: wagemosMutationClient, ...variables }, options)
       }, [mutate_, wagemosMutationClient])
 
@@ -595,7 +596,7 @@ export const wagemos = {
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
-          options: Parameters<typeof mutateAsync_>[1],
+          options?: Parameters<typeof mutateAsync_>[1],
         ) =>
           mutateAsync_({ client: wagemosMutationClient, ...variables }, options)
       }, [mutateAsync_, wagemosMutationClient])
@@ -603,7 +604,7 @@ export const wagemos = {
       return { mutate, mutateAsync, ...rest } as const
     },
     usePlaceBet: (
-      options: Omit<
+      options?: Omit<
         UseMutationOptions<
           ExecuteResult,
           Error,
@@ -634,7 +635,7 @@ export const wagemos = {
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
-          options: Parameters<typeof mutate_>[1],
+          options?: Parameters<typeof mutate_>[1],
         ) => mutate_({ client: wagemosMutationClient, ...variables }, options)
       }, [mutate_, wagemosMutationClient])
 
@@ -643,7 +644,7 @@ export const wagemos = {
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
-          options: Parameters<typeof mutateAsync_>[1],
+          options?: Parameters<typeof mutateAsync_>[1],
         ) =>
           mutateAsync_({ client: wagemosMutationClient, ...variables }, options)
       }, [mutateAsync_, wagemosMutationClient])
@@ -651,7 +652,7 @@ export const wagemos = {
       return { mutate, mutateAsync, ...rest } as const
     },
     useDistributeWinnings: (
-      options: Omit<
+      options?: Omit<
         UseMutationOptions<
           ExecuteResult,
           Error,
@@ -682,7 +683,7 @@ export const wagemos = {
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
-          options: Parameters<typeof mutate_>[1],
+          options?: Parameters<typeof mutate_>[1],
         ) => mutate_({ client: wagemosMutationClient, ...variables }, options)
       }, [mutate_, wagemosMutationClient])
 
@@ -691,7 +692,7 @@ export const wagemos = {
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
-          options: Parameters<typeof mutateAsync_>[1],
+          options?: Parameters<typeof mutateAsync_>[1],
         ) =>
           mutateAsync_({ client: wagemosMutationClient, ...variables }, options)
       }, [mutateAsync_, wagemosMutationClient])
@@ -699,7 +700,7 @@ export const wagemos = {
       return { mutate, mutateAsync, ...rest } as const
     },
     useCloseRound: (
-      options: Omit<
+      options?: Omit<
         UseMutationOptions<
           ExecuteResult,
           Error,
@@ -730,7 +731,7 @@ export const wagemos = {
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
-          options: Parameters<typeof mutate_>[1],
+          options?: Parameters<typeof mutate_>[1],
         ) => mutate_({ client: wagemosMutationClient, ...variables }, options)
       }, [mutate_, wagemosMutationClient])
 
@@ -739,7 +740,7 @@ export const wagemos = {
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
-          options: Parameters<typeof mutateAsync_>[1],
+          options?: Parameters<typeof mutateAsync_>[1],
         ) =>
           mutateAsync_({ client: wagemosMutationClient, ...variables }, options)
       }, [mutateAsync_, wagemosMutationClient])
@@ -747,7 +748,7 @@ export const wagemos = {
       return { mutate, mutateAsync, ...rest } as const
     },
     useUpdateConfig: (
-      options: Omit<
+      options?: Omit<
         UseMutationOptions<
           ExecuteResult,
           Error,
@@ -778,7 +779,7 @@ export const wagemos = {
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
-          options: Parameters<typeof mutate_>[1],
+          options?: Parameters<typeof mutate_>[1],
         ) => mutate_({ client: wagemosMutationClient, ...variables }, options)
       }, [mutate_, wagemosMutationClient])
 
@@ -787,7 +788,7 @@ export const wagemos = {
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
-          options: Parameters<typeof mutateAsync_>[1],
+          options?: Parameters<typeof mutateAsync_>[1],
         ) =>
           mutateAsync_({ client: wagemosMutationClient, ...variables }, options)
       }, [mutateAsync_, wagemosMutationClient])

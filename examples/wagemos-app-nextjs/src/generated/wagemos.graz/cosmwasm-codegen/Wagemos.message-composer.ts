@@ -4,10 +4,7 @@
  * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
  */
 
-import {
-  AppExecuteMsg,
-  AppExecuteMsgFactory,
-} from '@abstract-money/abstract.js'
+import { AppExecuteMsg, AppExecuteMsgFactory } from '@abstract-money/core'
 import { Coin } from '@cosmjs/amino'
 import { MsgExecuteContractEncodeObject } from '@cosmjs/cosmwasm-stargate'
 import { toUtf8 } from '@cosmjs/encoding'

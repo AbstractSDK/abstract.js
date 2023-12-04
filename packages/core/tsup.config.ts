@@ -5,7 +5,7 @@ import { dependencies, peerDependencies } from './package.json'
 
 export default defineConfig(
   getConfig({
-    dev: process.env.DEV === 'true',
+    //dev: process.env.DEV === 'true',
     entry: [
       'src/index.ts',
       'src/account/index.ts',

@@ -9,6 +9,14 @@ export function GrazProvider(props: PropsWithChildren) {
     <Provider
       grazOptions={{
         chains: [mainnetChains.neutron],
+        chainsConfig: {
+          [mainnetChains.neutron.chainId]: {
+            gas: {
+              price: '0.1',
+              denom: 'untrn',
+            },
+          },
+        },
       }}
       {...props}
     />

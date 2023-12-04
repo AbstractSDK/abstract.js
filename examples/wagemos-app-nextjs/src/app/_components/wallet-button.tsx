@@ -16,12 +16,45 @@ import {
 } from '~/components/ui/dialog'
 import { useToast } from '~/components/ui/use-toast'
 
-export function ConnectButton() {
+function DisconnectButton() {
+  const { disconnect } = useDisconnect()
+  const { data: account } = useAccount({
+    chainId: 'neutron-1',
+  })
+
+  const { toast } = useToast()
+
+  const handleCopy = () => {
+    if (!account) return
+    navigator.clipboard.writeText(account?.bech32Address)
+    toast({ title: 'Address copied to clipboard' })
+  }
+
+  return (
+    <div className="flex">
+      <Button
+        className="rounded-tr-none rounded-br-none"
+        variant="outline"
+        onClick={handleCopy}
+      >
+        {account?.bech32Address}
+      </Button>
+      <Button
+        className="rounded-tl-none rounded-bl-none"
+        onClick={() => disconnect()}
+      >
+        Disconnect Wallet
+      </Button>
+    </div>
+  )
+}
+
+function ConnectButton() {
   const wallets = getAvailableWallets()
   const [isOpen, setIsOpen] = useState(false)
   const { toast } = useToast()
 
-  const { isConnected, isConnecting } = useAccount({
+  const { isConnecting } = useAccount({
     chainId: 'neutron-1',
     onConnect: ({ walletType, chains }) => {
       toast({
@@ -38,7 +71,6 @@ export function ConnectButton() {
   })
 
   const { connect } = useConnect()
-  const { disconnect } = useDisconnect()
 
   const handleConnect = (wallet: WalletType) => {
     connect({ walletType: wallet, chainId: 'neutron-1' })
@@ -46,14 +78,7 @@ export function ConnectButton() {
   }
   return (
     <>
-      <Button
-        onClick={() => {
-          if (isConnected) return disconnect()
-          setIsOpen(true)
-        }}
-      >
-        {isConnected ? 'Disconnect Wallet' : 'Connect Wallet'}
-      </Button>
+      <Button onClick={() => setIsOpen(true)}>Connect Wallet</Button>
       <Dialog open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
         <DialogContent>
           <DialogHeader>
@@ -78,4 +103,14 @@ export function ConnectButton() {
       </Dialog>
     </>
   )
+}
+
+export function WalletButton() {
+  const { isConnected } = useAccount({
+    chainId: 'neutron-1',
+  })
+  if (isConnected) {
+    return <DisconnectButton />
+  }
+  return <ConnectButton />
 }
