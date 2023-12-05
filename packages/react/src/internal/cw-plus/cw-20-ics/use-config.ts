@@ -1,5 +1,4 @@
-import { Cw20IcsQueryMsgBuilder } from '@abstract-money/core'
-import { type ConfigResponse } from '@abstract-money/core/cw-plus/Cw20Ics.types'
+import { Cw20IcsTypes, Cw20IcsQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -19,7 +18,10 @@ function buildConfigMsg(...args: ConfigMsgBuilderParameters): ConfigMsg {
 }
 
 export function useConfig({ contractAddress, client }: UseConfigArgs) {
-  const { data: config, ...restOutput } = useQuerySmart<ConfigResponse, Error>({
+  const { data: config, ...restOutput } = useQuerySmart<
+    Cw20IcsTypes.ConfigResponse,
+    Error
+  >({
     address: contractAddress,
     client,
     queryMsg: buildConfigMsg(),

@@ -19,14 +19,17 @@
       // https://github.com/microsoft/TypeScript/issues/48212
       "chain-registry": [
         "node_modules/chain-registry/types"
-      ]
+      ],
+      "@cosmjs/amino": [
+        "node_modules/@cosmjs/amino/build"
+      ],
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
     "strictNullChecks": true,
     "target": "es2021",
-    "types": ["node", "@types/jest", "chain-registry/types"]
+    "types": ["node", "@types/jest"]
   },
   "exclude": ["**/node_modules/**", "**/dist/**"],
   "include": [

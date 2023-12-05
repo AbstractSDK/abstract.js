@@ -1,5 +1,4 @@
-import { ChallengeQueryMsgBuilder } from '@abstract-money/core'
-import { type VotesResponse } from '@abstract-money/core/apps/challenge/Challenge.types'
+import { ChallengeTypes, ChallengeQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -26,7 +25,10 @@ export function useVotes({
   client,
   ...restInput
 }: UseVotesArgs) {
-  const { data: votes, ...restOutput } = useQuerySmart<VotesResponse, Error>({
+  const { data: votes, ...restOutput } = useQuerySmart<
+    ChallengeTypes.VotesResponse,
+    Error
+  >({
     address: contractAddress,
     client,
     queryMsg: buildVotesMsg(restInput),

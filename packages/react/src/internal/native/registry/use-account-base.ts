@@ -1,5 +1,4 @@
-import { RegistryQueryMsgBuilder } from '@abstract-money/core'
-import { type AccountBaseResponse } from '@abstract-money/core/native/registry/Registry.types'
+import { RegistryTypes, RegistryQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -29,7 +28,7 @@ export function useAccountBase({
   ...restInput
 }: UseAccountBaseArgs) {
   const { data: accountBase, ...restOutput } = useQuerySmart<
-    AccountBaseResponse,
+    RegistryTypes.AccountBaseResponse,
     Error
   >({
     address: contractAddress,

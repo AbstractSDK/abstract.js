@@ -1,5 +1,7 @@
-import { Cw3FlexMultisigQueryMsgBuilder } from '@abstract-money/core'
-import { type ThresholdResponse } from '@abstract-money/core/cw-plus/Cw3FlexMultisig.types'
+import {
+  Cw3FlexMultisigTypes,
+  Cw3FlexMultisigQueryMsgBuilder,
+} from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -22,7 +24,7 @@ function buildThresholdMsg(
 
 export function useThreshold({ contractAddress, client }: UseThresholdArgs) {
   const { data: threshold, ...restOutput } = useQuerySmart<
-    ThresholdResponse,
+    Cw3FlexMultisigTypes.ThresholdResponse,
     Error
   >({ address: contractAddress, client, queryMsg: buildThresholdMsg() })
 

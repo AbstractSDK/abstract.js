@@ -1,5 +1,4 @@
-import { Cw20IcsQueryMsgBuilder } from '@abstract-money/core'
-import { type AllowedResponse } from '@abstract-money/core/cw-plus/Cw20Ics.types'
+import { Cw20IcsTypes, Cw20IcsQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -27,7 +26,7 @@ export function useAllowed({
   ...restInput
 }: UseAllowedArgs) {
   const { data: allowed, ...restOutput } = useQuerySmart<
-    AllowedResponse,
+    Cw20IcsTypes.AllowedResponse,
     Error
   >({ address: contractAddress, client, queryMsg: buildAllowedMsg(restInput) })
 

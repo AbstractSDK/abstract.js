@@ -1,5 +1,4 @@
-import { RegistryQueryMsgBuilder } from '@abstract-money/core'
-import { type OwnershipForString } from '@abstract-money/core/native/registry/Registry.types'
+import { RegistryTypes, RegistryQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -22,7 +21,7 @@ function buildOwnershipMsg(
 
 export function useOwnership({ contractAddress, client }: UseOwnershipArgs) {
   const { data: ownership, ...restOutput } = useQuerySmart<
-    OwnershipForString,
+    RegistryTypes.OwnershipForString,
     Error
   >({ address: contractAddress, client, queryMsg: buildOwnershipMsg() })
 

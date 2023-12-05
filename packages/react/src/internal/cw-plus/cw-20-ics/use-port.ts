@@ -1,5 +1,4 @@
-import { Cw20IcsQueryMsgBuilder } from '@abstract-money/core'
-import { type PortResponse } from '@abstract-money/core/cw-plus/Cw20Ics.types'
+import { Cw20IcsTypes, Cw20IcsQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -17,7 +16,10 @@ function buildPortMsg(...args: PortMsgBuilderParameters): PortMsg {
 }
 
 export function usePort({ contractAddress, client }: UsePortArgs) {
-  const { data: accounts, ...restOutput } = useQuerySmart<PortResponse, Error>({
+  const { data: accounts, ...restOutput } = useQuerySmart<
+    Cw20IcsTypes.PortResponse,
+    Error
+  >({
     address: contractAddress,
     client,
     queryMsg: buildPortMsg(),

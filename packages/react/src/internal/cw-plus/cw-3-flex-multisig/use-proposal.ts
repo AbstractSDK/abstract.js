@@ -1,5 +1,7 @@
-import { Cw3FlexMultisigQueryMsgBuilder } from '@abstract-money/core'
-import { type ProposalResponse } from '@abstract-money/core/cw-plus/Cw3FlexMultisig.types'
+import {
+  Cw3FlexMultisigQueryMsgBuilder,
+  Cw3FlexMultisigTypes,
+} from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -27,7 +29,7 @@ export function useProposal({
   ...restInput
 }: UseProposalArgs) {
   const { data: proposal, ...restOutput } = useQuerySmart<
-    ProposalResponse,
+    Cw3FlexMultisigTypes.ProposalResponse,
     Error
   >({ address: contractAddress, client, queryMsg: buildProposalMsg(restInput) })
 

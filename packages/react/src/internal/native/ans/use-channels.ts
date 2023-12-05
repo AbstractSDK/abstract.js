@@ -1,5 +1,4 @@
-import { AnsHostQueryMsgBuilder } from '@abstract-money/core'
-import { type ChannelsResponse } from '@abstract-money/core/native/ans-host/AnsHost.types'
+import { AnsHostTypes, AnsHostQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -27,7 +26,7 @@ export function useChannels({
   ...restInput
 }: UseChannelsArgs) {
   const { data: channels, ...restOutput } = useQuerySmart<
-    ChannelsResponse,
+    AnsHostTypes.ChannelsResponse,
     Error
   >({ address: contractAddress, client, queryMsg: buildChannelsMsg(restInput) })
 

@@ -1,5 +1,4 @@
-import { AnsHostQueryMsgBuilder } from '@abstract-money/core'
-import { type RegisteredDexesResponse } from '@abstract-money/core/native/ans-host/AnsHost.types'
+import { AnsHostTypes, AnsHostQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -28,7 +27,7 @@ export function useRegisteredDexes({
   client,
 }: UseRegisteredDexesArgs) {
   const { data: registeredDexes, ...restOutput } = useQuerySmart<
-    RegisteredDexesResponse,
+    AnsHostTypes.RegisteredDexesResponse,
     Error
   >({ address: contractAddress, client, queryMsg: buildRegisteredDexesMsg() })
 

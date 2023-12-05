@@ -1,5 +1,4 @@
-import { ManagerQueryMsgBuilder } from '@abstract-money/core'
-import { type ModuleInfosResponse } from '@abstract-money/core/account/manager/Manager.types'
+import { ManagerTypes, ManagerQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../utils/use-query-smart'
 
@@ -29,7 +28,7 @@ export function useModuleInfos({
   ...restInput
 }: UseModuleInfosArgs) {
   const { data: moduleInfos, ...restOutput } = useQuerySmart<
-    ModuleInfosResponse,
+    ManagerTypes.ModuleInfosResponse,
     Error
   >({
     address: contractAddress,

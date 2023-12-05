@@ -1,5 +1,4 @@
-import { Cw20QueryMsgBuilder } from '@abstract-money/core'
-import { type TokenInfoResponse } from '@abstract-money/core/cw-plus/Cw20.types'
+import { Cw20Types, Cw20QueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -22,7 +21,7 @@ function buildTokenInfoMsg(
 
 export function useTokenInfo({ contractAddress, client }: UseTokenInfoArgs) {
   const { data: tokenInfo, ...restOutput } = useQuerySmart<
-    TokenInfoResponse,
+    Cw20Types.TokenInfoResponse,
     Error
   >({ address: contractAddress, client, queryMsg: buildTokenInfoMsg() })
 

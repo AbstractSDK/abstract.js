@@ -1,5 +1,4 @@
-import { FactoryQueryMsgBuilder } from '@abstract-money/core'
-import { type ConfigResponse } from '@abstract-money/core/native/factory/Factory.types'
+import { FactoryTypes, FactoryQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -19,7 +18,10 @@ function buildConfigMsg(...args: ConfigMsgBuilderParameters): ConfigMsg {
 }
 
 export function useConfig({ contractAddress, client }: UseConfigArgs) {
-  const { data: config, ...restOutput } = useQuerySmart<ConfigResponse, Error>({
+  const { data: config, ...restOutput } = useQuerySmart<
+    FactoryTypes.ConfigResponse,
+    Error
+  >({
     address: contractAddress,
     client,
     queryMsg: buildConfigMsg(),

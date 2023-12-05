@@ -1,5 +1,7 @@
-import { Cw3FlexMultisigQueryMsgBuilder } from '@abstract-money/core'
-import { type ListVotesResponse } from '@abstract-money/core/cw-plus/Cw3FlexMultisig.types'
+import {
+  Cw3FlexMultisigTypes,
+  Cw3FlexMultisigQueryMsgBuilder,
+} from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -29,7 +31,7 @@ export function useListVotes({
   ...restInput
 }: UseListVotesArgs) {
   const { data: listVotes, ...restOutput } = useQuerySmart<
-    ListVotesResponse,
+    Cw3FlexMultisigTypes.ListVotesResponse,
     Error
   >({
     address: contractAddress,

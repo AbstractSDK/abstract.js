@@ -1,5 +1,4 @@
-import { AnsHostQueryMsgBuilder } from '@abstract-money/core'
-import { type PoolsResponse } from '@abstract-money/core/native/ans-host/AnsHost.types'
+import { AnsHostTypes, AnsHostQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -24,7 +23,10 @@ export function usePools({
   client,
   ...restInput
 }: UsePoolsArgs) {
-  const { data: pools, ...restOutput } = useQuerySmart<PoolsResponse, Error>({
+  const { data: pools, ...restOutput } = useQuerySmart<
+    AnsHostTypes.PoolsResponse,
+    Error
+  >({
     address: contractAddress,
     client,
     queryMsg: buildPoolsMsg(restInput),

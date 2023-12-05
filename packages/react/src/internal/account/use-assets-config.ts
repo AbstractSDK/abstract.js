@@ -1,5 +1,4 @@
-import { ProxyQueryMsgBuilder } from '@abstract-money/core'
-import { type AssetsConfigResponse } from '@abstract-money/core/account/proxy/Proxy.types'
+import { ProxyTypes, ProxyQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../utils/use-query-smart'
 
@@ -29,7 +28,7 @@ export function useAssetsConfig({
   ...restInput
 }: UseAssetsConfigArgs) {
   const { data: assetsConfig, ...restOutput } = useQuerySmart<
-    AssetsConfigResponse,
+    ProxyTypes.AssetsConfigResponse,
     Error
   >({
     address: contractAddress,

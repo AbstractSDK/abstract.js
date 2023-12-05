@@ -1,5 +1,4 @@
-import { Cw20IcsQueryMsgBuilder } from '@abstract-money/core'
-import { type AdminResponse } from '@abstract-money/core/cw-plus/Cw20Ics.types'
+import { Cw20IcsTypes, Cw20IcsQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -17,7 +16,10 @@ function buildAdminMsg(...args: AdminMsgBuilderParameters): AdminMsg {
 }
 
 export function useAdmin({ contractAddress, client }: UseAdminArgs) {
-  const { data: admin, ...restOutput } = useQuerySmart<AdminResponse, Error>({
+  const { data: admin, ...restOutput } = useQuerySmart<
+    Cw20IcsTypes.AdminResponse,
+    Error
+  >({
     address: contractAddress,
     client,
     queryMsg: buildAdminMsg(),

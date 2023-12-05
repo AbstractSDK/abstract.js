@@ -1,5 +1,4 @@
-import { Cw20QueryMsgBuilder } from '@abstract-money/core'
-import { type MinterResponse } from '@abstract-money/core/cw-plus/Cw20.types'
+import { Cw20Types, Cw20QueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -17,7 +16,10 @@ function buildMinterMsg(...args: MinterMsgBuilderParameters): MinterMsg {
 }
 
 export function useMinter({ contractAddress, client }: UseMinterArgs) {
-  const { data: minter, ...restOutput } = useQuerySmart<MinterResponse, Error>({
+  const { data: minter, ...restOutput } = useQuerySmart<
+    Cw20Types.MinterResponse,
+    Error
+  >({
     address: contractAddress,
     client,
     queryMsg: buildMinterMsg(),

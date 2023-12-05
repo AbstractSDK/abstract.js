@@ -1,5 +1,4 @@
-import { Cw4GroupQueryMsgBuilder } from '@abstract-money/core'
-import { type AdminResponse } from '@abstract-money/core/cw-plus/Cw4Group.types'
+import { Cw4GroupTypes, Cw4GroupQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -19,7 +18,10 @@ function buildAdminMsg(...args: AdminMsgBuilderParameters): AdminMsg {
 }
 
 export function useAdmin({ contractAddress, client }: UseAdminArgs) {
-  const { data: admin, ...restOutput } = useQuerySmart<AdminResponse, Error>({
+  const { data: admin, ...restOutput } = useQuerySmart<
+    Cw4GroupTypes.AdminResponse,
+    Error
+  >({
     address: contractAddress,
     client,
     queryMsg: buildAdminMsg(),

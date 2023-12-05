@@ -1,5 +1,7 @@
-import { Cw3FlexMultisigQueryMsgBuilder } from '@abstract-money/core'
-import { type ReverseProposalsResponse } from '@abstract-money/core/cw-plus/Cw3FlexMultisig.types'
+import {
+  Cw3FlexMultisigTypes,
+  Cw3FlexMultisigQueryMsgBuilder,
+} from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -31,7 +33,7 @@ export function useReverseProposals({
   ...restInput
 }: UseReverseProposalsArgs) {
   const { data: reverseProposals, ...restOutput } = useQuerySmart<
-    ReverseProposalsResponse,
+    Cw3FlexMultisigTypes.ReverseProposalsResponse,
     Error
   >({
     address: contractAddress,

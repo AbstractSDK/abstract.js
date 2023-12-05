@@ -1,5 +1,4 @@
-import { Cw20QueryMsgBuilder } from '@abstract-money/core'
-import { type DownloadLogoResponse } from '@abstract-money/core/cw-plus/Cw20.types'
+import { Cw20Types, Cw20QueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -25,7 +24,7 @@ export function useDownloadLogo({
   client,
 }: UseDownloadLogoArgs) {
   const { data: downloadLogo, ...restOutput } = useQuerySmart<
-    DownloadLogoResponse,
+    Cw20Types.DownloadLogoResponse,
     Error
   >({ address: contractAddress, client, queryMsg: buildDownloadLogoMsg() })
 

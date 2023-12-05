@@ -1,5 +1,4 @@
-import { ManagerQueryMsgBuilder } from '@abstract-money/core'
-import { type InfoResponse } from '@abstract-money/core/account/manager/Manager.types'
+import { ManagerTypes, ManagerQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../utils/use-query-smart'
 
@@ -17,7 +16,10 @@ function buildInfoMsg(...args: InfoMsgBuilderParameters): InfoMsg {
 }
 
 export function useInfo({ contractAddress, client }: UseInfoArgs) {
-  const { data: info, ...restOutput } = useQuerySmart<InfoResponse, Error>({
+  const { data: info, ...restOutput } = useQuerySmart<
+    ManagerTypes.InfoResponse,
+    Error
+  >({
     address: contractAddress,
     client,
     queryMsg: buildInfoMsg(),

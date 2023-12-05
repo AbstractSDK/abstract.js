@@ -1,5 +1,4 @@
-import { ChallengeQueryMsgBuilder } from '@abstract-money/core'
-import { type ProposalsResponse } from '@abstract-money/core/apps/challenge/Challenge.types'
+import { ChallengeTypes, ChallengeQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -29,7 +28,7 @@ export function useProposals({
   ...restInput
 }: UseProposalsArgs) {
   const { data: proposals, ...restOutput } = useQuerySmart<
-    ProposalsResponse,
+    ChallengeTypes.ProposalsResponse,
     Error
   >({
     address: contractAddress,

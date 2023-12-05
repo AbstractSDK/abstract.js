@@ -1,5 +1,4 @@
-import { Cw4GroupQueryMsgBuilder } from '@abstract-money/core'
-import { type MemberResponse } from '@abstract-money/core/cw-plus/Cw4Group.types'
+import { Cw4GroupTypes, Cw4GroupQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -26,7 +25,10 @@ export function useMember({
   client,
   ...restInput
 }: UseMemberArgs) {
-  const { data: member, ...restOutput } = useQuerySmart<MemberResponse, Error>({
+  const { data: member, ...restOutput } = useQuerySmart<
+    Cw4GroupTypes.MemberResponse,
+    Error
+  >({
     address: contractAddress,
     client,
     queryMsg: buildMemberMsg(restInput),

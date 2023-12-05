@@ -1,5 +1,4 @@
-import { Cw20QueryMsgBuilder } from '@abstract-money/core'
-import { type BalanceResponse } from '@abstract-money/core/cw-plus/Cw20.types'
+import { Cw20Types, Cw20QueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -27,7 +26,7 @@ export function useBalance({
   ...restInput
 }: UseChallengeArgs) {
   const { data: balance, ...restOutput } = useQuerySmart<
-    BalanceResponse,
+    Cw20Types.BalanceResponse,
     Error
   >({
     address: contractAddress,

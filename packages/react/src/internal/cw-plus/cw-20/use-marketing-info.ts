@@ -1,5 +1,4 @@
-import { Cw20QueryMsgBuilder } from '@abstract-money/core'
-import { type MarketingInfoResponse } from '@abstract-money/core/cw-plus/Cw20.types'
+import { Cw20Types, Cw20QueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -28,7 +27,7 @@ export function useMarketingInfo({
   client,
 }: UseMarketingInfoArgs) {
   const { data: marketingInfo, ...restOutput } = useQuerySmart<
-    MarketingInfoResponse,
+    Cw20Types.MarketingInfoResponse,
     Error
   >({ address: contractAddress, client, queryMsg: buildMarketingInfoMsg() })
 

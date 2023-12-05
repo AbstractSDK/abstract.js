@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsup'
 
 import { getConfig } from '../../scripts/tsup'
-import { dependencies, peerDependencies } from './package.json'
+import { dependencies } from './package.json'
 
 export default defineConfig(
   getConfig({
@@ -18,6 +18,6 @@ export default defineConfig(
       'src/native/index.ts',
       'src/tools/index.ts',
     ],
-    external: [...Object.keys(dependencies), ...Object.keys(peerDependencies)],
+    external: [...Object.keys(dependencies)],
   }),
 )

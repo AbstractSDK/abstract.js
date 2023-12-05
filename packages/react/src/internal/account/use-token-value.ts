@@ -1,5 +1,4 @@
-import { ProxyQueryMsgBuilder } from '@abstract-money/core'
-import { type TokenValueResponse } from '@abstract-money/core/account/proxy/Proxy.types'
+import { ProxyTypes, ProxyQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../utils/use-query-smart'
 
@@ -29,7 +28,7 @@ export function useTokenValue({
   ...restInput
 }: UseTokenValueArgs) {
   const { data: tokenValue, ...restOutput } = useQuerySmart<
-    TokenValueResponse,
+    ProxyTypes.TokenValueResponse,
     Error
   >({
     address: contractAddress,

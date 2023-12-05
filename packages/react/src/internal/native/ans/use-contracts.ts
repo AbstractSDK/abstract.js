@@ -1,5 +1,4 @@
-import { AnsHostQueryMsgBuilder } from '@abstract-money/core'
-import { type ContractsResponse } from '@abstract-money/core/native/ans-host/AnsHost.types'
+import { AnsHostTypes, AnsHostQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -29,7 +28,7 @@ export function useContracts({
   ...restInput
 }: UseContractsArgs) {
   const { data: contracts, ...restOutput } = useQuerySmart<
-    ContractsResponse,
+    AnsHostTypes.ContractsResponse,
     Error
   >({
     address: contractAddress,

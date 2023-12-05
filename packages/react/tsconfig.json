@@ -21,8 +21,6 @@
       "@cosmjs/cosmwasm-stargate": [
         "packages/core/node_modules/@cosmjs/cosmwasm-stargate/build"
       ],
-      "@abstract-money/core": ["node_modules/@abstract-money/core/dist"],
-      "@abstract-money/core/*": ["node_modules/@abstract-money/core/dist/*"],
       "@tanstack/react-query": ["packages/react/node_modules/@tanstack/react-query/src"],
       "@tanstack/query-core": ["node_modules/@tanstack/query-core/src"]
     },

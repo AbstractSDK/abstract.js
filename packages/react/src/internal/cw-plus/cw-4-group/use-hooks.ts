@@ -1,5 +1,4 @@
-import { Cw4GroupQueryMsgBuilder } from '@abstract-money/core'
-import { type HooksResponse } from '@abstract-money/core/cw-plus/Cw4Group.types'
+import { Cw4GroupTypes, Cw4GroupQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -19,7 +18,10 @@ function buildHooksMsg(...args: HooksMsgBuilderParameters): HooksMsg {
 }
 
 export function useHooks({ contractAddress, client }: UseHooksArgs) {
-  const { data: hooks, ...restOutput } = useQuerySmart<HooksResponse, Error>({
+  const { data: hooks, ...restOutput } = useQuerySmart<
+    Cw4GroupTypes.HooksResponse,
+    Error
+  >({
     address: contractAddress,
     client,
     queryMsg: buildHooksMsg(),

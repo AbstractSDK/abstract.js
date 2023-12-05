@@ -1,5 +1,4 @@
-import { Cw4GroupQueryMsgBuilder } from '@abstract-money/core'
-import { type TotalWeightResponse } from '@abstract-money/core/cw-plus/Cw4Group.types'
+import { Cw4GroupTypes, Cw4GroupQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -25,7 +24,7 @@ export function useTotalWeight({
   client,
 }: UseTotalWeightArgs) {
   const { data: totalWeight, ...restOutput } = useQuerySmart<
-    TotalWeightResponse,
+    Cw4GroupTypes.TotalWeightResponse,
     Error
   >({ address: contractAddress, client, queryMsg: buildTotalWeightMsg() })
 

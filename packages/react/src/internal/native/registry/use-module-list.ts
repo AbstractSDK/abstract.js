@@ -1,5 +1,4 @@
-import { RegistryQueryMsgBuilder } from '@abstract-money/core'
-import { type ModulesListResponse } from '@abstract-money/core/native/registry/Registry.types'
+import { RegistryTypes, RegistryQueryMsgBuilder } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
@@ -29,7 +28,7 @@ export function useModuleList({
   ...restInput
 }: UseModuleListArgs) {
   const { data: moduleList, ...restOutput } = useQuerySmart<
-    ModulesListResponse,
+    RegistryTypes.ModulesListResponse,
     Error
   >({
     address: contractAddress,
