@@ -17,11 +17,8 @@
     "paths": {
       // TODO: Remove once issue is fixed
       // https://github.com/microsoft/TypeScript/issues/48212
-      "@cosmjs/cosmwasm-stargate": [
-        "packages/core/node_modules/@cosmjs/cosmwasm-stargate/build"
-      ],
-      "@chain-registry/types": [
-        "packages/core/node_modules/@chain-registry/types/types"
+      "chain-registry": [
+        "node_modules/chain-registry/types"
       ]
     },
     "resolveJsonModule": true,
@@ -29,10 +26,9 @@
     "strict": true,
     "strictNullChecks": true,
     "target": "es2021",
-    "types": ["node", "@types/jest"]
+    "types": ["node", "@types/jest", "chain-registry/types"]
   },
   "exclude": ["**/node_modules/**", "**/dist/**"],
-  "types": ["@chain-registry/types"],
   "include": [
     "src/**/*",
   ]
