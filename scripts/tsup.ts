@@ -10,6 +10,7 @@ type GetConfig = Omit<
   'bundle' | 'clean' | 'dts' | 'entry' | 'format'
 > & {
   entry?: string[]
+  experimentalDts?: boolean
   dev?: boolean
   noExport?: string[]
 }
@@ -56,10 +57,13 @@ export function getConfig({ dev, noExport, ...options }: GetConfig): Options {
     }
   }
 
+  const experimentalDts = options.experimentalDts ?? true
+
   return {
     bundle: true,
     clean: true,
-    dts: true,
+    experimentalDts,
+    dts: !experimentalDts,
     format: [(process.env.FORMAT as Format) ?? 'esm'],
     splitting: true,
     target: 'es2021',

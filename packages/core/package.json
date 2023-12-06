@@ -18,8 +18,9 @@
     "url": "https://github.com/AbstractSDK/abstract.js/issues"
   },
   "scripts": {
-    "build": "tsup",
-    "dev": "DEV=true tsup",
+    "build": "pnpm clean && tsup",
+    "dev": "pnpm clean && DEV=true tsup",
+    "clean": "rimraf dist",
     "docs:gen": "typedoc",
     "docs:serve": "serve ./docs -l 3050",
     "typecheck": "tsc --noEmit --jsx react-jsx",
@@ -31,6 +32,7 @@
     "@chain-registry/types": "^0.13.1",
     "@cosmjs/amino": "^0.31.0",
     "@cosmjs/cosmwasm-stargate": "^0.31.0",
+    "@cosmjs/stargate": "^0.31.0",
     "@cosmjs/encoding": "^0.31.0",
     "@cosmjs/tendermint-rpc": "^0.31.0",
     "bech32": "^2.0.0",
@@ -51,6 +53,7 @@
   },
   "type": "module",
   "devDependencies": {
+    "rimraf": "^3.0.0",
     "@graphql-codegen/cli": "^2.13.1",
     "@graphql-codegen/client-preset": "^1.2.6",
     "@graphql-typed-document-node/core": "^3.2.0",

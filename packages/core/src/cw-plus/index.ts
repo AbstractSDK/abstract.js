@@ -11,7 +11,9 @@ export * from './Cw20Ics.msg-builder'
 export * from './Cw4Group.msg-builder'
 export * from './Cw3FlexMultisig.msg-builder'
 
-export * as Cw3FlexMultisigTypes from './Cw3FlexMultisig.types'
-export * as Cw4GroupTypes from './Cw4Group.types'
-export * as Cw20Types from './Cw20.types'
-export * as Cw20IcsTypes from './Cw20Ics.types'
+import * as Cw3FlexMultisigTypes from './Cw3FlexMultisig.types'
+import * as Cw4GroupTypes from './Cw4Group.types'
+import * as Cw20Types from './Cw20.types'
+import * as Cw20IcsTypes from './Cw20Ics.types'
+
+export { Cw3FlexMultisigTypes, Cw4GroupTypes, Cw20Types, Cw20IcsTypes }

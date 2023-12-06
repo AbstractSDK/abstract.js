@@ -8,10 +8,12 @@
   "engines": {
     "node": ">=10"
   },
+  "type": "module",
   "scripts": {
-    "build": "tsup",
-    "typecheck": "tsc --noEmit",
-    "dev": "DEV=true tsup"
+    "build": "pnpm clean && tsup",
+    "dev": "pnpm clean && DEV=true tsup",
+    "clean": "rimraf dist",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@cosmjs/encoding": "^0.31.0",
@@ -25,8 +27,8 @@
     }
   },
   "devDependencies": {
-    "@types/node": "^18.11.10",
-    "tsup": "^6.5.0"
+    "rimraf": "^3.0.0",
+    "@types/node": "^18.11.10"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -35,9 +37,19 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./client": {
+      "types": "./dist/client/index.d.ts",
+      "default": "./dist/client/index.js"
+    },
+    "./utils": {
+      "types": "./dist/utils/index.d.ts",
+      "default": "./dist/utils/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
+    "/client",
+    "/utils",
     "/dist"
   ],
   "sideEffects": false
