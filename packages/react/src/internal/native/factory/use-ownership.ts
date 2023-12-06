@@ -1,4 +1,4 @@
-import { FactoryTypes, FactoryQueryMsgBuilder } from '@abstract-money/core'
+import { FactoryQueryMsgBuilder, FactoryTypes } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 

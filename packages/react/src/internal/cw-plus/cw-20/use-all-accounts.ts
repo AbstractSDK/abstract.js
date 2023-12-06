@@ -1,4 +1,4 @@
-import { Cw20Types, Cw20QueryMsgBuilder } from '@abstract-money/core'
+import { Cw20QueryMsgBuilder, Cw20Types } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 

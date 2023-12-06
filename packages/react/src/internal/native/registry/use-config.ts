@@ -1,4 +1,4 @@
-import { RegistryTypes, RegistryQueryMsgBuilder } from '@abstract-money/core'
+import { RegistryQueryMsgBuilder, RegistryTypes } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 

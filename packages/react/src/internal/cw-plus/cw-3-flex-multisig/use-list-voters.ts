@@ -1,6 +1,6 @@
 import {
-  Cw3FlexMultisigTypes,
   Cw3FlexMultisigQueryMsgBuilder,
+  Cw3FlexMultisigTypes,
 } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'

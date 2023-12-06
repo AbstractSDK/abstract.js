@@ -1,4 +1,4 @@
-import { ProxyTypes, ProxyQueryMsgBuilder } from '@abstract-money/core'
+import { ProxyQueryMsgBuilder, ProxyTypes } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../utils/use-query-smart'
 

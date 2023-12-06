@@ -1,4 +1,4 @@
-import { Cw4GroupTypes, Cw4GroupQueryMsgBuilder } from '@abstract-money/core'
+import { Cw4GroupQueryMsgBuilder, Cw4GroupTypes } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 

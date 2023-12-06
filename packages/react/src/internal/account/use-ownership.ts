@@ -1,4 +1,4 @@
-import { ManagerTypes, ManagerQueryMsgBuilder } from '@abstract-money/core'
+import { ManagerQueryMsgBuilder, ManagerTypes } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../utils/use-query-smart'
 

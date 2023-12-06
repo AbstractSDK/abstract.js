@@ -1,4 +1,4 @@
-import { AnsHostTypes, AnsHostQueryMsgBuilder } from '@abstract-money/core'
+import { AnsHostQueryMsgBuilder, AnsHostTypes } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { useQuerySmart } from '../../../utils/use-query-smart'
 
