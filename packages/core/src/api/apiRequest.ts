@@ -20,7 +20,7 @@ export const graphqlRequest = <TResult, V extends Variables = Variables>(
  * @param gqlQuery
  * @param variablesAndRequestHeaders
  */
-export const abstractApiRequest = <TResult, V extends Variables = Variables>(
+export const apiRequest = <TResult, V extends Variables = Variables>(
   gqlQuery: RequestDocument | TypedDocumentNode<TResult, V>,
   ...variablesAndRequestHeaders: VariablesAndRequestHeadersArgs<V>
 ) =>
