@@ -1,11 +1,11 @@
 {
   "private": true,
   "scripts": {
-    "build": "pnpm run --r --filter \"./packages/**\" build",
-    "changeset:release": "pnpm build && changeset publish",
+    "build": "pnpm turbo --filter \"./packages/**\" build",
+    "changeset:release": "pnpm turbo build && changeset publish",
     "changeset:version": "changeset version && pnpm install --lockfile-only",
     "cjs:release": "node -r esbuild-register ./scripts/cjs.ts",
-    "dev": "pnpm -r --filter './packages/**' dev",
+    "dev": "pnpm turbo --filter './packages/**' dev",
     "format": "biome format . --write",
     "lint": "biome check .",
     "lint:fix": "pnpm lint --apply",
@@ -38,6 +38,7 @@
     "msw": "^1.2.1",
     "prettier": "^2.8.3",
     "simple-git-hooks": "^2.8.1",
+    "turbo": "1.10.9",
     "tsup": "^8.0.0",
     "typescript": "^5.0.4"
   },

@@ -18,8 +18,8 @@
     "url": "https://github.com/AbstractSDK/abstract.js/issues"
   },
   "scripts": {
-    "build": "pnpm clean && tsup",
-    "dev": "pnpm clean && DEV=true tsup",
+    "build": "tsup",
+    "dev": "DEV=true tsup",
     "clean": "rimraf dist",
     "docs:gen": "typedoc",
     "docs:serve": "serve ./docs -l 3050",
