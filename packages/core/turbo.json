@@ -10,6 +10,9 @@
       "dependsOn": ["@abstract-money/cosmwasm#dev", "clean"],
       "outputs": ["dist/**"]
     },
+    "typecheck": {
+      "dependsOn": ["@abstract-money/cosmwasm#build"]
+    },
     "clean": {
       "cache": false
     }

@@ -10,6 +10,7 @@
       "dependsOn": ["clean"],
       "outputs": ["dist/**"]
     },
+    "typecheck": {},
     "clean": {
       "cache": false
     }

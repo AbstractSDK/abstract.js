@@ -1,18 +1,18 @@
 {
   "private": true,
   "scripts": {
-    "build": "pnpm turbo --filter \"./packages/**\" build",
-    "changeset:release": "pnpm turbo build && changeset publish",
+    "build": "turbo --filter \"./packages/**\" build",
+    "changeset:release": "turbo build && changeset publish",
     "changeset:version": "changeset version && pnpm install --lockfile-only",
     "cjs:release": "node -r esbuild-register ./scripts/cjs.ts",
-    "dev": "pnpm turbo --filter './packages/**' dev",
+    "dev": "turbo --filter './packages/**' dev",
     "format": "biome format . --write",
     "lint": "biome check .",
     "lint:fix": "pnpm lint --apply",
     "preinstall": "npx only-allow pnpm",
     "postinstall": "pnpm dev",
     "prepare": "npx simple-git-hooks",
-    "typecheck": "pnpm run --r typecheck"
+    "typecheck": "turbo typecheck"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.3.3",
