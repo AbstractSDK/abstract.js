@@ -1,4 +1,4 @@
-schema: "../../apps/subgraph/schema.graphql"
+schema: "https://api.abstract.money/graphql"
 
 documents: ['./src/**/*.ts', '!src/__generated__/gql/**/*']
 generates:
