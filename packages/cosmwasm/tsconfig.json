@@ -1,33 +1,35 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "jsx": "react",
-    "declaration": true,
-    "rootDir": "src",
-    "sourceMap": false,
-    "strict": true,
+    "allowJs": true,
+    "baseUrl": ".",
+    "downlevelIteration": true,
     "esModuleInterop": true,
-    "noUnusedLocals": true,
+    "isolatedModules": true,
+    "lib": ["es2021", "dom"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noImplicitAny": true,
+    "noUncheckedIndexedAccess": true,
+    // TODO: change to true
+    "noUnusedLocals": false,
     "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noImplicitAny": false,
-    "noFallthroughCasesInSwitch": true,
-    "outDir": "lib",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
-    "importHelpers": false
+    "paths": {
+      // TODO: Remove once issue is fixed
+      // https://github.com/microsoft/TypeScript/issues/48212
+      "@cosmjs/cosmwasm-stargate": [
+        "packages/core/node_modules/@cosmjs/cosmwasm-stargate/build"
+      ],
+    },
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "target": "es2021",
+    "types": ["node", "@types/jest"]
   },
-  "exclude": [
-    "node_modules",
-    "lib",
-    "esm",
-    "tests",
-    "stories",
-    "jest.config.ts",
-    "jest.config.*.ts"
+  "exclude": ["**/node_modules/**", "**/dist/**"],
+  "include": [
+    "src/**/*",
   ]
 }

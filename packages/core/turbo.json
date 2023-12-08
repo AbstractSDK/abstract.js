@@ -1,0 +1,20 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["@abstract-money/cosmwasm#build", "clean"],
+      "outputs": ["dist/**"]
+    },
+    "dev": {
+      "dependsOn": ["@abstract-money/cosmwasm#dev", "clean"],
+      "outputs": ["dist/**"]
+    },
+    "typecheck": {
+      "dependsOn": ["@abstract-money/cosmwasm#build"]
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}

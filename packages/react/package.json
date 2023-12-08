@@ -1,0 +1,119 @@
+{
+  "name": "@abstract-money/react",
+  "version": "0.0.0",
+  "description": "React Hooks for Abstract SDK",
+  "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
+  "author": "h0tw4t3r <vlad@abstract.money>",
+  "contributors": [
+    "h0tw4t3r <vlad@abstract.money>",
+    "adairrr <adair@abstract.money>"
+  ],
+  "license": "ISC",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbstractSDK/abstract.js.git",
+    "directory": "packages/react"
+  },
+  "bugs": {
+    "url": "https://github.com/AbstractSDK/abstract.js/issues"
+  },
+  "scripts": {
+    "build": "NODE_OPTIONS='--max-old-space-size=16384' tsup",
+    "typecheck": "tsc --noEmit",
+    "dev": "NODE_OPTIONS='--max-old-space-size=16384' DEV=true tsup"
+  },
+  "dependencies": {
+    "@abstract-money/core": "workspace:@abstract-money/core@*",
+    "@tanstack/react-query": "^4",
+    "zustand": "^4.4.6"
+  },
+  "peerDependencies": {
+    "@cosmjs/amino": ">=0.28",
+    "@cosmjs/cosmwasm-stargate": ">=0.28",
+    "@cosmjs/encoding": ">=0.28",
+    "react": ">=18.0.0",
+    "typescript": ">=5.0.4"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@cosmjs/amino": "^0.31.0",
+    "@cosmjs/cosmwasm-stargate": "^0.31.0",
+    "@cosmjs/encoding": "^0.31.0",
+    "@cosmjs/proto-signing": "^0.31.0",
+    "@cosmjs/stargate": "^0.31.0",
+    "@keplr-wallet/types": "^0.12.44",
+    "@types/node": "^18.11.10",
+    "@types/react": "^18.2.0",
+    "rome": "^12.1.2",
+    "simple-git-hooks": "^2.8.1",
+    "ts-pattern": "^4.0.6",
+    "tslib": "^2.3.1"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./utils": {
+      "types": "./dist/utils/index.d.ts",
+      "default": "./dist/utils/index.js"
+    },
+    "./internal": {
+      "types": "./dist/internal/index.d.ts",
+      "default": "./dist/internal/index.js"
+    },
+    "./internal/account": {
+      "types": "./dist/internal/account/index.d.ts",
+      "default": "./dist/internal/account/index.js"
+    },
+    "./internal/apps/challenge": {
+      "types": "./dist/internal/apps/challenge/index.d.ts",
+      "default": "./dist/internal/apps/challenge/index.js"
+    },
+    "./internal/cw-plus/cw-20": {
+      "types": "./dist/internal/cw-plus/cw-20/index.d.ts",
+      "default": "./dist/internal/cw-plus/cw-20/index.js"
+    },
+    "./internal/cw-plus/cw-20-ics": {
+      "types": "./dist/internal/cw-plus/cw-20-ics/index.d.ts",
+      "default": "./dist/internal/cw-plus/cw-20-ics/index.js"
+    },
+    "./internal/cw-plus/cw-3-flex-multisig": {
+      "types": "./dist/internal/cw-plus/cw-3-flex-multisig/index.d.ts",
+      "default": "./dist/internal/cw-plus/cw-3-flex-multisig/index.js"
+    },
+    "./internal/cw-plus/cw-4-group": {
+      "types": "./dist/internal/cw-plus/cw-4-group/index.d.ts",
+      "default": "./dist/internal/cw-plus/cw-4-group/index.js"
+    },
+    "./internal/native/ans": {
+      "types": "./dist/internal/native/ans/index.d.ts",
+      "default": "./dist/internal/native/ans/index.js"
+    },
+    "./internal/native/factory": {
+      "types": "./dist/internal/native/factory/index.d.ts",
+      "default": "./dist/internal/native/factory/index.js"
+    },
+    "./internal/native/registry": {
+      "types": "./dist/internal/native/registry/index.d.ts",
+      "default": "./dist/internal/native/registry/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "/utils",
+    "/internal",
+    "/dist"
+  ],
+  "simple-git-hooks": {
+    "pre-commit": "pnpm format && pnpm lint:fix"
+  },
+  "sideEffects": false
+}

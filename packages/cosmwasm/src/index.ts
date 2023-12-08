@@ -1,2 +1,2 @@
-export * from './rawQuery'
-export * from './BatchCosmWasmClient'
+export * from './utils'
+export * from './client'
