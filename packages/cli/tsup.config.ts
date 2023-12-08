@@ -5,9 +5,8 @@ import { dependencies } from './package.json'
 
 export default defineConfig(
   getConfig({
-    outDir: 'dist',
     //dev: process.env.DEV === 'true',
-    entry: ['src/index.ts', 'src/client/index.ts', 'src/utils/index.ts'],
+    entry: ['src/index.ts'],
     external: [...Object.keys(dependencies)],
   }),
 )
