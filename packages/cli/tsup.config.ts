@@ -1,11 +1,11 @@
 import { defineConfig } from 'tsup'
 
 import { getConfig } from '../../scripts/tsup'
-import { dependencies } from './package.json'
+import { dependencies, devDependencies } from './package.json'
 
 export default defineConfig(
   getConfig({
-    experimentalDts: false,
+    // experimentalDts: false,
     //dev: process.env.DEV === 'true',
     entry: [
       'src/index.ts',

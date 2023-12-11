@@ -1,4 +1,3 @@
-import { react } from './plugins'
 import type { MaybeArray, MaybePromise } from './types'
 
 export type ContractConfig = {
@@ -72,5 +71,5 @@ export function defineConfig(
 export const defaultConfig = {
   out: 'src/generated.ts',
   contracts: [],
-  plugins: [react()],
-} satisfies Config
+  plugins: ['react'],
+}

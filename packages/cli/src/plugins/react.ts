@@ -25,6 +25,7 @@ export function react(_config: ReactConfig = {}): ReactResult {
       } satisfies TSBuilderOptions
 
       await codegen({
+        ...codegenOptions,
         contracts: contracts.map(({ name, path }) => ({ name, dir: path })),
         outPath: out,
       })

@@ -25,6 +25,20 @@ const Init = z.object({
   root: z.string().optional(),
 })
 
+function serializeConfig(
+  config:
+    | Config
+    | {
+        out: string
+        contracts: never[]
+        plugins: string[]
+      },
+) {
+  const serialized = JSON.stringify(config)
+  // HACK: Replacing `'react'` keyword to `react()`
+  return serialized.replaceAll('"react"', 'react()')
+}
+
 export async function init(options: Init = {}) {
   // Validate command line options
   try {
@@ -64,8 +78,9 @@ export async function init(options: Init = {}) {
     const config = options.content ?? defaultConfig
     content = dedent(`
       import { defineConfig } from '@abstract-money/cli'
-      
-      export default defineConfig(${JSON.stringify(config)})
+      import { react } from '@abstract-money/cli/plugins'
+
+      export default defineConfig(${serializeConfig(config)})
     `)
   } else {
     const config = options.content ?? {
@@ -75,8 +90,10 @@ export async function init(options: Init = {}) {
     content = dedent(`
       // @ts-check
 
+      import { react } from '@abstract-money/cli/plugins'
+
       /** @type {import('@abstract-money/cli').Config} */
-      export default ${JSON.stringify(config)}
+      export default ${serializeConfig(config)}
     `)
   }
 
