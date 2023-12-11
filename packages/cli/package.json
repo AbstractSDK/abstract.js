@@ -34,6 +34,7 @@
   "type": "module",
   "dependencies": {
     "@cosmwasm/ts-codegen": "^0.35.3",
+    "abort-controller": "^3.0.0",
     "bundle-require": "^3.1.2",
     "cac": "^6.7.12",
     "change-case": "^4.1.2",
@@ -41,13 +42,14 @@
     "detect-package-manager": "^2.0.1",
     "dotenv": "^16.0.3",
     "dotenv-expand": "^10.0.0",
-    "fs-extra": "^10.1.0",
+    "execa": "^6.1.0",
     "find-up": "^6.3.0",
+    "fs-extra": "^10.1.0",
+    "node-fetch": "^3.3.2",
     "ora": "^6.1.2",
     "pathe": "^1.0.0",
     "picocolors": "^1.0.0",
     "prettier": "^2.8.1",
-    "execa": "^6.1.0",
     "zod": "^3.21.4"
   },
   "devDependencies": {

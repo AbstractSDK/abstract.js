@@ -5,18 +5,16 @@ import codegen, { TSBuilderOptions } from '@cosmwasm/ts-codegen'
 import type { Plugin } from '../config'
 import type { RequiredBy } from '../types'
 
-type ReactConfig = {}
-
 type ReactResult = RequiredBy<Plugin, 'run'>
 
-export function react(_config: ReactConfig = {}): ReactResult {
+export function react(): ReactResult {
   return {
     name: 'React',
-    async run({ contracts, out /*isTypeScript, outputs*/ }) {
+    async run({ contracts, out, isTypeScript /*outputs*/ }) {
       // Prepare default config options
       const codegenOptions = {
         client: { enabled: true },
-        types: { enabled: true },
+        types: { enabled: isTypeScript },
         reactQuery: {
           enabled: true,
           mutations: true,
