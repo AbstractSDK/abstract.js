@@ -23,7 +23,7 @@ export type FetchConfig<
   /**
    * Function for creating a cache key for contract.
    */
-  getCacheKey?(config: { contract: TContract }): string
+  getCacheKey(config: { contract: TContract }): `${string}:${string}:${string}`
   /**
    * Name of source.
    */
@@ -64,7 +64,7 @@ export function fetch<
 >({
   cacheDuration = 1_800_000,
   contracts: contractConfigs,
-  getCacheKey = ({ contract }) => JSON.stringify(contract),
+  getCacheKey,
   name = 'Fetch',
   parse = ({ response }) => response.json(),
   request,
@@ -79,14 +79,16 @@ export function fetch<
       const contracts = []
       for (const contract of contractConfigs) {
         const cacheKey = getCacheKey({ contract })
-        const cacheFilePath = join(cacheDir, `${cacheKey}.json`)
-        const cacheFileTimestampPath = join(cacheDir, `${cacheKey}.timestamp`)
+        const cacheFolderPath = join(cacheDir, cacheKey)
+        await fse.ensureDir(cacheFolderPath)
+        const cacheFilePath = join(cacheFolderPath, 'module-schema.json')
+        const cacheFileTimestampPath = join(cacheFolderPath, '.timestamp')
         const cacheTimestamp = parseInt(
           await fse.readFile(cacheFileTimestampPath, 'utf8').catch(() => '0'),
           10,
         )
         let path
-        if (cacheTimestamp > Date.now()) path = cacheFilePath
+        if (cacheTimestamp > Date.now()) path = cacheFolderPath
         else {
           const AbortController =
             globalThis.AbortController ||
@@ -103,7 +105,7 @@ export function fetch<
             })
             const schema = await parse({ response })
             await fse.writeJSON(cacheFilePath, schema)
-            path = cacheFilePath
+            path = cacheFolderPath
             await fse.writeFile(cacheFileTimestampPath, timestamp, {
               encoding: 'utf8',
             })

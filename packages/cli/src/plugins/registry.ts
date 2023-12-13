@@ -41,8 +41,9 @@ export function registry({
     contracts,
     name,
     getCacheKey({ contract }) {
-      // TODO: Figure out how to properly handle namespace-name collisions.
-      return `${camelCase(name)}:${contract.name}`
+      return `${camelCase(name)}:${contract.namespace}:${contract.name}:${
+        contract.version
+      }`
     },
     async parse({ response }) {
       if (response.status !== 200) throw new Error('Schema not found')

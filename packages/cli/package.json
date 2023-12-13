@@ -33,7 +33,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@cosmwasm/ts-codegen": "^0.35.3",
+    "@abstract-money/ts-codegen": "^0.35.4",
     "abort-controller": "^3.0.0",
     "bundle-require": "^3.1.2",
     "cac": "^6.7.12",

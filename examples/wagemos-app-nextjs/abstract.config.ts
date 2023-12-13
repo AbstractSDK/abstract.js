@@ -2,7 +2,7 @@ import { defineConfig } from '@abstract-money/cli'
 import { react, registry } from '@abstract-money/cli/plugins'
 
 export default defineConfig({
-  out: 'src/generated.ts',
+  out: 'src/_generated',
   plugins: [
     react(),
     registry({

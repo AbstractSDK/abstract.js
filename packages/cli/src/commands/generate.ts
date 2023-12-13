@@ -1,6 +1,6 @@
 import { default as dedent } from 'dedent'
 import { default as fse, ensureDir } from 'fs-extra'
-import { basename, dirname, resolve } from 'pathe'
+import { basename, dirname, join, resolve } from 'pathe'
 import pc from 'picocolors'
 import { z } from 'zod'
 
@@ -135,13 +135,14 @@ export async function generate(options: Generate = {}) {
     spinner.succeed()
 
     // Write output to file
-    spinner.start(`Writing to ${pc.gray(config.out)}`)
+    const finalOutputFile = join(config.out, 'index.ts')
+    spinner.start(`Writing to ${pc.gray(finalOutputFile)}`)
     await writeContracts({
       content,
       contracts,
       imports,
       prepend,
-      filename: config.out,
+      filename: finalOutputFile,
     })
     spinner.succeed()
   }

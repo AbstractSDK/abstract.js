@@ -11,7 +11,6 @@ import {
 } from 'graz'
 
 import { ExecuteResult } from '@cosmjs/cosmwasm-stargate'
-import { GasPrice } from '@cosmjs/stargate'
 import { UseMutationOptions } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import {

@@ -1,11 +1,17 @@
-import codegen, { TSBuilderOptions } from '@cosmwasm/ts-codegen'
-// import { pascalCase } from 'change-case'
-// import dedent from 'dedent'
+import _codegen from '@abstract-money/ts-codegen'
+import { TSBuilderOptions } from '@abstract-money/ts-codegen'
 
+import { camelCase, pascalCase } from 'change-case'
+import dedent from 'dedent'
+import { default as fse } from 'fs-extra'
+import { join, relative, resolve } from 'pathe'
 import type { Plugin } from '../config'
 import type { RequiredBy } from '../types'
 
 type ReactResult = RequiredBy<Plugin, 'run'>
+
+// NOTE: It looks like the `ts-codegen` package bundles incorrectly and the default export is not actually exported.
+const codegen = (_codegen as any).default as typeof _codegen
 
 export function react(): ReactResult {
   return {
@@ -14,35 +20,253 @@ export function react(): ReactResult {
       // Prepare default config options
       const codegenOptions = {
         client: { enabled: true },
+        messageBuilder: { enabled: true },
         types: { enabled: isTypeScript },
         reactQuery: {
           enabled: true,
           mutations: true,
           camelize: true,
+          queryFactory: true,
+          queryKeys: true,
         },
+        abstractApp: { enabled: true },
+        bundle: { enabled: false },
       } satisfies TSBuilderOptions
 
+      const cosmwasmCodegenDirPath = join(out, 'cosmwasm-codegen')
+
       await codegen({
-        ...codegenOptions,
+        options: codegenOptions,
         contracts: contracts.map(({ name, path }) => ({ name, dir: path })),
-        outPath: out,
+        outPath: cosmwasmCodegenDirPath,
       })
-      // const imports = new Set<string>([])
-      // const actionsImports = new Set<string>([])
-      // const hasWriteContractMode = outputs.some(
-      //   (x) =>
-      //     x.plugin.name === 'Actions' &&
-      //     x.imports?.includes('WriteContractMode'),
-      // )
-      //
-      // const hookNames = new Set<string>()
-      // const getHookNameError = (name: string, contractName: string) =>
-      //   new Error(
-      //     `Hook name "${name}" must be unique for contract "${contractName}".`,
-      //   )
-      //
-      // const content: string[] = []
-      // for (const contract of contracts) {
+
+      const imports: string[] = []
+
+      const content: string[] = []
+      for (const contract of contracts) {
+        {
+          const contractNamePascalCase = pascalCase(contract.name)
+
+          {
+            // NOTE: The `@abstract-money/codegen` points to the old name of the core
+            // package `@abstract-money/abstract.js`, and has to be changed to the
+            // `@abstract-money/core` package.
+            const generatedClientFilePath = join(
+              cosmwasmCodegenDirPath,
+              `${contractNamePascalCase}.client.ts`,
+            )
+
+            const generatedClientFileContent = await fse.readFile(
+              resolve(generatedClientFilePath),
+              'utf8',
+            )
+            await fse.writeFile(
+              resolve(generatedClientFilePath),
+              generatedClientFileContent.replace(
+                '@abstract-money/abstract.js',
+                '@abstract-money/core',
+              ),
+            )
+          }
+
+          const reactQueryFilePath = join(
+            cosmwasmCodegenDirPath,
+            `${contractNamePascalCase}.react-query.ts`,
+          )
+          const reactQueryFileContents = await fse.readFile(
+            resolve(reactQueryFilePath),
+            'utf8',
+          )
+
+          type Hook = `use${string}Query` | `use${string}Mutation`
+
+          const importedHooks = [
+            ...reactQueryFileContents.matchAll(/export function (\w+)/gm),
+          ].map((m) => m[1]) as readonly Hook[]
+          {
+            const contractQueryImports = new Set<string>([])
+            for (const hookName of importedHooks) {
+              contractQueryImports.add(hookName)
+
+              if (isTypeScript && hookName.endsWith('Mutation')) {
+                // Slicing the `use` out of the hook to import the mutation type.
+                // i.e. `useFooMutation` -> `FooMutation`
+                contractQueryImports.add(hookName.slice(3))
+              }
+            }
+            imports.push(
+              `import { ${[...contractQueryImports.values()].join(
+                ', ',
+              )} } from './${relative(out, reactQueryFilePath.slice(0, -3))}'`,
+            )
+          }
+
+          imports.push(
+            `import { ${contractNamePascalCase}AppQueryClient, ${contractNamePascalCase}AppClient } from './${relative(
+              out,
+              join(cosmwasmCodegenDirPath, `${contractNamePascalCase}.client`),
+            )}'`,
+          )
+
+          content.push(`const MODULE_ID = '${contract.name}'`)
+
+          {
+            const queryHooks = new Map<Hook, string>([])
+            const contractNameCamelCase = camelCase(contract.name)
+            for (const hookName of importedHooks) {
+              const hookNamePascalCaseWithoutUse = pascalCase(hookName.slice(3))
+              const hookNameCamelCaseWithoutUse = camelCase(hookName.slice(3))
+              if (!hookName.endsWith('Query')) continue
+              queryHooks.set(
+                hookName,
+                dedent`
+                ({ options, client, chainId, ...rest }: Omit<Parameters<typeof ${hookName}>[0], 'client'> & { chainId: string | undefined, client: CosmWasmClient | undefined }) => {
+                  const {
+                    data: ${contractNameCamelCase}AppQueryClient,
+                    isLoading: is${contractNamePascalCase}AppQueryClientLoading,
+                    isError: is${contractNamePascalCase}AppQueryClientError,
+                    error: ${contractNameCamelCase}AppQueryClientError,
+                  } = useModuleQueryClient(
+                    {
+                      moduleId: MODULE_ID,
+                      client,
+                      chain: chainId,
+                      Module: ${contractNamePascalCase}AppQueryClient,
+                    },
+                    { enabled: options?.enabled },
+                  )
+
+                  const {
+                    data,
+                    isLoading: is${hookNamePascalCaseWithoutUse}Loading,
+                    isError: is${hookNamePascalCaseWithoutUse}Error,
+                    error: ${hookNameCamelCaseWithoutUse}Error,
+                  } = use${hookNamePascalCaseWithoutUse}({
+                    client: ${contractNameCamelCase}AppQueryClient,
+                    options,
+                    ...rest
+                  })
+
+                  if (is${contractNamePascalCase}AppQueryClientError)
+                    return {
+                      data: undefined,
+                      isLoading: false,
+                      isError: true,
+                      isSuccess: false,
+                      error: ${contractNameCamelCase}AppQueryClientError,
+                    } as const
+                  if (is${hookNamePascalCaseWithoutUse}Error)
+                    return {
+                      data: undefined,
+                      isLoading: false,
+                      isError: true,
+                      isSuccess: false,
+                      error: ${hookNameCamelCaseWithoutUse}Error,
+                    } as const
+                  if (is${contractNamePascalCase}AppQueryClientLoading || is${hookNamePascalCaseWithoutUse}Loading)
+                    return {
+                      data: undefined,
+                      isLoading: true,
+                      isError: false,
+                      isSuccess: false,
+                    } as const
+                  return {
+                    data,
+                    isLoading: false,
+                    isError: false,
+                    isSuccess: true,
+                  } as const
+                }
+              `,
+              )
+            }
+
+            const mutationHooks = new Map<Hook, string>([])
+            for (const hookName of importedHooks) {
+              const hookNamePascalCaseWithoutUse = pascalCase(hookName.slice(3))
+              if (!hookName.endsWith('Mutation')) continue
+              mutationHooks.set(
+                hookName,
+                dedent`
+                (
+                  { client, chainId, sender }: { client: SigningCosmWasmClient | undefined; chainId: string | undefined; sender: string | undefined },
+                  options?: Omit<
+                    UseMutationOptions<
+                      ExecuteResult,
+                      Error,
+                      Omit<${hookNamePascalCaseWithoutUse}, 'client'>
+                    >,
+                    'mutationFn'
+                  >,
+                ) => {
+                  const {
+                    data: ${contractNameCamelCase}MutationClient,
+                    // TODO: figure out what to do with those
+                    // isLoading: is${contractNamePascalCase}MutationClientLoading,
+                    // isError: is${contractNamePascalCase}MutationClientError,
+                    // error: ${contractNameCamelCase}MutationClientError,
+                  } = useModuleMutationClient(
+                    {
+                      moduleId: MODULE_ID,
+                      client,
+                      sender,
+                      chain: chainId,
+                      Module: ${contractNamePascalCase}AppClient,
+                    }
+                  )
+
+                  const {
+                    mutate: mutate_,
+                    mutateAsync: mutateAsync_,
+                    ...rest
+                  } = ${hookName}(options)
+
+                  const mutate = useMemo(() => {
+                    if (!${contractNameCamelCase}MutationClient) return undefined
+
+                    return (
+                      variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
+                      options?: Parameters<typeof mutate_>[1],
+                    ) => mutate_({ client: ${contractNameCamelCase}MutationClient, ...variables }, options)
+                  }, [mutate_, ${contractNameCamelCase}MutationClient])
+
+                  const mutateAsync = useMemo(() => {
+                    if (!${contractNameCamelCase}MutationClient) return undefined
+
+                    return (
+                      variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
+                      options?: Parameters<typeof mutateAsync_>[1],
+                    ) =>
+                      mutateAsync_({ client: ${contractNameCamelCase}MutationClient, ...variables }, options)
+                  }, [mutateAsync_, ${contractNameCamelCase}MutationClient])
+
+                  return { mutate, mutateAsync, ...rest } as const
+                }
+              `,
+              )
+            }
+
+            content.push(
+              dedent`
+              export const ${contract.name} = {
+                queries: {
+                  ${[...queryHooks.entries()]
+                    .map(([hookName, hook]) => `${hookName}: ${hook},`)
+                    .join('\n')}
+                },
+                mutations: {
+                  ${[...mutationHooks.entries()]
+                    .map(([hookName, hook]) => `${hookName}: ${hook},`)
+                    .join('\n')}
+                }
+              }
+            `,
+            )
+          }
+        }
+      }
+
       //   const baseHookName = pascalCase(contract.name)
       //
       //   let typeParams = ''
@@ -51,143 +275,48 @@ export function react(): ReactResult {
       //   const innerHookParams: Record<string, string> = {
       //     abi: contract.meta.abiName,
       //   }
-      //   if (contract.meta.addressName) {
-      //     omitted = `| 'address'`
-      //     if (typeof contract.address === 'object') {
-      //       typeParams = `& { chainId?: keyof typeof ${contract.meta.addressName}  }`
-      //       if (Object.keys(contract.address).length > 1) {
-      //         innerHookParams.address = `${contract.meta.addressName}[chainId as keyof typeof ${contract.meta.addressName}]`
-      //         imports.add('useNetwork')
-      //         imports.add('useChainId')
-      //         innerContent = dedent`
-      //           const { chain } = useNetwork()
-      //           const defaultChainId = useChainId()
-      //           const chainId = config.chainId ?? chain?.id ?? defaultChainId
-      //         `
-      //       } else
-      //         innerHookParams.address = `${contract.meta.addressName}[${
-      //           Object.keys(contract.address!)[0]
-      //         }]`
-      //     } else if (contract.address)
-      //       innerHookParams.address = contract.meta.addressName
-      //   }
       //
       //   const innerHookConfig = `${Object.entries(innerHookParams).reduce(
       //     (prev, curr) => `${prev}${curr[0]}: ${curr[1]},`,
       //     '{',
       //   )}...config}`
       //
-      //   type Item = { name: string; value: string }
-      //   const genDocString = (hookName: string, item?: Item) => {
-      //     let description = `Wraps __{@link ${hookName}}__ with \`abi\` set to __{@link ${contract.meta.abiName}}__`
-      //     if (item)
-      //       description += ` and \`${item.name}\` set to \`"${item.value}"\``
-      //     if (contract.address) {
-      //       const docString = getAddressDocString({ address: contract.address })
-      //       if (docString)
-      //         return dedent`
-      //         /**
-      //         * ${description}.
-      //         *
-      //         ${docString}
-      //         */
-      //         `
-      //     }
-      //     return dedent`
-      //     /**
-      //      * ${description}.
-      //      */
-      //     `
-      //   }
-      //
-      //   let hasReadFunction = false
-      //   let hasWriteFunction = false
-      //   let hasEvent = false
-      //   for (const component of contract.abi) {
-      //     if (component.type === 'function')
+      //   if (hooks.useContractFunctionRead) {
+      //     const contractNames = new Set<string>()
+      //     for (const item of contract.abi) {
       //       if (
-      //         component.stateMutability === 'view' ||
-      //         component.stateMutability === 'pure'
-      //       )
-      //         hasReadFunction = true
-      //       else hasWriteFunction = true
-      //     else if (component.type === 'event') hasEvent = true
-      //     // Exit early if all flags are `true`
-      //     if (hasReadFunction && hasWriteFunction && hasEvent) break
-      //   }
+      //         item.type === 'function' &&
+      //         (item.stateMutability === 'view' ||
+      //           item.stateMutability === 'pure')
+      //       ) {
+      //         // Skip overrides since they are captured by same hook
+      //         if (contractNames.has(item.name)) continue
+      //         contractNames.add(item.name)
       //
-      //   if (hasReadFunction) {
-      //     if (hooks.useContractRead) {
-      //       const name = `use${baseHookName}Read`
-      //       if (hookNames.has(name)) throw getHookNameError(name, contract.name)
-      //       hookNames.add(name)
+      //         const name = `use${baseHookName}${pascalCase(item.name)}`
+      //         if (hookNames.has(name))
+      //           throw getHookNameError(name, contract.name)
+      //         hookNames.add(name)
       //
-      //       imports.add('useContractRead')
-      //       const docString = genDocString('useContractRead')
+      //         const config = `${Object.entries({
+      //           ...innerHookParams,
+      //           functionName: `'${item.name}'`,
+      //         }).reduce(
+      //           (prev, curr) => `${prev}${curr[0]}: ${curr[1]},`,
+      //           '{',
+      //         )}...config}`
+      //         imports.add('useContractRead')
+      //         const docString = genDocString('useContractRead', {
+      //           name: 'functionName',
+      //           value: item.name,
+      //         })
       //
-      //       let code
-      //       if (isTypeScript) {
-      //         imports.add('UseContractReadConfig')
-      //         actionsImports.add('ReadContractResult')
-      //         code = dedent`
-      //         ${docString}
-      //         export function ${name}<
-      //           TFunctionName extends string,
-      //           TSelectData = ReadContractResult<typeof ${contract.meta.abiName}, TFunctionName>
-      //         >(
-      //           config: Omit<UseContractReadConfig<typeof ${contract.meta.abiName}, TFunctionName, TSelectData>, 'abi'${omitted}>${typeParams} = {} as any,
-      //         ) {
-      //           ${innerContent}
-      //           return useContractRead(${innerHookConfig} as UseContractReadConfig<typeof ${contract.meta.abiName}, TFunctionName, TSelectData>)
-      //         }
-      //         `
-      //       } else
-      //         code = dedent`
-      //         ${docString}
-      //         export function ${name}(config = {}) {
-      //           ${innerContent}
-      //           return useContractRead(${innerHookConfig})
-      //         }
-      //         `
-      //       content.push(code)
-      //     }
-      //
-      //     if (hooks.useContractFunctionRead) {
-      //       const contractNames = new Set<string>()
-      //       for (const item of contract.abi) {
-      //         if (
-      //           item.type === 'function' &&
-      //           (item.stateMutability === 'view' ||
-      //             item.stateMutability === 'pure')
-      //         ) {
-      //           // Skip overrides since they are captured by same hook
-      //           if (contractNames.has(item.name)) continue
-      //           contractNames.add(item.name)
-      //
-      //           const name = `use${baseHookName}${pascalCase(item.name)}`
-      //           if (hookNames.has(name))
-      //             throw getHookNameError(name, contract.name)
-      //           hookNames.add(name)
-      //
-      //           const config = `${Object.entries({
-      //             ...innerHookParams,
-      //             functionName: `'${item.name}'`,
-      //           }).reduce(
-      //             (prev, curr) => `${prev}${curr[0]}: ${curr[1]},`,
-      //             '{',
-      //           )}...config}`
-      //           imports.add('useContractRead')
-      //           const docString = genDocString('useContractRead', {
-      //             name: 'functionName',
-      //             value: item.name,
-      //           })
-      //
-      //           let code
-      //           if (isTypeScript) {
-      //             imports.add('UseContractReadConfig')
-      //             actionsImports.add('ReadContractResult')
-      //             // prettier-ignore
-      //             code = dedent`
+      //         let code
+      //         if (isTypeScript) {
+      //           imports.add('UseContractReadConfig')
+      //           actionsImports.add('ReadContractResult')
+      //           // prettier-ignore
+      //           code = dedent`
       //             ${docString}
       //             export function ${name}<
       //               TFunctionName extends '${item.name}',
@@ -199,18 +328,17 @@ export function react(): ReactResult {
       //               return useContractRead(${config} as UseContractReadConfig<typeof ${contract.meta.abiName}, TFunctionName, TSelectData>)
       //             }
       //             `
-      //           } else {
-      //             // prettier-ignore
-      //             code = dedent`
+      //         } else {
+      //           // prettier-ignore
+      //           code = dedent`
       //             ${docString}
       //             export function ${name}(config = {}) {
       //               ${innerContent}
       //               return useContractRead(${config})
       //             }
       //             `
-      //           }
-      //           content.push(code)
       //         }
+      //         content.push(code)
       //       }
       //     }
       //   }
@@ -458,110 +586,27 @@ export function react(): ReactResult {
       //     }
       //   }
       //
-      //   if (hasEvent) {
-      //     if (hooks.useContractEvent) {
-      //       const name = `use${baseHookName}Event`
-      //       if (hookNames.has(name)) throw getHookNameError(name, contract.name)
-      //       hookNames.add(name)
-      //
-      //       imports.add('useContractEvent')
-      //       const docString = genDocString('useContractEvent')
-      //
-      //       let code
-      //       if (isTypeScript) {
-      //         imports.add('UseContractEventConfig')
-      //         // prettier-ignore
-      //         code = dedent`
-      //         ${docString}
-      //         export function ${name}<
-      //           TEventName extends string,
-      //         >(
-      //           config: Omit<UseContractEventConfig<typeof ${contract.meta.abiName}, TEventName>, 'abi'${omitted}>${typeParams} = {} as any,
-      //         ) {
-      //           ${innerContent}
-      //           return useContractEvent(${innerHookConfig} as UseContractEventConfig<typeof ${contract.meta.abiName}, TEventName>)
-      //         }
-      //         `
-      //       } else
-      //         code = dedent`
-      //         ${docString}
-      //         export function ${name}(config = {}) {
-      //           ${innerContent}
-      //           return useContractEvent(${innerHookConfig})
-      //         }
-      //         `
-      //       content.push(code)
-      //     }
-      //
-      //     if (hooks.useContractItemEvent) {
-      //       const contractNames = new Set<string>()
-      //       for (const item of contract.abi) {
-      //         if (item.type === 'event') {
-      //           // Skip overrides since they are captured by same hook
-      //           if (contractNames.has(item.name)) continue
-      //           contractNames.add(item.name)
-      //
-      //           const name = `use${baseHookName}${pascalCase(item.name)}Event`
-      //           if (hookNames.has(name))
-      //             throw getHookNameError(name, contract.name)
-      //           hookNames.add(name)
-      //
-      //           const config = `${Object.entries({
-      //             ...innerHookParams,
-      //             eventName: `'${item.name}'`,
-      //           }).reduce(
-      //             (prev, curr) => `${prev}${curr[0]}: ${curr[1]},`,
-      //             '{',
-      //           )}...config}`
-      //           imports.add('useContractEvent')
-      //           const docString = genDocString('useContractEvent', {
-      //             name: 'eventName',
-      //             value: item.name,
-      //           })
-      //
-      //           let code
-      //           if (isTypeScript) {
-      //             imports.add('UseContractEventConfig')
-      //             // prettier-ignore
-      //             code = dedent`
-      //             ${docString}
-      //             export function ${name}(
-      //               config: Omit<UseContractEventConfig<typeof ${contract.meta.abiName}, '${item.name}'>, 'abi'${omitted} | 'eventName'>${typeParams} = {} as any,
-      //             ) {
-      //               ${innerContent}
-      //               return useContractEvent(${config} as UseContractEventConfig<typeof ${contract.meta.abiName}, '${item.name}'>)
-      //             }
-      //             `
-      //           } else {
-      //             // prettier-ignore
-      //             code = dedent`
-      //             ${docString}
-      //             export function ${name}(config = {}) {
-      //               ${innerContent}
-      //               return useContractEvent(${config})
-      //             }
-      //             `
-      //           }
-      //           content.push(code)
-      //         }
-      //       }
-      //     }
-      //   }
       // }
       //
-      // const importValues = [...imports.values()]
-      // const actionsImportValues = [...actionsImports.values()]
       return {
-        imports: '',
-        // (importValues.length
-        //   ? `import { ${importValues.join(', ')} } from 'wagmi'\n`
-        //   : '') +
+        imports: dedent`
+            import { SigningCosmWasmClient, CosmWasmClient, ExecuteResult } from '@cosmjs/cosmwasm-stargate'
+            import { UseMutationOptions } from '@tanstack/react-query'
+            import { useMemo } from 'react'
+
+            import {
+              useModuleMutationClient,
+              useModuleQueryClient,
+            } from '@abstract-money/react/utils'
+
+            ${imports.join('\n\n')}
+          `,
         // (actionsImportValues.length
         //   ? `import { ${actionsImportValues.join(
         //       ', ',
         //     )} } from 'wagmi/actions'`
         //   : ''),
-        content: '', // content.join('\n\n'),
+        content: content.join('\n\n'),
       }
     },
   }
