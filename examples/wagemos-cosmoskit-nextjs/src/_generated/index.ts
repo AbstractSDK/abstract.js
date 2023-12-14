@@ -1,7 +1,7 @@
 import {
+  SigningCosmWasmClient,
   CosmWasmClient,
   ExecuteResult,
-  SigningCosmWasmClient,
 } from '@cosmjs/cosmwasm-stargate'
 import { UseMutationOptions } from '@tanstack/react-query'
 import { useMemo } from 'react'
@@ -12,28 +12,28 @@ import {
 } from '@abstract-money/react/utils'
 
 import {
-  BettingCloseRoundMutation,
-  BettingDistributeWinningsMutation,
-  BettingPlaceBetMutation,
-  BettingRegisterMutation,
-  BettingUpdateAccountsMutation,
-  BettingUpdateConfigMutation,
   useBettingBetsQuery,
-  useBettingCloseRoundMutation,
   useBettingConfigQuery,
-  useBettingDistributeWinningsMutation,
   useBettingListOddsQuery,
   useBettingOddsQuery,
-  useBettingPlaceBetMutation,
-  useBettingRegisterMutation,
   useBettingRoundQuery,
-  useBettingUpdateAccountsMutation,
   useBettingUpdateConfigMutation,
+  BettingUpdateConfigMutation,
+  useBettingCloseRoundMutation,
+  BettingCloseRoundMutation,
+  useBettingDistributeWinningsMutation,
+  BettingDistributeWinningsMutation,
+  useBettingPlaceBetMutation,
+  BettingPlaceBetMutation,
+  useBettingUpdateAccountsMutation,
+  BettingUpdateAccountsMutation,
+  useBettingRegisterMutation,
+  BettingRegisterMutation,
 } from './cosmwasm-codegen/Betting.react-query'
 
 import {
-  BettingAppClient,
   BettingAppQueryClient,
+  BettingAppClient,
 } from './cosmwasm-codegen/Betting.client'
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

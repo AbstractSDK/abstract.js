@@ -1,0 +1,20 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["@abstract-money/react#build", "generate"],
+      "outputs": [".next/**"]
+    },
+    "dev": {
+      "dependsOn": ["@abstract-money/react#dev", "generate"],
+      "cache": false
+    },
+    "typecheck": {
+      "dependsOn": ["@abstract-money/react#build", "generate"]
+    },
+    "generate": {
+      "outputs": ["node_modules/graz/chains"]
+    }
+  }
+}

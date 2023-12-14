@@ -23,6 +23,7 @@ export function react(): ReactResult {
         messageBuilder: { enabled: true },
         types: { enabled: isTypeScript },
         reactQuery: {
+          optionalClient: true,
           enabled: true,
           mutations: true,
           camelize: true,
