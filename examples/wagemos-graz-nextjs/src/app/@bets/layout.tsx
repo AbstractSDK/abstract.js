@@ -7,7 +7,9 @@ export default function BetsLayout({
   children,
 }: PropsWithChildren<{ children: ReactNode }>) {
   return (
-    <AbstractAccountIdContext accountId={AbstractAccountId.local('asd', 2)}>
+    <AbstractAccountIdContext
+      accountId={AbstractAccountId.fromStringId('neutron-18')}
+    >
       <section className="mt-10">
         <div className="mt-10">{children}</div>
       </section>

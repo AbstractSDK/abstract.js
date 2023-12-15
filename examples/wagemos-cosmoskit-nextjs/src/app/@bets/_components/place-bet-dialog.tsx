@@ -1,5 +1,7 @@
 'use client'
 
+import { coin } from '@cosmjs/amino'
+import { useChain } from '@cosmos-kit/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { DialogDescription } from '@radix-ui/react-dialog'
 import { Loader2 } from 'lucide-react'
@@ -56,6 +58,8 @@ export function PlaceBetDialog({ round }: { round: RoundResponse }) {
 
   const { toast } = useToast()
 
+  const { isWalletConnected } = useChain('neutron')
+
   const { mutateAsync: placeBetAsync, isLoading } =
     wagemos.mutations.usePlaceBet('neutron')
 
@@ -74,6 +78,7 @@ export function PlaceBetDialog({ round }: { round: RoundResponse }) {
             asset: { name: round.total_bet.name, amount: amount.toString() },
           },
         },
+        args: { funds: [coin(amount.toString(), 'untrn')] },
       })
 
       setIsOpen(false)
@@ -87,7 +92,9 @@ export function PlaceBetDialog({ round }: { round: RoundResponse }) {
 
   return (
     <>
-      <Button onClick={() => setIsOpen(true)}>Place Bet</Button>
+      <Button disabled={!isWalletConnected} onClick={() => setIsOpen(true)}>
+        Place Bet
+      </Button>
       <Dialog open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
         <DialogContent>
           <Form {...form}>

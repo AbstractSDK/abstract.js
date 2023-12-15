@@ -1,7 +1,9 @@
 'use client'
 
+import { coin } from '@cosmjs/amino'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { DialogDescription } from '@radix-ui/react-dialog'
+import { useAccount } from 'graz'
 import { Loader2 } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -45,6 +47,8 @@ const placeBetSchema = z.object({
 export function PlaceBetDialog({ round }: { round: RoundResponse }) {
   const [isOpen, setIsOpen] = useState(false)
 
+  const { isConnected } = useAccount()
+
   const form = useForm({
     mode: 'onTouched',
     resolver: zodResolver(placeBetSchema),
@@ -74,6 +78,7 @@ export function PlaceBetDialog({ round }: { round: RoundResponse }) {
             asset: { name: round.total_bet.name, amount: amount.toString() },
           },
         },
+        args: { funds: [coin(amount.toString(), 'untrn')] },
       })
 
       setIsOpen(false)
@@ -87,7 +92,9 @@ export function PlaceBetDialog({ round }: { round: RoundResponse }) {
 
   return (
     <>
-      <Button onClick={() => setIsOpen(true)}>Place Bet</Button>
+      <Button disabled={!isConnected} onClick={() => setIsOpen(true)}>
+        Place Bet
+      </Button>
       <Dialog open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
         <DialogContent>
           <Form {...form}>

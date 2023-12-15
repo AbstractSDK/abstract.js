@@ -21,7 +21,7 @@
     "@cosmjs/stargate": "^0.31.0",
     "@cosmjs/tendermint-rpc": "^0.31.0",
     "@cosmos-kit/keplr": "^2.4.15",
-    "@cosmos-kit/react": "^2.9.14",
+    "@cosmos-kit/react": "^2.6.0",
     "@hookform/resolvers": "^3.3.2",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-label": "^2.0.2",

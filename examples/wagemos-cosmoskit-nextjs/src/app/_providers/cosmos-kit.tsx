@@ -11,7 +11,7 @@ export function CosmosKitProvider(props: { children: ReactNode }) {
   const signerOptions = {
     signingCosmwasm: (chain: Chain) => {
       switch (chain.chain_name) {
-        case 'localosmosis':
+        case 'neutron':
           return {
             gasPrice: GasPrice.fromString('0.01untrn'),
           }
