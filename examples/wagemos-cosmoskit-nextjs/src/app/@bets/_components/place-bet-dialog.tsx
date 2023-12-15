@@ -8,6 +8,8 @@ import { Loader2 } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { betting } from '../../../_generated'
+import { RoundResponse } from '../../../_generated/cosmwasm-codegen/Betting.types'
 import { Button } from '../../../components/ui/button'
 import {
   Dialog,
@@ -34,8 +36,6 @@ import {
   SelectValue,
 } from '../../../components/ui/select'
 import { useToast } from '../../../components/ui/use-toast'
-import { wagemos } from '../../../generated/wagemos.cosmoskit'
-import { RoundResponse } from '../../../generated/wagemos.cosmoskit/cosmwasm-codegen/Wagemos.types'
 
 const placeBetSchema = z.object({
   amount: z.coerce
@@ -61,7 +61,7 @@ export function PlaceBetDialog({ round }: { round: RoundResponse }) {
   const { isWalletConnected } = useChain('neutron')
 
   const { mutateAsync: placeBetAsync, isLoading } =
-    wagemos.mutations.usePlaceBet('neutron')
+    betting.mutations.usePlaceBet({ chain: 'neutron' })
 
   const onSubmit: SubmitHandler<z.infer<typeof placeBetSchema>> = useCallback(
     async ({ amount, accountSeq }) => {

@@ -81,10 +81,12 @@ export async function generate(options: Generate = {}) {
         contractConfigs.push(...contracts)
       }
     }
+    spinner.succeed()
 
     // Get contracts from config
     const contractNames = new Set<string>()
     const contractMap = new Map<string, Contract>()
+    spinner.start('Validating contracts')
     for (const contractConfig of contractConfigs) {
       if (contractNames.has(contractConfig.name))
         throw new Error(

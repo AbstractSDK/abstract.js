@@ -6,8 +6,8 @@
 
 import { UseQueryOptions, useQuery, useMutation, UseMutationOptions } from "@tanstack/react-query";
 import { ExecuteResult } from "@cosmjs/cosmwasm-stargate";
-import { StdFee } from "@cosmjs/amino";
-import { AssetEntry, Decimal, InstantiateMsg, ExecuteMsg, AccountTrace, ChainName, Uint128, AccountOdds, AccountId, Bet, AnsAsset, QueryMsg, MigrateMsg, Addr, BetsResponse, ConfigResponse, ListOddsResponse, OddsResponse, RoundStatus, RoundResponse, Coin } from "./Betting.types";
+import { StdFee, Coin } from "@cosmjs/amino";
+import { Decimal, InstantiateMsg, ExecuteMsg, AssetEntry, AccountTrace, ChainName, Uint128, AccountOdds, AccountId, Bet, AnsAsset, QueryMsg, MigrateMsg, Addr, BetsResponse, ConfigResponse, ListOddsResponse, RoundStatus, RoundsResponse, RoundResponse, OddsResponse } from "./Betting.types";
 import { BettingAppQueryClient, BettingAppClient } from "./Betting.client";
 export const bettingQueryKeys = {
   contract: ([{
@@ -18,6 +18,10 @@ export const bettingQueryKeys = {
   }] as const),
   round: (contractAddress: string | undefined, args?: Record<string, unknown>) => ([{ ...bettingQueryKeys.address(contractAddress)[0],
     method: "round",
+    args
+  }] as const),
+  listRounds: (contractAddress: string | undefined, args?: Record<string, unknown>) => ([{ ...bettingQueryKeys.address(contractAddress)[0],
+    method: "list_rounds",
     args
   }] as const),
   odds: (contractAddress: string | undefined, args?: Record<string, unknown>) => ([{ ...bettingQueryKeys.address(contractAddress)[0],
@@ -40,10 +44,26 @@ export const bettingQueryKeys = {
 export const bettingQueries = {
   round: <TData = RoundResponse,>({
     client,
+    args,
     options
   }: BettingRoundQuery<TData>): UseQueryOptions<RoundResponse, Error, TData> => ({
-    queryKey: bettingQueryKeys.round(client?.moduleId),
-    queryFn: () => client ? client.round() : Promise.reject(new Error("Invalid client")),
+    queryKey: bettingQueryKeys.round(client?.moduleId, args),
+    queryFn: () => client ? client.round({
+      roundId: args.roundId
+    }) : Promise.reject(new Error("Invalid client")),
+    ...options,
+    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
+  }),
+  listRounds: <TData = RoundsResponse,>({
+    client,
+    args,
+    options
+  }: BettingListRoundsQuery<TData>): UseQueryOptions<RoundsResponse, Error, TData> => ({
+    queryKey: bettingQueryKeys.listRounds(client?.moduleId, args),
+    queryFn: () => client ? client.listRounds({
+      limit: args.limit,
+      startAfter: args.startAfter
+    }) : Promise.reject(new Error("Invalid client")),
     ...options,
     enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
   }),
@@ -54,6 +74,7 @@ export const bettingQueries = {
   }: BettingOddsQuery<TData>): UseQueryOptions<OddsResponse, Error, TData> => ({
     queryKey: bettingQueryKeys.odds(client?.moduleId, args),
     queryFn: () => client ? client.odds({
+      roundId: args.roundId,
       teamId: args.teamId
     }) : Promise.reject(new Error("Invalid client")),
     ...options,
@@ -61,10 +82,13 @@ export const bettingQueries = {
   }),
   listOdds: <TData = ListOddsResponse,>({
     client,
+    args,
     options
   }: BettingListOddsQuery<TData>): UseQueryOptions<ListOddsResponse, Error, TData> => ({
-    queryKey: bettingQueryKeys.listOdds(client?.moduleId),
-    queryFn: () => client ? client.listOdds() : Promise.reject(new Error("Invalid client")),
+    queryKey: bettingQueryKeys.listOdds(client?.moduleId, args),
+    queryFn: () => client ? client.listOdds({
+      roundId: args.roundId
+    }) : Promise.reject(new Error("Invalid client")),
     ...options,
     enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
   }),
@@ -79,10 +103,13 @@ export const bettingQueries = {
   }),
   bets: <TData = BetsResponse,>({
     client,
+    args,
     options
   }: BettingBetsQuery<TData>): UseQueryOptions<BetsResponse, Error, TData> => ({
-    queryKey: bettingQueryKeys.bets(client?.moduleId),
-    queryFn: () => client ? client.bets() : Promise.reject(new Error("Invalid client")),
+    queryKey: bettingQueryKeys.bets(client?.moduleId, args),
+    queryFn: () => client ? client.bets({
+      roundId: args.roundId
+    }) : Promise.reject(new Error("Invalid client")),
     ...options,
     enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
   })
@@ -93,12 +120,19 @@ export interface BettingReactQuery<TResponse, TData = TResponse> {
     initialData?: undefined;
   };
 }
-export interface BettingBetsQuery<TData> extends BettingReactQuery<BetsResponse, TData> {}
+export interface BettingBetsQuery<TData> extends BettingReactQuery<BetsResponse, TData> {
+  args: {
+    roundId: number;
+  };
+}
 export function useBettingBetsQuery<TData = BetsResponse>({
   client,
+  args,
   options
 }: BettingBetsQuery<TData>) {
-  return useQuery<BetsResponse, Error, TData>(bettingQueryKeys.bets(client?.moduleId), () => client ? client.bets() : Promise.reject(new Error("Invalid client")), { ...options,
+  return useQuery<BetsResponse, Error, TData>(bettingQueryKeys.bets(client?.moduleId, args), () => client ? client.bets({
+    roundId: args.roundId
+  }) : Promise.reject(new Error("Invalid client")), { ...options,
     enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
   });
 }
@@ -111,17 +145,25 @@ export function useBettingConfigQuery<TData = ConfigResponse>({
     enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
   });
 }
-export interface BettingListOddsQuery<TData> extends BettingReactQuery<ListOddsResponse, TData> {}
+export interface BettingListOddsQuery<TData> extends BettingReactQuery<ListOddsResponse, TData> {
+  args: {
+    roundId: number;
+  };
+}
 export function useBettingListOddsQuery<TData = ListOddsResponse>({
   client,
+  args,
   options
 }: BettingListOddsQuery<TData>) {
-  return useQuery<ListOddsResponse, Error, TData>(bettingQueryKeys.listOdds(client?.moduleId), () => client ? client.listOdds() : Promise.reject(new Error("Invalid client")), { ...options,
+  return useQuery<ListOddsResponse, Error, TData>(bettingQueryKeys.listOdds(client?.moduleId, args), () => client ? client.listOdds({
+    roundId: args.roundId
+  }) : Promise.reject(new Error("Invalid client")), { ...options,
     enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
   });
 }
 export interface BettingOddsQuery<TData> extends BettingReactQuery<OddsResponse, TData> {
   args: {
+    roundId: number;
     teamId: AccountId;
   };
 }
@@ -131,17 +173,43 @@ export function useBettingOddsQuery<TData = OddsResponse>({
   options
 }: BettingOddsQuery<TData>) {
   return useQuery<OddsResponse, Error, TData>(bettingQueryKeys.odds(client?.moduleId, args), () => client ? client.odds({
+    roundId: args.roundId,
     teamId: args.teamId
   }) : Promise.reject(new Error("Invalid client")), { ...options,
     enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
   });
 }
-export interface BettingRoundQuery<TData> extends BettingReactQuery<RoundResponse, TData> {}
+export interface BettingListRoundsQuery<TData> extends BettingReactQuery<RoundsResponse, TData> {
+  args: {
+    limit?: number;
+    startAfter?: number;
+  };
+}
+export function useBettingListRoundsQuery<TData = RoundsResponse>({
+  client,
+  args,
+  options
+}: BettingListRoundsQuery<TData>) {
+  return useQuery<RoundsResponse, Error, TData>(bettingQueryKeys.listRounds(client?.moduleId, args), () => client ? client.listRounds({
+    limit: args.limit,
+    startAfter: args.startAfter
+  }) : Promise.reject(new Error("Invalid client")), { ...options,
+    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
+  });
+}
+export interface BettingRoundQuery<TData> extends BettingReactQuery<RoundResponse, TData> {
+  args: {
+    roundId: number;
+  };
+}
 export function useBettingRoundQuery<TData = RoundResponse>({
   client,
+  args,
   options
 }: BettingRoundQuery<TData>) {
-  return useQuery<RoundResponse, Error, TData>(bettingQueryKeys.round(client?.moduleId), () => client ? client.round() : Promise.reject(new Error("Invalid client")), { ...options,
+  return useQuery<RoundResponse, Error, TData>(bettingQueryKeys.round(client?.moduleId, args), () => client ? client.round({
+    roundId: args.roundId
+  }) : Promise.reject(new Error("Invalid client")), { ...options,
     enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
   });
 }
@@ -170,6 +238,7 @@ export function useBettingUpdateConfigMutation(options?: Omit<UseMutationOptions
 export interface BettingCloseRoundMutation {
   client: BettingAppClient;
   msg: {
+    roundId: number;
     winner?: AccountId;
   };
   args?: {
@@ -191,6 +260,9 @@ export function useBettingCloseRoundMutation(options?: Omit<UseMutationOptions<E
 }
 export interface BettingDistributeWinningsMutation {
   client: BettingAppClient;
+  msg: {
+    roundId: number;
+  };
   args?: {
     fee?: number | StdFee | "auto";
     memo?: string;
@@ -200,17 +272,19 @@ export interface BettingDistributeWinningsMutation {
 export function useBettingDistributeWinningsMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, BettingDistributeWinningsMutation>, "mutationFn">) {
   return useMutation<ExecuteResult, Error, BettingDistributeWinningsMutation>(({
     client,
+    msg,
     args: {
       fee,
       memo,
       funds
     } = {}
-  }) => client.distributeWinnings(fee, memo, funds), options);
+  }) => client.distributeWinnings(msg, fee, memo, funds), options);
 }
 export interface BettingPlaceBetMutation {
   client: BettingAppClient;
   msg: {
     bet: Bet;
+    roundId: number;
   };
   args?: {
     fee?: number | StdFee | "auto";
@@ -232,6 +306,7 @@ export function useBettingPlaceBetMutation(options?: Omit<UseMutationOptions<Exe
 export interface BettingUpdateAccountsMutation {
   client: BettingAppClient;
   msg: {
+    roundId: number;
     toAdd: AccountOdds[];
     toRemove: AccountId[];
   };
@@ -254,6 +329,9 @@ export function useBettingUpdateAccountsMutation(options?: Omit<UseMutationOptio
 }
 export interface BettingRegisterMutation {
   client: BettingAppClient;
+  msg: {
+    roundId: number;
+  };
   args?: {
     fee?: number | StdFee | "auto";
     memo?: string;
@@ -263,10 +341,35 @@ export interface BettingRegisterMutation {
 export function useBettingRegisterMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, BettingRegisterMutation>, "mutationFn">) {
   return useMutation<ExecuteResult, Error, BettingRegisterMutation>(({
     client,
+    msg,
     args: {
       fee,
       memo,
       funds
     } = {}
-  }) => client.register(fee, memo, funds), options);
+  }) => client.register(msg, fee, memo, funds), options);
+}
+export interface BettingCreateRoundMutation {
+  client: BettingAppClient;
+  msg: {
+    baseBetToken: AssetEntry;
+    description: string;
+    name: string;
+  };
+  args?: {
+    fee?: number | StdFee | "auto";
+    memo?: string;
+    funds?: Coin[];
+  };
+}
+export function useBettingCreateRoundMutation(options?: Omit<UseMutationOptions<ExecuteResult, Error, BettingCreateRoundMutation>, "mutationFn">) {
+  return useMutation<ExecuteResult, Error, BettingCreateRoundMutation>(({
+    client,
+    msg,
+    args: {
+      fee,
+      memo,
+      funds
+    } = {}
+  }) => client.createRound(msg, fee, memo, funds), options);
 }

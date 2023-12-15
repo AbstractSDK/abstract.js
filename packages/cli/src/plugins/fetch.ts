@@ -4,7 +4,7 @@ import { default as fetch_ } from 'node-fetch'
 import { join } from 'pathe'
 
 import { homedir } from 'os'
-import type { ContractConfig, Plugin } from '../config'
+import type { ContractConfig, ContractVersion, Plugin } from '../config'
 import type { RequiredBy } from '../types'
 
 export type FetchConfig<
@@ -23,7 +23,9 @@ export type FetchConfig<
   /**
    * Function for creating a cache key for contract.
    */
-  getCacheKey(config: { contract: TContract }): `${string}:${string}:${string}`
+  getCacheKey(config: {
+    contract: TContract
+  }): `${string}:${string}:${string}:${ContractVersion}`
   /**
    * Name of source.
    */
@@ -46,6 +48,7 @@ export type FetchConfig<
   ):
     | Promise<{ url: RequestInfo; init?: RequestInit }>
     | { url: RequestInfo; init?: RequestInit }
+
   /**
    * Duration in milliseconds before request times out.
    *
@@ -87,6 +90,7 @@ export function fetch<
           await fse.readFile(cacheFileTimestampPath, 'utf8').catch(() => '0'),
           10,
         )
+
         let path
         if (cacheTimestamp > Date.now()) path = cacheFolderPath
         else {
@@ -118,7 +122,16 @@ export function fetch<
           }
         }
 
-        contracts.push({ path: path!, name: contract.name })
+        const [_pluginName, namespace, _name, version] = cacheKey.split(
+          ':',
+        ) as [string, string, string, ContractVersion]
+
+        contracts.push({
+          path: path!,
+          name: contract.name,
+          version,
+          namespace,
+        })
       }
       return contracts
     },

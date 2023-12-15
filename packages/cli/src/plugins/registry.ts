@@ -3,10 +3,7 @@ import { camelCase } from 'change-case'
 import type { ContractConfig } from '../config'
 import { fetch } from './fetch'
 
-type RegistryContract = Omit<ContractConfig, 'path'> & {
-  version: string
-  namespace: string
-}
+type RegistryContract = Omit<ContractConfig, 'path'>
 
 export type RegistryConfig = {
   /**

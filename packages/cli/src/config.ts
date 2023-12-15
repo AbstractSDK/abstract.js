@@ -1,5 +1,7 @@
 import type { MaybeArray, MaybePromise } from './types'
 
+export type ContractVersion = `${string}.${string}.${string}`
+
 export type ContractConfig = {
   /**
    * Name of the contract.
@@ -9,17 +11,19 @@ export type ContractConfig = {
    * Path to the contract schema directory.
    */
   path: string
+  /**
+   * Contract namespace.
+   */
+  namespace: string
+  /**
+   * Contract version.
+   */
+  version: ContractVersion
 }
 
 export type Contract = ContractConfig & {
   /** Generated string content */
   content: string
-  /** Meta info about contract */
-  // meta: {
-  //   abiName: string
-  //   // addressName?: string
-  //   // configName?: string
-  // }
 }
 
 export type Plugin = {

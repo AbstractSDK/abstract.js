@@ -4,27 +4,38 @@
 * and run the @abstract-money/ts-codegen generate command to regenerate this file.
 */
 
-export type AssetEntry = string;
 export type Decimal = string;
 export interface InstantiateMsg {
-  bet_asset?: AssetEntry | null;
   rake?: Decimal | null;
 }
 export type ExecuteMsg = {
-  register: {};
+  create_round: {
+    base_bet_token: AssetEntry;
+    description: string;
+    name: string;
+  };
+} | {
+  register: {
+    round_id: number;
+  };
 } | {
   update_accounts: {
+    round_id: number;
     to_add: AccountOdds[];
     to_remove: AccountId[];
   };
 } | {
   place_bet: {
     bet: Bet;
+    round_id: number;
   };
 } | {
-  distribute_winnings: {};
+  distribute_winnings: {
+    round_id: number;
+  };
 } | {
   close_round: {
+    round_id: number;
     winner?: AccountId | null;
   };
 } | {
@@ -32,6 +43,7 @@ export type ExecuteMsg = {
     rake?: Decimal | null;
   };
 };
+export type AssetEntry = string;
 export type AccountTrace = "local" | {
   remote: ChainName[];
 };
@@ -55,17 +67,29 @@ export interface AnsAsset {
   [k: string]: unknown;
 }
 export type QueryMsg = {
-  round: {};
+  round: {
+    round_id: number;
+  };
+} | {
+  list_rounds: {
+    limit?: number | null;
+    start_after?: number | null;
+  };
 } | {
   odds: {
+    round_id: number;
     team_id: AccountId;
   };
 } | {
-  list_odds: {};
+  list_odds: {
+    round_id: number;
+  };
 } | {
   config: {};
 } | {
-  bets: {};
+  bets: {
+    round_id: number;
+  };
 };
 export interface MigrateMsg {
   [k: string]: unknown;
@@ -73,33 +97,33 @@ export interface MigrateMsg {
 export type Addr = string;
 export interface BetsResponse {
   bets: [Addr, Uint128][];
+  round_id: number;
 }
 export interface ConfigResponse {
-  bet_denom: string;
   rake: Decimal;
 }
 export interface ListOddsResponse {
   odds: AccountOdds[];
-}
-export interface OddsResponse {
-  odds: Decimal;
+  round_id: number;
 }
 export type RoundStatus = ("open" | "rewards_distributed") | {
   closed: {
     winning_team?: AccountId | null;
   };
 };
+export interface RoundsResponse {
+  rounds: RoundResponse[];
+}
 export interface RoundResponse {
   bet_count: number;
-  description?: string | null;
-  id: AccountId;
+  description: string;
+  id: number;
   name: string;
   status: RoundStatus;
   teams: AccountId[];
-  total_bet: Coin;
+  total_bet: AnsAsset;
 }
-export interface Coin {
-  amount: Uint128;
-  denom: string;
-  [k: string]: unknown;
+export interface OddsResponse {
+  odds: Decimal;
+  round_id: number;
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { wagemos } from '../../generated/wagemos.graz'
+import { betting } from '../../_generated'
 import { PlaceBetDialog } from './_components/place-bet-dialog'
 import {
   Round,
@@ -18,7 +18,7 @@ import {
 } from './_components/round'
 
 export default function ListRoundsPage() {
-  const { data, isLoading, isError } = wagemos.queries.useListRounds({
+  const { data, isLoading, isError } = betting.queries.useListRounds({
     chain: 'neutron',
     args: {},
   })
