@@ -18,7 +18,10 @@ import {
 } from './_components/round'
 
 export default function ListRoundsPage() {
-  const { data, isLoading, isError } = wagemos.queries.useListRounds()
+  const { data, isLoading, isError } = wagemos.queries.useListRounds({
+    chain: 'neutron',
+    args: {},
+  })
   if (isLoading) return <p>Loading...</p>
   if (isError) return <p>Error</p>
   return (

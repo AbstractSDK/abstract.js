@@ -61,7 +61,7 @@ export function PlaceBetDialog({ round }: { round: RoundResponse }) {
   const { toast } = useToast()
 
   const { mutateAsync: placeBetAsync, isLoading } =
-    wagemos.mutations.usePlaceBet()
+    wagemos.mutations.usePlaceBet('neutron')
 
   const onSubmit: SubmitHandler<z.infer<typeof placeBetSchema>> = useCallback(
     async ({ amount, accountSeq }) => {

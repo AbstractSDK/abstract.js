@@ -5,7 +5,6 @@ import {
 } from '@abstract-money/react/utils'
 import {
   useAccount,
-  useActiveChainIds,
   useCosmWasmClient,
   useCosmWasmSigningClient,
 } from 'graz'
@@ -70,15 +69,12 @@ type Module = {
 const WAGEMOS_MODULE_ID = 'abstract:betting'
 
 function useGrazModuleQueryClient(
-  args: Omit<Parameters<typeof useModuleQueryClient>[0], 'chain' | 'client'>,
+  args: Omit<Parameters<typeof useModuleQueryClient>[0], 'client'>,
   options?: Parameters<typeof useModuleQueryClient>[1],
 ) {
   const { data: client } = useCosmWasmClient()
-  const chainIds = useActiveChainIds()
-  const chain = chainIds?.[0]
   return useModuleQueryClient(
     {
-      chain,
       client,
       ...args,
     },
@@ -89,18 +85,15 @@ function useGrazModuleQueryClient(
 function useGrazModuleMutationClient(
   args: Omit<
     Parameters<typeof useModuleMutationClient>[0],
-    'chain' | 'client' | 'sender'
+     'client' | 'sender'
   >,
   options?: Parameters<typeof useModuleMutationClient>[1],
 ) {
   const { data: client } = useCosmWasmSigningClient()
-  const chainIds = useActiveChainIds()
-  const chain = chainIds?.[0]
   const { data: account } = useAccount()
   const sender = account?.bech32Address
   return useModuleMutationClient(
     {
-      chain,
       client,
       sender,
       ...args,
@@ -117,7 +110,8 @@ export const wagemos = {
       {
         args = {},
         options,
-      }: Omit<WagemosListRoundsQuery<RoundsResponse>, 'client'> = { args: {} },
+        chain
+      }: Omit<WagemosListRoundsQuery<RoundsResponse>, 'client'>& {chain?: string} = { args: {} },
     ) => {
       const {
         data: wagemosQueryClient,
@@ -128,6 +122,7 @@ export const wagemos = {
         {
           moduleId: WAGEMOS_MODULE_ID,
           Module: WagemosAppQueryClient,
+          chain
         },
         { enabled: options?.enabled },
       )
@@ -176,7 +171,8 @@ export const wagemos = {
     useBets: ({
       args,
       options,
-    }: Omit<WagemosBetsQuery<BetsResponse>, 'client'>) => {
+      chain
+    }: Omit<WagemosBetsQuery<BetsResponse>, 'client'>& {chain?: string}) => {
       const {
         data: wagemosQueryClient,
         isLoading: isWagemosQueryClientLoading,
@@ -186,6 +182,7 @@ export const wagemos = {
         {
           moduleId: WAGEMOS_MODULE_ID,
           Module: WagemosAppQueryClient,
+          chain
         },
         { enabled: options?.enabled },
       )
@@ -233,7 +230,8 @@ export const wagemos = {
     useRound: ({
       args,
       options,
-    }: Omit<WagemosRoundQuery<RoundResponse>, 'client'>) => {
+      chain
+    }: Omit<WagemosRoundQuery<RoundResponse>, 'client'>& {chain?: string}) => {
       const {
         data: wagemosQueryClient,
         isLoading: isWagemosQueryClientLoading,
@@ -243,6 +241,7 @@ export const wagemos = {
         {
           moduleId: WAGEMOS_MODULE_ID,
           Module: WagemosAppQueryClient,
+          chain
         },
         { enabled: options?.enabled },
       )
@@ -290,7 +289,8 @@ export const wagemos = {
     useOdds: ({
       args,
       options,
-    }: Omit<WagemosOddsQuery<OddsResponse>, 'client'>) => {
+      chain
+    }: Omit<WagemosOddsQuery<OddsResponse>, 'client'>& {chain?: string}) => {
       const {
         data: wagemosQueryClient,
         isLoading: isWagemosQueryClientLoading,
@@ -300,6 +300,7 @@ export const wagemos = {
         {
           moduleId: WAGEMOS_MODULE_ID,
           Module: WagemosAppQueryClient,
+          chain
         },
         { enabled: options?.enabled },
       )
@@ -347,7 +348,8 @@ export const wagemos = {
     useListOdds: ({
       args,
       options,
-    }: Omit<WagemosListOddsQuery<ListOddsResponse>, 'client'>) => {
+      chain
+    }: Omit<WagemosListOddsQuery<ListOddsResponse>, 'client'>& {chain?: string}) => {
       const {
         data: wagemosQueryClient,
         isLoading: isWagemosQueryClientLoading,
@@ -357,6 +359,7 @@ export const wagemos = {
         {
           moduleId: WAGEMOS_MODULE_ID,
           Module: WagemosAppQueryClient,
+          chain
         },
         { enabled: options?.enabled },
       )
@@ -403,7 +406,8 @@ export const wagemos = {
     },
     useConfig: ({
       options,
-    }: Omit<WagemosConfigQuery<ConfigResponse>, 'client'>) => {
+      chain
+    }: Omit<WagemosConfigQuery<ConfigResponse>, 'client'>& {chain?: string}) => {
       const {
         data: wagemosQueryClient,
         isLoading: isWagemosQueryClientLoading,
@@ -413,6 +417,7 @@ export const wagemos = {
         {
           moduleId: WAGEMOS_MODULE_ID,
           Module: WagemosAppQueryClient,
+          chain
         },
         { enabled: options?.enabled },
       )
@@ -459,6 +464,7 @@ export const wagemos = {
   },
   mutations: {
     useCreateRound: (
+      chain?: string,
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -477,6 +483,7 @@ export const wagemos = {
       } = useGrazModuleMutationClient({
         moduleId: WAGEMOS_MODULE_ID,
         Module: WagemosAppClient,
+        chain
       })
 
       const {
@@ -507,6 +514,7 @@ export const wagemos = {
       return { mutate, mutateAsync, ...rest } as const
     },
     useRegister: (
+      chain?: string,
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -525,6 +533,7 @@ export const wagemos = {
       } = useGrazModuleMutationClient({
         moduleId: WAGEMOS_MODULE_ID,
         Module: WagemosAppClient,
+        chain
       })
 
       const {
@@ -555,6 +564,7 @@ export const wagemos = {
       return { mutate, mutateAsync, ...rest } as const
     },
     useUpdateAccounts: (
+      chain?: string,
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -573,6 +583,7 @@ export const wagemos = {
       } = useGrazModuleMutationClient({
         moduleId: WAGEMOS_MODULE_ID,
         Module: WagemosAppClient,
+        chain
       })
 
       const {
@@ -603,6 +614,7 @@ export const wagemos = {
       return { mutate, mutateAsync, ...rest } as const
     },
     usePlaceBet: (
+      chain?: string,
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -619,6 +631,7 @@ export const wagemos = {
         // isError: isWagemosMutationClientError,
         // error: wagemosMutationClientError,
       } = useGrazModuleMutationClient({
+        chain,
         moduleId: WAGEMOS_MODULE_ID,
         Module: WagemosAppClient,
       })
@@ -651,6 +664,7 @@ export const wagemos = {
       return { mutate, mutateAsync, ...rest } as const
     },
     useDistributeWinnings: (
+      chain?: string,
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -667,6 +681,7 @@ export const wagemos = {
         // isError: isWagemosMutationClientError,
         // error: wagemosMutationClientError,
       } = useGrazModuleMutationClient({
+        chain,
         moduleId: WAGEMOS_MODULE_ID,
         Module: WagemosAppClient,
       })
@@ -699,6 +714,7 @@ export const wagemos = {
       return { mutate, mutateAsync, ...rest } as const
     },
     useCloseRound: (
+      chain?: string,
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -715,6 +731,7 @@ export const wagemos = {
         // isError: isWagemosMutationClientError,
         // error: wagemosMutationClientError,
       } = useGrazModuleMutationClient({
+        chain,
         moduleId: WAGEMOS_MODULE_ID,
         Module: WagemosAppClient,
       })
@@ -747,6 +764,7 @@ export const wagemos = {
       return { mutate, mutateAsync, ...rest } as const
     },
     useUpdateConfig: (
+      chain?: string,
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -763,6 +781,7 @@ export const wagemos = {
         // isError: isWagemosMutationClientError,
         // error: wagemosMutationClientError,
       } = useGrazModuleMutationClient({
+        chain,
         moduleId: WAGEMOS_MODULE_ID,
         Module: WagemosAppClient,
       })
