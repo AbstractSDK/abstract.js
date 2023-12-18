@@ -1,11 +1,10 @@
 import { defineConfig } from '@abstract-money/cli'
-import { cosmosKit, react, registry } from '@abstract-money/cli/plugins'
+import { react, registry } from '@abstract-money/cli/plugins'
 
 export default defineConfig({
   out: 'src/_generated',
   plugins: [
-    cosmosKit(),
-    react(),
+    react({ addon: 'cosmos-kit' }),
     registry({
       contracts: [{ namespace: 'abstract', name: 'betting', version: '0.0.2' }],
     }),

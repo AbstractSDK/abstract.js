@@ -6,7 +6,7 @@ import { defineConfig } from './config'
 describe('defineConfig', () => {
   it('object', () => {
     const config: Config = {
-      //contracts: [],
+      contracts: [],
       out: 'abstract.ts',
       plugins: [],
     }
@@ -15,7 +15,7 @@ describe('defineConfig', () => {
 
   it('array', () => {
     const config: Config = {
-      //contracts: [],
+      contracts: [],
       out: 'abstract.ts',
       plugins: [],
     }
@@ -24,7 +24,7 @@ describe('defineConfig', () => {
 
   it('function', () => {
     const config = vi.fn().mockImplementation(() => ({
-      //contracts: [],
+      contracts: [],
       out: 'abstract.ts',
       plugins: [],
     }))
@@ -33,7 +33,7 @@ describe('defineConfig', () => {
 
   it('async function', () => {
     const config = vi.fn().mockImplementation(async () => ({
-      //contracts: [],
+      contracts: [],
       out: 'abstract.ts',
       plugins: [],
     }))

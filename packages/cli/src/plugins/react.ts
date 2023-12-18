@@ -8,15 +8,16 @@ import { join, relative, resolve } from 'pathe'
 import type { Plugin } from '../config'
 import type { RequiredBy } from '../types'
 
-type ReactResult = RequiredBy<Plugin, 'run'>
-
 // NOTE: It looks like the `ts-codegen` package bundles incorrectly and the default export is not actually exported.
 const codegen = (_codegen as any).default as typeof _codegen
 
-export function react(): ReactResult {
+type ReactConfig = { addon: 'graz' } | { addon: 'cosmos-kit'; lite?: boolean }
+type ReactResult = RequiredBy<Plugin, 'run'>
+
+export function react(options?: ReactConfig): ReactResult {
   return {
     name: 'React',
-    async run({ contracts, out, isTypeScript, outputs }) {
+    async run({ contracts, out, isTypeScript }) {
       // Prepare default config options
       const codegenOptions = {
         client: { enabled: true },
@@ -36,19 +37,6 @@ export function react(): ReactResult {
 
       const cosmwasmCodegenDirPath = join(out, 'cosmwasm-codegen')
 
-      let plugin: 'graz' | 'cosmos-kit' | undefined
-      for (const {
-        plugin: { name },
-      } of outputs) {
-        if (name === 'Graz') {
-          plugin = 'graz'
-          break
-        } else if (name === 'CosmosKit') {
-          plugin = 'cosmos-kit'
-          break
-        }
-      }
-
       await codegen({
         options: codegenOptions,
         contracts: contracts.map(({ name, path }) => ({ name, dir: path })),
@@ -56,6 +44,18 @@ export function react(): ReactResult {
       })
 
       const imports: string[] = []
+
+      if (options?.addon === 'graz') {
+        imports.push(
+          `import { useAccount, useCosmWasmClient, useCosmWasmSigningClient } from 'graz'`,
+        )
+      } else if (options?.addon === 'cosmos-kit') {
+        imports.push(
+          `import { useChain } from '@cosmos-kit/${
+            options.lite ? 'react-lite' : 'react'
+          }'`,
+        )
+      }
 
       const content: string[] = []
       for (const contract of contracts) {
@@ -160,7 +160,7 @@ export function react(): ReactResult {
             | 'useCosmosKitModuleMutationClient'
             | 'useModuleMutationClient'
 
-          if (plugin === 'graz') {
+          if (options?.addon === 'graz') {
             useModuleQueryClientHookName = 'useGrazModuleQueryClient'
             useModuleMutationClientHookName = 'useGrazModuleMutationClient'
             content.push(dedent`
@@ -198,7 +198,7 @@ export function react(): ReactResult {
                 )
               }
             `)
-          } else if (plugin === 'cosmos-kit') {
+          } else if (options?.addon === 'cosmos-kit') {
             useModuleQueryClientHookName = 'useCosmosKitModuleQueryClient'
             useModuleMutationClientHookName = 'useCosmosKitModuleMutationClient'
             content.push(dedent`
@@ -264,7 +264,7 @@ export function react(): ReactResult {
             useModuleMutationClientHookName = 'useModuleMutationClient'
           }
 
-          const shouldInjectClientAndSender = plugin === undefined
+          const shouldInjectClientAndSender = options === undefined
 
           {
             const queryHooks = new Map<Hook, string>([])
@@ -442,8 +442,8 @@ export function react(): ReactResult {
         }
       }
 
-      const shouldImportUseEffectAndUseState = plugin === 'cosmos-kit'
-      const shouldImportCosmWasmClientTypes = plugin === 'cosmos-kit'
+      const shouldImportUseEffectAndUseState = options?.addon === 'cosmos-kit'
+      const shouldImportCosmWasmClientTypes = options?.addon === 'cosmos-kit'
 
       return {
         imports: dedent`
