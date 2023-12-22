@@ -6,8 +6,8 @@ it('should expose correct exports', () => {
   expect(Object.keys(Exports)).toMatchInlineSnapshot(`
     [
       "defineConfig",
-      "logger",
       "loadEnv",
+      "logger",
     ]
   `)
 })
