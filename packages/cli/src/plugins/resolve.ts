@@ -1,13 +1,13 @@
 import { default as fse } from 'fs-extra'
 import type { RequestInfo, RequestInit, Response } from 'node-fetch'
-import { default as fetch_ } from 'node-fetch'
+import { default as fetch } from 'node-fetch'
 import { join } from 'pathe'
 
 import { homedir } from 'os'
 import type { ContractConfig, ContractVersion, Plugin } from '../config'
 import type { RequiredBy } from '../types'
 
-export type FetchConfig<
+export type ResolveConfig<
   TContract extends Omit<ContractConfig, 'path'> = Omit<ContractConfig, 'path'>,
 > = {
   /**
@@ -57,22 +57,22 @@ export type FetchConfig<
   timeoutDuration?: number
 }
 
-type FetchResult = RequiredBy<Plugin, 'contracts'>
+type ResolveResult = RequiredBy<Plugin, 'contracts'>
 
 /**
- * Fetches and parses contract schemas from network resource with `fetch`.
+ * Resolvees and parses contract schemas from network resource with `fetch`.
  */
-export function fetch<
+export function resolve<
   TContract extends Omit<ContractConfig, 'path'> = Omit<ContractConfig, 'path'>,
 >({
   cacheDuration = 1_800_000,
   contracts: contractConfigs,
   getCacheKey,
-  name = 'Fetch',
+  name = 'Resolve',
   parse = ({ response }) => response.json(),
   request,
   timeoutDuration = 5_000,
-}: FetchConfig<TContract>): FetchResult {
+}: ResolveConfig<TContract>): ResolveResult {
   return {
     async contracts() {
       const cacheDir = join(homedir(), '.abstract-cli/plugins/fetch/cache')
@@ -102,7 +102,7 @@ export function fetch<
           try {
             const { url, init } = await request(contract)
             // TODO: Replace `node-fetch` with native `fetch` when Node 18 is more widely used.
-            const response = await fetch_(url, {
+            const response = await fetch(url, {
               ...init,
               // TODO: Use `AbortSignal.timeout` when Node 18 is more widely used.
               signal: controller.signal,

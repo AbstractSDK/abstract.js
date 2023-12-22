@@ -1,7 +1,7 @@
 import { camelCase } from 'change-case'
 
 import type { ContractConfig } from '../config'
-import { fetch } from './fetch'
+import { resolve } from './resolve'
 
 type RegistryContract = Omit<ContractConfig, 'path'>
 
@@ -33,7 +33,7 @@ export function registry({
   contracts,
   name = 'Registry',
 }: RegistryConfig) {
-  return fetch<RegistryContract>({
+  return resolve<RegistryContract>({
     cacheDuration,
     contracts,
     name,
