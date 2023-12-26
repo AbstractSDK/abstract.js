@@ -15,7 +15,7 @@ const Context = React.createContext<AbstractAccountIdContext | undefined>(
  * consumer is not obligated to set one at the initialization time, the context
  * is exported as a separate entity to be used whenever needed.
  */
-export function AbstractAccountIdContext({
+export function AbstractAccountIdProvider({
   children,
   accountId: defaultAccountId,
 }: React.PropsWithChildren<{ accountId: AbstractAccountId }>) {
