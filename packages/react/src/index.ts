@@ -1,6 +1,6 @@
 export {
   useAccountId,
-  AbstractAccountIdContext,
+  AbstractAccountIdProvider,
   AbstractProvider,
   useConfig,
 } from './contexts'
