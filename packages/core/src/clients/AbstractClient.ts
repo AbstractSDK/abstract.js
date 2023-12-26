@@ -8,9 +8,10 @@ import {
   type HttpEndpoint,
   type SigningCosmWasmClient,
 } from '@cosmjs/cosmwasm-stargate'
+import { Variables } from 'graphql-request'
 import semverSatisfies from 'semver/functions/satisfies'
 import { gql } from '../__generated__/gql'
-import { graphqlRequest } from '../api'
+import { apiRequest, graphqlRequest } from '../api'
 import { ChainRegistryClient, assets, chains } from '../chain-registry'
 import { AbstractModule } from '../clients/objects'
 import { ABSTRACT_API_URL } from '../constants'
@@ -53,7 +54,7 @@ export interface AccountModuleFilter {
   version?: string
 }
 
-export const CHAIN_DEPLOYMENT_QUERY = gql(/* GraphQL */ `
+const CHAIN_DEPLOYMENT_QUERY = gql(/* GraphQL */ `
   query Deployment($chain: ID!) {
     version
     deployment(chain: $chain) {
@@ -105,20 +106,25 @@ export class AbstractQueryClient implements IAbstractQueryClient {
   readonly registryAddress: string
   readonly factoryAddress: string
   readonly ansHostAddress: string
+  readonly apiUrl: string
   accountCache: Map<string, AbstractAccountQueryClient> = new Map()
   _chainName: string | undefined
 
-  constructor({
-    client,
-    registryAddress,
-    ansHostAddress,
-    factoryAddress,
-  }: Omit<IAbstractQueryClient, 'connectSigningClient'>) {
+  constructor(
+    {
+      client,
+      registryAddress,
+      ansHostAddress,
+      factoryAddress,
+    }: Omit<IAbstractQueryClient, 'connectSigningClient'>,
+    options?: { apiUrl?: string },
+  ) {
     if (!client) throw new Error(`CosmWasm client is missing: ${client}`)
     this.client = client
     this.registryAddress = registryAddress
     this.factoryAddress = factoryAddress
     this.ansHostAddress = ansHostAddress
+    this.apiUrl = options?.apiUrl ?? ABSTRACT_API_URL
     this.connectSigningClient = this.connectSigningClient.bind(this)
   }
 
@@ -159,9 +165,7 @@ export class AbstractQueryClient implements IAbstractQueryClient {
     return new AbstractQueryClient({
       client: cosmWasmClient,
       registryAddress: registryAddress,
-      // TODO: remove this hack
       ansHostAddress: ansHostAddress as string,
-      // TODO: remove this hack
       factoryAddress: factoryAddress as string,
     })
   }
@@ -177,8 +181,9 @@ export class AbstractQueryClient implements IAbstractQueryClient {
     chainId: string,
     options: AbstractQueryClientOptions = DEFAULT_ABSTRACT_QUERY_CLIENT_OPTIONS,
   ): Promise<AbstractQueryClient> {
-    const data = await graphqlRequest(
-      options.overrideApiUrl ?? ABSTRACT_API_URL,
+    const apiUrl = options.overrideApiUrl ?? ABSTRACT_API_URL
+    const deploymentData = await graphqlRequest(
+      apiUrl,
       CHAIN_DEPLOYMENT_QUERY,
       {
         chain: chainId,
@@ -190,20 +195,33 @@ export class AbstractQueryClient implements IAbstractQueryClient {
       ansHost: ansHostAddress,
       registry: registryAddress,
       accountFactory: factoryAddress,
-    } = data.deployment
+    } = deploymentData.deployment
 
-    const rpcEndpoint = options.rpcUrl || data.chainInfo.rpcUrl
+    const rpcEndpoint = options.rpcUrl || deploymentData.chainInfo.rpcUrl
 
     const cosmWasmClient = await (options.useBatchClient
       ? BatchCosmWasmClient.connect(rpcEndpoint, options.batchClientOptions)
       : CosmWasmClient.connect(rpcEndpoint))
 
-    return new AbstractQueryClient({
-      client: cosmWasmClient,
-      registryAddress,
-      ansHostAddress,
-      factoryAddress,
-    })
+    return new AbstractQueryClient(
+      {
+        client: cosmWasmClient,
+        registryAddress,
+        ansHostAddress,
+        factoryAddress,
+      },
+      { apiUrl },
+    )
+  }
+
+  /**
+   * Query the Abstract API.
+   * @param params
+   */
+  public async queryApi<TResult, V extends Variables = Variables>(
+    ...params: Parameters<typeof apiRequest<TResult, V>>
+  ): Promise<ReturnType<typeof apiRequest<TResult, V>>> {
+    return graphqlRequest(this.apiUrl, ...params)
   }
 
   public async getChainName(): Promise<string> {
@@ -216,6 +234,13 @@ export class AbstractQueryClient implements IAbstractQueryClient {
     this._chainName = chainName
 
     return chainName
+  }
+
+  /**
+   * Get the chain id for the connected chain.
+   */
+  public async getChainId(): Promise<string> {
+    return this.client.getChainId()
   }
 
   /**
@@ -531,7 +556,7 @@ export class AbstractClient extends AbstractQueryClient {
     if (link) {
       try {
         new URL(link)
-      } catch {
+      } catch (error) {
         throw new Error('Invalid link. Must be a valid URL.')
       }
     }
