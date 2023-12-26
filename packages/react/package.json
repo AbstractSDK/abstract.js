@@ -65,51 +65,10 @@
       "types": "./dist/utils/index.d.ts",
       "default": "./dist/utils/index.js"
     },
-    "./internal": {
-      "types": "./dist/internal/index.d.ts",
-      "default": "./dist/internal/index.js"
-    },
-    "./internal/account": {
-      "types": "./dist/internal/account/index.d.ts",
-      "default": "./dist/internal/account/index.js"
-    },
-    "./internal/apps/challenge": {
-      "types": "./dist/internal/apps/challenge/index.d.ts",
-      "default": "./dist/internal/apps/challenge/index.js"
-    },
-    "./internal/cw-plus/cw-20": {
-      "types": "./dist/internal/cw-plus/cw-20/index.d.ts",
-      "default": "./dist/internal/cw-plus/cw-20/index.js"
-    },
-    "./internal/cw-plus/cw-20-ics": {
-      "types": "./dist/internal/cw-plus/cw-20-ics/index.d.ts",
-      "default": "./dist/internal/cw-plus/cw-20-ics/index.js"
-    },
-    "./internal/cw-plus/cw-3-flex-multisig": {
-      "types": "./dist/internal/cw-plus/cw-3-flex-multisig/index.d.ts",
-      "default": "./dist/internal/cw-plus/cw-3-flex-multisig/index.js"
-    },
-    "./internal/cw-plus/cw-4-group": {
-      "types": "./dist/internal/cw-plus/cw-4-group/index.d.ts",
-      "default": "./dist/internal/cw-plus/cw-4-group/index.js"
-    },
-    "./internal/native/ans": {
-      "types": "./dist/internal/native/ans/index.d.ts",
-      "default": "./dist/internal/native/ans/index.js"
-    },
-    "./internal/native/factory": {
-      "types": "./dist/internal/native/factory/index.d.ts",
-      "default": "./dist/internal/native/factory/index.js"
-    },
-    "./internal/native/registry": {
-      "types": "./dist/internal/native/registry/index.d.ts",
-      "default": "./dist/internal/native/registry/index.js"
-    },
     "./package.json": "./package.json"
   },
   "files": [
     "/utils",
-    "/internal",
     "/dist"
   ],
   "simple-git-hooks": {
