@@ -1,0 +1,90 @@
+{
+  "name": "@abstract-money/cli",
+  "version": "0.0.0",
+  "description": "CLI tool to generate modules to build with Abstract SDK",
+  "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
+  "author": "h0tw4t3r <vlad@abstract.money>",
+  "contributors": [
+    "h0tw4t3r <vlad@abstract.money>",
+    "adairrr <adair@abstract.money>"
+  ],
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbstractSDK/abstract.js.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/AbstractSDK/abstract.js/issues"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "DEV=true tsup",
+    "clean": "rimraf dist",
+    "typecheck": "tsc --noEmit --jsx react-jsx"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "bin": {
+    "abstract": "./dist/cli.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "@abstract-money/ts-codegen": "^0.35.4",
+    "abort-controller": "^3.0.0",
+    "bundle-require": "^3.1.2",
+    "cac": "^6.7.12",
+    "change-case": "^4.1.2",
+    "dedent": "^0.7.0",
+    "detect-package-manager": "^2.0.1",
+    "dotenv": "^16.0.3",
+    "dotenv-expand": "^10.0.0",
+    "execa": "^6.1.0",
+    "find-up": "^6.3.0",
+    "fs-extra": "^10.1.0",
+    "node-fetch": "^3.3.2",
+    "ora": "^6.1.2",
+    "pathe": "^1.0.0",
+    "picocolors": "^1.0.0",
+    "prettier": "^2.8.1",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.2",
+    "@types/node": "^18.11.10",
+    "@vitest/spy": "^1.0.4",
+    "fixturez": "^1.1.0",
+    "rimraf": "^3.0.0",
+    "serve": "^14.2.0",
+    "ts-jest": "^29.0.2",
+    "typedoc": "^0.23.25",
+    "typedoc-plugin-markdown": "^3.14.0",
+    "vitest": "^1.0.2"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./config": {
+      "types": "./dist/config.d.ts",
+      "default": "./dist/config.js"
+    },
+    "./plugins": {
+      "types": "./dist/plugins/index.d.ts",
+      "default": "./dist/plugins/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "/config",
+    "/plugins",
+    "/dist"
+  ]
+}
