@@ -6,10 +6,8 @@
 
 import { Coin, StdFee } from '@cosmjs/amino'
 import { ExecuteResult, SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { CamelCasedProperties } from 'type-fest'
 import { ContractMsg } from '.'
 import { AppExecuteMsg, AppExecuteMsgFactory } from '../modules'
-import { AccountId } from '../native/registry/Registry.types'
 import {
   AbstractAccountClient,
   AbstractAccountQueryClient,
@@ -155,18 +153,18 @@ export class AppClient<
    * which has signing capabilities.
    *
    * @param queryClient - The AbstractAccountQueryClient to be upgraded.
-   * @param abstract - The AbstractClient to be associated with the new AbstractAccountClient.
+   * @param client - The AbstractClient to be associated with the new AbstractAccountClient.
    *
    * @returns A new AbstractAccountClient, upgraded from the provided AbstractAccountQueryClient.
    */
   public static fromQueryClient<TQueryMsg extends ContractMsg>(
     queryClient: AppQueryClient<TQueryMsg>,
-    abstractClient: AbstractClient,
+    client: AbstractClient,
   ) {
     return new AppClient({
       ...queryClient.accountQueryClient,
       ...queryClient,
-      abstractClient,
+      abstractClient: client,
     })
   }
 

@@ -1,43 +1,50 @@
 import {
-  CosmWasmClient,
-  SigningCosmWasmClient,
+  type CosmWasmClient,
+  type SigningCosmWasmClient,
 } from '@cosmjs/cosmwasm-stargate'
+import { BiMap } from '@rimbu/bimap'
 import { Mixin } from 'ts-mixer'
+
 import { ABSTRACT_CONSTANTS } from '../constants'
+
 import {
   AnsHostClient,
-  AnsHostInterface,
+  type AnsHostInterface,
   AnsHostQueryClient,
-  AnsHostReadOnlyInterface,
+  type AnsHostReadOnlyInterface,
 } from '../native'
+
 import {
-  AssetInfoBaseForAddr,
-  ChannelEntry,
-  ContractEntry,
+  type AssetInfoBaseForAddr,
+  type ChannelEntry,
+  type ContractEntry,
 } from '../native/ans-host/AnsHost.types'
 
-export type AnsAssetEntry = [string, AssetInfoBaseForAddr]
-export type AnsContractEntry = [ContractEntry, string]
-export type AnsChannelEntry = [ChannelEntry, string]
+type AnsId = string
+export type RawAnsAssetEntry = readonly [AnsId, AssetInfoBaseForAddr]
+export type RawAnsContractEntry = [ContractEntry, string]
+export type RawAnsChannelEntry = [ChannelEntry, string]
 
 interface IAnsQueryClient extends AnsHostReadOnlyInterface {
   /**
    * List all assets in ANS.
    */
-  listAssets({ startAfter }: { startAfter: string }): Promise<AnsAssetEntry[]>
+  listAssets({
+    startAfter,
+  }: { startAfter: string }): Promise<RawAnsAssetEntry[]>
 
   /**
    * Filter assets in ANS by their ids.
    * @param ids
    */
-  filterAssets({ ids }: { ids: string[] }): Promise<AnsAssetEntry[]>
+  filterAssets({ ids }: { ids: string[] }): Promise<RawAnsAssetEntry[]>
 
   /**
    * List all contracts in ANS.
    */
   listContracts({
     startAfter,
-  }: { startAfter: ContractEntry }): Promise<AnsContractEntry[]>
+  }: { startAfter: ContractEntry }): Promise<RawAnsContractEntry[]>
 
   /**
    * Filter contracts in ANS by their ids.
@@ -45,14 +52,14 @@ interface IAnsQueryClient extends AnsHostReadOnlyInterface {
    */
   filterContracts({
     entries,
-  }: { entries: ContractEntry[] }): Promise<AnsContractEntry[]>
+  }: { entries: ContractEntry[] }): Promise<RawAnsContractEntry[]>
 
   /**
    * List all the channels in ANS.
    */
   listChannels({
     startAfter,
-  }: { startAfter: ChannelEntry }): Promise<AnsChannelEntry[]>
+  }: { startAfter: ChannelEntry }): Promise<RawAnsChannelEntry[]>
 
   /**
    * Filter channels in ANS by their ids.
@@ -60,7 +67,7 @@ interface IAnsQueryClient extends AnsHostReadOnlyInterface {
    */
   filterChannels({
     entries,
-  }: { entries: ChannelEntry[] }): Promise<AnsChannelEntry[]>
+  }: { entries: ChannelEntry[] }): Promise<RawAnsChannelEntry[]>
 }
 
 /**
@@ -81,15 +88,56 @@ export class AnsQueryClient
     this.filterChannels = this.filterChannels.bind(this)
   }
 
+  private assetCache: BiMap<AnsId, AssetInfoBaseForAddr> = BiMap.empty()
+
+  /**
+   * Clear the asset cache.
+   */
+  private clearAssetCache = () => {
+    console.log('clearing asset cache')
+    this.assetCache = BiMap.empty()
+  }
+
+  /**
+   * Add a new asset entry to the cache based on the response.
+   * @param entry
+   */
+  private cacheAssetEntry = (entry: RawAnsAssetEntry) => {
+    this.assetCache = this.assetCache.addEntry(entry)
+  }
+
+  /**
+   * Retrieve an asset entry via its info. (reverse query).
+   * @param info
+   */
+  public entryByInfo = async (
+    info: AssetInfoBaseForAddr,
+  ): Promise<RawAnsAssetEntry | undefined> => {
+    // populate the cache
+    await this.listAssets()
+
+    const ansId = this.assetCache.getKey(info)
+
+    return ansId === undefined ? undefined : [ansId, info]
+  }
+
   /**
    * List all assets in ANS.
+   * If *cached* is set to false, it will hard refresh.
    */
   public async listAssets({
+    ignoreCache = false,
     startAfter: userPageToken,
   }: {
-    startAfter: string
-  }): Promise<AnsAssetEntry[]> {
-    const resolvedEntries: AnsAssetEntry[] = []
+    ignoreCache?: boolean
+    startAfter?: string
+  } = {}): Promise<RawAnsAssetEntry[]> {
+    // if we're cached, and the cache is not empty, return the cache
+    if (!ignoreCache && !this.assetCache.isEmpty) {
+      return this.assetCache.toArray()
+    }
+
+    const resolvedEntries: RawAnsAssetEntry[] = []
 
     let startAfter = userPageToken
 
@@ -101,12 +149,13 @@ export class AnsQueryClient
           startAfter,
         }).then(({ assets }) => {
           hasNextPage = assets.length === ABSTRACT_CONSTANTS.MAX_PAGE_SIZE
-          // TODO: remove this hack
-          startAfter = assets[assets.length - 1]?.[0] as string
+          startAfter = assets[assets.length - 1]?.[0]
           return assets
         })),
       )
     }
+
+    resolvedEntries.forEach(this.cacheAssetEntry)
 
     return resolvedEntries
   }
@@ -117,7 +166,7 @@ export class AnsQueryClient
    */
   public async filterAssets({
     ids,
-  }: { ids: string[] }): Promise<AnsAssetEntry[]> {
+  }: { ids: AnsId[] }): Promise<RawAnsAssetEntry[]> {
     return this.assets({
       names: ids,
     }).then(({ assets }) => assets)
@@ -131,8 +180,8 @@ export class AnsQueryClient
     startAfter: userPageToken,
   }: {
     startAfter: ChannelEntry
-  }): Promise<AnsChannelEntry[]> {
-    const resolvedEntries: AnsChannelEntry[] = []
+  }): Promise<RawAnsChannelEntry[]> {
+    const resolvedEntries: RawAnsChannelEntry[] = []
 
     let startAfter = userPageToken
 
@@ -144,7 +193,6 @@ export class AnsQueryClient
           startAfter,
         }).then(({ channels }) => {
           hasNextPage = channels.length === ABSTRACT_CONSTANTS.MAX_PAGE_SIZE
-          // TODO: remove this hack
           startAfter = channels[channels.length - 1]?.[0] as ChannelEntry
           return channels
         })),
@@ -162,7 +210,7 @@ export class AnsQueryClient
     entries,
   }: {
     entries: ChannelEntry[]
-  }): Promise<AnsChannelEntry[]> {
+  }): Promise<RawAnsChannelEntry[]> {
     return this.channels({
       entries: entries,
     }).then(({ channels }) => channels)
@@ -172,8 +220,8 @@ export class AnsQueryClient
     startAfter: userPageToken,
   }: {
     startAfter: ContractEntry
-  }): Promise<AnsContractEntry[]> {
-    const resolvedEntries: AnsContractEntry[] = []
+  }): Promise<RawAnsContractEntry[]> {
+    const resolvedEntries: RawAnsContractEntry[] = []
 
     let startAfter = userPageToken
 
@@ -185,7 +233,6 @@ export class AnsQueryClient
           startAfter,
         }).then(({ contracts }) => {
           hasNextPage = contracts.length === ABSTRACT_CONSTANTS.MAX_PAGE_SIZE
-          // TODO: remove this hack
           startAfter = contracts[contracts.length - 1]?.[0] as ContractEntry
           return contracts
         })),
@@ -202,7 +249,7 @@ export class AnsQueryClient
     entries,
   }: {
     entries: ContractEntry[]
-  }): Promise<AnsContractEntry[]> {
+  }): Promise<RawAnsContractEntry[]> {
     return this.contracts({
       entries: entries,
     }).then(({ contracts }) => contracts)

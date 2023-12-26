@@ -16,10 +16,8 @@ export class ModuleId {
       )
     }
     const split = id.split(MODULE_DELIMITER)
-    // TODO: remove this hack
-    this._namespace = split[0] as string
-    // TODO: remove this hack
-    this._name = split[1] as string
+    this._namespace = split[0]
+    this._name = split[1]
   }
 
   get namespace() {

@@ -5,9 +5,9 @@ import {
   type SigningCosmWasmClient,
 } from '@cosmjs/cosmwasm-stargate'
 import { type JsonObject } from '@cosmjs/cosmwasm-stargate/build/modules'
-import { toBase64, toUtf8 } from '@cosmjs/encoding'
+import { type StdFee } from '@cosmjs/stargate'
 import { match } from 'ts-pattern'
-import { type ContractMsg } from '.'
+import { type ContractMsg, type EncodedMsg } from '.'
 import {
   ManagerClient,
   ManagerExecuteMsgBuilder,
@@ -19,10 +19,7 @@ import {
   ProxyQueryClient,
 } from '../account'
 import { type ManagerModuleInfo } from '../account/manager/Manager.types'
-import {
-  type AssetInfoBaseForAddr,
-  CosmosMsgForEmpty,
-} from '../account/proxy/Proxy.types'
+import { type CosmosMsgForEmpty } from '../account/proxy/Proxy.types'
 import { ABSTRACT_CONSTANTS } from '../constants'
 import {
   AdapterExecuteMsgFactory,
@@ -32,7 +29,11 @@ import {
 } from '../modules'
 import { type ModuleReference } from '../native/registry/Registry.types'
 import { type AbstractClient, type AbstractQueryClient } from './AbstractClient'
+import { jsonToBinary } from './encoding'
 import { AbstractAccountId } from './objects/AbstractAccountId'
+import { type AnsAssetList } from './objects/AnsAssetList'
+import { type AssetInfo } from './objects/AssetInfo'
+import { type AssetList } from './objects/AssetList'
 
 type VariantKeys<T> = T extends T ? keyof T : never
 export type ModuleType = VariantKeys<ModuleReference>
@@ -47,10 +48,10 @@ interface IAbstractAccountQueryClient {
 /**
  * Query a module with the given msg.
  */
-interface QueryModule {
+interface QueryModule<TModuleMsg extends ContractMsg = ContractMsg> {
   moduleId: string
   moduleType?: ModuleType
-  queryMsg: ContractMsg
+  queryMsg: TModuleMsg
 }
 
 /**
@@ -84,7 +85,10 @@ export class AbstractAccountQueryClient implements IAbstractAccountQueryClient {
   }
 
   /**
-   * Load the abstract account client given the **accountId** and the **abstractClient**. @param abstractClient Abstract client connected to the chain. @param accountId The account id. */
+   * Load the abstract account client given the **accountId** and the **abstractClient**.
+   * @param abstractClient Abstract client connected to the chain.
+   * @param accountId The account id.
+   */
   public static async load(
     abstractClient: AbstractQueryClient,
     accountId: AbstractAccountId,
@@ -121,6 +125,13 @@ export class AbstractAccountQueryClient implements IAbstractAccountQueryClient {
    */
   get accountSequence(): number {
     return this.accountId.sequence
+  }
+
+  /**
+   * Retrieve the deposit address.
+   */
+  get depositAddress(): string {
+    return this.proxyAddress
   }
 
   /**
@@ -221,7 +232,7 @@ export class AbstractAccountQueryClient implements IAbstractAccountQueryClient {
    * Return the asset by which the value of the Account is calculated.
    * @returns the base asset.
    */
-  public async getBaseAsset(): Promise<AssetInfoBaseForAddr> {
+  public async getBaseAsset(): Promise<AssetInfo> {
     return await this.proxyQueryClient
       .baseAsset()
       .then(({ base_asset }) => base_asset)
@@ -246,10 +257,13 @@ export class AbstractAccountQueryClient implements IAbstractAccountQueryClient {
    * @param queryMsg the query message
    * @param moduleType the type of the module
    */
-  private wrapModuleQueryMsg(queryMsg: ContractMsg, moduleType?: ModuleType) {
+  private wrapModuleQueryMsg<TModuleMsg extends ContractMsg = ContractMsg>(
+    queryMsg: TModuleMsg,
+    moduleType?: ModuleType,
+  ) {
     return match(moduleType)
-      .with('app', () => AppQueryMsgFactory.queryApp(queryMsg))
-      .with('adapter', () => AdapterQueryMsgBuilder.query(queryMsg))
+      .with('app', () => AppQueryMsgFactory.queryApp<TModuleMsg>(queryMsg))
+      .with('adapter', () => AdapterQueryMsgBuilder.query<TModuleMsg>(queryMsg))
       .otherwise(() => queryMsg)
   }
 
@@ -259,12 +273,15 @@ export class AbstractAccountQueryClient implements IAbstractAccountQueryClient {
    * @param moduleType
    * @param queryMsg
    */
-  public async queryModule({
+  public async queryModule<TModuleMsg extends ContractMsg = ContractMsg>({
     moduleId,
     moduleType,
     queryMsg,
-  }: QueryModule): Promise<JsonObject> {
-    const moduleQueryMsg = this.wrapModuleQueryMsg(queryMsg, moduleType)
+  }: QueryModule<TModuleMsg>): Promise<JsonObject> {
+    const moduleQueryMsg = this.wrapModuleQueryMsg<TModuleMsg>(
+      queryMsg,
+      moduleType,
+    )
 
     const moduleAddress = await this.getModuleAddress(moduleId)
     if (!moduleAddress) {
@@ -355,7 +372,7 @@ export class AbstractAccountClient extends AbstractAccountQueryClient {
   }
 
   /**
-   * Get the proxy address.
+   * Get the proxy client.
    */
   get proxyClient(): ProxyClient {
     return new ProxyClient(this.abstract.client, this.sender, this.proxyAddress)
@@ -370,6 +387,78 @@ export class AbstractAccountClient extends AbstractAccountQueryClient {
 
   public proxyMsgComposer(sender?: string): ProxyMessageComposer {
     return new ProxyMessageComposer(sender || this.sender, this.proxyAddress)
+  }
+
+  /**
+   * Retrieve the {@link SigningCosmWasmClient} associated with the account.
+   */
+  public get client(): SigningCosmWasmClient {
+    return this.abstract.client
+  }
+
+  /**
+   * Get the messages for depositing assets into the account.
+   */
+  public depositMsgs(toDeposit: AssetList): EncodedMsg[] {
+    return toDeposit.transferMsgs(this.sender, this.depositAddress)
+  }
+
+  /**
+   * Deposit assets into the account.
+   */
+  public async deposit(
+    toDeposit: AssetList,
+    fee: StdFee | 'auto' | number,
+    memo?: string,
+  ) {
+    const depositMsgs = this.depositMsgs(toDeposit)
+    return this.client.signAndBroadcast(this.sender, depositMsgs, fee, memo)
+  }
+
+  /**
+   * Deposit ANS assets into the Account.
+   */
+  public async depositAnsAssets(
+    assets: AnsAssetList,
+    fee: StdFee | 'auto' | number,
+    memo?: string,
+  ) {
+    const resolved = await assets.resolve(this.abstract)
+    return this.deposit(resolved, fee, memo)
+  }
+
+  /**
+   * Get the withdraw messages for the given assets.
+   * @param toWithdraw - The assets to withdraw.
+   * @param recipient - The recipient for the assets.
+   * @param funds - Optional. Any funds to send with the message.
+   */
+  public withdrawMsgs(
+    toWithdraw: AssetList,
+    recipient: string,
+    funds?: Coin[],
+  ): EncodedMsg[] {
+    const transferMsgs = toWithdraw.cosmosTransferMsgs(
+      this.depositAddress,
+      recipient,
+    )
+
+    // what the proxy executes
+    return [this.executeMsg(transferMsgs, funds)]
+  }
+
+  /**
+   * Withdraw assets from the Account. Must be called by the owner.
+   */
+  public async withdraw(
+    toWithdraw: AssetList,
+    recipient: string,
+    fee: StdFee | 'auto' | number,
+    memo?: string,
+    funds?: Coin[],
+  ) {
+    const withdrawMsgs = this.withdrawMsgs(toWithdraw, recipient, funds)
+    return this.client.signAndBroadcast(this.sender, withdrawMsgs, fee, memo)
   }
 
   /**
@@ -474,17 +563,38 @@ export class AbstractAccountClient extends AbstractAccountQueryClient {
   }
 
   /**
-   * Execute a message on the account.
+   * Build a message for executing an action on the Account.
+   * @param msgs - The messages to execute.
+   * @param funds
+   */
+  public executeMsg(
+    msgs: CosmosMsgForEmpty | CosmosMsgForEmpty[],
+    funds?: Coin[],
+  ): MsgExecuteContractEncodeObject {
+    return this.composeExecuteOnModule(
+      {
+        moduleId: PROXY_MODULE_ID,
+        moduleType: 'account_base',
+        execMsg: ProxyExecuteMsgBuilder.moduleAction({ msgs: [msgs].flat() }),
+      },
+      funds,
+    )
+  }
+
+  /**
+   * Execute messages on the Account.
+   * @param msgs - The messages to execute.
+   * @param funds
    */
   public async execute(
-    execMsg: ContractMsg,
+    msgs: CosmosMsgForEmpty | CosmosMsgForEmpty[],
     funds?: Coin[],
   ): Promise<ExecuteResult> {
     return await this.executeOnModule(
       {
         moduleId: PROXY_MODULE_ID,
         moduleType: 'account_base',
-        execMsg,
+        execMsg: ProxyExecuteMsgBuilder.moduleAction({ msgs: [msgs].flat() }),
       },
       funds,
     )
@@ -509,35 +619,6 @@ export class AbstractAccountClient extends AbstractAccountQueryClient {
     params: Parameters<ManagerClient['createSubAccount']>[0],
   ): Promise<ExecuteResult> {
     return await this.managerClient.createSubAccount(params)
-  }
-
-  /**
-   * Withdraw native funds from the proxy.
-   * @param recipient
-   * @param funds
-   */
-  public async withdraw(
-    recipient: string,
-    funds: Coin[],
-  ): Promise<ExecuteResult> {
-    if (!funds.length) {
-      throw new Error('No funds to withdraw')
-    }
-
-    const cosmosTransferMsg: CosmosMsgForEmpty = {
-      bank: {
-        send: {
-          amount: funds,
-          to_address: recipient,
-        },
-      },
-    }
-
-    const proxyActionMsg = ProxyExecuteMsgBuilder.moduleAction({
-      msgs: [cosmosTransferMsg],
-    })
-
-    return this.execute(proxyActionMsg)
   }
 
   /**
@@ -572,6 +653,3 @@ export class AbstractAccountClient extends AbstractAccountQueryClient {
     return new AbstractAccountClient({ ...queryClient, abstract })
   }
 }
-
-export const jsonToBinary = (json: Record<string, unknown>): string =>
-  toBase64(toUtf8(JSON.stringify(json)))

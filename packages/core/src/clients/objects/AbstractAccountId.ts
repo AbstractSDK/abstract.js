@@ -111,17 +111,13 @@ export class AbstractAccountId {
     const [chainString, sequenceStr] = accountId.split(
       ACCOUNT_ID_SEQUENCE_DELIMITER,
     )
-    // TODO: remove this hack
-    const accountSequence = Number.parseInt(sequenceStr as string)
+    const accountSequence = Number.parseInt(sequenceStr!)
 
     if (chainString === 'local' && !chainName) {
       throw new Error('chainName must be provided for local account ids')
     }
 
-    // TODO: remove this hack
-    const splitChainString = (chainString as string).split(
-      ACCOUNT_ID_CHAIN_DELIMITER,
-    )
+    const splitChainString = chainString!.split(ACCOUNT_ID_CHAIN_DELIMITER)
     const accountSourceChain = splitChainString[splitChainString.length - 1]
     if (chainName && chainName !== accountSourceChain) {
       throw new Error(
@@ -130,13 +126,11 @@ export class AbstractAccountId {
     }
 
     if (splitChainString.length === 1) {
-      // TODO: remove this hack
       return AbstractAccountId.local(
         accountSourceChain as string,
         accountSequence,
       )
     } else {
-      // TODO: remove this hack
       return new AbstractAccountId(
         accountSourceChain as string,
         accountSequence,
