@@ -13,7 +13,6 @@ export default defineConfig(
       'src/api/index.ts',
       'src/chain-registry/index.ts',
       'src/clients/index.ts',
-      'src/cw-plus/index.ts',
       'src/modules/index.ts',
       'src/native/index.ts',
       'src/tools/index.ts',
