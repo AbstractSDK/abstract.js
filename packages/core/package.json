@@ -25,7 +25,8 @@
     "docs:serve": "serve ./docs -l 3050",
     "typecheck": "tsc --noEmit --jsx react-jsx",
     "codegen": "graphql-codegen --config codegen.yml",
-    "codegen:watch": "graphql-codegen --watch"
+    "codegen:watch": "graphql-codegen --watch",
+    "postinstall": "abstract generate"
   },
   "dependencies": {
     "@abstract-money/cosmwasm": "workspace:@abstract-money/cosmwasm@*",
@@ -53,6 +54,7 @@
   },
   "type": "module",
   "devDependencies": {
+    "@abstract-money/cli": "workspace:@abstract-money/cli@*",
     "rimraf": "^3.0.0",
     "@graphql-codegen/cli": "^2.13.1",
     "@graphql-codegen/client-preset": "^1.2.6",
@@ -76,17 +78,9 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./account": {
-      "types": "./dist/account/index.d.ts",
-      "default": "./dist/account/index.js"
-    },
     "./api": {
       "types": "./dist/api/index.d.ts",
       "default": "./dist/api/index.js"
-    },
-    "./apps": {
-      "types": "./dist/apps/index.d.ts",
-      "default": "./dist/apps/index.js"
     },
     "./chain-registry": {
       "types": "./dist/chain-registry/index.d.ts",
@@ -96,34 +90,22 @@
       "types": "./dist/clients/index.d.ts",
       "default": "./dist/clients/index.js"
     },
-    "./cw-plus": {
-      "types": "./dist/cw-plus/index.d.ts",
-      "default": "./dist/cw-plus/index.js"
-    },
-    "./modules": {
-      "types": "./dist/modules/index.d.ts",
-      "default": "./dist/modules/index.js"
-    },
-    "./native": {
-      "types": "./dist/native/index.d.ts",
-      "default": "./dist/native/index.js"
-    },
     "./tools": {
       "types": "./dist/tools/index.d.ts",
       "default": "./dist/tools/index.js"
     },
+    "./utils": {
+      "types": "./dist/utils/index.d.ts",
+      "default": "./dist/utils/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
-    "/account",
     "/api",
-    "/apps",
     "/chain-registry",
     "/clients",
-    "/cw-plus",
-    "/modules",
-    "/native",
     "/tools",
+    "/utils",
     "/dist"
   ],
   "sideEffects": false

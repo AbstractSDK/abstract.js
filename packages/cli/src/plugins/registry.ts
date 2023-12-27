@@ -25,6 +25,8 @@ export type RegistryConfig = {
 const SCHEMA_REGISTRY_GITHUB_URL =
   'https://raw.githubusercontent.com/AbstractSDK/schemas/mainline'
 
+export class RegistrySchemaNotFoundError extends Error {}
+
 /**
  * Fetches contract schemas from the schemas registry located at https://github.com/AbstractSDK/schemas/tree/mainline
  */
@@ -43,16 +45,22 @@ export function registry({
       }`
     },
     async parse({ response }) {
-      if (response.status !== 200) throw new Error('Schema not found')
+      if (response.status !== 200)
+        throw new RegistrySchemaNotFoundError('Schema not found')
       return response.json()
     },
     request({ name, namespace, version }) {
       if (!name) throw new Error('name is required')
       if (!version) throw new Error('version is required')
       if (!namespace) throw new Error('namespace is required')
-      return {
-        url: `${SCHEMA_REGISTRY_GITHUB_URL}/${namespace}/${name}/${version}/module-schema.json`,
-      }
+      return [
+        {
+          url: `${SCHEMA_REGISTRY_GITHUB_URL}/${namespace}/${name}/${version}/module-schema.json`,
+        },
+        {
+          url: `${SCHEMA_REGISTRY_GITHUB_URL}/${namespace}/${name}/${version}/${namespace}-${name}.json`,
+        },
+      ]
     },
   })
 }

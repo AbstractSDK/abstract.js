@@ -1,7 +1,4 @@
-import {
-  type CosmWasmClient,
-  type SigningCosmWasmClient,
-} from '@cosmjs/cosmwasm-stargate'
+import { type CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { BiMap } from '@rimbu/bimap'
 import { Mixin } from 'ts-mixer'
 
@@ -12,13 +9,12 @@ import {
   type AnsHostInterface,
   AnsHostQueryClient,
   type AnsHostReadOnlyInterface,
-} from '../native'
+  AnsHostTypes,
+} from '../_cli-generated'
 
-import {
-  type AssetInfoBaseForAddr,
-  type ChannelEntry,
-  type ContractEntry,
-} from '../native/ans-host/AnsHost.types'
+type AssetInfoBaseForAddr = AnsHostTypes.AssetInfoBaseForAddr
+type ChannelEntry = AnsHostTypes.ChannelEntry
+type ContractEntry = AnsHostTypes.ContractEntry
 
 type AnsId = string
 export type RawAnsAssetEntry = readonly [AnsId, AssetInfoBaseForAddr]

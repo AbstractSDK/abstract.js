@@ -1,10 +1,6 @@
 # Generated file. Do not edit directly.
-account/**
 api/**
-apps/**
 chain-registry/**
 clients/**
-cw-plus/**
-modules/**
-native/**
 tools/**
+utils/**

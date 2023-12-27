@@ -7,7 +7,7 @@
 import { Coin, StdFee } from '@cosmjs/amino'
 import { ExecuteResult, SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { ContractMsg } from '.'
-import { AppExecuteMsg, AppExecuteMsgFactory } from '../modules'
+import { AppExecuteMsg, AppExecuteMsgFactory } from '../utils'
 import {
   AbstractAccountClient,
   AbstractAccountQueryClient,

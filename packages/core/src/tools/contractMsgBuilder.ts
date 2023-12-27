@@ -1,6 +1,5 @@
 import { type Coin } from '@cosmjs/amino'
 import {
-  CosmWasmClient,
   type ExecuteResult,
   type MsgExecuteContractEncodeObject,
   type SigningCosmWasmClient,

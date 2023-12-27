@@ -1,11 +1,12 @@
 import { default as fse } from 'fs-extra'
 import type { RequestInfo, RequestInit, Response } from 'node-fetch'
-import { default as fetch } from 'node-fetch'
+import { AbortError, default as fetch } from 'node-fetch'
 import { join } from 'pathe'
 
 import { homedir } from 'os'
 import type { ContractConfig, ContractVersion, Plugin } from '../config'
-import type { RequiredBy } from '../types'
+import type { MaybeArray, RequiredBy } from '../types'
+import { RegistrySchemaNotFoundError } from './registry'
 
 export type ResolveConfig<
   TContract extends Omit<ContractConfig, 'path'> = Omit<ContractConfig, 'path'>,
@@ -46,8 +47,8 @@ export type ResolveConfig<
   request(
     config: Partial<TContract>,
   ):
-    | Promise<{ url: RequestInfo; init?: RequestInit }>
-    | { url: RequestInfo; init?: RequestInit }
+    | Promise<MaybeArray<{ url: RequestInfo; init?: RequestInit }>>
+    | MaybeArray<{ url: RequestInfo; init?: RequestInit }>
 
   /**
    * Duration in milliseconds before request times out.
@@ -97,28 +98,52 @@ export function resolve<
           const AbortController =
             globalThis.AbortController ||
             (await import('abort-controller')).default
-          const controller = new AbortController()
-          const timeout = setTimeout(() => controller.abort(), timeoutDuration)
-          try {
-            const { url, init } = await request(contract)
-            // TODO: Replace `node-fetch` with native `fetch` when Node 18 is more widely used.
-            const response = await fetch(url, {
-              ...init,
-              // TODO: Use `AbortSignal.timeout` when Node 18 is more widely used.
-              signal: controller.signal,
-            })
-            const schema = await parse({ response })
-            await fse.writeJSON(cacheFilePath, schema)
-            path = cacheFolderPath
-            await fse.writeFile(cacheFileTimestampPath, timestamp, {
-              encoding: 'utf8',
-            })
-          } catch (error) {
-            // Attempt to check cache if fetch fails.
-            const cacheExists = await fse.pathExists(cacheFilePath)
-            if (!cacheExists) throw error
-          } finally {
-            clearTimeout(timeout)
+
+          const requestsArgumentsMaybeArray = await request(contract)
+          const requestArguments = Array.isArray(requestsArgumentsMaybeArray)
+            ? requestsArgumentsMaybeArray
+            : [requestsArgumentsMaybeArray]
+          for (let i = 0; i < requestArguments.length; ++i) {
+            // safe assertion because we are iterating over the length of requestArguments
+            const { url, init } = requestArguments[i]!
+
+            const controller = new AbortController()
+            const timeout = setTimeout(
+              () => controller.abort(),
+              timeoutDuration,
+            )
+            try {
+              const response = await fetch(url, {
+                ...init,
+                // TODO: Use `AbortSignal.timeout` when Node 18 is more widely used.
+                signal: controller.signal,
+              })
+              const schema = await parse({ response })
+              await fse.writeJSON(cacheFilePath, schema)
+              path = cacheFolderPath
+              await fse.writeFile(cacheFileTimestampPath, timestamp, {
+                encoding: 'utf8',
+              })
+              // If request was successful, leave the loop.
+              break
+            } catch (error) {
+              // If request was aborted, skip to next request,
+              // yet if it's the last one, throw error.
+              if (
+                !(
+                  error instanceof AbortError ||
+                  error instanceof RegistrySchemaNotFoundError
+                )
+              ) {
+                // Attempt to check cache if fetch fails.
+                const cacheExists = await fse.pathExists(cacheFilePath)
+                if (!cacheExists) throw error
+              } else if (i === requestArguments.length - 1) {
+                throw new Error('All requests have timed out')
+              }
+            } finally {
+              clearTimeout(timeout)
+            }
           }
         }
 
