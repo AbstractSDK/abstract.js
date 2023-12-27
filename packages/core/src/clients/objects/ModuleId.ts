@@ -16,8 +16,8 @@ export class ModuleId {
       )
     }
     const split = id.split(MODULE_DELIMITER)
-    this._namespace = split[0]
-    this._name = split[1]
+    this._namespace = split[0]!
+    this._name = split[1]!
   }
 
   get namespace() {

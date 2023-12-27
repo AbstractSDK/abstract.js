@@ -11,23 +11,30 @@ import { type ContractMsg, type EncodedMsg } from '.'
 import {
   ManagerClient,
   ManagerExecuteMsgBuilder,
-  ManagerMessageComposer,
+  ManagerMsgComposer as ManagerMessageComposer,
   ManagerQueryClient,
+  ManagerTypes,
   ProxyClient,
   ProxyExecuteMsgBuilder,
-  ProxyMessageComposer,
+  ProxyMsgComposer as ProxyMessageComposer,
   ProxyQueryClient,
-} from '../account'
-import { type ManagerModuleInfo } from '../account/manager/Manager.types'
-import { type CosmosMsgForEmpty } from '../account/proxy/Proxy.types'
+  ProxyTypes,
+  VersionControlTypes,
+} from '../_cli-generated'
+
+type ManagerModuleInfo = ManagerTypes.ManagerModuleInfo
+type CosmosMsgForEmpty = ProxyTypes.CosmosMsgForEmpty
 import { ABSTRACT_CONSTANTS } from '../constants'
+import {
+  AppExecuteMsgFactory,
+  AppQueryMsgFactory,
+} from '../utils/app/App.msg-factory'
+
 import {
   AdapterExecuteMsgFactory,
   AdapterQueryMsgBuilder,
-  AppExecuteMsgFactory,
-  AppQueryMsgFactory,
-} from '../modules'
-import { type ModuleReference } from '../native/registry/Registry.types'
+} from '../utils/adapter/Adapter.msg-factory'
+type ModuleReference = VersionControlTypes.ModuleReference
 import { type AbstractClient, type AbstractQueryClient } from './AbstractClient'
 import { jsonToBinary } from './encoding'
 import { AbstractAccountId } from './objects/AbstractAccountId'

@@ -2,15 +2,19 @@ import { type CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { P, match } from 'ts-pattern'
 import { type ModuleType } from '../../clients/AbstractAccountClient'
 import { RAW_QUERY_KEYS } from '../../constants'
-import { type ModuleData } from '../../modules/Module.types'
-import { type RegistryQueryClient } from '../../native'
+
 import {
-  type Module as VcModule,
-  type ModuleConfiguration,
-  type ModuleInfo as VcModuleInfo,
-  type ModuleReference,
-  type ModuleResponse,
-} from '../../native/registry/Registry.types'
+  VersionControlQueryClient as RegistryQueryClient,
+  VersionControlTypes,
+} from '../../_cli-generated'
+
+type VcModule = VersionControlTypes.Module
+type ModuleConfiguration = VersionControlTypes.ModuleConfiguration
+type VcModuleInfo = VersionControlTypes.ModuleInfo
+type ModuleReference = VersionControlTypes.ModuleReference
+type ModuleResponse = VersionControlTypes.ModuleResponse
+
+import { type ModuleData } from '../../utils/Module.types'
 import { ModuleNotFoundError } from '../errors'
 import { rawQuery } from '../helpers'
 import { ModuleInfo } from './moduleInfo'

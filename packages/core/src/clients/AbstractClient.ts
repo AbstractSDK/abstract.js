@@ -11,22 +11,21 @@ import {
 import { Variables } from 'graphql-request'
 import semverSatisfies from 'semver/functions/satisfies'
 import { gql } from '../__generated__/gql'
+import {
+  AccountFactoryClient as FactoryClient,
+  AccountFactoryMsgComposer as FactoryMessageComposer,
+  AccountFactoryQueryClient as FactoryQueryClient,
+  AccountFactoryTypes,
+  AnsHostMsgComposer as AnsHostMessageComposer,
+  VersionControlClient as RegistryClient,
+  VersionControlMsgComposer as RegistryMessageComposer,
+  VersionControlQueryClient as RegistryQueryClient,
+} from '../_cli-generated'
 import { apiRequest, graphqlRequest } from '../api'
 import { ChainRegistryClient, assets, chains } from '../chain-registry'
 import { AbstractModule } from '../clients/objects'
 import { ABSTRACT_API_URL } from '../constants'
-import {
-  AnsHostMessageComposer,
-  FactoryClient,
-  FactoryMessageComposer,
-  FactoryQueryClient,
-  RegistryMessageComposer,
-} from '../native'
-import { type GovernanceDetailsForString } from '../native/factory/Factory.types'
-import {
-  RegistryClient,
-  RegistryQueryClient,
-} from '../native/registry/RegistryClient'
+type GovernanceDetailsForString = AccountFactoryTypes.GovernanceDetailsForString
 import { AbstractAccountQueryClient } from './AbstractAccountClient'
 import { AnsClient, AnsQueryClient } from './AnsClient'
 import { findAbstractAttribute } from './events'

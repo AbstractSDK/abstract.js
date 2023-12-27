@@ -1,4 +1,5 @@
-import { FactoryExecuteMsg } from '../native/factory/Factory.types'
+import { AccountFactoryTypes } from '../_cli-generated'
+type FactoryExecuteMsg = AccountFactoryTypes.ExecuteMsg
 import { ContractExecuteMsgBuilder } from './contractMsgBuilder'
 
 test('ContractClient variant and msg', () => {

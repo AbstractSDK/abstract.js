@@ -4,6 +4,7 @@ import { basename, dirname, join, resolve } from 'pathe'
 import pc from 'picocolors'
 import { z } from 'zod'
 
+import { pascalCase } from 'change-case'
 import type { Contract, ContractConfig, Plugin } from '../config'
 import { fromZodError } from '../errors'
 import * as logger from '../logger'
@@ -63,11 +64,6 @@ export async function generate(options: Generate = {}) {
     spinner.start('Validating plugins')
     for (const plugin of plugins) {
       await plugin.validate?.()
-    }
-
-    // Check for required plugins
-    if (!plugins.some((plugin) => plugin.name !== 'React')) {
-      throw new Error('React plugin is required.')
     }
 
     spinner.succeed()
@@ -154,7 +150,7 @@ export async function generate(options: Generate = {}) {
     ...rest
   }: ContractConfig): Promise<Contract> {
     const content = dedent`
-      ${getBannerContent({ name })}
+      ${getBannerContent({ name: pascalCase(name) })}
     `
 
     return { content, name, ...rest }

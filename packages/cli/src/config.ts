@@ -1,6 +1,8 @@
 import type { MaybeArray, MaybePromise } from './types'
 
-export type ContractVersion = `${string}.${string}.${string}`
+// TODO: bring the commented type back if schema repo is semver compliant
+export type ContractVersion = string
+//export type ContractVersion = `${string}.${string}.${string}`
 
 export type ContractConfig = {
   /**
@@ -73,7 +75,7 @@ export function defineConfig(
 }
 
 export const defaultConfig = {
-  out: 'src/generated.ts',
+  out: 'src/generated',
   contracts: [],
   plugins: ['react'],
 }

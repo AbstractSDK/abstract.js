@@ -82,6 +82,24 @@ export function react(options?: ReactConfig): ReactResult {
                 '@abstract-money/core',
               ),
             )
+
+            const generatedMessageBuilderFilePath = join(
+              cosmwasmCodegenDirPath,
+              `${contractNamePascalCase}.message-builder.ts`,
+            )
+
+            const generatedMessageBuilderFileContent = await fse.readFile(
+              resolve(generatedMessageBuilderFilePath),
+              'utf8',
+            )
+            await fse.writeFile(
+              resolve(generatedMessageBuilderFilePath),
+              // ts-codegen produces a file with some invalid typings, so we're ignoring those
+              dedent`
+            // @ts-nocheck
+            ${generatedMessageBuilderFileContent}
+          `,
+            )
           }
 
           const reactQueryFilePath = join(

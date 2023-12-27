@@ -1,6 +1,9 @@
 import { P, match } from 'ts-pattern'
 import * as Yup from 'yup'
-import { AccountId, AccountTrace } from '../../native/registry/Registry.types'
+
+import { VersionControlTypes } from '../../_cli-generated'
+type AccountId = VersionControlTypes.AccountId
+type AccountTrace = VersionControlTypes.AccountTrace
 
 export const ACCOUNT_ID_CHAIN_DELIMITER = '>'
 export const ACCOUNT_ID_SEQUENCE_DELIMITER = '-'

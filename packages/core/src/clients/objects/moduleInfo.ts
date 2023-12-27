@@ -1,8 +1,8 @@
 import { P, match } from 'ts-pattern'
-import {
-  type ModuleInfo as VcModuleInfo,
-  type ModuleVersion,
-} from '../../native/registry/Registry.types'
+import { VersionControlTypes } from '../../_cli-generated'
+
+type VcModuleInfo = VersionControlTypes.ModuleInfo
+type ModuleVersion = VersionControlTypes.ModuleVersion
 
 interface ModuleById {
   moduleId: string

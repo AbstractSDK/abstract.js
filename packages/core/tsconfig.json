@@ -23,6 +23,9 @@
       "@cosmjs/amino": [
         "node_modules/@cosmjs/amino/build"
       ],
+      "@abstract-money/core": [
+        "./src"
+      ],
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
