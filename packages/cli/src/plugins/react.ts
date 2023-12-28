@@ -169,25 +169,31 @@ export function react(options?: ReactConfig): ReactResult {
             }:${contract.name}'`,
           )
 
-          let useModuleQueryClientHookName:
-            | 'useGrazModuleQueryClient'
-            | 'useCosmosKitModuleQueryClient'
-            | 'useModuleQueryClient'
-          let useModuleMutationClientHookName:
-            | 'useGrazModuleMutationClient'
-            | 'useCosmosKitModuleMutationClient'
-            | 'useModuleMutationClient'
+          let useAbstractModuleQueryClientHookName:
+            | 'useGrazAbstractModuleQueryClient'
+            | 'useCosmosKitAbstractModuleQueryClient'
+            | 'useAbstractModuleQueryClient'
+          let useAbstractModuleClientHookName:
+            | 'useGrazAbstractModuleClient'
+            | 'useCosmosKitAbstractModuleClient'
+            | 'useAbstractModuleClient'
+          let useAbstractClientHookName:
+            | 'useGrazAbstractClient'
+            | 'useCosmosKitAbstractClient'
+            | undefined
 
           if (options?.addon === 'graz') {
-            useModuleQueryClientHookName = 'useGrazModuleQueryClient'
-            useModuleMutationClientHookName = 'useGrazModuleMutationClient'
+            useAbstractModuleQueryClientHookName =
+              'useGrazAbstractModuleQueryClient'
+            useAbstractModuleClientHookName = 'useGrazAbstractModuleClient'
+            useAbstractClientHookName = 'useGrazAbstractClient'
             content.push(dedent`
-              function useGrazModuleQueryClient(
-                args: Omit<Parameters<typeof useModuleQueryClient>[0], 'client'>,
-                options?: Parameters<typeof useModuleQueryClient>[1],
+              function useGrazAbstractModuleQueryClient(
+                args: Omit<Parameters<typeof useAbstractModuleQueryClient>[0], 'client'>,
+                options?: Parameters<typeof useAbstractModuleQueryClient>[1],
               ) {
                 const { data: client } = useCosmWasmClient()
-                return useModuleQueryClient(
+                return useAbstractModuleQueryClient(
                   {
                     client,
                     ...args,
@@ -196,17 +202,37 @@ export function react(options?: ReactConfig): ReactResult {
                 )
               }
 
-              function useGrazModuleMutationClient(
+              function useGrazAbstractModuleClient(
                 args: Omit<
-                  Parameters<typeof useModuleMutationClient>[0],
+                  Parameters<typeof useAbstractModuleClient>[0],
                   'client' | 'sender'
                 >,
-                options?: Parameters<typeof useModuleMutationClient>[1],
+                options?: Parameters<typeof useAbstractModuleClient>[1],
               ) {
                 const { data: client } = useCosmWasmSigningClient()
                 const { data: account } = useAccount()
                 const sender = account?.bech32Address
-                return useModuleMutationClient(
+                return useAbstractModuleClient(
+                  {
+                    client,
+                    sender,
+                    ...args,
+                  },
+                  options,
+                )
+              }
+
+              function useGrazAbstractClient(
+                args: Omit<
+                  Parameters<typeof useAbstractClient>[0],
+                  'client' | 'sender'
+                >,
+                options?: Parameters<typeof useAbstractClient>[1],
+              ) {
+                const { data: client } = useCosmWasmSigningClient()
+                const { data: account } = useAccount()
+                const sender = account?.bech32Address
+                return useAbstractClient(
                   {
                     client,
                     sender,
@@ -217,12 +243,14 @@ export function react(options?: ReactConfig): ReactResult {
               }
             `)
           } else if (options?.addon === 'cosmos-kit') {
-            useModuleQueryClientHookName = 'useCosmosKitModuleQueryClient'
-            useModuleMutationClientHookName = 'useCosmosKitModuleMutationClient'
+            useAbstractModuleQueryClientHookName =
+              'useCosmosKitAbstractModuleQueryClient'
+            useAbstractModuleClientHookName = 'useCosmosKitAbstractModuleClient'
+            useAbstractClientHookName = 'useCosmosKitAbstractClient'
             content.push(dedent`
-              function useCosmosKitModuleQueryClient(
-                args: Omit<Parameters<typeof useModuleQueryClient>[0], 'client'>,
-                options?: Parameters<typeof useModuleQueryClient>[1],
+              function useCosmosKitAbstractModuleQueryClient(
+                args: Omit<Parameters<typeof useAbstractModuleQueryClient>[0], 'client'>,
+                options?: Parameters<typeof useAbstractModuleQueryClient>[1],
               ) {
                 const [client, setClient] = useState<CosmWasmClient | undefined>(undefined)
                 const {getCosmWasmClient: _getCosmWasmClient} = useChain(args.chain ?? 'neutron')
@@ -238,7 +266,7 @@ export function react(options?: ReactConfig): ReactResult {
 
                 }, [getCosmWasmClient])
 
-                return useModuleQueryClient(
+                return useAbstractModuleQueryClient(
                   {
                     client,
                     ...args,
@@ -247,12 +275,12 @@ export function react(options?: ReactConfig): ReactResult {
                 )
               }
 
-              function useCosmosKitModuleMutationClient(
+              function useCosmosKitAbstractModuleClient(
                 args: Omit<
-                  Parameters<typeof useModuleMutationClient>[0],
+                  Parameters<typeof useAbstractModuleClient>[0],
                   'client' | 'sender'
                 >,
-                options?: Parameters<typeof useModuleMutationClient>[1],
+                options?: Parameters<typeof useAbstractModuleClient>[1],
               ) {
                 const [client, setClient] = useState<SigningCosmWasmClient | undefined>(undefined)
                 const {getSigningCosmWasmClient: _getSigningCosmWasmClient, address, isWalletConnected} = useChain(args.chain ?? 'neutron')
@@ -268,7 +296,7 @@ export function react(options?: ReactConfig): ReactResult {
 
                 }, [getSigningCosmWasmClient])
 
-                return useModuleMutationClient(
+                return useAbstractModuleClient(
                   {
                     client,
                     sender: address,
@@ -276,13 +304,170 @@ export function react(options?: ReactConfig): ReactResult {
                   },
                   options,
                 )
-              }`)
+              }
+
+              function useCosmosKitAbstractClient(
+                args: Omit<
+                  Parameters<typeof useAbstractClient>[0],
+                  'client' | 'sender'
+                >,
+                options?: Parameters<typeof useAbstractClient>[1],
+              ) {
+                const [client, setClient] = useState<SigningCosmWasmClient | undefined>(undefined)
+                const {getSigningCosmWasmClient: _getSigningCosmWasmClient, address, isWalletConnected} = useChain(args.chain ?? 'neutron')
+
+                const getSigningCosmWasmClient = useMemo(() => {
+                  if (!args.chain || !isWalletConnected) return undefined
+                  return _getSigningCosmWasmClient
+                }, [_getSigningCosmWasmClient, args.chain])
+
+                useEffect(() => {
+                  if (!getSigningCosmWasmClient) return
+                  getSigningCosmWasmClient().then((client) => setClient(client))
+
+                }, [getSigningCosmWasmClient])
+
+                return useAbstractClient(
+                  {
+                    client,
+                    sender: address,
+                    ...args,
+                  },
+                  options,
+                )
+              }
+
+            `)
           } else {
-            useModuleQueryClientHookName = 'useModuleQueryClient'
-            useModuleMutationClientHookName = 'useModuleMutationClient'
+            useAbstractModuleQueryClientHookName =
+              'useAbstractModuleQueryClient'
+            useAbstractModuleClientHookName = 'useAbstractModuleClient'
           }
 
           const shouldInjectClientAndSender = options === undefined
+
+          if (!shouldInjectClientAndSender) {
+            imports.push(dedent`
+              import { useAbstractClient } from '@abstract-money/react/utils'
+              import {
+                useDeposit as _useDeposit,
+                useWithdraw as _useWithdraw,
+                useExecute as _useExecute,
+              } from '@abstract-money/react/hooks'
+            `)
+            content.push(dedent`
+              export function useDeposit({ chain }:{ chain: string | undefined }, ...args: Parameters<typeof _useDeposit>) {
+                const {
+                  data: abstractClient,
+                  // TODO: figure out what to do with those
+                  // isLoading: isAbstractClientLoading,
+                  // isError: isAbstractClientError,
+                  // error: abstractClientError,
+                } = ${useAbstractClientHookName}({ chain })
+
+                const {
+                  mutate: mutate_,
+                  mutateAsync: mutateAsync_,
+                  ...rest
+                } = _useDeposit(...args)
+
+                const mutate = useMemo(() => {
+                  if (!abstractClient) return undefined
+
+                  return (
+                    variables: Omit<Parameters<typeof mutate_>[0], 'abstractClient'>,
+                    options?: Parameters<typeof mutate_>[1],
+                  ) => mutate_({ abstractClient, ...variables }, options)
+                }, [mutate_, abstractClient])
+
+                const mutateAsync = useMemo(() => {
+                  if (!abstractClient) return undefined
+
+                  return (
+                    variables: Omit<Parameters<typeof mutateAsync_>[0], 'abstractClient'>,
+                    options?: Parameters<typeof mutateAsync_>[1],
+                  ) =>
+                    mutateAsync_({ abstractClient, ...variables }, options)
+                }, [mutateAsync_, abstractClient])
+
+                return { mutate, mutateAsync, ...rest } as const
+              }
+
+              export function useWithdraw({ chain }:{ chain: string | undefined }, ...args: Parameters<typeof _useWithdraw>) {
+                const {
+                  data: abstractClient,
+                  // TODO: figure out what to do with those
+                  // isLoading: isAbstractClientLoading,
+                  // isError: isAbstractClientError,
+                  // error: abstractClientError,
+                } = ${useAbstractClientHookName}({ chain })
+
+                const {
+                  mutate: mutate_,
+                  mutateAsync: mutateAsync_,
+                  ...rest
+                } = _useWithdraw(...args)
+
+                const mutate = useMemo(() => {
+                  if (!abstractClient) return undefined
+
+                  return (
+                    variables: Omit<Parameters<typeof mutate_>[0], 'abstractClient'>,
+                    options?: Parameters<typeof mutate_>[1],
+                  ) => mutate_({ abstractClient, ...variables }, options)
+                }, [mutate_, abstractClient])
+
+                const mutateAsync = useMemo(() => {
+                  if (!abstractClient) return undefined
+
+                  return (
+                    variables: Omit<Parameters<typeof mutateAsync_>[0], 'abstractClient'>,
+                    options?: Parameters<typeof mutateAsync_>[1],
+                  ) =>
+                    mutateAsync_({ abstractClient, ...variables }, options)
+                }, [mutateAsync_, abstractClient])
+
+                return { mutate, mutateAsync, ...rest } as const
+              }
+
+              export function useExecute({ chain }:{ chain: string | undefined }, ...args: Parameters<typeof _useExecute>) {
+                const {
+                  data: abstractClient,
+                  // TODO: figure out what to do with those
+                  // isLoading: isAbstractClientLoading,
+                  // isError: isAbstractClientError,
+                  // error: abstractClientError,
+                } = ${useAbstractClientHookName}({ chain })
+
+                const {
+                  mutate: mutate_,
+                  mutateAsync: mutateAsync_,
+                  ...rest
+                } = _useExecute(...args)
+
+                const mutate = useMemo(() => {
+                  if (!abstractClient) return undefined
+
+                  return (
+                    variables: Omit<Parameters<typeof mutate_>[0], 'abstractClient'>,
+                    options?: Parameters<typeof mutate_>[1],
+                  ) => mutate_({ abstractClient, ...variables }, options)
+                }, [mutate_, abstractClient])
+
+                const mutateAsync = useMemo(() => {
+                  if (!abstractClient) return undefined
+
+                  return (
+                    variables: Omit<Parameters<typeof mutateAsync_>[0], 'abstractClient'>,
+                    options?: Parameters<typeof mutateAsync_>[1],
+                  ) =>
+                    mutateAsync_({ abstractClient, ...variables }, options)
+                }, [mutateAsync_, abstractClient])
+
+                return { mutate, mutateAsync, ...rest } as const
+              }
+            `)
+          }
 
           {
             const queryHooks = new Map<Hook, string>([])
@@ -311,7 +496,7 @@ export function react(options?: ReactConfig): ReactResult {
                       isLoading: is${contractNamePascalCase}AppQueryClientLoading,
                       isError: is${contractNamePascalCase}AppQueryClientError,
                       error: ${contractNameCamelCase}AppQueryClientError,
-                    } = ${useModuleQueryClientHookName}(
+                    } = ${useAbstractModuleQueryClientHookName}(
                       {
                         moduleId: ${constantCase(contract.name)}_MODULE_ID,
                         ${shouldInjectClientAndSender ? 'client,' : ''}
@@ -394,12 +579,12 @@ export function react(options?: ReactConfig): ReactResult {
                     >,
                   ) => {
                     const {
-                      data: ${contractNameCamelCase}MutationClient,
+                      data: ${contractNameCamelCase}AbstractModuleClient,
                       // TODO: figure out what to do with those
-                      // isLoading: is${contractNamePascalCase}MutationClientLoading,
-                      // isError: is${contractNamePascalCase}MutationClientError,
-                      // error: ${contractNameCamelCase}MutationClientError,
-                    } = ${useModuleMutationClientHookName}(
+                      // isLoading: is${contractNamePascalCase}AbstractModuleClientLoading,
+                      // isError: is${contractNamePascalCase}AbstractModuleClientError,
+                      // error: ${contractNameCamelCase}AbstractModuleClientError,
+                    } = ${useAbstractModuleClientHookName}(
                       {
                         moduleId: ${constantCase(contract.name)}_MODULE_ID,${
                   shouldInjectClientAndSender ? '\nclient,\nsender, ' : ''
@@ -416,23 +601,23 @@ export function react(options?: ReactConfig): ReactResult {
                     } = ${hookName}(options)
 
                     const mutate = useMemo(() => {
-                      if (!${contractNameCamelCase}MutationClient) return undefined
+                      if (!${contractNameCamelCase}AbstractModuleClient) return undefined
 
                       return (
                         variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
                         options?: Parameters<typeof mutate_>[1],
-                      ) => mutate_({ client: ${contractNameCamelCase}MutationClient, ...variables }, options)
-                    }, [mutate_, ${contractNameCamelCase}MutationClient])
+                      ) => mutate_({ client: ${contractNameCamelCase}AbstractModuleClient, ...variables }, options)
+                    }, [mutate_, ${contractNameCamelCase}AbstractModuleClient])
 
                     const mutateAsync = useMemo(() => {
-                      if (!${contractNameCamelCase}MutationClient) return undefined
+                      if (!${contractNameCamelCase}AbstractModuleClient) return undefined
 
                       return (
                         variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
                         options?: Parameters<typeof mutateAsync_>[1],
                       ) =>
-                        mutateAsync_({ client: ${contractNameCamelCase}MutationClient, ...variables }, options)
-                    }, [mutateAsync_, ${contractNameCamelCase}MutationClient])
+                        mutateAsync_({ client: ${contractNameCamelCase}AbstractModuleClient, ...variables }, options)
+                    }, [mutateAsync_, ${contractNameCamelCase}AbstractModuleClient])
 
                     return { mutate, mutateAsync, ...rest } as const
                   }
@@ -476,8 +661,8 @@ export function react(options?: ReactConfig): ReactResult {
           } } from 'react'
 
           import {
-            useModuleMutationClient,
-            useModuleQueryClient,
+            useAbstractModuleClient,
+            useAbstractModuleQueryClient,
           } from '@abstract-money/react/utils'
 
           ${imports.join('\n\n')}

@@ -1,18 +1,19 @@
-import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
 
 import {
   ABSTRACT_API_URL,
   AbstractAccountId,
-  AbstractClient,
+  AbstractQueryClient,
+  CHAIN_DEPLOYMENT_QUERY,
+  graphqlRequest,
 } from '@abstract-money/core'
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import { useAccountId, useConfig } from '../contexts'
-import { getAbstractClient } from './get-abstract-client'
 
-interface ModuleMutationClientConstructor {
+interface ModuleQueryClientConstructor {
   new (args: {
-    abstractClient: AbstractClient
+    abstractQueryClient: AbstractQueryClient
     accountId: AbstractAccountId
     managerAddress: string
     proxyAddress: string
@@ -20,10 +21,9 @@ interface ModuleMutationClientConstructor {
   }): any
 }
 
-async function getModuleMutationClient<
-  TModule extends ModuleMutationClientConstructor,
+async function getModuleQueryClient<
+  TModule extends ModuleQueryClientConstructor,
 >({
-  sender,
   client,
   chain,
   overrideApiUrl = ABSTRACT_API_URL,
@@ -31,27 +31,37 @@ async function getModuleMutationClient<
   moduleId,
   Module,
 }: {
-  sender: string
-  client: SigningCosmWasmClient
+  client: CosmWasmClient
   chain: string
   overrideApiUrl?: string
   accountId: AbstractAccountId
   moduleId: string
   Module: TModule
 }) {
-  const abstractClient = await getAbstractClient({
-    sender,
-    client,
+  // TODO: re-check if grabbing the first chain of the list is a good solution
+  const data = await graphqlRequest(overrideApiUrl, CHAIN_DEPLOYMENT_QUERY, {
     chain,
-    overrideApiUrl,
   })
-  const { account_base } = await abstractClient.registryQueryClient.accountBase(
-    {
+
+  const {
+    ansHost: ansHostAddress,
+    registry: registryAddress,
+    accountFactory: factoryAddress,
+  } = data.deployment
+
+  const abstractQueryClient = new AbstractQueryClient({
+    client,
+    ansHostAddress,
+    registryAddress,
+    factoryAddress,
+  })
+
+  const { account_base } =
+    await abstractQueryClient.registryQueryClient.accountBase({
       accountId: accountId.into(),
-    },
-  )
+    })
   return new Module({
-    abstractClient: abstractClient,
+    abstractQueryClient,
     accountId,
     managerAddress: account_base.manager,
     proxyAddress: account_base.proxy,
@@ -59,37 +69,34 @@ async function getModuleMutationClient<
   }) as InstanceType<TModule>
 }
 
-type TQueryFnData<TModule extends ModuleMutationClientConstructor> =
+type TQueryFnData<TModule extends ModuleQueryClientConstructor> =
   | InstanceType<TModule>
   | undefined
-type TQueryData<TModule extends ModuleMutationClientConstructor> =
+type TQueryData<TModule extends ModuleQueryClientConstructor> =
   | InstanceType<TModule>
   | undefined
 type TQueryKey = readonly [
-  'module-mutation-client',
+  'module-query-client',
   string,
-  string | undefined,
   AbstractAccountId,
   string | undefined,
   string,
-  SigningCosmWasmClient | undefined,
+  CosmWasmClient | undefined,
 ]
 
-export function useModuleMutationClient<
-  TModule extends ModuleMutationClientConstructor,
+export function useAbstractModuleQueryClient<
+  TModule extends ModuleQueryClientConstructor,
 >(
   {
     moduleId,
     Module,
     client,
     chain,
-    sender,
   }: {
+    client: CosmWasmClient | undefined
     chain: string | undefined
-    sender: string | undefined
     moduleId: string
     Module: TModule
-    client: SigningCosmWasmClient | undefined
   },
   {
     enabled: enabled_ = true,
@@ -107,24 +114,21 @@ export function useModuleMutationClient<
   const queryKey = React.useMemo(
     () =>
       [
-        'module-mutation-client',
+        'module-query-client',
         moduleId,
-        sender,
         accountId,
         chain,
         apiUrl,
         client,
       ] as const,
-    [moduleId, sender, accountId, chain, apiUrl, client],
+    [moduleId, accountId, chain, apiUrl, client],
   )
 
   const queryFn = React.useCallback(() => {
     if (!client) throw new Error('client is not defined')
-    if (!sender) throw new Error('sender is not defined')
     if (!chain) throw new Error('chain is not defined')
 
-    return getModuleMutationClient({
-      sender,
+    return getModuleQueryClient({
       client,
       chain,
       overrideApiUrl: apiUrl,

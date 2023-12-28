@@ -103,6 +103,7 @@ export function resolve<
           const requestArguments = Array.isArray(requestsArgumentsMaybeArray)
             ? requestsArgumentsMaybeArray
             : [requestsArgumentsMaybeArray]
+
           for (let i = 0; i < requestArguments.length; ++i) {
             // safe assertion because we are iterating over the length of requestArguments
             const { url, init } = requestArguments[i]!
@@ -121,9 +122,13 @@ export function resolve<
               const schema = await parse({ response })
               await fse.writeJSON(cacheFilePath, schema)
               path = cacheFolderPath
-              await fse.writeFile(cacheFileTimestampPath, timestamp, {
-                encoding: 'utf8',
-              })
+              await fse.writeFile(
+                cacheFileTimestampPath,
+                timestamp.toString(),
+                {
+                  encoding: 'utf8',
+                },
+              )
               // If request was successful, leave the loop.
               break
             } catch (error) {
