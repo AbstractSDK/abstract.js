@@ -15,6 +15,7 @@ runs:
       
     # https://github.com/pnpm/pnpm/issues/1801
     - name: PNPM Stubs
+      shell: bash
       run: mkdir -p ./packages/cli/node_modules/.bin/ && echo "#! /usr/bin/env node" > ./packages/cli/node_modules/.bin/abstract
 
     - name: Install dependencies
