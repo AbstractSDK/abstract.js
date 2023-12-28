@@ -65,10 +65,15 @@
       "types": "./dist/utils/index.d.ts",
       "default": "./dist/utils/index.js"
     },
+    "./hooks": {
+      "types": "./dist/hooks/index.d.ts",
+      "default": "./dist/hooks/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
     "/utils",
+    "/hooks",
     "/dist"
   ],
   "simple-git-hooks": {

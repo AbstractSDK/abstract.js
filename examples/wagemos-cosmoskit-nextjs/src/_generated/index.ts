@@ -7,8 +7,8 @@ import { UseMutationOptions } from '@tanstack/react-query'
 import { useMemo, useState, useEffect } from 'react'
 
 import {
-  useModuleMutationClient,
-  useModuleQueryClient,
+  useAbstractModuleClient,
+  useAbstractModuleQueryClient,
 } from '@abstract-money/react/utils'
 
 import { useChain } from '@cosmos-kit/react'
@@ -50,8 +50,15 @@ import {
   BettingAppClient,
 } from './cosmwasm-codegen/Betting.client'
 
+import { useAbstractClient } from '@abstract-money/react/utils'
+import {
+  useDeposit as _useDeposit,
+  useWithdraw as _useWithdraw,
+  useExecute as _useExecute,
+} from '@abstract-money/react/hooks'
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// betting
+// Betting
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,9 +67,9 @@ import {
 
 const BETTING_MODULE_ID = 'abstract:betting'
 
-function useCosmosKitModuleQueryClient(
-  args: Omit<Parameters<typeof useModuleQueryClient>[0], 'client'>,
-  options?: Parameters<typeof useModuleQueryClient>[1],
+function useCosmosKitAbstractModuleQueryClient(
+  args: Omit<Parameters<typeof useAbstractModuleQueryClient>[0], 'client'>,
+  options?: Parameters<typeof useAbstractModuleQueryClient>[1],
 ) {
   const [client, setClient] = useState<CosmWasmClient | undefined>(undefined)
   const { getCosmWasmClient: _getCosmWasmClient } = useChain(
@@ -79,7 +86,7 @@ function useCosmosKitModuleQueryClient(
     getCosmWasmClient().then((client) => setClient(client))
   }, [getCosmWasmClient])
 
-  return useModuleQueryClient(
+  return useAbstractModuleQueryClient(
     {
       client,
       ...args,
@@ -88,12 +95,12 @@ function useCosmosKitModuleQueryClient(
   )
 }
 
-function useCosmosKitModuleMutationClient(
+function useCosmosKitAbstractModuleClient(
   args: Omit<
-    Parameters<typeof useModuleMutationClient>[0],
+    Parameters<typeof useAbstractModuleClient>[0],
     'client' | 'sender'
   >,
-  options?: Parameters<typeof useModuleMutationClient>[1],
+  options?: Parameters<typeof useAbstractModuleClient>[1],
 ) {
   const [client, setClient] = useState<SigningCosmWasmClient | undefined>(
     undefined,
@@ -114,7 +121,7 @@ function useCosmosKitModuleMutationClient(
     getSigningCosmWasmClient().then((client) => setClient(client))
   }, [getSigningCosmWasmClient])
 
-  return useModuleMutationClient(
+  return useAbstractModuleClient(
     {
       client,
       sender: address,
@@ -122,6 +129,156 @@ function useCosmosKitModuleMutationClient(
     },
     options,
   )
+}
+
+function useCosmosKitAbstractClient(
+  args: Omit<Parameters<typeof useAbstractClient>[0], 'client' | 'sender'>,
+  options?: Parameters<typeof useAbstractClient>[1],
+) {
+  const [client, setClient] = useState<SigningCosmWasmClient | undefined>(
+    undefined,
+  )
+  const {
+    getSigningCosmWasmClient: _getSigningCosmWasmClient,
+    address,
+    isWalletConnected,
+  } = useChain(args.chain ?? 'neutron')
+
+  const getSigningCosmWasmClient = useMemo(() => {
+    if (!args.chain || !isWalletConnected) return undefined
+    return _getSigningCosmWasmClient
+  }, [_getSigningCosmWasmClient, args.chain])
+
+  useEffect(() => {
+    if (!getSigningCosmWasmClient) return
+    getSigningCosmWasmClient().then((client) => setClient(client))
+  }, [getSigningCosmWasmClient])
+
+  return useAbstractClient(
+    {
+      client,
+      sender: address,
+      ...args,
+    },
+    options,
+  )
+}
+
+export function useDeposit(
+  { chain }: { chain: string | undefined },
+  ...args: Parameters<typeof _useDeposit>
+) {
+  const {
+    data: abstractClient,
+    // TODO: figure out what to do with those
+    // isLoading: isAbstractClientLoading,
+    // isError: isAbstractClientError,
+    // error: abstractClientError,
+  } = useCosmosKitAbstractClient({ chain })
+
+  const {
+    mutate: mutate_,
+    mutateAsync: mutateAsync_,
+    ...rest
+  } = _useDeposit(...args)
+
+  const mutate = useMemo(() => {
+    if (!abstractClient) return undefined
+
+    return (
+      variables: Omit<Parameters<typeof mutate_>[0], 'abstractClient'>,
+      options?: Parameters<typeof mutate_>[1],
+    ) => mutate_({ abstractClient, ...variables }, options)
+  }, [mutate_, abstractClient])
+
+  const mutateAsync = useMemo(() => {
+    if (!abstractClient) return undefined
+
+    return (
+      variables: Omit<Parameters<typeof mutateAsync_>[0], 'abstractClient'>,
+      options?: Parameters<typeof mutateAsync_>[1],
+    ) => mutateAsync_({ abstractClient, ...variables }, options)
+  }, [mutateAsync_, abstractClient])
+
+  return { mutate, mutateAsync, ...rest } as const
+}
+
+export function useWithdraw(
+  { chain }: { chain: string | undefined },
+  ...args: Parameters<typeof _useWithdraw>
+) {
+  const {
+    data: abstractClient,
+    // TODO: figure out what to do with those
+    // isLoading: isAbstractClientLoading,
+    // isError: isAbstractClientError,
+    // error: abstractClientError,
+  } = useCosmosKitAbstractClient({ chain })
+
+  const {
+    mutate: mutate_,
+    mutateAsync: mutateAsync_,
+    ...rest
+  } = _useWithdraw(...args)
+
+  const mutate = useMemo(() => {
+    if (!abstractClient) return undefined
+
+    return (
+      variables: Omit<Parameters<typeof mutate_>[0], 'abstractClient'>,
+      options?: Parameters<typeof mutate_>[1],
+    ) => mutate_({ abstractClient, ...variables }, options)
+  }, [mutate_, abstractClient])
+
+  const mutateAsync = useMemo(() => {
+    if (!abstractClient) return undefined
+
+    return (
+      variables: Omit<Parameters<typeof mutateAsync_>[0], 'abstractClient'>,
+      options?: Parameters<typeof mutateAsync_>[1],
+    ) => mutateAsync_({ abstractClient, ...variables }, options)
+  }, [mutateAsync_, abstractClient])
+
+  return { mutate, mutateAsync, ...rest } as const
+}
+
+export function useExecute(
+  { chain }: { chain: string | undefined },
+  ...args: Parameters<typeof _useExecute>
+) {
+  const {
+    data: abstractClient,
+    // TODO: figure out what to do with those
+    // isLoading: isAbstractClientLoading,
+    // isError: isAbstractClientError,
+    // error: abstractClientError,
+  } = useCosmosKitAbstractClient({ chain })
+
+  const {
+    mutate: mutate_,
+    mutateAsync: mutateAsync_,
+    ...rest
+  } = _useExecute(...args)
+
+  const mutate = useMemo(() => {
+    if (!abstractClient) return undefined
+
+    return (
+      variables: Omit<Parameters<typeof mutate_>[0], 'abstractClient'>,
+      options?: Parameters<typeof mutate_>[1],
+    ) => mutate_({ abstractClient, ...variables }, options)
+  }, [mutate_, abstractClient])
+
+  const mutateAsync = useMemo(() => {
+    if (!abstractClient) return undefined
+
+    return (
+      variables: Omit<Parameters<typeof mutateAsync_>[0], 'abstractClient'>,
+      options?: Parameters<typeof mutateAsync_>[1],
+    ) => mutateAsync_({ abstractClient, ...variables }, options)
+  }, [mutateAsync_, abstractClient])
+
+  return { mutate, mutateAsync, ...rest } as const
 }
 
 export const betting = {
@@ -139,7 +296,7 @@ export const betting = {
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useCosmosKitModuleQueryClient(
+      } = useCosmosKitAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
 
@@ -203,7 +360,7 @@ export const betting = {
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useCosmosKitModuleQueryClient(
+      } = useCosmosKitAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
 
@@ -267,7 +424,7 @@ export const betting = {
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useCosmosKitModuleQueryClient(
+      } = useCosmosKitAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
 
@@ -331,7 +488,7 @@ export const betting = {
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useCosmosKitModuleQueryClient(
+      } = useCosmosKitAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
 
@@ -395,7 +552,7 @@ export const betting = {
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useCosmosKitModuleQueryClient(
+      } = useCosmosKitAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
 
@@ -459,7 +616,7 @@ export const betting = {
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useCosmosKitModuleQueryClient(
+      } = useCosmosKitAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
 
@@ -524,12 +681,12 @@ export const betting = {
       >,
     ) => {
       const {
-        data: bettingMutationClient,
+        data: bettingAbstractModuleClient,
         // TODO: figure out what to do with those
-        // isLoading: isBettingMutationClientLoading,
-        // isError: isBettingMutationClientError,
-        // error: bettingMutationClientError,
-      } = useCosmosKitModuleMutationClient({
+        // isLoading: isBettingAbstractModuleClientLoading,
+        // isError: isBettingAbstractModuleClientError,
+        // error: bettingAbstractModuleClientError,
+      } = useCosmosKitAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         chain,
         Module: BettingAppClient,
@@ -542,23 +699,30 @@ export const betting = {
       } = useBettingUpdateConfigMutation(options)
 
       const mutate = useMemo(() => {
-        if (!bettingMutationClient) return undefined
+        if (!bettingAbstractModuleClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
           options?: Parameters<typeof mutate_>[1],
-        ) => mutate_({ client: bettingMutationClient, ...variables }, options)
-      }, [mutate_, bettingMutationClient])
+        ) =>
+          mutate_(
+            { client: bettingAbstractModuleClient, ...variables },
+            options,
+          )
+      }, [mutate_, bettingAbstractModuleClient])
 
       const mutateAsync = useMemo(() => {
-        if (!bettingMutationClient) return undefined
+        if (!bettingAbstractModuleClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
           options?: Parameters<typeof mutateAsync_>[1],
         ) =>
-          mutateAsync_({ client: bettingMutationClient, ...variables }, options)
-      }, [mutateAsync_, bettingMutationClient])
+          mutateAsync_(
+            { client: bettingAbstractModuleClient, ...variables },
+            options,
+          )
+      }, [mutateAsync_, bettingAbstractModuleClient])
 
       return { mutate, mutateAsync, ...rest } as const
     },
@@ -574,12 +738,12 @@ export const betting = {
       >,
     ) => {
       const {
-        data: bettingMutationClient,
+        data: bettingAbstractModuleClient,
         // TODO: figure out what to do with those
-        // isLoading: isBettingMutationClientLoading,
-        // isError: isBettingMutationClientError,
-        // error: bettingMutationClientError,
-      } = useCosmosKitModuleMutationClient({
+        // isLoading: isBettingAbstractModuleClientLoading,
+        // isError: isBettingAbstractModuleClientError,
+        // error: bettingAbstractModuleClientError,
+      } = useCosmosKitAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         chain,
         Module: BettingAppClient,
@@ -592,23 +756,30 @@ export const betting = {
       } = useBettingCloseRoundMutation(options)
 
       const mutate = useMemo(() => {
-        if (!bettingMutationClient) return undefined
+        if (!bettingAbstractModuleClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
           options?: Parameters<typeof mutate_>[1],
-        ) => mutate_({ client: bettingMutationClient, ...variables }, options)
-      }, [mutate_, bettingMutationClient])
+        ) =>
+          mutate_(
+            { client: bettingAbstractModuleClient, ...variables },
+            options,
+          )
+      }, [mutate_, bettingAbstractModuleClient])
 
       const mutateAsync = useMemo(() => {
-        if (!bettingMutationClient) return undefined
+        if (!bettingAbstractModuleClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
           options?: Parameters<typeof mutateAsync_>[1],
         ) =>
-          mutateAsync_({ client: bettingMutationClient, ...variables }, options)
-      }, [mutateAsync_, bettingMutationClient])
+          mutateAsync_(
+            { client: bettingAbstractModuleClient, ...variables },
+            options,
+          )
+      }, [mutateAsync_, bettingAbstractModuleClient])
 
       return { mutate, mutateAsync, ...rest } as const
     },
@@ -624,12 +795,12 @@ export const betting = {
       >,
     ) => {
       const {
-        data: bettingMutationClient,
+        data: bettingAbstractModuleClient,
         // TODO: figure out what to do with those
-        // isLoading: isBettingMutationClientLoading,
-        // isError: isBettingMutationClientError,
-        // error: bettingMutationClientError,
-      } = useCosmosKitModuleMutationClient({
+        // isLoading: isBettingAbstractModuleClientLoading,
+        // isError: isBettingAbstractModuleClientError,
+        // error: bettingAbstractModuleClientError,
+      } = useCosmosKitAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         chain,
         Module: BettingAppClient,
@@ -642,23 +813,30 @@ export const betting = {
       } = useBettingDistributeWinningsMutation(options)
 
       const mutate = useMemo(() => {
-        if (!bettingMutationClient) return undefined
+        if (!bettingAbstractModuleClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
           options?: Parameters<typeof mutate_>[1],
-        ) => mutate_({ client: bettingMutationClient, ...variables }, options)
-      }, [mutate_, bettingMutationClient])
+        ) =>
+          mutate_(
+            { client: bettingAbstractModuleClient, ...variables },
+            options,
+          )
+      }, [mutate_, bettingAbstractModuleClient])
 
       const mutateAsync = useMemo(() => {
-        if (!bettingMutationClient) return undefined
+        if (!bettingAbstractModuleClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
           options?: Parameters<typeof mutateAsync_>[1],
         ) =>
-          mutateAsync_({ client: bettingMutationClient, ...variables }, options)
-      }, [mutateAsync_, bettingMutationClient])
+          mutateAsync_(
+            { client: bettingAbstractModuleClient, ...variables },
+            options,
+          )
+      }, [mutateAsync_, bettingAbstractModuleClient])
 
       return { mutate, mutateAsync, ...rest } as const
     },
@@ -674,12 +852,12 @@ export const betting = {
       >,
     ) => {
       const {
-        data: bettingMutationClient,
+        data: bettingAbstractModuleClient,
         // TODO: figure out what to do with those
-        // isLoading: isBettingMutationClientLoading,
-        // isError: isBettingMutationClientError,
-        // error: bettingMutationClientError,
-      } = useCosmosKitModuleMutationClient({
+        // isLoading: isBettingAbstractModuleClientLoading,
+        // isError: isBettingAbstractModuleClientError,
+        // error: bettingAbstractModuleClientError,
+      } = useCosmosKitAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         chain,
         Module: BettingAppClient,
@@ -692,23 +870,30 @@ export const betting = {
       } = useBettingPlaceBetMutation(options)
 
       const mutate = useMemo(() => {
-        if (!bettingMutationClient) return undefined
+        if (!bettingAbstractModuleClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
           options?: Parameters<typeof mutate_>[1],
-        ) => mutate_({ client: bettingMutationClient, ...variables }, options)
-      }, [mutate_, bettingMutationClient])
+        ) =>
+          mutate_(
+            { client: bettingAbstractModuleClient, ...variables },
+            options,
+          )
+      }, [mutate_, bettingAbstractModuleClient])
 
       const mutateAsync = useMemo(() => {
-        if (!bettingMutationClient) return undefined
+        if (!bettingAbstractModuleClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
           options?: Parameters<typeof mutateAsync_>[1],
         ) =>
-          mutateAsync_({ client: bettingMutationClient, ...variables }, options)
-      }, [mutateAsync_, bettingMutationClient])
+          mutateAsync_(
+            { client: bettingAbstractModuleClient, ...variables },
+            options,
+          )
+      }, [mutateAsync_, bettingAbstractModuleClient])
 
       return { mutate, mutateAsync, ...rest } as const
     },
@@ -724,12 +909,12 @@ export const betting = {
       >,
     ) => {
       const {
-        data: bettingMutationClient,
+        data: bettingAbstractModuleClient,
         // TODO: figure out what to do with those
-        // isLoading: isBettingMutationClientLoading,
-        // isError: isBettingMutationClientError,
-        // error: bettingMutationClientError,
-      } = useCosmosKitModuleMutationClient({
+        // isLoading: isBettingAbstractModuleClientLoading,
+        // isError: isBettingAbstractModuleClientError,
+        // error: bettingAbstractModuleClientError,
+      } = useCosmosKitAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         chain,
         Module: BettingAppClient,
@@ -742,23 +927,30 @@ export const betting = {
       } = useBettingUpdateAccountsMutation(options)
 
       const mutate = useMemo(() => {
-        if (!bettingMutationClient) return undefined
+        if (!bettingAbstractModuleClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
           options?: Parameters<typeof mutate_>[1],
-        ) => mutate_({ client: bettingMutationClient, ...variables }, options)
-      }, [mutate_, bettingMutationClient])
+        ) =>
+          mutate_(
+            { client: bettingAbstractModuleClient, ...variables },
+            options,
+          )
+      }, [mutate_, bettingAbstractModuleClient])
 
       const mutateAsync = useMemo(() => {
-        if (!bettingMutationClient) return undefined
+        if (!bettingAbstractModuleClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
           options?: Parameters<typeof mutateAsync_>[1],
         ) =>
-          mutateAsync_({ client: bettingMutationClient, ...variables }, options)
-      }, [mutateAsync_, bettingMutationClient])
+          mutateAsync_(
+            { client: bettingAbstractModuleClient, ...variables },
+            options,
+          )
+      }, [mutateAsync_, bettingAbstractModuleClient])
 
       return { mutate, mutateAsync, ...rest } as const
     },
@@ -774,12 +966,12 @@ export const betting = {
       >,
     ) => {
       const {
-        data: bettingMutationClient,
+        data: bettingAbstractModuleClient,
         // TODO: figure out what to do with those
-        // isLoading: isBettingMutationClientLoading,
-        // isError: isBettingMutationClientError,
-        // error: bettingMutationClientError,
-      } = useCosmosKitModuleMutationClient({
+        // isLoading: isBettingAbstractModuleClientLoading,
+        // isError: isBettingAbstractModuleClientError,
+        // error: bettingAbstractModuleClientError,
+      } = useCosmosKitAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         chain,
         Module: BettingAppClient,
@@ -792,23 +984,30 @@ export const betting = {
       } = useBettingRegisterMutation(options)
 
       const mutate = useMemo(() => {
-        if (!bettingMutationClient) return undefined
+        if (!bettingAbstractModuleClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
           options?: Parameters<typeof mutate_>[1],
-        ) => mutate_({ client: bettingMutationClient, ...variables }, options)
-      }, [mutate_, bettingMutationClient])
+        ) =>
+          mutate_(
+            { client: bettingAbstractModuleClient, ...variables },
+            options,
+          )
+      }, [mutate_, bettingAbstractModuleClient])
 
       const mutateAsync = useMemo(() => {
-        if (!bettingMutationClient) return undefined
+        if (!bettingAbstractModuleClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
           options?: Parameters<typeof mutateAsync_>[1],
         ) =>
-          mutateAsync_({ client: bettingMutationClient, ...variables }, options)
-      }, [mutateAsync_, bettingMutationClient])
+          mutateAsync_(
+            { client: bettingAbstractModuleClient, ...variables },
+            options,
+          )
+      }, [mutateAsync_, bettingAbstractModuleClient])
 
       return { mutate, mutateAsync, ...rest } as const
     },
@@ -824,12 +1023,12 @@ export const betting = {
       >,
     ) => {
       const {
-        data: bettingMutationClient,
+        data: bettingAbstractModuleClient,
         // TODO: figure out what to do with those
-        // isLoading: isBettingMutationClientLoading,
-        // isError: isBettingMutationClientError,
-        // error: bettingMutationClientError,
-      } = useCosmosKitModuleMutationClient({
+        // isLoading: isBettingAbstractModuleClientLoading,
+        // isError: isBettingAbstractModuleClientError,
+        // error: bettingAbstractModuleClientError,
+      } = useCosmosKitAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         chain,
         Module: BettingAppClient,
@@ -842,23 +1041,30 @@ export const betting = {
       } = useBettingCreateRoundMutation(options)
 
       const mutate = useMemo(() => {
-        if (!bettingMutationClient) return undefined
+        if (!bettingAbstractModuleClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
           options?: Parameters<typeof mutate_>[1],
-        ) => mutate_({ client: bettingMutationClient, ...variables }, options)
-      }, [mutate_, bettingMutationClient])
+        ) =>
+          mutate_(
+            { client: bettingAbstractModuleClient, ...variables },
+            options,
+          )
+      }, [mutate_, bettingAbstractModuleClient])
 
       const mutateAsync = useMemo(() => {
-        if (!bettingMutationClient) return undefined
+        if (!bettingAbstractModuleClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
           options?: Parameters<typeof mutateAsync_>[1],
         ) =>
-          mutateAsync_({ client: bettingMutationClient, ...variables }, options)
-      }, [mutateAsync_, bettingMutationClient])
+          mutateAsync_(
+            { client: bettingAbstractModuleClient, ...variables },
+            options,
+          )
+      }, [mutateAsync_, bettingAbstractModuleClient])
 
       return { mutate, mutateAsync, ...rest } as const
     },
