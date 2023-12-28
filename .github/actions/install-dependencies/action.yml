@@ -20,7 +20,7 @@ runs:
 
     - name: Install dependencies
       shell: bash
-      run: pnpm install --ignore-scripts
+      run: pnpm install --ignore-scripts -r
 
     - name: Link packages
       shell: bash
