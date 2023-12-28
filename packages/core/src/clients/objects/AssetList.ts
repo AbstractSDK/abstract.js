@@ -5,7 +5,7 @@ import { type MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
 import { match } from 'ts-pattern'
 
 import { ProxyTypes } from '../../_cli-generated'
-type CosmosMsgForEmpty = ProxyTypes.CosmosMsgForEmpty
+export type CosmosMsgForEmpty = ProxyTypes.CosmosMsgForEmpty
 import { type EncodedMsg } from '../index'
 import { Asset } from './Asset'
 
