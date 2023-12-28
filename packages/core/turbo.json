@@ -3,11 +3,19 @@
   "extends": ["//"],
   "pipeline": {
     "build": {
-      "dependsOn": ["@abstract-money/cosmwasm#build", "clean"],
+      "dependsOn": [
+        "@abstract-money/cosmwasm#build",
+        "@abstract-money/cli#build",
+        "clean"
+      ],
       "outputs": ["dist/**"]
     },
     "dev": {
-      "dependsOn": ["@abstract-money/cosmwasm#dev", "clean"],
+      "dependsOn": [
+        "@abstract-money/cosmwasm#dev",
+        "@abstract-money/cli#dev",
+        "clean"
+      ],
       "outputs": ["dist/**"]
     },
     "typecheck": {
