@@ -13,10 +13,10 @@ runs:
         cache: pnpm
         node-version: 18
       
-    # https://github.com/pnpm/pnpm/issues/1801
-    - name: PNPM Stubs
-      shell: bash
-      run: mkdir -p ./packages/core/node_modules/.bin/ && echo "#! /usr/bin/env node" > ./packages/core/node_modules/.bin/abstract
+    # # https://github.com/pnpm/pnpm/issues/1801
+    # - name: PNPM Stubs
+    #   shell: bash
+    #   run: mkdir -p ./packages/core/node_modules/.bin/ && echo "#! /usr/bin/env node" > ./packages/core/node_modules/.bin/abstract
 
     - name: Install dependencies
       shell: bash

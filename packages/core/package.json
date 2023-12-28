@@ -18,14 +18,15 @@
     "url": "https://github.com/AbstractSDK/abstract.js/issues"
   },
   "scripts": {
-    "build": "abstract generate && tsup",
-    "dev": "abstract generate && DEV=true tsup",
+    "build": "tsup",
+    "dev": "DEV=true tsup",
     "clean": "rimraf dist",
     "docs:gen": "typedoc",
     "docs:serve": "serve ./docs -l 3050",
     "typecheck": "tsc --noEmit --jsx react-jsx",
-    "codegen": "graphql-codegen --config codegen.yml",
-    "codegen:watch": "graphql-codegen --watch"
+    "codegen:abstract": "abstract generate",
+    "codegen:subgraph": "graphql-codegen --config codegen.yml",
+    "codegen:subgraph:watch": "graphql-codegen --watch"
   },
   "dependencies": {
     "@abstract-money/cosmwasm": "workspace:@abstract-money/cosmwasm@*",
@@ -100,6 +101,13 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["/api", "/chain-registry", "/clients", "/tools", "/utils", "/dist"],
+  "files": [
+    "/api",
+    "/chain-registry",
+    "/clients",
+    "/tools",
+    "/utils",
+    "/dist"
+  ],
   "sideEffects": false
 }
