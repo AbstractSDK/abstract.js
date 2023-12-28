@@ -5,11 +5,10 @@ import {
   ABSTRACT_API_URL,
   AbstractAccountId,
   AbstractClient,
-  CHAIN_DEPLOYMENT_QUERY,
-  graphqlRequest,
 } from '@abstract-money/core'
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import { useAccountId, useConfig } from '../contexts'
+import { getAbstractClient } from './get-abstract-client'
 
 interface ModuleMutationClientConstructor {
   new (args: {
@@ -40,25 +39,12 @@ async function getModuleMutationClient<
   moduleId: string
   Module: TModule
 }) {
-  // TODO: re-check if grabbing the first chain of the list is a good solution
-  const data = await graphqlRequest(overrideApiUrl, CHAIN_DEPLOYMENT_QUERY, {
-    chain,
-  })
-
-  const {
-    ansHost: ansHostAddress,
-    registry: registryAddress,
-    accountFactory: factoryAddress,
-  } = data.deployment
-
-  const abstractClient = new AbstractClient({
+  const abstractClient = await getAbstractClient({
     sender,
     client,
-    ansHostAddress,
-    registryAddress,
-    factoryAddress,
+    chain,
+    overrideApiUrl,
   })
-
   const { account_base } = await abstractClient.registryQueryClient.accountBase(
     {
       accountId: accountId.into(),
