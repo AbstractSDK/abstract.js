@@ -1,23 +1,23 @@
 'use client'
 
 import { coin } from '@cosmjs/amino'
-import { useChain } from '@cosmos-kit/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { DialogDescription } from '@radix-ui/react-dialog'
+import { useAccount } from 'graz'
 import { Loader2 } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { betting } from '../../../_generated'
-import { RoundResponse } from '../../../_generated/cosmwasm-codegen/Betting.types'
-import { Button } from '../../../components/ui/button'
+import { betting } from '../../_generated'
+import { RoundResponse } from '../../_generated/cosmwasm-codegen/Betting.types'
+import { Button } from '../../components/ui/button'
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '../../../components/ui/dialog'
+} from '../../components/ui/dialog'
 import {
   Form,
   FormControl,
@@ -26,16 +26,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../components/ui/form'
-import { Input } from '../../../components/ui/input'
+} from '../../components/ui/form'
+import { Input } from '../../components/ui/input'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../../../components/ui/select'
-import { useToast } from '../../../components/ui/use-toast'
+} from '../../components/ui/select'
+import { useToast } from '../../components/ui/use-toast'
 
 const placeBetSchema = z.object({
   amount: z.coerce
@@ -47,6 +47,8 @@ const placeBetSchema = z.object({
 export function PlaceBetDialog({ round }: { round: RoundResponse }) {
   const [isOpen, setIsOpen] = useState(false)
 
+  const { isConnected } = useAccount()
+
   const form = useForm({
     mode: 'onTouched',
     resolver: zodResolver(placeBetSchema),
@@ -57,8 +59,6 @@ export function PlaceBetDialog({ round }: { round: RoundResponse }) {
   })
 
   const { toast } = useToast()
-
-  const { isWalletConnected } = useChain('neutron')
 
   const { mutateAsync: placeBetAsync, isLoading } =
     betting.mutations.usePlaceBet({ chain: 'neutron' })
@@ -92,7 +92,7 @@ export function PlaceBetDialog({ round }: { round: RoundResponse }) {
 
   return (
     <>
-      <Button disabled={!isWalletConnected} onClick={() => setIsOpen(true)}>
+      <Button disabled={!isConnected} onClick={() => setIsOpen(true)}>
         Place Bet
       </Button>
       <Dialog open={isOpen} onOpenChange={(open) => setIsOpen(open)}>

@@ -10,8 +10,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@abstract-money/core": "workspace:@abstract-money/core@*",
-    "@abstract-money/react": "workspace:@abstract-money/react@*",
+    "@abstract-money/core": "workspace:*",
+    "@abstract-money/react": "workspace:*",
     "@chain-registry/types": "^0.13.1",
     "@cosmjs/amino": "^0.31.0",
     "@cosmjs/cosmwasm-stargate": "^0.31.0",
@@ -44,7 +44,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@abstract-money/cli": "workspace:@abstract-money/cli@*",
+    "@abstract-money/cli": "workspace:*",
     "@keplr-wallet/types": "^0.12.44",
     "@types/node": "^20",
     "@types/react": "^18",

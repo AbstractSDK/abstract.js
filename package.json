@@ -1,7 +1,8 @@
 {
   "private": true,
+  "workspaces": ["examples/*", "packages/*"],
   "scripts": {
-    "build": "turbo --filter \"./packages/**\" build",
+    "build": "turbo build",
     "changeset:release": "turbo build && changeset publish",
     "changeset:version": "changeset version && pnpm install --lockfile-only",
     "cjs:release": "node -r esbuild-register ./scripts/cjs.ts",
@@ -9,7 +10,7 @@
     "lint": "biome check .",
     "lint:fix": "pnpm lint --apply",
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "pnpm build",
+    "postinstall": "turbo --filter \"./packages/**\" build",
     "prepare": "npx simple-git-hooks",
     "typecheck": "turbo typecheck"
   },

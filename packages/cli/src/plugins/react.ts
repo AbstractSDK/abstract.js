@@ -650,6 +650,8 @@ export function react(options?: ReactConfig): ReactResult {
 
       return {
         imports: dedent`
+          'use client';
+
           import { ${
             shouldImportCosmWasmClientTypes
               ? 'SigningCosmWasmClient, CosmWasmClient, '

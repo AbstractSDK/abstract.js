@@ -33,7 +33,7 @@ export function useAccountId() {
   const accountStore = React.useContext(Context)
   if (!accountStore)
     throw new Error(
-      '`useAccountId` must be used within `AbstractAccountIdContext`.',
+      '`useAccountId` must be used within `AbstractAccountIdProvider`.',
     )
   return accountStore
 }
