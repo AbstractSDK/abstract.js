@@ -12,16 +12,6 @@
       ],
       "outputs": ["dist/**"]
     },
-    "dev": {
-      "dependsOn": [
-        "@abstract-money/cosmwasm#dev",
-        "@abstract-money/cli#dev",
-        "codegen:abstract",
-        "codegen:subgraph",
-        "clean"
-      ],
-      "outputs": ["dist/**"]
-    },
     "typecheck": {
       "dependsOn": [
         "@abstract-money/cosmwasm#build",
@@ -39,7 +29,7 @@
       "outputs": ["src/_cli-generated/**"]
     },
     "codegen:subgraph": {
-      "cache": false
+      "outputs": ["src/__generated__"]
     }
   }
 }

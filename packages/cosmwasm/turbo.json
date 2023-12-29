@@ -6,10 +6,6 @@
       "dependsOn": ["clean"],
       "outputs": ["dist/**"]
     },
-    "dev": {
-      "dependsOn": ["clean"],
-      "outputs": ["dist/**"]
-    },
     "typecheck": {},
     "clean": {
       "cache": false
