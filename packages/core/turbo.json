@@ -24,8 +24,8 @@
     },
     "typecheck": {
       "dependsOn": [
-        "@abstract-money/cosmwasm#dev",
-        "@abstract-money/cli#dev",
+        "@abstract-money/cosmwasm#build",
+        "@abstract-money/cli#build",
         "codegen:abstract",
         "codegen:subgraph",
         "clean"
@@ -35,7 +35,8 @@
       "cache": false
     },
     "codegen:abstract": {
-      "cache": false
+      "dependsOn": ["@abstract-money/cli#build", "clean"],
+      "outputs": ["src/_cli-generated/**"]
     },
     "codegen:subgraph": {
       "cache": false
