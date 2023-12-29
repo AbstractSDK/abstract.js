@@ -20,8 +20,7 @@
   },
   "scripts": {
     "build": "NODE_OPTIONS='--max-old-space-size=16384' tsup",
-    "typecheck": "tsc --noEmit",
-    "dev": "NODE_OPTIONS='--max-old-space-size=16384' DEV=true tsup"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@abstract-money/core": "workspace:@abstract-money/core@*",

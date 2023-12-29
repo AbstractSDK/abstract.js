@@ -19,7 +19,6 @@
   },
   "scripts": {
     "build": "tsup",
-    "dev": "DEV=true tsup",
     "clean": "rimraf dist",
     "docs:gen": "typedoc",
     "docs:serve": "serve ./docs -l 3050",
