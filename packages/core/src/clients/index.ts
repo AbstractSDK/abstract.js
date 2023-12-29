@@ -1,4 +1,4 @@
-import { BatchCosmWasmClient } from '@abstract-money/cosmwasm'
+import { BatchCosmWasmClient } from '@abstract-money/cosmwasm-utils'
 import { Mixin } from 'ts-mixer'
 
 export * from './errors'

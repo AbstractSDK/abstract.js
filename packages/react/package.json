@@ -23,7 +23,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@abstract-money/core": "workspace:@abstract-money/core@*",
+    "@abstract-money/core": "workspace:*",
     "@tanstack/react-query": "^4",
     "zustand": "^4.4.6"
   },

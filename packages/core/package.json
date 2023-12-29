@@ -28,7 +28,7 @@
     "codegen:subgraph:watch": "graphql-codegen --watch"
   },
   "dependencies": {
-    "@abstract-money/cosmwasm": "workspace:@abstract-money/cosmwasm@*",
+    "@abstract-money/cosmwasm-utils": "workspace:*",
     "@chain-registry/types": "^0.13.1",
     "@cosmjs/amino": "^0.31.0",
     "@cosmjs/cosmwasm-stargate": "^0.31.0",
@@ -54,7 +54,7 @@
   },
   "type": "module",
   "devDependencies": {
-    "@abstract-money/cli": "workspace:@abstract-money/cli@*",
+    "@abstract-money/cli": "workspace:*",
     "@graphql-codegen/cli": "^2.13.1",
     "@graphql-codegen/client-preset": "^1.2.6",
     "@graphql-typed-document-node/core": "^3.2.0",

@@ -1,7 +1,7 @@
 import {
   BatchCosmWasmClient,
   type BatchCosmWasmClientOptions,
-} from '@abstract-money/cosmwasm'
+} from '@abstract-money/cosmwasm-utils'
 import { Coin } from '@cosmjs/amino'
 import {
   CosmWasmClient,

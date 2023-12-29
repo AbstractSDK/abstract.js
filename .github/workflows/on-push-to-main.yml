@@ -1,7 +1,7 @@
 name: Main
 on:
   push:
-    branches: [main]
+    branches: [mainline]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -31,7 +31,7 @@ jobs:
 
       - name: Create version pull request or publish to npm
         id: changesets
-        uses: changesets/action@v1
+        uses: changesets/action@v1.4.1
         with:
           title: "chore: version packages"
           commit: "chore: version packages"

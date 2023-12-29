@@ -1,7 +1,7 @@
 {
-  "name": "@abstract-money/cosmwasm",
-  "version": "0.1.3",
-  "description": "Cosmwasm helpers",
+  "name": "@abstract-money/cosmwasm-utils",
+  "version": "0.0.0",
+  "description": "Cosmwasm utils",
   "author": "adairrr",
   "license": "MIT",
   "repository": "",
@@ -40,15 +40,15 @@
       "types": "./dist/client/index.d.ts",
       "default": "./dist/client/index.js"
     },
-    "./utils": {
-      "types": "./dist/utils/index.d.ts",
-      "default": "./dist/utils/index.js"
+    "./query": {
+      "types": "./dist/query/index.d.ts",
+      "default": "./dist/query/index.js"
     },
     "./package.json": "./package.json"
   },
   "files": [
     "/client",
-    "/utils",
+    "/query",
     "/dist"
   ],
   "sideEffects": false

@@ -1,5 +1,6 @@
 {
   "private": true,
+  "workspaces": ["examples/*", "packages/*"],
   "scripts": {
     "build": "turbo --filter \"./packages/**\" build",
     "changeset:release": "turbo build && changeset publish",

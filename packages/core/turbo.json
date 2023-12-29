@@ -4,7 +4,7 @@
   "pipeline": {
     "build": {
       "dependsOn": [
-        "@abstract-money/cosmwasm#build",
+        "@abstract-money/cosmwasm-utils#build",
         "@abstract-money/cli#build",
         "codegen:abstract",
         "codegen:subgraph",
@@ -14,7 +14,7 @@
     },
     "typecheck": {
       "dependsOn": [
-        "@abstract-money/cosmwasm#build",
+        "@abstract-money/cosmwasm-utils#build",
         "@abstract-money/cli#build",
         "codegen:abstract",
         "codegen:subgraph",
