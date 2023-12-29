@@ -101,6 +101,13 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["/api", "/chain-registry", "/clients", "/tools", "/utils", "/dist"],
+  "files": [
+    "/api",
+    "/chain-registry",
+    "/clients",
+    "/tools",
+    "/utils",
+    "/dist"
+  ],
   "sideEffects": false
 }
