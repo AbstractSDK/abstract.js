@@ -10,26 +10,26 @@ import {
 import { useAccount, useCosmWasmClient, useCosmWasmSigningClient } from 'graz'
 
 import {
-  useBettingBetsQuery,
-  useBettingConfigQuery,
-  useBettingListOddsQuery,
-  useBettingOddsQuery,
-  useBettingListRoundsQuery,
-  useBettingRoundQuery,
-  useBettingUpdateConfigMutation,
-  BettingUpdateConfigMutation,
-  useBettingCloseRoundMutation,
   BettingCloseRoundMutation,
-  useBettingDistributeWinningsMutation,
-  BettingDistributeWinningsMutation,
-  useBettingPlaceBetMutation,
-  BettingPlaceBetMutation,
-  useBettingUpdateAccountsMutation,
-  BettingUpdateAccountsMutation,
-  useBettingRegisterMutation,
-  BettingRegisterMutation,
-  useBettingCreateRoundMutation,
   BettingCreateRoundMutation,
+  BettingDistributeWinningsMutation,
+  BettingPlaceBetMutation,
+  BettingRegisterMutation,
+  BettingUpdateAccountsMutation,
+  BettingUpdateConfigMutation,
+  useBettingBetsQuery,
+  useBettingCloseRoundMutation,
+  useBettingConfigQuery,
+  useBettingCreateRoundMutation,
+  useBettingDistributeWinningsMutation,
+  useBettingListOddsQuery,
+  useBettingListRoundsQuery,
+  useBettingOddsQuery,
+  useBettingPlaceBetMutation,
+  useBettingRegisterMutation,
+  useBettingRoundQuery,
+  useBettingUpdateAccountsMutation,
+  useBettingUpdateConfigMutation,
 } from './cosmwasm-codegen/Betting.react-query'
 
 import {
@@ -37,21 +37,21 @@ import {
   ConfigResponse,
   ListOddsResponse,
   OddsResponse,
-  RoundsResponse,
   RoundResponse,
+  RoundsResponse,
 } from './cosmwasm-codegen/Betting.types'
 
 import {
-  BettingAppQueryClient,
   BettingAppClient,
+  BettingAppQueryClient,
 } from './cosmwasm-codegen/Betting.client'
 
-import { useAbstractClient } from '@abstract-money/react/utils'
 import {
   useDeposit as _useDeposit,
-  useWithdraw as _useWithdraw,
   useExecute as _useExecute,
+  useWithdraw as _useWithdraw,
 } from '@abstract-money/react/hooks'
+import { useAbstractClient } from '@abstract-money/react/utils'
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Betting

@@ -20,7 +20,7 @@ import {
   ProxyQueryClient,
   ProxyTypes,
   VersionControlTypes,
-} from '../_cli-generated'
+} from '../codegen/abstract'
 
 type ManagerModuleInfo = ManagerTypes.ManagerModuleInfo
 type CosmosMsgForEmpty = ProxyTypes.CosmosMsgForEmpty

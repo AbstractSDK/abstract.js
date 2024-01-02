@@ -29,7 +29,7 @@ const contractsConfig = [
 ]
 
 export default defineConfig({
-  out: 'src/_cli-generated',
+  out: 'src/codegen/abstract',
   plugins: [
     vanilla(),
     registry({

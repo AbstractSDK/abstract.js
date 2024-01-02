@@ -181,12 +181,17 @@ export function react(options?: ReactConfig): ReactResult {
             | 'useGrazAbstractClient'
             | 'useCosmosKitAbstractClient'
             | undefined
+          let useAbstractQueryClientHookName:
+            | 'useGrazAbstractQueryClient'
+            | 'useCosmosKitAbstractQueryClient'
+            | undefined
 
           if (options?.addon === 'graz') {
             useAbstractModuleQueryClientHookName =
               'useGrazAbstractModuleQueryClient'
             useAbstractModuleClientHookName = 'useGrazAbstractModuleClient'
             useAbstractClientHookName = 'useGrazAbstractClient'
+            useAbstractQueryClientHookName = 'useGrazAbstractQueryClient'
             content.push(dedent`
               function useGrazAbstractModuleQueryClient(
                 args: Omit<Parameters<typeof useAbstractModuleQueryClient>[0], 'client'>,
@@ -241,12 +246,30 @@ export function react(options?: ReactConfig): ReactResult {
                   options,
                 )
               }
+
+              function useGrazAbstractQueryClient(
+                args: Omit<
+                  Parameters<typeof useAbstractQueryClient>[0],
+                  'client' | 'sender'
+                >,
+                options?: Parameters<typeof useAbstractQueryClient>[1],
+              ) {
+                const { data: client } = useCosmWasmClient()
+                return useAbstractQueryClient(
+                  {
+                    client,
+                    ...args,
+                  },
+                  options,
+                )
+              }
             `)
           } else if (options?.addon === 'cosmos-kit') {
             useAbstractModuleQueryClientHookName =
               'useCosmosKitAbstractModuleQueryClient'
             useAbstractModuleClientHookName = 'useCosmosKitAbstractModuleClient'
             useAbstractClientHookName = 'useCosmosKitAbstractClient'
+            useAbstractQueryClientHookName = 'useCosmosKitAbstractQueryClient'
             content.push(dedent`
               function useCosmosKitAbstractModuleQueryClient(
                 args: Omit<Parameters<typeof useAbstractModuleQueryClient>[0], 'client'>,
@@ -337,6 +360,35 @@ export function react(options?: ReactConfig): ReactResult {
                 )
               }
 
+              function useCosmosKitAbstractQueryClient(
+                args: Omit<
+                  Parameters<typeof useAbstractQueryClient>[0],
+                  'client' | 'sender'
+                >,
+                options?: Parameters<typeof useAbstractQueryClient>[1],
+              ) {
+                const [client, setClient] = useState<CosmWasmClient | undefined>(undefined)
+                const {getCosmWasmClient: _getCosmWasmClient} = useChain(args.chain ?? 'neutron')
+
+                const getCosmWasmClient = useMemo(() => {
+                  if (!args.chain) return undefined
+                  return _getCosmWasmClient
+                }, [_getCosmWasmClient, args.chain])
+
+                useEffect(() => {
+                  if (!getCosmWasmClient) return
+                  getCosmWasmClient().then((client) => setClient(client))
+
+                }, [getCosmWasmClient])
+
+                return useAbstractQueryClient(
+                  {
+                    client,
+                    ...args,
+                  },
+                  options,
+                )
+              }
             `)
           } else {
             useAbstractModuleQueryClientHookName =
@@ -348,14 +400,27 @@ export function react(options?: ReactConfig): ReactResult {
 
           if (!shouldInjectClientAndSender) {
             imports.push(dedent`
-              import { useAbstractClient } from '@abstract-money/react/utils'
+              import { useAbstractClient, useAbstractQueryClient } from '@abstract-money/react/utils'
               import {
                 useDeposit as _useDeposit,
                 useWithdraw as _useWithdraw,
                 useExecute as _useExecute,
+                useAccounts as _useAccounts
               } from '@abstract-money/react/hooks'
             `)
             content.push(dedent`
+              export function useAccounts({ chain, owner }: Omit<Parameters<typeof _useAccounts>[0], 'client'>, opts: Parameters<typeof _useAccounts>[1]) {
+                const {
+                  data: abstractQueryClient,
+                  // TODO: figure out what to do with those
+                  // isLoading: isAbstractQueryClientLoading,
+                  // isError: isAbstractQueryClientError,
+                  // error: abstractQueryClientError,
+                } = ${useAbstractQueryClientHookName}({ chain })
+
+                return _useAccounts({chain, owner, client: abstractQueryClient}, opts)
+              }
+
               export function useDeposit({ chain }:{ chain: string | undefined }, ...args: Parameters<typeof _useDeposit>) {
                 const {
                   data: abstractClient,

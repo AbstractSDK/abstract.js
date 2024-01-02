@@ -10,7 +10,9 @@ import {
 } from '@cosmjs/cosmwasm-stargate'
 import { Variables } from 'graphql-request'
 import semverSatisfies from 'semver/functions/satisfies'
-import { gql } from '../__generated__/gql'
+import { apiRequest, graphqlRequest } from '../api'
+import { ChainRegistryClient, assets, chains } from '../chain-registry'
+import { AbstractModule } from '../clients/objects'
 import {
   AccountFactoryClient as FactoryClient,
   AccountFactoryMsgComposer as FactoryMessageComposer,
@@ -20,10 +22,8 @@ import {
   VersionControlClient as RegistryClient,
   VersionControlMsgComposer as RegistryMessageComposer,
   VersionControlQueryClient as RegistryQueryClient,
-} from '../_cli-generated'
-import { apiRequest, graphqlRequest } from '../api'
-import { ChainRegistryClient, assets, chains } from '../chain-registry'
-import { AbstractModule } from '../clients/objects'
+} from '../codegen/abstract'
+import { gql } from '../codegen/gql'
 import { ABSTRACT_API_URL } from '../constants'
 type GovernanceDetailsForString = AccountFactoryTypes.GovernanceDetailsForString
 import { AbstractAccountQueryClient } from './AbstractAccountClient'
@@ -125,6 +125,51 @@ export class AbstractQueryClient implements IAbstractQueryClient {
     this.ansHostAddress = ansHostAddress
     this.apiUrl = options?.apiUrl ?? ABSTRACT_API_URL
     this.connectSigningClient = this.connectSigningClient.bind(this)
+  }
+
+  async getAccountsOfOwner(
+    owner: string,
+    chains: string[],
+  ): Promise<AbstractAccountId[]> {
+    const result = await apiRequest(
+      gql(/* GraphQL */ `
+  query Accounts($chains: [ID!]!, $page: Page, $filter: AccountFilter) {
+    accounts(chains: $chains, page: $page, filter: $filter) {
+      id
+      chain
+      accountId {
+        chainName
+        sequence
+        trace
+      }
+      namespace
+      owner
+      info {
+        name
+        description
+        link
+        governance {
+          governanceType
+        }
+      }
+      proxy
+      manager
+      modules {
+        id
+      }
+    }
+  }
+`),
+      { filter: { owner }, chains },
+    )
+    return result.accounts.map(
+      (r) =>
+        new AbstractAccountId(
+          r.accountId.chainName,
+          r.accountId.sequence,
+          r.accountId.trace,
+        ),
+    )
   }
 
   /**

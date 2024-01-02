@@ -7,7 +7,7 @@
         "@abstract-money/cosmwasm-utils#build",
         "@abstract-money/cli#build",
         "codegen:abstract",
-        "codegen:subgraph",
+        "codegen:gql",
         "clean"
       ],
       "outputs": ["dist/**"]
@@ -17,7 +17,7 @@
         "@abstract-money/cosmwasm-utils#build",
         "@abstract-money/cli#build",
         "codegen:abstract",
-        "codegen:subgraph",
+        "codegen:gql",
         "clean"
       ]
     },
@@ -26,10 +26,10 @@
     },
     "codegen:abstract": {
       "dependsOn": ["@abstract-money/cli#build", "clean"],
-      "outputs": ["src/_cli-generated/**"]
+      "outputs": ["src/codegen/abstract"]
     },
-    "codegen:subgraph": {
-      "outputs": ["src/__generated__"]
+    "codegen:gql": {
+      "outputs": ["src/codegen/gql"]
     }
   }
 }

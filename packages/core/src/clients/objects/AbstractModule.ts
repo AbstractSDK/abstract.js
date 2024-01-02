@@ -6,7 +6,7 @@ import { RAW_QUERY_KEYS } from '../../constants'
 import {
   VersionControlQueryClient as RegistryQueryClient,
   VersionControlTypes,
-} from '../../_cli-generated'
+} from '../../codegen/abstract'
 
 type VcModule = VersionControlTypes.Module
 type ModuleConfiguration = VersionControlTypes.ModuleConfiguration

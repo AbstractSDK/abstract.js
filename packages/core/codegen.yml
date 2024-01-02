@@ -1,8 +1,8 @@
 schema: "https://api.abstract.money/graphql"
 
-documents: ['./src/**/*.ts', '!src/__generated__/gql/**/*']
+documents: ['./src/**/*.ts', '!src/codegen/gql/**/*']
 generates:
-  ./src/__generated__/gql/:
+  ./src/codegen/gql/:
     preset: client
     presetConfig:
       gqlTagName: gql

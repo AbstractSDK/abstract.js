@@ -1,7 +1,7 @@
 import { P, match } from 'ts-pattern'
 import * as Yup from 'yup'
 
-import { VersionControlTypes } from '../../_cli-generated'
+import { VersionControlTypes } from '../../codegen/abstract'
 type AccountId = VersionControlTypes.AccountId
 type AccountTrace = VersionControlTypes.AccountTrace
 
