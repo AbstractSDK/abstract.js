@@ -10,6 +10,7 @@ import {
 } from '@abstract-money/core'
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import { useAccountId, useConfig } from '../contexts'
+import { useAbstractQueryClient } from './use-abstract-query-client'
 
 interface ModuleQueryClientConstructor {
   new (args: {
@@ -21,7 +22,7 @@ interface ModuleQueryClientConstructor {
   }): any
 }
 
-async function getModuleQueryClient<
+async function getAbstractModuleQueryClient<
   TModule extends ModuleQueryClientConstructor,
 >({
   client,
@@ -75,13 +76,12 @@ type TQueryFnData<TModule extends ModuleQueryClientConstructor> =
 type TQueryData<TModule extends ModuleQueryClientConstructor> =
   | InstanceType<TModule>
   | undefined
-type TQueryKey = readonly [
+type TQueryKey<TModule extends ModuleQueryClientConstructor> = readonly [
   'module-query-client',
   string,
   AbstractAccountId,
-  string | undefined,
-  string,
-  CosmWasmClient | undefined,
+  TModule,
+  AbstractQueryClient | undefined,
 ]
 
 export function useAbstractModuleQueryClient<
@@ -105,11 +105,18 @@ export function useAbstractModuleQueryClient<
     TQueryFnData<TModule>,
     unknown,
     TQueryData<TModule>,
-    TQueryKey
+    TQueryKey<TModule>
   > = {},
 ) {
   const { accountId } = useAccountId()
   const { apiUrl } = useConfig()
+
+  const {
+    data: abstractQueryClient,
+    isLoading: isAbstractClientLoading,
+    isError: isAbstractClientError,
+    error: abstractClientError,
+  } = useAbstractQueryClient({ client, chain }, { enabled: enabled_ })
 
   const queryKey = React.useMemo(
     () =>
@@ -117,18 +124,17 @@ export function useAbstractModuleQueryClient<
         'module-query-client',
         moduleId,
         accountId,
-        chain,
-        apiUrl,
-        client,
+        Module,
+        abstractQueryClient,
       ] as const,
-    [moduleId, accountId, chain, apiUrl, client],
+    [moduleId, accountId, abstractQueryClient],
   )
 
   const queryFn = React.useCallback(() => {
     if (!client) throw new Error('client is not defined')
     if (!chain) throw new Error('chain is not defined')
 
-    return getModuleQueryClient({
+    return getAbstractModuleQueryClient({
       client,
       chain,
       overrideApiUrl: apiUrl,
@@ -143,5 +149,40 @@ export function useAbstractModuleQueryClient<
     [enabled_, client, chain],
   )
 
-  return useQuery(queryKey, queryFn, { enabled, ...rest })
+  const {
+    data,
+    isLoading: isAbstractModuleQueryClientLoading,
+    isError: isAbstractModuleQueryClientError,
+    error: abstractModuleQueryClientError,
+  } = useQuery(queryKey, queryFn, { enabled, ...rest })
+
+  if (isAbstractClientError)
+    return {
+      data: undefined,
+      isLoading: false,
+      isError: true,
+      isSuccess: false,
+      error: abstractClientError,
+    } as const
+  if (isAbstractModuleQueryClientError)
+    return {
+      data: undefined,
+      isLoading: false,
+      isError: true,
+      isSuccess: false,
+      error: abstractModuleQueryClientError,
+    } as const
+  if (isAbstractClientLoading || isAbstractModuleQueryClientLoading)
+    return {
+      data: undefined,
+      isLoading: true,
+      isError: false,
+      isSuccess: false,
+    } as const
+  return {
+    data,
+    isLoading: false,
+    isError: false,
+    isSuccess: true,
+  } as const
 }

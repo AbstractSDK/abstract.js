@@ -19,16 +19,21 @@ export function useAccounts(
     AbstractAccountId[] | undefined,
     unknown,
     AbstractAccountId[] | undefined,
-    readonly ['accountsOf', string | undefined, string | undefined]
-  >,
+    readonly [
+      'accountsOf',
+      string | undefined,
+      string | undefined,
+      AbstractQueryClient | undefined,
+    ]
+  > = {},
 ) {
   const queryKey = React.useMemo(
-    () => ['accountsOf', owner, chain] as const,
-    [owner, chain],
+    () => ['accountsOf', owner, chain, client] as const,
+    [owner, chain, client],
   )
 
   const enabled = React.useMemo(
-    () => Boolean(client && chain && owner && chain && enabled_),
+    () => Boolean(client && chain && owner && enabled_),
     [enabled_, client, owner, chain],
   )
 

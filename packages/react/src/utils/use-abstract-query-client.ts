@@ -52,7 +52,7 @@ export function useAbstractQueryClient(
     unknown,
     AbstractQueryClient | undefined,
     readonly [
-      'abstract-client',
+      'abstract-query-client',
       string | undefined,
       string,
       CosmWasmClient | undefined,
@@ -62,7 +62,7 @@ export function useAbstractQueryClient(
   const { apiUrl } = useConfig()
 
   const queryKey = React.useMemo(
-    () => ['abstract-client', chain, apiUrl, client] as const,
+    () => ['abstract-query-client', chain, apiUrl, client] as const,
     [chain, apiUrl, client],
   )
 

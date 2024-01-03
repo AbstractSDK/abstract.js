@@ -409,7 +409,7 @@ export function react(options?: ReactConfig): ReactResult {
               } from '@abstract-money/react/hooks'
             `)
             content.push(dedent`
-              export function useAccounts({ chain, owner }: Omit<Parameters<typeof _useAccounts>[0], 'client'>, opts: Parameters<typeof _useAccounts>[1]) {
+              export function useAccounts({ chain, owner }: Omit<Parameters<typeof _useAccounts>[0], 'client'>, opts?: Parameters<typeof _useAccounts>[1]) {
                 const {
                   data: abstractQueryClient,
                   // TODO: figure out what to do with those
