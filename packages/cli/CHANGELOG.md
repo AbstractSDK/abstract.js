@@ -1,5 +1,11 @@
 # @abstract-money/cli
 
+## 0.1.1
+
+### Patch Changes
+
+- [#14](https://github.com/AbstractSDK/abstract.js/pull/14) [`bfb3519`](https://github.com/AbstractSDK/abstract.js/commit/bfb351972b4bd901d219f0f3790050c3a7264e0e) Thanks [@dalechyn](https://github.com/dalechyn)! - Implements the `useAccounts` hook to retrieve the list of accounts of the connected signer.
+
 ## 0.1.0
 
 ### Minor Changes
