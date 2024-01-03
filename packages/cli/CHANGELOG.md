@@ -1,5 +1,11 @@
 # @abstract-money/cli
 
+## 0.1.2
+
+### Patch Changes
+
+- [#16](https://github.com/AbstractSDK/abstract.js/pull/16) [`fadd8fb`](https://github.com/AbstractSDK/abstract.js/commit/fadd8fb0a0dc2dd6fcc518a5fc27a8f8dd32a277) Thanks [@dalechyn](https://github.com/dalechyn)! - Pins the version of `bundle-require` to `3.1.2` to fix invalid `esbuild` resolution when `pnpm` is used.
+
 ## 0.1.1
 
 ### Patch Changes
