@@ -1,5 +1,5 @@
 import { P, match } from 'ts-pattern'
-import { VersionControlTypes } from '../../_cli-generated'
+import { VersionControlTypes } from '../../codegen/abstract'
 
 type VcModuleInfo = VersionControlTypes.ModuleInfo
 type ModuleVersion = VersionControlTypes.ModuleVersion

@@ -1,3 +1,5 @@
+'use client'
+
 import { ExecuteResult } from '@cosmjs/cosmwasm-stargate'
 import { UseMutationOptions } from '@tanstack/react-query'
 import { useMemo } from 'react'
@@ -46,11 +48,15 @@ import {
   BettingAppClient,
 } from './cosmwasm-codegen/Betting.client'
 
-import { useAbstractClient } from '@abstract-money/react/utils'
+import {
+  useAbstractClient,
+  useAbstractQueryClient,
+} from '@abstract-money/react/utils'
 import {
   useDeposit as _useDeposit,
   useWithdraw as _useWithdraw,
   useExecute as _useExecute,
+  useAccounts as _useAccounts,
 } from '@abstract-money/react/hooks'
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -112,6 +118,35 @@ function useGrazAbstractClient(
     },
     options,
   )
+}
+
+function useGrazAbstractQueryClient(
+  args: Omit<Parameters<typeof useAbstractQueryClient>[0], 'client' | 'sender'>,
+  options?: Parameters<typeof useAbstractQueryClient>[1],
+) {
+  const { data: client } = useCosmWasmClient()
+  return useAbstractQueryClient(
+    {
+      client,
+      ...args,
+    },
+    options,
+  )
+}
+
+export function useAccounts(
+  { chain, owner }: Omit<Parameters<typeof _useAccounts>[0], 'client'>,
+  opts?: Parameters<typeof _useAccounts>[1],
+) {
+  const {
+    data: abstractQueryClient,
+    // TODO: figure out what to do with those
+    // isLoading: isAbstractQueryClientLoading,
+    // isError: isAbstractQueryClientError,
+    // error: abstractQueryClientError,
+  } = useGrazAbstractQueryClient({ chain })
+
+  return _useAccounts({ chain, owner, client: abstractQueryClient }, opts)
 }
 
 export function useDeposit(

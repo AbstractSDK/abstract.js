@@ -1,6 +1,6 @@
-import { AccountFactoryTypes } from '../_cli-generated'
-type FactoryExecuteMsg = AccountFactoryTypes.ExecuteMsg
+import { AccountFactoryTypes } from '../codegen/abstract'
 import { ContractExecuteMsgBuilder } from './contractMsgBuilder'
+type FactoryExecuteMsg = AccountFactoryTypes.ExecuteMsg
 
 test('ContractClient variant and msg', () => {
   class FactoryMessageBulider extends ContractExecuteMsgBuilder<FactoryExecuteMsg> {}

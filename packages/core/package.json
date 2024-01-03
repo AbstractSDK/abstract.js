@@ -24,8 +24,8 @@
     "docs:serve": "serve ./docs -l 3050",
     "typecheck": "tsc --noEmit --jsx react-jsx",
     "codegen:abstract": "abstract generate",
-    "codegen:subgraph": "graphql-codegen --config codegen.yml",
-    "codegen:subgraph:watch": "graphql-codegen --watch"
+    "codegen:gql": "graphql-codegen --config codegen.yml",
+    "codegen:gql:watch": "graphql-codegen --watch"
   },
   "dependencies": {
     "@abstract-money/cosmwasm-utils": "workspace:*",
@@ -98,6 +98,14 @@
       "types": "./dist/utils/index.d.ts",
       "default": "./dist/utils/index.js"
     },
+    "./codegen/gql": {
+      "types": "./dist/codegen/gql/index.d.ts",
+      "default": "./dist/codegen/gql/index.js"
+    },
+    "./codegen/abstract": {
+      "types": "./dist/codegen/abstract/index.d.ts",
+      "default": "./dist/codegen/abstract/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -106,6 +114,7 @@
     "/clients",
     "/tools",
     "/utils",
+    "/codegen",
     "/dist"
   ],
   "sideEffects": false

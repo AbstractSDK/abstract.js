@@ -8,8 +8,9 @@
       "lib",
       "dist",
       "esm",
-      "generated",
-      "_generated"
+      "_generated",
+      "codegen/gql",
+      "codegen/abstract"
     ]
   },
   "formatter": {

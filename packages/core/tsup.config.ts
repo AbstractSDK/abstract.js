@@ -14,6 +14,8 @@ export default defineConfig(
       'src/clients/index.ts',
       'src/tools/index.ts',
       'src/utils/index.ts',
+      'src/codegen/gql/index.ts',
+      'src/codegen/abstract/index.ts',
     ],
     external: [...Object.keys(dependencies)],
   }),

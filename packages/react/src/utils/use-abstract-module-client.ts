@@ -107,8 +107,8 @@ export function useAbstractModuleClient<
   }, [abstractClient, accountId, moduleId, Module])
 
   const enabled = React.useMemo(
-    () => Boolean(client && chain && enabled_),
-    [enabled_, client, chain],
+    () => Boolean(abstractClient && chain && enabled_),
+    [enabled_, abstractClient, chain],
   )
 
   const {

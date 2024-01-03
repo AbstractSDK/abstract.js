@@ -10,7 +10,7 @@ import {
   AnsHostQueryClient,
   type AnsHostReadOnlyInterface,
   AnsHostTypes,
-} from '../_cli-generated'
+} from '../codegen/abstract'
 
 type AssetInfoBaseForAddr = AnsHostTypes.AssetInfoBaseForAddr
 type ChannelEntry = AnsHostTypes.ChannelEntry

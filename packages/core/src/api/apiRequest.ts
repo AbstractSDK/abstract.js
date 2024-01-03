@@ -29,3 +29,10 @@ export const apiRequest = <TResult, V extends Variables = Variables>(
     gqlQuery,
     ...variablesAndRequestHeaders,
   )
+
+export type {
+  VariablesAndRequestHeadersArgs,
+  RequestDocument,
+  Variables,
+  TypedDocumentNode,
+}

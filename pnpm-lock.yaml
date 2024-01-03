@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 overrides:
   esbuild: 0.15.13
 
@@ -312,6 +316,9 @@ importers:
       '@keplr-wallet/types':
         specifier: ^0.12.44
         version: 0.12.44
+      '@tanstack/react-query-devtools':
+        specifier: ^5.17.1
+        version: 5.17.1(@tanstack/react-query@5.17.1)(react@18.2.0)
       '@types/node':
         specifier: ^20
         version: 20.10.0
@@ -7540,6 +7547,25 @@ packages:
   /@tanstack/query-core@4.36.1:
     resolution: {integrity: sha512-DJSilV5+ytBP1FbFcEJovv4rnnm/CokuVvrBEtW/Va9DvuJ3HksbXUJEpI0aV1KtuL4ZoO9AVE6PyNLzF7tLeA==}
 
+  /@tanstack/query-core@5.17.1:
+    resolution: {integrity: sha512-kUXozQmU7NBtzX5dM6qfFNZN+YK/9Ct37hnG/ogdgI4mExIx7VH/qRepsPhKfNrJz2w81/JykmM3Uug6sVpUSw==}
+    dev: true
+
+  /@tanstack/query-devtools@5.17.1:
+    resolution: {integrity: sha512-gNdt6PYzYlyjtSAoO8Jt9GIFq5VSLLDV2qq0TCi1t/PGnpAIlIHqNZGYkQTPsy0FyGUTX3pCq4bd7v5z/wzf3A==}
+    dev: true
+
+  /@tanstack/react-query-devtools@5.17.1(@tanstack/react-query@5.17.1)(react@18.2.0):
+    resolution: {integrity: sha512-QWHqdEN2TJpj76r0yzdOJEopmPvdAHOJHAKXaygubRASqCqfcWGkOHGD9pqqHOfTu5eQdV1Csx97EuSjnHMKcA==}
+    peerDependencies:
+      '@tanstack/react-query': ^5.17.1
+      react: ^18.0.0
+    dependencies:
+      '@tanstack/query-devtools': 5.17.1
+      '@tanstack/react-query': 5.17.1(react@18.2.0)
+      react: 18.2.0
+    dev: true
+
   /@tanstack/react-query@4.36.1(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-y7ySVHFyyQblPl3J3eQBWpXZkliroki3ARnBKsdJchlgt7yJLRDUcf4B8soufgiYt3pEQIkBWBx1N9/ZPIeUWw==}
     peerDependencies:
@@ -7556,6 +7582,15 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       use-sync-external-store: 1.2.0(react@18.2.0)
+
+  /@tanstack/react-query@5.17.1(react@18.2.0):
+    resolution: {integrity: sha512-4JYgX0kU+pvwVQi5eRiHGvBK7WnahEl6lmaxd32ZVSKmByAxLgaewoxBR03cdDNse8lUD2zGOe0sx3M/EGRlmA==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@tanstack/query-core': 5.17.1
+      react: 18.2.0
+    dev: true
 
   /@terra-money/feather.js@1.2.1:
     resolution: {integrity: sha512-OyXkWriNwb0lCF45eMmtjdOPEmfGKJxgGSnxpM7VxD0Vqr1qqtlcYyQG9wOHXNQrExvZv+uo922B2ZA4S77HsQ==}
@@ -17010,7 +17045,3 @@ packages:
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
