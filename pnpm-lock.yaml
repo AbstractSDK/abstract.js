@@ -349,7 +349,7 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       bundle-require:
-        specifier: ^3.1.2
+        specifier: 3.1.2
         version: 3.1.2(esbuild@0.15.13)
       cac:
         specifier: ^6.7.12

@@ -34,7 +34,7 @@
   "dependencies": {
     "@abstract-money/ts-codegen": "^0.35.4",
     "abort-controller": "^3.0.0",
-    "bundle-require": "^3.1.2",
+    "bundle-require": "3.1.2",
     "cac": "^6.7.12",
     "change-case": "^4.1.2",
     "dedent": "^0.7.0",
