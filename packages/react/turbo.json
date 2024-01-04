@@ -3,11 +3,14 @@
   "extends": ["//"],
   "pipeline": {
     "build": {
-      "dependsOn": ["@abstract-money/core#build"],
+      "dependsOn": ["@abstract-money/core#build", "clean"],
       "outputs": ["dist/**"]
     },
     "typecheck": {
-      "dependsOn": ["@abstract-money/core#build"]
+      "dependsOn": ["@abstract-money/core#build", "clean"]
+    },
+    "clean": {
+      "cache": false
     }
   }
 }

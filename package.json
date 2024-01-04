@@ -45,10 +45,5 @@
   "simple-git-hooks": {
     "pre-commit": "pnpm format && pnpm lint:fix && git add -u"
   },
-  "packageManager": "pnpm@8.3.1",
-  "pnpm": {
-    "overrides": {
-      "esbuild": "0.15.13"
-    }
-  }
+  "packageManager": "pnpm@8.3.1"
 }

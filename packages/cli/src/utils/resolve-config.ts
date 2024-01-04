@@ -1,4 +1,4 @@
-import { bundleRequire } from 'bundle-require'
+import { bundleRequire } from '@abstract-money/bundle-require'
 
 import type { Config } from '../config'
 import type { MaybeArray } from '../types'
