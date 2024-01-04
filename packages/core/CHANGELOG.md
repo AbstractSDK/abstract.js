@@ -1,5 +1,12 @@
 ## 0.1.0
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies [[`31348c5`](https://github.com/AbstractSDK/abstract.js/commit/31348c5a05da05b2d5e4d4446a72662e4669c466)]:
+  - @abstract-money/cosmwasm-utils@0.1.1
+
 ## 0.1.1
 
 ### Patch Changes
