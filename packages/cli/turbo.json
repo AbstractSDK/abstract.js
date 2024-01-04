@@ -3,10 +3,12 @@
   "extends": ["//"],
   "pipeline": {
     "build": {
-      "dependsOn": ["clean"],
+      "dependsOn": ["@abstract-money/bundle-require#build", "clean"],
       "outputs": ["dist/**"]
     },
-    "typecheck": {},
+    "typecheck": {
+      "dependsOn": ["@abstract-money/bundle-require#build", "clean"]
+    },
     "clean": {
       "cache": false
     }

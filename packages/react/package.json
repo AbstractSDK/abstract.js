@@ -20,6 +20,7 @@
   },
   "scripts": {
     "build": "NODE_OPTIONS='--max-old-space-size=16384' tsup",
+    "clean": "rimraf dist",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -48,6 +49,7 @@
     "@keplr-wallet/types": "^0.12.44",
     "@types/node": "^18.11.10",
     "@types/react": "^18.2.0",
+    "rimraf": "^3.0.0",
     "rome": "^12.1.2",
     "simple-git-hooks": "^2.8.1",
     "ts-pattern": "^4.0.6",
