@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     react({ addon: 'graz' }),
     registry({
-      contracts: [{ namespace: 'abstract', name: 'betting', version: '0.0.2' }],
+      contracts: [{ name: 'betting', namespace: 'abstract', version: '0.0.2' }],
     }),
   ],
 })
