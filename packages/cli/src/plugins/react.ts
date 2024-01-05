@@ -711,7 +711,7 @@ export function react(options?: ReactConfig): ReactResult {
       }
 
       const shouldImportUseEffectAndUseState = options?.addon === 'cosmos-kit'
-      const shouldImportCosmWasmClientTypes = options?.addon === 'cosmos-kit'
+      const shouldImportCosmWasmClientTypes = options?.addon !== 'graz'
 
       return {
         imports: dedent`
