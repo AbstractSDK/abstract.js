@@ -58,141 +58,31 @@ export function react(options?: ReactConfig): ReactResult {
       }
 
       const content: string[] = []
-      for (const contract of contracts) {
-        {
-          const contractNamePascalCase = pascalCase(contract.name)
 
-          {
-            // NOTE: The `@abstract-money/codegen` points to the old name of the core
-            // package `@abstract-money/abstract.js`, and has to be changed to the
-            // `@abstract-money/core` package.
-            const generatedClientFilePath = join(
-              cosmwasmCodegenDirPath,
-              `${contractNamePascalCase}.client.ts`,
-            )
+      let useAbstractModuleQueryClientHookName:
+        | 'useGrazAbstractModuleQueryClient'
+        | 'useCosmosKitAbstractModuleQueryClient'
+        | 'useAbstractModuleQueryClient'
+      let useAbstractModuleClientHookName:
+        | 'useGrazAbstractModuleClient'
+        | 'useCosmosKitAbstractModuleClient'
+        | 'useAbstractModuleClient'
+      let useAbstractClientHookName:
+        | 'useGrazAbstractClient'
+        | 'useCosmosKitAbstractClient'
+        | undefined
+      let useAbstractQueryClientHookName:
+        | 'useGrazAbstractQueryClient'
+        | 'useCosmosKitAbstractQueryClient'
+        | undefined
 
-            const generatedClientFileContent = await fse.readFile(
-              resolve(generatedClientFilePath),
-              'utf8',
-            )
-            await fse.writeFile(
-              resolve(generatedClientFilePath),
-              generatedClientFileContent.replace(
-                '@abstract-money/abstract.js',
-                '@abstract-money/core',
-              ),
-            )
-
-            const generatedMessageBuilderFilePath = join(
-              cosmwasmCodegenDirPath,
-              `${contractNamePascalCase}.message-builder.ts`,
-            )
-
-            const generatedMessageBuilderFileContent = await fse.readFile(
-              resolve(generatedMessageBuilderFilePath),
-              'utf8',
-            )
-            await fse.writeFile(
-              resolve(generatedMessageBuilderFilePath),
-              // ts-codegen produces a file with some invalid typings, so we're ignoring those
-              dedent`
-            // @ts-nocheck
-            ${generatedMessageBuilderFileContent}
-          `,
-            )
-          }
-
-          const reactQueryFilePath = join(
-            cosmwasmCodegenDirPath,
-            `${contractNamePascalCase}.react-query.ts`,
-          )
-          const reactQueryFileContents = await fse.readFile(
-            resolve(reactQueryFilePath),
-            'utf8',
-          )
-
-          type Hook = `use${string}`
-
-          const importedHooks = [
-            ...reactQueryFileContents.matchAll(/export function (\w+)/gm),
-          ].map((m) => m[1]) as readonly Hook[]
-          {
-            const contractQueryImports = new Set<string>([])
-            for (const hookName of importedHooks) {
-              contractQueryImports.add(hookName)
-
-              if (isTypeScript && hookName.endsWith('Mutation')) {
-                // Slicing the `use` out of the hook to import the mutation type.
-                // i.e. `useFooMutation` -> `FooMutation`
-                contractQueryImports.add(hookName.slice(3))
-              }
-            }
-            imports.push(
-              `import { ${[...contractQueryImports.values()].join(
-                ', ',
-              )} } from './${relative(out, reactQueryFilePath.slice(0, -3))}'`,
-            )
-          }
-
-          const queryHooksWithResponseTypes = new Map(
-            [
-              ...reactQueryFileContents.matchAll(
-                /export function (\w+)<[\r\n ]*TData = (\w+)/gm,
-              ),
-            ].map((m) => [m[1] as Hook, m[2]]),
-          )
-          {
-            const typesFilePath = join(
-              cosmwasmCodegenDirPath,
-              `${contractNamePascalCase}.types.ts`,
-            )
-            const importedResponseTypes = new Set(
-              queryHooksWithResponseTypes.values(),
-            )
-            imports.push(
-              `import { ${[...importedResponseTypes.values()].join(
-                ', ',
-              )} } from './${relative(out, typesFilePath.slice(0, -3))}'`,
-            )
-          }
-
-          imports.push(
-            `import { ${contractNamePascalCase}AppQueryClient, ${contractNamePascalCase}AppClient } from './${relative(
-              out,
-              join(cosmwasmCodegenDirPath, `${contractNamePascalCase}.client`),
-            )}'`,
-          )
-
-          content.push(
-            `const ${constantCase(contract.name)}_MODULE_ID = '${
-              contract.namespace
-            }:${contract.name}'`,
-          )
-
-          let useAbstractModuleQueryClientHookName:
-            | 'useGrazAbstractModuleQueryClient'
-            | 'useCosmosKitAbstractModuleQueryClient'
-            | 'useAbstractModuleQueryClient'
-          let useAbstractModuleClientHookName:
-            | 'useGrazAbstractModuleClient'
-            | 'useCosmosKitAbstractModuleClient'
-            | 'useAbstractModuleClient'
-          let useAbstractClientHookName:
-            | 'useGrazAbstractClient'
-            | 'useCosmosKitAbstractClient'
-            | undefined
-          let useAbstractQueryClientHookName:
-            | 'useGrazAbstractQueryClient'
-            | 'useCosmosKitAbstractQueryClient'
-            | undefined
-
-          if (options?.addon === 'graz') {
-            useAbstractModuleQueryClientHookName =
-              'useGrazAbstractModuleQueryClient'
-            useAbstractModuleClientHookName = 'useGrazAbstractModuleClient'
-            useAbstractClientHookName = 'useGrazAbstractClient'
-            useAbstractQueryClientHookName = 'useGrazAbstractQueryClient'
-            content.push(dedent`
+      if (options?.addon === 'graz') {
+        useAbstractModuleQueryClientHookName =
+          'useGrazAbstractModuleQueryClient'
+        useAbstractModuleClientHookName = 'useGrazAbstractModuleClient'
+        useAbstractClientHookName = 'useGrazAbstractClient'
+        useAbstractQueryClientHookName = 'useGrazAbstractQueryClient'
+        content.push(dedent`
               function useGrazAbstractModuleQueryClient(
                 args: Omit<Parameters<typeof useAbstractModuleQueryClient>[0], 'client'>,
                 options?: Parameters<typeof useAbstractModuleQueryClient>[1],
@@ -264,13 +154,13 @@ export function react(options?: ReactConfig): ReactResult {
                 )
               }
             `)
-          } else if (options?.addon === 'cosmos-kit') {
-            useAbstractModuleQueryClientHookName =
-              'useCosmosKitAbstractModuleQueryClient'
-            useAbstractModuleClientHookName = 'useCosmosKitAbstractModuleClient'
-            useAbstractClientHookName = 'useCosmosKitAbstractClient'
-            useAbstractQueryClientHookName = 'useCosmosKitAbstractQueryClient'
-            content.push(dedent`
+      } else if (options?.addon === 'cosmos-kit') {
+        useAbstractModuleQueryClientHookName =
+          'useCosmosKitAbstractModuleQueryClient'
+        useAbstractModuleClientHookName = 'useCosmosKitAbstractModuleClient'
+        useAbstractClientHookName = 'useCosmosKitAbstractClient'
+        useAbstractQueryClientHookName = 'useCosmosKitAbstractQueryClient'
+        content.push(dedent`
               function useCosmosKitAbstractModuleQueryClient(
                 args: Omit<Parameters<typeof useAbstractModuleQueryClient>[0], 'client'>,
                 options?: Parameters<typeof useAbstractModuleQueryClient>[1],
@@ -390,16 +280,15 @@ export function react(options?: ReactConfig): ReactResult {
                 )
               }
             `)
-          } else {
-            useAbstractModuleQueryClientHookName =
-              'useAbstractModuleQueryClient'
-            useAbstractModuleClientHookName = 'useAbstractModuleClient'
-          }
+      } else {
+        useAbstractModuleQueryClientHookName = 'useAbstractModuleQueryClient'
+        useAbstractModuleClientHookName = 'useAbstractModuleClient'
+      }
 
-          const shouldInjectClientAndSender = options === undefined
+      const shouldInjectClientAndSender = options === undefined
 
-          if (!shouldInjectClientAndSender) {
-            imports.push(dedent`
+      if (!shouldInjectClientAndSender) {
+        imports.push(dedent`
               import { useAbstractClient, useAbstractQueryClient } from '@abstract-money/react/utils'
               import {
                 useDeposit as _useDeposit,
@@ -408,7 +297,7 @@ export function react(options?: ReactConfig): ReactResult {
                 useAccounts as _useAccounts
               } from '@abstract-money/react/hooks'
             `)
-            content.push(dedent`
+        content.push(dedent`
               export function useAccounts({ chain, owner }: Omit<Parameters<typeof _useAccounts>[0], 'client'>, opts?: Parameters<typeof _useAccounts>[1]) {
                 const {
                   data: abstractQueryClient,
@@ -532,7 +421,116 @@ export function react(options?: ReactConfig): ReactResult {
                 return { mutate, mutateAsync, ...rest } as const
               }
             `)
+      }
+
+      for (const contract of contracts) {
+        {
+          const contractNamePascalCase = pascalCase(contract.name)
+
+          {
+            // NOTE: The `@abstract-money/codegen` points to the old name of the core
+            // package `@abstract-money/abstract.js`, and has to be changed to the
+            // `@abstract-money/core` package.
+            const generatedClientFilePath = join(
+              cosmwasmCodegenDirPath,
+              `${contractNamePascalCase}.client.ts`,
+            )
+
+            const generatedClientFileContent = await fse.readFile(
+              resolve(generatedClientFilePath),
+              'utf8',
+            )
+            await fse.writeFile(
+              resolve(generatedClientFilePath),
+              generatedClientFileContent.replace(
+                '@abstract-money/abstract.js',
+                '@abstract-money/core',
+              ),
+            )
+
+            const generatedMessageBuilderFilePath = join(
+              cosmwasmCodegenDirPath,
+              `${contractNamePascalCase}.message-builder.ts`,
+            )
+
+            const generatedMessageBuilderFileContent = await fse.readFile(
+              resolve(generatedMessageBuilderFilePath),
+              'utf8',
+            )
+            await fse.writeFile(
+              resolve(generatedMessageBuilderFilePath),
+              // ts-codegen produces a file with some invalid typings, so we're ignoring those
+              dedent`
+            // @ts-nocheck
+            ${generatedMessageBuilderFileContent}
+          `,
+            )
           }
+
+          const reactQueryFilePath = join(
+            cosmwasmCodegenDirPath,
+            `${contractNamePascalCase}.react-query.ts`,
+          )
+          const reactQueryFileContents = await fse.readFile(
+            resolve(reactQueryFilePath),
+            'utf8',
+          )
+
+          type Hook = `use${string}`
+
+          const importedHooks = [
+            ...reactQueryFileContents.matchAll(/export function (\w+)/gm),
+          ].map((m) => m[1]) as readonly Hook[]
+          {
+            const contractQueryImports = new Set<string>([])
+            for (const hookName of importedHooks) {
+              contractQueryImports.add(hookName)
+
+              if (isTypeScript && hookName.endsWith('Mutation')) {
+                // Slicing the `use` out of the hook to import the mutation type.
+                // i.e. `useFooMutation` -> `FooMutation`
+                contractQueryImports.add(hookName.slice(3))
+              }
+            }
+            imports.push(
+              `import { ${[...contractQueryImports.values()].join(
+                ', ',
+              )} } from './${relative(out, reactQueryFilePath.slice(0, -3))}'`,
+            )
+          }
+
+          const queryHookNameToResponseTypeMap = new Map(
+            [
+              ...reactQueryFileContents.matchAll(
+                /export function (\w+)<[\r\n ]*TData = (\w+)/gm,
+              ),
+            ].map((m) => [m[1] as Hook, m[2]]),
+          )
+          {
+            const typesFilePath = join(
+              cosmwasmCodegenDirPath,
+              `${contractNamePascalCase}.types.ts`,
+            )
+            imports.push(
+              `import * as ${contractNamePascalCase}Types from './${relative(
+                out,
+                typesFilePath.slice(0, -3),
+              )}'`,
+            )
+          }
+
+          imports.push(
+            `import { ${contractNamePascalCase}AppQueryClient, ${contractNamePascalCase}AppClient } from './${relative(
+              out,
+              join(cosmwasmCodegenDirPath, `${contractNamePascalCase}.client`),
+            )}'`,
+          )
+
+          content.push(
+            `const ${constantCase(contract.name)}_MODULE_ID = '${
+              contract.namespace
+            }:${contract.name}'`,
+          )
 
           {
             const queryHooks = new Map<Hook, string>([])
@@ -549,7 +547,7 @@ export function react(options?: ReactConfig): ReactResult {
                 dedent`
                   ({ options, ${
                     shouldInjectClientAndSender ? 'client,' : ''
-                  } chain, ...rest }: Omit<Parameters<typeof ${hookName}<${queryHooksWithResponseTypes.get(
+                  } chain, ...rest }: Omit<Parameters<typeof ${hookName}<${contractNamePascalCase}Types.${queryHookNameToResponseTypeMap.get(
                   hookName,
                 )}>>[0], 'client'> & { chain: string | undefined${
                   shouldInjectClientAndSender
