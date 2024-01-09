@@ -41,7 +41,7 @@ export function react(options?: ReactConfig): ReactResult {
         options: codegenOptions,
         contracts: contracts.map(({ name, path }) => ({ name, dir: path })),
         outPath: cosmwasmCodegenDirPath,
-      }).catch((err) => console.log(err))
+      })
 
       const imports: string[] = []
 
