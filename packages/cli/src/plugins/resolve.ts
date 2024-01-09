@@ -4,6 +4,7 @@ import { AbortError, default as fetch } from 'node-fetch'
 import { join } from 'pathe'
 
 import { homedir } from 'os'
+import { pascalCase } from 'change-case'
 import type { ContractConfig, ContractVersion, Plugin } from '../config'
 import type { MaybeArray, RequiredBy } from '../types'
 import { RegistrySchemaNotFoundError } from './registry'
@@ -120,7 +121,15 @@ export function resolve<
                 signal: controller.signal,
               })
               const schema = await parse({ response })
-              await fse.writeJSON(cacheFilePath, schema)
+              // HACK: Replaces the undescored `Result_of` to be PascalCased as
+              // it raises an error that is pretty complex to debug. Needs to be deleted later.
+              const schemaString = JSON.stringify(schema, null, 2).replaceAll(
+                /(Result_of_[A-Za-z-_]+)/gm,
+                (substitution) => {
+                  return pascalCase(substitution)
+                },
+              )
+              await fse.writeFile(cacheFilePath, schemaString)
               path = cacheFolderPath
               await fse.writeFile(
                 cacheFileTimestampPath,
