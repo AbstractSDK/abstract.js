@@ -7,7 +7,6 @@ import {
 } from '@abstract-money/core'
 import { DeliverTxResponse, type StdFee } from '@cosmjs/stargate'
 import { UseMutationOptions, useMutation } from '@tanstack/react-query'
-import { useAccountId } from '../contexts'
 
 async function deposit({
   abstractClient,
@@ -34,6 +33,7 @@ async function deposit({
 type DepositMutation = {
   abstractClient: AbstractClient
   assets: AssetList
+  accountId: AbstractAccountId
   args: {
     fee: number | StdFee | 'auto'
     memo?: string
@@ -43,10 +43,8 @@ type DepositMutation = {
 export function useDeposit(
   options: UseMutationOptions<DeliverTxResponse, unknown, DepositMutation> = {},
 ) {
-  const { accountId } = useAccountId()
-
   return useMutation(
-    ({ abstractClient, assets, args }) =>
+    ({ abstractClient, accountId, assets, args }) =>
       deposit({
         abstractClient,
         assets,

@@ -98,10 +98,6 @@
       "types": "./dist/utils/index.d.ts",
       "default": "./dist/utils/index.js"
     },
-    "./codegen/gql": {
-      "types": "./dist/codegen/gql/index.d.ts",
-      "default": "./dist/codegen/gql/index.js"
-    },
     "./codegen/abstract": {
       "types": "./dist/codegen/abstract/index.d.ts",
       "default": "./dist/codegen/abstract/index.js"

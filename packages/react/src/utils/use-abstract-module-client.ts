@@ -48,6 +48,7 @@ export function useAbstractModuleClient<
 >(
   {
     moduleId,
+    accountId: defaultAccountId,
     Module,
     client,
     chain,
@@ -55,6 +56,7 @@ export function useAbstractModuleClient<
   }: {
     chain: string | undefined
     sender: string | undefined
+    accountId?: AbstractAccountId
     moduleId: string
     Module: TModule
     client: SigningCosmWasmClient | undefined
@@ -75,7 +77,7 @@ export function useAbstractModuleClient<
     ]
   > = {},
 ) {
-  const { accountId } = useAccountId()
+  const { accountId } = useAccountId({ accountId: defaultAccountId })
   const {
     data: abstractClient,
     isLoading: isAbstractClientLoading,

@@ -8,7 +8,6 @@ import {
 import { ExecuteResult } from '@cosmjs/cosmwasm-stargate'
 import { Coin } from '@cosmjs/stargate'
 import { UseMutationOptions, useMutation } from '@tanstack/react-query'
-import { useAccountId } from '../contexts'
 
 async function execute({
   abstractClient,
@@ -32,16 +31,15 @@ async function execute({
 type ExecuteMutation = {
   msgs: CosmosMsgForEmpty[]
   funds: Coin[]
+  accountId: AbstractAccountId
   abstractClient: AbstractClient
 }
 
 export function useExecute(
   options: UseMutationOptions<ExecuteResult, Error, ExecuteMutation> = {},
 ) {
-  const { accountId } = useAccountId()
-
   return useMutation(
-    ({ abstractClient, msgs, funds }) =>
+    ({ abstractClient, accountId, msgs, funds }) =>
       execute({
         msgs,
         abstractClient,
