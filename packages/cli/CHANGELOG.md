@@ -1,5 +1,15 @@
 # @abstract-money/cli
 
+## 0.1.4
+
+### Patch Changes
+
+- [#22](https://github.com/AbstractSDK/abstract.js/pull/22) [`cc949bf`](https://github.com/AbstractSDK/abstract.js/commit/cc949bf5485c7676db8724116b8f307463dd0fc8) Thanks [@dalechyn](https://github.com/dalechyn)! - Fixes schema parsing issue with a regexp.
+
+- [#23](https://github.com/AbstractSDK/abstract.js/pull/23) [`2811970`](https://github.com/AbstractSDK/abstract.js/commit/281197085b04750aa041fb1904535d5926e043de) Thanks [@dalechyn](https://github.com/dalechyn)! - Optional accountId and optional provider.
+
+- [#20](https://github.com/AbstractSDK/abstract.js/pull/20) [`90d6a49`](https://github.com/AbstractSDK/abstract.js/commit/90d6a49051ad5e881b540a4644f2d1032bc16cf6) Thanks [@dalechyn](https://github.com/dalechyn)! - Fixes the conflicting types and `react` plugin when used with multiple contracts.
+
 ## 0.1.3
 
 ### Patch Changes
