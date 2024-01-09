@@ -2,6 +2,12 @@ import { AbstractAccountId, AbstractQueryClient } from '@abstract-money/core'
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import React from 'react'
 
+/**
+ * Loads all accounts for a given owner and chain.
+ * @param owner address of the owner. Will automatically translate to other chains' addresses.
+ * @param chain chain to load accounts for.
+ * @param client
+ */
 export function useAccounts(
   {
     owner,

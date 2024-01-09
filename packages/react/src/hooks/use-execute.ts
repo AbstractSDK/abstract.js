@@ -1,5 +1,4 @@
 import {
-  AbstractAccountClient,
   AbstractAccountId,
   AbstractAccountQueryClient,
   AbstractClient,
@@ -20,12 +19,11 @@ async function execute({
   msgs: CosmosMsgForEmpty[]
   funds: Coin[]
 }) {
-  const abstractAccountClient = AbstractAccountClient.fromQueryClient(
-    await AbstractAccountQueryClient.load(abstractClient, accountId),
-    abstractClient,
-  )
+  const accountClient = (
+    await AbstractAccountQueryClient.load(abstractClient, accountId)
+  ).connectAbstractClient(abstractClient)
 
-  return abstractAccountClient.execute(msgs, funds)
+  return accountClient.execute(msgs, funds)
 }
 
 type ExecuteMutation = {
@@ -35,6 +33,10 @@ type ExecuteMutation = {
   abstractClient: AbstractClient
 }
 
+/**
+ * Hook to execute a transaction on an Account.
+ * @param options execute options.
+ */
 export function useExecute(
   options: UseMutationOptions<ExecuteResult, Error, ExecuteMutation> = {},
 ) {

@@ -22,12 +22,11 @@ async function deposit({
     memo?: string
   }
 }) {
-  const abstractAccountClient = AbstractAccountClient.fromQueryClient(
-    await AbstractAccountQueryClient.load(abstractClient, accountId),
-    abstractClient,
-  )
+  const accountClient = (
+    await AbstractAccountQueryClient.load(abstractClient, accountId)
+  ).connectAbstractClient(abstractClient)
 
-  return abstractAccountClient.deposit(assets, args.fee, args.memo)
+  return accountClient.deposit(assets, args.fee, args.memo)
 }
 
 type DepositMutation = {
@@ -40,6 +39,10 @@ type DepositMutation = {
   }
 }
 
+/**
+ * Hook to deposit assets to an Account.
+ * @param options deposit options.
+ */
 export function useDeposit(
   options: UseMutationOptions<DeliverTxResponse, unknown, DepositMutation> = {},
 ) {

@@ -17,6 +17,11 @@ const client = new QueryClient({
 })
 
 export type AbstractProviderProps = AbstractConfigProps
+
+/**
+ * Provide abstract configuration for the application.
+ * @param config configuration.
+ */
 export function AbstractProvider({
   children,
   config,

@@ -24,10 +24,9 @@ async function withdraw({
     memo?: string
   }
 }) {
-  const abstractAccountClient = AbstractAccountClient.fromQueryClient(
-    await AbstractAccountQueryClient.load(abstractClient, accountId),
-    abstractClient,
-  )
+  const abstractAccountClient = (
+    await AbstractAccountQueryClient.load(abstractClient, accountId)
+  ).connectAbstractClient(abstractClient)
 
   return abstractAccountClient.withdraw(assets, recipient, args.fee, args.memo)
 }
@@ -43,6 +42,10 @@ type WithdrawMutation = {
   }
 }
 
+/**
+ * Hook to withdraw assets from an Account.
+ * @param options withdraw options.
+ */
 export function useWithdraw(
   options: UseMutationOptions<
     DeliverTxResponse,
