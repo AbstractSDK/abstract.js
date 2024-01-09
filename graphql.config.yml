@@ -1,0 +1,2 @@
+# Allows the IDE to resolve the schema and provide autocomplete
+schema: "https://api.abstract.money/graphql"

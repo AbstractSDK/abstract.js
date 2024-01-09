@@ -2,6 +2,14 @@
 
 This monorepo contains the Typescript-based SDKs for AbstractSDK.
 
+## Development
+
+1. Install the Abstract CLI:
+
+   ```bash
+   npm i -g @abstract-money/cli
+   ```
+
 ## Prerequisites
 
 - Ensure you have Node.js installed.
