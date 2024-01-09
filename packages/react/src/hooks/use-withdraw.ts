@@ -7,7 +7,6 @@ import {
 } from '@abstract-money/core'
 import { DeliverTxResponse, type StdFee } from '@cosmjs/stargate'
 import { UseMutationOptions, useMutation } from '@tanstack/react-query'
-import { useAccountId } from '../contexts'
 
 async function withdraw({
   abstractClient,
@@ -37,6 +36,7 @@ type WithdrawMutation = {
   abstractClient: AbstractClient
   assets: AssetList
   recipient: string
+  accountId: AbstractAccountId
   args: {
     fee: number | StdFee | 'auto'
     memo?: string
@@ -50,10 +50,8 @@ export function useWithdraw(
     WithdrawMutation
   > = {},
 ) {
-  const { accountId } = useAccountId()
-
   return useMutation(
-    ({ abstractClient, recipient, assets, args }) =>
+    ({ abstractClient, accountId, recipient, assets, args }) =>
       withdraw({
         recipient,
         abstractClient,

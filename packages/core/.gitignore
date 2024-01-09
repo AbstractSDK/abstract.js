@@ -4,5 +4,4 @@ chain-registry/**
 clients/**
 tools/**
 utils/**
-codegen/gql/**
 codegen/abstract/**

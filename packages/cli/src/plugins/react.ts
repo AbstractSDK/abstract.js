@@ -545,11 +545,11 @@ export function react(options?: ReactConfig): ReactResult {
               queryHooks.set(
                 hookNameWithoutModuleAndQuery,
                 dedent`
-                  ({ options, ${
+                  ({ options, accountId, ${
                     shouldInjectClientAndSender ? 'client,' : ''
                   } chain, ...rest }: Omit<Parameters<typeof ${hookName}<${contractNamePascalCase}Types.${queryHookNameToResponseTypeMap.get(
                   hookName,
-                )}>>[0], 'client'> & { chain: string | undefined${
+                )}>>[0], 'client'> & { accountId?: AbstractAccountId; chain: string | undefined${
                   shouldInjectClientAndSender
                     ? ', client: CosmWasmClient | undefined'
                     : ''
@@ -562,6 +562,7 @@ export function react(options?: ReactConfig): ReactResult {
                     } = ${useAbstractModuleQueryClientHookName}(
                       {
                         moduleId: ${constantCase(contract.name)}_MODULE_ID,
+                        accountId,
                         ${shouldInjectClientAndSender ? 'client,' : ''}
                         chain,
                         Module: ${contractNamePascalCase}AppQueryClient,
@@ -627,11 +628,11 @@ export function react(options?: ReactConfig): ReactResult {
                   (
                     { ${
                       shouldInjectClientAndSender ? 'client, sender, ' : ''
-                    }chain }: { ${
+                    }chain, accountId }: { ${
                   shouldInjectClientAndSender
                     ? 'client: SigningCosmWasmClient | undefined; sender: string | undefined; '
                     : ''
-                } chain: string | undefined },
+                } chain: string | undefined; accountId?: AbstractAccountId },
                     options?: Omit<
                       UseMutationOptions<
                         ExecuteResult,
@@ -652,6 +653,7 @@ export function react(options?: ReactConfig): ReactResult {
                         moduleId: ${constantCase(contract.name)}_MODULE_ID,${
                   shouldInjectClientAndSender ? '\nclient,\nsender, ' : ''
                 }
+                        accountId,
                         chain,
                         Module: ${contractNamePascalCase}AppClient,
                       }
@@ -729,6 +731,8 @@ export function react(options?: ReactConfig): ReactResult {
             useAbstractModuleClient,
             useAbstractModuleQueryClient,
           } from '@abstract-money/react/utils'
+
+          import { AbstractAccountId } from '@abstract-money/core'
 
           ${imports.join('\n\n')}
         `,

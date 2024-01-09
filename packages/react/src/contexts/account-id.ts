@@ -29,11 +29,21 @@ export function AbstractAccountIdProvider({
   })
 }
 
-export function useAccountId() {
-  const accountStore = React.useContext(Context)
+export function useAccountId({
+  accountId,
+}: { accountId?: AbstractAccountId } = {}) {
+  let accountStore = React.useContext(Context)
   if (!accountStore)
-    throw new Error(
-      '`useAccountId` must be used within `AbstractAccountIdProvider`.',
-    )
+    if (accountId)
+      accountStore = {
+        accountId,
+        setAccountId: () => {
+          throw new Error('noop')
+        },
+      }
+    else
+      throw new Error(
+        '`useAccountId` must be used within `AbstractAccountIdProvider`.',
+      )
   return accountStore
 }

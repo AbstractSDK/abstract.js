@@ -89,11 +89,13 @@ export function useAbstractModuleQueryClient<
 >(
   {
     moduleId,
+    accountId: defaultAccountId,
     Module,
     client,
     chain,
   }: {
     client: CosmWasmClient | undefined
+    accountId?: AbstractAccountId
     chain: string | undefined
     moduleId: string
     Module: TModule
@@ -108,7 +110,7 @@ export function useAbstractModuleQueryClient<
     TQueryKey<TModule>
   > = {},
 ) {
-  const { accountId } = useAccountId()
+  const { accountId } = useAccountId({ accountId: defaultAccountId })
   const { apiUrl } = useConfig()
 
   const {
