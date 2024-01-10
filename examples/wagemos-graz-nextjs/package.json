@@ -9,7 +9,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "next lint",
     "postinstall": "pnpm generate",
-    "generate": "graz generate -g -M neutron"
+    "generate": "graz generate -g -M neutron -T neutrontestnet"
   },
   "dependencies": {
     "@abstract-money/core": "workspace:*",
