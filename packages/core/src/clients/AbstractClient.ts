@@ -10,7 +10,7 @@ import {
 } from '@cosmjs/cosmwasm-stargate'
 import { Variables } from 'graphql-request'
 import semverSatisfies from 'semver/functions/satisfies'
-import { apiRequest, graphqlRequest } from '../api'
+import { graphqlRequest } from '../api'
 import { ChainRegistryClient, assets, chains } from '../chain-registry'
 import { AbstractModule } from '../clients/objects'
 import {
@@ -30,6 +30,10 @@ import { AbstractAccountQueryClient } from './AbstractAccountClient'
 import { AnsClient, AnsQueryClient } from './AnsClient'
 import { findAbstractAttribute } from './events'
 import { AbstractAccountId, AccountSequence } from './objects/AbstractAccountId'
+
+type ParametersExceptFirst<F> = F extends (arg0: any, ...rest: infer R) => any
+  ? R
+  : never
 
 export interface IAbstractQueryClient {
   client: CosmWasmClient
@@ -131,7 +135,8 @@ export class AbstractQueryClient implements IAbstractQueryClient {
     owner: string,
     chains: string[],
   ): Promise<AbstractAccountId[]> {
-    const result = await apiRequest(
+    const result = await graphqlRequest(
+      this.apiUrl,
       gql(/* GraphQL */ `
   query Accounts($chains: [ID!]!, $page: Page, $filter: AccountFilter) {
     accounts(chains: $chains, page: $page, filter: $filter) {
@@ -160,7 +165,6 @@ export class AbstractQueryClient implements IAbstractQueryClient {
     }
   }
 `),
-      this.apiUrl,
       { filter: { owner }, chains },
     )
     return result.accounts.map(
@@ -264,8 +268,8 @@ export class AbstractQueryClient implements IAbstractQueryClient {
    * @param params
    */
   public async queryApi<TResult, V extends Variables = Variables>(
-    ...params: Parameters<typeof apiRequest<TResult, V>>
-  ): Promise<ReturnType<typeof apiRequest<TResult, V>>> {
+    ...params: ParametersExceptFirst<typeof graphqlRequest<TResult, V>>
+  ): Promise<ReturnType<typeof graphqlRequest<TResult, V>>> {
     return graphqlRequest(this.apiUrl, ...params)
   }
 
