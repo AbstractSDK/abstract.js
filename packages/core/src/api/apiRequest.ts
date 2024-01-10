@@ -22,13 +22,9 @@ export const graphqlRequest = <TResult, V extends Variables = Variables>(
  */
 export const apiRequest = <TResult, V extends Variables = Variables>(
   gqlQuery: RequestDocument | TypedDocumentNode<TResult, V>,
+  apiUrl = ABSTRACT_API_URL,
   ...variablesAndRequestHeaders: VariablesAndRequestHeadersArgs<V>
-) =>
-  graphqlRequest<TResult, V>(
-    ABSTRACT_API_URL,
-    gqlQuery,
-    ...variablesAndRequestHeaders,
-  )
+) => graphqlRequest<TResult, V>(apiUrl, gqlQuery, ...variablesAndRequestHeaders)
 
 export type {
   VariablesAndRequestHeadersArgs,
