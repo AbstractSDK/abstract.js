@@ -160,6 +160,7 @@ export class AbstractQueryClient implements IAbstractQueryClient {
     }
   }
 `),
+      this.apiUrl,
       { filter: { owner }, chains },
     )
     return result.accounts.map(
