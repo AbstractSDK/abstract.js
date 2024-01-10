@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 0.1.4
+
+### Patch Changes
+
+- [#25](https://github.com/AbstractSDK/abstract.js/pull/25) [`39b71f4`](https://github.com/AbstractSDK/abstract.js/commit/39b71f43a7a207199dcf3abcd491db8de4f7825f) Thanks [@dalechyn](https://github.com/dalechyn)! - Fixes the missing override of the `apiUrl`
+
 ## 0.1.3
 
 ### Patch Changes
