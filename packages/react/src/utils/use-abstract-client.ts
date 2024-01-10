@@ -30,13 +30,16 @@ export async function getAbstractClient({
     accountFactory: factoryAddress,
   } = data.deployment
 
-  return new AbstractClient({
-    sender,
-    client,
-    ansHostAddress,
-    registryAddress,
-    factoryAddress,
-  })
+  return new AbstractClient(
+    {
+      sender,
+      client,
+      ansHostAddress,
+      registryAddress,
+      factoryAddress,
+    },
+    { apiUrl: overrideApiUrl },
+  )
 }
 
 export function useAbstractClient(

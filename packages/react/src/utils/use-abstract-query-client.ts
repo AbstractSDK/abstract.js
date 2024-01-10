@@ -28,12 +28,15 @@ async function getAbstractQueryClient({
     accountFactory: factoryAddress,
   } = data.deployment
 
-  return new AbstractQueryClient({
-    client,
-    ansHostAddress,
-    registryAddress,
-    factoryAddress,
-  })
+  return new AbstractQueryClient(
+    {
+      client,
+      ansHostAddress,
+      registryAddress,
+      factoryAddress,
+    },
+    { apiUrl: overrideApiUrl },
+  )
 }
 
 export function useAbstractQueryClient(

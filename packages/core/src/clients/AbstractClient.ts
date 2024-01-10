@@ -479,8 +479,8 @@ export class AbstractClient extends AbstractQueryClient {
   declare client: SigningCosmWasmClient
   sender: string
 
-  constructor(base: IAbstractClient) {
-    super(base)
+  constructor(base: IAbstractClient, options?: { apiUrl?: string }) {
+    super(base, options)
     const { client, sender } = base
     this.client = client
     this.sender = sender
