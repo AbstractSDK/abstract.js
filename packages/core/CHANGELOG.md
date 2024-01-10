@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 0.1.5
+
+### Patch Changes
+
+- [#27](https://github.com/AbstractSDK/abstract.js/pull/27) [`72c2d2c`](https://github.com/AbstractSDK/abstract.js/commit/72c2d2c7dffb34fedad3af4a8905f8737f58f206) Thanks [@dalechyn](https://github.com/dalechyn)! - Fixes api url propagation
+
 ## 0.1.4
 
 ### Patch Changes
