@@ -10,6 +10,7 @@ const ConfigContext = React.createContext<Config | undefined>(undefined)
 export type AbstractConfigProps = {
   config?: Config
 }
+
 export function AbstractConfigContext({
   children,
   config = { apiUrl: ABSTRACT_API_URL },
@@ -22,6 +23,9 @@ export function AbstractConfigContext({
   })
 }
 
+/**
+ * Internal hook to retrieve the Abstract configuration from the {@link AbstractConfigContext} context.
+ */
 export function useConfig() {
   const config = React.useContext(ConfigContext)
   if (!config)

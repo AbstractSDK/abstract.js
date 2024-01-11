@@ -29,6 +29,10 @@ export function AbstractAccountIdProvider({
   })
 }
 
+/**
+ * Hook to retrieve the provided Account id from the {@link AbstractAccountIdProvider} context.
+ * @param accountId the Account id to set if the context is not provided.
+ */
 export function useAccountId({
   accountId,
 }: { accountId?: AbstractAccountId } = {}) {
