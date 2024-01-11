@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
 
   .:
@@ -497,6 +501,9 @@ importers:
       semver:
         specifier: ^7.3.8
         version: 7.5.4
+      string-ts:
+        specifier: ^2.0.0
+        version: 2.0.0
       ts-mixer:
         specifier: ^6.0.2
         version: 6.0.3
@@ -15350,6 +15357,10 @@ packages:
       strip-ansi: 6.0.1
     dev: true
 
+  /string-ts@2.0.0:
+    resolution: {integrity: sha512-Q+WJ5tQ0AdCeWgbhe3ZqDw1v5DGac5/lmDVNbJIa/bFR7TGfB8nJ1rHQSqinZHB8wKetUfhQlfR89puRcIKZZw==}
+    dev: false
+
   /string-width@2.1.1:
     resolution: {integrity: sha512-nOqH59deCq9SRHlxq1Aw85Jnt4w6KvLKqWVik6oA9ZklXLNIOlqg4F2yrT1MVaTjAqvVwdfeZ7w7aCvJD7ugkw==}
     engines: {node: '>=4'}
@@ -17119,7 +17130,3 @@ packages:
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false

@@ -8,9 +8,8 @@ import {
   type HttpEndpoint,
   type SigningCosmWasmClient,
 } from '@cosmjs/cosmwasm-stargate'
-import { Variables } from 'graphql-request'
+import request, { Variables } from 'graphql-request'
 import semverSatisfies from 'semver/functions/satisfies'
-import { graphqlRequest } from '../api'
 import { ChainRegistryClient, assets, chains } from '../chain-registry'
 import { AbstractModule } from '../clients/objects'
 import {
@@ -29,7 +28,7 @@ type GovernanceDetailsForString = AccountFactoryTypes.GovernanceDetailsForString
 import { AbstractAccountQueryClient } from './AbstractAccountClient'
 import { AnsClient, AnsQueryClient } from './AnsClient'
 import { findAbstractAttribute } from './events'
-import { AbstractAccountId, AccountSequence } from './objects/AbstractAccountId'
+import { AbstractAccountId, AccountSequence } from './objects/account-id'
 
 type ParametersExceptFirst<F> = F extends (arg0: any, ...rest: infer R) => any
   ? R
@@ -135,7 +134,7 @@ export class AbstractQueryClient implements IAbstractQueryClient {
     owner: string,
     chains: string[],
   ): Promise<AbstractAccountId[]> {
-    const result = await graphqlRequest(
+    const result = await request(
       this.apiUrl,
       gql(/* GraphQL */ `
   query Accounts($chains: [ID!]!, $page: Page, $filter: AccountFilter) {
@@ -231,13 +230,9 @@ export class AbstractQueryClient implements IAbstractQueryClient {
     options: AbstractQueryClientOptions = DEFAULT_ABSTRACT_QUERY_CLIENT_OPTIONS,
   ): Promise<AbstractQueryClient> {
     const apiUrl = options.overrideApiUrl ?? ABSTRACT_API_URL
-    const deploymentData = await graphqlRequest(
-      apiUrl,
-      CHAIN_DEPLOYMENT_QUERY,
-      {
-        chain: chainId,
-      },
-    )
+    const deploymentData = await request(apiUrl, CHAIN_DEPLOYMENT_QUERY, {
+      chain: chainId,
+    })
     // TODO: check that the version of the subgraph matches that in ABstractJS
 
     const {
@@ -261,16 +256,6 @@ export class AbstractQueryClient implements IAbstractQueryClient {
       },
       { apiUrl },
     )
-  }
-
-  /**
-   * Query the Abstract API.
-   * @param params
-   */
-  public async queryApi<TResult, V extends Variables = Variables>(
-    ...params: ParametersExceptFirst<typeof graphqlRequest<TResult, V>>
-  ): Promise<ReturnType<typeof graphqlRequest<TResult, V>>> {
-    return graphqlRequest(this.apiUrl, ...params)
   }
 
   public async getChainName(): Promise<string> {

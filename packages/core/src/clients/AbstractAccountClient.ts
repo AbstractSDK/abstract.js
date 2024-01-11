@@ -37,10 +37,10 @@ import {
 type ModuleReference = VersionControlTypes.ModuleReference
 import { type AbstractClient, type AbstractQueryClient } from './AbstractClient'
 import { jsonToBinary } from './encoding'
-import { AbstractAccountId } from './objects/AbstractAccountId'
 import { type AnsAssetList } from './objects/AnsAssetList'
 import { type AssetInfo } from './objects/AssetInfo'
 import { type AssetList } from './objects/AssetList'
+import { AbstractAccountId } from './objects/account-id'
 
 type VariantKeys<T> = T extends T ? keyof T : never
 export type ModuleType = VariantKeys<ModuleReference>

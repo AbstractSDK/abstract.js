@@ -13,7 +13,7 @@ import {
   AbstractAccountQueryClient,
 } from './AbstractAccountClient'
 import { AbstractClient, AbstractQueryClient } from './AbstractClient'
-import { AbstractAccountId } from './objects/AbstractAccountId'
+import { AbstractAccountId } from './objects/account-id'
 
 export interface IAppQueryClient<TQueryMsg extends ContractMsg> {
   moduleId: string
