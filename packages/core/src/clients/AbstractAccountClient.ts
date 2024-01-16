@@ -24,23 +24,23 @@ import {
 
 type ManagerModuleInfo = ManagerTypes.ManagerModuleInfo
 type CosmosMsgForEmpty = ProxyTypes.CosmosMsgForEmpty
-import { ABSTRACT_CONSTANTS } from '../constants'
+import { ABSTRACT_CONSTANTS } from '../utils/constants'
 import {
   AppExecuteMsgFactory,
   AppQueryMsgFactory,
-} from '../utils/app/App.msg-factory'
+} from '../utils/generics/app/App.msg-factory'
 
 import {
   AdapterExecuteMsgFactory,
   AdapterQueryMsgBuilder,
-} from '../utils/adapter/Adapter.msg-factory'
+} from '../utils/generics/adapter/Adapter.msg-factory'
 type ModuleReference = VersionControlTypes.ModuleReference
+import { AbstractAccountId } from '../utils/account-id'
+import { jsonToBinary } from '../utils/encoding'
 import { type AbstractClient, type AbstractQueryClient } from './AbstractClient'
-import { jsonToBinary } from './encoding'
 import { type AnsAssetList } from './objects/AnsAssetList'
 import { type AssetInfo } from './objects/AssetInfo'
 import { type AssetList } from './objects/AssetList'
-import { AbstractAccountId } from './objects/account-id'
 
 type VariantKeys<T> = T extends T ? keyof T : never
 export type ModuleType = VariantKeys<ModuleReference>

@@ -1,7 +1,0 @@
-export * from './get-ibc-token-name'
-export * from './get-lp-token-name'
-export * from './get-staking-contract-name'
-export * from './get-name-without-protocol'
-export * from './get-source-chain-from-name'
-export * from './get-source-protocol-from-name'
-export * from './get-symbol-from-name'

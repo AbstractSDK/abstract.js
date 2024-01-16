@@ -1,12 +1,12 @@
 import { BatchCosmWasmClient } from '@abstract-money/cosmwasm-utils'
 import { Mixin } from 'ts-mixer'
 
-export * from './errors'
+export * from '../utils/errors'
 export * from './AbstractClient'
 export * from './AbstractAccountClient'
 export * from './objects'
 export * from './AnsClient'
-export * from './events'
+export * from '../utils/events'
 
 /**
  * An execute or query msg for a contract.
@@ -21,4 +21,4 @@ export type EncodedMsg = {
 // Re-export Mixin for use in mixed classes
 export { Mixin, BatchCosmWasmClient }
 
-export { jsonToBinary } from './encoding'
+export { jsonToBinary } from '../utils/encoding'

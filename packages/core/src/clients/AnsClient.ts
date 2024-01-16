@@ -2,7 +2,7 @@ import { type CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { BiMap } from '@rimbu/bimap'
 import { Mixin } from 'ts-mixer'
 
-import { ABSTRACT_CONSTANTS } from '../constants'
+import { ABSTRACT_CONSTANTS } from '../utils/constants'
 
 import {
   AnsHostClient,

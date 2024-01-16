@@ -7,13 +7,13 @@
 import { Coin, StdFee } from '@cosmjs/amino'
 import { ExecuteResult, SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { ContractMsg } from '.'
-import { AppExecuteMsg, AppExecuteMsgFactory } from '../utils'
+import { AbstractAccountId } from '../utils/account-id'
+import { AppExecuteMsg, AppExecuteMsgFactory } from '../utils/generics'
 import {
   AbstractAccountClient,
   AbstractAccountQueryClient,
 } from './AbstractAccountClient'
 import { AbstractClient, AbstractQueryClient } from './AbstractClient'
-import { AbstractAccountId } from './objects/account-id'
 
 export interface IAppQueryClient<TQueryMsg extends ContractMsg> {
   moduleId: string

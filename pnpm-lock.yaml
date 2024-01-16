@@ -488,7 +488,7 @@ importers:
         version: 2.0.0
       chain-registry:
         specifier: ^1.18.1
-        version: 1.20.0
+        version: 1.25.0
       cosmjs-types:
         specifier: ^0.8.0
         version: 0.8.0
@@ -2114,6 +2114,12 @@ packages:
 
   /@chain-registry/types@0.17.0:
     resolution: {integrity: sha512-lavACU4oDxioUy8lZOFZN0Vrr2qR+Dg2yEh/mkrPfOldcioavREXJou0elDyyXwq4pGLC5YQ+IISCtQ4Du0bdw==}
+    dependencies:
+      '@babel/runtime': 7.23.4
+    dev: false
+
+  /@chain-registry/types@0.17.1:
+    resolution: {integrity: sha512-O0CgrtJgIlqXvZm1CqDZe/7jZz068O/uuCIoyDXCegFHK03rdHacKcDGwEIUuI0MNUf8YV3jdE4xHQMSAX+79w==}
     dependencies:
       '@babel/runtime': 7.23.4
     dev: false
@@ -9038,6 +9044,13 @@ packages:
     dependencies:
       '@babel/runtime': 7.23.4
       '@chain-registry/types': 0.17.0
+    dev: false
+
+  /chain-registry@1.25.0:
+    resolution: {integrity: sha512-u+i64OW5hBRGc1HZtZRr7Givgnj0uvcRV1XnJjPMBcSkEP0zTuMWg032HX7wpuu8C47I6aosQ00CGFDLfKtzSQ==}
+    dependencies:
+      '@babel/runtime': 7.23.4
+      '@chain-registry/types': 0.17.1
     dev: false
 
   /chalk-template@0.4.0:

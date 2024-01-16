@@ -10,7 +10,6 @@ import {
 } from '@cosmjs/cosmwasm-stargate'
 import request, { Variables } from 'graphql-request'
 import semverSatisfies from 'semver/functions/satisfies'
-import { ChainRegistryClient, assets, chains } from '../chain-registry'
 import { AbstractModule } from '../clients/objects'
 import {
   AccountFactoryClient as FactoryClient,
@@ -23,12 +22,13 @@ import {
   VersionControlQueryClient as RegistryQueryClient,
 } from '../codegen/abstract'
 import { gql } from '../codegen/gql'
-import { ABSTRACT_API_URL } from '../constants'
+import { ChainRegistryClient, assets, chains } from '../utils/chain-registry'
+import { ABSTRACT_API_URL } from '../utils/constants'
 type GovernanceDetailsForString = AccountFactoryTypes.GovernanceDetailsForString
+import { AbstractAccountId, AccountSequence } from '../utils/account-id'
+import { findAbstractAttribute } from '../utils/events'
 import { AbstractAccountQueryClient } from './AbstractAccountClient'
 import { AnsClient, AnsQueryClient } from './AnsClient'
-import { findAbstractAttribute } from './events'
-import { AbstractAccountId, AccountSequence } from './objects/account-id'
 
 type ParametersExceptFirst<F> = F extends (arg0: any, ...rest: infer R) => any
   ? R
