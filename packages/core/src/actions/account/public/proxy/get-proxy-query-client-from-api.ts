@@ -1,6 +1,7 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { ProxyQueryClient, VersionControlTypes } from 'src/codegen/abstract'
-import { getAccountBaseAddressesFromApi } from '../get-account-base-addresses-from-api'
+import { getProxyQueryClient } from 'src/actions/public/proxy/get-proxy-query-client'
+import { VersionControlTypes } from 'src/codegen/abstract'
+import { getAccountBaseAddressesFromApi } from '../version-control/get-account-base-addresses-from-api'
 
 export async function getProxyQueryClientFromApi(
   accountId: VersionControlTypes.AccountId,
@@ -13,5 +14,5 @@ export async function getProxyQueryClientFromApi(
     apiUrl,
   )
 
-  return new ProxyQueryClient(cosmWasmClient, proxyAddress)
+  return getProxyQueryClient(cosmWasmClient, proxyAddress)
 }

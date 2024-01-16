@@ -1,5 +1,5 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import type { Prettify } from '../types/utils.js'
+import type { Prettify } from '../types/utils'
 import { type Client, type ClientConfig, createClient } from './create-client'
 import { type PublicActions, publicActions } from './decorators/public'
 

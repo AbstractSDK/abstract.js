@@ -1,15 +1,11 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { VersionControlTypes } from 'src/codegen/abstract/index.js'
-import type { Prettify } from '../types/utils.js'
-import {
-  type Client,
-  type ClientConfig,
-  createClient,
-} from './create-client.js'
+import { VersionControlTypes } from 'src/codegen/abstract/index'
+import type { Prettify } from '../types/utils'
+import { type Client, type ClientConfig, createClient } from './create-client'
 import {
   type AccountPublicActions,
   accountPublicActions,
-} from './decorators/account-public.js'
+} from './decorators/account-public'
 
 export type AccountPublicClientConfig = ClientConfig & {
   accountId: VersionControlTypes.AccountId

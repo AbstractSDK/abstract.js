@@ -7,7 +7,7 @@ import {
 import { versionControlModuleToAddress } from '../../../utils/version-control/version-control-module-to-address'
 const ANS_HOST_MODULE_NAME = 'ans-host'
 
-export async function getAnsHostAddress(
+export async function getAnsHostAddressFromVersionControl(
   cosmWasmClient: CosmWasmClient,
   versionControlAddress: string,
   version?: string,

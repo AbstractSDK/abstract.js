@@ -1,6 +1,7 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { ManagerQueryClient, VersionControlTypes } from 'src/codegen/abstract'
-import { getAccountBaseAddressesFromApi } from '../get-account-base-addresses-from-api'
+import { getManagerQueryClient } from 'src/actions/public/manager/get-manager-query-client'
+import { VersionControlTypes } from 'src/codegen/abstract'
+import { getAccountBaseAddressesFromApi } from '../version-control/get-account-base-addresses-from-api'
 
 export async function getManagerQueryClientFromApi(
   accountId: VersionControlTypes.AccountId,
@@ -13,5 +14,5 @@ export async function getManagerQueryClientFromApi(
     apiUrl,
   )
 
-  return new ManagerQueryClient(cosmWasmClient, managerAddress)
+  return getManagerQueryClient(cosmWasmClient, managerAddress)
 }

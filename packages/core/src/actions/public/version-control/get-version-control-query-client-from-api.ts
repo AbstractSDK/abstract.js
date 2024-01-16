@@ -1,7 +1,7 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
-import { VersionControlQueryClient } from 'src/codegen/abstract'
 import { getVersionControlAddressFromApi } from '../../version-control/get-version-control-address-from-api'
+import { getVersionControlQueryClient } from './get-version-control-query-client'
 
 export async function getVersionControlQueryClientFromApi(
   cosmWasmClient: CosmWasmClient,
@@ -13,5 +13,5 @@ export async function getVersionControlQueryClientFromApi(
     chainId,
   )
 
-  return new VersionControlQueryClient(cosmWasmClient, versionControlAddress)
+  return getVersionControlQueryClient(cosmWasmClient, versionControlAddress)
 }

@@ -2,7 +2,7 @@ import { assets as cosmosAssets } from 'chain-registry'
 
 // @TODO: Needs a pr to `chain-registry`
 const NIBIRU_TESTNET_ASSET_LIST = {
-  $schema: '../assetlist.schema.json',
+  $schema: '../assetlist.schemaon',
   chain_name: 'nibirutestnet',
   assets: [
     {

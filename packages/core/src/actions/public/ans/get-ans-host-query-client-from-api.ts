@@ -1,7 +1,7 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
-import { AnsHostQueryClient } from '../../../codegen/abstract'
 import { getAnsHostAddressFromApi } from '../../ans/get-ans-host-address-from-api'
+import { getAnsHostQueryClient } from './get-ans-host-query-client'
 
 export async function getAnsHostQueryClientFromApi(
   cosmWasmClient: CosmWasmClient,
@@ -11,5 +11,5 @@ export async function getAnsHostQueryClientFromApi(
 
   const ansHostAddress = await getAnsHostAddressFromApi(apiUrl, chainId)
 
-  return new AnsHostQueryClient(cosmWasmClient, ansHostAddress)
+  return getAnsHostQueryClient(cosmWasmClient, ansHostAddress)
 }

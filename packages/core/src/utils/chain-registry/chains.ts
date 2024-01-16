@@ -1,7 +1,7 @@
 import { chains as chainRegistryChains } from 'chain-registry'
 
 const LOCAL_JUNO_CHAIN = {
-  $schema: '../../chain.schema.json',
+  $schema: '../../chain.schemaon',
   chain_name: 'localjuno',
   status: 'live',
   network_type: 'testnet',
@@ -61,7 +61,7 @@ const LOCAL_JUNO_CHAIN = {
 
 // @TODO: needs a PR in chain-registry
 const NIBIRU_TESTNET_CHAIN = {
-  $schema: '../chain.schema.json',
+  $schema: '../chain.schemaon',
   chain_name: 'nibirutestnet',
   chain_id: 'nibiru-itn-3',
   pretty_name: 'Nibiru Chain',

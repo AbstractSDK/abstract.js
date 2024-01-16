@@ -8,7 +8,7 @@ import { versionControlModuleToAddress } from '../../../utils/version-control/ve
 
 const ACCOUNT_FACTORY_MODULE_NAME = 'account-factory'
 
-export async function getAccountFactoryAddress(
+export async function getAccountFactoryAddressFromVersionControl(
   cosmWasmClient: CosmWasmClient,
   versionControlAddress: string,
   version?: string,

@@ -2,6 +2,7 @@ import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
 import { VersionControlClient } from '../../../codegen/abstract'
 import { getVersionControlAddressFromApi } from '../../version-control/get-version-control-address-from-api'
+import { getVersionControlClient } from './get-version-control-client'
 
 export async function getVersionControlClientFromApi(
   cosmWasmClient: SigningCosmWasmClient,
@@ -14,5 +15,5 @@ export async function getVersionControlClientFromApi(
     chainId,
   )
 
-  return new VersionControlClient(cosmWasmClient, sender, versionControlAddress)
+  return getVersionControlClient(cosmWasmClient, sender, versionControlAddress)
 }

@@ -1,8 +1,8 @@
-import { getAccountFactoryAddressFromApi } from 'src/actions/account-factory/get-account-factory-address-from-api.js'
-import { getAnsHostAddressFromApi } from 'src/actions/ans/get-ans-host-address-from-api.js'
-import { getAccountsOfOwnerFromApi } from 'src/actions/get-accounts-of-owner-from-api.js'
-import { SliceFirst } from '../../types/utils.js'
-import { Client_Base } from '../create-client.js'
+import { getAccountFactoryAddressFromApi } from 'src/actions/account-factory/get-account-factory-address-from-api'
+import { getAnsHostAddressFromApi } from 'src/actions/ans/get-ans-host-address-from-api'
+import { getAccountsByOwnerFromApi } from 'src/actions/get-accounts-of-owner-from-api'
+import { SliceFirst } from '../../types/utils'
+import { Client_Base } from '../create-client'
 
 export type BaseActions = {
   getAccountFactoryAddressFromApi(
@@ -12,8 +12,8 @@ export type BaseActions = {
     ...args: SliceFirst<Parameters<typeof getAnsHostAddressFromApi>>
   ): ReturnType<typeof getAnsHostAddressFromApi>
   getAccountsOfOwnerFromApi(
-    ...args: SliceFirst<Parameters<typeof getAccountsOfOwnerFromApi>>
-  ): ReturnType<typeof getAccountsOfOwnerFromApi>
+    ...args: SliceFirst<Parameters<typeof getAccountsByOwnerFromApi>>
+  ): ReturnType<typeof getAccountsByOwnerFromApi>
 }
 
 export function baseActions({ apiUrl }: Client_Base): BaseActions {
@@ -23,6 +23,6 @@ export function baseActions({ apiUrl }: Client_Base): BaseActions {
     getAnsHostAddressFromApi: (...args) =>
       getAnsHostAddressFromApi(apiUrl, ...args),
     getAccountsOfOwnerFromApi: (...args) =>
-      getAccountsOfOwnerFromApi(apiUrl, ...args),
+      getAccountsByOwnerFromApi(apiUrl, ...args),
   }
 }

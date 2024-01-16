@@ -9,12 +9,8 @@ export async function getAccountFactoryAddressFromApi(
     apiUrl,
     gql(/* GraphQL */ `
       query AccountFactoryDeployment($chain: ID!) {
-        version
         deployment(chain: $chain) {
           accountFactory
-        }
-        chainInfo(chain: $chain) {
-          rpcUrl
         }
       }
     `),

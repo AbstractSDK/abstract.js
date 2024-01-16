@@ -1,7 +1,7 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
-import { AccountFactoryQueryClient } from '../../../codegen/abstract'
 import { getAccountFactoryAddressFromApi } from '../../account-factory/get-account-factory-address-from-api'
+import { getAccountFactoryQueryClient } from './get-account-factory-query-client'
 
 export async function getAccountFactoryQueryClientFromApi(
   cosmWasmClient: CosmWasmClient,
@@ -10,5 +10,5 @@ export async function getAccountFactoryQueryClientFromApi(
   const chainId = await cosmWasmClient.getChainId()
   const factoryAddress = await getAccountFactoryAddressFromApi(apiUrl, chainId)
 
-  return new AccountFactoryQueryClient(cosmWasmClient, factoryAddress)
+  return getAccountFactoryQueryClient(cosmWasmClient, factoryAddress)
 }

@@ -1,7 +1,7 @@
 import { ExecuteResult } from '@cosmjs/cosmwasm-stargate'
-import { ACCOUNT_ID_CHAIN_DELIMITER, AccountId } from '../../utils/account-id'
-import { chainIdToName } from '../../utils/chain-registry'
-import { findAbstractAttribute } from '../../utils/events'
+import { ACCOUNT_ID_CHAIN_DELIMITER, AccountId } from '../account-id'
+import { chainIdToName } from '../chain-registry'
+import { findAbstractAttribute } from '../events'
 
 export function parseCreateAccountExecuteResult(
   result: ExecuteResult,

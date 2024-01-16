@@ -2,7 +2,7 @@ import request from 'graphql-request'
 import { gql } from '../codegen/gql'
 import { accountIdApiFormatToAccountId } from '../utils/account-id/account-id-api-format-to-account-id'
 
-export async function getAccountsOfOwnerFromApi(
+export async function getAccountsByOwnerFromApi(
   apiUrl: string,
   owner: string,
   chains: string[],
