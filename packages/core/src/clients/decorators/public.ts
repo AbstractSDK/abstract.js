@@ -1,15 +1,17 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { getAccountFactoryQueryClient } from 'src/actions/public/account-factory/get-account-factory-query-client'
-import { getAnsHostQueryClient } from 'src/actions/public/ans/get-ans-host-query-client'
-import { getVersionControlQueryClient } from 'src/actions/public/version-control/get-version-control-query-client'
-import { getAccountFactoryAddressFromVersionControl } from '../../actions/public/account-factory/get-account-factory-address-from-version-control'
-import { getAccountFactoryQueryClientFromApi } from '../../actions/public/account-factory/get-account-factory-query-client-from-api'
-import { getAccountFactoryQueryClientFromVersionControl } from '../../actions/public/account-factory/get-account-factory-query-client-from-version-control'
-import { getAnsHostAddressFromVersionControl } from '../../actions/public/ans/get-ans-host-address-from-version-control'
-import { getAnsHostQueryClientFromApi } from '../../actions/public/ans/get-ans-host-query-client-from-api'
-import { getAnsHostQueryClientFromVersionControl } from '../../actions/public/ans/get-ans-host-query-client-from-version-control'
-import { getVersionControlModuleData } from '../../actions/public/version-control/get-version-control-module-data'
-import { getVersionControlQueryClientFromApi } from '../../actions/public/version-control/get-version-control-query-client-from-api'
+import { getAccountFactoryAddressFromVersionControl } from '../../actions/public/get-account-factory-address-from-version-control'
+import { getAccountFactoryQueryClient } from '../../actions/public/get-account-factory-query-client'
+import { getAccountFactoryQueryClientFromApi } from '../../actions/public/get-account-factory-query-client-from-api'
+import { getAccountFactoryQueryClientFromVersionControl } from '../../actions/public/get-account-factory-query-client-from-version-control'
+import { getAnsHostAddressFromVersionControl } from '../../actions/public/get-ans-host-address-from-version-control'
+import { getAnsHostQueryClient } from '../../actions/public/get-ans-host-query-client'
+import { getAnsHostQueryClientFromApi } from '../../actions/public/get-ans-host-query-client-from-api'
+import { getAnsHostQueryClientFromVersionControl } from '../../actions/public/get-ans-host-query-client-from-version-control'
+import { getManagerQueryClient } from '../../actions/public/get-manager-query-client'
+import { getProxyQueryClient } from '../../actions/public/get-proxy-query-client'
+import { getVersionControlModuleData } from '../../actions/public/get-version-control-module-data'
+import { getVersionControlQueryClient } from '../../actions/public/get-version-control-query-client'
+import { getVersionControlQueryClientFromApi } from '../../actions/public/get-version-control-query-client-from-api'
 import { SliceFirst, SliceFirstTwo } from '../../types/utils'
 import { Client } from '../create-client'
 
@@ -46,6 +48,12 @@ export type PublicActions = {
   getAnsHostQueryClient(
     ...args: SliceFirst<Parameters<typeof getAnsHostQueryClient>>
   ): ReturnType<typeof getAnsHostQueryClient>
+  getManagerQueryClient(
+    ...args: SliceFirst<Parameters<typeof getManagerQueryClient>>
+  ): ReturnType<typeof getManagerQueryClient>
+  getProxyQueryClient(
+    ...args: SliceFirst<Parameters<typeof getProxyQueryClient>>
+  ): ReturnType<typeof getProxyQueryClient>
   getVersionControlModuleData(
     ...args: SliceFirst<Parameters<typeof getVersionControlModuleData>>
   ): ReturnType<typeof getVersionControlModuleData>
@@ -85,5 +93,9 @@ export function publicActions(
       getVersionControlQueryClientFromApi(client, ...args),
     getVersionControlQueryClient: (...args) =>
       getVersionControlQueryClient(client, ...args),
+
+    getManagerQueryClient: (...args) => getManagerQueryClient(client, ...args),
+
+    getProxyQueryClient: (...args) => getProxyQueryClient(client, ...args),
   }
 }

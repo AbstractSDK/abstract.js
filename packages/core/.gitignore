@@ -1,7 +1,3 @@
 # Generated file. Do not edit directly.
-api/**
-chain-registry/**
 clients/**
-tools/**
 utils/**
-codegen/abstract/**

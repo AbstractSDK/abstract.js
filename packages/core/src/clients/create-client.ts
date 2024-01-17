@@ -1,4 +1,4 @@
-import { Prettify } from 'src/types/utils'
+import { Prettify } from '../types/utils'
 import { ABSTRACT_API_URL } from '../utils/constants'
 import { baseActions } from './decorators/base'
 

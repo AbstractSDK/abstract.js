@@ -4,10 +4,10 @@ import {
   ProxyExecuteMsgBuilder,
   ProxyTypes,
   VersionControlTypes,
-} from 'src/codegen/abstract'
-import { MaybeArray, SliceFirstTwo } from 'src/types/utils'
-import { jsonToBinary } from 'src/utils/encoding'
-import { getAccountBaseAddressesFromApi } from '../public/version-control/get-account-base-addresses-from-api'
+} from '../../../codegen/abstract'
+import { MaybeArray, SliceFirstTwo } from '../../../types/utils'
+import { jsonToBinary } from '../../../utils/encoding'
+import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
 
 export async function execute(
   accountId: VersionControlTypes.AccountId,

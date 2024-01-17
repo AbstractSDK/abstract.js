@@ -1,8 +1,8 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { VersionControlTypes } from 'src/codegen/abstract'
-import { SliceFirstTwo } from 'src/types/utils'
-import { Asset, encodeAssetsProxyTransferMsgs } from 'src/utils/assets'
-import { getAccountBaseAddressesFromApi } from '../public/version-control/get-account-base-addresses-from-api'
+import { VersionControlTypes } from '../../../codegen/abstract'
+import { SliceFirstTwo } from '../../../types/utils'
+import { Asset, encodeAssetsProxyTransferMsgs } from '../../../utils/assets'
+import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
 import { execute } from './execute'
 
 export async function withdraw(

@@ -1,5 +1,5 @@
 import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
-import { EncodedMsg } from '../../../clients'
+import { EncodedMsg } from 'src/types/messages'
 import { jsonToBinary, jsonToUtf8 } from '../../encoding'
 import { CW20Asset } from './types'
 

@@ -1,6 +1,2 @@
-export * from './api'
 export * from './clients'
-export * from './utils/constants'
-export * from './tools'
-export * from './utils/chain-registry'
-export * from './utils/generics'
+export * from './utils'

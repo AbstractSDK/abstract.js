@@ -19,7 +19,7 @@
  */
 
 import { type CamelCasedProperties } from 'type-fest'
-import { type ContractMsg } from '../../../clients'
+import { ContractMsg } from '../../../types/messages'
 import {
   ModuleExecuteMsgFactory,
   ModuleQueryMsgFactory,

@@ -1,3 +1,4 @@
+import { Chain } from '@chain-registry/types'
 import { chains as chainRegistryChains } from 'chain-registry'
 
 const LOCAL_JUNO_CHAIN = {
@@ -141,7 +142,7 @@ const NIBIRU_TESTNET_CHAIN = {
   ],
 }
 
-export const chains = [
+export const chains: Chain[] = [
   // remove harpoon 4 in favor of manual entry
   ...chainRegistryChains.filter(
     ({ chain_id }) =>
@@ -149,4 +150,4 @@ export const chains = [
   ),
   LOCAL_JUNO_CHAIN,
   NIBIRU_TESTNET_CHAIN,
-] satisfies typeof chainRegistryChains[number][]
+] satisfies Chain[]

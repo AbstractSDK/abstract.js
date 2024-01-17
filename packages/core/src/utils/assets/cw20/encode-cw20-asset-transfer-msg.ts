@@ -1,4 +1,4 @@
-import { EncodedMsg } from '../../../clients'
+import { EncodedMsg } from '../../../types/messages'
 import { jsonToUtf8 } from '../../encoding'
 import { CW20Asset } from './types'
 

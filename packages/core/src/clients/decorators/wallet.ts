@@ -1,15 +1,17 @@
-import { getAccountFactoryClientFromApi } from 'src/actions/wallet/account-factory/get-account-factory-client-from-api'
-import { getAccountFactoryClientFromVersionControl } from 'src/actions/wallet/account-factory/get-account-factory-client-from-version-control'
-import { getAnsHostClientFromApi } from 'src/actions/wallet/ans/get-ans-host-client-from-api'
-import { getAnsHostClientFromVersionControl } from 'src/actions/wallet/ans/get-ans-host-client-from-version-control'
-import { getVersionControlClientFromApi } from 'src/actions/wallet/version-control/get-version-control-client-from-api'
+import { getAccountFactoryClientFromApi } from '../../actions/wallet/get-account-factory-client-from-api'
+import { getAccountFactoryClientFromVersionControl } from '../../actions/wallet/get-account-factory-client-from-version-control'
+import { getAnsHostClientFromApi } from '../../actions/wallet/get-ans-host-client-from-api'
+import { getAnsHostClientFromVersionControl } from '../../actions/wallet/get-ans-host-client-from-version-control'
+import { getVersionControlClientFromApi } from '../../actions/wallet/get-version-control-client-from-api'
 
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { createAccount } from 'src/actions/wallet/account-factory/create-account'
-import { createAccountMonarchy } from 'src/actions/wallet/account-factory/create-account-monarchy'
-import { getAccountFactoryClient } from 'src/actions/wallet/account-factory/get-account-factory-client'
-import { getAnsHostClient } from 'src/actions/wallet/ans/get-ans-host-client'
-import { getVersionControlClient } from 'src/actions/wallet/version-control/get-version-control-client'
+import { createAccount } from '../../actions/wallet/create-account'
+import { createAccountMonarchy } from '../../actions/wallet/create-account-monarchy'
+import { getAccountFactoryClient } from '../../actions/wallet/get-account-factory-client'
+import { getAnsHostClient } from '../../actions/wallet/get-ans-host-client'
+import { getManagerClient } from '../../actions/wallet/get-manager-client'
+import { getProxyClient } from '../../actions/wallet/get-proxy-client'
+import { getVersionControlClient } from '../../actions/wallet/get-version-control-client'
 import { SliceFirst, SliceFirstTwo } from '../../types/utils'
 import { Client } from '../create-client'
 
@@ -46,6 +48,12 @@ export type WalletActions = {
   getVersionControlClientFromApi(
     ...args: SliceFirstTwo<Parameters<typeof getVersionControlClientFromApi>>
   ): ReturnType<typeof getVersionControlClientFromApi>
+  getManagerClient(
+    ...args: SliceFirst<Parameters<typeof getManagerClient>>
+  ): ReturnType<typeof getManagerClient>
+  getProxyClient(
+    ...args: SliceFirst<Parameters<typeof getProxyClient>>
+  ): ReturnType<typeof getProxyClient>
 }
 
 export function walletActions(
@@ -74,5 +82,8 @@ export function walletActions(
       getVersionControlClientFromApi(client, apiUrl, ...args),
     getVersionControlClient: (...args) =>
       getVersionControlClient(client, ...args),
+
+    getManagerClient: (...args) => getManagerClient(client, ...args),
+    getProxyClient: (...args) => getProxyClient(client, ...args),
   }
 }

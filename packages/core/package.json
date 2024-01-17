@@ -78,39 +78,19 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./api": {
-      "types": "./dist/api/index.d.ts",
-      "default": "./dist/api/index.js"
-    },
-    "./chain-registry": {
-      "types": "./dist/chain-registry/index.d.ts",
-      "default": "./dist/chain-registry/index.js"
-    },
     "./clients": {
       "types": "./dist/clients/index.d.ts",
       "default": "./dist/clients/index.js"
-    },
-    "./tools": {
-      "types": "./dist/tools/index.d.ts",
-      "default": "./dist/tools/index.js"
     },
     "./utils": {
       "types": "./dist/utils/index.d.ts",
       "default": "./dist/utils/index.js"
     },
-    "./codegen/abstract": {
-      "types": "./dist/codegen/abstract/index.d.ts",
-      "default": "./dist/codegen/abstract/index.js"
-    },
     "./package.json": "./package.json"
   },
   "files": [
-    "/api",
-    "/chain-registry",
     "/clients",
-    "/tools",
     "/utils",
-    "/codegen",
     "/dist"
   ],
   "sideEffects": false

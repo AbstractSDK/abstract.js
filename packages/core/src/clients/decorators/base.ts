@@ -1,6 +1,9 @@
-import { getAccountFactoryAddressFromApi } from 'src/actions/account-factory/get-account-factory-address-from-api'
-import { getAnsHostAddressFromApi } from 'src/actions/ans/get-ans-host-address-from-api'
-import { getAccountsByOwnerFromApi } from 'src/actions/get-accounts-of-owner-from-api'
+import { getAccountFactoryAddressFromApi } from '../../actions/get-account-factory-address-from-api'
+import { getAccountsByOwnerFromApi } from '../../actions/get-accounts-by-owner-from-api'
+import { getAnsHostAddressFromApi } from '../../actions/get-ans-host-address-from-api'
+import { getAnsTokenFromApi } from '../../actions/get-ans-token-from-api'
+import { getAnsTokensFromApi } from '../../actions/get-ans-tokens-from-api'
+import { getVersionControlAddressFromApi } from '../../actions/get-version-control-address-from-api'
 import { SliceFirst } from '../../types/utils'
 import { Client_Base } from '../create-client'
 
@@ -11,9 +14,18 @@ export type BaseActions = {
   getAnsHostAddressFromApi(
     ...args: SliceFirst<Parameters<typeof getAnsHostAddressFromApi>>
   ): ReturnType<typeof getAnsHostAddressFromApi>
-  getAccountsOfOwnerFromApi(
+  getAccountsByOwnerFromApi(
     ...args: SliceFirst<Parameters<typeof getAccountsByOwnerFromApi>>
   ): ReturnType<typeof getAccountsByOwnerFromApi>
+  getAnsTokenFromApi(
+    ...args: SliceFirst<Parameters<typeof getAnsTokenFromApi>>
+  ): ReturnType<typeof getAnsTokenFromApi>
+  getAnsTokensFromApi(
+    ...args: SliceFirst<Parameters<typeof getAnsTokensFromApi>>
+  ): ReturnType<typeof getAnsTokensFromApi>
+  getVersionControlAddressFromApi(
+    ...args: SliceFirst<Parameters<typeof getVersionControlAddressFromApi>>
+  ): ReturnType<typeof getVersionControlAddressFromApi>
 }
 
 export function baseActions({ apiUrl }: Client_Base): BaseActions {
@@ -22,7 +34,11 @@ export function baseActions({ apiUrl }: Client_Base): BaseActions {
       getAccountFactoryAddressFromApi(apiUrl, ...args),
     getAnsHostAddressFromApi: (...args) =>
       getAnsHostAddressFromApi(apiUrl, ...args),
-    getAccountsOfOwnerFromApi: (...args) =>
+    getAccountsByOwnerFromApi: (...args) =>
       getAccountsByOwnerFromApi(apiUrl, ...args),
+    getAnsTokenFromApi: (...args) => getAnsTokenFromApi(apiUrl, ...args),
+    getAnsTokensFromApi: (...args) => getAnsTokensFromApi(apiUrl, ...args),
+    getVersionControlAddressFromApi: (...args) =>
+      getVersionControlAddressFromApi(apiUrl, ...args),
   }
 }

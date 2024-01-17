@@ -1,5 +1,5 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { VersionControlTypes } from 'src/codegen/abstract/index'
+import { VersionControlTypes } from '../codegen/abstract/index'
 import type { Prettify } from '../types/utils'
 import { type Client, type ClientConfig, createClient } from './create-client'
 import {
@@ -18,7 +18,7 @@ export function createAccountPublicClient(
   parameters: AccountPublicClientConfig,
 ): AccountPublicClient {
   const {
-    key = 'public',
+    key = 'account-public',
     name = 'AccountPublic Client',
     accountId,
     cosmWasmClient,
