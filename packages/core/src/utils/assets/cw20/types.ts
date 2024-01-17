@@ -1,5 +1,5 @@
 import { Coin } from '@cosmjs/amino'
-import { CW20Token, isCW20Token } from '../../tokens/cw20/cw20-token'
+import { CW20Token, isCW20Token } from '../../tokens/cw20/types'
 import { Asset } from '../asset'
 
 export type CW20Asset<TAddress extends string = string> = Pick<Coin, 'amount'> &

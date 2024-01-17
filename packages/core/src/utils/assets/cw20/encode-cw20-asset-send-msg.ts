@@ -1,7 +1,7 @@
 import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
 import { EncodedMsg } from '../../../clients'
 import { jsonToBinary, jsonToUtf8 } from '../../encoding'
-import { CW20Asset } from './cw20-asset'
+import { CW20Asset } from './types'
 
 export function encodeCW20AssetSendMsg<
   const TMsg extends Record<string, unknown> | string,

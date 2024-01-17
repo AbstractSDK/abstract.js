@@ -36,3 +36,5 @@ export type SliceFirstThree<T extends readonly unknown[]> = T extends readonly [
 
 export type WithOptional<T, K extends keyof T> = Omit<T, K> &
   Partial<Pick<T, K>>
+
+export type MaybeArray<T> = T | T[]

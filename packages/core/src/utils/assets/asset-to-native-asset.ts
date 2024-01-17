@@ -1,5 +1,5 @@
 import { Asset } from './asset'
-import { NativeAsset, isNativeAsset } from './native/native-asset'
+import { NativeAsset, isNativeAsset } from './native/types'
 
 export function assetToNativeAsset<const TAsset extends Asset = Asset>(
   asset: TAsset,

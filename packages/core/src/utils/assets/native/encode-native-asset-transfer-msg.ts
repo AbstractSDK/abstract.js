@@ -1,5 +1,5 @@
 import { EncodedMsg } from '../../../clients'
-import { NativeAsset } from './native-asset'
+import { NativeAsset } from './types'
 
 export function encodeNativeAssetTransferMsg<
   const TDenom extends string = string,

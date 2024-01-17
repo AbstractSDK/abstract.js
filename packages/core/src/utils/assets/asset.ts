@@ -1,4 +1,4 @@
-import { CW20Asset } from './cw20/cw20-asset'
-import { NativeAsset } from './native/native-asset'
+import { CW20Asset } from './cw20/types'
+import { NativeAsset } from './native/types'
 
 export type Asset = NativeAsset | CW20Asset

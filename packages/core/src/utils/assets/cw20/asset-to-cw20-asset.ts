@@ -1,5 +1,5 @@
 import { Asset } from '../asset'
-import { CW20Asset, isCW20Asset } from './cw20-asset'
+import { CW20Asset, isCW20Asset } from './types'
 
 export function assetToCW20Asset<const TAsset extends Asset = Asset>(
   asset: TAsset,

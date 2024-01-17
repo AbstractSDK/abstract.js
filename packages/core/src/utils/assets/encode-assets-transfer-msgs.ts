@@ -1,9 +1,9 @@
 import { EncodedMsg } from 'src/clients'
 import { Asset } from './asset'
-import { CW20Asset, isCW20Asset } from './cw20/cw20-asset'
 import { encodeCW20AssetTransferMsg } from './cw20/encode-cw20-asset-transfer-msg'
-import { NativeAsset, isNativeAsset } from './native/native-asset'
+import { CW20Asset, isCW20Asset } from './cw20/types'
 import { nativeAssetToCoin } from './native/native-asset-to-coin'
+import { NativeAsset, isNativeAsset } from './native/types'
 
 export function encodeAssetsTransfersMsgs<
   const TAssets extends readonly Asset[] = Asset[],

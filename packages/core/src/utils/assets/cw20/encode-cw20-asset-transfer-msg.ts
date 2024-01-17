@@ -1,6 +1,6 @@
 import { EncodedMsg } from '../../../clients'
 import { jsonToUtf8 } from '../../encoding'
-import { CW20Asset } from './cw20-asset'
+import { CW20Asset } from './types'
 
 export function encodeCW20AssetTransferMsg<
   const TAddress extends string = string,

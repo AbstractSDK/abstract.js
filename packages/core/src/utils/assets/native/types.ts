@@ -1,5 +1,5 @@
 import { Coin } from '@cosmjs/amino'
-import { NativeToken, isNativeToken } from '../../tokens/native/native-token'
+import { NativeToken, isNativeToken } from '../../tokens/native/types'
 import { Asset } from '../asset'
 
 export type NativeAsset<TDenom extends string = string> = NativeToken<TDenom> &

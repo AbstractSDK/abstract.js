@@ -1,5 +1,5 @@
 import * as s from 'string-ts'
-import { MODULE_DELIMITER, type ModuleId } from './module-id'
+import { MODULE_DELIMITER, type ModuleId } from './types'
 
 export function moduleIdToName<const TModuleId extends ModuleId = ModuleId>(
   id: TModuleId,

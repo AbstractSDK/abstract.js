@@ -1,8 +1,8 @@
 import { Token } from '../token'
 
 export type NativeToken<TDenom extends string = string> = {
-  type: 'native'
-  denom: TDenom
+  readonly type: 'native'
+  readonly denom: TDenom
 }
 
 export function isNativeToken(asset: Token): asset is NativeToken {

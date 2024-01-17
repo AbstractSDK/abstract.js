@@ -1,15 +1,17 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { VersionControlTypes } from 'src/codegen/abstract'
 import { SliceFirstTwo } from 'src/types/utils'
-import { Asset, encodeAssetsTransfersMsgs } from 'src/utils/assets'
+import { Asset, encodeAssetsProxyTransferMsgs } from 'src/utils/assets'
 import { getAccountBaseAddressesFromApi } from '../public/version-control/get-account-base-addresses-from-api'
+import { execute } from './execute'
 
-export async function deposit(
+export async function withdraw(
   accountId: VersionControlTypes.AccountId,
   signingCosmWasmClient: SigningCosmWasmClient,
   apiUrl: string,
   assets: Asset[],
   sender: string,
+  recipient: string,
   ...rest: SliceFirstTwo<
     Parameters<typeof SigningCosmWasmClient.prototype.signAndBroadcast>
   >
@@ -19,9 +21,19 @@ export async function deposit(
     signingCosmWasmClient,
     apiUrl,
   )
-  return signingCosmWasmClient.signAndBroadcast(
+
+  const transferMsgs = encodeAssetsProxyTransferMsgs(
+    assets,
+    proxyAddress,
+    recipient,
+  )
+
+  return execute(
+    accountId,
+    signingCosmWasmClient,
+    apiUrl,
+    transferMsgs,
     sender,
-    encodeAssetsTransfersMsgs(assets, sender, proxyAddress),
     ...rest,
   )
 }

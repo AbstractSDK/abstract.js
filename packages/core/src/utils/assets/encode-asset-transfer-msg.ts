@@ -1,8 +1,8 @@
 import { Asset } from './asset'
-import { isCW20Asset } from './cw20/cw20-asset'
 import { encodeCW20AssetTransferMsg } from './cw20/encode-cw20-asset-transfer-msg'
+import { isCW20Asset } from './cw20/types'
 import { encodeNativeAssetTransferMsg } from './native/encode-native-asset-transfer-msg'
-import { isNativeAsset } from './native/native-asset'
+import { isNativeAsset } from './native/types'
 
 export function encodeAssetTransferMsg(
   asset: Asset,
