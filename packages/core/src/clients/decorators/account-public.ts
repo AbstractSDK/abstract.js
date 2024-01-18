@@ -12,7 +12,6 @@ import { getSubAccountSequences } from '../../actions/account/public/get-sub-acc
 import { getTotalValue } from '../../actions/account/public/get-total-value'
 import { VersionControlTypes } from '../../codegen/abstract/index'
 import { SliceFirst, SliceFirstThree } from '../../types/utils'
-import { Client } from '../create-client'
 
 export type AccountPublicActions = {
   getAccountBaseAddresses(
