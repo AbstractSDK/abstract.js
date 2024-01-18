@@ -1,8 +1,8 @@
-import { AssetQueryQuery, AssetType } from '../../../codegen/gql/graphql'
+import { AssetType, AssetsQueryQuery } from '../../../codegen/gql/graphql'
 import { AnsToken } from './types'
 
 export function ansTokenFromApi(
-  token: AssetQueryQuery['ans']['assets'][number],
+  token: AssetsQueryQuery['ans']['assets'][number],
 ) {
   if (token.type === AssetType.Cw1155)
     throw new Error('CW1155 tokens are not supported')
