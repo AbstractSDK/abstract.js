@@ -145,8 +145,7 @@ const NIBIRU_TESTNET_CHAIN = {
 export const chains: Chain[] = [
   // remove harpoon 4 in favor of manual entry
   ...chainRegistryChains.filter(
-    ({ chain_id }) =>
-      !['uni-6', 'pisco-1', 'archway-1', 'neutron-1'].includes(chain_id),
+    ({ chain_id }) => ![NIBIRU_TESTNET_CHAIN.chain_id].includes(chain_id),
   ),
   LOCAL_JUNO_CHAIN,
   NIBIRU_TESTNET_CHAIN,
