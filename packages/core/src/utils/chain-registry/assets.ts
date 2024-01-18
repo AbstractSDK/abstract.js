@@ -22,6 +22,9 @@ const NIBIRU_TESTNET_ASSET_LIST = {
 }
 
 export const assets: typeof cosmosAssets = [
-  ...cosmosAssets,
+  ...cosmosAssets.filter(
+    ({ chain_name }) =>
+      ![NIBIRU_TESTNET_ASSET_LIST.chain_name].includes(chain_name),
+  ),
   NIBIRU_TESTNET_ASSET_LIST,
 ] satisfies typeof cosmosAssets[number][]
