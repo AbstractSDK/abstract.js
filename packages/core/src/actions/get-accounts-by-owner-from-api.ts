@@ -12,27 +12,10 @@ export async function getAccountsByOwnerFromApi(
     gql(/* GraphQL */ `
   query Accounts($chains: [ID!]!, $page: Page, $filter: AccountFilter) {
     accounts(chains: $chains, page: $page, filter: $filter) {
-      id
-      chain
       accountId {
         chainName
         sequence
         trace
-      }
-      namespace
-      owner
-      info {
-        name
-        description
-        link
-        governance {
-          governanceType
-        }
-      }
-      proxy
-      manager
-      modules {
-        id
       }
     }
   }
