@@ -1,15 +1,15 @@
-import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { VersionControlTypes } from '../codegen/abstract/index'
 import type { Prettify } from '../types/utils'
-import { type Client, type ClientConfig, createClient } from './create-client'
+import { ABSTRACT_API_URL } from '../utils'
+import { type Client } from './create-client'
+import { PublicClientConfig, createPublicClient } from './create-public-client'
 import {
   type AccountPublicActions,
   accountPublicActions,
 } from './decorators/account-public'
 
-export type AccountPublicClientConfig = ClientConfig & {
+export type AccountPublicClientConfig = PublicClientConfig & {
   accountId: VersionControlTypes.AccountId
-  cosmWasmClient: CosmWasmClient
 }
 
 export type AccountPublicClient = Prettify<Client<AccountPublicActions>>
@@ -22,13 +22,14 @@ export function createAccountPublicClient(
     name = 'AccountPublic Client',
     accountId,
     cosmWasmClient,
+    apiUrl = ABSTRACT_API_URL,
   } = parameters
-  const client = createClient({
+  const client = createPublicClient({
     ...parameters,
     key,
     name,
   })
-  return client.extend((client) =>
-    accountPublicActions(accountId, cosmWasmClient, client),
+  return client.extend(() =>
+    accountPublicActions(accountId, cosmWasmClient, apiUrl),
   )
 }

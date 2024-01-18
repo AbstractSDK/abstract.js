@@ -8,8 +8,8 @@ export async function deposit(
   accountId: VersionControlTypes.AccountId,
   signingCosmWasmClient: SigningCosmWasmClient,
   apiUrl: string,
-  assets: Asset[],
   sender: string,
+  assets: Asset[],
   ...rest: SliceFirstTwo<
     Parameters<typeof SigningCosmWasmClient.prototype.signAndBroadcast>
   >

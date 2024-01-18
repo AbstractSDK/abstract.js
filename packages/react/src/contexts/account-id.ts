@@ -1,9 +1,9 @@
-import { AbstractAccountId } from '@abstract-money/core'
+import { AccountId } from '@abstract-money/core'
 import * as React from 'react'
 
 type AbstractAccountIdContext = {
-  accountId: AbstractAccountId
-  setAccountId: (accountId: AbstractAccountId) => void
+  accountId: AccountId
+  setAccountId: (accountId: AccountId) => void
 }
 
 const Context = React.createContext<AbstractAccountIdContext | undefined>(
@@ -18,9 +18,8 @@ const Context = React.createContext<AbstractAccountIdContext | undefined>(
 export function AbstractAccountIdProvider({
   children,
   accountId: defaultAccountId,
-}: React.PropsWithChildren<{ accountId: AbstractAccountId }>) {
-  const [accountId, setAccountId] =
-    React.useState<AbstractAccountId>(defaultAccountId)
+}: React.PropsWithChildren<{ accountId: AccountId }>) {
+  const [accountId, setAccountId] = React.useState<AccountId>(defaultAccountId)
   // Bailing out of using JSX
   // https://github.com/egoist/tsup/issues/390#issuecomment-933488738
   return React.createElement(Context.Provider, {
@@ -33,9 +32,7 @@ export function AbstractAccountIdProvider({
  * Hook to retrieve the provided Account id from the {@link AbstractAccountIdProvider} context.
  * @param accountId the Account id to set if the context is not provided.
  */
-export function useAccountId({
-  accountId,
-}: { accountId?: AbstractAccountId } = {}) {
+export function useAccountId({ accountId }: { accountId?: AccountId } = {}) {
   let accountStore = React.useContext(Context)
   if (!accountStore)
     if (accountId)

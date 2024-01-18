@@ -1,4 +1,4 @@
-import { AbstractAccountId, AbstractQueryClient } from '@abstract-money/core'
+import { AccountId, ApiClient } from '@abstract-money/core'
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import React from 'react'
 
@@ -16,20 +16,20 @@ export function useAccounts(
   }: {
     owner: string | undefined
     chain: string | undefined
-    client: AbstractQueryClient | undefined
+    client: ApiClient | undefined
   },
   {
     enabled: enabled_ = true,
     ...rest
   }: UseQueryOptions<
-    AbstractAccountId[] | undefined,
+    AccountId[] | undefined,
     unknown,
-    AbstractAccountId[] | undefined,
+    AccountId[] | undefined,
     readonly [
       'accountsOf',
       string | undefined,
       string | undefined,
-      AbstractQueryClient | undefined,
+      ApiClient | undefined,
     ]
   > = {},
 ) {
@@ -47,7 +47,7 @@ export function useAccounts(
     if (!client || !owner || !chain)
       throw new Error('No client or owner or chain')
 
-    return client.getAccountsOfOwner(owner, [chain])
+    return client.getAccountsByOwnerFromApi(owner, [chain])
   }, [client, owner, chain])
 
   return useQuery(queryKey, queryFn, { enabled, ...rest })

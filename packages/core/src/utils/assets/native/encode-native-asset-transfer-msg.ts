@@ -1,4 +1,4 @@
-import { EncodedMsg } from '../../../types/messages'
+import { EncodedMsg } from '../../../legacy/messages'
 import { NativeAsset } from './types'
 
 export function encodeNativeAssetTransferMsg<

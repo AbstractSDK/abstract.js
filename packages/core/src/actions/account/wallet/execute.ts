@@ -13,8 +13,8 @@ export async function execute(
   accountId: VersionControlTypes.AccountId,
   signingCosmWasmClient: SigningCosmWasmClient,
   apiUrl: string,
-  msgs: MaybeArray<ProxyTypes.CosmosMsgForEmpty>,
   sender: string,
+  msgs: MaybeArray<ProxyTypes.CosmosMsgForEmpty>,
   ...rest: SliceFirstTwo<
     Parameters<typeof SigningCosmWasmClient.prototype.signAndBroadcast>
   >

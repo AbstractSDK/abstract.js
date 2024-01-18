@@ -6,7 +6,7 @@
 
 import { CamelCasedProperties } from "type-fest";
 import { SigningCosmWasmClient, ExecuteResult } from "@cosmjs/cosmwasm-stargate";
-import { AbstractQueryClient, AbstractAccountQueryClient, AbstractAccountClient, AppExecuteMsg, AppExecuteMsgFactory, AbstractClient, AbstractAccountId } from "@abstract-money/core";
+import { AbstractQueryClient, AbstractAccountQueryClient, AbstractAccountClient, AppExecuteMsg, AppExecuteMsgFactory, AbstractClient, AbstractAccountId } from "@abstract-money/core/legacy";
 import { StdFee, Coin } from "@cosmjs/amino";
 import { Decimal, InstantiateMsg, ExecuteMsg, AssetEntry, AccountTrace, ChainName, Uint128, AccountOdds, AccountId, Bet, AnsAsset, QueryMsg, MigrateMsg, Addr, BetsResponse, ConfigResponse, ListOddsResponse, RoundStatus, RoundsResponse, RoundResponse, OddsResponse } from "./Betting.types";
 import { BettingQueryMsgBuilder, BettingExecuteMsgBuilder } from "./Betting.message-builder";

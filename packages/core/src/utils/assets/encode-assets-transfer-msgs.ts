@@ -1,4 +1,4 @@
-import { EncodedMsg } from '../../types/messages'
+import { EncodedMsg } from '../../legacy/messages'
 import { Asset } from './asset'
 import { encodeCW20AssetTransferMsg } from './cw20/encode-cw20-asset-transfer-msg'
 import { CW20Asset, isCW20Asset } from './cw20/types'

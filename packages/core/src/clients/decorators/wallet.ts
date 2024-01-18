@@ -12,78 +12,80 @@ import { getAnsHostClient } from '../../actions/wallet/get-ans-host-client'
 import { getManagerClient } from '../../actions/wallet/get-manager-client'
 import { getProxyClient } from '../../actions/wallet/get-proxy-client'
 import { getVersionControlClient } from '../../actions/wallet/get-version-control-client'
-import { SliceFirst, SliceFirstTwo } from '../../types/utils'
-import { Client } from '../create-client'
+import { SliceFirstThree, SliceFirstTwo } from '../../types/utils'
 
 export type WalletActions = {
   createAccount(
-    ...args: SliceFirstTwo<Parameters<typeof createAccount>>
+    ...args: SliceFirstThree<Parameters<typeof createAccount>>
   ): ReturnType<typeof createAccount>
   createAccountMonarchy(
-    ...args: SliceFirstTwo<Parameters<typeof createAccountMonarchy>>
+    ...args: SliceFirstThree<Parameters<typeof createAccountMonarchy>>
   ): ReturnType<typeof createAccountMonarchy>
   getAccountFactoryClient(
-    ...args: SliceFirst<Parameters<typeof getAccountFactoryClient>>
+    ...args: SliceFirstTwo<Parameters<typeof getAccountFactoryClient>>
   ): ReturnType<typeof getAccountFactoryClient>
   getAccountFactoryClientFromVersionControl(
-    ...args: SliceFirst<
+    ...args: SliceFirstTwo<
       Parameters<typeof getAccountFactoryClientFromVersionControl>
     >
   ): ReturnType<typeof getAccountFactoryClientFromVersionControl>
   getAccountFactoryClientFromApi(
-    ...args: SliceFirstTwo<Parameters<typeof getAccountFactoryClientFromApi>>
+    ...args: SliceFirstThree<Parameters<typeof getAccountFactoryClientFromApi>>
   ): ReturnType<typeof getAccountFactoryClientFromApi>
   getAnsHostClient(
-    ...args: SliceFirst<Parameters<typeof getAnsHostClient>>
+    ...args: SliceFirstTwo<Parameters<typeof getAnsHostClient>>
   ): ReturnType<typeof getAnsHostClient>
   getAnsHostClientFromApi(
-    ...args: SliceFirstTwo<Parameters<typeof getAnsHostClientFromApi>>
+    ...args: SliceFirstThree<Parameters<typeof getAnsHostClientFromApi>>
   ): ReturnType<typeof getAnsHostClientFromApi>
   getAnsHostClientFromVersionControl(
-    ...args: SliceFirst<Parameters<typeof getAnsHostClientFromVersionControl>>
+    ...args: SliceFirstTwo<
+      Parameters<typeof getAnsHostClientFromVersionControl>
+    >
   ): ReturnType<typeof getAnsHostClientFromVersionControl>
   getVersionControlClient(
-    ...args: SliceFirst<Parameters<typeof getVersionControlClient>>
+    ...args: SliceFirstTwo<Parameters<typeof getVersionControlClient>>
   ): ReturnType<typeof getVersionControlClient>
   getVersionControlClientFromApi(
-    ...args: SliceFirstTwo<Parameters<typeof getVersionControlClientFromApi>>
+    ...args: SliceFirstThree<Parameters<typeof getVersionControlClientFromApi>>
   ): ReturnType<typeof getVersionControlClientFromApi>
   getManagerClient(
-    ...args: SliceFirst<Parameters<typeof getManagerClient>>
+    ...args: SliceFirstTwo<Parameters<typeof getManagerClient>>
   ): ReturnType<typeof getManagerClient>
   getProxyClient(
-    ...args: SliceFirst<Parameters<typeof getProxyClient>>
+    ...args: SliceFirstTwo<Parameters<typeof getProxyClient>>
   ): ReturnType<typeof getProxyClient>
 }
 
 export function walletActions(
-  { apiUrl }: Client,
   client: SigningCosmWasmClient,
+  sender: string,
+  apiUrl: string,
 ): WalletActions {
   return {
-    createAccount: (...args) => createAccount(client, apiUrl, ...args),
+    createAccount: (...args) => createAccount(client, apiUrl, sender, ...args),
     createAccountMonarchy: (...args) =>
-      createAccountMonarchy(client, apiUrl, ...args),
+      createAccountMonarchy(client, apiUrl, sender, ...args),
 
     getAccountFactoryClient: (...args) =>
-      getAccountFactoryClient(client, ...args),
+      getAccountFactoryClient(client, sender, ...args),
     getAccountFactoryClientFromVersionControl: (...args) =>
-      getAccountFactoryClientFromVersionControl(client, ...args),
+      getAccountFactoryClientFromVersionControl(client, sender, ...args),
     getAccountFactoryClientFromApi: (...args) =>
-      getAccountFactoryClientFromApi(client, apiUrl, ...args),
+      getAccountFactoryClientFromApi(client, apiUrl, sender, ...args),
 
-    getAnsHostClient: (...args) => getAnsHostClient(client, ...args),
+    getAnsHostClient: (...args) => getAnsHostClient(client, sender, ...args),
     getAnsHostClientFromApi: (...args) =>
-      getAnsHostClientFromApi(client, apiUrl, ...args),
+      getAnsHostClientFromApi(client, apiUrl, sender, ...args),
     getAnsHostClientFromVersionControl: (...args) =>
-      getAnsHostClientFromVersionControl(client, ...args),
+      getAnsHostClientFromVersionControl(client, sender, ...args),
 
     getVersionControlClientFromApi: (...args) =>
-      getVersionControlClientFromApi(client, apiUrl, ...args),
+      getVersionControlClientFromApi(client, apiUrl, sender, ...args),
     getVersionControlClient: (...args) =>
-      getVersionControlClient(client, ...args),
+      getVersionControlClient(client, sender, ...args),
 
-    getManagerClient: (...args) => getManagerClient(client, ...args),
-    getProxyClient: (...args) => getProxyClient(client, ...args),
+    getManagerClient: (...args) => getManagerClient(client, sender, ...args),
+    getProxyClient: (...args) => getProxyClient(client, sender, ...args),
   }
 }

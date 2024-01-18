@@ -1,4 +1,4 @@
-import { ContractMsg } from '../../types/messages'
+import { ContractMsg } from '../messages'
 import {
   ModuleExecuteMsg,
   ModuleInstantiateMsg,

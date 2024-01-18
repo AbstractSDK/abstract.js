@@ -34,6 +34,16 @@ export type SliceFirstThree<T extends readonly unknown[]> = T extends readonly [
   ? Rest
   : never
 
+export type SliceFirstFour<T extends readonly unknown[]> = T extends readonly [
+  infer _,
+  infer _,
+  infer _,
+  infer _,
+  ...infer Rest,
+]
+  ? Rest
+  : never
+
 export type WithOptional<T, K extends keyof T> = Omit<T, K> &
   Partial<Pick<T, K>>
 

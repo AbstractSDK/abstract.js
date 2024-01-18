@@ -5,9 +5,8 @@ import { getAnsTokenFromApi } from '../../actions/get-ans-token-from-api'
 import { getAnsTokensFromApi } from '../../actions/get-ans-tokens-from-api'
 import { getVersionControlAddressFromApi } from '../../actions/get-version-control-address-from-api'
 import { SliceFirst } from '../../types/utils'
-import { Client_Base } from '../create-client'
 
-export type BaseActions = {
+export type ApiActions = {
   getAccountFactoryAddressFromApi(
     ...args: SliceFirst<Parameters<typeof getAccountFactoryAddressFromApi>>
   ): ReturnType<typeof getAccountFactoryAddressFromApi>
@@ -28,7 +27,7 @@ export type BaseActions = {
   ): ReturnType<typeof getVersionControlAddressFromApi>
 }
 
-export function baseActions({ apiUrl }: Client_Base): BaseActions {
+export function apiActions(apiUrl: string): ApiActions {
   return {
     getAccountFactoryAddressFromApi: (...args) =>
       getAccountFactoryAddressFromApi(apiUrl, ...args),

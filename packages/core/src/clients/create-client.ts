@@ -1,26 +1,23 @@
 import { Prettify } from '../types/utils'
 import { ABSTRACT_API_URL } from '../utils/constants'
-import { baseActions } from './decorators/base'
 
 export type ClientConfig = {
-  apiUrl: string
   /** A key for the client. */
   key?: string | undefined
   /** A name for the client. */
   name?: string | undefined
 }
 
-export type Client_Base = {
+export type BaseClient = {
   /** A key for the client. */
   key: string
   /** A name for the client. */
   name: string
-  apiUrl: string
 }
 
 export type Client<
   extended extends Extended | undefined = Extended | undefined,
-> = Client_Base &
+> = BaseClient &
   (extended extends Extended ? extended : unknown) & {
     extend: <const client extends Extended,>(
       fn: (client: Client<extended>) => client,
@@ -29,22 +26,17 @@ export type Client<
     >
   }
 
-type Extended = Prettify<
+export type Extended<TClient extends BaseClient = BaseClient> = Prettify<
   // disallow redefining base properties
-  { [_ in keyof Client_Base]?: undefined } & {
+  { [_ in keyof TClient]?: undefined } & {
     [key: string]: unknown
   }
 >
 
 function createBaseClient(parameters: ClientConfig): Client {
-  const {
-    apiUrl = ABSTRACT_API_URL,
-    key = 'base',
-    name = 'Base Client',
-  } = parameters
+  const { key = 'base', name = 'Base Client' } = parameters
 
   const client = {
-    apiUrl,
     key,
     name,
   }
@@ -64,5 +56,5 @@ function createBaseClient(parameters: ClientConfig): Client {
 
 export function createClient(parameters: ClientConfig): Client {
   const client = createBaseClient(parameters)
-  return client.extend(baseActions)
+  return client
 }

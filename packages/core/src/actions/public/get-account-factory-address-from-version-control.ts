@@ -13,12 +13,12 @@ export async function getAccountFactoryAddressFromVersionControl(
   versionControlAddress: string,
   version?: string,
 ) {
-  const registryClient = new VersionControlQueryClient(
+  const versionControlClient = new VersionControlQueryClient(
     cosmWasmClient,
     versionControlAddress,
   )
 
-  const [accountFactoryAddress] = await registryClient
+  const [accountFactoryAddress] = await versionControlClient
     .modules({
       infos: [
         {

@@ -1,4 +1,4 @@
-import { ContractMsg } from '../../types/messages'
+import { ContractMsg } from '../messages'
 
 export type ModuleExecuteMsg<TBaseMsg, TAppMsg> =
   | {

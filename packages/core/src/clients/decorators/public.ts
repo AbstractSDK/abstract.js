@@ -13,7 +13,6 @@ import { getVersionControlModuleData } from '../../actions/public/get-version-co
 import { getVersionControlQueryClient } from '../../actions/public/get-version-control-query-client'
 import { getVersionControlQueryClientFromApi } from '../../actions/public/get-version-control-query-client-from-api'
 import { SliceFirst, SliceFirstTwo } from '../../types/utils'
-import { Client } from '../create-client'
 
 export type PublicActions = {
   getAccountFactoryAddressFromVersionControl(
@@ -66,8 +65,8 @@ export type PublicActions = {
 }
 
 export function publicActions(
-  { apiUrl }: Client,
   client: CosmWasmClient,
+  apiUrl: string,
 ): PublicActions {
   return {
     getAccountFactoryAddressFromVersionControl: (...args) =>

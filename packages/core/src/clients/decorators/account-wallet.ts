@@ -8,62 +8,81 @@ import { getProxyClientFromApi } from '../../actions/account/wallet/get-proxy-cl
 import { removeNamespace } from '../../actions/account/wallet/remove-namespace'
 import { withdraw } from '../../actions/account/wallet/withdraw'
 import { VersionControlTypes } from '../../codegen/abstract/index'
-import { SliceFirstThree } from '../../types/utils'
-import { Client } from '../create-client'
+import { SliceFirstFour } from '../../types/utils'
 
 export type AccountWalletActions = {
   claimNamespace(
-    ...args: SliceFirstThree<Parameters<typeof claimNamespace>>
+    ...args: SliceFirstFour<Parameters<typeof claimNamespace>>
   ): ReturnType<typeof claimNamespace>
   createSubAccount(
-    ...args: SliceFirstThree<Parameters<typeof createSubAccount>>
+    ...args: SliceFirstFour<Parameters<typeof createSubAccount>>
   ): ReturnType<typeof createSubAccount>
   deposit(
-    ...args: SliceFirstThree<Parameters<typeof deposit>>
+    ...args: SliceFirstFour<Parameters<typeof deposit>>
   ): ReturnType<typeof deposit>
   execute(
-    ...args: SliceFirstThree<Parameters<typeof execute>>
+    ...args: SliceFirstFour<Parameters<typeof execute>>
   ): ReturnType<typeof execute>
   getManagerClientFromApi(
-    ...args: SliceFirstThree<Parameters<typeof getManagerClientFromApi>>
+    ...args: SliceFirstFour<Parameters<typeof getManagerClientFromApi>>
   ): ReturnType<typeof getManagerClientFromApi>
   getProxyClientFromApi(
-    ...args: SliceFirstThree<Parameters<typeof getProxyClientFromApi>>
+    ...args: SliceFirstFour<Parameters<typeof getProxyClientFromApi>>
   ): ReturnType<typeof getProxyClientFromApi>
   removeNamespace(
-    ...args: SliceFirstThree<Parameters<typeof removeNamespace>>
+    ...args: SliceFirstFour<Parameters<typeof removeNamespace>>
   ): ReturnType<typeof removeNamespace>
   withdraw(
-    ...args: SliceFirstThree<Parameters<typeof withdraw>>
+    ...args: SliceFirstFour<Parameters<typeof withdraw>>
   ): ReturnType<typeof withdraw>
 }
 
 export function accountWalletActions(
   accountId: VersionControlTypes.AccountId,
   signingCosmWasmClient: SigningCosmWasmClient,
-  { apiUrl }: Client,
+  sender: string,
+  apiUrl: string,
 ): AccountWalletActions {
   return {
     claimNamespace: (...args) =>
-      claimNamespace(accountId, signingCosmWasmClient, apiUrl, ...args),
+      claimNamespace(accountId, signingCosmWasmClient, apiUrl, sender, ...args),
     createSubAccount: (...args) =>
-      createSubAccount(accountId, signingCosmWasmClient, apiUrl, ...args),
+      createSubAccount(
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
+        ...args,
+      ),
     deposit: (...args) =>
-      deposit(accountId, signingCosmWasmClient, apiUrl, ...args),
+      deposit(accountId, signingCosmWasmClient, apiUrl, sender, ...args),
     execute: (...args) =>
-      execute(accountId, signingCosmWasmClient, apiUrl, ...args),
+      execute(accountId, signingCosmWasmClient, apiUrl, sender, ...args),
     withdraw: (...args) =>
-      withdraw(accountId, signingCosmWasmClient, apiUrl, ...args),
+      withdraw(accountId, signingCosmWasmClient, apiUrl, sender, ...args),
     getManagerClientFromApi: (...args) =>
       getManagerClientFromApi(
         accountId,
         signingCosmWasmClient,
         apiUrl,
+        sender,
         ...args,
       ),
     getProxyClientFromApi: (...args) =>
-      getProxyClientFromApi(accountId, signingCosmWasmClient, apiUrl, ...args),
+      getProxyClientFromApi(
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
+        ...args,
+      ),
     removeNamespace: (...args) =>
-      removeNamespace(accountId, signingCosmWasmClient, apiUrl, ...args),
+      removeNamespace(
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
+        ...args,
+      ),
   }
 }

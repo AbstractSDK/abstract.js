@@ -12,12 +12,12 @@ export async function getAnsHostAddressFromVersionControl(
   versionControlAddress: string,
   version?: string,
 ) {
-  const registryClient = new VersionControlQueryClient(
+  const versionControlClient = new VersionControlQueryClient(
     cosmWasmClient,
     versionControlAddress,
   )
 
-  const [ansHostAddress] = await registryClient
+  const [ansHostAddress] = await versionControlClient
     .modules({
       infos: [
         {

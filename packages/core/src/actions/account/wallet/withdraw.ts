@@ -9,8 +9,8 @@ export async function withdraw(
   accountId: VersionControlTypes.AccountId,
   signingCosmWasmClient: SigningCosmWasmClient,
   apiUrl: string,
-  assets: Asset[],
   sender: string,
+  assets: Asset[],
   recipient: string,
   ...rest: SliceFirstTwo<
     Parameters<typeof SigningCosmWasmClient.prototype.signAndBroadcast>
@@ -32,8 +32,8 @@ export async function withdraw(
     accountId,
     signingCosmWasmClient,
     apiUrl,
-    transferMsgs,
     sender,
+    transferMsgs,
     ...rest,
   )
 }

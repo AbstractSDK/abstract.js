@@ -1,10 +1,13 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import type { Prettify } from '../types/utils'
-import { type Client, type ClientConfig, createClient } from './create-client'
+import { ABSTRACT_API_URL } from '../utils'
+import { type Client } from './create-client'
+import { PublicClientConfig, createPublicClient } from './create-public-client'
 import { type WalletActions, walletActions } from './decorators/wallet'
 
-export type WalletClientConfig = ClientConfig & {
+export type WalletClientConfig = Omit<PublicClientConfig, 'cosmWasmClient'> & {
   signingCosmWasmClient: SigningCosmWasmClient
+  sender: string
 }
 
 export type WalletClient = Prettify<Client<WalletActions>>
@@ -16,11 +19,16 @@ export function createWalletClient(
     key = 'wallet',
     name = 'Wallet Client',
     signingCosmWasmClient,
+    sender,
+    apiUrl = ABSTRACT_API_URL,
   } = parameters
-  const client = createClient({
+  const client = createPublicClient({
     ...parameters,
+    cosmWasmClient: signingCosmWasmClient,
     key,
     name,
   })
-  return client.extend((client) => walletActions(client, signingCosmWasmClient))
+  return client.extend(() =>
+    walletActions(signingCosmWasmClient, sender, apiUrl),
+  )
 }

@@ -53,7 +53,7 @@ export type AccountPublicActions = {
 export function accountPublicActions(
   accountId: VersionControlTypes.AccountId,
   cosmWasmClient: CosmWasmClient,
-  { apiUrl }: Client,
+  apiUrl: string,
 ): AccountPublicActions {
   return {
     getAccountBaseAddresses: (...args) =>
