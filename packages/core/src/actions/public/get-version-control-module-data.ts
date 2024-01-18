@@ -25,7 +25,7 @@ export async function getVersionControlModuleData<
       )
       const firstInstantiation = instantiations[0]
       if (!firstInstantiation) {
-        console.log(
+        console.warn(
           `Could not find first instantiation of ${formatModuleIdWithVersion(
             module.info.namespace,
             module.info.name,
