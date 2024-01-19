@@ -1,11 +1,6 @@
 name: Manual Release
 
 on:
-  push:
-    branches:
-      - mainline
-  pull_request:
-  # TODO: Support latest releases
   workflow_dispatch:
     inputs:
       name:
