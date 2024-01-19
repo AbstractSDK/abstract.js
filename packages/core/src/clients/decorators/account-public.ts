@@ -1,6 +1,6 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { getAccountBaseAddressesFromApi } from '../../actions/account/public/get-account-base-addresses-from-api'
-import { getBaseAsset } from '../../actions/account/public/get-base-asset'
+import { getBaseToken } from '../../actions/account/public/get-base-token'
 import { getManagerQueryClientFromApi } from '../../actions/account/public/get-manager-query-client-from-api'
 import { getModuleAddress } from '../../actions/account/public/get-module-address'
 import { getModules } from '../../actions/account/public/get-modules'
@@ -17,9 +17,9 @@ export type AccountPublicActions = {
   getAccountBaseAddresses(
     ...args: SliceFirstThree<Parameters<typeof getAccountBaseAddressesFromApi>>
   ): ReturnType<typeof getAccountBaseAddressesFromApi>
-  getBaseAsset(
-    ...args: SliceFirstThree<Parameters<typeof getBaseAsset>>
-  ): ReturnType<typeof getBaseAsset>
+  getBaseToken(
+    ...args: SliceFirstThree<Parameters<typeof getBaseToken>>
+  ): ReturnType<typeof getBaseToken>
   getManagerQueryClientFromApi(
     ...args: SliceFirst<Parameters<typeof getManagerQueryClientFromApi>>
   ): ReturnType<typeof getManagerQueryClientFromApi>
@@ -62,8 +62,8 @@ export function accountPublicActions(
         apiUrl,
         ...args,
       ),
-    getBaseAsset: (...args) =>
-      getBaseAsset(accountId, cosmWasmClient, apiUrl, ...args),
+    getBaseToken: (...args) =>
+      getBaseToken(accountId, cosmWasmClient, apiUrl, ...args),
     getManagerQueryClientFromApi: () =>
       getManagerQueryClientFromApi(accountId, cosmWasmClient, apiUrl),
     getModuleAddress: (...args) =>
