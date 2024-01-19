@@ -1,19 +1,27 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
-import { VersionControlClient } from '../../codegen/abstract'
+import { WithArgs } from 'src/types/with-args'
 import { getVersionControlAddressFromApi } from '../get-version-control-address-from-api'
 import { getVersionControlClient } from './get-version-control-client'
 
-export async function getVersionControlClientFromApi(
-  cosmWasmClient: SigningCosmWasmClient,
-  apiUrl: string,
-  sender: string,
-) {
-  const chainId = await cosmWasmClient.getChainId()
-  const versionControlAddress = await getVersionControlAddressFromApi(
-    apiUrl,
-    chainId,
-  )
+export type GetVersionControlClientFromApiParameters = WithArgs<{
+  signingCosmWasmClient: SigningCosmWasmClient
+  apiUrl: string
+  sender: string
+}>
 
-  return getVersionControlClient(cosmWasmClient, sender, versionControlAddress)
+export async function getVersionControlClientFromApi({
+  args: { signingCosmWasmClient, apiUrl, sender },
+}: GetVersionControlClientFromApiParameters) {
+  const chainId = await signingCosmWasmClient.getChainId()
+  const versionControlAddress = await getVersionControlAddressFromApi({
+    args: {
+      apiUrl,
+      chainId,
+    },
+  })
+
+  return getVersionControlClient({
+    args: { signingCosmWasmClient, sender, versionControlAddress },
+  })
 }

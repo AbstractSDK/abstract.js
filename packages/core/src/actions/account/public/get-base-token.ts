@@ -1,4 +1,5 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { WithArgs } from 'src/types/with-args'
 import { CW20Token, NativeToken } from 'src/utils'
 import { VersionControlTypes } from '../../../codegen/abstract'
 import { getProxyQueryClientFromApi } from './get-proxy-query-client-from-api'
@@ -11,16 +12,22 @@ function hasCw20Field(base_asset: any): base_asset is { cw20: string } {
   return (base_asset as { cw20: string }).cw20 !== undefined
 }
 
-export async function getBaseToken(
-  accountId: VersionControlTypes.AccountId,
-  cosmWasmClient: CosmWasmClient,
-  apiUrl: string,
-) {
-  const proxyQueryClient = await getProxyQueryClientFromApi(
-    accountId,
-    cosmWasmClient,
-    apiUrl,
-  )
+export type GetBaseTokenParameters = WithArgs<{
+  accountId: VersionControlTypes.AccountId
+  cosmWasmClient: CosmWasmClient
+  apiUrl: string
+}>
+
+export async function getBaseToken({
+  args: { accountId, cosmWasmClient, apiUrl },
+}: GetBaseTokenParameters) {
+  const proxyQueryClient = await getProxyQueryClientFromApi({
+    args: {
+      accountId,
+      cosmWasmClient,
+      apiUrl,
+    },
+  })
   const { base_asset } = await proxyQueryClient.baseAsset()
   if (hasNativeField(base_asset))
     return {

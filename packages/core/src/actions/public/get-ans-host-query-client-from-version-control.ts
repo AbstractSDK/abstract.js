@@ -1,18 +1,25 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
+import { WithArgs } from 'src/types/with-args'
 import { getAnsHostAddressFromVersionControl } from './get-ans-host-address-from-version-control'
 import { getAnsHostQueryClient } from './get-ans-host-query-client'
 
-export async function getAnsHostQueryClientFromVersionControl(
-  cosmWasmClient: CosmWasmClient,
-  versionControlAddress: string,
-  version?: string,
-) {
-  const ansHostAddress = await getAnsHostAddressFromVersionControl(
-    cosmWasmClient,
-    versionControlAddress,
-    version,
-  )
+export type GetAnsHostQueryClientFromVersionControlParameters = WithArgs<{
+  cosmWasmClient: CosmWasmClient
+  versionControlAddress: string
+  version?: string
+}>
+export async function getAnsHostQueryClientFromVersionControl({
+  args: { cosmWasmClient, versionControlAddress, version },
+}: GetAnsHostQueryClientFromVersionControlParameters) {
+  const ansHostAddress = await getAnsHostAddressFromVersionControl({
+    args: {
+      cosmWasmClient,
+      versionControlAddress,
 
-  return getAnsHostQueryClient(cosmWasmClient, ansHostAddress)
+      version,
+    },
+  })
+
+  return getAnsHostQueryClient({ args: { cosmWasmClient, ansHostAddress } })
 }

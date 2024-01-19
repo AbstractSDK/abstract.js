@@ -1,11 +1,16 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
+import { WithArgs } from 'src/types/with-args'
 import { AccountFactoryClient } from '../../codegen/abstract'
 
-export async function getAccountFactoryClient(
-  cosmWasmClient: SigningCosmWasmClient,
-  sender: string,
-  factoryAddress: string,
-) {
-  return new AccountFactoryClient(cosmWasmClient, sender, factoryAddress)
+export type GetAccountFactoryClientParameters = WithArgs<{
+  signingCosmWasmClient: SigningCosmWasmClient
+  sender: string
+  factoryAddress: string
+}>
+
+export async function getAccountFactoryClient({
+  args: { signingCosmWasmClient, sender, factoryAddress },
+}: GetAccountFactoryClientParameters) {
+  return new AccountFactoryClient(signingCosmWasmClient, sender, factoryAddress)
 }

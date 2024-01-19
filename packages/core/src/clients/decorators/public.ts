@@ -1,4 +1,5 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { CutArgs } from 'src/types/with-args'
 import { getAccountFactoryAddressFromVersionControl } from '../../actions/public/get-account-factory-address-from-version-control'
 import { getAccountFactoryQueryClient } from '../../actions/public/get-account-factory-query-client'
 import { getAccountFactoryQueryClientFromApi } from '../../actions/public/get-account-factory-query-client-from-api'
@@ -12,89 +13,149 @@ import { getProxyQueryClient } from '../../actions/public/get-proxy-query-client
 import { getVersionControlModuleData } from '../../actions/public/get-version-control-module-data'
 import { getVersionControlQueryClient } from '../../actions/public/get-version-control-query-client'
 import { getVersionControlQueryClientFromApi } from '../../actions/public/get-version-control-query-client-from-api'
-import { SliceFirst, SliceFirstTwo } from '../../types/utils'
+
+type CutCosmWasmClientFromParameter<T extends (payload: any) => any> = CutArgs<
+  {
+    readonly cosmWasmClient: CosmWasmClient
+  },
+  T
+>
+
+type CutCosmWasmClientAndApiUrlFromParameter<T extends (payload: any) => any> =
+  CutArgs<
+    {
+      readonly cosmWasmClient: CosmWasmClient
+      readonly apiUrl: string
+    },
+    T
+  >
 
 export type PublicActions = {
   getAccountFactoryAddressFromVersionControl(
-    ...args: SliceFirst<
-      Parameters<typeof getAccountFactoryAddressFromVersionControl>
-    >
+    args: CutCosmWasmClientFromParameter<
+      typeof getAccountFactoryAddressFromVersionControl
+    >,
   ): ReturnType<typeof getAccountFactoryAddressFromVersionControl>
   getAccountFactoryQueryClientFromVersionControl(
-    ...args: SliceFirst<
-      Parameters<typeof getAccountFactoryQueryClientFromVersionControl>
-    >
+    args: CutCosmWasmClientFromParameter<
+      typeof getAccountFactoryQueryClientFromVersionControl
+    >,
   ): ReturnType<typeof getAccountFactoryQueryClientFromVersionControl>
   getAccountFactoryQueryClientFromApi(
-    ...args: SliceFirstTwo<
-      Parameters<typeof getAccountFactoryQueryClientFromApi>
-    >
+    args: CutCosmWasmClientAndApiUrlFromParameter<
+      typeof getAccountFactoryQueryClientFromApi
+    >,
   ): ReturnType<typeof getAccountFactoryQueryClientFromApi>
   getAccountFactoryQueryClient(
-    ...args: SliceFirst<Parameters<typeof getAccountFactoryQueryClient>>
+    args: CutCosmWasmClientFromParameter<typeof getAccountFactoryQueryClient>,
   ): ReturnType<typeof getAccountFactoryQueryClient>
-  getAnsHostAddress(
-    ...args: SliceFirst<Parameters<typeof getAnsHostAddressFromVersionControl>>
+  getAnsHostAddressFromVersionControl(
+    args: CutCosmWasmClientFromParameter<
+      typeof getAnsHostAddressFromVersionControl
+    >,
   ): ReturnType<typeof getAnsHostAddressFromVersionControl>
   getAnsHostQueryClientFromVersionControl(
-    ...args: SliceFirst<
-      Parameters<typeof getAnsHostQueryClientFromVersionControl>
-    >
+    args: CutCosmWasmClientFromParameter<
+      typeof getAnsHostQueryClientFromVersionControl
+    >,
   ): ReturnType<typeof getAnsHostQueryClientFromVersionControl>
   getAnsHostQueryClientFromApi(
-    ...args: SliceFirstTwo<Parameters<typeof getAnsHostQueryClientFromApi>>
+    args: CutCosmWasmClientAndApiUrlFromParameter<
+      typeof getAnsHostQueryClientFromApi
+    >,
   ): ReturnType<typeof getAnsHostQueryClientFromApi>
   getAnsHostQueryClient(
-    ...args: SliceFirst<Parameters<typeof getAnsHostQueryClient>>
+    args: CutCosmWasmClientFromParameter<typeof getAnsHostQueryClient>,
   ): ReturnType<typeof getAnsHostQueryClient>
   getManagerQueryClient(
-    ...args: SliceFirst<Parameters<typeof getManagerQueryClient>>
+    args: CutCosmWasmClientFromParameter<typeof getManagerQueryClient>,
   ): ReturnType<typeof getManagerQueryClient>
   getProxyQueryClient(
-    ...args: SliceFirst<Parameters<typeof getProxyQueryClient>>
+    args: CutCosmWasmClientFromParameter<typeof getProxyQueryClient>,
   ): ReturnType<typeof getProxyQueryClient>
   getVersionControlModuleData(
-    ...args: SliceFirst<Parameters<typeof getVersionControlModuleData>>
+    args: CutCosmWasmClientFromParameter<typeof getVersionControlModuleData>,
   ): ReturnType<typeof getVersionControlModuleData>
   getVersionControlQueryClientFromApi(
-    ...args: SliceFirst<Parameters<typeof getVersionControlQueryClientFromApi>>
+    args: CutCosmWasmClientAndApiUrlFromParameter<
+      typeof getVersionControlQueryClientFromApi
+    >,
   ): ReturnType<typeof getVersionControlQueryClientFromApi>
   getVersionControlQueryClient(
-    ...args: SliceFirst<Parameters<typeof getVersionControlQueryClient>>
+    args: CutCosmWasmClientFromParameter<typeof getVersionControlQueryClient>,
   ): ReturnType<typeof getVersionControlQueryClient>
 }
 
 export function publicActions(
-  client: CosmWasmClient,
+  cosmWasmClient: CosmWasmClient,
   apiUrl: string,
 ): PublicActions {
   return {
-    getAccountFactoryAddressFromVersionControl: (...args) =>
-      getAccountFactoryAddressFromVersionControl(client, ...args),
-    getAccountFactoryQueryClientFromVersionControl: (...args) =>
-      getAccountFactoryQueryClientFromVersionControl(client, ...args),
-    getAccountFactoryQueryClientFromApi: (...args) =>
-      getAccountFactoryQueryClientFromApi(client, apiUrl, ...args),
-    getAccountFactoryQueryClient: (...args) =>
-      getAccountFactoryQueryClient(client, ...args),
+    getAccountFactoryAddressFromVersionControl: ({ args, ...rest }) =>
+      getAccountFactoryAddressFromVersionControl({
+        args: { ...args, cosmWasmClient },
+        ...rest,
+      }),
+    getAccountFactoryQueryClientFromVersionControl: ({ args, ...rest }) =>
+      getAccountFactoryQueryClientFromVersionControl({
+        args: { ...args, cosmWasmClient },
+        ...rest,
+      }),
+    getAccountFactoryQueryClientFromApi: ({ args, ...rest }) =>
+      getAccountFactoryQueryClientFromApi({
+        args: { ...args, cosmWasmClient, apiUrl },
+        ...rest,
+      }),
+    getAccountFactoryQueryClient: ({ args, ...rest }) =>
+      getAccountFactoryQueryClient({
+        args: { ...args, cosmWasmClient },
+        ...rest,
+      }),
+    getAnsHostAddressFromVersionControl: ({ args, ...rest }) =>
+      getAnsHostAddressFromVersionControl({
+        args: { ...args, cosmWasmClient },
+        ...rest,
+      }),
 
-    getAnsHostAddress: (...args) =>
-      getAnsHostAddressFromVersionControl(client, ...args),
-    getAnsHostQueryClientFromVersionControl: (...args) =>
-      getAnsHostQueryClientFromVersionControl(client, ...args),
-    getAnsHostQueryClientFromApi: (...args) =>
-      getAnsHostQueryClientFromApi(client, apiUrl, ...args),
-    getAnsHostQueryClient: (...args) => getAnsHostQueryClient(client, ...args),
-
-    getVersionControlModuleData: (...args) =>
-      getVersionControlModuleData(client, ...args),
-    getVersionControlQueryClientFromApi: (...args) =>
-      getVersionControlQueryClientFromApi(client, ...args),
-    getVersionControlQueryClient: (...args) =>
-      getVersionControlQueryClient(client, ...args),
-
-    getManagerQueryClient: (...args) => getManagerQueryClient(client, ...args),
-
-    getProxyQueryClient: (...args) => getProxyQueryClient(client, ...args),
+    getAnsHostQueryClientFromVersionControl: ({ args, ...rest }) =>
+      getAnsHostQueryClientFromVersionControl({
+        args: { ...args, cosmWasmClient },
+        ...rest,
+      }),
+    getAnsHostQueryClientFromApi: ({ args, ...rest }) =>
+      getAnsHostQueryClientFromApi({
+        args: { ...args, cosmWasmClient, apiUrl },
+        ...rest,
+      }),
+    getAnsHostQueryClient: ({ args, ...rest }) =>
+      getAnsHostQueryClient({
+        args: { ...args, cosmWasmClient },
+        ...rest,
+      }),
+    getVersionControlModuleData: ({ args, ...rest }) =>
+      getVersionControlModuleData({
+        args: { ...args, cosmWasmClient },
+        ...rest,
+      }),
+    getVersionControlQueryClientFromApi: ({ args, ...rest }) =>
+      getVersionControlQueryClientFromApi({
+        args: { ...args, cosmWasmClient, apiUrl },
+        ...rest,
+      }),
+    getVersionControlQueryClient: ({ args, ...rest }) =>
+      getVersionControlQueryClient({
+        args: { ...args, cosmWasmClient },
+        ...rest,
+      }),
+    getManagerQueryClient: ({ args, ...rest }) =>
+      getManagerQueryClient({
+        args: { ...args, cosmWasmClient },
+        ...rest,
+      }),
+    getProxyQueryClient: ({ args, ...rest }) =>
+      getProxyQueryClient({
+        args: { ...args, cosmWasmClient },
+        ...rest,
+      }),
   }
 }

@@ -1,4 +1,5 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { CutArgs } from 'src/types/with-args'
 import { claimNamespace } from '../../actions/account/wallet/claim-namespace'
 import { createSubAccount } from '../../actions/account/wallet/create-sub-account'
 import { deposit } from '../../actions/account/wallet/deposit'
@@ -8,32 +9,41 @@ import { getProxyClientFromApi } from '../../actions/account/wallet/get-proxy-cl
 import { removeNamespace } from '../../actions/account/wallet/remove-namespace'
 import { withdraw } from '../../actions/account/wallet/withdraw'
 import { VersionControlTypes } from '../../codegen/abstract/index'
-import { SliceFirstFour } from '../../types/utils'
+
+type CutSpecificArgsFromParameter<T extends (payload: any) => any> = CutArgs<
+  {
+    readonly accountId: VersionControlTypes.AccountId
+    readonly signingCosmWasmClient: SigningCosmWasmClient
+    readonly apiUrl: string
+    readonly sender: string
+  },
+  T
+>
 
 export type AccountWalletActions = {
   claimNamespace(
-    ...args: SliceFirstFour<Parameters<typeof claimNamespace>>
+    args: CutSpecificArgsFromParameter<typeof claimNamespace>,
   ): ReturnType<typeof claimNamespace>
   createSubAccount(
-    ...args: SliceFirstFour<Parameters<typeof createSubAccount>>
+    args: CutSpecificArgsFromParameter<typeof createSubAccount>,
   ): ReturnType<typeof createSubAccount>
   deposit(
-    ...args: SliceFirstFour<Parameters<typeof deposit>>
+    args: CutSpecificArgsFromParameter<typeof deposit>,
   ): ReturnType<typeof deposit>
   execute(
-    ...args: SliceFirstFour<Parameters<typeof execute>>
+    args: CutSpecificArgsFromParameter<typeof execute>,
   ): ReturnType<typeof execute>
   getManagerClientFromApi(
-    ...args: SliceFirstFour<Parameters<typeof getManagerClientFromApi>>
+    args: CutSpecificArgsFromParameter<typeof getManagerClientFromApi>,
   ): ReturnType<typeof getManagerClientFromApi>
   getProxyClientFromApi(
-    ...args: SliceFirstFour<Parameters<typeof getProxyClientFromApi>>
+    args: CutSpecificArgsFromParameter<typeof getProxyClientFromApi>,
   ): ReturnType<typeof getProxyClientFromApi>
   removeNamespace(
-    ...args: SliceFirstFour<Parameters<typeof removeNamespace>>
+    args: CutSpecificArgsFromParameter<typeof removeNamespace>,
   ): ReturnType<typeof removeNamespace>
   withdraw(
-    ...args: SliceFirstFour<Parameters<typeof withdraw>>
+    args: CutSpecificArgsFromParameter<typeof withdraw>,
   ): ReturnType<typeof withdraw>
 }
 
@@ -44,45 +54,45 @@ export function accountWalletActions(
   apiUrl: string,
 ): AccountWalletActions {
   return {
-    claimNamespace: (...args) =>
-      claimNamespace(accountId, signingCosmWasmClient, apiUrl, sender, ...args),
-    createSubAccount: (...args) =>
-      createSubAccount(
-        accountId,
-        signingCosmWasmClient,
-        apiUrl,
-        sender,
-        ...args,
-      ),
-    deposit: (...args) =>
-      deposit(accountId, signingCosmWasmClient, apiUrl, sender, ...args),
-    execute: (...args) =>
-      execute(accountId, signingCosmWasmClient, apiUrl, sender, ...args),
-    withdraw: (...args) =>
-      withdraw(accountId, signingCosmWasmClient, apiUrl, sender, ...args),
-    getManagerClientFromApi: (...args) =>
-      getManagerClientFromApi(
-        accountId,
-        signingCosmWasmClient,
-        apiUrl,
-        sender,
-        ...args,
-      ),
-    getProxyClientFromApi: (...args) =>
-      getProxyClientFromApi(
-        accountId,
-        signingCosmWasmClient,
-        apiUrl,
-        sender,
-        ...args,
-      ),
-    removeNamespace: (...args) =>
-      removeNamespace(
-        accountId,
-        signingCosmWasmClient,
-        apiUrl,
-        sender,
-        ...args,
-      ),
+    claimNamespace: ({ args, ...rest }) =>
+      claimNamespace({
+        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
+        ...rest,
+      }),
+    createSubAccount: ({ args, ...rest }) =>
+      createSubAccount({
+        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
+        ...rest,
+      }),
+    deposit: ({ args, ...rest }) =>
+      deposit({
+        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
+        ...rest,
+      }),
+    execute: ({ args, ...rest }) =>
+      execute({
+        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
+        ...rest,
+      }),
+    withdraw: ({ args, ...rest }) =>
+      withdraw({
+        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
+        ...rest,
+      }),
+    getManagerClientFromApi: ({ args, ...rest }) =>
+      getManagerClientFromApi({
+        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
+        ...rest,
+      }),
+    getProxyClientFromApi: ({ args, ...rest }) =>
+      getProxyClientFromApi({
+        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
+        ...rest,
+      }),
+    removeNamespace: ({ args, ...rest }) =>
+      removeNamespace({
+        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
+        ...rest,
+      }),
   }
 }

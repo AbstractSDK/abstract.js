@@ -1,43 +1,70 @@
+import { CutArgs } from 'src/types/with-args'
 import { getAccountFactoryAddressFromApi } from '../../actions/get-account-factory-address-from-api'
 import { getAccountsByOwnerFromApi } from '../../actions/get-accounts-by-owner-from-api'
 import { getAnsHostAddressFromApi } from '../../actions/get-ans-host-address-from-api'
 import { getAnsTokenFromApi } from '../../actions/get-ans-token-from-api'
 import { getAnsTokensFromApi } from '../../actions/get-ans-tokens-from-api'
 import { getVersionControlAddressFromApi } from '../../actions/get-version-control-address-from-api'
-import { SliceFirst } from '../../types/utils'
+
+type CutSpecificArgsFromParameter<T extends (payload: any) => any> = CutArgs<
+  {
+    readonly apiUrl: string
+  },
+  T
+>
 
 export type ApiActions = {
   getAccountFactoryAddressFromApi(
-    ...args: SliceFirst<Parameters<typeof getAccountFactoryAddressFromApi>>
+    args: CutSpecificArgsFromParameter<typeof getAccountFactoryAddressFromApi>,
   ): ReturnType<typeof getAccountFactoryAddressFromApi>
   getAnsHostAddressFromApi(
-    ...args: SliceFirst<Parameters<typeof getAnsHostAddressFromApi>>
+    args: CutSpecificArgsFromParameter<typeof getAnsHostAddressFromApi>,
   ): ReturnType<typeof getAnsHostAddressFromApi>
   getAccountsByOwnerFromApi(
-    ...args: SliceFirst<Parameters<typeof getAccountsByOwnerFromApi>>
+    args: CutSpecificArgsFromParameter<typeof getAccountsByOwnerFromApi>,
   ): ReturnType<typeof getAccountsByOwnerFromApi>
   getAnsTokenFromApi(
-    ...args: SliceFirst<Parameters<typeof getAnsTokenFromApi>>
+    args: CutSpecificArgsFromParameter<typeof getAnsTokenFromApi>,
   ): ReturnType<typeof getAnsTokenFromApi>
   getAnsTokensFromApi(
-    ...args: SliceFirst<Parameters<typeof getAnsTokensFromApi>>
+    args: CutSpecificArgsFromParameter<typeof getAnsTokensFromApi>,
   ): ReturnType<typeof getAnsTokensFromApi>
   getVersionControlAddressFromApi(
-    ...args: SliceFirst<Parameters<typeof getVersionControlAddressFromApi>>
+    args: CutSpecificArgsFromParameter<typeof getVersionControlAddressFromApi>,
   ): ReturnType<typeof getVersionControlAddressFromApi>
 }
 
 export function apiActions(apiUrl: string): ApiActions {
   return {
-    getAccountFactoryAddressFromApi: (...args) =>
-      getAccountFactoryAddressFromApi(apiUrl, ...args),
-    getAnsHostAddressFromApi: (...args) =>
-      getAnsHostAddressFromApi(apiUrl, ...args),
-    getAccountsByOwnerFromApi: (...args) =>
-      getAccountsByOwnerFromApi(apiUrl, ...args),
-    getAnsTokenFromApi: (...args) => getAnsTokenFromApi(apiUrl, ...args),
-    getAnsTokensFromApi: (...args) => getAnsTokensFromApi(apiUrl, ...args),
-    getVersionControlAddressFromApi: (...args) =>
-      getVersionControlAddressFromApi(apiUrl, ...args),
+    getAccountFactoryAddressFromApi: ({ args, ...rest }) =>
+      getAccountFactoryAddressFromApi({
+        args: { ...args, apiUrl },
+        ...rest,
+      }),
+    getAnsHostAddressFromApi: ({ args, ...rest }) =>
+      getAnsHostAddressFromApi({
+        args: { ...args, apiUrl },
+        ...rest,
+      }),
+    getAccountsByOwnerFromApi: ({ args, ...rest }) =>
+      getAccountsByOwnerFromApi({
+        args: { ...args, apiUrl },
+        ...rest,
+      }),
+    getAnsTokenFromApi: ({ args, ...rest }) =>
+      getAnsTokenFromApi({
+        args: { ...args, apiUrl },
+        ...rest,
+      }),
+    getAnsTokensFromApi: ({ args, ...rest }) =>
+      getAnsTokensFromApi({
+        args: { ...args, apiUrl },
+        ...rest,
+      }),
+    getVersionControlAddressFromApi: ({ args, ...rest }) =>
+      getVersionControlAddressFromApi({
+        args: { ...args, apiUrl },
+        ...rest,
+      }),
   }
 }

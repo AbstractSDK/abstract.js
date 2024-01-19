@@ -1,27 +1,36 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { WithArgsAndCosmWasmSignOptions } from 'src/types/with-args'
 import { VersionControlTypes } from '../../../codegen/abstract'
-import { SliceFirstTwo } from '../../../types/utils'
 import { Asset, encodeAssetsTransfersMsgs } from '../../../utils/assets'
 import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
 
-export async function deposit(
-  accountId: VersionControlTypes.AccountId,
-  signingCosmWasmClient: SigningCosmWasmClient,
-  apiUrl: string,
-  sender: string,
-  assets: Asset[],
-  ...rest: SliceFirstTwo<
-    Parameters<typeof SigningCosmWasmClient.prototype.signAndBroadcast>
-  >
-) {
-  const { proxyAddress } = await getAccountBaseAddressesFromApi(
-    accountId,
-    signingCosmWasmClient,
-    apiUrl,
-  )
+export type DepositParameters = Omit<
+  WithArgsAndCosmWasmSignOptions<{
+    accountId: VersionControlTypes.AccountId
+    signingCosmWasmClient: SigningCosmWasmClient
+    apiUrl: string
+    sender: string
+    assets: Asset[]
+  }>,
+  'funds'
+>
+
+export async function deposit({
+  args: { accountId, signingCosmWasmClient, apiUrl, sender, assets },
+  fee,
+  memo,
+}: DepositParameters) {
+  const { proxyAddress } = await getAccountBaseAddressesFromApi({
+    args: {
+      accountId,
+      cosmWasmClient: signingCosmWasmClient,
+      apiUrl,
+    },
+  })
   return signingCosmWasmClient.signAndBroadcast(
     sender,
     encodeAssetsTransfersMsgs(assets, sender, proxyAddress),
-    ...rest,
+    fee,
+    memo,
   )
 }

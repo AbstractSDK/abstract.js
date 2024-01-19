@@ -1,15 +1,24 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
+import { WithArgs } from 'src/types/with-args'
 import { getAnsHostAddressFromApi } from '../get-ans-host-address-from-api'
 import { getAnsHostClient } from './get-ans-host-client'
 
-export async function getAnsHostClientFromApi(
-  cosmWasmClient: SigningCosmWasmClient,
-  apiUrl: string,
-  sender: string,
-) {
-  const chainId = await cosmWasmClient.getChainId()
-  const ansHostAddress = await getAnsHostAddressFromApi(apiUrl, chainId)
+export type GetAnsHostClientFromApiParameters = WithArgs<{
+  signingCosmWasmClient: SigningCosmWasmClient
+  apiUrl: string
+  sender: string
+}>
 
-  return getAnsHostClient(cosmWasmClient, sender, ansHostAddress)
+export async function getAnsHostClientFromApi({
+  args: { signingCosmWasmClient, apiUrl, sender },
+}: GetAnsHostClientFromApiParameters) {
+  const chainId = await signingCosmWasmClient.getChainId()
+  const ansHostAddress = await getAnsHostAddressFromApi({
+    args: { apiUrl, chainId },
+  })
+
+  return getAnsHostClient({
+    args: { signingCosmWasmClient, sender, ansHostAddress },
+  })
 }

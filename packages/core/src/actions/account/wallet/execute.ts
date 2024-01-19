@@ -1,29 +1,38 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { WithArgsAndCosmWasmSignOptions } from 'src/types/with-args'
 import {
   ManagerMsgComposer,
   ProxyExecuteMsgBuilder,
   ProxyTypes,
   VersionControlTypes,
 } from '../../../codegen/abstract'
-import { MaybeArray, SliceFirstTwo } from '../../../types/utils'
+import { MaybeArray } from '../../../types/utils'
 import { jsonToBinary } from '../../../utils/encoding'
 import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
 
-export async function execute(
-  accountId: VersionControlTypes.AccountId,
-  signingCosmWasmClient: SigningCosmWasmClient,
-  apiUrl: string,
-  sender: string,
-  msgs: MaybeArray<ProxyTypes.CosmosMsgForEmpty>,
-  ...rest: SliceFirstTwo<
-    Parameters<typeof SigningCosmWasmClient.prototype.signAndBroadcast>
-  >
-) {
-  const { managerAddress } = await getAccountBaseAddressesFromApi(
-    accountId,
-    signingCosmWasmClient,
-    apiUrl,
-  )
+export type ExecuteParameters = Omit<
+  WithArgsAndCosmWasmSignOptions<{
+    accountId: VersionControlTypes.AccountId
+    signingCosmWasmClient: SigningCosmWasmClient
+    apiUrl: string
+    sender: string
+    msgs: MaybeArray<ProxyTypes.CosmosMsgForEmpty>
+  }>,
+  'funds'
+>
+
+export async function execute({
+  args: { accountId, signingCosmWasmClient, apiUrl, sender, msgs },
+  fee,
+  memo,
+}: ExecuteParameters) {
+  const { managerAddress } = await getAccountBaseAddressesFromApi({
+    args: {
+      accountId,
+      cosmWasmClient: signingCosmWasmClient,
+      apiUrl,
+    },
+  })
   return signingCosmWasmClient.signAndBroadcast(
     sender,
     [
@@ -36,6 +45,7 @@ export async function execute(
         ),
       }),
     ],
-    ...rest,
+    fee,
+    memo,
   )
 }

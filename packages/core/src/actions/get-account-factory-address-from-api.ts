@@ -1,10 +1,15 @@
 import { request } from 'graphql-request'
+import { WithArgs } from 'src/types/with-args'
 import { gql } from '../codegen/gql'
 
-export async function getAccountFactoryAddressFromApi(
-  apiUrl: string,
-  chainId: string,
-) {
+export type GetAccountFactoryAddressFromApiParameters = WithArgs<{
+  apiUrl: string
+  chainId: string
+}>
+
+export async function getAccountFactoryAddressFromApi({
+  args: { apiUrl, chainId },
+}: GetAccountFactoryAddressFromApiParameters) {
   const deploymentData = await request(
     apiUrl,
     gql(/* GraphQL */ `

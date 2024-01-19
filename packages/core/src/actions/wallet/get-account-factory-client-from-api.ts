@@ -1,15 +1,24 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
+import { WithArgs } from 'src/types/with-args'
 import { getAccountFactoryAddressFromApi } from '../get-account-factory-address-from-api'
 import { getAccountFactoryClient } from './get-account-factory-client'
 
-export async function getAccountFactoryClientFromApi(
-  cosmWasmClient: SigningCosmWasmClient,
-  apiUrl: string,
-  sender: string,
-) {
-  const chainId = await cosmWasmClient.getChainId()
-  const factoryAddress = await getAccountFactoryAddressFromApi(apiUrl, chainId)
+export type GetAccountFactoryClientFromApiParameters = WithArgs<{
+  signingCosmWasmClient: SigningCosmWasmClient
+  apiUrl: string
+  sender: string
+}>
 
-  return getAccountFactoryClient(cosmWasmClient, sender, factoryAddress)
+export async function getAccountFactoryClientFromApi({
+  args: { signingCosmWasmClient, apiUrl, sender },
+}: GetAccountFactoryClientFromApiParameters) {
+  const chainId = await signingCosmWasmClient.getChainId()
+  const factoryAddress = await getAccountFactoryAddressFromApi({
+    args: { apiUrl, chainId },
+  })
+
+  return getAccountFactoryClient({
+    args: { signingCosmWasmClient, sender, factoryAddress },
+  })
 }

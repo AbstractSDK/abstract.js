@@ -1,18 +1,29 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
+import { WithArgs } from 'src/types/with-args'
 import { getAccountFactoryAddressFromVersionControl } from './get-account-factory-address-from-version-control'
 import { getAccountFactoryQueryClient } from './get-account-factory-query-client'
 
-export async function getAccountFactoryQueryClientFromVersionControl(
-  cosmWasmClient: CosmWasmClient,
-  versionControlAddress: string,
-  version?: string,
-) {
-  const factoryAddress = await getAccountFactoryAddressFromVersionControl(
-    cosmWasmClient,
-    versionControlAddress,
-    version,
-  )
+export type GetAccountFactoryQueryClientFromVersionControlParameters =
+  WithArgs<{
+    cosmWasmClient: CosmWasmClient
+    versionControlAddress: string
+    version?: string
+  }>
 
-  return getAccountFactoryQueryClient(cosmWasmClient, factoryAddress)
+export async function getAccountFactoryQueryClientFromVersionControl({
+  args: { cosmWasmClient, versionControlAddress, version },
+}: GetAccountFactoryQueryClientFromVersionControlParameters) {
+  const accountFactoryAddress =
+    await getAccountFactoryAddressFromVersionControl({
+      args: {
+        cosmWasmClient,
+        versionControlAddress,
+        version,
+      },
+    })
+
+  return getAccountFactoryQueryClient({
+    args: { cosmWasmClient, accountFactoryAddress },
+  })
 }

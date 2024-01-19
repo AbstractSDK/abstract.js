@@ -1,18 +1,25 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { WithArgs } from 'src/types/with-args'
 import { VersionControlTypes } from '../../../codegen/abstract'
 import { getManagerQueryClientFromApi } from './get-manager-query-client-from-api'
 
-export async function getModuleAddress(
-  accountId: VersionControlTypes.AccountId,
-  cosmWasmClient: CosmWasmClient,
-  apiUrl: string,
-  id: string,
-) {
-  const managerQueryClient = await getManagerQueryClientFromApi(
-    accountId,
-    cosmWasmClient,
-    apiUrl,
-  )
+export type GetModuleAddressParameters = WithArgs<{
+  accountId: VersionControlTypes.AccountId
+  cosmWasmClient: CosmWasmClient
+  apiUrl: string
+  id: string
+}>
+
+export async function getModuleAddress({
+  args: { accountId, cosmWasmClient, apiUrl, id },
+}: GetModuleAddressParameters) {
+  const managerQueryClient = await getManagerQueryClientFromApi({
+    args: {
+      accountId,
+      cosmWasmClient,
+      apiUrl,
+    },
+  })
   const { modules } = await managerQueryClient.moduleAddresses({ ids: [id] })
 
   return modules[0]?.[1] ?? null

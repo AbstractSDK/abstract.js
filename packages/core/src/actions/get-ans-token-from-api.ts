@@ -1,14 +1,19 @@
+import { WithArgs } from 'src/types/with-args'
 import { AnsId } from '../utils/tokens/ans/types'
 import { getAnsTokensFromApi } from './get-ans-tokens-from-api'
 
-export async function getAnsTokenFromApi(
-  apiUrl: string,
-  chainId: string,
-  id: AnsId,
-) {
-  const result = await getAnsTokensFromApi(apiUrl, chainId, [id]).then(
-    (tokens) => tokens[0],
-  )
+export type GetAnsTokenFromApiParameters = WithArgs<{
+  apiUrl: string
+  chainId: string
+  id: AnsId
+}>
+
+export async function getAnsTokenFromApi({
+  args: { apiUrl, chainId, id },
+}: GetAnsTokenFromApiParameters) {
+  const result = await getAnsTokensFromApi({
+    args: { apiUrl, chainId, ids: [id] },
+  }).then((tokens) => tokens[0])
   if (!result) throw new Error(`Cannot find token with id ${id}`)
   return result
 }

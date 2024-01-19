@@ -1,5 +1,6 @@
 import { rawQuery } from '@abstract-money/cosmwasm-utils'
 import { type CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { WithArgs } from 'src/types/with-args'
 import { match } from 'ts-pattern'
 import { VersionControlTypes } from '../../codegen/abstract'
 import { type ModuleData } from '../../legacy/generics/Module.types'
@@ -8,9 +9,15 @@ import { versionControlModuleToAddress } from '../../utils/version-control/versi
 import { versionControlModuleToCodeId } from '../../utils/version-control/version-control-module-to-code-id'
 import { versionControlModuleToType } from '../../utils/version-control/version-control-module-to-type'
 
+export type GetVersionControlModuleDataParameters<
+  TVcModule extends VersionControlTypes.Module = VersionControlTypes.Module,
+> = WithArgs<{ cosmWasmClient: CosmWasmClient; module: TVcModule }>
+
 export async function getVersionControlModuleData<
   const TVcModule extends VersionControlTypes.Module = VersionControlTypes.Module,
->(client: CosmWasmClient, module: TVcModule): Promise<ModuleData | null> {
+>({
+  args: { cosmWasmClient, module },
+}: GetVersionControlModuleDataParameters<TVcModule>): Promise<ModuleData | null> {
   // Retrieve the first instantiation of the module
   const moduleType = versionControlModuleToType(module)
   const firstInstantiation = await match(moduleType)
@@ -20,7 +27,7 @@ export async function getVersionControlModuleData<
     // TODO: not all standalones will have module_data
     .with('standalone', 'app', async () => {
       // retrieve the first instantiation
-      const instantiations = await client.getContracts(
+      const instantiations = await cosmWasmClient.getContracts(
         versionControlModuleToCodeId(module),
       )
       const firstInstantiation = instantiations[0]
@@ -51,7 +58,7 @@ export async function getVersionControlModuleData<
   }
 
   return await rawQuery<ModuleData | null>({
-    client,
+    client: cosmWasmClient,
     address: firstInstantiation,
     key: 'module_data',
   })

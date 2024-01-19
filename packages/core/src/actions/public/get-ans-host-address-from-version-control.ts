@@ -1,18 +1,25 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { WithArgs } from 'src/types/with-args'
 import {
   CommonModuleNames,
-  getModuleAddressFromVersionControl,
-} from './get-module-address-from-version-control'
+  getAbstractModuleAddressFromVersionControl,
+} from './get-abstract-module-address-from-version-control'
 
-export async function getAnsHostAddressFromVersionControl(
-  cosmWasmClient: CosmWasmClient,
-  versionControlAddress: string,
-  version?: string,
-) {
-  return getModuleAddressFromVersionControl(
-    CommonModuleNames.ANS_HOST_MODULE_NAME,
-    cosmWasmClient,
-    versionControlAddress,
-    version,
-  )
+export type GetAnsHostAddressFromVersionControlParameters = WithArgs<{
+  cosmWasmClient: CosmWasmClient
+  versionControlAddress: string
+  version?: string
+}>
+
+export async function getAnsHostAddressFromVersionControl({
+  args: { cosmWasmClient, versionControlAddress, version },
+}: GetAnsHostAddressFromVersionControlParameters) {
+  return getAbstractModuleAddressFromVersionControl({
+    args: {
+      moduleName: CommonModuleNames.ANS_HOST,
+      cosmWasmClient,
+      versionControlAddress,
+      version,
+    },
+  })
 }

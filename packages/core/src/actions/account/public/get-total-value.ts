@@ -1,17 +1,24 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { WithArgs } from 'src/types/with-args'
 import { VersionControlTypes } from '../../../codegen/abstract'
 import { getProxyQueryClientFromApi } from './get-proxy-query-client-from-api'
 
-export async function getTotalValue(
-  accountId: VersionControlTypes.AccountId,
-  cosmWasmClient: CosmWasmClient,
-  apiUrl: string,
-): Promise<number> {
-  const proxyQueryClient = await getProxyQueryClientFromApi(
-    accountId,
-    cosmWasmClient,
-    apiUrl,
-  )
+export type GetTotalValueParameters = WithArgs<{
+  accountId: VersionControlTypes.AccountId
+  cosmWasmClient: CosmWasmClient
+  apiUrl: string
+}>
+
+export async function getTotalValue({
+  args: { accountId, cosmWasmClient, apiUrl },
+}: GetTotalValueParameters): Promise<number> {
+  const proxyQueryClient = await getProxyQueryClientFromApi({
+    args: {
+      accountId,
+      cosmWasmClient,
+      apiUrl,
+    },
+  })
   const res = await proxyQueryClient.totalValue()
   return +res.total_value
 }

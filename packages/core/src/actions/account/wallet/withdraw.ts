@@ -1,26 +1,32 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { WithArgsAndCosmWasmSignOptions } from 'src/types/with-args'
 import { VersionControlTypes } from '../../../codegen/abstract'
 import { SliceFirstTwo } from '../../../types/utils'
 import { Asset, encodeAssetsProxyTransferMsgs } from '../../../utils/assets'
 import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
 import { execute } from './execute'
 
-export async function withdraw(
-  accountId: VersionControlTypes.AccountId,
-  signingCosmWasmClient: SigningCosmWasmClient,
-  apiUrl: string,
-  sender: string,
-  assets: Asset[],
-  recipient: string,
-  ...rest: SliceFirstTwo<
-    Parameters<typeof SigningCosmWasmClient.prototype.signAndBroadcast>
-  >
-) {
-  const { proxyAddress } = await getAccountBaseAddressesFromApi(
-    accountId,
-    signingCosmWasmClient,
-    apiUrl,
-  )
+export type WithdrawParameters = WithArgsAndCosmWasmSignOptions<{
+  accountId: VersionControlTypes.AccountId
+  signingCosmWasmClient: SigningCosmWasmClient
+  apiUrl: string
+  sender: string
+  assets: Asset[]
+  recipient: string
+}>
+
+export async function withdraw({
+  fee,
+  memo,
+  args: { accountId, signingCosmWasmClient, apiUrl, sender, assets, recipient },
+}: WithdrawParameters) {
+  const { proxyAddress } = await getAccountBaseAddressesFromApi({
+    args: {
+      accountId,
+      cosmWasmClient: signingCosmWasmClient,
+      apiUrl,
+    },
+  })
 
   const transferMsgs = encodeAssetsProxyTransferMsgs(
     assets,
@@ -28,12 +34,15 @@ export async function withdraw(
     recipient,
   )
 
-  return execute(
-    accountId,
-    signingCosmWasmClient,
-    apiUrl,
-    sender,
-    transferMsgs,
-    ...rest,
-  )
+  return execute({
+    args: {
+      accountId,
+      signingCosmWasmClient,
+      apiUrl,
+      sender,
+      msgs: transferMsgs,
+    },
+    fee,
+    memo,
+  })
 }

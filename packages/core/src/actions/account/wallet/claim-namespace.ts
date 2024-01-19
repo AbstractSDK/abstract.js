@@ -1,29 +1,31 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import {
-  VersionControlClient,
-  VersionControlTypes,
-} from '../../../codegen/abstract'
-import { SliceFirst } from '../../../types/utils'
+import { WithArgsAndCosmWasmSignOptions } from 'src/types/with-args'
+import { VersionControlClient } from '../../../codegen/abstract'
 import { accountIdToParameter } from '../../../utils/account-id'
 import { getVersionControlClientFromApi } from '../../wallet/get-version-control-client-from-api'
 
-export async function claimNamespace(
-  accountId: VersionControlTypes.AccountId,
-  signingCosmWasmClient: SigningCosmWasmClient,
-  apiUrl: string,
-  sender: string,
-  namespace: string,
-  ...rest: SliceFirst<
-    Parameters<typeof VersionControlClient.prototype.claimNamespace>
-  >
-) {
-  const versionControlClient = await getVersionControlClientFromApi(
-    signingCosmWasmClient,
-    apiUrl,
-    sender,
-  )
+export type ClaimNamespaceParameters = WithArgsAndCosmWasmSignOptions<
+  {
+    signingCosmWasmClient: SigningCosmWasmClient
+    apiUrl: string
+    sender: string
+    namespace: string
+  } & Parameters<typeof VersionControlClient.prototype.claimNamespace>[0]
+>
+
+export async function claimNamespace({
+  args: { signingCosmWasmClient, apiUrl, namespace, sender, accountId },
+  fee,
+  funds,
+  memo,
+}: ClaimNamespaceParameters) {
+  const versionControlClient = await getVersionControlClientFromApi({
+    args: { signingCosmWasmClient, apiUrl, sender },
+  })
   return versionControlClient.claimNamespace(
     { accountId: accountIdToParameter(accountId), namespace },
-    ...rest,
+    fee,
+    memo,
+    funds,
   )
 }
