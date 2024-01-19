@@ -15,5 +15,5 @@ export async function createSubAccount(
     sender,
     apiUrl,
   )
-  managerClient.createSubAccount(...rest)
+  return managerClient.createSubAccount(...rest)
 }
