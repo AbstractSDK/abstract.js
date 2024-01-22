@@ -14,12 +14,8 @@ export async function getVersionControlAddressFromApi({
     apiUrl,
     gql(/* GraphQL */ `
       query VersionControlDeployment($chain: ID!) {
-        version
         deployment(chain: $chain) {
           registry
-        }
-        chainInfo(chain: $chain) {
-          rpcUrl
         }
       }
     `),

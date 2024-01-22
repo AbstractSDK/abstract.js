@@ -20,5 +20,6 @@ export async function getTotalValue({
     },
   })
   const res = await proxyQueryClient.totalValue()
+  // @TODO: might overflow a number
   return +res.total_value
 }

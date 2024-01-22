@@ -5,7 +5,7 @@ import { deposit } from '../../actions/account/wallet/deposit'
 import { execute } from '../../actions/account/wallet/execute'
 import { getManagerClientFromApi } from '../../actions/account/wallet/get-manager-client-from-api'
 import { getProxyClientFromApi } from '../../actions/account/wallet/get-proxy-client-from-api'
-import { removeNamespace } from '../../actions/account/wallet/remove-namespace'
+import { revokeNamespace } from '../../actions/account/wallet/remove-namespace'
 import { withdraw } from '../../actions/account/wallet/withdraw'
 import { VersionControlTypes } from '../../codegen/abstract/index'
 import { CutArgs } from '../../types/with-args'
@@ -39,9 +39,9 @@ export type AccountWalletActions = {
   getProxyClientFromApi(
     args: CutSpecificArgsFromParameter<typeof getProxyClientFromApi>,
   ): ReturnType<typeof getProxyClientFromApi>
-  removeNamespace(
-    args: CutSpecificArgsFromParameter<typeof removeNamespace>,
-  ): ReturnType<typeof removeNamespace>
+  revokeNamespace(
+    args: CutSpecificArgsFromParameter<typeof revokeNamespace>,
+  ): ReturnType<typeof revokeNamespace>
   withdraw(
     args: CutSpecificArgsFromParameter<typeof withdraw>,
   ): ReturnType<typeof withdraw>
@@ -89,8 +89,8 @@ export function accountWalletActions(
         args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
         ...rest,
       }),
-    removeNamespace: ({ args, ...rest }) =>
-      removeNamespace({
+    revokeNamespace: ({ args, ...rest }) =>
+      revokeNamespace({
         args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
         ...rest,
       }),

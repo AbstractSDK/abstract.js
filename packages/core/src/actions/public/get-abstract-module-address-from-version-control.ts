@@ -27,7 +27,7 @@ export async function getAbstractModuleAddressFromVersionControl({
     },
   })
 
-  const [accountFactoryAddress] = await versionControlQueryClient
+  const [moduleAddress] = await versionControlQueryClient
     .modules({
       infos: [
         {
@@ -41,11 +41,11 @@ export async function getAbstractModuleAddressFromVersionControl({
       modules.map(({ module }) => versionControlModuleToAddress(module)),
     )
 
-  if (!accountFactoryAddress) {
+  if (!moduleAddress) {
     throw new Error(
       `Could not fetch address for module ${moduleName} version ${version} from registry ${versionControlAddress}`,
     )
   }
 
-  return accountFactoryAddress
+  return moduleAddress
 }

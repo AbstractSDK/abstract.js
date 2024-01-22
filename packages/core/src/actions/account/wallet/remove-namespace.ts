@@ -4,19 +4,19 @@ import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
 import { getVersionControlClientFromApi } from '../../wallet/get-version-control-client-from-api'
 import { getNamespace } from '../public/get-namespace'
 
-export type RemoveNamespaceParameters = WithArgsAndCosmWasmSignOptions<{
+export type RevokeNamespaceParameters = WithArgsAndCosmWasmSignOptions<{
   accountId: VersionControlTypes.AccountId
   signingCosmWasmClient: SigningCosmWasmClient
   apiUrl: string
   sender: string
 }>
 
-export async function removeNamespace({
+export async function revokeNamespace({
   args: { accountId, signingCosmWasmClient, apiUrl, sender },
   fee,
   memo,
   funds,
-}: RemoveNamespaceParameters) {
+}: RevokeNamespaceParameters) {
   const versionControlClient = await getVersionControlClientFromApi({
     args: {
       signingCosmWasmClient,
