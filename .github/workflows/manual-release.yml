@@ -48,8 +48,9 @@ jobs:
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
           pnpm publish --no-git-checks --access public --tag experimental
           echo "🎉 Experimental release published 📦️ on npm: https://npmjs.com/package/${{ github.event.inputs.name }}/v/${{ env.VERSION }}"
-          echo "Install via: pnpm add ${{ github.event.inputs.name }}@${{ env.VERSION }}"
+          echo "Install via: pnpm add ${{ env.PACKAGE_NAME }}@${{ env.VERSION }}"
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           PACKAGE_PATH: ${{ github.event.inputs.path }}
+          PACKAGE_NAME: ${{ github.event.inputs.name }}
           VERSION: ${{ steps.determine-version.outputs.version }}
