@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 0.2.0
+
+### Minor Changes
+
+- [#30](https://github.com/AbstractSDK/abstract.js/pull/30) [`24438df`](https://github.com/AbstractSDK/abstract.js/commit/24438dfd851ff9d8b7ca02da2168bf60cd91cfde) Thanks [@dalechyn](https://github.com/dalechyn)! - Reimplements `core` package, with backwards compatibility support at `@abstract-money/core/legacy`.
+
 ## 0.1.5
 
 ### Patch Changes

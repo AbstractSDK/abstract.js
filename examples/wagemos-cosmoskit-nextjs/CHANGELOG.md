@@ -1,5 +1,17 @@
 # wagemos-cosmoskit-nextjs
 
+## 0.2.0
+
+### Minor Changes
+
+- [#30](https://github.com/AbstractSDK/abstract.js/pull/30) [`24438df`](https://github.com/AbstractSDK/abstract.js/commit/24438dfd851ff9d8b7ca02da2168bf60cd91cfde) Thanks [@dalechyn](https://github.com/dalechyn)! - Reimplements `core` package, with backwards compatibility support at `@abstract-money/core/legacy`.
+
+### Patch Changes
+
+- Updated dependencies [[`24438df`](https://github.com/AbstractSDK/abstract.js/commit/24438dfd851ff9d8b7ca02da2168bf60cd91cfde)]:
+  - @abstract-money/core@0.2.0
+  - @abstract-money/react@0.2.0
+
 ## 0.1.6
 
 ### Patch Changes
