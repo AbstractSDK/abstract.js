@@ -1,6 +1,6 @@
 'use client'
 
-import { AbstractAccountId } from '@abstract-money/core'
+import { stringToAccountId } from '@abstract-money/core'
 import {
   AbstractAccountIdProvider,
   AbstractProvider,
@@ -30,7 +30,7 @@ export default function RootLayout({
         <CosmosKitProvider>
           <AbstractProvider>
             <AbstractAccountIdProvider
-              accountId={AbstractAccountId.fromStringId('neutron-18')}
+              accountId={stringToAccountId('neutron-18')}
             >
               <main className="flex flex-col items-center p-24 min-h-screen">
                 <section className="mt-10">

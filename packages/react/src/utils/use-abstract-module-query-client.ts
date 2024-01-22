@@ -1,13 +1,15 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
 
+import { AccountId, accountIdToParameter } from '@abstract-money/core'
 import {
   ABSTRACT_API_URL,
   AbstractAccountId,
   AbstractQueryClient,
   CHAIN_DEPLOYMENT_QUERY,
+  accountIdToLegacyAccountId,
   graphqlRequest,
-} from '@abstract-money/core'
+} from '@abstract-money/core/legacy'
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import { useAccountId, useConfig } from '../contexts'
 import { useAbstractQueryClient } from './use-abstract-query-client'
@@ -35,7 +37,7 @@ async function getAbstractModuleQueryClient<
   client: CosmWasmClient
   chain: string
   overrideApiUrl?: string
-  accountId: AbstractAccountId
+  accountId: AccountId
   moduleId: string
   Module: TModule
 }) {
@@ -59,11 +61,11 @@ async function getAbstractModuleQueryClient<
 
   const { account_base } =
     await abstractQueryClient.registryQueryClient.accountBase({
-      accountId: accountId.into(),
+      accountId: accountIdToParameter(accountId),
     })
   return new Module({
     abstractQueryClient,
-    accountId,
+    accountId: accountIdToLegacyAccountId(accountId),
     managerAddress: account_base.manager,
     proxyAddress: account_base.proxy,
     moduleId,
@@ -79,7 +81,7 @@ type TQueryData<TModule extends ModuleQueryClientConstructor> =
 type TQueryKey<TModule extends ModuleQueryClientConstructor> = readonly [
   'module-query-client',
   string,
-  AbstractAccountId,
+  AccountId,
   TModule,
   AbstractQueryClient | undefined,
 ]
@@ -95,7 +97,7 @@ export function useAbstractModuleQueryClient<
     chain,
   }: {
     client: CosmWasmClient | undefined
-    accountId?: AbstractAccountId
+    accountId?: AccountId
     chain: string | undefined
     moduleId: string
     Module: TModule

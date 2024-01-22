@@ -1,63 +1,62 @@
 'use client'
 
 import {
+  SigningCosmWasmClient,
   CosmWasmClient,
   ExecuteResult,
-  SigningCosmWasmClient,
 } from '@cosmjs/cosmwasm-stargate'
 import { UseMutationOptions } from '@tanstack/react-query'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 
 import {
   useAbstractModuleClient,
   useAbstractModuleQueryClient,
 } from '@abstract-money/react/utils'
 
+import { AccountId } from '@abstract-money/core'
+
 import { useChain } from '@cosmos-kit/react'
 
 import {
-  BettingCloseRoundMutation,
-  BettingCreateRoundMutation,
-  BettingDistributeWinningsMutation,
-  BettingPlaceBetMutation,
-  BettingRegisterMutation,
-  BettingUpdateAccountsMutation,
-  BettingUpdateConfigMutation,
-  useBettingBetsQuery,
-  useBettingCloseRoundMutation,
-  useBettingConfigQuery,
-  useBettingCreateRoundMutation,
-  useBettingDistributeWinningsMutation,
-  useBettingListOddsQuery,
-  useBettingListRoundsQuery,
-  useBettingOddsQuery,
-  useBettingPlaceBetMutation,
-  useBettingRegisterMutation,
-  useBettingRoundQuery,
-  useBettingUpdateAccountsMutation,
-  useBettingUpdateConfigMutation,
-} from './cosmwasm-codegen/Betting.react-query'
-
-import {
-  BetsResponse,
-  ConfigResponse,
-  ListOddsResponse,
-  OddsResponse,
-  RoundResponse,
-  RoundsResponse,
-} from './cosmwasm-codegen/Betting.types'
-
-import {
-  BettingAppClient,
-  BettingAppQueryClient,
-} from './cosmwasm-codegen/Betting.client'
-
+  useAccountWalletClient,
+  useApiClient,
+} from '@abstract-money/react/utils'
 import {
   useDeposit as _useDeposit,
-  useExecute as _useExecute,
   useWithdraw as _useWithdraw,
+  useExecute as _useExecute,
+  useAccounts as _useAccounts,
 } from '@abstract-money/react/hooks'
-import { useAbstractClient } from '@abstract-money/react/utils'
+
+import {
+  useBettingBetsQuery,
+  useBettingConfigQuery,
+  useBettingListOddsQuery,
+  useBettingOddsQuery,
+  useBettingListRoundsQuery,
+  useBettingRoundQuery,
+  useBettingUpdateConfigMutation,
+  BettingUpdateConfigMutation,
+  useBettingCloseRoundMutation,
+  BettingCloseRoundMutation,
+  useBettingDistributeWinningsMutation,
+  BettingDistributeWinningsMutation,
+  useBettingPlaceBetMutation,
+  BettingPlaceBetMutation,
+  useBettingUpdateAccountsMutation,
+  BettingUpdateAccountsMutation,
+  useBettingRegisterMutation,
+  BettingRegisterMutation,
+  useBettingCreateRoundMutation,
+  BettingCreateRoundMutation,
+} from './cosmwasm-codegen/Betting.react-query'
+
+import * as BettingTypes from './cosmwasm-codegen/Betting.types'
+
+import {
+  BettingAppQueryClient,
+  BettingAppClient,
+} from './cosmwasm-codegen/Betting.client'
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Betting
@@ -66,8 +65,6 @@ import { useAbstractClient } from '@abstract-money/react/utils'
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // React
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-const BETTING_MODULE_ID = 'abstract:betting'
 
 function useCosmosKitAbstractModuleQueryClient(
   args: Omit<Parameters<typeof useAbstractModuleQueryClient>[0], 'client'>,
@@ -133,50 +130,46 @@ function useCosmosKitAbstractModuleClient(
   )
 }
 
-function useCosmosKitAbstractClient(
-  args: Omit<Parameters<typeof useAbstractClient>[0], 'client' | 'sender'>,
-  options?: Parameters<typeof useAbstractClient>[1],
-) {
-  const [client, setClient] = useState<SigningCosmWasmClient | undefined>(
-    undefined,
-  )
+function useCosmosKitAccountWalletClient(args?: { chain?: string }) {
+  const [signingCosmWasmClient, setClient] = useState<
+    SigningCosmWasmClient | undefined
+  >(undefined)
   const {
     getSigningCosmWasmClient: _getSigningCosmWasmClient,
     address,
     isWalletConnected,
-  } = useChain(args.chain ?? 'neutron')
+  } = useChain(args?.chain ?? 'neutron')
 
   const getSigningCosmWasmClient = useMemo(() => {
-    if (!args.chain || !isWalletConnected) return undefined
+    if (!args?.chain || !isWalletConnected) return undefined
     return _getSigningCosmWasmClient
-  }, [_getSigningCosmWasmClient, args.chain])
+  }, [_getSigningCosmWasmClient, args?.chain])
 
   useEffect(() => {
     if (!getSigningCosmWasmClient) return
     getSigningCosmWasmClient().then((client) => setClient(client))
   }, [getSigningCosmWasmClient])
 
-  return useAbstractClient(
-    {
-      client,
-      sender: address,
-      ...args,
-    },
-    options,
-  )
+  return useAccountWalletClient({
+    signingCosmWasmClient,
+    sender: address,
+  })
+}
+
+export function useAccounts(
+  { chain, owner }: Omit<Parameters<typeof _useAccounts>[0], 'client'>,
+  opts?: Parameters<typeof _useAccounts>[1],
+) {
+  const apiClient = useApiClient()
+
+  return _useAccounts({ chain, owner, client: apiClient }, opts)
 }
 
 export function useDeposit(
-  { chain }: { chain: string | undefined },
+  { chain }: Parameters<typeof useCosmosKitAccountWalletClient>[0] = {},
   ...args: Parameters<typeof _useDeposit>
 ) {
-  const {
-    data: abstractClient,
-    // TODO: figure out what to do with those
-    // isLoading: isAbstractClientLoading,
-    // isError: isAbstractClientError,
-    // error: abstractClientError,
-  } = useCosmosKitAbstractClient({ chain })
+  const accountWalletClient = useCosmosKitAccountWalletClient({ chain })
 
   const {
     mutate: mutate_,
@@ -185,37 +178,34 @@ export function useDeposit(
   } = _useDeposit(...args)
 
   const mutate = useMemo(() => {
-    if (!abstractClient) return undefined
+    if (!accountWalletClient) return undefined
 
     return (
-      variables: Omit<Parameters<typeof mutate_>[0], 'abstractClient'>,
+      variables: Omit<Parameters<typeof mutate_>[0], 'accountWalletClient'>,
       options?: Parameters<typeof mutate_>[1],
-    ) => mutate_({ abstractClient, ...variables }, options)
-  }, [mutate_, abstractClient])
+    ) => mutate_({ accountWalletClient, ...variables }, options)
+  }, [mutate_, accountWalletClient])
 
   const mutateAsync = useMemo(() => {
-    if (!abstractClient) return undefined
+    if (!accountWalletClient) return undefined
 
     return (
-      variables: Omit<Parameters<typeof mutateAsync_>[0], 'abstractClient'>,
+      variables: Omit<
+        Parameters<typeof mutateAsync_>[0],
+        'accountWalletClient'
+      >,
       options?: Parameters<typeof mutateAsync_>[1],
-    ) => mutateAsync_({ abstractClient, ...variables }, options)
-  }, [mutateAsync_, abstractClient])
+    ) => mutateAsync_({ accountWalletClient, ...variables }, options)
+  }, [mutateAsync_, accountWalletClient])
 
   return { mutate, mutateAsync, ...rest } as const
 }
 
 export function useWithdraw(
-  { chain }: { chain: string | undefined },
+  { chain }: Parameters<typeof useCosmosKitAccountWalletClient>[0] = {},
   ...args: Parameters<typeof _useWithdraw>
 ) {
-  const {
-    data: abstractClient,
-    // TODO: figure out what to do with those
-    // isLoading: isAbstractClientLoading,
-    // isError: isAbstractClientError,
-    // error: abstractClientError,
-  } = useCosmosKitAbstractClient({ chain })
+  const accountWalletClient = useCosmosKitAccountWalletClient({ chain })
 
   const {
     mutate: mutate_,
@@ -224,37 +214,34 @@ export function useWithdraw(
   } = _useWithdraw(...args)
 
   const mutate = useMemo(() => {
-    if (!abstractClient) return undefined
+    if (!accountWalletClient) return undefined
 
     return (
-      variables: Omit<Parameters<typeof mutate_>[0], 'abstractClient'>,
+      variables: Omit<Parameters<typeof mutate_>[0], 'accountWalletClient'>,
       options?: Parameters<typeof mutate_>[1],
-    ) => mutate_({ abstractClient, ...variables }, options)
-  }, [mutate_, abstractClient])
+    ) => mutate_({ accountWalletClient, ...variables }, options)
+  }, [mutate_, accountWalletClient])
 
   const mutateAsync = useMemo(() => {
-    if (!abstractClient) return undefined
+    if (!accountWalletClient) return undefined
 
     return (
-      variables: Omit<Parameters<typeof mutateAsync_>[0], 'abstractClient'>,
+      variables: Omit<
+        Parameters<typeof mutateAsync_>[0],
+        'accountWalletClient'
+      >,
       options?: Parameters<typeof mutateAsync_>[1],
-    ) => mutateAsync_({ abstractClient, ...variables }, options)
-  }, [mutateAsync_, abstractClient])
+    ) => mutateAsync_({ accountWalletClient, ...variables }, options)
+  }, [mutateAsync_, accountWalletClient])
 
   return { mutate, mutateAsync, ...rest } as const
 }
 
 export function useExecute(
-  { chain }: { chain: string | undefined },
+  { chain }: Parameters<typeof useCosmosKitAccountWalletClient>[0] = {},
   ...args: Parameters<typeof _useExecute>
 ) {
-  const {
-    data: abstractClient,
-    // TODO: figure out what to do with those
-    // isLoading: isAbstractClientLoading,
-    // isError: isAbstractClientError,
-    // error: abstractClientError,
-  } = useCosmosKitAbstractClient({ chain })
+  const accountWalletClient = useCosmosKitAccountWalletClient({ chain })
 
   const {
     mutate: mutate_,
@@ -263,36 +250,42 @@ export function useExecute(
   } = _useExecute(...args)
 
   const mutate = useMemo(() => {
-    if (!abstractClient) return undefined
+    if (!accountWalletClient) return undefined
 
     return (
-      variables: Omit<Parameters<typeof mutate_>[0], 'abstractClient'>,
+      variables: Omit<Parameters<typeof mutate_>[0], 'accountWalletClient'>,
       options?: Parameters<typeof mutate_>[1],
-    ) => mutate_({ abstractClient, ...variables }, options)
-  }, [mutate_, abstractClient])
+    ) => mutate_({ accountWalletClient, ...variables }, options)
+  }, [mutate_, accountWalletClient])
 
   const mutateAsync = useMemo(() => {
-    if (!abstractClient) return undefined
+    if (!accountWalletClient) return undefined
 
     return (
-      variables: Omit<Parameters<typeof mutateAsync_>[0], 'abstractClient'>,
+      variables: Omit<
+        Parameters<typeof mutateAsync_>[0],
+        'accountWalletClient'
+      >,
       options?: Parameters<typeof mutateAsync_>[1],
-    ) => mutateAsync_({ abstractClient, ...variables }, options)
-  }, [mutateAsync_, abstractClient])
+    ) => mutateAsync_({ accountWalletClient, ...variables }, options)
+  }, [mutateAsync_, accountWalletClient])
 
   return { mutate, mutateAsync, ...rest } as const
 }
+
+const BETTING_MODULE_ID = 'abstract:betting'
 
 export const betting = {
   queries: {
     useBets: ({
       options,
+      accountId,
       chain,
       ...rest
     }: Omit<
-      Parameters<typeof useBettingBetsQuery<BetsResponse>>[0],
+      Parameters<typeof useBettingBetsQuery<BettingTypes.BetsResponse>>[0],
       'client'
-    > & { chain: string | undefined }) => {
+    > & { accountId?: AccountId; chain: string | undefined }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
@@ -301,6 +294,7 @@ export const betting = {
       } = useCosmosKitAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
+          accountId,
 
           chain,
           Module: BettingAppQueryClient,
@@ -351,12 +345,13 @@ export const betting = {
     },
     useConfig: ({
       options,
+      accountId,
       chain,
       ...rest
     }: Omit<
-      Parameters<typeof useBettingConfigQuery<ConfigResponse>>[0],
+      Parameters<typeof useBettingConfigQuery<BettingTypes.ConfigResponse>>[0],
       'client'
-    > & { chain: string | undefined }) => {
+    > & { accountId?: AccountId; chain: string | undefined }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
@@ -365,6 +360,7 @@ export const betting = {
       } = useCosmosKitAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
+          accountId,
 
           chain,
           Module: BettingAppQueryClient,
@@ -415,12 +411,15 @@ export const betting = {
     },
     useListOdds: ({
       options,
+      accountId,
       chain,
       ...rest
     }: Omit<
-      Parameters<typeof useBettingListOddsQuery<ListOddsResponse>>[0],
+      Parameters<
+        typeof useBettingListOddsQuery<BettingTypes.ListOddsResponse>
+      >[0],
       'client'
-    > & { chain: string | undefined }) => {
+    > & { accountId?: AccountId; chain: string | undefined }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
@@ -429,6 +428,7 @@ export const betting = {
       } = useCosmosKitAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
+          accountId,
 
           chain,
           Module: BettingAppQueryClient,
@@ -479,12 +479,13 @@ export const betting = {
     },
     useOdds: ({
       options,
+      accountId,
       chain,
       ...rest
     }: Omit<
-      Parameters<typeof useBettingOddsQuery<OddsResponse>>[0],
+      Parameters<typeof useBettingOddsQuery<BettingTypes.OddsResponse>>[0],
       'client'
-    > & { chain: string | undefined }) => {
+    > & { accountId?: AccountId; chain: string | undefined }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
@@ -493,6 +494,7 @@ export const betting = {
       } = useCosmosKitAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
+          accountId,
 
           chain,
           Module: BettingAppQueryClient,
@@ -543,12 +545,15 @@ export const betting = {
     },
     useListRounds: ({
       options,
+      accountId,
       chain,
       ...rest
     }: Omit<
-      Parameters<typeof useBettingListRoundsQuery<RoundsResponse>>[0],
+      Parameters<
+        typeof useBettingListRoundsQuery<BettingTypes.RoundsResponse>
+      >[0],
       'client'
-    > & { chain: string | undefined }) => {
+    > & { accountId?: AccountId; chain: string | undefined }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
@@ -557,6 +562,7 @@ export const betting = {
       } = useCosmosKitAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
+          accountId,
 
           chain,
           Module: BettingAppQueryClient,
@@ -607,12 +613,13 @@ export const betting = {
     },
     useRound: ({
       options,
+      accountId,
       chain,
       ...rest
     }: Omit<
-      Parameters<typeof useBettingRoundQuery<RoundResponse>>[0],
+      Parameters<typeof useBettingRoundQuery<BettingTypes.RoundResponse>>[0],
       'client'
-    > & { chain: string | undefined }) => {
+    > & { accountId?: AccountId; chain: string | undefined }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
@@ -621,6 +628,7 @@ export const betting = {
       } = useCosmosKitAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
+          accountId,
 
           chain,
           Module: BettingAppQueryClient,
@@ -672,7 +680,10 @@ export const betting = {
   },
   mutations: {
     useUpdateConfig: (
-      { chain }: { chain: string | undefined },
+      {
+        chain,
+        accountId,
+      }: { chain: string | undefined; accountId?: AccountId },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -690,6 +701,7 @@ export const betting = {
         // error: bettingAbstractModuleClientError,
       } = useCosmosKitAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
+        accountId,
         chain,
         Module: BettingAppClient,
       })
@@ -729,7 +741,10 @@ export const betting = {
       return { mutate, mutateAsync, ...rest } as const
     },
     useCloseRound: (
-      { chain }: { chain: string | undefined },
+      {
+        chain,
+        accountId,
+      }: { chain: string | undefined; accountId?: AccountId },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -747,6 +762,7 @@ export const betting = {
         // error: bettingAbstractModuleClientError,
       } = useCosmosKitAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
+        accountId,
         chain,
         Module: BettingAppClient,
       })
@@ -786,7 +802,10 @@ export const betting = {
       return { mutate, mutateAsync, ...rest } as const
     },
     useDistributeWinnings: (
-      { chain }: { chain: string | undefined },
+      {
+        chain,
+        accountId,
+      }: { chain: string | undefined; accountId?: AccountId },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -804,6 +823,7 @@ export const betting = {
         // error: bettingAbstractModuleClientError,
       } = useCosmosKitAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
+        accountId,
         chain,
         Module: BettingAppClient,
       })
@@ -843,7 +863,10 @@ export const betting = {
       return { mutate, mutateAsync, ...rest } as const
     },
     usePlaceBet: (
-      { chain }: { chain: string | undefined },
+      {
+        chain,
+        accountId,
+      }: { chain: string | undefined; accountId?: AccountId },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -861,6 +884,7 @@ export const betting = {
         // error: bettingAbstractModuleClientError,
       } = useCosmosKitAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
+        accountId,
         chain,
         Module: BettingAppClient,
       })
@@ -900,7 +924,10 @@ export const betting = {
       return { mutate, mutateAsync, ...rest } as const
     },
     useUpdateAccounts: (
-      { chain }: { chain: string | undefined },
+      {
+        chain,
+        accountId,
+      }: { chain: string | undefined; accountId?: AccountId },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -918,6 +945,7 @@ export const betting = {
         // error: bettingAbstractModuleClientError,
       } = useCosmosKitAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
+        accountId,
         chain,
         Module: BettingAppClient,
       })
@@ -957,7 +985,10 @@ export const betting = {
       return { mutate, mutateAsync, ...rest } as const
     },
     useRegister: (
-      { chain }: { chain: string | undefined },
+      {
+        chain,
+        accountId,
+      }: { chain: string | undefined; accountId?: AccountId },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -975,6 +1006,7 @@ export const betting = {
         // error: bettingAbstractModuleClientError,
       } = useCosmosKitAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
+        accountId,
         chain,
         Module: BettingAppClient,
       })
@@ -1014,7 +1046,10 @@ export const betting = {
       return { mutate, mutateAsync, ...rest } as const
     },
     useCreateRound: (
-      { chain }: { chain: string | undefined },
+      {
+        chain,
+        accountId,
+      }: { chain: string | undefined; accountId?: AccountId },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -1032,6 +1067,7 @@ export const betting = {
         // error: bettingAbstractModuleClientError,
       } = useCosmosKitAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
+        accountId,
         chain,
         Module: BettingAppClient,
       })

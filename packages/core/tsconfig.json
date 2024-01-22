@@ -17,9 +17,6 @@
     "paths": {
       // TODO: Remove once issue is fixed
       // https://github.com/microsoft/TypeScript/issues/48212
-      "chain-registry": [
-        "node_modules/chain-registry/types"
-      ],
       "@cosmjs/amino": [
         "node_modules/@cosmjs/amino/build"
       ],

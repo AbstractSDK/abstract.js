@@ -67,23 +67,18 @@ export function react(options?: ReactConfig): ReactResult {
         | 'useGrazAbstractModuleClient'
         | 'useCosmosKitAbstractModuleClient'
         | 'useAbstractModuleClient'
-      let useAbstractClientHookName:
-        | 'useGrazAbstractClient'
-        | 'useCosmosKitAbstractClient'
-        | undefined
-      let useAbstractQueryClientHookName:
-        | 'useGrazAbstractQueryClient'
-        | 'useCosmosKitAbstractQueryClient'
+      let useAccountWalletClientHookName:
+        | 'useGrazAccountWalletClient'
+        | 'useCosmosKitAccountWalletClient'
         | undefined
 
       if (options?.addon === 'graz') {
         useAbstractModuleQueryClientHookName =
           'useGrazAbstractModuleQueryClient'
         useAbstractModuleClientHookName = 'useGrazAbstractModuleClient'
-        useAbstractClientHookName = 'useGrazAbstractClient'
-        useAbstractQueryClientHookName = 'useGrazAbstractQueryClient'
+        useAccountWalletClientHookName = 'useGrazAccountWalletClient'
         content.push(dedent`
-              function useGrazAbstractModuleQueryClient(
+              function ${useAbstractModuleQueryClientHookName}(
                 args: Omit<Parameters<typeof useAbstractModuleQueryClient>[0], 'client'>,
                 options?: Parameters<typeof useAbstractModuleQueryClient>[1],
               ) {
@@ -97,7 +92,7 @@ export function react(options?: ReactConfig): ReactResult {
                 )
               }
 
-              function useGrazAbstractModuleClient(
+              function ${useAbstractModuleClientHookName}(
                 args: Omit<
                   Parameters<typeof useAbstractModuleClient>[0],
                   'client' | 'sender'
@@ -117,40 +112,15 @@ export function react(options?: ReactConfig): ReactResult {
                 )
               }
 
-              function useGrazAbstractClient(
-                args: Omit<
-                  Parameters<typeof useAbstractClient>[0],
-                  'client' | 'sender'
-                >,
-                options?: Parameters<typeof useAbstractClient>[1],
-              ) {
-                const { data: client } = useCosmWasmSigningClient()
+              function ${useAccountWalletClientHookName}() {
+                const { data: signingCosmWasmClient } = useCosmWasmSigningClient()
                 const { data: account } = useAccount()
                 const sender = account?.bech32Address
-                return useAbstractClient(
+                return useAccountWalletClient(
                   {
-                    client,
+                    signingCosmWasmClient,
                     sender,
-                    ...args,
                   },
-                  options,
-                )
-              }
-
-              function useGrazAbstractQueryClient(
-                args: Omit<
-                  Parameters<typeof useAbstractQueryClient>[0],
-                  'client' | 'sender'
-                >,
-                options?: Parameters<typeof useAbstractQueryClient>[1],
-              ) {
-                const { data: client } = useCosmWasmClient()
-                return useAbstractQueryClient(
-                  {
-                    client,
-                    ...args,
-                  },
-                  options,
                 )
               }
             `)
@@ -158,10 +128,9 @@ export function react(options?: ReactConfig): ReactResult {
         useAbstractModuleQueryClientHookName =
           'useCosmosKitAbstractModuleQueryClient'
         useAbstractModuleClientHookName = 'useCosmosKitAbstractModuleClient'
-        useAbstractClientHookName = 'useCosmosKitAbstractClient'
-        useAbstractQueryClientHookName = 'useCosmosKitAbstractQueryClient'
+        useAccountWalletClientHookName = 'useCosmosKitAccountWalletClient'
         content.push(dedent`
-              function useCosmosKitAbstractModuleQueryClient(
+              function ${useAbstractModuleQueryClientHookName}(
                 args: Omit<Parameters<typeof useAbstractModuleQueryClient>[0], 'client'>,
                 options?: Parameters<typeof useAbstractModuleQueryClient>[1],
               ) {
@@ -188,7 +157,7 @@ export function react(options?: ReactConfig): ReactResult {
                 )
               }
 
-              function useCosmosKitAbstractModuleClient(
+              function ${useAbstractModuleClientHookName}(
                 args: Omit<
                   Parameters<typeof useAbstractModuleClient>[0],
                   'client' | 'sender'
@@ -219,20 +188,14 @@ export function react(options?: ReactConfig): ReactResult {
                 )
               }
 
-              function useCosmosKitAbstractClient(
-                args: Omit<
-                  Parameters<typeof useAbstractClient>[0],
-                  'client' | 'sender'
-                >,
-                options?: Parameters<typeof useAbstractClient>[1],
-              ) {
-                const [client, setClient] = useState<SigningCosmWasmClient | undefined>(undefined)
-                const {getSigningCosmWasmClient: _getSigningCosmWasmClient, address, isWalletConnected} = useChain(args.chain ?? 'neutron')
+              function ${useAccountWalletClientHookName}(args?: { chain?: string }) {
+                const [signingCosmWasmClient, setClient] = useState<SigningCosmWasmClient | undefined>(undefined)
+                const {getSigningCosmWasmClient: _getSigningCosmWasmClient, address, isWalletConnected} = useChain(args?.chain ?? 'neutron')
 
                 const getSigningCosmWasmClient = useMemo(() => {
-                  if (!args.chain || !isWalletConnected) return undefined
+                  if (!args?.chain || !isWalletConnected) return undefined
                   return _getSigningCosmWasmClient
-                }, [_getSigningCosmWasmClient, args.chain])
+                }, [_getSigningCosmWasmClient, args?.chain])
 
                 useEffect(() => {
                   if (!getSigningCosmWasmClient) return
@@ -240,43 +203,11 @@ export function react(options?: ReactConfig): ReactResult {
 
                 }, [getSigningCosmWasmClient])
 
-                return useAbstractClient(
+                return useAccountWalletClient(
                   {
-                    client,
+                    signingCosmWasmClient,
                     sender: address,
-                    ...args,
-                  },
-                  options,
-                )
-              }
-
-              function useCosmosKitAbstractQueryClient(
-                args: Omit<
-                  Parameters<typeof useAbstractQueryClient>[0],
-                  'client' | 'sender'
-                >,
-                options?: Parameters<typeof useAbstractQueryClient>[1],
-              ) {
-                const [client, setClient] = useState<CosmWasmClient | undefined>(undefined)
-                const {getCosmWasmClient: _getCosmWasmClient} = useChain(args.chain ?? 'neutron')
-
-                const getCosmWasmClient = useMemo(() => {
-                  if (!args.chain) return undefined
-                  return _getCosmWasmClient
-                }, [_getCosmWasmClient, args.chain])
-
-                useEffect(() => {
-                  if (!getCosmWasmClient) return
-                  getCosmWasmClient().then((client) => setClient(client))
-
-                }, [getCosmWasmClient])
-
-                return useAbstractQueryClient(
-                  {
-                    client,
-                    ...args,
-                  },
-                  options,
+                  }
                 )
               }
             `)
@@ -289,7 +220,7 @@ export function react(options?: ReactConfig): ReactResult {
 
       if (!shouldInjectClientAndSender) {
         imports.push(dedent`
-              import { useAbstractClient, useAbstractQueryClient } from '@abstract-money/react/utils'
+              import { useAccountWalletClient, useApiClient } from '@abstract-money/react/utils'
               import {
                 useDeposit as _useDeposit,
                 useWithdraw as _useWithdraw,
@@ -299,25 +230,22 @@ export function react(options?: ReactConfig): ReactResult {
             `)
         content.push(dedent`
               export function useAccounts({ chain, owner }: Omit<Parameters<typeof _useAccounts>[0], 'client'>, opts?: Parameters<typeof _useAccounts>[1]) {
-                const {
-                  data: abstractQueryClient,
-                  // TODO: figure out what to do with those
-                  // isLoading: isAbstractQueryClientLoading,
-                  // isError: isAbstractQueryClientError,
-                  // error: abstractQueryClientError,
-                } = ${useAbstractQueryClientHookName}({ chain })
+                const apiClient = useApiClient()
 
-                return _useAccounts({chain, owner, client: abstractQueryClient}, opts)
+                return _useAccounts({chain, owner, client: apiClient}, opts)
               }
 
-              export function useDeposit({ chain }:{ chain: string | undefined }, ...args: Parameters<typeof _useDeposit>) {
-                const {
-                  data: abstractClient,
-                  // TODO: figure out what to do with those
-                  // isLoading: isAbstractClientLoading,
-                  // isError: isAbstractClientError,
-                  // error: abstractClientError,
-                } = ${useAbstractClientHookName}({ chain })
+              export function useDeposit(
+                ${
+                  options.addon === 'cosmos-kit'
+                    ? `{ chain }: Parameters<typeof ${useAccountWalletClientHookName}>[0] = {},`
+                    : ''
+                }
+                ...args: Parameters<typeof _useDeposit>
+                ) {
+                const accountWalletClient = ${useAccountWalletClientHookName}(${
+          options.addon === 'cosmos-kit' ? '{ chain }' : ''
+        })
 
                 const {
                   mutate: mutate_,
@@ -326,35 +254,38 @@ export function react(options?: ReactConfig): ReactResult {
                 } = _useDeposit(...args)
 
                 const mutate = useMemo(() => {
-                  if (!abstractClient) return undefined
+                  if (!accountWalletClient) return undefined
 
                   return (
-                    variables: Omit<Parameters<typeof mutate_>[0], 'abstractClient'>,
+                    variables: Omit<Parameters<typeof mutate_>[0], 'accountWalletClient'>,
                     options?: Parameters<typeof mutate_>[1],
-                  ) => mutate_({ abstractClient, ...variables }, options)
-                }, [mutate_, abstractClient])
+                  ) => mutate_({ accountWalletClient, ...variables }, options)
+                }, [mutate_, accountWalletClient])
 
                 const mutateAsync = useMemo(() => {
-                  if (!abstractClient) return undefined
+                  if (!accountWalletClient) return undefined
 
                   return (
-                    variables: Omit<Parameters<typeof mutateAsync_>[0], 'abstractClient'>,
+                    variables: Omit<Parameters<typeof mutateAsync_>[0], 'accountWalletClient'>,
                     options?: Parameters<typeof mutateAsync_>[1],
                   ) =>
-                    mutateAsync_({ abstractClient, ...variables }, options)
-                }, [mutateAsync_, abstractClient])
+                    mutateAsync_({ accountWalletClient, ...variables }, options)
+                }, [mutateAsync_, accountWalletClient])
 
                 return { mutate, mutateAsync, ...rest } as const
               }
 
-              export function useWithdraw({ chain }:{ chain: string | undefined }, ...args: Parameters<typeof _useWithdraw>) {
-                const {
-                  data: abstractClient,
-                  // TODO: figure out what to do with those
-                  // isLoading: isAbstractClientLoading,
-                  // isError: isAbstractClientError,
-                  // error: abstractClientError,
-                } = ${useAbstractClientHookName}({ chain })
+              export function useWithdraw(
+                ${
+                  options.addon === 'cosmos-kit'
+                    ? `{ chain }: Parameters<typeof ${useAccountWalletClientHookName}>[0] = {},`
+                    : ''
+                }
+                ...args: Parameters<typeof _useWithdraw>
+                ) {
+                const accountWalletClient = ${useAccountWalletClientHookName}(${
+          options.addon === 'cosmos-kit' ? '{ chain }' : ''
+        })
 
                 const {
                   mutate: mutate_,
@@ -363,35 +294,38 @@ export function react(options?: ReactConfig): ReactResult {
                 } = _useWithdraw(...args)
 
                 const mutate = useMemo(() => {
-                  if (!abstractClient) return undefined
+                  if (!accountWalletClient) return undefined
 
                   return (
-                    variables: Omit<Parameters<typeof mutate_>[0], 'abstractClient'>,
+                    variables: Omit<Parameters<typeof mutate_>[0], 'accountWalletClient'>,
                     options?: Parameters<typeof mutate_>[1],
-                  ) => mutate_({ abstractClient, ...variables }, options)
-                }, [mutate_, abstractClient])
+                  ) => mutate_({ accountWalletClient, ...variables }, options)
+                }, [mutate_, accountWalletClient])
 
                 const mutateAsync = useMemo(() => {
-                  if (!abstractClient) return undefined
+                  if (!accountWalletClient) return undefined
 
                   return (
-                    variables: Omit<Parameters<typeof mutateAsync_>[0], 'abstractClient'>,
+                    variables: Omit<Parameters<typeof mutateAsync_>[0], 'accountWalletClient'>,
                     options?: Parameters<typeof mutateAsync_>[1],
                   ) =>
-                    mutateAsync_({ abstractClient, ...variables }, options)
-                }, [mutateAsync_, abstractClient])
+                    mutateAsync_({ accountWalletClient, ...variables }, options)
+                }, [mutateAsync_, accountWalletClient])
 
                 return { mutate, mutateAsync, ...rest } as const
               }
 
-              export function useExecute({ chain }:{ chain: string | undefined }, ...args: Parameters<typeof _useExecute>) {
-                const {
-                  data: abstractClient,
-                  // TODO: figure out what to do with those
-                  // isLoading: isAbstractClientLoading,
-                  // isError: isAbstractClientError,
-                  // error: abstractClientError,
-                } = ${useAbstractClientHookName}({ chain })
+              export function useExecute(
+                ${
+                  options.addon === 'cosmos-kit'
+                    ? `{ chain }: Parameters<typeof ${useAccountWalletClientHookName}>[0] = {},`
+                    : ''
+                }
+                ...args: Parameters<typeof _useExecute>
+                ) {
+                const accountWalletClient = ${useAccountWalletClientHookName}(${
+          options.addon === 'cosmos-kit' ? '{ chain }' : ''
+        })
 
                 const {
                   mutate: mutate_,
@@ -400,23 +334,23 @@ export function react(options?: ReactConfig): ReactResult {
                 } = _useExecute(...args)
 
                 const mutate = useMemo(() => {
-                  if (!abstractClient) return undefined
+                  if (!accountWalletClient) return undefined
 
                   return (
-                    variables: Omit<Parameters<typeof mutate_>[0], 'abstractClient'>,
+                    variables: Omit<Parameters<typeof mutate_>[0], 'accountWalletClient'>,
                     options?: Parameters<typeof mutate_>[1],
-                  ) => mutate_({ abstractClient, ...variables }, options)
-                }, [mutate_, abstractClient])
+                  ) => mutate_({ accountWalletClient, ...variables }, options)
+                }, [mutate_, accountWalletClient])
 
                 const mutateAsync = useMemo(() => {
-                  if (!abstractClient) return undefined
+                  if (!accountWalletClient) return undefined
 
                   return (
-                    variables: Omit<Parameters<typeof mutateAsync_>[0], 'abstractClient'>,
+                    variables: Omit<Parameters<typeof mutateAsync_>[0], 'accountWalletClient'>,
                     options?: Parameters<typeof mutateAsync_>[1],
                   ) =>
-                    mutateAsync_({ abstractClient, ...variables }, options)
-                }, [mutateAsync_, abstractClient])
+                    mutateAsync_({ accountWalletClient, ...variables }, options)
+                }, [mutateAsync_, accountWalletClient])
 
                 return { mutate, mutateAsync, ...rest } as const
               }
@@ -444,7 +378,7 @@ export function react(options?: ReactConfig): ReactResult {
               resolve(generatedClientFilePath),
               generatedClientFileContent.replace(
                 '@abstract-money/abstract.js',
-                '@abstract-money/core',
+                '@abstract-money/core/legacy',
               ),
             )
 
@@ -549,7 +483,7 @@ export function react(options?: ReactConfig): ReactResult {
                     shouldInjectClientAndSender ? 'client,' : ''
                   } chain, ...rest }: Omit<Parameters<typeof ${hookName}<${contractNamePascalCase}Types.${queryHookNameToResponseTypeMap.get(
                   hookName,
-                )}>>[0], 'client'> & { accountId?: AbstractAccountId; chain: string | undefined${
+                )}>>[0], 'client'> & { accountId?: AccountId; chain: string | undefined${
                   shouldInjectClientAndSender
                     ? ', client: CosmWasmClient | undefined'
                     : ''
@@ -632,7 +566,7 @@ export function react(options?: ReactConfig): ReactResult {
                   shouldInjectClientAndSender
                     ? 'client: SigningCosmWasmClient | undefined; sender: string | undefined; '
                     : ''
-                } chain: string | undefined; accountId?: AbstractAccountId },
+                } chain: string | undefined; accountId?: AccountId },
                     options?: Omit<
                       UseMutationOptions<
                         ExecuteResult,
@@ -732,7 +666,7 @@ export function react(options?: ReactConfig): ReactResult {
             useAbstractModuleQueryClient,
           } from '@abstract-money/react/utils'
 
-          import { AbstractAccountId } from '@abstract-money/core'
+          import { AccountId } from '@abstract-money/core'
 
           ${imports.join('\n\n')}
         `,

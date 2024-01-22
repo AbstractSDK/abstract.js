@@ -5,4 +5,4 @@ export {
   useConfig,
 } from './contexts'
 
-export { useDeposit, useExecute, useWithdraw } from './hooks'
+export * from './hooks'

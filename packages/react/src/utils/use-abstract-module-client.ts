@@ -1,7 +1,13 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
 
-import { AbstractAccountId, AbstractClient } from '@abstract-money/core'
+import { AccountId, accountIdToParameter } from '@abstract-money/core'
+import {
+  AbstractAccountId,
+  AbstractClient,
+  accountIdToLegacyAccountId,
+  legacyAccountIdToAccountId,
+} from '@abstract-money/core/legacy'
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import { useAccountId } from '../contexts'
 import { useAbstractClient } from './use-abstract-client'
@@ -25,18 +31,18 @@ async function getAbstractModuleClient<
   Module,
 }: {
   abstractClient: AbstractClient
-  accountId: AbstractAccountId
+  accountId: AccountId
   moduleId: string
   Module: TModule
 }) {
   const { account_base } = await abstractClient.registryQueryClient.accountBase(
     {
-      accountId: accountId.into(),
+      accountId: accountIdToParameter(accountId),
     },
   )
   return new Module({
     abstractClient: abstractClient,
-    accountId,
+    accountId: accountIdToLegacyAccountId(accountId),
     managerAddress: account_base.manager,
     proxyAddress: account_base.proxy,
     moduleId,
@@ -56,7 +62,7 @@ export function useAbstractModuleClient<
   }: {
     chain: string | undefined
     sender: string | undefined
-    accountId?: AbstractAccountId
+    accountId?: AccountId
     moduleId: string
     Module: TModule
     client: SigningCosmWasmClient | undefined
@@ -71,7 +77,7 @@ export function useAbstractModuleClient<
     readonly [
       'module-mutation-client',
       string,
-      AbstractAccountId,
+      AccountId,
       TModule,
       AbstractClient | undefined,
     ]

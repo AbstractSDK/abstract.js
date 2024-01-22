@@ -3,7 +3,7 @@ import {
   AbstractQueryClient,
   CHAIN_DEPLOYMENT_QUERY,
   graphqlRequest,
-} from '@abstract-money/core'
+} from '@abstract-money/core/legacy'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import React from 'react'
