@@ -1,7 +1,7 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
-import { WithArgs } from 'src/types/with-args'
 import { VersionControlTypes } from '../../codegen/abstract'
+import { WithArgs } from '../../types/with-args'
 import { versionControlModuleToAddress } from '../../utils/version-control/version-control-module-to-address'
 import { getVersionControlQueryClient } from './get-version-control-query-client'
 

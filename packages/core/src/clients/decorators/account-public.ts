@@ -1,5 +1,4 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { CutArgs } from 'src/types/with-args'
 import { getAccountBaseAddressesFromApi } from '../../actions/account/public/get-account-base-addresses-from-api'
 import { getBaseToken } from '../../actions/account/public/get-base-token'
 import { getManagerQueryClientFromApi } from '../../actions/account/public/get-manager-query-client-from-api'
@@ -12,6 +11,7 @@ import { getSubAccountIds } from '../../actions/account/public/get-sub-account-i
 import { getSubAccountSequences } from '../../actions/account/public/get-sub-account-sequences'
 import { getTotalValue } from '../../actions/account/public/get-total-value'
 import { VersionControlTypes } from '../../codegen/abstract/index'
+import { CutArgs } from '../../types/with-args'
 
 type CutSpecificArgsFromParameter<T extends (payload: any) => any> = CutArgs<
   {

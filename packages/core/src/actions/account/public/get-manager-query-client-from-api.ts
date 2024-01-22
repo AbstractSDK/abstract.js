@@ -1,6 +1,6 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { WithArgs } from 'src/types/with-args'
 import { VersionControlTypes } from '../../../codegen/abstract'
+import { WithArgs } from '../../../types/with-args'
 import { getManagerQueryClient } from '../../public/get-manager-query-client'
 import { getAccountBaseAddressesFromApi } from './get-account-base-addresses-from-api'
 

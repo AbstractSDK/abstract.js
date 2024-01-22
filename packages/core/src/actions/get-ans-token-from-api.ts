@@ -1,4 +1,4 @@
-import { WithArgs } from 'src/types/with-args'
+import { WithArgs } from '../types/with-args'
 import { AnsId } from '../utils/tokens/ans/types'
 import { getAnsTokensFromApi } from './get-ans-tokens-from-api'
 

@@ -1,5 +1,4 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { CutArgs } from 'src/types/with-args'
 import { getAccountFactoryAddressFromVersionControl } from '../../actions/public/get-account-factory-address-from-version-control'
 import { getAccountFactoryQueryClient } from '../../actions/public/get-account-factory-query-client'
 import { getAccountFactoryQueryClientFromApi } from '../../actions/public/get-account-factory-query-client-from-api'
@@ -13,6 +12,7 @@ import { getProxyQueryClient } from '../../actions/public/get-proxy-query-client
 import { getVersionControlModuleData } from '../../actions/public/get-version-control-module-data'
 import { getVersionControlQueryClient } from '../../actions/public/get-version-control-query-client'
 import { getVersionControlQueryClientFromApi } from '../../actions/public/get-version-control-query-client-from-api'
+import { CutArgs } from '../../types/with-args'
 
 type CutCosmWasmClientFromParameter<T extends (payload: any) => any> = CutArgs<
   {

@@ -1,6 +1,6 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { WithArgs } from 'src/types/with-args'
 import { VersionControlTypes } from '../../../codegen/abstract'
+import { WithArgs } from '../../../types/with-args'
 import { accountIdToParameter } from '../../../utils/account-id'
 import { getVersionControlQueryClientFromApi } from '../../public/get-version-control-query-client-from-api'
 

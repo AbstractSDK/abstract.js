@@ -1,6 +1,6 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
-import { WithArgs } from 'src/types/with-args'
+import { WithArgs } from '../../types/with-args'
 import { getAnsHostAddressFromVersionControl } from '../public/get-ans-host-address-from-version-control'
 import { getAnsHostClient } from './get-ans-host-client'
 

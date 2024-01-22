@@ -1,7 +1,7 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
-import { WithArgs } from 'src/types/with-args'
 import { VersionControlQueryClient } from '../../codegen/abstract'
+import { WithArgs } from '../../types/with-args'
 
 export type GetVersionControlQueryClientParameters = WithArgs<{
   cosmWasmClient: CosmWasmClient

@@ -1,9 +1,9 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { WithArgs } from 'src/types/with-args'
 import {
   ManagerQueryClient,
   VersionControlTypes,
 } from '../../../codegen/abstract'
+import { WithArgs } from '../../../types/with-args'
 import { sequenceToLocalAccountId } from '../../../utils/account-id/seq-to-local-account-id'
 import { chainIdToName } from '../../../utils/chain-registry'
 import { getSubAccountSequences } from './get-sub-account-sequences'

@@ -1,6 +1,6 @@
 import request from 'graphql-request'
-import { WithArgs } from 'src/types/with-args'
 import { gql } from '../codegen/gql'
+import { WithArgs } from '../types/with-args'
 import { accountIdApiFormatToAccountId } from '../utils/account-id/account-id-api-format-to-account-id'
 
 export type GetAccountsByOwnerFromApi = WithArgs<{

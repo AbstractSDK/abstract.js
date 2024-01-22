@@ -1,10 +1,10 @@
-import { CutArgs } from 'src/types/with-args'
 import { getAccountFactoryAddressFromApi } from '../../actions/get-account-factory-address-from-api'
 import { getAccountsByOwnerFromApi } from '../../actions/get-accounts-by-owner-from-api'
 import { getAnsHostAddressFromApi } from '../../actions/get-ans-host-address-from-api'
 import { getAnsTokenFromApi } from '../../actions/get-ans-token-from-api'
 import { getAnsTokensFromApi } from '../../actions/get-ans-tokens-from-api'
 import { getVersionControlAddressFromApi } from '../../actions/get-version-control-address-from-api'
+import { CutArgs } from '../../types/with-args'
 
 type CutSpecificArgsFromParameter<T extends (payload: any) => any> = CutArgs<
   {

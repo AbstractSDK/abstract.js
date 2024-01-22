@@ -32,7 +32,7 @@ import {
   PublicClient,
   createApiClient,
   createPublicClient,
-} from 'src/clients'
+} from '../../clients'
 import { findAbstractAttribute } from '../../utils/events'
 import { AbstractAccountQueryClient } from './AbstractAccountClient'
 import { AnsClient, AnsQueryClient } from './AnsClient'
@@ -149,10 +149,9 @@ export class AbstractQueryClient implements IAbstractQueryClient {
     owner: string,
     chains: string[],
   ): Promise<AbstractAccountId[]> {
-    const result = await this._apiClient.getAccountsByOwnerFromApi(
-      owner,
-      chains,
-    )
+    const result = await this._apiClient.getAccountsByOwnerFromApi({
+      args: { owner, chains },
+    })
     return result.map((r) => new AbstractAccountId(r.chainName, r.seq, r.trace))
   }
 

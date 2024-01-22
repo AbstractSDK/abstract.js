@@ -1,5 +1,4 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { CutArgs } from 'src/types/with-args'
 import { claimNamespace } from '../../actions/account/wallet/claim-namespace'
 import { createSubAccount } from '../../actions/account/wallet/create-sub-account'
 import { deposit } from '../../actions/account/wallet/deposit'
@@ -9,6 +8,7 @@ import { getProxyClientFromApi } from '../../actions/account/wallet/get-proxy-cl
 import { removeNamespace } from '../../actions/account/wallet/remove-namespace'
 import { withdraw } from '../../actions/account/wallet/withdraw'
 import { VersionControlTypes } from '../../codegen/abstract/index'
+import { CutArgs } from '../../types/with-args'
 
 type CutSpecificArgsFromParameter<T extends (payload: any) => any> = CutArgs<
   {

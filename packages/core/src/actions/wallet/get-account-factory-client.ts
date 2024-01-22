@@ -1,7 +1,7 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
-import { WithArgs } from 'src/types/with-args'
 import { AccountFactoryClient } from '../../codegen/abstract'
+import { WithArgs } from '../../types/with-args'
 
 export type GetAccountFactoryClientParameters = WithArgs<{
   signingCosmWasmClient: SigningCosmWasmClient

@@ -47,7 +47,9 @@ export function useAccounts(
     if (!client || !owner || !chain)
       throw new Error('No client or owner or chain')
 
-    return client.getAccountsByOwnerFromApi(owner, [chain])
+    return client.getAccountsByOwnerFromApi({
+      args: { owner, chains: [chain] },
+    })
   }, [client, owner, chain])
 
   return useQuery(queryKey, queryFn, { enabled, ...rest })

@@ -1,6 +1,6 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { WithArgsAndCosmWasmSignOptions } from 'src/types/with-args'
 import { VersionControlClient } from '../../../codegen/abstract'
+import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
 import { accountIdToParameter } from '../../../utils/account-id'
 import { getVersionControlClientFromApi } from '../../wallet/get-version-control-client-from-api'
 

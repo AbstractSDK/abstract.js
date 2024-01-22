@@ -1,7 +1,7 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { WithArgsAndCosmWasmSignOptions } from 'src/types/with-args'
 import { AccountFactoryClient } from '../../codegen/abstract'
 import { WithOptional } from '../../types/utils'
+import { WithArgsAndCosmWasmSignOptions } from '../../types/with-args'
 import { createAccount } from './create-account'
 
 export type CreateAccountMonarchyParameters = WithArgsAndCosmWasmSignOptions<

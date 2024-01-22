@@ -1,6 +1,6 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { WithArgsAndCosmWasmSignOptions } from 'src/types/with-args'
 import { ManagerClient, VersionControlTypes } from '../../../codegen/abstract'
+import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
 import { getManagerClientFromApi } from './get-manager-client-from-api'
 
 export type CreateSubAccountParameters = WithArgsAndCosmWasmSignOptions<

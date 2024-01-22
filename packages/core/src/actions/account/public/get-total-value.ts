@@ -1,6 +1,6 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { WithArgs } from 'src/types/with-args'
 import { VersionControlTypes } from '../../../codegen/abstract'
+import { WithArgs } from '../../../types/with-args'
 import { getProxyQueryClientFromApi } from './get-proxy-query-client-from-api'
 
 export type GetTotalValueParameters = WithArgs<{

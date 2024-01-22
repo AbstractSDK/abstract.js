@@ -1,5 +1,4 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { WithArgsAndCosmWasmSignOptions } from 'src/types/with-args'
 import {
   ManagerMsgComposer,
   ProxyExecuteMsgBuilder,
@@ -7,6 +6,7 @@ import {
   VersionControlTypes,
 } from '../../../codegen/abstract'
 import { MaybeArray } from '../../../types/utils'
+import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
 import { jsonToBinary } from '../../../utils/encoding'
 import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
 

@@ -5,7 +5,6 @@ import { getAnsHostClientFromVersionControl } from '../../actions/wallet/get-ans
 import { getVersionControlClientFromApi } from '../../actions/wallet/get-version-control-client-from-api'
 
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { CutArgs } from 'src/types/with-args'
 import { createAccount } from '../../actions/wallet/create-account'
 import { createAccountMonarchy } from '../../actions/wallet/create-account-monarchy'
 import { getAccountFactoryClient } from '../../actions/wallet/get-account-factory-client'
@@ -13,6 +12,7 @@ import { getAnsHostClient } from '../../actions/wallet/get-ans-host-client'
 import { getManagerClient } from '../../actions/wallet/get-manager-client'
 import { getProxyClient } from '../../actions/wallet/get-proxy-client'
 import { getVersionControlClient } from '../../actions/wallet/get-version-control-client'
+import { CutArgs } from '../../types/with-args'
 
 type CutSigningCosmWasmClientFromParameter<T extends (payload: any) => any> =
   CutArgs<

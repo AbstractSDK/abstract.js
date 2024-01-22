@@ -1,6 +1,6 @@
 import { request } from 'graphql-request'
-import { WithArgs } from 'src/types/with-args'
 import { gql } from '../codegen/gql'
+import { WithArgs } from '../types/with-args'
 
 export type GetAnsHostAddressFromApiParameters = WithArgs<{
   apiUrl: string

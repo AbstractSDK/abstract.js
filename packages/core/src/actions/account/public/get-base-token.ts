@@ -1,7 +1,7 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { WithArgs } from 'src/types/with-args'
-import { CW20Token, NativeToken } from 'src/utils'
 import { VersionControlTypes } from '../../../codegen/abstract'
+import { WithArgs } from '../../../types/with-args'
+import { CW20Token, NativeToken } from '../../../utils'
 import { getProxyQueryClientFromApi } from './get-proxy-query-client-from-api'
 
 function hasNativeField(base_asset: any): base_asset is { native: string } {

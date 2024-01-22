@@ -7,7 +7,7 @@ import {
 import { toUtf8 } from '@cosmjs/encoding'
 import { type StdFee } from '@cosmjs/stargate'
 import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
-import { ContractMsg } from 'src/legacy/messages'
+import { ContractMsg } from './messages'
 
 /**
  * The variant names that a type supports.

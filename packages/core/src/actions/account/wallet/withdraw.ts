@@ -1,7 +1,7 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { WithArgsAndCosmWasmSignOptions } from 'src/types/with-args'
 import { VersionControlTypes } from '../../../codegen/abstract'
 import { SliceFirstTwo } from '../../../types/utils'
+import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
 import { Asset, encodeAssetsProxyTransferMsgs } from '../../../utils/assets'
 import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
 import { execute } from './execute'

@@ -1,5 +1,5 @@
-import { SliceFirst } from 'src/types/utils'
 import * as s from 'string-ts'
+import { SliceFirst } from '../../../types/utils'
 import { CHAIN_SEPARATOR } from './constants'
 import { AnsId } from './types'
 
