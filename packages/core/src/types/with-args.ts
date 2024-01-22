@@ -22,9 +22,11 @@ export type CutArgs<
 > = Prettify<
   T extends (payload: infer P) => any
     ? P extends WithArgs<TArgs>
-      ? Omit<P, 'args'> & {
-          args: Omit<P['args'], K>
-        }
+      ? Prettify<
+          Omit<P, 'args'> & {
+            args: Prettify<Omit<P['args'], K>>
+          }
+        >
       : never
     : never
 >

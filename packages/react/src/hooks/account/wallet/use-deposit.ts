@@ -4,8 +4,7 @@ import { UseMutationOptions, useMutation } from '@tanstack/react-query'
 
 type DepositMutation = {
   accountWalletClient: AccountWalletClient
-  args: Parameters<AccountWalletClient['deposit']>
-}
+} & Parameters<AccountWalletClient['deposit']>[0]
 
 /**
  * Hook to deposit assets to an Account.
@@ -15,7 +14,7 @@ export function useDeposit(
   options: UseMutationOptions<DeliverTxResponse, unknown, DepositMutation> = {},
 ) {
   return useMutation(
-    ({ accountWalletClient, args }) => accountWalletClient.deposit(...args),
+    ({ accountWalletClient, ...rest }) => accountWalletClient.deposit(rest),
     options,
   )
 }

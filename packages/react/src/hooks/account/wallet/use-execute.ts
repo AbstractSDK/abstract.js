@@ -4,8 +4,7 @@ import { UseMutationOptions, useMutation } from '@tanstack/react-query'
 
 type ExecuteMutation = {
   accountWalletClient: AccountWalletClient
-  args: Parameters<AccountWalletClient['execute']>
-}
+} & Parameters<AccountWalletClient['execute']>[0]
 
 /**
  * Hook to execute a transaction on an Account.
@@ -15,7 +14,7 @@ export function useExecute(
   options: UseMutationOptions<DeliverTxResponse, Error, ExecuteMutation> = {},
 ) {
   return useMutation(
-    ({ accountWalletClient, args }) => accountWalletClient.execute(...args),
+    ({ accountWalletClient, ...rest }) => accountWalletClient.execute(rest),
     options,
   )
 }

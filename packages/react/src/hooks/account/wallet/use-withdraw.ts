@@ -4,8 +4,7 @@ import { UseMutationOptions, useMutation } from '@tanstack/react-query'
 
 type WithdrawMutation = {
   accountWalletClient: AccountWalletClient
-  args: Parameters<AccountWalletClient['withdraw']>
-}
+} & Parameters<AccountWalletClient['withdraw']>[0]
 
 /**
  * Hook to withdraw from an Account.
@@ -15,7 +14,7 @@ export function useWithdraw(
   options: UseMutationOptions<DeliverTxResponse, Error, WithdrawMutation> = {},
 ) {
   return useMutation(
-    ({ accountWalletClient, args }) => accountWalletClient.withdraw(...args),
+    ({ accountWalletClient, ...rest }) => accountWalletClient.withdraw(rest),
     options,
   )
 }
