@@ -1,5 +1,14 @@
 # @abstract-money/react
 
+## 0.2.1
+
+### Patch Changes
+
+- [`f1ba82a`](https://github.com/AbstractSDK/abstract.js/commit/f1ba82a116296c8d4d9cdc88e3cac136284528a1) Thanks [@dalechyn](https://github.com/dalechyn)! - Fixes args propagation in `useDeposit`, `useExecute` and `useWithdraw` hook, and prettifies types from cut arguments.
+
+- Updated dependencies [[`f1ba82a`](https://github.com/AbstractSDK/abstract.js/commit/f1ba82a116296c8d4d9cdc88e3cac136284528a1)]:
+  - @abstract-money/core@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes

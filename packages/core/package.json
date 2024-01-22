@@ -1,6 +1,6 @@
 {
   "name": "@abstract-money/core",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Typings for Abstract smart contracts",
   "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
   "author": "adairrr <adair@abstract.money>",
