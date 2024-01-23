@@ -1,0 +1,54 @@
+{
+  "name": "@abstract-money/provider-cosmoskit",
+  "version": "0.0.0",
+  "description": "Provider for CosmosKit",
+  "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
+  "author": "dalechyn <adair@abstract.money>",
+  "contributors": [
+    "dalechyn <vlad@abstract.money>",
+    "adairrr <adair@abstract.money>"
+  ],
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbstractSDK/abstract.js.git",
+    "directory": "packages/provider-cosmoskit"
+  },
+  "bugs": {
+    "url": "https://github.com/AbstractSDK/abstract.js/issues"
+  },
+  "scripts": {
+    "build": "tsup",
+    "clean": "rimraf dist",
+    "typecheck": "tsc --noEmit --jsx react-jsx"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@cosmjs/cosmwasm-stargate": ">=0.28",
+    "@abstract-money/react": "workspace:*"
+  },
+  "devDependencies": {
+    "@abstract-money/react": "workspace:*",
+    "@cosmjs/cosmwasm-stargate": "^0.31.0",
+    "@types/node": "^18.11.10",
+    "rimraf": "^3.0.0"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "/dist"
+  ],
+  "sideEffects": false
+}

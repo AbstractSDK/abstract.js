@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "baseUrl": ".",
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "lib": ["es2021", "dom"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noImplicitAny": true,
+    "noUncheckedIndexedAccess": true,
+    // TODO: change to true
+    "noUnusedLocals": false,
+    "noUnusedParameters": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "target": "es2021",
+    "paths": {
+      // TODO: Remove once issue is fixed
+      // https://github.com/microsoft/TypeScript/issues/48212
+      "@cosmjs/cosmwasm-stargate": [
+        "packages/core/node_modules/@cosmjs/cosmwasm-stargate/build"
+      ]
+    },
+    "types": ["node", "@types/jest"]
+  },
+  "exclude": ["**/node_modules/**", "**/dist/**"],
+  "include": [
+    "src/**/*",
+  ]
+}

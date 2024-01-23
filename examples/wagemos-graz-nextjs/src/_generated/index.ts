@@ -181,6 +181,7 @@ export function useWithdraw(...args: Parameters<typeof _useWithdraw>) {
   return { mutate, mutateAsync, ...rest } as const
 }
 
+export type Evaluate<type> = { [key in keyof type]: type[key] } 
 export function useExecute(...args: Parameters<typeof _useExecute>) {
   const accountWalletClient = useGrazAccountWalletClient()
 
