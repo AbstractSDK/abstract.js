@@ -73,7 +73,7 @@ export function createConfig(parameters: CreateConfigParameters) {
     ...args: Prettify<Parameters<Provider['useSigningCosmWasmClient']>>
   ): WalletClient | undefined {
     const signingCosmWasmClient = provider.useSigningCosmWasmClient(...args)
-    const sender = provider.useSenderAddress(...(args as [any]))
+    const sender = provider.useSenderAddress(...args)
     return useMemo(() => {
       if (!signingCosmWasmClient || !sender) return undefined
       return createWalletClient({
@@ -109,10 +109,8 @@ export function createConfig(parameters: CreateConfigParameters) {
       Provider['useSigningCosmWasmClient']
     >[0]
   >): AccountWalletClient | undefined {
-    const signingCosmWasmClient = provider.useSigningCosmWasmClient(
-      ...(rest as [any]),
-    )
-    const sender = provider.useSenderAddress(...(rest as [any]))
+    const signingCosmWasmClient = provider.useSigningCosmWasmClient(rest)
+    const sender = provider.useSenderAddress(rest)
     return useMemo(() => {
       if (!signingCosmWasmClient || !sender || !accountId) return undefined
       return createAccountWalletClient({

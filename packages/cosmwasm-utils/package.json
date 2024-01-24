@@ -46,6 +46,10 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["/client", "/query", "/dist"],
+  "files": [
+    "/client",
+    "/query",
+    "/dist"
+  ],
   "sideEffects": false
 }

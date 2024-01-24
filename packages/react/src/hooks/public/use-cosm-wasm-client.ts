@@ -7,7 +7,7 @@ import { useConfig } from 'src/contexts'
 export function useCosmWasmClient(
   args: {
     /** Pass only if you are using cosmos-kit provider, graz doesn't need one. */
-    chain: string | undefined
+    chainName: string | undefined
   },
   {
     enabled: enabled_ = true,
@@ -20,7 +20,7 @@ export function useCosmWasmClient(
   > = {},
 ) {
   const config = useConfig()
-  const publicClient = config.usePublicClient({ chainName: args?.chain })
+  const publicClient = config.usePublicClient({ chainName: args?.chainName })
 
   const queryKey = React.useMemo(
     () => ['cosm-wasm-client', publicClient] as const,

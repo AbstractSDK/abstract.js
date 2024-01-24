@@ -4,15 +4,15 @@ import { getAnsTokensFromApi } from './get-ans-tokens-from-api'
 
 export type GetAnsTokenFromApiParameters = WithArgs<{
   apiUrl: string
-  chainId: string
+  chainName: string
   id: AnsId
 }>
 
 export async function getAnsTokenFromApi({
-  args: { apiUrl, chainId, id },
+  args: { apiUrl, chainName, id },
 }: GetAnsTokenFromApiParameters) {
   const result = await getAnsTokensFromApi({
-    args: { apiUrl, chainId, ids: [id] },
+    args: { apiUrl, chainName, ids: [id] },
   }).then((tokens) => tokens[0])
   if (!result) throw new Error(`Cannot find token with id ${id}`)
   return result

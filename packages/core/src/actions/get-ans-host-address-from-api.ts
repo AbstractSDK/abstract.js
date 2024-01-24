@@ -4,11 +4,11 @@ import { WithArgs } from '../types/with-args'
 
 export type GetAnsHostAddressFromApiParameters = WithArgs<{
   apiUrl: string
-  chainId: string
+  chainName: string
 }>
 
 export async function getAnsHostAddressFromApi({
-  args: { apiUrl, chainId },
+  args: { apiUrl, chainName },
 }: GetAnsHostAddressFromApiParameters) {
   const deploymentData = await request(
     apiUrl,
@@ -21,7 +21,7 @@ export async function getAnsHostAddressFromApi({
       }
     `),
     {
-      chain: chainId,
+      chain: chainName,
     },
   )
 

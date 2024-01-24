@@ -61,7 +61,7 @@ export function PlaceBetDialog({ round }: { round: RoundResponse }) {
   const { toast } = useToast()
 
   const { mutateAsync: placeBetAsync, isLoading } =
-    betting.mutations.usePlaceBet({ chain: 'neutron' })
+    betting.mutations.usePlaceBet({ chainName: 'neutron' })
 
   const onSubmit: SubmitHandler<z.infer<typeof placeBetSchema>> = useCallback(
     async ({ amount, accountSeq }) => {

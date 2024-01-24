@@ -7,15 +7,15 @@ import { MaybeArray } from '../types/utils'
 /**
  * Loads all accounts for a given owner and chain.
  * @param owner address of the owner. Will automatically translate to other chains' addresses.
- * @param chain chain to load accounts for.
+ * @param chainName chain to load accounts for.
  */
 export function useAccounts(
   {
     owner,
-    chain,
+    chainName,
   }: {
     owner: string | undefined
-    chain: MaybeArray<string> | undefined
+    chainName: MaybeArray<string> | undefined
   },
   {
     enabled: enabled_ = true,
@@ -33,8 +33,13 @@ export function useAccounts(
   > = {},
 ) {
   const chains = React.useMemo(
-    () => (chain ? (Array.isArray(chain) ? chain : [chain]) : undefined),
-    [chain],
+    () =>
+      chainName
+        ? Array.isArray(chainName)
+          ? chainName
+          : [chainName]
+        : undefined,
+    [chainName],
   )
   const config = useConfig()
   const client = config.useApiClient()

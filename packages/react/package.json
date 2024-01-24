@@ -72,7 +72,11 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["/utils", "/hooks", "/dist"],
+  "files": [
+    "/utils",
+    "/hooks",
+    "/dist"
+  ],
   "simple-git-hooks": {
     "pre-commit": "pnpm format && pnpm lint:fix"
   },

@@ -28,16 +28,16 @@ export function useAnsTokenFromAPI(
   )
 
   const enabled = React.useMemo(
-    () => Boolean(client && args.id && args.chainId && enabled_),
+    () => Boolean(client && args.id && args.chainName && enabled_),
     [enabled_, client, args],
   )
 
   const queryFn = React.useCallback(() => {
-    if (!client || !args.chainId || !args.id)
+    if (!client || !args.chainName || !args.id)
       throw new Error('No client or owner or chain')
 
     return client.getAnsTokenFromApi({
-      args: { chainId: args.chainId, id: args.id },
+      args: { chainName: args.chainName, id: args.id },
     })
   }, [client, args])
 

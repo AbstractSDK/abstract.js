@@ -44,7 +44,9 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["/dist"],
+  "files": [
+    "/dist"
+  ],
   "sideEffects": false,
   "peerDependencies": {
     "@abstract-money/react": "workspace:*",

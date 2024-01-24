@@ -7,7 +7,7 @@ export function useSenderAddress(
   /** Pass only if you are using cosmos-kit provider, graz doesn't need one */
   args?: {
     /** Pass only if you are using cosmos-kit provider, graz doesn't need one. */
-    chain: string | undefined
+    chainName: string | undefined
   },
   {
     enabled: enabled_ = true,
@@ -16,14 +16,14 @@ export function useSenderAddress(
     string | undefined,
     unknown,
     string | undefined,
-    readonly ['signing-cosm-wasm-client', WalletClient | undefined]
+    readonly ['sender-address', WalletClient | undefined]
   > = {},
 ) {
   const config = useConfig()
-  const walletClient = config.useWalletClient({ chainName: args?.chain })
+  const walletClient = config.useWalletClient({ chainName: args?.chainName })
 
   const queryKey = React.useMemo(
-    () => ['signing-cosm-wasm-client', walletClient] as const,
+    () => ['sender-address', walletClient] as const,
     [walletClient],
   )
 

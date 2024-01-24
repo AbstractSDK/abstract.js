@@ -4,11 +4,11 @@ import { WithArgs } from '../types/with-args'
 
 export type GetVersionControlAddressFromApiParameters = WithArgs<{
   apiUrl: string
-  chainId: string
+  chainName: string
 }>
 
 export async function getVersionControlAddressFromApi({
-  args: { apiUrl, chainId },
+  args: { apiUrl, chainName },
 }: GetVersionControlAddressFromApiParameters) {
   const deploymentData = await request(
     apiUrl,
@@ -20,7 +20,7 @@ export async function getVersionControlAddressFromApi({
       }
     `),
     {
-      chain: chainId,
+      chain: chainName,
     },
   )
 

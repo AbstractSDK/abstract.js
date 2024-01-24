@@ -50,7 +50,7 @@ export function react(): ReactResult {
           args: Omit<Parameters<typeof useAbstractModuleQueryClient_>[0], 'client'>,
           options?: Parameters<typeof useAbstractModuleQueryClient_>[1],
         ) {
-          const { data: client } = useCosmWasmClient({chain: args.chain})
+          const { data: client } = useCosmWasmClient({chainName: args.chainName})
           return useAbstractModuleQueryClient_(
             {
               client,
@@ -67,8 +67,8 @@ export function react(): ReactResult {
           >,
           options?: Parameters<typeof useAbstractModuleClient_>[1],
         ) {
-          const { data: client } = useSigningCosmWasmClient({chain: args.chain})
-          const { data: sender } = useSenderAddress({chain: args.chain})
+          const { data: client } = useSigningCosmWasmClient({chainName: args.chainName})
+          const { data: sender } = useSenderAddress({chainName: args.chainName})
           return useAbstractModuleClient_(
             {
               client,
@@ -202,9 +202,9 @@ export function react(): ReactResult {
               queryHooks.set(
                 hookNameWithoutModuleAndQuery,
                 dedent`
-                  ({ options, accountId, chain, ...rest }: Omit<Parameters<typeof ${hookName}<${contractNamePascalCase}Types.${queryHookNameToResponseTypeMap.get(
+                  ({ options, accountId, chainName, ...rest }: Omit<Parameters<typeof ${hookName}<${contractNamePascalCase}Types.${queryHookNameToResponseTypeMap.get(
                   hookName,
-                )}>>[0], 'client'> & { accountId?: AccountId; chain: string | undefined }) => {
+                )}>>[0], 'client'> & { accountId?: AccountId; chainName: string | undefined }) => {
                     const {
                       data: ${contractNameCamelCase}AppQueryClient,
                       isLoading: is${contractNamePascalCase}AppQueryClientLoading,
@@ -214,7 +214,7 @@ export function react(): ReactResult {
                       {
                         moduleId: ${constantCase(contract.name)}_MODULE_ID,
                         accountId,
-                        chain,
+                        chainName,
                         Module: ${contractNamePascalCase}AppQueryClient,
                       },
                       { enabled: options?.enabled },
@@ -276,7 +276,7 @@ export function react(): ReactResult {
                 hookNameWithoutModuleAndMutation,
                 dedent`
                   (
-                    { chain, accountId }: { chain: string | undefined; accountId?: AccountId },
+                    { chainName, accountId }: { chainName: string | undefined; accountId?: AccountId },
                     options?: Omit<
                       UseMutationOptions<
                         ExecuteResult,
@@ -296,7 +296,7 @@ export function react(): ReactResult {
                       {
                         moduleId: ${constantCase(contract.name)}_MODULE_ID,
                         accountId,
-                        chain,
+                        chainName,
                         Module: ${contractNamePascalCase}AppClient,
                       }
                     )

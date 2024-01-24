@@ -8,7 +8,7 @@ export function useSigningCosmWasmClient(
   /** Pass only if you are using cosmos-kit provider, graz doesn't need one */
   args?: {
     /** Pass only if you are using cosmos-kit provider, graz doesn't need one. */
-    chain: string | undefined
+    chainName: string | undefined
   },
   {
     enabled: enabled_ = true,
@@ -21,7 +21,7 @@ export function useSigningCosmWasmClient(
   > = {},
 ) {
   const config = useConfig()
-  const walletClient = config.useWalletClient({ chainName: args?.chain })
+  const walletClient = config.useWalletClient({ chainName: args?.chainName })
 
   const queryKey = React.useMemo(
     () => ['signing-cosm-wasm-client', walletClient] as const,

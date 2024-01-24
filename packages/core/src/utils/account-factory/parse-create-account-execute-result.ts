@@ -1,18 +1,17 @@
 import { ExecuteResult } from '@cosmjs/cosmwasm-stargate'
 import { ACCOUNT_ID_CHAIN_DELIMITER, AccountId } from '../account-id'
-import { chainIdToName } from '../chain-registry'
 import { findAbstractAttribute } from '../events'
 
 export function parseCreateAccountExecuteResult(
   result: ExecuteResult,
-  chainId: string,
+  chainName: string,
 ) {
   const seq = Number.parseInt(
     findAbstractAttribute(result, 'account_sequence').value,
   )
   const trace = findAbstractAttribute(result, 'trace').value
   const accountId = {
-    chainName: chainIdToName(chainId),
+    chainName,
     seq,
     trace:
       trace === 'local' || trace === undefined

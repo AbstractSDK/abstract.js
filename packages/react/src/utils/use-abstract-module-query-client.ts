@@ -28,14 +28,14 @@ async function getAbstractModuleQueryClient<
   TModule extends ModuleQueryClientConstructor,
 >({
   client,
-  chain,
+  chainName,
   overrideApiUrl = ABSTRACT_API_URL,
   accountId,
   moduleId,
   Module,
 }: {
   client: CosmWasmClient
-  chain: string
+  chainName: string
   overrideApiUrl?: string
   accountId: AccountId
   moduleId: string
@@ -43,7 +43,7 @@ async function getAbstractModuleQueryClient<
 }) {
   // TODO: re-check if grabbing the first chain of the list is a good solution
   const data = await graphqlRequest(overrideApiUrl, CHAIN_DEPLOYMENT_QUERY, {
-    chain,
+    chain: chainName,
   })
 
   const {
@@ -94,11 +94,11 @@ export function useAbstractModuleQueryClient<
     accountId: defaultAccountId,
     Module,
     client,
-    chain,
+    chainName,
   }: {
     client: CosmWasmClient | undefined
     accountId?: AccountId
-    chain: string | undefined
+    chainName: string | undefined
     moduleId: string
     Module: TModule
   },
@@ -120,7 +120,10 @@ export function useAbstractModuleQueryClient<
     isLoading: isAbstractClientLoading,
     isError: isAbstractClientError,
     error: abstractClientError,
-  } = useAbstractQueryClient({ client, chain }, { enabled: enabled_ })
+  } = useAbstractQueryClient(
+    { client, chainName: chainName },
+    { enabled: enabled_ },
+  )
 
   const queryKey = React.useMemo(
     () =>
@@ -136,21 +139,21 @@ export function useAbstractModuleQueryClient<
 
   const queryFn = React.useCallback(() => {
     if (!client) throw new Error('client is not defined')
-    if (!chain) throw new Error('chain is not defined')
+    if (!chainName) throw new Error('chain is not defined')
 
     return getAbstractModuleQueryClient({
       client,
-      chain,
+      chainName: chainName,
       overrideApiUrl: apiUrl,
       accountId,
       moduleId,
       Module,
     })
-  }, [client, chain, apiUrl, accountId, moduleId, Module])
+  }, [client, chainName, apiUrl, accountId, moduleId, Module])
 
   const enabled = React.useMemo(
-    () => Boolean(client && chain && enabled_),
-    [enabled_, client, chain],
+    () => Boolean(client && chainName && enabled_),
+    [enabled_, client, chainName],
   )
 
   const {

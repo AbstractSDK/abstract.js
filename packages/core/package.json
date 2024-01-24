@@ -93,6 +93,11 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["/clients", "/utils", "/legacy", "/dist"],
+  "files": [
+    "/clients",
+    "/utils",
+    "/legacy",
+    "/dist"
+  ],
   "sideEffects": false
 }

@@ -81,5 +81,9 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["/config", "/plugins", "/dist"]
+  "files": [
+    "/config",
+    "/plugins",
+    "/dist"
+  ]
 }
