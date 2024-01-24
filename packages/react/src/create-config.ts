@@ -19,10 +19,7 @@ import {
 import { useMemo } from 'react'
 import { Prettify } from './types/utils'
 
-// Because cosmos-kit does not handle the chain states
-// and requires them to be explicitly passed,
 type CommonProviderArgs = {
-  /** Pass only if you are using cosmos-kit provider, graz doesn't need one. */
   chainName?: string
 }
 

@@ -6,17 +6,23 @@ import {
 import { useChain } from '@cosmos-kit/react'
 import { useEffect, useMemo, useState } from 'react'
 
+/**
+ * Such hack lets us calling `useChain` safely when a `chainName` is not passed,
+ * as otherwise, `useChain` function throws an error.
+ */
+const USE_CHAIN_HACK_CHAIN_NAME = 'neutron'
+
 export const cosmosKitProvider = {
-  useCosmWasmClient(args?: { chainName?: string }) {
+  useCosmWasmClient(parameters: Parameters<Provider['useCosmWasmClient']>[0]) {
     const [client, setClient] = useState<CosmWasmClient | undefined>(undefined)
     const { getCosmWasmClient: _getCosmWasmClient } = useChain(
-      args?.chainName ?? 'neutron',
+      parameters?.chainName ?? USE_CHAIN_HACK_CHAIN_NAME,
     )
 
     const getCosmWasmClient = useMemo(() => {
-      if (!args?.chainName) return undefined
+      if (!parameters?.chainName) return undefined
       return _getCosmWasmClient
-    }, [_getCosmWasmClient, args?.chainName])
+    }, [_getCosmWasmClient, parameters?.chainName])
 
     useEffect(() => {
       if (!getCosmWasmClient) return
@@ -25,19 +31,21 @@ export const cosmosKitProvider = {
 
     return client
   },
-  useSigningCosmWasmClient(args?: { chainName?: string }) {
+  useSigningCosmWasmClient(
+    parameters: Parameters<Provider['useSigningCosmWasmClient']>[0],
+  ) {
     const [client, setClient] = useState<SigningCosmWasmClient | undefined>(
       undefined,
     )
     const {
       getSigningCosmWasmClient: _getSigningCosmWasmClient,
       isWalletConnected,
-    } = useChain(args?.chainName ?? 'neutron')
+    } = useChain(parameters?.chainName ?? USE_CHAIN_HACK_CHAIN_NAME)
 
     const getSigningCosmWasmClient = useMemo(() => {
-      if (!args?.chainName || !isWalletConnected) return undefined
+      if (!parameters?.chainName || !isWalletConnected) return undefined
       return _getSigningCosmWasmClient
-    }, [_getSigningCosmWasmClient, args?.chainName])
+    }, [_getSigningCosmWasmClient, parameters?.chainName])
 
     useEffect(() => {
       if (!getSigningCosmWasmClient) return
@@ -46,9 +54,14 @@ export const cosmosKitProvider = {
 
     return client
   },
-  useSenderAddress(args?: { chainName?: string }) {
-    const { address } = useChain(args?.chainName ?? 'neutron')
+  useSenderAddress(parameters: Parameters<Provider['useSenderAddress']>[0]) {
+    const { address } = useChain(
+      parameters?.chainName ?? USE_CHAIN_HACK_CHAIN_NAME,
+    )
 
-    return address
+    return useMemo(
+      () => (!parameters?.chainName ? undefined : address),
+      [address, parameters?.chainName],
+    )
   },
 } satisfies Provider

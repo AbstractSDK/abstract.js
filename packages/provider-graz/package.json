@@ -30,6 +30,7 @@
   "type": "module",
   "devDependencies": {
     "@abstract-money/react": "workspace:*",
+    "@abstract-money/core": "workspace:*",
     "@cosmjs/cosmwasm-stargate": "^0.31.3",
     "@types/node": "^18.11.10",
     "graz": "^0.1.1",
@@ -50,6 +51,7 @@
   "sideEffects": false,
   "peerDependencies": {
     "@abstract-money/react": "workspace:*",
+    "@abstract-money/core": "workspace:*",
     "@cosmjs/cosmwasm-stargate": ">=0.28",
     "graz": "^0.1.1"
   }

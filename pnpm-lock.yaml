@@ -620,6 +620,9 @@ importers:
 
   packages/provider-graz:
     devDependencies:
+      '@abstract-money/core':
+        specifier: workspace:*
+        version: link:../core
       '@abstract-money/react':
         specifier: workspace:*
         version: link:../react
