@@ -1,9 +1,11 @@
 'use client'
 
 import { stringToAccountId } from '@abstract-money/core'
+import { grazProvider } from '@abstract-money/provider-graz'
 import {
   AbstractAccountIdProvider,
   AbstractProvider,
+  createConfig,
 } from '@abstract-money/react'
 import { Inter, Poppins } from 'next/font/google'
 import { Toaster } from '../components/ui/toaster'
@@ -18,6 +20,7 @@ const poppins = Poppins({
   weight: ['900', '800', '700'],
   variable: '--font-display',
 })
+const abstractConfig = createConfig({ provider: grazProvider })
 
 export default function RootLayout({
   children,
@@ -29,7 +32,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(inter.variable, poppins.variable)}>
         <GrazProvider>
-          <AbstractProvider>
+          <AbstractProvider config={abstractConfig}>
             <AbstractAccountIdProvider
               accountId={stringToAccountId('neutron-18')}
             >

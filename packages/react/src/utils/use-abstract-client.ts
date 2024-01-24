@@ -12,16 +12,16 @@ import { useConfig } from 'src/contexts'
 export async function getAbstractClient({
   sender,
   client,
-  chain,
+  chainName,
   overrideApiUrl = ABSTRACT_API_URL,
 }: {
   sender: string
   client: SigningCosmWasmClient
-  chain: string
+  chainName: string
   overrideApiUrl?: string
 }) {
   const data = await graphqlRequest(overrideApiUrl, CHAIN_DEPLOYMENT_QUERY, {
-    chain,
+    chain: chainName,
   })
 
   const {
@@ -45,10 +45,10 @@ export async function getAbstractClient({
 export function useAbstractClient(
   {
     client,
-    chain,
+    chainName,
     sender,
   }: {
-    chain: string | undefined
+    chainName: string | undefined
     sender: string | undefined
     client: SigningCosmWasmClient | undefined
   },
@@ -71,26 +71,26 @@ export function useAbstractClient(
   const { apiUrl } = useConfig()
 
   const queryKey = React.useMemo(
-    () => ['abstract-client', sender, chain, apiUrl, client] as const,
-    [sender, chain, apiUrl, client],
+    () => ['abstract-client', sender, chainName, apiUrl, client] as const,
+    [sender, chainName, apiUrl, client],
   )
 
   const queryFn = React.useCallback(() => {
     if (!client) throw new Error('client is not defined')
     if (!sender) throw new Error('sender is not defined')
-    if (!chain) throw new Error('chain is not defined')
+    if (!chainName) throw new Error('chain is not defined')
 
     return getAbstractClient({
       sender,
       client,
-      chain,
+      chainName: chainName,
       overrideApiUrl: apiUrl,
     })
-  }, [client, chain, apiUrl])
+  }, [client, chainName, apiUrl])
 
   const enabled = React.useMemo(
-    () => Boolean(client && chain && enabled_),
-    [enabled_, client, chain],
+    () => Boolean(client && chainName && enabled_),
+    [enabled_, client, chainName],
   )
 
   return useQuery(queryKey, queryFn, { enabled, ...rest })

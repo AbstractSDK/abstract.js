@@ -3,6 +3,7 @@ import { AccountFactoryClient } from '../../codegen/abstract'
 import { WithOptional } from '../../types/utils'
 import { WithArgsAndCosmWasmSignOptions } from '../../types/with-args'
 import { parseCreateAccountExecuteResult } from '../../utils/account-factory/parse-create-account-execute-result'
+import { chainIdToName } from '../../utils/chain-registry'
 import { getAccountFactoryClientFromApi } from './get-account-factory-client-from-api'
 
 export type CreateAccountParameters = WithArgsAndCosmWasmSignOptions<
@@ -33,6 +34,7 @@ export async function createAccount({
   funds,
 }: CreateAccountParameters) {
   const chainId = await signingCosmWasmClient.getChainId()
+  const chainName = chainIdToName(chainId)
   const accountFactoryClient = await getAccountFactoryClientFromApi({
     args: {
       signingCosmWasmClient,
@@ -57,5 +59,5 @@ export async function createAccount({
     funds,
   )
 
-  return parseCreateAccountExecuteResult(result, chainId)
+  return parseCreateAccountExecuteResult(result, chainName)
 }

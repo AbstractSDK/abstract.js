@@ -11,10 +11,9 @@ import type { RequiredBy } from '../types'
 // NOTE: It looks like the `ts-codegen` package bundles incorrectly and the default export is not actually exported.
 const codegen = (_codegen as any).default as typeof _codegen
 
-type ReactConfig = { addon: 'graz' } | { addon: 'cosmos-kit'; lite?: boolean }
 type ReactResult = RequiredBy<Plugin, 'run'>
 
-export function react(options?: ReactConfig): ReactResult {
+export function react(): ReactResult {
   return {
     name: 'React',
     async run({ contracts, out, isTypeScript }) {
@@ -44,318 +43,42 @@ export function react(options?: ReactConfig): ReactResult {
       })
 
       const imports: string[] = []
-
-      if (options?.addon === 'graz') {
-        imports.push(
-          `import { useAccount, useCosmWasmClient, useCosmWasmSigningClient } from 'graz'`,
-        )
-      } else if (options?.addon === 'cosmos-kit') {
-        imports.push(
-          `import { useChain } from '@cosmos-kit/${
-            options.lite ? 'react-lite' : 'react'
-          }'`,
-        )
-      }
-
       const content: string[] = []
 
-      let useAbstractModuleQueryClientHookName:
-        | 'useGrazAbstractModuleQueryClient'
-        | 'useCosmosKitAbstractModuleQueryClient'
-        | 'useAbstractModuleQueryClient'
-      let useAbstractModuleClientHookName:
-        | 'useGrazAbstractModuleClient'
-        | 'useCosmosKitAbstractModuleClient'
-        | 'useAbstractModuleClient'
-      let useAccountWalletClientHookName:
-        | 'useGrazAccountWalletClient'
-        | 'useCosmosKitAccountWalletClient'
-        | undefined
+      content.push(dedent`
+        function useAbstractModuleQueryClient(
+          args: Omit<Parameters<typeof useAbstractModuleQueryClient_>[0], 'client'>,
+          options?: Parameters<typeof useAbstractModuleQueryClient_>[1],
+        ) {
+          const { data: client } = useCosmWasmClient({chainName: args.chainName})
+          return useAbstractModuleQueryClient_(
+            {
+              client,
+              ...args,
+            },
+            options,
+          )
+        }
 
-      if (options?.addon === 'graz') {
-        useAbstractModuleQueryClientHookName =
-          'useGrazAbstractModuleQueryClient'
-        useAbstractModuleClientHookName = 'useGrazAbstractModuleClient'
-        useAccountWalletClientHookName = 'useGrazAccountWalletClient'
-        content.push(dedent`
-              function ${useAbstractModuleQueryClientHookName}(
-                args: Omit<Parameters<typeof useAbstractModuleQueryClient>[0], 'client'>,
-                options?: Parameters<typeof useAbstractModuleQueryClient>[1],
-              ) {
-                const { data: client } = useCosmWasmClient()
-                return useAbstractModuleQueryClient(
-                  {
-                    client,
-                    ...args,
-                  },
-                  options,
-                )
-              }
-
-              function ${useAbstractModuleClientHookName}(
-                args: Omit<
-                  Parameters<typeof useAbstractModuleClient>[0],
-                  'client' | 'sender'
-                >,
-                options?: Parameters<typeof useAbstractModuleClient>[1],
-              ) {
-                const { data: client } = useCosmWasmSigningClient()
-                const { data: account } = useAccount()
-                const sender = account?.bech32Address
-                return useAbstractModuleClient(
-                  {
-                    client,
-                    sender,
-                    ...args,
-                  },
-                  options,
-                )
-              }
-
-              function ${useAccountWalletClientHookName}() {
-                const { data: signingCosmWasmClient } = useCosmWasmSigningClient()
-                const { data: account } = useAccount()
-                const sender = account?.bech32Address
-                return useAccountWalletClient(
-                  {
-                    signingCosmWasmClient,
-                    sender,
-                  },
-                )
-              }
-            `)
-      } else if (options?.addon === 'cosmos-kit') {
-        useAbstractModuleQueryClientHookName =
-          'useCosmosKitAbstractModuleQueryClient'
-        useAbstractModuleClientHookName = 'useCosmosKitAbstractModuleClient'
-        useAccountWalletClientHookName = 'useCosmosKitAccountWalletClient'
-        content.push(dedent`
-              function ${useAbstractModuleQueryClientHookName}(
-                args: Omit<Parameters<typeof useAbstractModuleQueryClient>[0], 'client'>,
-                options?: Parameters<typeof useAbstractModuleQueryClient>[1],
-              ) {
-                const [client, setClient] = useState<CosmWasmClient | undefined>(undefined)
-                const {getCosmWasmClient: _getCosmWasmClient} = useChain(args.chain ?? 'neutron')
-
-                const getCosmWasmClient = useMemo(() => {
-                  if (!args.chain) return undefined
-                  return _getCosmWasmClient
-                }, [_getCosmWasmClient, args.chain])
-
-                useEffect(() => {
-                  if (!getCosmWasmClient) return
-                  getCosmWasmClient().then((client) => setClient(client))
-
-                }, [getCosmWasmClient])
-
-                return useAbstractModuleQueryClient(
-                  {
-                    client,
-                    ...args,
-                  },
-                  options,
-                )
-              }
-
-              function ${useAbstractModuleClientHookName}(
-                args: Omit<
-                  Parameters<typeof useAbstractModuleClient>[0],
-                  'client' | 'sender'
-                >,
-                options?: Parameters<typeof useAbstractModuleClient>[1],
-              ) {
-                const [client, setClient] = useState<SigningCosmWasmClient | undefined>(undefined)
-                const {getSigningCosmWasmClient: _getSigningCosmWasmClient, address, isWalletConnected} = useChain(args.chain ?? 'neutron')
-
-                const getSigningCosmWasmClient = useMemo(() => {
-                  if (!args.chain || !isWalletConnected) return undefined
-                  return _getSigningCosmWasmClient
-                }, [_getSigningCosmWasmClient, args.chain])
-
-                useEffect(() => {
-                  if (!getSigningCosmWasmClient) return
-                  getSigningCosmWasmClient().then((client) => setClient(client))
-
-                }, [getSigningCosmWasmClient])
-
-                return useAbstractModuleClient(
-                  {
-                    client,
-                    sender: address,
-                    ...args,
-                  },
-                  options,
-                )
-              }
-
-              function ${useAccountWalletClientHookName}(args?: { chain?: string }) {
-                const [signingCosmWasmClient, setClient] = useState<SigningCosmWasmClient | undefined>(undefined)
-                const {getSigningCosmWasmClient: _getSigningCosmWasmClient, address, isWalletConnected} = useChain(args?.chain ?? 'neutron')
-
-                const getSigningCosmWasmClient = useMemo(() => {
-                  if (!args?.chain || !isWalletConnected) return undefined
-                  return _getSigningCosmWasmClient
-                }, [_getSigningCosmWasmClient, args?.chain])
-
-                useEffect(() => {
-                  if (!getSigningCosmWasmClient) return
-                  getSigningCosmWasmClient().then((client) => setClient(client))
-
-                }, [getSigningCosmWasmClient])
-
-                return useAccountWalletClient(
-                  {
-                    signingCosmWasmClient,
-                    sender: address,
-                  }
-                )
-              }
-            `)
-      } else {
-        useAbstractModuleQueryClientHookName = 'useAbstractModuleQueryClient'
-        useAbstractModuleClientHookName = 'useAbstractModuleClient'
-      }
-
-      const shouldInjectClientAndSender = options === undefined
-
-      if (!shouldInjectClientAndSender) {
-        imports.push(dedent`
-              import { useAccountWalletClient, useApiClient } from '@abstract-money/react/utils'
-              import {
-                useDeposit as _useDeposit,
-                useWithdraw as _useWithdraw,
-                useExecute as _useExecute,
-                useAccounts as _useAccounts
-              } from '@abstract-money/react/hooks'
-            `)
-        content.push(dedent`
-              export function useAccounts({ chain, owner }: Omit<Parameters<typeof _useAccounts>[0], 'client'>, opts?: Parameters<typeof _useAccounts>[1]) {
-                const apiClient = useApiClient()
-
-                return _useAccounts({chain, owner, client: apiClient}, opts)
-              }
-
-              export function useDeposit(
-                ${
-                  options.addon === 'cosmos-kit'
-                    ? `{ chain }: Parameters<typeof ${useAccountWalletClientHookName}>[0] = {},`
-                    : ''
-                }
-                ...args: Parameters<typeof _useDeposit>
-                ) {
-                const accountWalletClient = ${useAccountWalletClientHookName}(${
-          options.addon === 'cosmos-kit' ? '{ chain }' : ''
-        })
-
-                const {
-                  mutate: mutate_,
-                  mutateAsync: mutateAsync_,
-                  ...rest
-                } = _useDeposit(...args)
-
-                const mutate = useMemo(() => {
-                  if (!accountWalletClient) return undefined
-
-                  return (
-                    variables: Omit<Parameters<typeof mutate_>[0], 'accountWalletClient'>,
-                    options?: Parameters<typeof mutate_>[1],
-                  ) => mutate_({ accountWalletClient, ...variables }, options)
-                }, [mutate_, accountWalletClient])
-
-                const mutateAsync = useMemo(() => {
-                  if (!accountWalletClient) return undefined
-
-                  return (
-                    variables: Omit<Parameters<typeof mutateAsync_>[0], 'accountWalletClient'>,
-                    options?: Parameters<typeof mutateAsync_>[1],
-                  ) =>
-                    mutateAsync_({ accountWalletClient, ...variables }, options)
-                }, [mutateAsync_, accountWalletClient])
-
-                return { mutate, mutateAsync, ...rest } as const
-              }
-
-              export function useWithdraw(
-                ${
-                  options.addon === 'cosmos-kit'
-                    ? `{ chain }: Parameters<typeof ${useAccountWalletClientHookName}>[0] = {},`
-                    : ''
-                }
-                ...args: Parameters<typeof _useWithdraw>
-                ) {
-                const accountWalletClient = ${useAccountWalletClientHookName}(${
-          options.addon === 'cosmos-kit' ? '{ chain }' : ''
-        })
-
-                const {
-                  mutate: mutate_,
-                  mutateAsync: mutateAsync_,
-                  ...rest
-                } = _useWithdraw(...args)
-
-                const mutate = useMemo(() => {
-                  if (!accountWalletClient) return undefined
-
-                  return (
-                    variables: Omit<Parameters<typeof mutate_>[0], 'accountWalletClient'>,
-                    options?: Parameters<typeof mutate_>[1],
-                  ) => mutate_({ accountWalletClient, ...variables }, options)
-                }, [mutate_, accountWalletClient])
-
-                const mutateAsync = useMemo(() => {
-                  if (!accountWalletClient) return undefined
-
-                  return (
-                    variables: Omit<Parameters<typeof mutateAsync_>[0], 'accountWalletClient'>,
-                    options?: Parameters<typeof mutateAsync_>[1],
-                  ) =>
-                    mutateAsync_({ accountWalletClient, ...variables }, options)
-                }, [mutateAsync_, accountWalletClient])
-
-                return { mutate, mutateAsync, ...rest } as const
-              }
-
-              export function useExecute(
-                ${
-                  options.addon === 'cosmos-kit'
-                    ? `{ chain }: Parameters<typeof ${useAccountWalletClientHookName}>[0] = {},`
-                    : ''
-                }
-                ...args: Parameters<typeof _useExecute>
-                ) {
-                const accountWalletClient = ${useAccountWalletClientHookName}(${
-          options.addon === 'cosmos-kit' ? '{ chain }' : ''
-        })
-
-                const {
-                  mutate: mutate_,
-                  mutateAsync: mutateAsync_,
-                  ...rest
-                } = _useExecute(...args)
-
-                const mutate = useMemo(() => {
-                  if (!accountWalletClient) return undefined
-
-                  return (
-                    variables: Omit<Parameters<typeof mutate_>[0], 'accountWalletClient'>,
-                    options?: Parameters<typeof mutate_>[1],
-                  ) => mutate_({ accountWalletClient, ...variables }, options)
-                }, [mutate_, accountWalletClient])
-
-                const mutateAsync = useMemo(() => {
-                  if (!accountWalletClient) return undefined
-
-                  return (
-                    variables: Omit<Parameters<typeof mutateAsync_>[0], 'accountWalletClient'>,
-                    options?: Parameters<typeof mutateAsync_>[1],
-                  ) =>
-                    mutateAsync_({ accountWalletClient, ...variables }, options)
-                }, [mutateAsync_, accountWalletClient])
-
-                return { mutate, mutateAsync, ...rest } as const
-              }
-            `)
-      }
+        function useAbstractModuleClient(
+          args: Omit<
+            Parameters<typeof useAbstractModuleClient_>[0],
+            'client' | 'sender'
+          >,
+          options?: Parameters<typeof useAbstractModuleClient_>[1],
+        ) {
+          const { data: client } = useSigningCosmWasmClient({chainName: args.chainName})
+          const { data: sender } = useSenderAddress({chainName: args.chainName})
+          return useAbstractModuleClient_(
+            {
+              client,
+              sender,
+              ...args,
+            },
+            options,
+          )
+        }
+      `)
 
       for (const contract of contracts) {
         {
@@ -479,26 +202,19 @@ export function react(options?: ReactConfig): ReactResult {
               queryHooks.set(
                 hookNameWithoutModuleAndQuery,
                 dedent`
-                  ({ options, accountId, ${
-                    shouldInjectClientAndSender ? 'client,' : ''
-                  } chain, ...rest }: Omit<Parameters<typeof ${hookName}<${contractNamePascalCase}Types.${queryHookNameToResponseTypeMap.get(
+                  ({ options, accountId, chainName, ...rest }: Omit<Parameters<typeof ${hookName}<${contractNamePascalCase}Types.${queryHookNameToResponseTypeMap.get(
                   hookName,
-                )}>>[0], 'client'> & { accountId?: AccountId; chain: string | undefined${
-                  shouldInjectClientAndSender
-                    ? ', client: CosmWasmClient | undefined'
-                    : ''
-                } }) => {
+                )}>>[0], 'client'> & { accountId?: AccountId; chainName: string | undefined }) => {
                     const {
                       data: ${contractNameCamelCase}AppQueryClient,
                       isLoading: is${contractNamePascalCase}AppQueryClientLoading,
                       isError: is${contractNamePascalCase}AppQueryClientError,
                       error: ${contractNameCamelCase}AppQueryClientError,
-                    } = ${useAbstractModuleQueryClientHookName}(
+                    } = useAbstractModuleQueryClient(
                       {
                         moduleId: ${constantCase(contract.name)}_MODULE_ID,
                         accountId,
-                        ${shouldInjectClientAndSender ? 'client,' : ''}
-                        chain,
+                        chainName,
                         Module: ${contractNamePascalCase}AppQueryClient,
                       },
                       { enabled: options?.enabled },
@@ -560,13 +276,7 @@ export function react(options?: ReactConfig): ReactResult {
                 hookNameWithoutModuleAndMutation,
                 dedent`
                   (
-                    { ${
-                      shouldInjectClientAndSender ? 'client, sender, ' : ''
-                    }chain, accountId }: { ${
-                  shouldInjectClientAndSender
-                    ? 'client: SigningCosmWasmClient | undefined; sender: string | undefined; '
-                    : ''
-                } chain: string | undefined; accountId?: AccountId },
+                    { chainName, accountId }: { chainName: string | undefined; accountId?: AccountId },
                     options?: Omit<
                       UseMutationOptions<
                         ExecuteResult,
@@ -582,13 +292,11 @@ export function react(options?: ReactConfig): ReactResult {
                       // isLoading: is${contractNamePascalCase}AbstractModuleClientLoading,
                       // isError: is${contractNamePascalCase}AbstractModuleClientError,
                       // error: ${contractNameCamelCase}AbstractModuleClientError,
-                    } = ${useAbstractModuleClientHookName}(
+                    } = useAbstractModuleClient(
                       {
-                        moduleId: ${constantCase(contract.name)}_MODULE_ID,${
-                  shouldInjectClientAndSender ? '\nclient,\nsender, ' : ''
-                }
+                        moduleId: ${constantCase(contract.name)}_MODULE_ID,
                         accountId,
-                        chain,
+                        chainName,
                         Module: ${contractNamePascalCase}AppClient,
                       }
                     )
@@ -644,29 +352,26 @@ export function react(options?: ReactConfig): ReactResult {
         }
       }
 
-      const shouldImportUseEffectAndUseState = options?.addon === 'cosmos-kit'
-      const shouldImportCosmWasmClientTypes = options?.addon !== 'graz'
-
       return {
         imports: dedent`
           'use client';
 
-          import { ${
-            shouldImportCosmWasmClientTypes
-              ? 'SigningCosmWasmClient, CosmWasmClient, '
-              : ''
-          }ExecuteResult } from '@cosmjs/cosmwasm-stargate'
+          import { ExecuteResult } from '@cosmjs/cosmwasm-stargate'
           import { UseMutationOptions } from '@tanstack/react-query'
-          import { useMemo${
-            shouldImportUseEffectAndUseState ? ', useState, useEffect' : ''
-          } } from 'react'
+          import { useMemo } from 'react'
 
           import {
-            useAbstractModuleClient,
-            useAbstractModuleQueryClient,
+            useAbstractModuleClient as useAbstractModuleClient_,
+            useAbstractModuleQueryClient as useAbstractModuleQueryClient_,
           } from '@abstract-money/react/utils'
 
           import { AccountId } from '@abstract-money/core'
+
+          import {
+            useCosmWasmClient,
+            useSigningCosmWasmClient,
+            useSenderAddress
+          } from '@abstract-money/react/hooks'
 
           ${imports.join('\n\n')}
         `,

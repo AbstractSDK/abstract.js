@@ -6,7 +6,6 @@ import {
   AbstractAccountId,
   AbstractClient,
   accountIdToLegacyAccountId,
-  legacyAccountIdToAccountId,
 } from '@abstract-money/core/legacy'
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import { useAccountId } from '../contexts'
@@ -57,10 +56,10 @@ export function useAbstractModuleClient<
     accountId: defaultAccountId,
     Module,
     client,
-    chain,
+    chainName,
     sender,
   }: {
-    chain: string | undefined
+    chainName: string | undefined
     sender: string | undefined
     accountId?: AccountId
     moduleId: string
@@ -89,7 +88,7 @@ export function useAbstractModuleClient<
     isLoading: isAbstractClientLoading,
     isError: isAbstractClientError,
     error: abstractClientError,
-  } = useAbstractClient({ client, chain, sender }, { enabled: enabled_ })
+  } = useAbstractClient({ client, chainName, sender }, { enabled: enabled_ })
 
   const queryKey = React.useMemo(
     () =>
@@ -115,8 +114,8 @@ export function useAbstractModuleClient<
   }, [abstractClient, accountId, moduleId, Module])
 
   const enabled = React.useMemo(
-    () => Boolean(abstractClient && chain && enabled_),
-    [enabled_, abstractClient, chain],
+    () => Boolean(abstractClient && chainName && enabled_),
+    [enabled_, abstractClient, chainName],
   )
 
   const {

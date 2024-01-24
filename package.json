@@ -13,7 +13,6 @@
     "lint": "biome check .",
     "lint:fix": "pnpm lint --apply",
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "turbo --filter \"./packages/**\" build",
     "prepare": "npx simple-git-hooks",
     "typecheck": "turbo typecheck"
   },

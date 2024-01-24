@@ -5,23 +5,16 @@ import { UseMutationOptions } from '@tanstack/react-query'
 import { useMemo } from 'react'
 
 import {
-  useAbstractModuleClient,
-  useAbstractModuleQueryClient,
+  useAbstractModuleClient as useAbstractModuleClient_,
+  useAbstractModuleQueryClient as useAbstractModuleQueryClient_,
 } from '@abstract-money/react/utils'
 
 import { AccountId } from '@abstract-money/core'
 
-import { useAccount, useCosmWasmClient, useCosmWasmSigningClient } from 'graz'
-
 import {
-  useAccountWalletClient,
-  useApiClient,
-} from '@abstract-money/react/utils'
-import {
-  useDeposit as _useDeposit,
-  useWithdraw as _useWithdraw,
-  useExecute as _useExecute,
-  useAccounts as _useAccounts,
+  useCosmWasmClient,
+  useSigningCosmWasmClient,
+  useSenderAddress,
 } from '@abstract-money/react/hooks'
 
 import {
@@ -62,12 +55,12 @@ import {
 // React
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function useGrazAbstractModuleQueryClient(
-  args: Omit<Parameters<typeof useAbstractModuleQueryClient>[0], 'client'>,
-  options?: Parameters<typeof useAbstractModuleQueryClient>[1],
+function useAbstractModuleQueryClient(
+  args: Omit<Parameters<typeof useAbstractModuleQueryClient_>[0], 'client'>,
+  options?: Parameters<typeof useAbstractModuleQueryClient_>[1],
 ) {
-  const { data: client } = useCosmWasmClient()
-  return useAbstractModuleQueryClient(
+  const { data: client } = useCosmWasmClient({ chainName: args.chainName })
+  return useAbstractModuleQueryClient_(
     {
       client,
       ...args,
@@ -76,17 +69,18 @@ function useGrazAbstractModuleQueryClient(
   )
 }
 
-function useGrazAbstractModuleClient(
+function useAbstractModuleClient(
   args: Omit<
-    Parameters<typeof useAbstractModuleClient>[0],
+    Parameters<typeof useAbstractModuleClient_>[0],
     'client' | 'sender'
   >,
-  options?: Parameters<typeof useAbstractModuleClient>[1],
+  options?: Parameters<typeof useAbstractModuleClient_>[1],
 ) {
-  const { data: client } = useCosmWasmSigningClient()
-  const { data: account } = useAccount()
-  const sender = account?.bech32Address
-  return useAbstractModuleClient(
+  const { data: client } = useSigningCosmWasmClient({
+    chainName: args.chainName,
+  })
+  const { data: sender } = useSenderAddress({ chainName: args.chainName })
+  return useAbstractModuleClient_(
     {
       client,
       sender,
@@ -96,124 +90,6 @@ function useGrazAbstractModuleClient(
   )
 }
 
-function useGrazAccountWalletClient() {
-  const { data: signingCosmWasmClient } = useCosmWasmSigningClient()
-  const { data: account } = useAccount()
-  const sender = account?.bech32Address
-  return useAccountWalletClient({
-    signingCosmWasmClient,
-    sender,
-  })
-}
-
-export function useAccounts(
-  { chain, owner }: Omit<Parameters<typeof _useAccounts>[0], 'client'>,
-  opts?: Parameters<typeof _useAccounts>[1],
-) {
-  const apiClient = useApiClient()
-
-  return _useAccounts({ chain, owner, client: apiClient }, opts)
-}
-
-export function useDeposit(...args: Parameters<typeof _useDeposit>) {
-  const accountWalletClient = useGrazAccountWalletClient()
-
-  const {
-    mutate: mutate_,
-    mutateAsync: mutateAsync_,
-    ...rest
-  } = _useDeposit(...args)
-
-  const mutate = useMemo(() => {
-    if (!accountWalletClient) return undefined
-
-    return (
-      variables: Omit<Parameters<typeof mutate_>[0], 'accountWalletClient'>,
-      options?: Parameters<typeof mutate_>[1],
-    ) => mutate_({ accountWalletClient, ...variables }, options)
-  }, [mutate_, accountWalletClient])
-
-  const mutateAsync = useMemo(() => {
-    if (!accountWalletClient) return undefined
-
-    return (
-      variables: Omit<
-        Parameters<typeof mutateAsync_>[0],
-        'accountWalletClient'
-      >,
-      options?: Parameters<typeof mutateAsync_>[1],
-    ) => mutateAsync_({ accountWalletClient, ...variables }, options)
-  }, [mutateAsync_, accountWalletClient])
-
-  return { mutate, mutateAsync, ...rest } as const
-}
-
-export function useWithdraw(...args: Parameters<typeof _useWithdraw>) {
-  const accountWalletClient = useGrazAccountWalletClient()
-
-  const {
-    mutate: mutate_,
-    mutateAsync: mutateAsync_,
-    ...rest
-  } = _useWithdraw(...args)
-
-  const mutate = useMemo(() => {
-    if (!accountWalletClient) return undefined
-
-    return (
-      variables: Omit<Parameters<typeof mutate_>[0], 'accountWalletClient'>,
-      options?: Parameters<typeof mutate_>[1],
-    ) => mutate_({ accountWalletClient, ...variables }, options)
-  }, [mutate_, accountWalletClient])
-
-  const mutateAsync = useMemo(() => {
-    if (!accountWalletClient) return undefined
-
-    return (
-      variables: Omit<
-        Parameters<typeof mutateAsync_>[0],
-        'accountWalletClient'
-      >,
-      options?: Parameters<typeof mutateAsync_>[1],
-    ) => mutateAsync_({ accountWalletClient, ...variables }, options)
-  }, [mutateAsync_, accountWalletClient])
-
-  return { mutate, mutateAsync, ...rest } as const
-}
-
-export function useExecute(...args: Parameters<typeof _useExecute>) {
-  const accountWalletClient = useGrazAccountWalletClient()
-
-  const {
-    mutate: mutate_,
-    mutateAsync: mutateAsync_,
-    ...rest
-  } = _useExecute(...args)
-
-  const mutate = useMemo(() => {
-    if (!accountWalletClient) return undefined
-
-    return (
-      variables: Omit<Parameters<typeof mutate_>[0], 'accountWalletClient'>,
-      options?: Parameters<typeof mutate_>[1],
-    ) => mutate_({ accountWalletClient, ...variables }, options)
-  }, [mutate_, accountWalletClient])
-
-  const mutateAsync = useMemo(() => {
-    if (!accountWalletClient) return undefined
-
-    return (
-      variables: Omit<
-        Parameters<typeof mutateAsync_>[0],
-        'accountWalletClient'
-      >,
-      options?: Parameters<typeof mutateAsync_>[1],
-    ) => mutateAsync_({ accountWalletClient, ...variables }, options)
-  }, [mutateAsync_, accountWalletClient])
-
-  return { mutate, mutateAsync, ...rest } as const
-}
-
 const BETTING_MODULE_ID = 'abstract:betting'
 
 export const betting = {
@@ -221,23 +97,22 @@ export const betting = {
     useBets: ({
       options,
       accountId,
-      chain,
+      chainName,
       ...rest
     }: Omit<
       Parameters<typeof useBettingBetsQuery<BettingTypes.BetsResponse>>[0],
       'client'
-    > & { accountId?: AccountId; chain: string | undefined }) => {
+    > & { accountId?: AccountId; chainName: string | undefined }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useGrazAbstractModuleQueryClient(
+      } = useAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
           accountId,
-
-          chain,
+          chainName,
           Module: BettingAppQueryClient,
         },
         { enabled: options?.enabled },
@@ -287,23 +162,22 @@ export const betting = {
     useConfig: ({
       options,
       accountId,
-      chain,
+      chainName,
       ...rest
     }: Omit<
       Parameters<typeof useBettingConfigQuery<BettingTypes.ConfigResponse>>[0],
       'client'
-    > & { accountId?: AccountId; chain: string | undefined }) => {
+    > & { accountId?: AccountId; chainName: string | undefined }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useGrazAbstractModuleQueryClient(
+      } = useAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
           accountId,
-
-          chain,
+          chainName,
           Module: BettingAppQueryClient,
         },
         { enabled: options?.enabled },
@@ -353,25 +227,24 @@ export const betting = {
     useListOdds: ({
       options,
       accountId,
-      chain,
+      chainName,
       ...rest
     }: Omit<
       Parameters<
         typeof useBettingListOddsQuery<BettingTypes.ListOddsResponse>
       >[0],
       'client'
-    > & { accountId?: AccountId; chain: string | undefined }) => {
+    > & { accountId?: AccountId; chainName: string | undefined }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useGrazAbstractModuleQueryClient(
+      } = useAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
           accountId,
-
-          chain,
+          chainName,
           Module: BettingAppQueryClient,
         },
         { enabled: options?.enabled },
@@ -421,23 +294,22 @@ export const betting = {
     useOdds: ({
       options,
       accountId,
-      chain,
+      chainName,
       ...rest
     }: Omit<
       Parameters<typeof useBettingOddsQuery<BettingTypes.OddsResponse>>[0],
       'client'
-    > & { accountId?: AccountId; chain: string | undefined }) => {
+    > & { accountId?: AccountId; chainName: string | undefined }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useGrazAbstractModuleQueryClient(
+      } = useAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
           accountId,
-
-          chain,
+          chainName,
           Module: BettingAppQueryClient,
         },
         { enabled: options?.enabled },
@@ -487,25 +359,24 @@ export const betting = {
     useListRounds: ({
       options,
       accountId,
-      chain,
+      chainName,
       ...rest
     }: Omit<
       Parameters<
         typeof useBettingListRoundsQuery<BettingTypes.RoundsResponse>
       >[0],
       'client'
-    > & { accountId?: AccountId; chain: string | undefined }) => {
+    > & { accountId?: AccountId; chainName: string | undefined }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useGrazAbstractModuleQueryClient(
+      } = useAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
           accountId,
-
-          chain,
+          chainName,
           Module: BettingAppQueryClient,
         },
         { enabled: options?.enabled },
@@ -555,23 +426,22 @@ export const betting = {
     useRound: ({
       options,
       accountId,
-      chain,
+      chainName,
       ...rest
     }: Omit<
       Parameters<typeof useBettingRoundQuery<BettingTypes.RoundResponse>>[0],
       'client'
-    > & { accountId?: AccountId; chain: string | undefined }) => {
+    > & { accountId?: AccountId; chainName: string | undefined }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useGrazAbstractModuleQueryClient(
+      } = useAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
           accountId,
-
-          chain,
+          chainName,
           Module: BettingAppQueryClient,
         },
         { enabled: options?.enabled },
@@ -622,9 +492,9 @@ export const betting = {
   mutations: {
     useUpdateConfig: (
       {
-        chain,
+        chainName,
         accountId,
-      }: { chain: string | undefined; accountId?: AccountId },
+      }: { chainName: string | undefined; accountId?: AccountId },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -640,10 +510,10 @@ export const betting = {
         // isLoading: isBettingAbstractModuleClientLoading,
         // isError: isBettingAbstractModuleClientError,
         // error: bettingAbstractModuleClientError,
-      } = useGrazAbstractModuleClient({
+      } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
-        chain,
+        chainName,
         Module: BettingAppClient,
       })
 
@@ -683,9 +553,9 @@ export const betting = {
     },
     useCloseRound: (
       {
-        chain,
+        chainName,
         accountId,
-      }: { chain: string | undefined; accountId?: AccountId },
+      }: { chainName: string | undefined; accountId?: AccountId },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -701,10 +571,10 @@ export const betting = {
         // isLoading: isBettingAbstractModuleClientLoading,
         // isError: isBettingAbstractModuleClientError,
         // error: bettingAbstractModuleClientError,
-      } = useGrazAbstractModuleClient({
+      } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
-        chain,
+        chainName,
         Module: BettingAppClient,
       })
 
@@ -744,9 +614,9 @@ export const betting = {
     },
     useDistributeWinnings: (
       {
-        chain,
+        chainName,
         accountId,
-      }: { chain: string | undefined; accountId?: AccountId },
+      }: { chainName: string | undefined; accountId?: AccountId },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -762,10 +632,10 @@ export const betting = {
         // isLoading: isBettingAbstractModuleClientLoading,
         // isError: isBettingAbstractModuleClientError,
         // error: bettingAbstractModuleClientError,
-      } = useGrazAbstractModuleClient({
+      } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
-        chain,
+        chainName,
         Module: BettingAppClient,
       })
 
@@ -805,9 +675,9 @@ export const betting = {
     },
     usePlaceBet: (
       {
-        chain,
+        chainName,
         accountId,
-      }: { chain: string | undefined; accountId?: AccountId },
+      }: { chainName: string | undefined; accountId?: AccountId },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -823,10 +693,10 @@ export const betting = {
         // isLoading: isBettingAbstractModuleClientLoading,
         // isError: isBettingAbstractModuleClientError,
         // error: bettingAbstractModuleClientError,
-      } = useGrazAbstractModuleClient({
+      } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
-        chain,
+        chainName,
         Module: BettingAppClient,
       })
 
@@ -866,9 +736,9 @@ export const betting = {
     },
     useUpdateAccounts: (
       {
-        chain,
+        chainName,
         accountId,
-      }: { chain: string | undefined; accountId?: AccountId },
+      }: { chainName: string | undefined; accountId?: AccountId },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -884,10 +754,10 @@ export const betting = {
         // isLoading: isBettingAbstractModuleClientLoading,
         // isError: isBettingAbstractModuleClientError,
         // error: bettingAbstractModuleClientError,
-      } = useGrazAbstractModuleClient({
+      } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
-        chain,
+        chainName,
         Module: BettingAppClient,
       })
 
@@ -927,9 +797,9 @@ export const betting = {
     },
     useRegister: (
       {
-        chain,
+        chainName,
         accountId,
-      }: { chain: string | undefined; accountId?: AccountId },
+      }: { chainName: string | undefined; accountId?: AccountId },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -945,10 +815,10 @@ export const betting = {
         // isLoading: isBettingAbstractModuleClientLoading,
         // isError: isBettingAbstractModuleClientError,
         // error: bettingAbstractModuleClientError,
-      } = useGrazAbstractModuleClient({
+      } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
-        chain,
+        chainName,
         Module: BettingAppClient,
       })
 
@@ -988,9 +858,9 @@ export const betting = {
     },
     useCreateRound: (
       {
-        chain,
+        chainName,
         accountId,
-      }: { chain: string | undefined; accountId?: AccountId },
+      }: { chainName: string | undefined; accountId?: AccountId },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -1006,10 +876,10 @@ export const betting = {
         // isLoading: isBettingAbstractModuleClientLoading,
         // isError: isBettingAbstractModuleClientError,
         // error: bettingAbstractModuleClientError,
-      } = useGrazAbstractModuleClient({
+      } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
-        chain,
+        chainName,
         Module: BettingAppClient,
       })
 

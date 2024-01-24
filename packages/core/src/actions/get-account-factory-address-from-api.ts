@@ -4,11 +4,11 @@ import { WithArgs } from '../types/with-args'
 
 export type GetAccountFactoryAddressFromApiParameters = WithArgs<{
   apiUrl: string
-  chainId: string
+  chainName: string
 }>
 
 export async function getAccountFactoryAddressFromApi({
-  args: { apiUrl, chainId },
+  args: { apiUrl, chainName },
 }: GetAccountFactoryAddressFromApiParameters) {
   const deploymentData = await request(
     apiUrl,
@@ -20,7 +20,7 @@ export async function getAccountFactoryAddressFromApi({
       }
     `),
     {
-      chain: chainId,
+      chain: chainName,
     },
   )
 

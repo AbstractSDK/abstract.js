@@ -6,12 +6,12 @@ import { AnsId } from '../utils/tokens/ans/types'
 
 export type GetAnsTokensFromApiParameters = WithArgs<{
   apiUrl: string
-  chainId: string
+  chainName: string
   ids: AnsId[]
 }>
 
 export async function getAnsTokensFromApi({
-  args: { apiUrl, chainId, ids },
+  args: { apiUrl, chainName, ids },
 }: GetAnsTokensFromApiParameters) {
   const result = await request(
     apiUrl,
@@ -27,7 +27,7 @@ export async function getAnsTokensFromApi({
       }
   `),
     {
-      chain: chainId,
+      chain: chainName,
       filter: { ids },
     },
   )

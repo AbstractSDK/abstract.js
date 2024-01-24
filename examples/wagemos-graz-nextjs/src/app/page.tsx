@@ -20,7 +20,7 @@ import { WalletButton } from './_components/wallet-button'
 
 export default function Home() {
   const { data, isLoading, isError } = betting.queries.useListRounds({
-    chain: 'neutron',
+    chainName: 'neutron',
     args: {},
   })
   if (isLoading) return <p>Loading...</p>

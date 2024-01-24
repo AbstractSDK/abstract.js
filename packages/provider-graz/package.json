@@ -1,0 +1,58 @@
+{
+  "name": "@abstract-money/provider-graz",
+  "version": "0.0.0",
+  "description": "Provider for Graz",
+  "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
+  "author": "dalechyn <vlad@abstract.money>",
+  "contributors": [
+    "dalechyn <vlad@abstract.money>",
+    "adairrr <adair@abstract.money>"
+  ],
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbstractSDK/abstract.js.git",
+    "directory": "packages/provider-graz"
+  },
+  "bugs": {
+    "url": "https://github.com/AbstractSDK/abstract.js/issues"
+  },
+  "scripts": {
+    "build": "tsup",
+    "clean": "rimraf dist",
+    "typecheck": "tsc --noEmit --jsx react-jsx"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "type": "module",
+  "devDependencies": {
+    "@abstract-money/react": "workspace:*",
+    "@abstract-money/core": "workspace:*",
+    "@cosmjs/cosmwasm-stargate": "^0.31.3",
+    "@types/node": "^18.11.10",
+    "graz": "^0.1.1",
+    "rimraf": "^3.0.0"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "/dist"
+  ],
+  "sideEffects": false,
+  "peerDependencies": {
+    "@abstract-money/react": "workspace:*",
+    "@abstract-money/core": "workspace:*",
+    "@cosmjs/cosmwasm-stargate": ">=0.28",
+    "graz": "^0.1.1"
+  }
+}

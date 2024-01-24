@@ -1,23 +1,21 @@
 import { AccountId, ApiClient } from '@abstract-money/core'
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import React from 'react'
+import { useConfig } from '../contexts'
 import { MaybeArray } from '../types/utils'
 
 /**
  * Loads all accounts for a given owner and chain.
  * @param owner address of the owner. Will automatically translate to other chains' addresses.
- * @param chain chain to load accounts for.
- * @param client
+ * @param chainName chain to load accounts for.
  */
 export function useAccounts(
   {
     owner,
-    chain,
-    client,
+    chainName,
   }: {
     owner: string | undefined
-    chain: MaybeArray<string> | undefined
-    client: ApiClient | undefined
+    chainName: MaybeArray<string> | undefined
   },
   {
     enabled: enabled_ = true,
@@ -35,9 +33,16 @@ export function useAccounts(
   > = {},
 ) {
   const chains = React.useMemo(
-    () => (chain ? (Array.isArray(chain) ? chain : [chain]) : undefined),
-    [chain],
+    () =>
+      chainName
+        ? Array.isArray(chainName)
+          ? chainName
+          : [chainName]
+        : undefined,
+    [chainName],
   )
+  const config = useConfig()
+  const client = config.useApiClient()
   const queryKey = React.useMemo(
     () => ['accountsOf', owner, chains, client] as const,
     [owner, chains, client],

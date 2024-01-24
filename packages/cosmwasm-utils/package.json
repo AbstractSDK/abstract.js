@@ -2,7 +2,7 @@
   "name": "@abstract-money/cosmwasm-utils",
   "version": "0.1.1",
   "description": "Cosmwasm utils",
-  "author": "adairrr",
+  "author": "adairrr <adair@abstract.money>",
   "license": "MIT",
   "repository": "",
   "engines": {

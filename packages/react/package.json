@@ -3,9 +3,9 @@
   "version": "0.2.1",
   "description": "React Hooks for Abstract SDK",
   "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
-  "author": "h0tw4t3r <vlad@abstract.money>",
+  "author": "dalechyn <vlad@abstract.money>",
   "contributors": [
-    "h0tw4t3r <vlad@abstract.money>",
+    "dalechyn <vlad@abstract.money>",
     "adairrr <adair@abstract.money>"
   ],
   "license": "ISC",
