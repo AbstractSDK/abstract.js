@@ -3,9 +3,9 @@
   "version": "0.2.0",
   "description": "React Hooks for Abstract SDK",
   "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
-  "author": "h0tw4t3r <vlad@abstract.money>",
+  "author": "dalechyn <vlad@abstract.money>",
   "contributors": [
-    "h0tw4t3r <vlad@abstract.money>",
+    "dalechyn <vlad@abstract.money>",
     "adairrr <adair@abstract.money>"
   ],
   "license": "ISC",
@@ -72,11 +72,7 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "/utils",
-    "/hooks",
-    "/dist"
-  ],
+  "files": ["/utils", "/hooks", "/dist"],
   "simple-git-hooks": {
     "pre-commit": "pnpm format && pnpm lint:fix"
   },

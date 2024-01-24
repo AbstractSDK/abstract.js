@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Provider for Graz",
   "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
-  "author": "dalechyn <adair@abstract.money>",
+  "author": "dalechyn <vlad@abstract.money>",
   "contributors": [
     "dalechyn <vlad@abstract.money>",
     "adairrr <adair@abstract.money>"
@@ -44,9 +44,7 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "/dist"
-  ],
+  "files": ["/dist"],
   "sideEffects": false,
   "peerDependencies": {
     "@abstract-money/react": "workspace:*",
