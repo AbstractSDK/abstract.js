@@ -11,17 +11,20 @@ import { getAccountFactoryClient } from '../../actions/wallet/get-account-factor
 import { getAnsHostClient } from '../../actions/wallet/get-ans-host-client'
 import { getManagerClient } from '../../actions/wallet/get-manager-client'
 import { getProxyClient } from '../../actions/wallet/get-proxy-client'
+import { getSenderAddress } from '../../actions/wallet/get-sender-address'
+import { getSigningCosmWasmClient } from '../../actions/wallet/get-signing-cosm-wasm-client'
 import { getVersionControlClient } from '../../actions/wallet/get-version-control-client'
 import { CutArgs } from '../../types/with-args'
 
-type CutSigningCosmWasmClientFromParameter<T extends (payload: any) => any> =
-  CutArgs<
-    {
-      readonly signingCosmWasmClient: SigningCosmWasmClient
-      readonly sender: string
-    },
-    T
-  >
+type CutSigningCosmWasmClientAndSenderFromParameter<
+  T extends (payload: any) => any,
+> = CutArgs<
+  {
+    readonly signingCosmWasmClient: SigningCosmWasmClient
+    readonly sender: string
+  },
+  T
+>
 
 type CutSigningCosmWasmClientAndApiUrlFromParameter<
   T extends (payload: any) => any,
@@ -44,10 +47,12 @@ export type WalletActions = {
     >,
   ): ReturnType<typeof createAccountMonarchy>
   getAccountFactoryClient(
-    args: CutSigningCosmWasmClientFromParameter<typeof getAccountFactoryClient>,
+    args: CutSigningCosmWasmClientAndSenderFromParameter<
+      typeof getAccountFactoryClient
+    >,
   ): ReturnType<typeof getAccountFactoryClient>
   getAccountFactoryClientFromVersionControl(
-    args: CutSigningCosmWasmClientFromParameter<
+    args: CutSigningCosmWasmClientAndSenderFromParameter<
       typeof getAccountFactoryClientFromVersionControl
     >,
   ): ReturnType<typeof getAccountFactoryClientFromVersionControl>
@@ -57,7 +62,9 @@ export type WalletActions = {
     >,
   ): ReturnType<typeof getAccountFactoryClientFromApi>
   getAnsHostClient(
-    args: CutSigningCosmWasmClientFromParameter<typeof getAnsHostClient>,
+    args: CutSigningCosmWasmClientAndSenderFromParameter<
+      typeof getAnsHostClient
+    >,
   ): ReturnType<typeof getAnsHostClient>
   getAnsHostClientFromApi(
     args: CutSigningCosmWasmClientAndApiUrlFromParameter<
@@ -65,12 +72,14 @@ export type WalletActions = {
     >,
   ): ReturnType<typeof getAnsHostClientFromApi>
   getAnsHostClientFromVersionControl(
-    args: CutSigningCosmWasmClientFromParameter<
+    args: CutSigningCosmWasmClientAndSenderFromParameter<
       typeof getAnsHostClientFromVersionControl
     >,
   ): ReturnType<typeof getAnsHostClientFromVersionControl>
   getVersionControlClient(
-    args: CutSigningCosmWasmClientFromParameter<typeof getVersionControlClient>,
+    args: CutSigningCosmWasmClientAndSenderFromParameter<
+      typeof getVersionControlClient
+    >,
   ): ReturnType<typeof getVersionControlClient>
   getVersionControlClientFromApi(
     args: CutSigningCosmWasmClientAndApiUrlFromParameter<
@@ -78,11 +87,15 @@ export type WalletActions = {
     >,
   ): ReturnType<typeof getVersionControlClientFromApi>
   getManagerClient(
-    args: CutSigningCosmWasmClientFromParameter<typeof getManagerClient>,
+    args: CutSigningCosmWasmClientAndSenderFromParameter<
+      typeof getManagerClient
+    >,
   ): ReturnType<typeof getManagerClient>
   getProxyClient(
-    args: CutSigningCosmWasmClientFromParameter<typeof getProxyClient>,
+    args: CutSigningCosmWasmClientAndSenderFromParameter<typeof getProxyClient>,
   ): ReturnType<typeof getProxyClient>
+  getSigningCosmWasmClient(): ReturnType<typeof getSigningCosmWasmClient>
+  getSenderAddress(): ReturnType<typeof getSenderAddress>
 }
 
 export function walletActions(
@@ -154,6 +167,14 @@ export function walletActions(
       getProxyClient({
         args: { ...args, signingCosmWasmClient, sender },
         ...rest,
+      }),
+    getSigningCosmWasmClient: () =>
+      getSigningCosmWasmClient({
+        args: { signingCosmWasmClient },
+      }),
+    getSenderAddress: () =>
+      getSenderAddress({
+        args: { sender },
       }),
   }
 }

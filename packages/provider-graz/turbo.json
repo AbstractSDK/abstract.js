@@ -3,33 +3,14 @@
   "extends": ["//"],
   "pipeline": {
     "build": {
-      "dependsOn": [
-        "@abstract-money/cosmwasm-utils#build",
-        "@abstract-money/cli#build",
-        "codegen:abstract",
-        "codegen:gql",
-        "clean"
-      ],
+      "dependsOn": ["@abstract-money/react#build", "clean"],
       "outputs": ["dist/**"]
     },
     "typecheck": {
-      "dependsOn": [
-        "@abstract-money/cosmwasm-utils#build",
-        "@abstract-money/cli#build",
-        "codegen:abstract",
-        "codegen:gql",
-        "clean"
-      ]
+      "dependsOn": ["@abstract-money/react#build", "clean"]
     },
     "clean": {
       "cache": false
-    },
-    "codegen:abstract": {
-      "dependsOn": ["@abstract-money/cli#build", "clean"],
-      "outputs": ["src/codegen/abstract"]
-    },
-    "codegen:gql": {
-      "outputs": ["src/codegen/gql"]
     }
   }
 }

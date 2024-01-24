@@ -10,6 +10,8 @@ on:
           - "@abstract-money/core"
           - "@abstract-money/cli"
           - "@abstract-money/react"
+          - "@abstract-money/provider-graz"
+          - "@abstract-money/provider-cosmoskit"
       # TODO: Infer from package name
       path:
         type: choice
@@ -18,6 +20,8 @@ on:
           - "core"
           - "cli"
           - "react"
+          - "provider-graz"
+          - "provider-cosmoskit"
 env:
   FORCE_COLOR: true
 

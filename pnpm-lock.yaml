@@ -95,6 +95,9 @@ importers:
       '@abstract-money/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@abstract-money/provider-cosmoskit':
+        specifier: workspace:*
+        version: link:../../packages/provider-cosmoskit
       '@abstract-money/react':
         specifier: workspace:*
         version: link:../../packages/react
@@ -225,6 +228,9 @@ importers:
       '@abstract-money/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@abstract-money/provider-graz':
+        specifier: workspace:*
+        version: link:../../packages/provider-graz
       '@abstract-money/react':
         specifier: workspace:*
         version: link:../../packages/react
@@ -596,6 +602,9 @@ importers:
       '@abstract-money/react':
         specifier: workspace:*
         version: link:../react
+      '@cosmjs/cosmwasm-stargate':
+        specifier: ^0.31.0
+        version: 0.31.3
       '@cosmos-kit/react':
         specifier: ^2.6.0
         version: 2.9.14(@cosmjs/amino@0.31.3)(@cosmjs/cosmwasm-stargate@0.31.3)(@cosmjs/proto-signing@0.32.0)(@cosmjs/stargate@0.31.3)(@interchain-ui/react@1.16.4)(cosmjs-types@0.8.0)(react-dom@18.2.0)(react@18.2.0)
@@ -614,6 +623,9 @@ importers:
       '@abstract-money/react':
         specifier: workspace:*
         version: link:../react
+      '@cosmjs/cosmwasm-stargate':
+        specifier: ^0.31.3
+        version: 0.31.3
       '@types/node':
         specifier: ^18.11.10
         version: 18.18.13

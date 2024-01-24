@@ -1,9 +1,11 @@
 'use client'
 
 import { stringToAccountId } from '@abstract-money/core'
+import { cosmosKitProvider } from '@abstract-money/provider-cosmoskit'
 import {
   AbstractAccountIdProvider,
   AbstractProvider,
+  createConfig,
 } from '@abstract-money/react'
 import '@interchain-ui/react/styles'
 import { Inter, Poppins } from 'next/font/google'
@@ -18,6 +20,7 @@ const poppins = Poppins({
   weight: ['900', '800', '700'],
   variable: '--font-display',
 })
+const abstractConfig = createConfig({ provider: cosmosKitProvider })
 
 export default function RootLayout({
   children,
@@ -28,7 +31,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(inter.variable, poppins.variable)}>
         <CosmosKitProvider>
-          <AbstractProvider>
+          <AbstractProvider config={abstractConfig}>
             <AbstractAccountIdProvider
               accountId={stringToAccountId('neutron-18')}
             >

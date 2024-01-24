@@ -1,6 +1,7 @@
-import { AccountId, ApiClient } from '@abstract-money/core'
+import { AnsToken, ApiClient } from '@abstract-money/core'
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import React from 'react'
+import { useConfig } from '../contexts'
 import { PartialArgs } from '../types/utils'
 
 export function useAnsTokenFromAPI(
@@ -9,35 +10,36 @@ export function useAnsTokenFromAPI(
     enabled: enabled_ = true,
     ...rest
   }: UseQueryOptions<
-    AccountId[] | undefined,
+    AnsToken | undefined,
     unknown,
-    AccountId[] | undefined,
+    AnsToken | undefined,
     readonly [
-      'accountsOf',
-      string | undefined,
-      string[] | undefined,
+      'ansTokenFromApi',
+      PartialArgs<Parameters<ApiClient['getAnsTokenFromApi']>[0]>,
       ApiClient | undefined,
     ]
   > = {},
 ) {
+  const config = useConfig()
+  const client = config.useApiClient()
   const queryKey = React.useMemo(
-    () => ['accountsOf', owner, chains, client] as const,
-    [owner, chains, client],
+    () => ['ansTokenFromApi', { args }, client] as const,
+    [args, client],
   )
 
   const enabled = React.useMemo(
-    () => Boolean(client && chains && owner && enabled_),
-    [enabled_, client, owner, chains],
+    () => Boolean(client && args.id && args.chainId && enabled_),
+    [enabled_, client, args],
   )
 
   const queryFn = React.useCallback(() => {
-    if (!client || !owner || !chains)
+    if (!client || !args.chainId || !args.id)
       throw new Error('No client or owner or chain')
 
-    return client.getAccountsByOwnerFromApi({
-      args: { owner, chains },
+    return client.getAnsTokenFromApi({
+      args: { chainId: args.chainId, id: args.id },
     })
-  }, [client, owner, chains])
+  }, [client, args])
 
   return useQuery(queryKey, queryFn, { enabled, ...rest })
 }

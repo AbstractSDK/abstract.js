@@ -1,51 +1,46 @@
 import {
+  ABSTRACT_API_URL,
+  AccountId,
+  AccountPublicClient,
+  AccountWalletClient,
+  ApiClient,
+  PublicClient,
+  WalletClient,
+  createAccountPublicClient,
+  createAccountWalletClient,
+  createApiClient,
+  createPublicClient,
+  createWalletClient,
+} from '@abstract-money/core'
+import {
   CosmWasmClient,
   SigningCosmWasmClient,
 } from '@cosmjs/cosmwasm-stargate'
-import {
-  ApiClient,
-  createPublicClient,
-  createWalletClient,
-  createAccountPublicClient,
-  createAccountWalletClient,
-  PublicClient,
-  createApiClient,
-  WalletClient,
-  AccountPublicClient,
-  AccountId,
-  AccountWalletClient,
-} from '@abstract-money/core'
 import { useMemo } from 'react'
+import { Prettify } from './types/utils'
 
-type CosmosKitArgs = { chainName?: string }
-
-export type GrazProvider = {
-  name: 'graz'
-  useCosmWasmClient: () => CosmWasmClient | undefined
-  useSigningCosmWasmClient: () => SigningCosmWasmClient | undefined
-  useSenderAddress: () => string | undefined
+// Because cosmos-kit does not handle the chain states
+// and requires them to be explicitly passed,
+type CommonProviderArgs = {
+  /** Pass only if you are using cosmos-kit provider, graz doesn't need one. */
+  chainName?: string
 }
 
-export type CosmosKitProvider = {
-  name: 'cosmos-kit'
-  useCosmWasmClient: (args: CosmosKitArgs) => CosmWasmClient | undefined
+export type Provider = {
+  useCosmWasmClient: (arg?: CommonProviderArgs) => CosmWasmClient | undefined
   useSigningCosmWasmClient: (
-    args: CosmosKitArgs,
+    arg?: CommonProviderArgs,
   ) => SigningCosmWasmClient | undefined
-  useSenderAddress: (args: CosmosKitArgs) => string | undefined
+  useSenderAddress: (arg?: CommonProviderArgs) => string | undefined
 }
 
-export type Provider = GrazProvider | CosmosKitProvider
-
-export type CreateConfigParameters<provider extends Provider> = {
-  provider: provider
-  apiUrl: string
+export type CreateConfigParameters = {
+  provider: Provider
+  apiUrl?: string
 }
 
-export function createConfig<TProvider extends Provider>(
-  parameters: CreateConfigParameters<TProvider>,
-) {
-  const { apiUrl, provider } = parameters
+export function createConfig(parameters: CreateConfigParameters) {
+  const { apiUrl = ABSTRACT_API_URL, provider } = parameters
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Set up clients
@@ -61,13 +56,10 @@ export function createConfig<TProvider extends Provider>(
     )
   }
 
-  type ProviderAgnosticArgs = TProvider['name'] extends 'graz'
-    ? Parameters<GrazProvider['useCosmWasmClient']>
-    : Parameters<CosmosKitProvider['useCosmWasmClient']>
   function usePublicClient(
-    ...args: ProviderAgnosticArgs
+    ...args: Prettify<Parameters<Provider['useCosmWasmClient']>>
   ): PublicClient | undefined {
-    const cosmWasmClient = provider.useCosmWasmClient(...(args as [any]))
+    const cosmWasmClient = provider.useCosmWasmClient(...args)
     return useMemo(() => {
       if (!cosmWasmClient) return undefined
       return createPublicClient({
@@ -78,11 +70,9 @@ export function createConfig<TProvider extends Provider>(
   }
 
   function useWalletClient(
-    ...args: ProviderAgnosticArgs
+    ...args: Prettify<Parameters<Provider['useSigningCosmWasmClient']>>
   ): WalletClient | undefined {
-    const signingCosmWasmClient = provider.useSigningCosmWasmClient(
-      ...(args as [any]),
-    )
+    const signingCosmWasmClient = provider.useSigningCosmWasmClient(...args)
     const sender = provider.useSenderAddress(...(args as [any]))
     return useMemo(() => {
       if (!signingCosmWasmClient || !sender) return undefined
@@ -97,12 +87,10 @@ export function createConfig<TProvider extends Provider>(
   function useAccountPublicClient({
     accountId,
     ...rest
-  }: ProviderAgnosticArgs[0] extends undefined
-    ? { accountId?: AccountId }
-    : ProviderAgnosticArgs[0] & { accountId?: AccountId }):
-    | AccountPublicClient
-    | undefined {
-    const cosmWasmClient = provider.useCosmWasmClient(...(rest as [any]))
+  }: Prettify<
+    { accountId?: AccountId } & Parameters<Provider['useCosmWasmClient']>[0]
+  >): AccountPublicClient | undefined {
+    const cosmWasmClient = provider.useCosmWasmClient(rest)
     return useMemo(() => {
       if (!cosmWasmClient || !accountId) return undefined
       return createAccountPublicClient({
@@ -116,11 +104,11 @@ export function createConfig<TProvider extends Provider>(
   function useAccountWalletClient({
     accountId,
     ...rest
-  }: ProviderAgnosticArgs[0] extends undefined
-    ? { accountId?: AccountId }
-    : ProviderAgnosticArgs[0] & { accountId?: AccountId }):
-    | AccountWalletClient
-    | undefined {
+  }: Prettify<
+    { accountId?: AccountId } & Parameters<
+      Provider['useSigningCosmWasmClient']
+    >[0]
+  >): AccountWalletClient | undefined {
     const signingCosmWasmClient = provider.useSigningCosmWasmClient(
       ...(rest as [any]),
     )
@@ -145,4 +133,26 @@ export function createConfig<TProvider extends Provider>(
     useAccountPublicClient,
     useAccountWalletClient,
   }
+}
+
+export type Config = {
+  apiUrl: string
+  provider: Provider
+  useApiClient(): ApiClient | undefined
+  usePublicClient(
+    ...args: Parameters<Provider['useCosmWasmClient']>
+  ): PublicClient | undefined
+  useWalletClient(
+    ...args: Prettify<Parameters<Provider['useSigningCosmWasmClient']>>
+  ): WalletClient | undefined
+  useAccountPublicClient(
+    args: Prettify<
+      { accountId?: AccountId } & Parameters<Provider['useCosmWasmClient']>[0]
+    >,
+  ): AccountPublicClient | undefined
+  useAccountWalletClient(
+    args: Prettify<
+      { accountId?: AccountId } & Parameters<Provider['useCosmWasmClient']>[0]
+    >,
+  ): AccountWalletClient | undefined
 }

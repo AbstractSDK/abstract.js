@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@abstract-money/core": "workspace:*",
+    "@abstract-money/provider-graz": "workspace:*",
     "@abstract-money/react": "workspace:*",
     "@cosmjs/amino": "^0.31.0",
     "@cosmjs/cosmwasm-stargate": "^0.31.0",

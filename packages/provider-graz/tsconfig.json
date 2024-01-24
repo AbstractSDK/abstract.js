@@ -19,14 +19,14 @@
     "strict": true,
     "strictNullChecks": true,
     "target": "es2021",
+    "types": ["node", "@types/jest"],
     "paths": {
       // TODO: Remove once issue is fixed
       // https://github.com/microsoft/TypeScript/issues/48212
       "@cosmjs/cosmwasm-stargate": [
-        "packages/core/node_modules/@cosmjs/cosmwasm-stargate/build"
+        "../react/node_modules/@cosmjs/cosmwasm-stargate/build"
       ]
     },
-    "types": ["node", "@types/jest"]
   },
   "exclude": ["**/node_modules/**", "**/dist/**"],
   "include": [

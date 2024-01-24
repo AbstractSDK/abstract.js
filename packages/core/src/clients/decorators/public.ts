@@ -7,6 +7,7 @@ import { getAnsHostAddressFromVersionControl } from '../../actions/public/get-an
 import { getAnsHostQueryClient } from '../../actions/public/get-ans-host-query-client'
 import { getAnsHostQueryClientFromApi } from '../../actions/public/get-ans-host-query-client-from-api'
 import { getAnsHostQueryClientFromVersionControl } from '../../actions/public/get-ans-host-query-client-from-version-control'
+import { getCosmWasmClient } from '../../actions/public/get-cosm-wasm-client'
 import { getManagerQueryClient } from '../../actions/public/get-manager-query-client'
 import { getProxyQueryClient } from '../../actions/public/get-proxy-query-client'
 import { getVersionControlModuleData } from '../../actions/public/get-version-control-module-data'
@@ -84,6 +85,7 @@ export type PublicActions = {
   getVersionControlQueryClient(
     args: CutCosmWasmClientFromParameter<typeof getVersionControlQueryClient>,
   ): ReturnType<typeof getVersionControlQueryClient>
+  getCosmWasmClient(): ReturnType<typeof getCosmWasmClient>
 }
 
 export function publicActions(
@@ -156,6 +158,10 @@ export function publicActions(
       getProxyQueryClient({
         args: { ...args, cosmWasmClient },
         ...rest,
+      }),
+    getCosmWasmClient: () =>
+      getCosmWasmClient({
+        args: { cosmWasmClient },
       }),
   }
 }

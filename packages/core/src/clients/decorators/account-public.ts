@@ -1,4 +1,5 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { getCosmWasmClient } from 'src/actions/account/public/get-cosm-wasm-client'
 import { getAccountBaseAddressesFromApi } from '../../actions/account/public/get-account-base-addresses-from-api'
 import { getBaseToken } from '../../actions/account/public/get-base-token'
 import { getManagerQueryClientFromApi } from '../../actions/account/public/get-manager-query-client-from-api'
@@ -12,6 +13,13 @@ import { getSubAccountSequences } from '../../actions/account/public/get-sub-acc
 import { getTotalValue } from '../../actions/account/public/get-total-value'
 import { VersionControlTypes } from '../../codegen/abstract/index'
 import { CutArgs } from '../../types/with-args'
+
+type CutCosmWasmClientFromParameter<T extends (payload: any) => any> = CutArgs<
+  {
+    readonly cosmWasmClient: CosmWasmClient
+  },
+  T
+>
 
 type CutSpecificArgsFromParameter<T extends (payload: any) => any> = CutArgs<
   {
@@ -56,6 +64,9 @@ export type AccountPublicActions = {
   getTotalValue(
     args: CutSpecificArgsFromParameter<typeof getTotalValue>,
   ): ReturnType<typeof getTotalValue>
+  getCosmWasmClient(
+    args: CutCosmWasmClientFromParameter<typeof getCosmWasmClient>,
+  ): ReturnType<typeof getCosmWasmClient>
 }
 
 export function accountPublicActions(
@@ -117,6 +128,12 @@ export function accountPublicActions(
     getTotalValue: ({ args, ...rest }) =>
       getTotalValue({
         args: { ...args, accountId, cosmWasmClient, apiUrl },
+        ...rest,
+      }),
+
+    getCosmWasmClient: ({ args, ...rest }) =>
+      getCosmWasmClient({
+        args: { ...args, cosmWasmClient },
         ...rest,
       }),
   }

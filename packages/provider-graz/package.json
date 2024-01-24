@@ -30,9 +30,9 @@
   "type": "module",
   "devDependencies": {
     "@abstract-money/react": "workspace:*",
+    "@cosmjs/cosmwasm-stargate": "^0.31.3",
     "@types/node": "^18.11.10",
     "graz": "^0.1.1",
-    "@cosmjs/cosmwasm-stargate": "^0.31.0",
     "rimraf": "^3.0.0"
   },
   "main": "dist/index.js",
@@ -44,11 +44,13 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["/dist"],
+  "files": [
+    "/dist"
+  ],
   "sideEffects": false,
   "peerDependencies": {
-    "@cosmjs/cosmwasm-stargate": ">=0.28",
     "@abstract-money/react": "workspace:*",
+    "@cosmjs/cosmwasm-stargate": ">=0.28",
     "graz": "^0.1.1"
   }
 }
