@@ -1,5 +1,11 @@
 # @abstract-money/cli
 
+## 0.2.2
+
+### Patch Changes
+
+- [`1df4fde`](https://github.com/AbstractSDK/abstract.js/commit/1df4fde2d3e44104fb134aa64285d21cc7da89f1) Thanks [@dalechyn](https://github.com/dalechyn)! - Guard specific contracts from being turned into app clients.
+
 ## 0.2.1
 
 ### Patch Changes
