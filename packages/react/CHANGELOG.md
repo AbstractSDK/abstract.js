@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 0.2.4
+
+### Patch Changes
+
+- [`89c8d26`](https://github.com/AbstractSDK/abstract.js/commit/89c8d267ff9e00552bf1b56e1191f57aa25a6eee) Thanks [@dalechyn](https://github.com/dalechyn)! - Force a user to always pass accountId in account related hooks.
+
 ## 0.2.3
 
 ### Patch Changes
