@@ -26,6 +26,7 @@
   "dependencies": {
     "@abstract-money/core": "workspace:*",
     "@tanstack/react-query": "^4",
+    "dedent": "^0.7.0",
     "zustand": "^4.4.6"
   },
   "peerDependencies": {

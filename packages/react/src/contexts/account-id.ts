@@ -1,4 +1,5 @@
 import { AccountId } from '@abstract-money/core'
+import dedent from 'dedent'
 import * as React from 'react'
 
 type AbstractAccountIdContext = {
@@ -44,7 +45,11 @@ export function useAccountId({ accountId }: { accountId?: AccountId } = {}) {
       }
     else
       throw new Error(
-        '`useAccountId` must be used within `AbstractAccountIdProvider`.',
+        dedent`Cannot find \`accountId\`.
+
+              Did you forget to wrap the component in a \`<AbstractAccountIdProvider>\`?
+              Or you did not pass \`accountId\` as a parameter to one of your methods?
+              `,
       )
   return accountStore
 }

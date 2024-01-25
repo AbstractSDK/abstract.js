@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
 
   .:
@@ -643,6 +647,9 @@ importers:
       '@tanstack/react-query':
         specifier: ^4
         version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
+      dedent:
+        specifier: ^0.7.0
+        version: 0.7.0
       react:
         specifier: '>=18.0.0'
         version: 18.2.0
@@ -16784,7 +16791,3 @@ packages:
       immer: 9.0.21
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
