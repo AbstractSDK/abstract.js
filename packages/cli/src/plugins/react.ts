@@ -145,19 +145,34 @@ export function react(): ReactResult {
 
           type Hook = `use${string}`
 
-          const importedHooks = [
-            ...reactQueryFileContents.matchAll(/export function (\w+)/gm),
+          const importedQueryHooks = [
+            ...reactQueryFileContents.matchAll(
+              /export function (\w+).*\(\{((?:[\r\n \S]*?))\}/gm,
+            ),
+          ].map((m) => ({
+            name: m[1],
+            hasArgs: /args/.test(m[2] ?? ''),
+          })) as readonly { name: Hook; hasArgs: boolean }[]
+
+          const importedMutationHooks = [
+            ...reactQueryFileContents.matchAll(
+              /export function (\w+Mutation)/gm,
+            ),
           ].map((m) => m[1]) as readonly Hook[]
           {
             const contractQueryImports = new Set<string>([])
-            for (const hookName of importedHooks) {
+            for (const hookName of importedMutationHooks) {
               contractQueryImports.add(hookName)
 
-              if (isTypeScript && hookName.endsWith('Mutation')) {
+              if (isTypeScript) {
                 // Slicing the `use` out of the hook to import the mutation type.
                 // i.e. `useFooMutation` -> `FooMutation`
                 contractQueryImports.add(hookName.slice(3))
               }
+            }
+
+            for (const { name: hookName } of importedQueryHooks) {
+              contractQueryImports.add(hookName)
             }
             imports.push(
               `import { ${[...contractQueryImports.values()].join(
@@ -202,8 +217,7 @@ export function react(): ReactResult {
           {
             const queryHooks = new Map<Hook, string>([])
             const contractNameCamelCase = camelCase(contract.name)
-            for (const hookName of importedHooks) {
-              if (!hookName.endsWith('Query')) continue
+            for (const { name: hookName, hasArgs } of importedQueryHooks) {
               const hookNamePascalCaseWithoutUse = pascalCase(hookName.slice(3))
               const hookNameCamelCaseWithoutUse = camelCase(hookName.slice(3))
               const hookNameWithoutModuleAndQuery = hookName
@@ -212,7 +226,9 @@ export function react(): ReactResult {
               queryHooks.set(
                 hookNameWithoutModuleAndQuery,
                 dedent`
-                  ({ options, accountId, chainName, ...rest }: Omit<Parameters<typeof ${hookName}<${contractNamePascalCase}Types.${queryHookNameToResponseTypeMap.get(
+                  ({ options, ${
+                    hasArgs ? 'args, ' : ''
+                  } ...rest }: Omit<Parameters<typeof ${hookName}<${contractNamePascalCase}Types.${queryHookNameToResponseTypeMap.get(
                   hookName,
                 )}>>[0], 'client'> & { accountId?: AccountId; chainName: string | undefined }) => {
                     const {
@@ -223,8 +239,7 @@ export function react(): ReactResult {
                     } = useAbstractModuleQueryClient(
                       {
                         moduleId: ${constantCase(contract.name)}_MODULE_ID,
-                        accountId,
-                        chainName,
+                        ...rest,
                         Module: ${contractNamePascalCase}AppQueryClient,
                       },
                       { enabled: options?.enabled },
@@ -238,7 +253,7 @@ export function react(): ReactResult {
                     } = use${hookNamePascalCaseWithoutUse}({
                       client: ${contractNameCamelCase}AppQueryClient,
                       options,
-                      ...rest
+                      ${hasArgs ? 'args, ' : ''}
                     })
 
                     if (is${contractNamePascalCase}AppQueryClientError)
@@ -276,8 +291,7 @@ export function react(): ReactResult {
             }
 
             const mutationHooks = new Map<Hook, string>([])
-            for (const hookName of importedHooks) {
-              if (!hookName.endsWith('Mutation')) continue
+            for (const hookName of importedMutationHooks) {
               const hookNamePascalCaseWithoutUse = pascalCase(hookName.slice(3))
               const hookNameWithoutModuleAndMutation = hookName
                 .replace(pascalCase(contract.name), '')

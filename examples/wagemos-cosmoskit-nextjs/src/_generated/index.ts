@@ -18,12 +18,6 @@ import {
 } from '@abstract-money/react/hooks'
 
 import {
-  useBettingBetsQuery,
-  useBettingConfigQuery,
-  useBettingListOddsQuery,
-  useBettingOddsQuery,
-  useBettingListRoundsQuery,
-  useBettingRoundQuery,
   useBettingUpdateConfigMutation,
   BettingUpdateConfigMutation,
   useBettingCloseRoundMutation,
@@ -38,6 +32,12 @@ import {
   BettingRegisterMutation,
   useBettingCreateRoundMutation,
   BettingCreateRoundMutation,
+  useBettingBetsQuery,
+  useBettingConfigQuery,
+  useBettingListOddsQuery,
+  useBettingOddsQuery,
+  useBettingListRoundsQuery,
+  useBettingRoundQuery,
 } from './cosmwasm-codegen/Betting.react-query'
 
 import * as BettingTypes from './cosmwasm-codegen/Betting.types'
@@ -96,8 +96,7 @@ export const betting = {
   queries: {
     useBets: ({
       options,
-      accountId,
-      chainName,
+      args,
       ...rest
     }: Omit<
       Parameters<typeof useBettingBetsQuery<BettingTypes.BetsResponse>>[0],
@@ -111,8 +110,7 @@ export const betting = {
       } = useAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
-          accountId,
-          chainName,
+          ...rest,
           Module: BettingAppQueryClient,
         },
         { enabled: options?.enabled },
@@ -126,7 +124,7 @@ export const betting = {
       } = useBettingBetsQuery({
         client: bettingAppQueryClient,
         options,
-        ...rest,
+        args,
       })
 
       if (isBettingAppQueryClientError)
@@ -161,8 +159,6 @@ export const betting = {
     },
     useConfig: ({
       options,
-      accountId,
-      chainName,
       ...rest
     }: Omit<
       Parameters<typeof useBettingConfigQuery<BettingTypes.ConfigResponse>>[0],
@@ -176,8 +172,7 @@ export const betting = {
       } = useAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
-          accountId,
-          chainName,
+          ...rest,
           Module: BettingAppQueryClient,
         },
         { enabled: options?.enabled },
@@ -191,7 +186,6 @@ export const betting = {
       } = useBettingConfigQuery({
         client: bettingAppQueryClient,
         options,
-        ...rest,
       })
 
       if (isBettingAppQueryClientError)
@@ -226,8 +220,7 @@ export const betting = {
     },
     useListOdds: ({
       options,
-      accountId,
-      chainName,
+      args,
       ...rest
     }: Omit<
       Parameters<
@@ -243,8 +236,7 @@ export const betting = {
       } = useAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
-          accountId,
-          chainName,
+          ...rest,
           Module: BettingAppQueryClient,
         },
         { enabled: options?.enabled },
@@ -258,7 +250,7 @@ export const betting = {
       } = useBettingListOddsQuery({
         client: bettingAppQueryClient,
         options,
-        ...rest,
+        args,
       })
 
       if (isBettingAppQueryClientError)
@@ -293,8 +285,7 @@ export const betting = {
     },
     useOdds: ({
       options,
-      accountId,
-      chainName,
+      args,
       ...rest
     }: Omit<
       Parameters<typeof useBettingOddsQuery<BettingTypes.OddsResponse>>[0],
@@ -308,8 +299,7 @@ export const betting = {
       } = useAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
-          accountId,
-          chainName,
+          ...rest,
           Module: BettingAppQueryClient,
         },
         { enabled: options?.enabled },
@@ -323,7 +313,7 @@ export const betting = {
       } = useBettingOddsQuery({
         client: bettingAppQueryClient,
         options,
-        ...rest,
+        args,
       })
 
       if (isBettingAppQueryClientError)
@@ -358,8 +348,7 @@ export const betting = {
     },
     useListRounds: ({
       options,
-      accountId,
-      chainName,
+      args,
       ...rest
     }: Omit<
       Parameters<
@@ -375,8 +364,7 @@ export const betting = {
       } = useAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
-          accountId,
-          chainName,
+          ...rest,
           Module: BettingAppQueryClient,
         },
         { enabled: options?.enabled },
@@ -390,7 +378,7 @@ export const betting = {
       } = useBettingListRoundsQuery({
         client: bettingAppQueryClient,
         options,
-        ...rest,
+        args,
       })
 
       if (isBettingAppQueryClientError)
@@ -425,8 +413,7 @@ export const betting = {
     },
     useRound: ({
       options,
-      accountId,
-      chainName,
+      args,
       ...rest
     }: Omit<
       Parameters<typeof useBettingRoundQuery<BettingTypes.RoundResponse>>[0],
@@ -440,8 +427,7 @@ export const betting = {
       } = useAbstractModuleQueryClient(
         {
           moduleId: BETTING_MODULE_ID,
-          accountId,
-          chainName,
+          ...rest,
           Module: BettingAppQueryClient,
         },
         { enabled: options?.enabled },
@@ -455,7 +441,7 @@ export const betting = {
       } = useBettingRoundQuery({
         client: bettingAppQueryClient,
         options,
-        ...rest,
+        args,
       })
 
       if (isBettingAppQueryClientError)

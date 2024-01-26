@@ -51,14 +51,7 @@ async function getAbstractModuleClient<
 export function useAbstractModuleClient<
   TModule extends AbstractModuleClientConstructor,
 >(
-  {
-    moduleId,
-    accountId: defaultAccountId,
-    Module,
-    client,
-    chainName,
-    sender,
-  }: {
+  parameters: {
     chainName: string | undefined
     sender: string | undefined
     accountId?: AccountId
@@ -76,13 +69,29 @@ export function useAbstractModuleClient<
     readonly [
       'module-mutation-client',
       string,
-      AccountId,
+      AccountId | undefined,
       TModule,
       AbstractClient | undefined,
     ]
   > = {},
 ) {
-  const { accountId } = useAccountId({ accountId: defaultAccountId })
+  const {
+    moduleId,
+    accountId: accountIdParameter,
+    Module,
+    client,
+    chainName,
+    sender,
+  } = parameters
+
+  const { accountId } = useAccountId(
+    // Workaround to not pass any parameters if the accountId was not fed as an argument
+    // in order to throw `accountId` not found error, as it might be defined as a property
+    // but be undefined.
+    ...((Object.hasOwnProperty.call(parameters, 'accountId')
+      ? [{ accountId: accountIdParameter }]
+      : []) as [any]),
+  )
   const {
     data: abstractClient,
     isLoading: isAbstractClientLoading,
@@ -104,6 +113,7 @@ export function useAbstractModuleClient<
 
   const queryFn = React.useCallback(() => {
     if (!abstractClient) throw new Error('abstractClient is not defined')
+    if (!accountId) throw new Error('accountId is not defined')
 
     return getAbstractModuleClient({
       abstractClient,
@@ -114,8 +124,8 @@ export function useAbstractModuleClient<
   }, [abstractClient, accountId, moduleId, Module])
 
   const enabled = React.useMemo(
-    () => Boolean(abstractClient && chainName && enabled_),
-    [enabled_, abstractClient, chainName],
+    () => Boolean(abstractClient && chainName && accountId && enabled_),
+    [enabled_, abstractClient, chainName, accountId],
   )
 
   const {

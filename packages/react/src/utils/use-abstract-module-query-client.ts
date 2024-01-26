@@ -81,7 +81,7 @@ type TQueryData<TModule extends ModuleQueryClientConstructor> =
 type TQueryKey<TModule extends ModuleQueryClientConstructor> = readonly [
   'module-query-client',
   string,
-  AccountId,
+  AccountId | undefined,
   TModule,
   AbstractQueryClient | undefined,
 ]
@@ -89,13 +89,7 @@ type TQueryKey<TModule extends ModuleQueryClientConstructor> = readonly [
 export function useAbstractModuleQueryClient<
   TModule extends ModuleQueryClientConstructor,
 >(
-  {
-    moduleId,
-    accountId: defaultAccountId,
-    Module,
-    client,
-    chainName,
-  }: {
+  parameters: {
     client: CosmWasmClient | undefined
     accountId?: AccountId
     chainName: string | undefined
@@ -112,7 +106,21 @@ export function useAbstractModuleQueryClient<
     TQueryKey<TModule>
   > = {},
 ) {
-  const { accountId } = useAccountId({ accountId: defaultAccountId })
+  const {
+    moduleId,
+    accountId: accountIdParameter,
+    Module,
+    client,
+    chainName,
+  } = parameters
+  const { accountId } = useAccountId(
+    // Workaround to not pass any parameters if the accountId was not fed as an argument
+    // in order to throw `accountId` not found error, as it might be defined as a property
+    // but be undefined.
+    ...((Object.hasOwnProperty.call(parameters, 'accountId')
+      ? [{ accountId: accountIdParameter }]
+      : []) as [any]),
+  )
   const { apiUrl } = useConfig()
 
   const {
@@ -140,6 +148,7 @@ export function useAbstractModuleQueryClient<
   const queryFn = React.useCallback(() => {
     if (!client) throw new Error('client is not defined')
     if (!chainName) throw new Error('chain is not defined')
+    if (!accountId) throw new Error('accountId is not defined')
 
     return getAbstractModuleQueryClient({
       client,
@@ -152,8 +161,8 @@ export function useAbstractModuleQueryClient<
   }, [client, chainName, apiUrl, accountId, moduleId, Module])
 
   const enabled = React.useMemo(
-    () => Boolean(client && chainName && enabled_),
-    [enabled_, client, chainName],
+    () => Boolean(client && chainName && accountId && enabled_),
+    [enabled_, client, chainName, accountId],
   )
 
   const {
