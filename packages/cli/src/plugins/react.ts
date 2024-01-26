@@ -5,6 +5,7 @@ import { camelCase, constantCase, pascalCase } from 'change-case'
 import dedent from 'dedent'
 import { default as fse } from 'fs-extra'
 import { join, relative, resolve } from 'pathe'
+import { DISALLOWED_CONTRACT_NAMES } from 'src/utils/disallowed-contract-names'
 import type { Plugin } from '../config'
 import type { RequiredBy } from '../types'
 
@@ -17,6 +18,15 @@ export function react(): ReactResult {
   return {
     name: 'React',
     async run({ contracts, out, isTypeScript }) {
+      // Check for disallowed contract names
+
+      if (
+        contracts.some(({ name }) => DISALLOWED_CONTRACT_NAMES.includes(name))
+      )
+        throw new Error(
+          '`proxy` and `manager` contract generations are disallowed. Use `@abstract-money/core` methods or `@abstract-money/react` methods',
+        )
+
       // Prepare default config options
       const codegenOptions = {
         client: { enabled: true },
