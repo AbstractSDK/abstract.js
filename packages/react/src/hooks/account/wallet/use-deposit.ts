@@ -1,34 +1,14 @@
 import { AccountId, AccountWalletClient } from '@abstract-money/core'
 import { DeliverTxResponse } from '@cosmjs/stargate'
 import {
-  MutationOptions,
   UseMutationOptions,
   UseMutationResult,
   useMutation,
 } from '@tanstack/react-query'
 import { useAccountId, useConfig } from '../../../contexts'
+import { parseParameters } from '../utils'
 
 type DepositMutation = Parameters<AccountWalletClient['deposit']>[0]
-
-function parseParameters<
-  TOptions extends Omit<MutationOptions<any, any, any, any>, 'mutationFn'>,
-  TResult extends {
-    accountId: AccountId | undefined
-    options: TOptions | undefined
-    passesAccountId: boolean
-  },
->(
-  arg1: { accountId: AccountId | undefined } | TOptions | undefined,
-  arg2: TOptions | undefined,
-) {
-  if (Object.hasOwnProperty.call(arg1, 'accountId'))
-    return { ...arg1, options: arg2, passesAccountId: true } as TResult
-  return {
-    accountId: undefined,
-    options: arg1,
-    passesAccountId: false,
-  } as TResult
-}
 
 export function useDeposit(
   { accountId }: { accountId: AccountId | undefined },
