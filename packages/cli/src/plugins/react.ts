@@ -13,13 +13,7 @@ const codegen = (_codegen as any).default as typeof _codegen
 
 type ReactResult = RequiredBy<Plugin, 'run'>
 
-type ReactOptions = {
-  disableAppstractAppFor?: string[]
-}
-
-const DISABLED_APPSTRACT_APP_FOR_GUARD = ['proxy']
-
-export function react(options: ReactOptions = {}): ReactResult {
+export function react(): ReactResult {
   return {
     name: 'React',
     async run({ contracts, out, isTypeScript }) {
@@ -42,39 +36,11 @@ export function react(options: ReactOptions = {}): ReactResult {
 
       const cosmwasmCodegenDirPath = join(out, 'cosmwasm-codegen')
 
-      // Guard speicfic contracts to not have the abstract app generated
-      const guardedContracts = contracts.filter(({ name }) =>
-        DISABLED_APPSTRACT_APP_FOR_GUARD.includes(name),
-      )
-
       await codegen({
         options: codegenOptions,
-        contracts: contracts
-          .filter(
-            ({ name }) =>
-              !options.disableAppstractAppFor?.includes(name) &&
-              guardedContracts.every(
-                (guardedContract) => guardedContract.name !== name,
-              ),
-          )
-          .map(({ name, path }) => ({ name, dir: path })),
+        contracts: contracts.map(({ name, path }) => ({ name, dir: path })),
         outPath: cosmwasmCodegenDirPath,
       })
-
-      if (
-        options.disableAppstractAppFor?.length !== 0 ||
-        guardedContracts.length !== 0
-      )
-        await codegen({
-          options: { ...codegenOptions, abstractApp: { enabled: false } },
-          contracts: [
-            ...guardedContracts,
-            ...contracts.filter(({ name }) =>
-              options.disableAppstractAppFor?.includes(name),
-            ),
-          ].map(({ name, path }) => ({ name, dir: path })),
-          outPath: cosmwasmCodegenDirPath,
-        })
 
       const imports: string[] = []
       const content: string[] = []
