@@ -1,5 +1,16 @@
 # @abstract-money/react
 
+## 0.2.5
+
+### Patch Changes
+
+- [`1d6201e`](https://github.com/AbstractSDK/abstract.js/commit/1d6201efe3b52b8d34e7ad9de5179b5abe318e9a) Thanks [@dalechyn](https://github.com/dalechyn)! - Improves `accountId` usage, when passed to generated hooks or hooks from \`react\` package, it takes precedence over the context, yet if one is not passed, an error is thrown to indicate that it either should be passed or account id provider wrapping is needed. Also improves `cli` to not require args in hooks that don't need them.
+
+- [`1a38dc4`](https://github.com/AbstractSDK/abstract.js/commit/1a38dc47d7cb59eacc156471b0400c02353b15fb) Thanks [@dalechyn](https://github.com/dalechyn)! - Provide account id leverage to other wallet account hooks
+
+- Updated dependencies []:
+  - @abstract-money/core@0.2.2
+
 ## 0.2.4
 
 ### Patch Changes
