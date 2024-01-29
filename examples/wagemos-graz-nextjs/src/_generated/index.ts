@@ -5,17 +5,11 @@ import { UseMutationOptions } from '@tanstack/react-query'
 import { useMemo } from 'react'
 
 import {
-  useAbstractModuleClient as useAbstractModuleClient_,
-  useAbstractModuleQueryClient as useAbstractModuleQueryClient_,
+  useAbstractModuleClient,
+  useAbstractModuleQueryClient,
 } from '@abstract-money/react/utils'
 
 import { AccountId } from '@abstract-money/core'
-
-import {
-  useCosmWasmClient,
-  useSigningCosmWasmClient,
-  useSenderAddress,
-} from '@abstract-money/react/hooks'
 
 import {
   useBettingUpdateConfigMutation,
@@ -54,41 +48,6 @@ import {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // React
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function useAbstractModuleQueryClient(
-  args: Omit<Parameters<typeof useAbstractModuleQueryClient_>[0], 'client'>,
-  options?: Parameters<typeof useAbstractModuleQueryClient_>[1],
-) {
-  const { data: client } = useCosmWasmClient({ chainName: args.chainName })
-  return useAbstractModuleQueryClient_(
-    {
-      client,
-      ...args,
-    },
-    options,
-  )
-}
-
-function useAbstractModuleClient(
-  args: Omit<
-    Parameters<typeof useAbstractModuleClient_>[0],
-    'client' | 'sender'
-  >,
-  options?: Parameters<typeof useAbstractModuleClient_>[1],
-) {
-  const { data: client } = useSigningCosmWasmClient({
-    chainName: args.chainName,
-  })
-  const { data: sender } = useSenderAddress({ chainName: args.chainName })
-  return useAbstractModuleClient_(
-    {
-      client,
-      sender,
-      ...args,
-    },
-    options,
-  )
-}
 
 const BETTING_MODULE_ID = 'abstract:betting'
 
@@ -491,14 +450,15 @@ export const betting = {
       >,
     ) => {
       const {
-        data: bettingAbstractModuleClient,
+        data: bettingAppClient,
         // TODO: figure out what to do with those
-        // isLoading: isBettingAbstractModuleClientLoading,
-        // isError: isBettingAbstractModuleClientError,
-        // error: bettingAbstractModuleClientError,
+        // isLoading: isBettingAppClientLoading,
+        // isError: isBettingAppClientError,
+        // error: bettingAppClientError,
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
+
         chainName,
         Module: BettingAppClient,
       })
@@ -510,30 +470,22 @@ export const betting = {
       } = useBettingUpdateConfigMutation(options)
 
       const mutate = useMemo(() => {
-        if (!bettingAbstractModuleClient) return undefined
+        if (!bettingAppClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
           options?: Parameters<typeof mutate_>[1],
-        ) =>
-          mutate_(
-            { client: bettingAbstractModuleClient, ...variables },
-            options,
-          )
-      }, [mutate_, bettingAbstractModuleClient])
+        ) => mutate_({ client: bettingAppClient, ...variables }, options)
+      }, [mutate_, bettingAppClient])
 
       const mutateAsync = useMemo(() => {
-        if (!bettingAbstractModuleClient) return undefined
+        if (!bettingAppClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
           options?: Parameters<typeof mutateAsync_>[1],
-        ) =>
-          mutateAsync_(
-            { client: bettingAbstractModuleClient, ...variables },
-            options,
-          )
-      }, [mutateAsync_, bettingAbstractModuleClient])
+        ) => mutateAsync_({ client: bettingAppClient, ...variables }, options)
+      }, [mutateAsync_, bettingAppClient])
 
       return { mutate, mutateAsync, ...rest } as const
     },
@@ -552,14 +504,15 @@ export const betting = {
       >,
     ) => {
       const {
-        data: bettingAbstractModuleClient,
+        data: bettingAppClient,
         // TODO: figure out what to do with those
-        // isLoading: isBettingAbstractModuleClientLoading,
-        // isError: isBettingAbstractModuleClientError,
-        // error: bettingAbstractModuleClientError,
+        // isLoading: isBettingAppClientLoading,
+        // isError: isBettingAppClientError,
+        // error: bettingAppClientError,
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
+
         chainName,
         Module: BettingAppClient,
       })
@@ -571,30 +524,22 @@ export const betting = {
       } = useBettingCloseRoundMutation(options)
 
       const mutate = useMemo(() => {
-        if (!bettingAbstractModuleClient) return undefined
+        if (!bettingAppClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
           options?: Parameters<typeof mutate_>[1],
-        ) =>
-          mutate_(
-            { client: bettingAbstractModuleClient, ...variables },
-            options,
-          )
-      }, [mutate_, bettingAbstractModuleClient])
+        ) => mutate_({ client: bettingAppClient, ...variables }, options)
+      }, [mutate_, bettingAppClient])
 
       const mutateAsync = useMemo(() => {
-        if (!bettingAbstractModuleClient) return undefined
+        if (!bettingAppClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
           options?: Parameters<typeof mutateAsync_>[1],
-        ) =>
-          mutateAsync_(
-            { client: bettingAbstractModuleClient, ...variables },
-            options,
-          )
-      }, [mutateAsync_, bettingAbstractModuleClient])
+        ) => mutateAsync_({ client: bettingAppClient, ...variables }, options)
+      }, [mutateAsync_, bettingAppClient])
 
       return { mutate, mutateAsync, ...rest } as const
     },
@@ -613,14 +558,15 @@ export const betting = {
       >,
     ) => {
       const {
-        data: bettingAbstractModuleClient,
+        data: bettingAppClient,
         // TODO: figure out what to do with those
-        // isLoading: isBettingAbstractModuleClientLoading,
-        // isError: isBettingAbstractModuleClientError,
-        // error: bettingAbstractModuleClientError,
+        // isLoading: isBettingAppClientLoading,
+        // isError: isBettingAppClientError,
+        // error: bettingAppClientError,
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
+
         chainName,
         Module: BettingAppClient,
       })
@@ -632,30 +578,22 @@ export const betting = {
       } = useBettingDistributeWinningsMutation(options)
 
       const mutate = useMemo(() => {
-        if (!bettingAbstractModuleClient) return undefined
+        if (!bettingAppClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
           options?: Parameters<typeof mutate_>[1],
-        ) =>
-          mutate_(
-            { client: bettingAbstractModuleClient, ...variables },
-            options,
-          )
-      }, [mutate_, bettingAbstractModuleClient])
+        ) => mutate_({ client: bettingAppClient, ...variables }, options)
+      }, [mutate_, bettingAppClient])
 
       const mutateAsync = useMemo(() => {
-        if (!bettingAbstractModuleClient) return undefined
+        if (!bettingAppClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
           options?: Parameters<typeof mutateAsync_>[1],
-        ) =>
-          mutateAsync_(
-            { client: bettingAbstractModuleClient, ...variables },
-            options,
-          )
-      }, [mutateAsync_, bettingAbstractModuleClient])
+        ) => mutateAsync_({ client: bettingAppClient, ...variables }, options)
+      }, [mutateAsync_, bettingAppClient])
 
       return { mutate, mutateAsync, ...rest } as const
     },
@@ -674,14 +612,15 @@ export const betting = {
       >,
     ) => {
       const {
-        data: bettingAbstractModuleClient,
+        data: bettingAppClient,
         // TODO: figure out what to do with those
-        // isLoading: isBettingAbstractModuleClientLoading,
-        // isError: isBettingAbstractModuleClientError,
-        // error: bettingAbstractModuleClientError,
+        // isLoading: isBettingAppClientLoading,
+        // isError: isBettingAppClientError,
+        // error: bettingAppClientError,
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
+
         chainName,
         Module: BettingAppClient,
       })
@@ -693,30 +632,22 @@ export const betting = {
       } = useBettingPlaceBetMutation(options)
 
       const mutate = useMemo(() => {
-        if (!bettingAbstractModuleClient) return undefined
+        if (!bettingAppClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
           options?: Parameters<typeof mutate_>[1],
-        ) =>
-          mutate_(
-            { client: bettingAbstractModuleClient, ...variables },
-            options,
-          )
-      }, [mutate_, bettingAbstractModuleClient])
+        ) => mutate_({ client: bettingAppClient, ...variables }, options)
+      }, [mutate_, bettingAppClient])
 
       const mutateAsync = useMemo(() => {
-        if (!bettingAbstractModuleClient) return undefined
+        if (!bettingAppClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
           options?: Parameters<typeof mutateAsync_>[1],
-        ) =>
-          mutateAsync_(
-            { client: bettingAbstractModuleClient, ...variables },
-            options,
-          )
-      }, [mutateAsync_, bettingAbstractModuleClient])
+        ) => mutateAsync_({ client: bettingAppClient, ...variables }, options)
+      }, [mutateAsync_, bettingAppClient])
 
       return { mutate, mutateAsync, ...rest } as const
     },
@@ -735,14 +666,15 @@ export const betting = {
       >,
     ) => {
       const {
-        data: bettingAbstractModuleClient,
+        data: bettingAppClient,
         // TODO: figure out what to do with those
-        // isLoading: isBettingAbstractModuleClientLoading,
-        // isError: isBettingAbstractModuleClientError,
-        // error: bettingAbstractModuleClientError,
+        // isLoading: isBettingAppClientLoading,
+        // isError: isBettingAppClientError,
+        // error: bettingAppClientError,
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
+
         chainName,
         Module: BettingAppClient,
       })
@@ -754,30 +686,22 @@ export const betting = {
       } = useBettingUpdateAccountsMutation(options)
 
       const mutate = useMemo(() => {
-        if (!bettingAbstractModuleClient) return undefined
+        if (!bettingAppClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
           options?: Parameters<typeof mutate_>[1],
-        ) =>
-          mutate_(
-            { client: bettingAbstractModuleClient, ...variables },
-            options,
-          )
-      }, [mutate_, bettingAbstractModuleClient])
+        ) => mutate_({ client: bettingAppClient, ...variables }, options)
+      }, [mutate_, bettingAppClient])
 
       const mutateAsync = useMemo(() => {
-        if (!bettingAbstractModuleClient) return undefined
+        if (!bettingAppClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
           options?: Parameters<typeof mutateAsync_>[1],
-        ) =>
-          mutateAsync_(
-            { client: bettingAbstractModuleClient, ...variables },
-            options,
-          )
-      }, [mutateAsync_, bettingAbstractModuleClient])
+        ) => mutateAsync_({ client: bettingAppClient, ...variables }, options)
+      }, [mutateAsync_, bettingAppClient])
 
       return { mutate, mutateAsync, ...rest } as const
     },
@@ -796,14 +720,15 @@ export const betting = {
       >,
     ) => {
       const {
-        data: bettingAbstractModuleClient,
+        data: bettingAppClient,
         // TODO: figure out what to do with those
-        // isLoading: isBettingAbstractModuleClientLoading,
-        // isError: isBettingAbstractModuleClientError,
-        // error: bettingAbstractModuleClientError,
+        // isLoading: isBettingAppClientLoading,
+        // isError: isBettingAppClientError,
+        // error: bettingAppClientError,
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
+
         chainName,
         Module: BettingAppClient,
       })
@@ -815,30 +740,22 @@ export const betting = {
       } = useBettingRegisterMutation(options)
 
       const mutate = useMemo(() => {
-        if (!bettingAbstractModuleClient) return undefined
+        if (!bettingAppClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
           options?: Parameters<typeof mutate_>[1],
-        ) =>
-          mutate_(
-            { client: bettingAbstractModuleClient, ...variables },
-            options,
-          )
-      }, [mutate_, bettingAbstractModuleClient])
+        ) => mutate_({ client: bettingAppClient, ...variables }, options)
+      }, [mutate_, bettingAppClient])
 
       const mutateAsync = useMemo(() => {
-        if (!bettingAbstractModuleClient) return undefined
+        if (!bettingAppClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
           options?: Parameters<typeof mutateAsync_>[1],
-        ) =>
-          mutateAsync_(
-            { client: bettingAbstractModuleClient, ...variables },
-            options,
-          )
-      }, [mutateAsync_, bettingAbstractModuleClient])
+        ) => mutateAsync_({ client: bettingAppClient, ...variables }, options)
+      }, [mutateAsync_, bettingAppClient])
 
       return { mutate, mutateAsync, ...rest } as const
     },
@@ -857,14 +774,15 @@ export const betting = {
       >,
     ) => {
       const {
-        data: bettingAbstractModuleClient,
+        data: bettingAppClient,
         // TODO: figure out what to do with those
-        // isLoading: isBettingAbstractModuleClientLoading,
-        // isError: isBettingAbstractModuleClientError,
-        // error: bettingAbstractModuleClientError,
+        // isLoading: isBettingAppClientLoading,
+        // isError: isBettingAppClientError,
+        // error: bettingAppClientError,
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
+
         chainName,
         Module: BettingAppClient,
       })
@@ -876,30 +794,22 @@ export const betting = {
       } = useBettingCreateRoundMutation(options)
 
       const mutate = useMemo(() => {
-        if (!bettingAbstractModuleClient) return undefined
+        if (!bettingAppClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
           options?: Parameters<typeof mutate_>[1],
-        ) =>
-          mutate_(
-            { client: bettingAbstractModuleClient, ...variables },
-            options,
-          )
-      }, [mutate_, bettingAbstractModuleClient])
+        ) => mutate_({ client: bettingAppClient, ...variables }, options)
+      }, [mutate_, bettingAppClient])
 
       const mutateAsync = useMemo(() => {
-        if (!bettingAbstractModuleClient) return undefined
+        if (!bettingAppClient) return undefined
 
         return (
           variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
           options?: Parameters<typeof mutateAsync_>[1],
-        ) =>
-          mutateAsync_(
-            { client: bettingAbstractModuleClient, ...variables },
-            options,
-          )
-      }, [mutateAsync_, bettingAbstractModuleClient])
+        ) => mutateAsync_({ client: bettingAppClient, ...variables }, options)
+      }, [mutateAsync_, bettingAppClient])
 
       return { mutate, mutateAsync, ...rest } as const
     },
