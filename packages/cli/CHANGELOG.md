@@ -1,5 +1,11 @@
 # @abstract-money/cli
 
+## 0.2.4
+
+### Patch Changes
+
+- [`3f2e5c2`](https://github.com/AbstractSDK/abstract.js/commit/3f2e5c2c655f0b4eca847b336b2851f36d82a00e) Thanks [@dalechyn](https://github.com/dalechyn)! - Adds another pattern url for `registry` plugin.
+
 ## 0.2.3
 
 ### Patch Changes
