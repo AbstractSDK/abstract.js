@@ -1,5 +1,11 @@
 # @abstract-money/cli
 
+## 0.2.6
+
+### Patch Changes
+
+- [`2d2935a`](https://github.com/AbstractSDK/abstract.js/commit/2d2935a7b389d363810e521842df2ba528acc829) Thanks [@dalechyn](https://github.com/dalechyn)! - Adds a guard to never generate abstractApp for cw-plus namespace and allows a user to configure other namespaces to not generate abstractApp for.
+
 ## 0.2.5
 
 ### Patch Changes
