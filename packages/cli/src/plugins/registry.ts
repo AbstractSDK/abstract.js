@@ -60,6 +60,9 @@ export function registry({
         {
           url: `${SCHEMA_REGISTRY_GITHUB_URL}/${namespace}/${name}/${version}/${namespace}-${name}.json`,
         },
+        {
+          url: `${SCHEMA_REGISTRY_GITHUB_URL}/${namespace}/${name}/${version}/${name}.json`,
+        },
       ]
     },
   })
