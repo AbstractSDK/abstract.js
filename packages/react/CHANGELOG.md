@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 0.2.8
+
+### Patch Changes
+
+- [`3ae1291`](https://github.com/AbstractSDK/abstract.js/commit/3ae1291a673964478e74aca758d7537d4a4db615) Thanks [@dalechyn](https://github.com/dalechyn)! - Fixed lost export
+
 ## 0.2.7
 
 ### Patch Changes
