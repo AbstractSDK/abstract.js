@@ -14,7 +14,18 @@ const codegen = (_codegen as any).default as typeof _codegen
 
 type ReactResult = RequiredBy<Plugin, 'run'>
 
-export function react(): ReactResult {
+const DISABLED_APPSTRACT_APP_FOR_NAMESPACES_LIST = ['cw-plus']
+
+type ReactOptions = {
+  disableAppstractAppFor?: string[]
+}
+
+export function react(options: ReactOptions = {}): ReactResult {
+  const disableAppstractAppFor = [
+    ...(options.disableAppstractAppFor ?? []),
+    ...DISABLED_APPSTRACT_APP_FOR_NAMESPACES_LIST,
+  ]
+
   return {
     name: 'React',
     async run({ contracts, out, isTypeScript }) {
@@ -24,7 +35,7 @@ export function react(): ReactResult {
         contracts.some(({ name }) => DISALLOWED_CONTRACT_NAMES.includes(name))
       )
         throw new Error(
-          '`proxy` and `manager` contract generations are disallowed. Use `@abstract-money/core` methods or `@abstract-money/react` methods',
+          '`proxy` and `manager` contract generations are disallowed. Use `@abstract-money/core` methods or `@abstract-money/react` hooks.',
         )
 
       // Prepare default config options
@@ -46,11 +57,36 @@ export function react(): ReactResult {
 
       const cosmwasmCodegenDirPath = join(out, 'cosmwasm-codegen')
 
+      // Guard speicfic contracts to not have the abstract app generated
+      const guardedContracts = contracts.filter(({ namespace }) =>
+        disableAppstractAppFor.includes(namespace),
+      )
+
       await codegen({
         options: codegenOptions,
-        contracts: contracts.map(({ name, path }) => ({ name, dir: path })),
+        contracts: contracts
+          .filter(
+            ({ namespace }) =>
+              !disableAppstractAppFor.includes(namespace) &&
+              guardedContracts.every(
+                (guardedContract) => guardedContract.namespace !== namespace,
+              ),
+          )
+          .map(({ name, path }) => ({ name, dir: path })),
         outPath: cosmwasmCodegenDirPath,
       })
+
+      if (guardedContracts.length !== 0)
+        await codegen({
+          options: { ...codegenOptions, abstractApp: { enabled: false } },
+          contracts: [
+            ...guardedContracts,
+            ...contracts.filter(({ namespace }) =>
+              disableAppstractAppFor.includes(namespace),
+            ),
+          ].map(({ name, path }) => ({ name, dir: path })),
+          outPath: cosmwasmCodegenDirPath,
+        })
 
       const imports: string[] = []
       const content: string[] = []
