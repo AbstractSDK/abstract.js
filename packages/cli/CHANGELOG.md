@@ -1,5 +1,11 @@
 # @abstract-money/cli
 
+## 0.2.5
+
+### Patch Changes
+
+- [`8c5c289`](https://github.com/AbstractSDK/abstract.js/commit/8c5c289be8d82f2ab827b7e10179962f2353cc24) Thanks [@dalechyn](https://github.com/dalechyn)! - Transforms the dash-cased contract names to camel case to fix the export.
+
 ## 0.2.4
 
 ### Patch Changes
