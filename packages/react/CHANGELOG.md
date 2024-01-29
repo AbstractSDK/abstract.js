@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 0.2.7
+
+### Patch Changes
+
+- [`b48d9f2`](https://github.com/AbstractSDK/abstract.js/commit/b48d9f2154d1902073287b151195a3b1f3bd7080) Thanks [@dalechyn](https://github.com/dalechyn)! - Implemented `useAccountBaseAddressesFromApi` hook.
+
 ## 0.2.6
 
 ### Patch Changes
