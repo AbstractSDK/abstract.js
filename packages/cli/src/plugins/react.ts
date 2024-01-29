@@ -58,7 +58,7 @@ export function react(options: ReactOptions = {}): ReactResult {
       const cosmwasmCodegenDirPath = join(out, 'cosmwasm-codegen')
 
       // Guard speicfic contracts to not have the abstract app generated
-      const guardedContracts = contracts.filter(({ namespace }) =>
+      const contractsWithoutAbstractApp = contracts.filter(({ namespace }) =>
         disableAppstractAppFor.includes(namespace),
       )
 
@@ -68,7 +68,7 @@ export function react(options: ReactOptions = {}): ReactResult {
           .filter(
             ({ namespace }) =>
               !disableAppstractAppFor.includes(namespace) &&
-              guardedContracts.every(
+              contractsWithoutAbstractApp.every(
                 (guardedContract) => guardedContract.namespace !== namespace,
               ),
           )
@@ -76,11 +76,11 @@ export function react(options: ReactOptions = {}): ReactResult {
         outPath: cosmwasmCodegenDirPath,
       })
 
-      if (guardedContracts.length !== 0)
+      if (contractsWithoutAbstractApp.length !== 0)
         await codegen({
           options: { ...codegenOptions, abstractApp: { enabled: false } },
           contracts: [
-            ...guardedContracts,
+            ...contractsWithoutAbstractApp,
             ...contracts.filter(({ namespace }) =>
               disableAppstractAppFor.includes(namespace),
             ),
@@ -91,45 +91,14 @@ export function react(options: ReactOptions = {}): ReactResult {
       const imports: string[] = []
       const content: string[] = []
 
-      content.push(dedent`
-        function useAbstractModuleQueryClient(
-          args: Omit<Parameters<typeof useAbstractModuleQueryClient_>[0], 'client'>,
-          options?: Parameters<typeof useAbstractModuleQueryClient_>[1],
-        ) {
-          const { data: client } = useCosmWasmClient({chainName: args.chainName})
-          return useAbstractModuleQueryClient_(
-            {
-              client,
-              ...args,
-            },
-            options,
-          )
-        }
-
-        function useAbstractModuleClient(
-          args: Omit<
-            Parameters<typeof useAbstractModuleClient_>[0],
-            'client' | 'sender'
-          >,
-          options?: Parameters<typeof useAbstractModuleClient_>[1],
-        ) {
-          const { data: client } = useSigningCosmWasmClient({chainName: args.chainName})
-          const { data: sender } = useSenderAddress({chainName: args.chainName})
-          return useAbstractModuleClient_(
-            {
-              client,
-              sender,
-              ...args,
-            },
-            options,
-          )
-        }
-      `)
-
       for (const contract of contracts) {
         {
           const contractNamePascalCase = pascalCase(contract.name)
 
+          const hasAbstractApp = contractsWithoutAbstractApp.every(
+            (contractWithoutAbstractApp) =>
+              contractWithoutAbstractApp !== contract,
+          )
           {
             // NOTE: The `@abstract-money/codegen` points to the old name of the core
             // package `@abstract-money/abstract.js`, and has to be changed to the
@@ -238,17 +207,22 @@ export function react(options: ReactOptions = {}): ReactResult {
           }
 
           imports.push(
-            `import { ${contractNamePascalCase}AppQueryClient, ${contractNamePascalCase}AppClient } from './${relative(
+            `import { ${contractNamePascalCase}${
+              hasAbstractApp ? 'App' : ''
+            }QueryClient, ${contractNamePascalCase}${
+              hasAbstractApp ? 'App' : ''
+            }Client } from './${relative(
               out,
               join(cosmwasmCodegenDirPath, `${contractNamePascalCase}.client`),
             )}'`,
           )
 
-          content.push(
-            `const ${constantCase(contract.name)}_MODULE_ID = '${
-              contract.namespace
-            }:${contract.name}'`,
-          )
+          if (hasAbstractApp)
+            content.push(
+              `const ${constantCase(contract.name)}_MODULE_ID = '${
+                contract.namespace
+              }:${contract.name}'`,
+            )
 
           {
             const queryHooks = new Map<Hook, string>([])
@@ -259,6 +233,12 @@ export function react(options: ReactOptions = {}): ReactResult {
               const hookNameWithoutModuleAndQuery = hookName
                 .replace(pascalCase(contract.name), '')
                 .replace('Query', '') as Hook
+              const queryClientCamelCase = hasAbstractApp
+                ? `${contractNameCamelCase}AppQueryClient`
+                : `${contractNameCamelCase}QueryClient`
+              const queryClientPascalCase = hasAbstractApp
+                ? `${contractNamePascalCase}AppQueryClient`
+                : `${contractNamePascalCase}QueryClient`
               queryHooks.set(
                 hookNameWithoutModuleAndQuery,
                 dedent`
@@ -266,19 +246,29 @@ export function react(options: ReactOptions = {}): ReactResult {
                     hasArgs ? 'args, ' : ''
                   } ...rest }: Omit<Parameters<typeof ${hookName}<${contractNamePascalCase}Types.${queryHookNameToResponseTypeMap.get(
                   hookName,
-                )}>>[0], 'client'> & { accountId?: AccountId; chainName: string | undefined }) => {
+                )}>>[0], 'client'> & { ${
+                  hasAbstractApp
+                    ? 'accountId?: AccountId;'
+                    : 'contractAddress: string | undefined;'
+                } chainName: string | undefined }) => {
                     const {
-                      data: ${contractNameCamelCase}AppQueryClient,
-                      isLoading: is${contractNamePascalCase}AppQueryClientLoading,
-                      isError: is${contractNamePascalCase}AppQueryClientError,
-                      error: ${contractNameCamelCase}AppQueryClientError,
-                    } = useAbstractModuleQueryClient(
+                      data: ${queryClientCamelCase},
+                      isLoading: is${queryClientPascalCase}Loading,
+                      isError: is${queryClientPascalCase}Error,
+                      error: ${queryClientCamelCase}Error,
+                    } = use${hasAbstractApp ? 'Abstract' : ''}ModuleQueryClient(
                       {
-                        moduleId: ${constantCase(contract.name)}_MODULE_ID,
+                        ${
+                          hasAbstractApp
+                            ? `moduleId: ${constantCase(
+                                contract.name,
+                              )}_MODULE_ID,`
+                            : ''
+                        }
                         ...rest,
-                        Module: ${contractNamePascalCase}AppQueryClient,
+                        Module: ${queryClientPascalCase},
                       },
-                      { enabled: options?.enabled },
+                      ${hasAbstractApp ? '{ enabled: options?.enabled }' : ''}
                     )
 
                     const {
@@ -287,18 +277,18 @@ export function react(options: ReactOptions = {}): ReactResult {
                       isError: is${hookNamePascalCaseWithoutUse}Error,
                       error: ${hookNameCamelCaseWithoutUse}Error,
                     } = use${hookNamePascalCaseWithoutUse}({
-                      client: ${contractNameCamelCase}AppQueryClient,
+                      client: ${queryClientCamelCase},
                       options,
                       ${hasArgs ? 'args, ' : ''}
                     })
 
-                    if (is${contractNamePascalCase}AppQueryClientError)
+                    if (is${queryClientPascalCase}Error)
                       return {
                         data: undefined,
                         isLoading: false,
                         isError: true,
                         isSuccess: false,
-                        error: ${contractNameCamelCase}AppQueryClientError,
+                        error: ${queryClientCamelCase}Error,
                       } as const
                     if (is${hookNamePascalCaseWithoutUse}Error)
                       return {
@@ -308,7 +298,7 @@ export function react(options: ReactOptions = {}): ReactResult {
                         isSuccess: false,
                         error: ${hookNameCamelCaseWithoutUse}Error,
                       } as const
-                    if (is${contractNamePascalCase}AppQueryClientLoading || is${hookNamePascalCaseWithoutUse}Loading)
+                    if (is${queryClientPascalCase}Loading || is${hookNamePascalCaseWithoutUse}Loading)
                       return {
                         data: undefined,
                         isLoading: true,
@@ -332,11 +322,24 @@ export function react(options: ReactOptions = {}): ReactResult {
               const hookNameWithoutModuleAndMutation = hookName
                 .replace(pascalCase(contract.name), '')
                 .replace('Mutation', '') as Hook
+
+              const clientCamelCase = hasAbstractApp
+                ? `${contractNameCamelCase}AppClient`
+                : `${contractNameCamelCase}Client`
+              const clientPascalCase = hasAbstractApp
+                ? `${contractNamePascalCase}AppClient`
+                : `${contractNamePascalCase}Client`
               mutationHooks.set(
                 hookNameWithoutModuleAndMutation,
                 dedent`
                   (
-                    { chainName, accountId }: { chainName: string | undefined; accountId?: AccountId },
+                    { chainName, ${
+                      hasAbstractApp ? 'accountId' : 'contractAddress'
+                    } }: { chainName: string | undefined; ${
+                  hasAbstractApp
+                    ? 'accountId?: AccountId'
+                    : 'contractAddress: string | undefined'
+                } },
                     options?: Omit<
                       UseMutationOptions<
                         ExecuteResult,
@@ -347,17 +350,23 @@ export function react(options: ReactOptions = {}): ReactResult {
                     >,
                   ) => {
                     const {
-                      data: ${contractNameCamelCase}AbstractModuleClient,
+                      data: ${clientCamelCase},
                       // TODO: figure out what to do with those
-                      // isLoading: is${contractNamePascalCase}AbstractModuleClientLoading,
-                      // isError: is${contractNamePascalCase}AbstractModuleClientError,
-                      // error: ${contractNameCamelCase}AbstractModuleClientError,
-                    } = useAbstractModuleClient(
+                      // isLoading: is${clientPascalCase}Loading,
+                      // isError: is${clientPascalCase}Error,
+                      // error: ${clientCamelCase}Error,
+                    } = use${hasAbstractApp ? 'Abstract' : ''}ModuleClient(
                       {
+                        ${
+                          hasAbstractApp
+                            ? `
                         moduleId: ${constantCase(contract.name)}_MODULE_ID,
                         accountId,
+                        `
+                            : 'contractAddress,'
+                        }
                         chainName,
-                        Module: ${contractNamePascalCase}AppClient,
+                        Module: ${clientPascalCase},
                       }
                     )
 
@@ -368,23 +377,23 @@ export function react(options: ReactOptions = {}): ReactResult {
                     } = ${hookName}(options)
 
                     const mutate = useMemo(() => {
-                      if (!${contractNameCamelCase}AbstractModuleClient) return undefined
+                      if (!${clientCamelCase}) return undefined
 
                       return (
                         variables: Omit<Parameters<typeof mutate_>[0], 'client'>,
                         options?: Parameters<typeof mutate_>[1],
-                      ) => mutate_({ client: ${contractNameCamelCase}AbstractModuleClient, ...variables }, options)
-                    }, [mutate_, ${contractNameCamelCase}AbstractModuleClient])
+                      ) => mutate_({ client: ${clientCamelCase}, ...variables }, options)
+                    }, [mutate_, ${clientCamelCase}])
 
                     const mutateAsync = useMemo(() => {
-                      if (!${contractNameCamelCase}AbstractModuleClient) return undefined
+                      if (!${clientCamelCase}) return undefined
 
                       return (
                         variables: Omit<Parameters<typeof mutateAsync_>[0], 'client'>,
                         options?: Parameters<typeof mutateAsync_>[1],
                       ) =>
-                        mutateAsync_({ client: ${contractNameCamelCase}AbstractModuleClient, ...variables }, options)
-                    }, [mutateAsync_, ${contractNameCamelCase}AbstractModuleClient])
+                        mutateAsync_({ client: ${clientCamelCase}, ...variables }, options)
+                    }, [mutateAsync_, ${clientCamelCase}])
 
                     return { mutate, mutateAsync, ...rest } as const
                   }
@@ -421,17 +430,19 @@ export function react(options: ReactOptions = {}): ReactResult {
           import { useMemo } from 'react'
 
           import {
-            useAbstractModuleClient as useAbstractModuleClient_,
-            useAbstractModuleQueryClient as useAbstractModuleQueryClient_,
+            useAbstractModuleClient,
+            useAbstractModuleQueryClient,
+          ${
+            contractsWithoutAbstractApp.length !== 0
+              ? `
+            useModuleClient,
+            useModuleQueryClient,
+          `
+              : ''
+          }
           } from '@abstract-money/react/utils'
 
           import { AccountId } from '@abstract-money/core'
-
-          import {
-            useCosmWasmClient,
-            useSigningCosmWasmClient,
-            useSenderAddress
-          } from '@abstract-money/react/hooks'
 
           ${imports.join('\n\n')}
         `,

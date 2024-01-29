@@ -1,4 +1,3 @@
-import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
 
 import { AccountId, accountIdToParameter } from '@abstract-money/core'
@@ -53,11 +52,9 @@ export function useAbstractModuleClient<
 >(
   parameters: {
     chainName: string | undefined
-    sender: string | undefined
     accountId?: AccountId
     moduleId: string
     Module: TModule
-    client: SigningCosmWasmClient | undefined
   },
   {
     enabled: enabled_ = true,
@@ -79,9 +76,7 @@ export function useAbstractModuleClient<
     moduleId,
     accountId: accountIdParameter,
     Module,
-    client,
     chainName,
-    sender,
   } = parameters
 
   const { accountId } = useAccountId(
@@ -97,7 +92,7 @@ export function useAbstractModuleClient<
     isLoading: isAbstractClientLoading,
     isError: isAbstractClientError,
     error: abstractClientError,
-  } = useAbstractClient({ client, chainName, sender }, { enabled: enabled_ })
+  } = useAbstractClient({ chainName }, { enabled: enabled_ })
 
   const queryKey = React.useMemo(
     () =>

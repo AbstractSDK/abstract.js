@@ -8,11 +8,12 @@ import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { useConfig } from 'src/contexts'
+import { useSenderAddress, useSigningCosmWasmClient } from 'src/hooks'
 
 export async function getAbstractClient({
   sender,
-  client,
   chainName,
+  client,
   overrideApiUrl = ABSTRACT_API_URL,
 }: {
   sender: string
@@ -44,13 +45,9 @@ export async function getAbstractClient({
 
 export function useAbstractClient(
   {
-    client,
     chainName,
-    sender,
   }: {
     chainName: string | undefined
-    sender: string | undefined
-    client: SigningCosmWasmClient | undefined
   },
   {
     enabled: enabled_ = true,
@@ -69,6 +66,19 @@ export function useAbstractClient(
   > = {},
 ) {
   const { apiUrl } = useConfig()
+
+  const {
+    data: client,
+    isLoading: isSigningCosmWasmClientLoading,
+    isError: isSigningCosmWasmClientError,
+    error: signingCosmWasmClientError,
+  } = useSigningCosmWasmClient({ chainName })
+  const {
+    data: sender,
+    isLoading: isSenderLoading,
+    isError: isSenderError,
+    error: senderError,
+  } = useSenderAddress({ chainName })
 
   const queryKey = React.useMemo(
     () => ['abstract-client', sender, chainName, apiUrl, client] as const,
@@ -93,5 +103,46 @@ export function useAbstractClient(
     [enabled_, client, chainName],
   )
 
-  return useQuery(queryKey, queryFn, { enabled, ...rest })
+  const { data, isLoading, isError, error } = useQuery(queryKey, queryFn, {
+    enabled,
+    ...rest,
+  })
+
+  if (isSigningCosmWasmClientError)
+    return {
+      data: undefined,
+      isLoading: false,
+      isError: true,
+      isSuccess: false,
+      error: signingCosmWasmClientError,
+    } as const
+  if (isSenderError)
+    return {
+      data: undefined,
+      isLoading: false,
+      isError: true,
+      isSuccess: false,
+      error: senderError,
+    } as const
+  if (isError)
+    return {
+      data: undefined,
+      isLoading: false,
+      isError: true,
+      isSuccess: false,
+      error,
+    } as const
+  if (isSigningCosmWasmClientLoading || isSenderLoading || isLoading)
+    return {
+      data: undefined,
+      isLoading: true,
+      isError: false,
+      isSuccess: false,
+    } as const
+  return {
+    data,
+    isLoading: false,
+    isError: false,
+    isSuccess: true,
+  } as const
 }

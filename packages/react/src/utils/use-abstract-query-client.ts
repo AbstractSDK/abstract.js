@@ -8,6 +8,7 @@ import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { useConfig } from 'src/contexts'
+import { useCosmWasmClient } from 'src/hooks'
 
 async function getAbstractQueryClient({
   client,
@@ -41,11 +42,9 @@ async function getAbstractQueryClient({
 
 export function useAbstractQueryClient(
   {
-    client,
     chainName,
   }: {
     chainName: string | undefined
-    client: CosmWasmClient | undefined
   },
   {
     enabled: enabled_ = true,
@@ -63,6 +62,13 @@ export function useAbstractQueryClient(
   > = {},
 ) {
   const { apiUrl } = useConfig()
+
+  const {
+    data: client,
+    isLoading: isCosmWasmClientLoading,
+    isError: isCosmWasmClientError,
+    error: cosmWasmClientError,
+  } = useCosmWasmClient({ chainName })
 
   const queryKey = React.useMemo(
     () => ['abstract-query-client', chainName, apiUrl, client] as const,
@@ -85,5 +91,40 @@ export function useAbstractQueryClient(
     [enabled_, client, chainName],
   )
 
-  return useQuery(queryKey, queryFn, { enabled, ...rest })
+  const { data, isLoading, isError, error } = useQuery(queryKey, queryFn, {
+    enabled,
+    ...rest,
+  })
+
+  if (isCosmWasmClientError)
+    return {
+      data: undefined,
+      isLoading: true,
+      isError: false,
+      isSuccess: false,
+      error: cosmWasmClientError,
+    } as const
+
+  if (isError)
+    return {
+      data: undefined,
+      isLoading: true,
+      isError: false,
+      isSuccess: false,
+      error,
+    } as const
+  if (isCosmWasmClientLoading || isLoading)
+    return {
+      data: undefined,
+      isLoading: true,
+      isError: false,
+      isSuccess: false,
+    } as const
+
+  return {
+    data,
+    isLoading: false,
+    isError: false,
+    isSuccess: false,
+  } as const
 }

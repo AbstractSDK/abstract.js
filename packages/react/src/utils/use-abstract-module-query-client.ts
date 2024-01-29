@@ -1,20 +1,16 @@
-import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
 
 import { AccountId, accountIdToParameter } from '@abstract-money/core'
 import {
-  ABSTRACT_API_URL,
   AbstractAccountId,
   AbstractQueryClient,
-  CHAIN_DEPLOYMENT_QUERY,
   accountIdToLegacyAccountId,
-  graphqlRequest,
 } from '@abstract-money/core/legacy'
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import { useAccountId, useConfig } from '../contexts'
 import { useAbstractQueryClient } from './use-abstract-query-client'
 
-interface ModuleQueryClientConstructor {
+interface AbstractModuleQueryClientConstructor {
   new (args: {
     abstractQueryClient: AbstractQueryClient
     accountId: AbstractAccountId
@@ -25,40 +21,20 @@ interface ModuleQueryClientConstructor {
 }
 
 async function getAbstractModuleQueryClient<
-  TModule extends ModuleQueryClientConstructor,
+  TModule extends AbstractModuleQueryClientConstructor,
 >({
-  client,
-  chainName,
-  overrideApiUrl = ABSTRACT_API_URL,
+  abstractQueryClient,
   accountId,
   moduleId,
   Module,
 }: {
-  client: CosmWasmClient
+  abstractQueryClient: AbstractQueryClient
   chainName: string
   overrideApiUrl?: string
   accountId: AccountId
   moduleId: string
   Module: TModule
 }) {
-  // TODO: re-check if grabbing the first chain of the list is a good solution
-  const data = await graphqlRequest(overrideApiUrl, CHAIN_DEPLOYMENT_QUERY, {
-    chain: chainName,
-  })
-
-  const {
-    ansHost: ansHostAddress,
-    registry: registryAddress,
-    accountFactory: factoryAddress,
-  } = data.deployment
-
-  const abstractQueryClient = new AbstractQueryClient({
-    client,
-    ansHostAddress,
-    registryAddress,
-    factoryAddress,
-  })
-
   const { account_base } =
     await abstractQueryClient.registryQueryClient.accountBase({
       accountId: accountIdToParameter(accountId),
@@ -72,25 +48,25 @@ async function getAbstractModuleQueryClient<
   }) as InstanceType<TModule>
 }
 
-type TQueryFnData<TModule extends ModuleQueryClientConstructor> =
+type TQueryFnData<TModule extends AbstractModuleQueryClientConstructor> =
   | InstanceType<TModule>
   | undefined
-type TQueryData<TModule extends ModuleQueryClientConstructor> =
+type TQueryData<TModule extends AbstractModuleQueryClientConstructor> =
   | InstanceType<TModule>
   | undefined
-type TQueryKey<TModule extends ModuleQueryClientConstructor> = readonly [
-  'module-query-client',
-  string,
-  AccountId | undefined,
-  TModule,
-  AbstractQueryClient | undefined,
-]
+type TQueryKey<TModule extends AbstractModuleQueryClientConstructor> =
+  readonly [
+    'module-query-client',
+    string,
+    AccountId | undefined,
+    TModule,
+    AbstractQueryClient | undefined,
+  ]
 
 export function useAbstractModuleQueryClient<
-  TModule extends ModuleQueryClientConstructor,
+  TModule extends AbstractModuleQueryClientConstructor,
 >(
   parameters: {
-    client: CosmWasmClient | undefined
     accountId?: AccountId
     chainName: string | undefined
     moduleId: string
@@ -110,7 +86,6 @@ export function useAbstractModuleQueryClient<
     moduleId,
     accountId: accountIdParameter,
     Module,
-    client,
     chainName,
   } = parameters
   const { accountId } = useAccountId(
@@ -128,10 +103,7 @@ export function useAbstractModuleQueryClient<
     isLoading: isAbstractClientLoading,
     isError: isAbstractClientError,
     error: abstractClientError,
-  } = useAbstractQueryClient(
-    { client, chainName: chainName },
-    { enabled: enabled_ },
-  )
+  } = useAbstractQueryClient({ chainName: chainName }, { enabled: enabled_ })
 
   const queryKey = React.useMemo(
     () =>
@@ -146,23 +118,23 @@ export function useAbstractModuleQueryClient<
   )
 
   const queryFn = React.useCallback(() => {
-    if (!client) throw new Error('client is not defined')
+    if (!abstractQueryClient) throw new Error('client is not defined')
     if (!chainName) throw new Error('chain is not defined')
     if (!accountId) throw new Error('accountId is not defined')
 
     return getAbstractModuleQueryClient({
-      client,
+      abstractQueryClient,
       chainName: chainName,
       overrideApiUrl: apiUrl,
       accountId,
       moduleId,
       Module,
     })
-  }, [client, chainName, apiUrl, accountId, moduleId, Module])
+  }, [abstractQueryClient, chainName, apiUrl, accountId, moduleId, Module])
 
   const enabled = React.useMemo(
-    () => Boolean(client && chainName && accountId && enabled_),
-    [enabled_, client, chainName, accountId],
+    () => Boolean(abstractQueryClient && chainName && accountId && enabled_),
+    [enabled_, abstractQueryClient, chainName, accountId],
   )
 
   const {
