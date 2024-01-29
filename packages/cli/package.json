@@ -1,6 +1,6 @@
 {
   "name": "@abstract-money/cli",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "CLI tool to generate modules to build with Abstract SDK",
   "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
   "author": "dalechyn <vlad@abstract.money>",
