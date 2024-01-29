@@ -1,8 +1,10 @@
 import { AccountId } from '@abstract-money/core'
-import { MutationOptions } from '@tanstack/react-query'
+import { MutationOptions, QueryOptions } from '@tanstack/react-query'
 
 export function parseParameters<
-  TOptions extends Omit<MutationOptions<any, any, any, any>, 'mutationFn'>,
+  TOptions extends
+    | Omit<MutationOptions<any, any, any, any>, 'mutationFn'>
+    | Omit<QueryOptions<any, any, any, any>, 'queryFn'>,
   TResult extends {
     accountId: AccountId | undefined
     options: TOptions | undefined
