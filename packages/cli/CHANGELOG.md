@@ -1,5 +1,11 @@
 # @abstract-money/cli
 
+## 0.2.7
+
+### Patch Changes
+
+- [`3ca6d2f`](https://github.com/AbstractSDK/abstract.js/commit/3ca6d2f0c302978b3d03e9deb511b94765a68b15) Thanks [@dalechyn](https://github.com/dalechyn)! - Support non-abstract apps codegen, and minor optimizations.
+
 ## 0.2.6
 
 ### Patch Changes
