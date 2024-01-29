@@ -358,7 +358,7 @@ export function react(): ReactResult {
 
             content.push(
               dedent`
-                export const ${contract.name} = {
+                export const ${camelCase(contract.name)} = {
                   queries: {
                     ${[...queryHooks.entries()]
                       .map(([hookName, hook]) => `${hookName}: ${hook},`)
