@@ -1,5 +1,14 @@
 # @abstract-money/react
 
+## 0.2.11
+
+### Patch Changes
+
+- [`bb7def0`](https://github.com/AbstractSDK/abstract.js/commit/bb7def01d62cb759edb6972b7a49331c39bad1e9) Thanks [@dalechyn](https://github.com/dalechyn)! - useAccountBalanceFromApi hook
+
+- Updated dependencies [[`bb7def0`](https://github.com/AbstractSDK/abstract.js/commit/bb7def01d62cb759edb6972b7a49331c39bad1e9)]:
+  - @abstract-money/core@0.2.3
+
 ## 0.2.10
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 0.2.3
+
+### Patch Changes
+
+- [`bb7def0`](https://github.com/AbstractSDK/abstract.js/commit/bb7def01d62cb759edb6972b7a49331c39bad1e9) Thanks [@dalechyn](https://github.com/dalechyn)! - useAccountBalanceFromApi hook
+
 ## 0.2.2
 
 ### Patch Changes
