@@ -41,79 +41,6 @@ export const bettingQueryKeys = {
     args
   }] as const)
 };
-export const bettingQueries = {
-  round: <TData = RoundResponse,>({
-    client,
-    args,
-    options
-  }: BettingRoundQuery<TData>): UseQueryOptions<RoundResponse, Error, TData> => ({
-    queryKey: bettingQueryKeys.round(client?.moduleId, args),
-    queryFn: () => client ? client.round({
-      roundId: args.roundId
-    }) : Promise.reject(new Error("Invalid client")),
-    ...options,
-    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
-  }),
-  listRounds: <TData = RoundsResponse,>({
-    client,
-    args,
-    options
-  }: BettingListRoundsQuery<TData>): UseQueryOptions<RoundsResponse, Error, TData> => ({
-    queryKey: bettingQueryKeys.listRounds(client?.moduleId, args),
-    queryFn: () => client ? client.listRounds({
-      limit: args.limit,
-      startAfter: args.startAfter
-    }) : Promise.reject(new Error("Invalid client")),
-    ...options,
-    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
-  }),
-  odds: <TData = OddsResponse,>({
-    client,
-    args,
-    options
-  }: BettingOddsQuery<TData>): UseQueryOptions<OddsResponse, Error, TData> => ({
-    queryKey: bettingQueryKeys.odds(client?.moduleId, args),
-    queryFn: () => client ? client.odds({
-      roundId: args.roundId,
-      teamId: args.teamId
-    }) : Promise.reject(new Error("Invalid client")),
-    ...options,
-    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
-  }),
-  listOdds: <TData = ListOddsResponse,>({
-    client,
-    args,
-    options
-  }: BettingListOddsQuery<TData>): UseQueryOptions<ListOddsResponse, Error, TData> => ({
-    queryKey: bettingQueryKeys.listOdds(client?.moduleId, args),
-    queryFn: () => client ? client.listOdds({
-      roundId: args.roundId
-    }) : Promise.reject(new Error("Invalid client")),
-    ...options,
-    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
-  }),
-  config: <TData = ConfigResponse,>({
-    client,
-    options
-  }: BettingConfigQuery<TData>): UseQueryOptions<ConfigResponse, Error, TData> => ({
-    queryKey: bettingQueryKeys.config(client?.moduleId),
-    queryFn: () => client ? client.config() : Promise.reject(new Error("Invalid client")),
-    ...options,
-    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
-  }),
-  bets: <TData = BetsResponse,>({
-    client,
-    args,
-    options
-  }: BettingBetsQuery<TData>): UseQueryOptions<BetsResponse, Error, TData> => ({
-    queryKey: bettingQueryKeys.bets(client?.moduleId, args),
-    queryFn: () => client ? client.bets({
-      roundId: args.roundId
-    }) : Promise.reject(new Error("Invalid client")),
-    ...options,
-    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
-  })
-};
 export interface BettingReactQuery<TResponse, TData = TResponse> {
   client: BettingAppQueryClient | undefined;
   options?: Omit<UseQueryOptions<TResponse, Error, TData>, "'queryKey' | 'queryFn' | 'initialData'"> & {
@@ -121,7 +48,7 @@ export interface BettingReactQuery<TResponse, TData = TResponse> {
   };
 }
 export interface BettingBetsQuery<TData> extends BettingReactQuery<BetsResponse, TData> {
-  args: {
+  args: undefined | {
     roundId: number;
   };
 }
@@ -130,10 +57,9 @@ export function useBettingBetsQuery<TData = BetsResponse>({
   args,
   options
 }: BettingBetsQuery<TData>) {
-  return useQuery<BetsResponse, Error, TData>(bettingQueryKeys.bets(client?.moduleId, args), () => client ? client.bets({
+  return useQuery<BetsResponse, Error, TData>(bettingQueryKeys.bets(client?.moduleId,  args), () => client && args ? client.bets({
     roundId: args.roundId
-  }) : Promise.reject(new Error("Invalid client")), { ...options,
-    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
+  }) : Promise.reject(new Error("Invalid client or args")), { ...options, enabled: !!args &&  !!client && (options?.enabled != undefined ? options.enabled : true)
   });
 }
 export interface BettingConfigQuery<TData> extends BettingReactQuery<ConfigResponse, TData> {}
@@ -146,7 +72,7 @@ export function useBettingConfigQuery<TData = ConfigResponse>({
   });
 }
 export interface BettingListOddsQuery<TData> extends BettingReactQuery<ListOddsResponse, TData> {
-  args: {
+  args: undefined | {
     roundId: number;
   };
 }
@@ -155,14 +81,13 @@ export function useBettingListOddsQuery<TData = ListOddsResponse>({
   args,
   options
 }: BettingListOddsQuery<TData>) {
-  return useQuery<ListOddsResponse, Error, TData>(bettingQueryKeys.listOdds(client?.moduleId, args), () => client ? client.listOdds({
+  return useQuery<ListOddsResponse, Error, TData>(bettingQueryKeys.listOdds(client?.moduleId,  args), () => client && args ? client.listOdds({
     roundId: args.roundId
-  }) : Promise.reject(new Error("Invalid client")), { ...options,
-    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
+  }) : Promise.reject(new Error("Invalid client or args")), { ...options, enabled: !!args &&  !!client && (options?.enabled != undefined ? options.enabled : true)
   });
 }
 export interface BettingOddsQuery<TData> extends BettingReactQuery<OddsResponse, TData> {
-  args: {
+  args: undefined | {
     roundId: number;
     teamId: AccountId;
   };
@@ -172,15 +97,14 @@ export function useBettingOddsQuery<TData = OddsResponse>({
   args,
   options
 }: BettingOddsQuery<TData>) {
-  return useQuery<OddsResponse, Error, TData>(bettingQueryKeys.odds(client?.moduleId, args), () => client ? client.odds({
+  return useQuery<OddsResponse, Error, TData>(bettingQueryKeys.odds(client?.moduleId,  args), () => client && args ? client.odds({
     roundId: args.roundId,
     teamId: args.teamId
-  }) : Promise.reject(new Error("Invalid client")), { ...options,
-    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
+  }) : Promise.reject(new Error("Invalid client or args")), { ...options, enabled: !!args &&  !!client && (options?.enabled != undefined ? options.enabled : true)
   });
 }
 export interface BettingListRoundsQuery<TData> extends BettingReactQuery<RoundsResponse, TData> {
-  args: {
+  args: undefined | {
     limit?: number;
     startAfter?: number;
   };
@@ -190,15 +114,14 @@ export function useBettingListRoundsQuery<TData = RoundsResponse>({
   args,
   options
 }: BettingListRoundsQuery<TData>) {
-  return useQuery<RoundsResponse, Error, TData>(bettingQueryKeys.listRounds(client?.moduleId, args), () => client ? client.listRounds({
+  return useQuery<RoundsResponse, Error, TData>(bettingQueryKeys.listRounds(client?.moduleId,  args), () => client && args ? client.listRounds({
     limit: args.limit,
     startAfter: args.startAfter
-  }) : Promise.reject(new Error("Invalid client")), { ...options,
-    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
+  }) : Promise.reject(new Error("Invalid client or args")), { ...options, enabled: !!args &&  !!client && (options?.enabled != undefined ? options.enabled : true)
   });
 }
 export interface BettingRoundQuery<TData> extends BettingReactQuery<RoundResponse, TData> {
-  args: {
+  args: undefined | {
     roundId: number;
   };
 }
@@ -207,10 +130,9 @@ export function useBettingRoundQuery<TData = RoundResponse>({
   args,
   options
 }: BettingRoundQuery<TData>) {
-  return useQuery<RoundResponse, Error, TData>(bettingQueryKeys.round(client?.moduleId, args), () => client ? client.round({
+  return useQuery<RoundResponse, Error, TData>(bettingQueryKeys.round(client?.moduleId,  args), () => client && args ? client.round({
     roundId: args.roundId
-  }) : Promise.reject(new Error("Invalid client")), { ...options,
-    enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
+  }) : Promise.reject(new Error("Invalid client or args")), { ...options, enabled: !!args &&  !!client && (options?.enabled != undefined ? options.enabled : true)
   });
 }
 export interface BettingUpdateConfigMutation {

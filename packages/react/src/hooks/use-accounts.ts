@@ -2,7 +2,7 @@ import { AccountId, ApiClient } from '@abstract-money/core'
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { useConfig } from '../contexts'
-import { MaybeArray } from '../types/utils'
+import { MaybeArray, WithArgs } from '../types/utils'
 
 /**
  * Loads all accounts for a given owner and chain.
@@ -11,12 +11,11 @@ import { MaybeArray } from '../types/utils'
  */
 export function useAccounts(
   {
-    owner,
-    chainName,
-  }: {
-    owner: string | undefined
-    chainName: MaybeArray<string> | undefined
-  },
+    args,
+  }: WithArgs<{
+    owner: string
+    chainName: MaybeArray<string>
+  }>,
   {
     enabled: enabled_ = true,
     ...rest
@@ -34,33 +33,33 @@ export function useAccounts(
 ) {
   const chains = React.useMemo(
     () =>
-      chainName
-        ? Array.isArray(chainName)
-          ? chainName
-          : [chainName]
+      args?.chainName
+        ? Array.isArray(args?.chainName)
+          ? args?.chainName
+          : [args?.chainName]
         : undefined,
-    [chainName],
+    [args?.chainName],
   )
   const config = useConfig()
   const client = config.useApiClient()
   const queryKey = React.useMemo(
-    () => ['accountsOf', owner, chains, client] as const,
-    [owner, chains, client],
+    () => ['accountsOf', args?.owner, chains, client] as const,
+    [args?.owner, chains, client],
   )
 
   const enabled = React.useMemo(
-    () => Boolean(client && chains && owner && enabled_),
-    [enabled_, client, owner, chains],
+    () => Boolean(client && chains && args?.owner && enabled_),
+    [enabled_, client, args?.owner, chains],
   )
 
   const queryFn = React.useCallback(() => {
-    if (!client || !owner || !chains)
+    if (!client || !args?.owner || !chains)
       throw new Error('No client or owner or chain')
 
     return client.getAccountsByOwnerFromApi({
-      args: { owner, chains },
+      args: { owner: args.owner, chains },
     })
-  }, [client, owner, chains])
+  }, [client, args?.owner, chains])
 
   return useQuery(queryKey, queryFn, { enabled, ...rest })
 }

@@ -48,7 +48,6 @@ export function react(options: ReactOptions = {}): ReactResult {
           enabled: true,
           mutations: true,
           camelize: true,
-          queryFactory: true,
           queryKeys: true,
         },
         abstractApp: { enabled: true },
@@ -99,6 +98,7 @@ export function react(options: ReactOptions = {}): ReactResult {
             (contractWithoutAbstractApp) =>
               contractWithoutAbstractApp !== contract,
           )
+          // Post ts-codegen transfomrations
           {
             // NOTE: The `@abstract-money/codegen` points to the old name of the core
             // package `@abstract-money/abstract.js`, and has to be changed to the
@@ -143,9 +143,44 @@ export function react(options: ReactOptions = {}): ReactResult {
             cosmwasmCodegenDirPath,
             `${contractNamePascalCase}.react-query.ts`,
           )
-          const reactQueryFileContents = await fse.readFile(
+          let reactQueryFileContents = await fse.readFile(
             resolve(reactQueryFilePath),
             'utf8',
+          )
+          // Replace args: to args?: to support stale queries with partial args
+          reactQueryFileContents = reactQueryFileContents
+            .replaceAll(
+              /(export interface \w+Query.*[\r\n \w\s]*?)args:/gm,
+              (substring) => {
+                const matches =
+                  /(export interface \w+Query.*[\r\n \w\s]*?)args:/gm.exec(
+                    substring,
+                  )
+                if (!matches)
+                  throw new Error(
+                    'Could not replace React Query File Contents. Please open an issue on GitHub.',
+                  )
+                return `${matches[1]}args: undefined |`
+              },
+            )
+            .replaceAll(/useQuery(?:[<>\r\n \S]*?)^}/gm, (useQueryCode) => {
+              // Don't edit query hooks without args
+              if (!useQueryCode.includes('args')) return useQueryCode
+              return useQueryCode
+                .replaceAll('Invalid client', 'Invalid client or args')
+                .replaceAll(
+                  /args\),(?:[\r\n \s]*?)\(\)(?:[\r\n \s]*?)=>(?:[\r\n \s]*?)client(?:[\r\n \s]*?)\?/gm,
+                  'args), () => client && args ?',
+                )
+                .replaceAll(
+                  /args"\)\),(?:[\r\n \s]*?){(?:[\r\n \s]*?)\.\.\.options,(?:[\r\n \s]*?)enabled:/gm,
+                  'args")), { ...options, enabled: !!args && ',
+                )
+            })
+
+          await fse.writeFile(
+            resolve(reactQueryFilePath),
+            reactQueryFileContents,
           )
 
           type Hook = `use${string}`

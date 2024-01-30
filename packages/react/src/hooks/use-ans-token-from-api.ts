@@ -2,10 +2,10 @@ import { AnsToken, ApiClient } from '@abstract-money/core'
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { useConfig } from '../contexts'
-import { PartialArgs } from '../types/utils'
+import { WithArgs } from '../types/utils'
 
 export function useAnsTokenFromAPI(
-  { args }: PartialArgs<Parameters<ApiClient['getAnsTokenFromApi']>[0]>,
+  { args }: WithArgs<Parameters<ApiClient['getAnsTokenFromApi']>[0]['args']>,
   {
     enabled: enabled_ = true,
     ...rest
@@ -15,7 +15,7 @@ export function useAnsTokenFromAPI(
     AnsToken | undefined,
     readonly [
       'ansTokenFromApi',
-      PartialArgs<Parameters<ApiClient['getAnsTokenFromApi']>[0]>,
+      WithArgs<Parameters<ApiClient['getAnsTokenFromApi']>[0]['args']>,
       ApiClient | undefined,
     ]
   > = {},
@@ -28,12 +28,12 @@ export function useAnsTokenFromAPI(
   )
 
   const enabled = React.useMemo(
-    () => Boolean(client && args.id && args.chainName && enabled_),
+    () => Boolean(client && args?.id && args?.chainName && enabled_),
     [enabled_, client, args],
   )
 
   const queryFn = React.useCallback(() => {
-    if (!client || !args.chainName || !args.id)
+    if (!client || !args?.chainName || !args?.id)
       throw new Error('No client or owner or chain')
 
     return client.getAnsTokenFromApi({
