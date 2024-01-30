@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 0.2.9
+
+### Patch Changes
+
+- [`c49dee6`](https://github.com/AbstractSDK/abstract.js/commit/c49dee6c6db5dad9896e9b858fede68b645efcaf) Thanks [@dalechyn](https://github.com/dalechyn)! - Type fix
+
 ## 0.2.8
 
 ### Patch Changes
