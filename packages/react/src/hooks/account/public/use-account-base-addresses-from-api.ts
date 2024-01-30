@@ -8,7 +8,9 @@ import React from 'react'
 import { useAccountId, useConfig } from '../../../contexts'
 import { parseParameters } from '../utils'
 
-type QueryFnData = ReturnType<AccountPublicClient['getAccountBaseAddresses']>
+type QueryFnData = Awaited<
+  ReturnType<AccountPublicClient['getAccountBaseAddresses']>
+>
 
 type QueryError = unknown
 type QueryData = QueryFnData
