@@ -1,3 +1,4 @@
+import { getAccountBalancesFromApi } from '../../actions/get-account-balance-from-api'
 import { getAccountFactoryAddressFromApi } from '../../actions/get-account-factory-address-from-api'
 import { getAccountsByOwnerFromApi } from '../../actions/get-accounts-by-owner-from-api'
 import { getAnsHostAddressFromApi } from '../../actions/get-ans-host-address-from-api'
@@ -32,10 +33,18 @@ export type ApiActions = {
   getVersionControlAddressFromApi(
     args: CutSpecificArgsFromParameter<typeof getVersionControlAddressFromApi>,
   ): ReturnType<typeof getVersionControlAddressFromApi>
+  getAccountBalancesFromApi(
+    args: CutSpecificArgsFromParameter<typeof getAccountBalancesFromApi>,
+  ): ReturnType<typeof getAccountBalancesFromApi>
 }
 
 export function apiActions(apiUrl: string): ApiActions {
   return {
+    getAccountBalancesFromApi: ({ args, ...rest }) =>
+      getAccountBalancesFromApi({
+        args: { ...args, apiUrl },
+        ...rest,
+      }),
     getAccountFactoryAddressFromApi: ({ args, ...rest }) =>
       getAccountFactoryAddressFromApi({
         args: { ...args, apiUrl },
