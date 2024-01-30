@@ -4,7 +4,7 @@ import React from 'react'
 import { useConfig } from '../contexts'
 import { WithArgs } from '../types/utils'
 
-export function useAccountBalancesFromAPI(
+export function useAccountBalancesFromApi(
   {
     args,
   }: WithArgs<Parameters<ApiClient['getAccountBalancesFromApi']>[0]['args']>,
