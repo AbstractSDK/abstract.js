@@ -1,5 +1,11 @@
 # @abstract-money/cli
 
+## 0.2.8
+
+### Patch Changes
+
+- [`f183560`](https://github.com/AbstractSDK/abstract.js/commit/f1835604f7b00e4b89c550620940d0df3af1a6a2) Thanks [@dalechyn](https://github.com/dalechyn)! - Partial arguments for generated hooks
+
 ## 0.2.7
 
 ### Patch Changes
