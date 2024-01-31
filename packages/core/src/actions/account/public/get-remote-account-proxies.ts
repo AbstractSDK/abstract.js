@@ -31,9 +31,15 @@ type MaybeProxyAddress = string | null
 export async function getRemoteAccountProxies({
   args: { accountId, cosmWasmClient, apiUrl },
 }: GetRemoteProxiesParameters): Promise<Record<ChainName, MaybeProxyAddress>> {
-  const ibcClient = await getIbcClientQueryClientFromManager({
-    args: { accountId, cosmWasmClient, apiUrl },
-  })
+  let ibcClient: IbcClientQueryClient
+  try {
+    ibcClient = await getIbcClientQueryClientFromManager({
+      args: { accountId, cosmWasmClient, apiUrl },
+    })
+  } catch (e) {
+    // IBC client not installed
+    return {}
+  }
 
   const remoteProxies = await ibcClient.listRemoteProxiesByAccountId({
     accountId,
