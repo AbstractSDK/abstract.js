@@ -8,6 +8,8 @@ import { getModules } from '../../actions/account/public/get-modules'
 import { getNamespace } from '../../actions/account/public/get-namespace'
 import { getOwner } from '../../actions/account/public/get-owner'
 import { getProxyQueryClientFromApi } from '../../actions/account/public/get-proxy-query-client-from-api'
+import { getRemoteAccountIds } from '../../actions/account/public/get-remote-account-ids'
+import { getRemoteAccountProxies } from '../../actions/account/public/get-remote-account-proxies'
 import { getSubAccountIds } from '../../actions/account/public/get-sub-account-ids'
 import { getSubAccountSequences } from '../../actions/account/public/get-sub-account-sequences'
 import { getTotalValue } from '../../actions/account/public/get-total-value'
@@ -61,6 +63,12 @@ export type AccountPublicActions = {
   getSubAccountSequences(
     args: CutSpecificArgsFromParameter<typeof getSubAccountSequences>,
   ): ReturnType<typeof getSubAccountSequences>
+  getRemoteAccountProxies(
+    args: CutSpecificArgsFromParameter<typeof getRemoteAccountProxies>,
+  ): ReturnType<typeof getRemoteAccountProxies>
+  getRemoteAccountIds(
+    args: CutSpecificArgsFromParameter<typeof getRemoteAccountIds>,
+  ): ReturnType<typeof getRemoteAccountIds>
   getTotalValue(
     args: CutSpecificArgsFromParameter<typeof getTotalValue>,
   ): ReturnType<typeof getTotalValue>
@@ -122,6 +130,16 @@ export function accountPublicActions(
       }),
     getSubAccountSequences: ({ args, ...rest }) =>
       getSubAccountSequences({
+        args: { ...args, accountId, cosmWasmClient, apiUrl },
+        ...rest,
+      }),
+    getRemoteAccountProxies: ({ args, ...rest }) =>
+      getRemoteAccountProxies({
+        args: { ...args, accountId, cosmWasmClient, apiUrl },
+        ...rest,
+      }),
+    getRemoteAccountIds: ({ args, ...rest }) =>
+      getRemoteAccountIds({
         args: { ...args, accountId, cosmWasmClient, apiUrl },
         ...rest,
       }),
