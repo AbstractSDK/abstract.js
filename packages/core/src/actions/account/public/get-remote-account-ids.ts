@@ -1,4 +1,4 @@
-import { AccountId } from '@abstract-money/core'
+import { AccountId, chainIdToName } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import {
   IbcClientQueryClient,
@@ -26,16 +26,20 @@ export async function getRemoteAccountIds({
     args: { accountId, cosmWasmClient, apiUrl },
   })
 
-  return Object.keys(remoteProxies).map((chainName) => {
+  const chainId = await cosmWasmClient.getChainId()
+  const sourceChainName = chainIdToName(chainId)
+
+  return Object.keys(remoteProxies).map((remoteChainName) => {
     // local accounts are now remote accounts, remote accounts are now one hop further
     const remoteTrace =
       accountId.trace === 'local'
-        ? [chainName]
-        : accountId.trace.remote.concat(chainName)
+        ? [sourceChainName]
+        : accountId.trace.remote.concat(sourceChainName)
+
     return {
       seq: accountId.seq,
       trace: { remote: remoteTrace },
-      chainName,
+      chainName: remoteChainName,
     } satisfies AccountId
   })
 }
