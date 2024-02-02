@@ -26,6 +26,10 @@ const contractsConfig = [
     name: 'account-factory',
     version: '0.19',
   },
+  {
+    name: 'ibc-client',
+    version: '0.20.0',
+  },
 ]
 
 export default defineConfig({

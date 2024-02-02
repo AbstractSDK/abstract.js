@@ -1,3 +1,4 @@
+import { AccountId } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import {
   ManagerQueryClient,
@@ -18,7 +19,7 @@ export type GetSubAccountIdsParameters = WithArgs<
 
 export async function getSubAccountIds({
   args: { accountId, cosmWasmClient, apiUrl, ...params },
-}: GetSubAccountIdsParameters) {
+}: GetSubAccountIdsParameters): Promise<AccountId[]> {
   const chainId = await cosmWasmClient.getChainId()
   const chainName = chainIdToName(chainId)
   const sub_accounts = await getSubAccountSequences({
