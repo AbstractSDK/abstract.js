@@ -1,6 +1,6 @@
 # @abstract-money/provider-graz
 
-## 1.0.0
+## 0.0.12
 
 ### Patch Changes
 
