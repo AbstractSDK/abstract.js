@@ -39,7 +39,7 @@
     "bech32": "^2.0.0",
     "chain-registry": "^1.18.1",
     "cosmjs-types": "^0.8.0",
-    "graphql-request": "5",
+    "graphql-request": "^6.1.0",
     "lodash": "^4.17.21",
     "semver": "^7.3.8",
     "string-ts": "^2.0.0",
