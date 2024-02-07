@@ -1,5 +1,15 @@
 ## 0.1.0
 
+## 0.3.0
+
+### Minor Changes
+
+- [#50](https://github.com/AbstractSDK/abstract.js/pull/50) [`9f6274a`](https://github.com/AbstractSDK/abstract.js/commit/9f6274a756cc84f2013f1f460dd2212d01f159b1) Thanks [@adairrr](https://github.com/adairrr)! - Add interchain account queries
+
+### Patch Changes
+
+- [`ce722cc`](https://github.com/AbstractSDK/abstract.js/commit/ce722cc4821e220694ec710ebd867e2c906aa888) Thanks [@dalechyn](https://github.com/dalechyn)! - Bump `graphql-request`.
+
 ## 0.2.3
 
 ### Patch Changes
