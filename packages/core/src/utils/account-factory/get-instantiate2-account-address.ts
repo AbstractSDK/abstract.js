@@ -3,11 +3,15 @@ import { bech32 } from 'bech32'
 import { AccountId, accountIdToString } from '../account-id'
 
 async function getSalt(accountId: AccountId) {
+  const encoder = new TextEncoder()
   const hash = await crypto.subtle.digest(
-    'sha256',
-    new TextEncoder().encode(accountIdToString(accountId)),
+    'SHA-256',
+    encoder.encode(accountIdToString(accountId)),
   )
-  return new Uint8Array(hash)
+  return new Uint8Array([
+    ...new Uint8Array(hash),
+    ...encoder.encode('abstract'),
+  ])
 }
 
 export async function getInstantiate2AccountAddress(
