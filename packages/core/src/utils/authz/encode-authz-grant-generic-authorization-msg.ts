@@ -1,12 +1,11 @@
 import { GenericAuthorization } from 'cosmjs-types/cosmos/authz/v1beta1/authz'
 import { MsgGrant } from 'cosmjs-types/cosmos/authz/v1beta1/tx'
 import { AuthzTransactionTypeUrl } from './auth-transactions-types-url'
-import { BankTransactionTypeUrl } from './bank-transaction-types-url'
 
 export function encodeAuthzGrantGenericAuthorizationMsg(
   granter: string,
   grantee: string,
-  permission: `${BankTransactionTypeUrl}`,
+  permission: string,
   expiration?:
     | {
         seconds?: bigint | undefined
