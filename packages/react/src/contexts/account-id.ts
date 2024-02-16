@@ -1,4 +1,8 @@
-import { AccountId } from '@abstract-money/core'
+import {
+  AccountId,
+  accountIdToString,
+  stringToAccountId,
+} from '@abstract-money/core'
 import dedent from 'dedent'
 import * as React from 'react'
 import { Prettify } from '../types/utils'
@@ -10,6 +14,7 @@ const noop = () => {
 type AbstractAccountIdContext = {
   accountId: AccountId
   setAccountId: (accountId: AccountId) => void
+  persistKey?: string
 }
 
 type AbstractAccountIdContextWithPartialAccountId = Prettify<
@@ -31,13 +36,33 @@ const Context =
 export function AbstractAccountIdProvider({
   children,
   accountId: defaultAccountId,
-}: React.PropsWithChildren<{ accountId: AccountId }>) {
-  const [accountId, setAccountId] = React.useState<AccountId>(defaultAccountId)
+  persistKey,
+}: React.PropsWithChildren<{ accountId: AccountId; persistKey?: string }>) {
+  const [accountId, setAccountId_] = React.useState<AccountId>(() => {
+    if (typeof window === 'undefined') return defaultAccountId
+    if (persistKey) {
+      const item = window.localStorage.getItem(persistKey)
+      if (item) return stringToAccountId(item)
+      return defaultAccountId
+    }
+    return defaultAccountId
+  })
+
+  const setAccountId = React.useCallback<(accountId: AccountId) => void>(
+    (accountId) => {
+      setAccountId_(accountId)
+      if (typeof window === 'undefined' || !persistKey) return
+
+      window.localStorage.setItem(persistKey, accountIdToString(accountId))
+    },
+    [],
+  )
+
   // Bailing out of using JSX
   // https://github.com/egoist/tsup/issues/390#issuecomment-933488738
   return React.createElement(Context.Provider, {
     children,
-    value: { accountId, setAccountId },
+    value: { accountId, persistKey, setAccountId },
   })
 }
 

@@ -26,8 +26,7 @@
   "dependencies": {
     "@abstract-money/core": "workspace:*",
     "@tanstack/react-query": "^4",
-    "dedent": "^0.7.0",
-    "zustand": "^4.4.6"
+    "dedent": "^0.7.0"
   },
   "peerDependencies": {
     "@cosmjs/amino": ">=0.28",
@@ -73,11 +72,7 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "/utils",
-    "/hooks",
-    "/dist"
-  ],
+  "files": ["/utils", "/hooks", "/dist"],
   "simple-git-hooks": {
     "pre-commit": "pnpm format && pnpm lint:fix"
   },
