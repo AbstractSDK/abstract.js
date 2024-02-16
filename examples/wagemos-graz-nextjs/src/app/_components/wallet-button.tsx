@@ -19,7 +19,7 @@ import { useToast } from '../../components/ui/use-toast'
 function DisconnectButton() {
   const { disconnect } = useDisconnect()
   const { data: account } = useAccount({
-    chainId: 'neutron-1',
+    chainId: 'osmosis-1',
   })
 
   const { toast } = useToast()
@@ -55,7 +55,7 @@ function ConnectButton() {
   const { toast } = useToast()
 
   const { isConnecting } = useAccount({
-    chainId: 'neutron-1',
+    chainId: 'osmosis-1',
     onConnect: ({ walletType, chains }) => {
       toast({
         title: `Wallet connected! using ${walletType} to ${chains.map(
@@ -73,7 +73,7 @@ function ConnectButton() {
   const { connect } = useConnect()
 
   const handleConnect = (wallet: WalletType) => {
-    connect({ walletType: wallet, chainId: 'neutron-1' })
+    connect({ walletType: wallet, chainId: 'osmosis-1' })
     setIsOpen(false)
   }
   return (
@@ -107,7 +107,7 @@ function ConnectButton() {
 
 export function WalletButton() {
   const { isConnected } = useAccount({
-    chainId: 'neutron-1',
+    chainId: ['neutron-1', 'osmosis-1'],
   })
   if (isConnected) {
     return <DisconnectButton />
