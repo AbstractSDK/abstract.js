@@ -14,12 +14,12 @@ export function encodeAuthzGrantSendAuthorizationMsg(
       | undefined
     allowList?: string[] | undefined
   },
-  expiration:
+  expiration?:
     | {
         seconds?: bigint | undefined
         nanos?: number | undefined
       }
-    | undefined = { seconds: 99999999999 } as any,
+    | undefined,
 ) {
   return {
     typeUrl: AuthzTransactionTypeUrl.AuthzMsgGrant,

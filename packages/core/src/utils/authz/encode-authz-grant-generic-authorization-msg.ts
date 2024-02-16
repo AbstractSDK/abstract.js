@@ -7,12 +7,12 @@ export function encodeAuthzGrantGenericAuthorizationMsg(
   granter: string,
   grantee: string,
   permission: `${BankTransactionTypeUrl}`,
-  expiration:
+  expiration?:
     | {
         seconds?: bigint | undefined
         nanos?: number | undefined
       }
-    | undefined = { seconds: 99999999999n },
+    | undefined,
 ) {
   return {
     typeUrl: AuthzTransactionTypeUrl.AuthzMsgGrant,
