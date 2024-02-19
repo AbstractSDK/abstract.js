@@ -38,13 +38,13 @@ export function stringToAccountId(
       seq: accountSequence,
       trace: 'local',
     }
-  } else {
-    return {
-      chainName: accountSourceChain,
-      seq: accountSequence,
-      trace: {
-        remote: splitChainString.slice(0, splitChainString.length - 1),
-      },
-    }
+  }
+
+  return {
+    chainName: accountSourceChain,
+    seq: accountSequence,
+    trace: {
+      remote: splitChainString.slice(0, splitChainString.length - 1),
+    },
   }
 }

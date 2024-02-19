@@ -2,6 +2,7 @@ import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { AccountFactoryClient } from '../../codegen/abstract'
 import { WithOptional } from '../../types/utils'
 import { WithArgsAndCosmWasmSignOptions } from '../../types/with-args'
+import { accountIdToParameter } from '../../utils'
 import { createAccount } from './create-account'
 
 export type CreateAccountMonarchyParameters = WithArgsAndCosmWasmSignOptions<
@@ -31,6 +32,7 @@ export async function createAccountMonarchy({
     namespace,
     link,
     owner,
+    accountId,
   },
   fee,
   memo,
@@ -52,6 +54,7 @@ export async function createAccountMonarchy({
       installModules,
       baseAsset,
       namespace,
+      accountId: accountId ? accountIdToParameter(accountId) : undefined,
     },
     fee,
     memo,

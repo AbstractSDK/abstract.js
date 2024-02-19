@@ -5,23 +5,56 @@ import {
   encodeAuthzGrantGenericAuthorizationMsg,
   encodeAuthzGrantSendAuthorizationMsg,
   encodeBankSendMsg,
+  stringToAccountId,
 } from '@abstract-money/core/utils'
-import { osmosis } from '@osmosis-labs/proto-codecs'
 
-import { useSignAndBroadcast } from '@abstract-money/react'
+import {
+  useAccountFactoryQueryClientFromApi,
+  useCreateAccountMonarchy,
+  useSignAndBroadcast,
+} from '@abstract-money/react'
 import { useAccount } from 'graz'
-import { useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { Button } from '../../components/ui/button'
 import { WalletButton } from '../_components/wallet-button'
+import { prepareInstantiateMsg } from './_utils/prepare-instantiate-msg'
 
 const GRANTER = 'osmo1jzyqffltm2s5wxmnjyze5hzrpcady0gmpz738n'
 const GRANTEE = 'osmo1ak64euh4tyzetkny6t0y0v5tw47n3y6y0ys3md'
 
 export default function AuthzPage() {
+  useEffect(() => {
+    prepareInstantiateMsg()
+  }, [])
+
   const { mutate: signAndBroadcast } = useSignAndBroadcast({
     args: { chainName: 'osmosis' },
   })
   const { data: account } = useAccount({ chainId: 'osmosis-1' })
+
+  const { data: accountFactory, isLoading } =
+    useAccountFactoryQueryClientFromApi('osmosis')
+
+  const { mutate: createAccount } = useCreateAccountMonarchy({
+    args: { chainName: 'osmosis' },
+  })
+
+  const onCreateAccount = useCallback(async () => {
+    if (!accountFactory || !account)
+      throw new Error('no account factory or account')
+
+    const config = await accountFactory.config()
+    const sequence = config.local_account_sequence + 1
+
+    createAccount({
+      fee: 'auto',
+      args: {
+        name: 'funny-squid',
+        accountId: stringToAccountId(`local-${sequence}`, 'osmosis'),
+        owner: account.bech32Address,
+      },
+    })
+  }, [accountFactory])
 
   const onGrantAuthzClick = useMemo(() => {
     if (!account) return undefined
@@ -84,6 +117,11 @@ export default function AuthzPage() {
     <>
       <Button onClick={onGrantAuthzClick}> Grant AuthZ</Button>
       <Button onClick={onTransferClick}> Transfer</Button>
+      {isLoading ? (
+        'Loading'
+      ) : (
+        <Button onClick={onCreateAccount}>Create Account</Button>
+      )}
       <WalletButton />
     </>
   )
