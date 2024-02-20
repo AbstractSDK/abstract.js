@@ -51,10 +51,13 @@ export interface Values {
 const GET_POOL_DATA_LINK =
   '/osmosis/pools-edge-trpc/pools.getPool?input=%7B%22json%22%3A%7B%22poolId%22%3A%221220%22%7D%7D'
 
+const EXCHANGES = ['osmosis']
+
 export async function prepareInstantiateMsg() {
   const poolData = (await fetch(GET_POOL_DATA_LINK).then((res) =>
     res.json(),
   )) as Root
+  console.log(poolData)
   const tick = BigInt(poolData.result.data.json.raw.current_tick)
   const tickSpacing = BigInt(poolData.result.data.json.raw.tick_spacing)
   const sqrtPrice = poolData.result.data.json.raw.current_sqrt_price
