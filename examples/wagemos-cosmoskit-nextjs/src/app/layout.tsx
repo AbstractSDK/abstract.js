@@ -29,8 +29,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cn(inter.variable, poppins.variable)}>
-        <CosmosKitProvider>
+      <CosmosKitProvider>
+        <body className={cn(inter.variable, poppins.variable)}>
           <AbstractProvider config={abstractConfig}>
             <AbstractAccountIdProvider
               accountId={stringToAccountId('neutron-18')}
@@ -42,9 +42,9 @@ export default function RootLayout({
               </main>
             </AbstractAccountIdProvider>
           </AbstractProvider>
-        </CosmosKitProvider>
-        <Toaster />
-      </body>
+          <Toaster />
+        </body>
+      </CosmosKitProvider>
     </html>
   )
 }
