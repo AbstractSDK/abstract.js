@@ -1,5 +1,13 @@
 ## 0.1.0
 
+## 0.3.1
+
+### Patch Changes
+
+- [#52](https://github.com/AbstractSDK/abstract.js/pull/52) [`4526937`](https://github.com/AbstractSDK/abstract.js/commit/4526937949897f736daf125558454cc069205562) Thanks [@dalechyn](https://github.com/dalechyn)! - Introduces new hooks for the savings app.
+
+- [#52](https://github.com/AbstractSDK/abstract.js/pull/52) [`cadb381`](https://github.com/AbstractSDK/abstract.js/commit/cadb381837899de18a71efb2a21e14819d70214d) Thanks [@dalechyn](https://github.com/dalechyn)! - Added authz utils and util to retrieve account address before creation.
+
 ## 0.3.0
 
 ### Minor Changes

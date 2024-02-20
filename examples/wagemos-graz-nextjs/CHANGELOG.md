@@ -1,5 +1,16 @@
 # wagemos-graz-nextjs
 
+## 0.2.14
+
+### Patch Changes
+
+- [#52](https://github.com/AbstractSDK/abstract.js/pull/52) [`4526937`](https://github.com/AbstractSDK/abstract.js/commit/4526937949897f736daf125558454cc069205562) Thanks [@dalechyn](https://github.com/dalechyn)! - Introduces new hooks for the savings app.
+
+- Updated dependencies [[`f0d965e`](https://github.com/AbstractSDK/abstract.js/commit/f0d965e33176306bfb6e11d6d4c1924b5e960a5a), [`4526937`](https://github.com/AbstractSDK/abstract.js/commit/4526937949897f736daf125558454cc069205562), [`cadb381`](https://github.com/AbstractSDK/abstract.js/commit/cadb381837899de18a71efb2a21e14819d70214d)]:
+  - @abstract-money/react@0.2.14
+  - @abstract-money/core@0.3.1
+  - @abstract-money/provider-graz@0.0.13
+
 ## 0.2.13
 
 ### Patch Changes
