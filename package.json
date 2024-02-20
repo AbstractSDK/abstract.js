@@ -9,6 +9,7 @@
     "changeset:release": "turbo build && changeset publish",
     "changeset:version": "changeset version && pnpm install --lockfile-only",
     "cjs:release": "node -r esbuild-register ./scripts/cjs.ts",
+    "test": "vitest",
     "format": "biome format . --write",
     "lint": "biome check .",
     "lint:fix": "pnpm lint --apply",
@@ -48,5 +49,9 @@
   "simple-git-hooks": {
     "pre-commit": "pnpm format && pnpm lint:fix && git add -u"
   },
-  "packageManager": "pnpm@8.3.1"
+  "packageManager": "pnpm@8.3.1",
+  "dependencies": {
+    "happy-dom": "^13.3.8",
+    "vitest": "^1.2.2"
+  }
 }

@@ -2,6 +2,7 @@ import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { AccountFactoryClient } from '../../codegen/abstract'
 import { WithOptional } from '../../types/utils'
 import { WithArgsAndCosmWasmSignOptions } from '../../types/with-args'
+import { accountIdToParameter } from '../../utils'
 import { parseCreateAccountExecuteResult } from '../../utils/account-factory/parse-create-account-execute-result'
 import { chainIdToName } from '../../utils/chain-registry'
 import { getAccountFactoryClientFromApi } from './get-account-factory-client-from-api'
@@ -28,6 +29,7 @@ export async function createAccount({
     namespace,
     governance,
     link,
+    accountId,
   },
   fee,
   memo,
@@ -53,6 +55,7 @@ export async function createAccount({
       namespace,
       governance,
       link,
+      accountId: accountId ? accountIdToParameter(accountId) : undefined,
     },
     fee,
     memo,

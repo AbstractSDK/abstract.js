@@ -9,7 +9,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "next lint",
     "postinstall": "pnpm generate",
-    "generate": "graz generate -g -M neutron -T neutrontestnet"
+    "generate": "graz generate -g -M neutron,osmosis -T neutrontestnet,osmosistestnet"
   },
   "dependencies": {
     "@abstract-money/core": "workspace:*",
@@ -23,6 +23,8 @@
     "@cosmjs/stargate": "^0.31.0",
     "@cosmjs/tendermint-rpc": "^0.31.0",
     "@hookform/resolvers": "^3.3.2",
+    "@osmosis-labs/math": "^5.1.0",
+    "@osmosis-labs/proto-codecs": "^5.1.0",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-select": "^2.0.0",
