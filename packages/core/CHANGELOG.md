@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 0.3.2
+
+### Patch Changes
+
+- [#55](https://github.com/AbstractSDK/abstract.js/pull/55) [`2bca172`](https://github.com/AbstractSDK/abstract.js/commit/2bca17257f8b957f6e2b8e156e7e9cad1b4674ff) Thanks [@adairrr](https://github.com/adairrr)! - Add helpers to predict module address
+
 ## 0.3.1
 
 ### Patch Changes
