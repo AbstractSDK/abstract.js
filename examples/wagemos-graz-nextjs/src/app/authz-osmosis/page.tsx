@@ -74,7 +74,6 @@ export default function AuthzPage() {
   console.log('calculated savings app address', savingsAppAddress)
 
   const onGrantAuthzClick = useMemo(() => {
-    console.log('account', account)
     if (!account) {
       console.error('no account')
       return undefined
