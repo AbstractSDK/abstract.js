@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 0.3.3
+
+### Patch Changes
+
+- [#58](https://github.com/AbstractSDK/abstract.js/pull/58) [`22daa16`](https://github.com/AbstractSDK/abstract.js/commit/22daa16fd55a0c54066b46c98d7b1cf68e88d1ab) Thanks [@adairrr](https://github.com/adairrr)! - Update init2 logic to use correct account ids
+
 ## 0.3.2
 
 ### Patch Changes

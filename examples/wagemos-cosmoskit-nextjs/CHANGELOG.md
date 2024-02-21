@@ -1,5 +1,14 @@
 # wagemos-cosmoskit-nextjs
 
+## 0.2.17
+
+### Patch Changes
+
+- Updated dependencies [[`22daa16`](https://github.com/AbstractSDK/abstract.js/commit/22daa16fd55a0c54066b46c98d7b1cf68e88d1ab)]:
+  - @abstract-money/core@0.3.3
+  - @abstract-money/react@0.2.17
+  - @abstract-money/provider-cosmoskit@0.0.16
+
 ## 0.2.16
 
 ### Patch Changes
