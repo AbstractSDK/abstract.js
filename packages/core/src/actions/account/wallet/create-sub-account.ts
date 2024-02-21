@@ -9,11 +9,21 @@ export type CreateSubAccountParameters = WithArgsAndCosmWasmSignOptions<
     signingCosmWasmClient: SigningCosmWasmClient
     apiUrl: string
     sender: string
-  } & Parameters<typeof ManagerClient.prototype.createSubAccount>[0]
+  } & Omit<
+    Parameters<typeof ManagerClient.prototype.createSubAccount>[0],
+    'accountId'
+  > & { subAccountId?: number }
 >
 
 export async function createSubAccount({
-  args: { accountId, signingCosmWasmClient, apiUrl, sender, ...rest },
+  args: {
+    accountId,
+    subAccountId,
+    signingCosmWasmClient,
+    apiUrl,
+    sender,
+    ...rest
+  },
   fee,
   memo,
   funds,
@@ -26,5 +36,10 @@ export async function createSubAccount({
       apiUrl,
     },
   })
-  return managerClient.createSubAccount(rest, fee, memo, funds)
+  return managerClient.createSubAccount(
+    { ...rest, accountId: subAccountId },
+    fee,
+    memo,
+    funds,
+  )
 }
