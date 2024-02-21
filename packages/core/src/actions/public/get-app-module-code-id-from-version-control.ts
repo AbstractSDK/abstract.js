@@ -1,26 +1,26 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
+import {
+  ModuleId,
+  formatModuleIdWithVersion,
+  moduleIdToName,
+  moduleIdToNamespace,
+} from '@abstract-money/core'
 import { VersionControlTypes } from '../../codegen/abstract'
 import { WithArgs } from '../../types/with-args'
-import { versionControlModuleToAddress } from '../../utils/version-control/version-control-module-to-address'
+import { versionControlModuleToCodeId } from '../../utils/version-control/version-control-module-to-code-id'
 import { getVersionControlQueryClient } from './get-version-control-query-client'
 
-export enum CommonModuleNames {
-  ACCOUNT_FACTORY = 'account-factory',
-  MODULE_FACTORY = 'module-factory',
-  ANS_HOST = 'ans-host',
-}
-
-export type GetAbstractModuleAddressFromVersionControl = WithArgs<{
-  moduleName: `${CommonModuleNames}`
+export type GetAppModuleCodeIdFromVersionControl = WithArgs<{
+  moduleId: `${ModuleId}`
   cosmWasmClient: CosmWasmClient
   versionControlAddress: string
   version?: string
 }>
 
-export async function getAbstractModuleAddressFromVersionControl({
-  args: { moduleName, cosmWasmClient, versionControlAddress, version },
-}: GetAbstractModuleAddressFromVersionControl) {
+export async function getAppModuleCodeIdFromVersionControl({
+  args: { moduleId, cosmWasmClient, versionControlAddress, version },
+}: GetAppModuleCodeIdFromVersionControl) {
   const versionControlQueryClient = getVersionControlQueryClient({
     args: {
       cosmWasmClient,
@@ -32,19 +32,19 @@ export async function getAbstractModuleAddressFromVersionControl({
     .modules({
       infos: [
         {
-          name: moduleName,
-          namespace: 'abstract',
+          name: moduleIdToName(moduleId),
+          namespace: moduleIdToNamespace(moduleId),
           version: version ? { version } : 'latest',
         } satisfies VersionControlTypes.ModuleInfo,
       ],
     })
     .then(({ modules }) =>
-      modules.map(({ module }) => versionControlModuleToAddress(module)),
+      modules.map(({ module }) => versionControlModuleToCodeId(module)),
     )
 
   if (!moduleAddress) {
     throw new Error(
-      `Could not fetch address for module ${moduleName} version ${version} from registry ${versionControlAddress}`,
+      `Could not fetch code id for app module ${moduleId} version ${version} from registry ${versionControlAddress}`,
     )
   }
 
