@@ -254,7 +254,7 @@ export function react(options: ReactOptions = {}): ReactResult {
 
           if (hasAbstractApp)
             content.push(
-              `const ${constantCase(contract.name)}_MODULE_ID = '${
+              `export const ${constantCase(contract.name)}_MODULE_ID = '${
                 contract.namespace
               }:${contract.name}'`,
             )
