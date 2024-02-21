@@ -13,30 +13,33 @@ import {
   useCreateAccountMonarchy,
   useSignAndBroadcast,
 } from '@abstract-money/react'
+import { useModuleInstantiate2AddressFromApi } from '@abstract-money/react'
 import { useAccount } from 'graz'
-import { useCallback, useEffect, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { Button } from '../../components/ui/button'
 import { WalletButton } from '../_components/wallet-button'
 import { prepareInstantiateMsg } from './_utils/prepare-instantiate-msg'
 
-const GRANTER = 'osmo1jzyqffltm2s5wxmnjyze5hzrpcady0gmpz738n'
-const GRANTEE = 'osmo1ak64euh4tyzetkny6t0y0v5tw47n3y6y0ys3md'
+const GRANTER = 'osmo18k2uq7srsr8lwrae6zr0qahpn29rsp7tswpc4g'
 
+const CHAIN_NAME = 'osmosis'
+const TEST_SAVINGS_ACCOUNT_ID = 'osmosis-48'
+const SAVINGS_APP_MODULE_ID = 'abstract:carrot-app'
 export default function AuthzPage() {
   useEffect(() => {
     prepareInstantiateMsg()
   }, [])
 
   const { mutate: signAndBroadcast } = useSignAndBroadcast({
-    args: { chainName: 'osmosis' },
+    args: { chainName: CHAIN_NAME },
   })
   const { data: account } = useAccount({ chainId: 'osmosis-1' })
 
   const { data: accountFactory, isLoading } =
-    useAccountFactoryQueryClientFromApi('osmosis')
+    useAccountFactoryQueryClientFromApi(CHAIN_NAME)
 
   const { mutate: createAccount } = useCreateAccountMonarchy({
-    args: { chainName: 'osmosis' },
+    args: { chainName: CHAIN_NAME },
   })
 
   const onCreateAccount = useCallback(async () => {
@@ -50,14 +53,32 @@ export default function AuthzPage() {
       fee: 'auto',
       args: {
         name: 'funny-squid',
-        accountId: stringToAccountId(`local-${sequence}`, 'osmosis'),
+        accountId: stringToAccountId(`local-${sequence}`, CHAIN_NAME),
         owner: account.bech32Address,
       },
     })
   }, [accountFactory])
 
+  const { data: savingsAppAddress } = useModuleInstantiate2AddressFromApi(
+    {
+      accountId: stringToAccountId(TEST_SAVINGS_ACCOUNT_ID, CHAIN_NAME),
+      moduleId: SAVINGS_APP_MODULE_ID,
+    },
+    {
+      enabled: true,
+    },
+  )
+
+  console.log('calculated savings app address', savingsAppAddress)
+
   const onGrantAuthzClick = useMemo(() => {
-    if (!account) return undefined
+    if (!account) {
+      console.error('no account')
+      return undefined
+    } else if (!savingsAppAddress) {
+      console.error('no module grantee')
+      return undefined
+    }
 
     return () => {
       signAndBroadcast({
@@ -74,18 +95,18 @@ export default function AuthzPage() {
             ].map((typeUrl) =>
               encodeAuthzGrantGenericAuthorizationMsg(
                 account.bech32Address,
-                GRANTEE,
+                savingsAppAddress,
                 typeUrl,
               ),
             ),
             encodeAuthzGrantGenericAuthorizationMsg(
               account.bech32Address,
-              GRANTEE,
+              savingsAppAddress,
               BankTransactionTypeUrl.Send,
             ),
             encodeAuthzGrantSendAuthorizationMsg(
               account.bech32Address,
-              GRANTEE,
+              savingsAppAddress,
               { spendLimit: [{ denom: 'uosmo', amount: '100' }] },
             ),
           ],
