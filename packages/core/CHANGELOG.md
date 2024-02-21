@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 0.3.4
+
+### Patch Changes
+
+- [`61866cd`](https://github.com/AbstractSDK/abstract.js/commit/61866cdc4b93eaa2b43fdceb8144016037228998) Thanks [@dalechyn](https://github.com/dalechyn)! - Bump contract versions and add encoding create sub account msg util.
+
 ## 0.3.3
 
 ### Patch Changes
