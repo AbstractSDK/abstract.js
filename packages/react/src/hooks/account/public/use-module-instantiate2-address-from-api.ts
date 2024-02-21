@@ -1,5 +1,5 @@
 import { AccountId, AccountPublicClient } from '@abstract-money/core'
-import { MODULE_DELIMITER } from '@abstract-money/core/.tsup/declaration'
+import { MODULE_DELIMITER } from '@abstract-money/core'
 import {
   UseQueryOptions,
   UseQueryResult,
