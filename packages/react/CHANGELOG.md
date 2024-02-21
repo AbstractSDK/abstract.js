@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 0.2.16
+
+### Patch Changes
+
+- [`396d21e`](https://github.com/AbstractSDK/abstract.js/commit/396d21e1fe6a0fd80655b9de5fa6bd68eebd8ea1) Thanks [@dalechyn](https://github.com/dalechyn)! - Added missed overload for module address prediction hook
+
 ## 0.2.15
 
 ### Patch Changes
