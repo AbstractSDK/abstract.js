@@ -10,7 +10,6 @@ describe('getInstantiate2AccountAddress', () => {
     const checksum =
       '3f6fb5db7e9be94c6699c495535fd55884ac72e2babbcd90b5b41a41cce179ee'
     const accountId = stringToAccountId('osmosis-48', 'osmosis')
-    console.log('accountId', accountId)
 
     const result = await getInstantiate2Address(
       moduleFactoryAddress,
