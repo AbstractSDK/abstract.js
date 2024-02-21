@@ -5,6 +5,12 @@ import {
   type AccountId,
 } from './account-id'
 
+/**
+ * Pretty string for account ids.
+ * { seq: 45, chainName: 'osmosis', trace: 'local' } => 'osmosis-45'
+ * { seq: 45, chainName: 'osmosis', trace: ['juno'] } => 'juno>osmosis-45'
+ * @param id
+ */
 export function accountIdToString<TChainName extends string = string>(
   id: AccountId<TChainName>,
 ) {

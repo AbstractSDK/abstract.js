@@ -1,13 +1,16 @@
 import { instantiate2Address } from '@cosmjs/cosmwasm-stargate'
+import { fromHex } from '@cosmjs/encoding'
 import { bech32 } from 'bech32'
-import { AccountId, accountIdToString } from '../account-id'
+import { AccountId, versionControlAccountIdToString } from '../account-id'
 import { toSha256 } from '../encoding'
 
+const SALT_POSTFIX = 'abstract'
+
 async function getAccountIdSalt(accountId: AccountId) {
-  const sha256 = await toSha256(accountIdToString(accountId))
+  const sha256 = await toSha256(versionControlAccountIdToString(accountId))
   const encoder = new TextEncoder()
 
-  return new Uint8Array([...sha256, ...encoder.encode('abstract')])
+  return new Uint8Array([...sha256, ...encoder.encode(SALT_POSTFIX)])
 }
 
 /**
@@ -21,14 +24,9 @@ export async function getInstantiate2Address(
   codeIdChecksum: string,
   accountId: AccountId,
 ) {
+  const hexedChecksum = fromHex(codeIdChecksum)
+  const salt = await getAccountIdSalt(accountId)
   const prefix = bech32.decode(moduleFactoryAddress).prefix
 
-  const checksumSha256 = await toSha256(codeIdChecksum)
-
-  return instantiate2Address(
-    checksumSha256,
-    moduleFactoryAddress,
-    await getAccountIdSalt(accountId),
-    prefix,
-  )
+  return instantiate2Address(hexedChecksum, moduleFactoryAddress, salt, prefix)
 }

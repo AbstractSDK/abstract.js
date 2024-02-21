@@ -91,6 +91,7 @@ export default function AuthzPage() {
             ...[
               '/osmosis.concentratedliquidity.v1beta1.MsgCreatePosition',
               '/osmosis.poolmanager.v1beta1.MsgSplitRouteSwapExactAmountIn',
+              '/osmosis.gamm.v1beta1.MsgSwapExactAmountIn',
               '/osmosis.concentratedliquidity.v1beta1.MsgAddToPosition',
               '/osmosis.concentratedliquidity.v1beta1.MsgWithdrawPosition',
               '/osmosis.concentratedliquidity.v1beta1.MsgCollectIncentives',
