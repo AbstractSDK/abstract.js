@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 0.2.19
+
+### Patch Changes
+
+- [`bd6928a`](https://github.com/AbstractSDK/abstract.js/commit/bd6928a8e6779f02498b09dbcb01a09421f1c7e4) Thanks [@dalechyn](https://github.com/dalechyn)! - Added hook to fetch account factory config
+
 ## 0.2.18
 
 ### Patch Changes
