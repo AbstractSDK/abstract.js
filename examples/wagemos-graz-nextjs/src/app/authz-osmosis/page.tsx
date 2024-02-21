@@ -62,7 +62,9 @@ export default function AuthzPage() {
   const { data: savingsAppAddress } = useModuleInstantiate2AddressFromApi(
     {
       accountId: stringToAccountId(TEST_SAVINGS_ACCOUNT_ID, CHAIN_NAME),
-      moduleId: SAVINGS_APP_MODULE_ID,
+      args: {
+        moduleId: SAVINGS_APP_MODULE_ID,
+      },
     },
     {
       enabled: true,
@@ -75,7 +77,8 @@ export default function AuthzPage() {
     if (!account) {
       console.error('no account')
       return undefined
-    } else if (!savingsAppAddress) {
+    }
+    if (!savingsAppAddress) {
       console.error('no module grantee')
       return undefined
     }

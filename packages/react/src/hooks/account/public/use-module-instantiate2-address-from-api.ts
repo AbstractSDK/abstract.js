@@ -7,6 +7,8 @@ import {
 } from '@tanstack/react-query'
 import React from 'react'
 import { useAccountId, useConfig } from '../../../contexts'
+import { WithArgs } from '../../../types/utils'
+import { parseParametersWithArgs } from '../utils'
 
 type QueryFnData = Awaited<
   ReturnType<AccountPublicClient['getModuleInstantiate2AddressFromApi']>
@@ -18,8 +20,7 @@ type QueryData = QueryFnData
 type QueryKey = readonly [
   'moduleInstantiate2AddressFromApi',
   AccountPublicClient | undefined,
-  ModuleId,
-  string | undefined,
+  UseModuleInstantiate2AddressFromApiArgs['args'],
 ]
 
 type QueryOptions = Omit<
@@ -28,15 +29,36 @@ type QueryOptions = Omit<
 >
 type QueryResult = UseQueryResult<QueryData, QueryError>
 
+type UseModuleInstantiate2AddressFromApiArgs = WithArgs<{
+  version?: string
+  moduleId: ModuleId
+}>
+
 export function useModuleInstantiate2AddressFromApi(
-  args: {
+  parameters: UseModuleInstantiate2AddressFromApiArgs & {
     accountId: AccountId | undefined
-    moduleId: ModuleId
-    version?: string
   },
   options?: QueryOptions,
+): QueryResult
+export function useModuleInstantiate2AddressFromApi(
+  parameters: UseModuleInstantiate2AddressFromApiArgs,
+  options?: QueryOptions,
+): QueryResult
+export function useModuleInstantiate2AddressFromApi(
+  arg1: UseModuleInstantiate2AddressFromApiArgs &
+    (
+      | {
+          accountId: AccountId | undefined
+        }
+      | {}
+    ),
+  arg2?: QueryOptions,
 ) {
-  const { accountId: accountIdParameter, moduleId, version } = args
+  const {
+    args,
+    accountId: accountIdParameter,
+    options,
+  } = parseParametersWithArgs(arg1, arg2)
 
   const { accountId } = useAccountId({ accountId: accountIdParameter })
   const config = useConfig()
@@ -46,28 +68,21 @@ export function useModuleInstantiate2AddressFromApi(
   })
   const queryKey = React.useMemo(
     () =>
-      [
-        'moduleInstantiate2AddressFromApi',
-        accountPublicClient,
-        moduleId,
-        version,
-      ] as const,
+      ['moduleInstantiate2AddressFromApi', accountPublicClient, args] as const,
     [accountPublicClient],
   )
 
   const enabled = React.useMemo(
-    () => Boolean(accountPublicClient && options?.enabled),
+    () => Boolean(accountPublicClient && args && options?.enabled),
     [options?.enabled, accountPublicClient],
   )
 
   const queryFn = React.useCallback(() => {
     if (!accountPublicClient) throw new Error('No client')
+    if (!args) throw new Error('No args')
 
     return accountPublicClient.getModuleInstantiate2AddressFromApi({
-      args: {
-        moduleId,
-        version,
-      },
+      args,
     })
   }, [accountPublicClient])
 
