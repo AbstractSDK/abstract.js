@@ -7,8 +7,6 @@ import {
   AbstractProvider,
   createConfig,
 } from '@abstract-money/react'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Inter, Poppins } from 'next/font/google'
 import { Toaster } from '../components/ui/toaster'
 import { cn } from '../utils'
@@ -27,8 +25,6 @@ const abstractConfig = createConfig({
   apiUrl: 'https://api.abstract.money/graphql',
 })
 
-const queryClient = new QueryClient()
-
 export default function RootLayout({
   children,
 }: {
@@ -39,20 +35,17 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(inter.variable, poppins.variable)}>
         <GrazProvider>
-          <QueryClientProvider client={queryClient}>
-            <AbstractProvider config={abstractConfig}>
-              <AbstractAccountIdProvider
-                accountId={stringToAccountId('neutron-18')}
-              >
-                <main className="flex flex-col items-center p-24 min-h-screen">
-                  <section className="mt-10">
-                    <div className="mt-10">{children}</div>
-                  </section>
-                </main>
-              </AbstractAccountIdProvider>
-            </AbstractProvider>
-            {/*<ReactQueryDevtools />*/}
-          </QueryClientProvider>
+          <AbstractProvider config={abstractConfig}>
+            <AbstractAccountIdProvider
+              accountId={stringToAccountId('neutron-18')}
+            >
+              <main className="flex flex-col items-center p-24 min-h-screen">
+                <section className="mt-10">
+                  <div className="mt-10">{children}</div>
+                </section>
+              </main>
+            </AbstractAccountIdProvider>
+          </AbstractProvider>
         </GrazProvider>
         <Toaster />
       </body>

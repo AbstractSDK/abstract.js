@@ -48,7 +48,6 @@
   "devDependencies": {
     "@abstract-money/cli": "workspace:*",
     "@keplr-wallet/types": "^0.12.44",
-    "@tanstack/react-query-devtools": "^5.17.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
