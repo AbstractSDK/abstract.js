@@ -3,17 +3,15 @@ import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { useConfig } from '../../contexts'
 
-type QueryFnData = Awaited<
-  ReturnType<PublicClient['getAbstractModuleVersionFromVersionControl']>
->
+type QueryFnData = Awaited<ReturnType<PublicClient['getAbstractModuleVersion']>>
 
 type QueryError = unknown
 type QueryData = QueryFnData
 type QueryKey = readonly [
-  'abstractModuleVersionFromVersionControl',
+  'abstractModuleVersion',
   PublicClient | undefined,
   string | undefined,
-  UseAbstractModuleVersionFromVersionControlArgs['args'],
+  UseAbstractModuleVersionArgs['args'],
 ]
 
 type QueryOptions = Omit<
@@ -21,11 +19,11 @@ type QueryOptions = Omit<
   'queryFn'
 >
 
-type UseAbstractModuleVersionFromVersionControlArgs = Parameters<
-  PublicClient['getAbstractModuleVersionFromVersionControl']
+type UseAbstractModuleVersionArgs = Parameters<
+  PublicClient['getAbstractModuleVersion']
 >[0] & { chainName: string | undefined }
-export function useAbstractModuleVersionFromVersionControl(
-  { args, chainName }: UseAbstractModuleVersionFromVersionControlArgs,
+export function useAbstractModuleVersion(
+  { args, chainName }: UseAbstractModuleVersionArgs,
   options: QueryOptions = { enabled: true },
 ) {
   const config = useConfig()
@@ -33,13 +31,7 @@ export function useAbstractModuleVersionFromVersionControl(
     chainName,
   })
   const queryKey = React.useMemo(
-    () =>
-      [
-        'abstractModuleVersionFromVersionControl',
-        publicClient,
-        chainName,
-        args,
-      ] as const,
+    () => ['abstractModuleVersion', publicClient, chainName, args] as const,
     [publicClient, args],
   )
 
@@ -52,7 +44,7 @@ export function useAbstractModuleVersionFromVersionControl(
     if (!publicClient) throw new Error('No client')
     if (!args) throw new Error('No args')
 
-    return publicClient.getAbstractModuleVersionFromVersionControl({
+    return publicClient.getAbstractModuleVersion({
       args,
     })
   }, [publicClient])
