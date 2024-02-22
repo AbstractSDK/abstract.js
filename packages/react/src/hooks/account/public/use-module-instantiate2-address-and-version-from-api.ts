@@ -11,17 +11,19 @@ import { WithArgs } from '../../../types/utils'
 import { parseParametersWithArgs } from '../utils'
 
 type QueryFnData = Awaited<
-  ReturnType<AccountPublicClient['getModuleInstantiate2AddressFromApi']>
+  ReturnType<
+    AccountPublicClient['getModuleInstantiate2AddressAndVersionFromApi']
+  >
 >
 
 type ModuleId = `${string}${typeof MODULE_DELIMITER}${string}`
 type QueryError = unknown
 type QueryData = QueryFnData
 type QueryKey = readonly [
-  'moduleInstantiate2AddressFromApi',
+  'moduleInstantiate2AddressAndVersionFromApi',
   AccountPublicClient | undefined,
   AccountId | undefined,
-  UseModuleInstantiate2AddressFromApiArgs['args'],
+  UseModuleInstantiate2AddressAndVersionFromApiArgs['args'],
 ]
 
 type QueryOptions = Omit<
@@ -30,23 +32,23 @@ type QueryOptions = Omit<
 >
 type QueryResult = UseQueryResult<QueryData, QueryError>
 
-type UseModuleInstantiate2AddressFromApiArgs = WithArgs<{
+type UseModuleInstantiate2AddressAndVersionFromApiArgs = WithArgs<{
   version?: string
   moduleId: ModuleId
 }>
 
-export function useModuleInstantiate2AddressFromApi(
-  parameters: UseModuleInstantiate2AddressFromApiArgs & {
+export function useModuleInstantiate2AddressAndVersionFromApi(
+  parameters: UseModuleInstantiate2AddressAndVersionFromApiArgs & {
     accountId: AccountId | undefined
   },
   options?: QueryOptions,
 ): QueryResult
-export function useModuleInstantiate2AddressFromApi(
-  parameters: UseModuleInstantiate2AddressFromApiArgs,
+export function useModuleInstantiate2AddressAndVersionFromApi(
+  parameters: UseModuleInstantiate2AddressAndVersionFromApiArgs,
   options?: QueryOptions,
 ): QueryResult
-export function useModuleInstantiate2AddressFromApi(
-  arg1: UseModuleInstantiate2AddressFromApiArgs &
+export function useModuleInstantiate2AddressAndVersionFromApi(
+  arg1: UseModuleInstantiate2AddressAndVersionFromApiArgs &
     (
       | {
           accountId: AccountId | undefined
@@ -70,7 +72,7 @@ export function useModuleInstantiate2AddressFromApi(
   const queryKey = React.useMemo(
     () =>
       [
-        'moduleInstantiate2AddressFromApi',
+        'moduleInstantiate2AddressAndVersionFromApi',
         accountPublicClient,
         accountId,
         args,
@@ -87,7 +89,7 @@ export function useModuleInstantiate2AddressFromApi(
     if (!accountPublicClient) throw new Error('No client')
     if (!args) throw new Error('No args')
 
-    return accountPublicClient.getModuleInstantiate2AddressFromApi({
+    return accountPublicClient.getModuleInstantiate2AddressAndVersionFromApi({
       args,
     })
   }, [accountPublicClient])

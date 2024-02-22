@@ -15,9 +15,10 @@ export async function getAccountFactoryQueryClientFromApi({
 }: GetAccountFactoryQueryClientFromApiParameters) {
   const chainId = await cosmWasmClient.getChainId()
   const chainName = chainIdToName(chainId)
-  const accountFactoryAddress = await getAccountFactoryAddressFromApi({
-    args: { apiUrl, chainName },
-  })
+  const { address: accountFactoryAddress } =
+    await getAccountFactoryAddressFromApi({
+      args: { apiUrl, chainName },
+    })
 
   return getAccountFactoryQueryClient({
     args: { cosmWasmClient, accountFactoryAddress },

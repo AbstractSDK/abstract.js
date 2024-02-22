@@ -18,7 +18,7 @@ export type GetAbstractModuleAddressFromVersionControl = WithArgs<{
   version?: string
 }>
 
-export async function getAbstractModuleAddressFromVersionControl({
+export async function getAbstractModuleAddressAndVersionFromVersionControl({
   args: { moduleName, cosmWasmClient, versionControlAddress, version },
 }: GetAbstractModuleAddressFromVersionControl) {
   const versionControlQueryClient = getVersionControlQueryClient({
@@ -39,7 +39,10 @@ export async function getAbstractModuleAddressFromVersionControl({
       ],
     })
     .then(({ modules }) =>
-      modules.map(({ module }) => versionControlModuleToAddress(module)),
+      modules.map(({ module }) => ({
+        address: versionControlModuleToAddress(module),
+        version: module.info.version,
+      })),
     )
 
   if (!moduleAddress) {

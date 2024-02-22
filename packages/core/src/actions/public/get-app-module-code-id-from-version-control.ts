@@ -2,7 +2,6 @@ import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
 import {
   ModuleId,
-  formatModuleIdWithVersion,
   moduleIdToName,
   moduleIdToNamespace,
 } from '@abstract-money/core'

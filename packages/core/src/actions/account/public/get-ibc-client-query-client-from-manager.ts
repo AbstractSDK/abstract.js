@@ -4,7 +4,6 @@ import {
   VersionControlTypes,
 } from '../../../codegen/abstract'
 import { WithArgs } from '../../../types/with-args'
-import { getManagerQueryClientFromApi } from './get-manager-query-client-from-api'
 import { getModuleAddress } from './get-module-address'
 
 export type GetModuleAddressParameters = WithArgs<{

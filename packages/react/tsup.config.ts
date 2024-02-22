@@ -7,7 +7,7 @@ export default defineConfig(
   getConfig({
     //dev: process.env.DEV === 'true',
     experimentalDts: false,
-    entry: ['src/index.ts', 'src/utils/index.ts', 'src/hooks/index.ts'],
+    entry: ['src/index.ts', 'src/hooks/index.ts'],
     external: [...Object.keys(dependencies), ...Object.keys(peerDependencies)],
     platform: 'browser',
     banner: {

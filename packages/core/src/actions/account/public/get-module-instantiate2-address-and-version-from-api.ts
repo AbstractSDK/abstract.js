@@ -2,15 +2,13 @@ import {
   ModuleId,
   chainIdToName,
   getInstantiate2Address,
-  toSha256,
 } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { VersionControlTypes } from '../../../codegen/abstract'
 import { WithArgs } from '../../../types/with-args'
 import { getVersionControlAddressFromApi } from '../../get-version-control-address-from-api'
-import { getAbstractModuleAddressFromVersionControl } from '../../public/get-abstract-module-address-from-version-control'
 import { getAppModuleCodeIdFromVersionControl } from '../../public/get-app-module-code-id-from-version-control'
-import { getModuleFactoryAddressFromVersionControl } from '../../public/get-module-factory-address-from-version-control'
+import { getModuleFactoryAddressAndVersionFromVersionControl } from '../../public/get-module-factory-address-and-version-from-version-control'
 
 export type GetModuleInstantiate2AddressFromApi = WithArgs<{
   accountId: VersionControlTypes.AccountId
@@ -20,9 +18,9 @@ export type GetModuleInstantiate2AddressFromApi = WithArgs<{
   apiUrl: string
 }>
 
-export async function getModuleInstantiate2AddressFromApi({
+export async function getModuleInstantiate2AddressAndVersionFromApi({
   args: { accountId, cosmWasmClient, apiUrl, moduleId, version },
-}: GetModuleInstantiate2AddressFromApi): Promise<string> {
+}: GetModuleInstantiate2AddressFromApi) {
   const chainId = await cosmWasmClient.getChainId()
   const chainName = chainIdToName(chainId)
 
@@ -33,12 +31,13 @@ export async function getModuleInstantiate2AddressFromApi({
     },
   })
 
-  const moduleFactoryAddress = await getModuleFactoryAddressFromVersionControl({
-    args: {
-      cosmWasmClient,
-      versionControlAddress,
-    },
-  })
+  const { address: moduleFactoryAddress, version: resolvedVersion } =
+    await getModuleFactoryAddressAndVersionFromVersionControl({
+      args: {
+        cosmWasmClient,
+        versionControlAddress,
+      },
+    })
 
   const moduleCodeId = await getAppModuleCodeIdFromVersionControl({
     args: { moduleId, version, cosmWasmClient, versionControlAddress },
@@ -46,9 +45,12 @@ export async function getModuleInstantiate2AddressFromApi({
 
   const moduleCodeDetails = await cosmWasmClient.getCodeDetails(moduleCodeId)
 
-  return await getInstantiate2Address(
-    moduleFactoryAddress,
-    moduleCodeDetails.checksum,
-    { ...accountId, chainName },
-  )
+  return {
+    version: resolvedVersion,
+    address: await getInstantiate2Address(
+      moduleFactoryAddress,
+      moduleCodeDetails.checksum,
+      { ...accountId, chainName },
+    ),
+  }
 }
