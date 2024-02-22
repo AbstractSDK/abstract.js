@@ -475,7 +475,7 @@ export function react(options: ReactOptions = {}): ReactResult {
           `
               : ''
           }
-          } from '@abstract-money/react/utils'
+          } from '@abstract-money/react'
 
           import { AccountId } from '@abstract-money/core'
 

@@ -7,7 +7,7 @@ import { useMemo } from 'react'
 import {
   useAbstractModuleClient,
   useAbstractModuleQueryClient,
-} from '@abstract-money/react/utils'
+} from '@abstract-money/react'
 
 import { AccountId } from '@abstract-money/core'
 
