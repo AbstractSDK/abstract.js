@@ -1,5 +1,14 @@
 # @abstract-money/react
 
+## 0.2.24
+
+### Patch Changes
+
+- [`795d207`](https://github.com/AbstractSDK/abstract.js/commit/795d2079b714bc740c670a95954fd17dbf4ca9de) Thanks [@dalechyn](https://github.com/dalechyn)! - Add hook to fetch module version./
+
+- Updated dependencies [[`795d207`](https://github.com/AbstractSDK/abstract.js/commit/795d2079b714bc740c670a95954fd17dbf4ca9de)]:
+  - @abstract-money/core@0.3.6
+
 ## 0.2.23
 
 ### Patch Changes
