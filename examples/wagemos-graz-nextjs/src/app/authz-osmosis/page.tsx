@@ -13,7 +13,7 @@ import {
   useCreateAccountMonarchy,
   useSignAndBroadcast,
 } from '@abstract-money/react'
-import { useModuleInstantiate2AddressFromApi } from '@abstract-money/react'
+import { useModuleInstantiate2AddressAndVersionFromApi } from '@abstract-money/react'
 import { useAccount } from 'graz'
 import React, { useCallback, useEffect, useMemo } from 'react'
 import { Button } from '../../components/ui/button'
@@ -59,26 +59,27 @@ export default function AuthzPage() {
     })
   }, [accountFactory])
 
-  const { data: savingsAppAddress } = useModuleInstantiate2AddressFromApi(
-    {
-      accountId: stringToAccountId(TEST_SAVINGS_ACCOUNT_ID, CHAIN_NAME),
-      args: {
-        moduleId: SAVINGS_APP_MODULE_ID,
+  const { data: savingsAppData } =
+    useModuleInstantiate2AddressAndVersionFromApi(
+      {
+        accountId: stringToAccountId(TEST_SAVINGS_ACCOUNT_ID, CHAIN_NAME),
+        args: {
+          moduleId: SAVINGS_APP_MODULE_ID,
+        },
       },
-    },
-    {
-      enabled: true,
-    },
-  )
+      {
+        enabled: true,
+      },
+    )
 
-  console.log('calculated savings app address', savingsAppAddress)
+  console.log('calculated savings app address', savingsAppData)
 
   const onGrantAuthzClick = useMemo(() => {
     if (!account) {
       console.error('no account')
       return undefined
     }
-    if (!savingsAppAddress) {
+    if (!savingsAppData) {
       console.error('no module grantee')
       return undefined
     }
@@ -99,18 +100,18 @@ export default function AuthzPage() {
             ].map((typeUrl) =>
               encodeAuthzGrantGenericAuthorizationMsg(
                 account.bech32Address,
-                savingsAppAddress,
+                savingsAppData.address,
                 typeUrl,
               ),
             ),
             encodeAuthzGrantGenericAuthorizationMsg(
               account.bech32Address,
-              savingsAppAddress,
+              savingsAppData.address,
               BankTransactionTypeUrl.Send,
             ),
             encodeAuthzGrantSendAuthorizationMsg(
               account.bech32Address,
-              savingsAppAddress,
+              savingsAppData.address,
               { spendLimit: [{ denom: 'uosmo', amount: '100' }] },
             ),
           ],
