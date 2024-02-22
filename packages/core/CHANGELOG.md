@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 0.3.8
+
+### Patch Changes
+
+- [`87b2119`](https://github.com/AbstractSDK/abstract.js/commit/87b2119b09e167a3693e75703b5db16cb1c1b491) Thanks [@dalechyn](https://github.com/dalechyn)! - Fix undefined address issue.
+
 ## 0.3.7
 
 ### Patch Changes
