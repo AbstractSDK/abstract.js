@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 0.3.5
+
+### Patch Changes
+
+- [`12f8922`](https://github.com/AbstractSDK/abstract.js/commit/12f89220a5abeaf673d3836330d162f9694f89b7) Thanks [@dalechyn](https://github.com/dalechyn)! - Return version along with address from the version control to cache it.
+
 ## 0.3.4
 
 ### Patch Changes
