@@ -1,5 +1,16 @@
 # wagemos-graz-nextjs
 
+## 0.2.25
+
+### Patch Changes
+
+- [`6b6809d`](https://github.com/AbstractSDK/abstract.js/commit/6b6809d7f9b4288aa3626c18818218dbc6805728) Thanks [@dalechyn](https://github.com/dalechyn)! - Fix the parameters for hooks that get the version.
+
+- Updated dependencies [[`6b6809d`](https://github.com/AbstractSDK/abstract.js/commit/6b6809d7f9b4288aa3626c18818218dbc6805728)]:
+  - @abstract-money/core@0.3.7
+  - @abstract-money/react@0.2.25
+  - @abstract-money/provider-graz@0.0.24
+
 ## 0.2.24
 
 ### Patch Changes
