@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 0.2.22
+
+### Patch Changes
+
+- [`42f205d`](https://github.com/AbstractSDK/abstract.js/commit/42f205d544336b452649a490e22e7a5d1c015cb0) Thanks [@dalechyn](https://github.com/dalechyn)! - Add `useSubAccountsIds` hook.
+
 ## 0.2.21
 
 ### Patch Changes
