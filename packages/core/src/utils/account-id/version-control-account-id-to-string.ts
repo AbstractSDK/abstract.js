@@ -1,10 +1,5 @@
-import * as s from 'string-ts'
 import { VersionControlTypes } from '../../codegen/abstract'
-import {
-  ACCOUNT_ID_CHAIN_DELIMITER,
-  ACCOUNT_ID_SEQUENCE_DELIMITER,
-  type AccountId,
-} from './account-id'
+import { ACCOUNT_ID_CHAIN_DELIMITER } from './account-id'
 
 /**
  * To string for account ids. Matches Display trait.

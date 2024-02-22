@@ -34,8 +34,8 @@ export function useAccountBaseAddressesFromApi(
 ): QueryResult
 
 export function useAccountBaseAddressesFromApi(
-  arg1?: { accountId: AccountId | undefined } | QueryOptions,
-  arg2?: QueryOptions,
+  arg1: { accountId: AccountId | undefined } | QueryOptions = { enabled: true },
+  arg2: QueryOptions = { enabled: true },
 ) {
   const { accountId: accountIdParameter, options } = parseParameters(arg1, arg2)
 
@@ -51,8 +51,8 @@ export function useAccountBaseAddressesFromApi(
   )
 
   const enabled = React.useMemo(
-    () => Boolean(accountPublicClient && options?.enabled),
-    [options?.enabled, accountPublicClient],
+    () => Boolean(accountPublicClient && options.enabled),
+    [options.enabled, accountPublicClient],
   )
 
   const queryFn = React.useCallback(() => {

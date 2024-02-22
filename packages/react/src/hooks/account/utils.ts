@@ -9,19 +9,20 @@ export function parseParameters<
     | undefined,
   TOptions extends
     | Omit<MutationOptions<any, any, any, any>, 'mutationFn'>
-    | Omit<QueryOptions<any, any, any, any>, 'queryFn'>,
+    | Omit<QueryOptions<any, any, any, any>, 'queryFn'>
+    | undefined,
   TResult extends {
     accountId: TFirstParameter extends { accountId: AccountId | undefined }
       ? TFirstParameter['accountId']
       : never
-    options: TOptions | undefined
+    options: TOptions
     passesAccountId: TFirstParameter extends {
       accountId: AccountId | undefined
     }
       ? true
       : false
   },
->(arg1: TFirstParameter, arg2: TOptions | undefined) {
+>(arg1: TFirstParameter, arg2: TOptions) {
   if (arg1 && 'accountId' in arg1)
     return { ...(arg1 as any), options: arg2, passesAccountId: true } as TResult
   return {
@@ -42,16 +43,17 @@ export function parseParametersWithArgs<
     ),
   TOptions extends
     | Omit<MutationOptions<any, any, any, any>, 'mutationFn'>
-    | Omit<QueryOptions<any, any, any, any>, 'queryFn'>,
+    | Omit<QueryOptions<any, any, any, any>, 'queryFn'>
+    | undefined,
   TResult extends {
     accountId: TWithArgs extends { accountId: AccountId | undefined }
       ? TWithArgs['accountId']
       : never
     args: TWithArgs['args']
-    options: TOptions | undefined
+    options: TOptions
     passesAccountId: boolean
   },
->(arg1: TWithArgs | Omit<TWithArgs, 'accountId'>, arg2: TOptions | undefined) {
+>(arg1: TWithArgs | Omit<TWithArgs, 'accountId'>, arg2: TOptions) {
   if ('accountId' in arg1) {
     const { accountId, args } = arg1
     return { accountId, args, options: arg2, passesAccountId: true } as TResult

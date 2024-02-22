@@ -52,7 +52,7 @@ export function useModuleInstantiate2AddressFromApi(
         }
       | {}
     ),
-  arg2?: QueryOptions,
+  arg2: QueryOptions = { enabled: true },
 ) {
   const {
     args,
@@ -73,8 +73,8 @@ export function useModuleInstantiate2AddressFromApi(
   )
 
   const enabled = React.useMemo(
-    () => Boolean(accountPublicClient && args && options?.enabled),
-    [options?.enabled, accountPublicClient],
+    () => Boolean(accountPublicClient && args && options.enabled),
+    [options.enabled, accountPublicClient],
   )
 
   const queryFn = React.useCallback(() => {
