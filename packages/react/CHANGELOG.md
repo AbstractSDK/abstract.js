@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 0.2.21
+
+### Patch Changes
+
+- [`6275682`](https://github.com/AbstractSDK/abstract.js/commit/627568200c08d6e786693ef4f8795b5b7de11b4c) Thanks [@dalechyn](https://github.com/dalechyn)! - Fix the query key for account public hooks.
+
 ## 0.2.20
 
 ### Patch Changes
