@@ -59,7 +59,7 @@ export default function AuthzPage() {
     })
   }, [accountFactory])
 
-  const { data: savingsAppData } = useModuleInstantiate2AddressFromApi(
+  const { data: savingsAppAddress } = useModuleInstantiate2AddressFromApi(
     {
       accountId: stringToAccountId(TEST_SAVINGS_ACCOUNT_ID, CHAIN_NAME),
       args: {
@@ -71,14 +71,14 @@ export default function AuthzPage() {
     },
   )
 
-  console.log('calculated savings app address', savingsAppData)
+  console.log('calculated savings app address', savingsAppAddress)
 
   const onGrantAuthzClick = useMemo(() => {
     if (!account) {
       console.error('no account')
       return undefined
     }
-    if (!savingsAppData) {
+    if (!savingsAppAddress) {
       console.error('no module grantee')
       return undefined
     }
@@ -99,18 +99,18 @@ export default function AuthzPage() {
             ].map((typeUrl) =>
               encodeAuthzGrantGenericAuthorizationMsg(
                 account.bech32Address,
-                savingsAppData.address,
+                savingsAppAddress,
                 typeUrl,
               ),
             ),
             encodeAuthzGrantGenericAuthorizationMsg(
               account.bech32Address,
-              savingsAppData.address,
+              savingsAppAddress,
               BankTransactionTypeUrl.Send,
             ),
             encodeAuthzGrantSendAuthorizationMsg(
               account.bech32Address,
-              savingsAppData.address,
+              savingsAppAddress,
               { spendLimit: [{ denom: 'uosmo', amount: '100' }] },
             ),
           ],
