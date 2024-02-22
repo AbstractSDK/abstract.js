@@ -8,7 +8,7 @@ import { VersionControlTypes } from '../../../codegen/abstract'
 import { WithArgs } from '../../../types/with-args'
 import { getVersionControlAddressFromApi } from '../../get-version-control-address-from-api'
 import { getAppModuleCodeIdFromVersionControl } from '../../public/get-app-module-code-id-from-version-control'
-import { getModuleFactoryAddressAndVersionFromVersionControl } from '../../public/get-module-factory-address-and-version-from-version-control'
+import { getModuleFactoryAddressFromVersionControl } from '../../public/get-module-factory-address-from-version-control'
 
 export type GetModuleInstantiate2AddressFromApi = WithArgs<{
   accountId: VersionControlTypes.AccountId
@@ -18,7 +18,7 @@ export type GetModuleInstantiate2AddressFromApi = WithArgs<{
   apiUrl: string
 }>
 
-export async function getModuleInstantiate2AddressAndVersionFromApi({
+export async function getModuleInstantiate2AddressFromApi({
   args: { accountId, cosmWasmClient, apiUrl, moduleId, version },
 }: GetModuleInstantiate2AddressFromApi) {
   const chainId = await cosmWasmClient.getChainId()
@@ -31,13 +31,12 @@ export async function getModuleInstantiate2AddressAndVersionFromApi({
     },
   })
 
-  const { address: moduleFactoryAddress, version: resolvedVersion } =
-    await getModuleFactoryAddressAndVersionFromVersionControl({
-      args: {
-        cosmWasmClient,
-        versionControlAddress,
-      },
-    })
+  const moduleFactoryAddress = await getModuleFactoryAddressFromVersionControl({
+    args: {
+      cosmWasmClient,
+      versionControlAddress,
+    },
+  })
 
   const moduleCodeId = await getAppModuleCodeIdFromVersionControl({
     args: { moduleId, version, cosmWasmClient, versionControlAddress },
@@ -45,12 +44,9 @@ export async function getModuleInstantiate2AddressAndVersionFromApi({
 
   const moduleCodeDetails = await cosmWasmClient.getCodeDetails(moduleCodeId)
 
-  return {
-    version: resolvedVersion,
-    address: await getInstantiate2Address(
-      moduleFactoryAddress,
-      moduleCodeDetails.checksum,
-      { ...accountId, chainName },
-    ),
-  }
+  return getInstantiate2Address(
+    moduleFactoryAddress,
+    moduleCodeDetails.checksum,
+    { ...accountId, chainName },
+  )
 }

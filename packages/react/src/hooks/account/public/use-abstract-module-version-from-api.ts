@@ -6,24 +6,22 @@ import {
   useQuery,
 } from '@tanstack/react-query'
 import React from 'react'
-import { useAccountId, useConfig } from '../../../contexts'
-import { WithArgs } from '../../../types/utils'
-import { parseParametersWithArgs } from '../utils'
+import { useAccountId, useConfig } from '../../contexts'
+import { WithArgs } from '../../types/utils'
+import { parseParametersWithArgs } from '../account/utils'
 
 type QueryFnData = Awaited<
-  ReturnType<
-    AccountPublicClient['getModuleInstantiate2AddressAndVersionFromApi']
-  >
+  ReturnType<AccountPublicClient['getAbstractModuleVersionFromApi']>
 >
 
 type ModuleId = `${string}${typeof MODULE_DELIMITER}${string}`
 type QueryError = unknown
 type QueryData = QueryFnData
 type QueryKey = readonly [
-  'moduleInstantiate2AddressAndVersionFromApi',
+  'moduleInstantiate2AddressFromApi',
   AccountPublicClient | undefined,
   AccountId | undefined,
-  UseModuleInstantiate2AddressAndVersionFromApiArgs['args'],
+  UseAbstractModuleVersionFromApiArgs['args'],
 ]
 
 type QueryOptions = Omit<
@@ -32,23 +30,23 @@ type QueryOptions = Omit<
 >
 type QueryResult = UseQueryResult<QueryData, QueryError>
 
-type UseModuleInstantiate2AddressAndVersionFromApiArgs = WithArgs<{
+type UseAbstractModuleVersionFromApiArgs = WithArgs<{
   version?: string
   moduleId: ModuleId
 }>
 
-export function useModuleInstantiate2AddressAndVersionFromApi(
-  parameters: UseModuleInstantiate2AddressAndVersionFromApiArgs & {
+export function useAbstractModuleVersionFromApi(
+  parameters: UseAbstractModuleVersionFromApiArgs & {
     accountId: AccountId | undefined
   },
   options?: QueryOptions,
 ): QueryResult
-export function useModuleInstantiate2AddressAndVersionFromApi(
-  parameters: UseModuleInstantiate2AddressAndVersionFromApiArgs,
+export function useAbstractModuleVersionFromApi(
+  parameters: UseAbstractModuleVersionFromApiArgs,
   options?: QueryOptions,
 ): QueryResult
-export function useModuleInstantiate2AddressAndVersionFromApi(
-  arg1: UseModuleInstantiate2AddressAndVersionFromApiArgs &
+export function useAbstractModuleVersionFromApi(
+  arg1: UseAbstractModuleVersionFromApiArgs &
     (
       | {
           accountId: AccountId | undefined
@@ -72,7 +70,7 @@ export function useModuleInstantiate2AddressAndVersionFromApi(
   const queryKey = React.useMemo(
     () =>
       [
-        'moduleInstantiate2AddressAndVersionFromApi',
+        'moduleInstantiate2AddressFromApi',
         accountPublicClient,
         accountId,
         args,
@@ -89,7 +87,7 @@ export function useModuleInstantiate2AddressAndVersionFromApi(
     if (!accountPublicClient) throw new Error('No client')
     if (!args) throw new Error('No args')
 
-    return accountPublicClient.getModuleInstantiate2AddressAndVersionFromApi({
+    return accountPublicClient.getAbstractModuleVersionFromApi({
       args,
     })
   }, [accountPublicClient])

@@ -4,7 +4,7 @@ import { getAccountBaseAddressesFromApi } from '../../actions/account/public/get
 import { getBaseToken } from '../../actions/account/public/get-base-token'
 import { getManagerQueryClientFromApi } from '../../actions/account/public/get-manager-query-client-from-api'
 import { getModuleAddress } from '../../actions/account/public/get-module-address'
-import { getModuleInstantiate2AddressAndVersionFromApi } from '../../actions/account/public/get-module-instantiate2-address-and-version-from-api'
+import { getModuleInstantiate2AddressFromApi } from '../../actions/account/public/get-module-instantiate2-address-from-api'
 import { getModules } from '../../actions/account/public/get-modules'
 import { getNamespace } from '../../actions/account/public/get-namespace'
 import { getOwner } from '../../actions/account/public/get-owner'
@@ -49,11 +49,11 @@ export type AccountPublicActions = {
   getModules(
     args: CutSpecificArgsFromParameter<typeof getModules>,
   ): ReturnType<typeof getModules>
-  getModuleInstantiate2AddressAndVersionFromApi(
+  getModuleInstantiate2AddressFromApi(
     args: CutSpecificArgsFromParameter<
-      typeof getModuleInstantiate2AddressAndVersionFromApi
+      typeof getModuleInstantiate2AddressFromApi
     >,
-  ): ReturnType<typeof getModuleInstantiate2AddressAndVersionFromApi>
+  ): ReturnType<typeof getModuleInstantiate2AddressFromApi>
   getNamespace(
     args: CutSpecificArgsFromParameter<typeof getNamespace>,
   ): ReturnType<typeof getNamespace>
@@ -114,8 +114,8 @@ export function accountPublicActions(
         args: { ...args, accountId, cosmWasmClient, apiUrl },
         ...rest,
       }),
-    getModuleInstantiate2AddressAndVersionFromApi: ({ args, ...rest }) =>
-      getModuleInstantiate2AddressAndVersionFromApi({
+    getModuleInstantiate2AddressFromApi: ({ args, ...rest }) =>
+      getModuleInstantiate2AddressFromApi({
         args: { ...args, accountId, cosmWasmClient, apiUrl },
         ...rest,
       }),

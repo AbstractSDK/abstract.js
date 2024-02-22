@@ -11,9 +11,9 @@ import {
 import {
   useAccountFactoryQueryClientFromApi,
   useCreateAccountMonarchy,
+  useModuleInstantiate2AddressFromApi,
   useSignAndBroadcast,
 } from '@abstract-money/react'
-import { useModuleInstantiate2AddressAndVersionFromApi } from '@abstract-money/react'
 import { useAccount } from 'graz'
 import React, { useCallback, useEffect, useMemo } from 'react'
 import { Button } from '../../components/ui/button'
@@ -59,18 +59,17 @@ export default function AuthzPage() {
     })
   }, [accountFactory])
 
-  const { data: savingsAppData } =
-    useModuleInstantiate2AddressAndVersionFromApi(
-      {
-        accountId: stringToAccountId(TEST_SAVINGS_ACCOUNT_ID, CHAIN_NAME),
-        args: {
-          moduleId: SAVINGS_APP_MODULE_ID,
-        },
+  const { data: savingsAppData } = useModuleInstantiate2AddressFromApi(
+    {
+      accountId: stringToAccountId(TEST_SAVINGS_ACCOUNT_ID, CHAIN_NAME),
+      args: {
+        moduleId: SAVINGS_APP_MODULE_ID,
       },
-      {
-        enabled: true,
-      },
-    )
+    },
+    {
+      enabled: true,
+    },
+  )
 
   console.log('calculated savings app address', savingsAppData)
 

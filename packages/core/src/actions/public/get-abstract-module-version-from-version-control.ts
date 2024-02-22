@@ -2,7 +2,7 @@ import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
 import { VersionControlTypes } from '../../codegen/abstract'
 import { WithArgs } from '../../types/with-args'
-import { versionControlModuleToAddress } from '../../utils/version-control/version-control-module-to-address'
+import { versionControlModuleToVersion } from '../../utils/version-control/version-control-module-to-version'
 import { getVersionControlQueryClient } from './get-version-control-query-client'
 
 export enum CommonModuleNames {
@@ -11,16 +11,16 @@ export enum CommonModuleNames {
   ANS_HOST = 'ans-host',
 }
 
-export type GetAbstractModuleAddressFromVersionControl = WithArgs<{
-  moduleName: `${CommonModuleNames}`
+export type GetAbstractModuleVersionFromVersionControl = WithArgs<{
+  moduleName: string
   cosmWasmClient: CosmWasmClient
   versionControlAddress: string
   version?: string
 }>
 
-export async function getAbstractModuleAddressAndVersionFromVersionControl({
+export async function getAbstractModuleVersionFromVersionControl({
   args: { moduleName, cosmWasmClient, versionControlAddress, version },
-}: GetAbstractModuleAddressFromVersionControl) {
+}: GetAbstractModuleVersionFromVersionControl) {
   const versionControlQueryClient = getVersionControlQueryClient({
     args: {
       cosmWasmClient,
@@ -28,7 +28,7 @@ export async function getAbstractModuleAddressAndVersionFromVersionControl({
     },
   })
 
-  const [moduleAddress] = await versionControlQueryClient
+  const [moduleVersion] = await versionControlQueryClient
     .modules({
       infos: [
         {
@@ -39,17 +39,14 @@ export async function getAbstractModuleAddressAndVersionFromVersionControl({
       ],
     })
     .then(({ modules }) =>
-      modules.map(({ module }) => ({
-        address: versionControlModuleToAddress(module),
-        version: module.info.version,
-      })),
+      modules.map(({ module }) => versionControlModuleToVersion(module)),
     )
 
-  if (!moduleAddress) {
+  if (!moduleVersion) {
     throw new Error(
       `Could not fetch address for module ${moduleName} version ${version} from registry ${versionControlAddress}`,
     )
   }
 
-  return moduleAddress
+  return moduleVersion
 }

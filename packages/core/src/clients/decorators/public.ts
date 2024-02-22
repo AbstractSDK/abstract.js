@@ -1,12 +1,16 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { getAccountFactoryAddressAndVersionFromVersionControl } from '../../actions/public/get-account-factory-address-and-version-from-version-control'
+import { getAbstractModuleAddressFromVersionControl } from '../../actions/public/get-abstract-module-address-from-version-control'
+import { getAbstractModuleVersionFromVersionControl } from '../../actions/public/get-abstract-module-version-from-version-control'
+import { getAccountFactoryAddressFromVersionControl } from '../../actions/public/get-account-factory-address-from-version-control'
 import { getAccountFactoryQueryClient } from '../../actions/public/get-account-factory-query-client'
 import { getAccountFactoryQueryClientFromApi } from '../../actions/public/get-account-factory-query-client-from-api'
 import { getAccountFactoryQueryClientFromVersionControl } from '../../actions/public/get-account-factory-query-client-from-version-control'
-import { getAnsHostAddressAndVersionFromVersionControl } from '../../actions/public/get-ans-host-address-and-version-from-version-control'
+import { getAccountFactoryVersionFromVersionControl } from '../../actions/public/get-account-factory-version-from-version-control'
+import { getAnsHostAddressFromVersionControl } from '../../actions/public/get-ans-host-address-from-version-control'
 import { getAnsHostQueryClient } from '../../actions/public/get-ans-host-query-client'
 import { getAnsHostQueryClientFromApi } from '../../actions/public/get-ans-host-query-client-from-api'
 import { getAnsHostQueryClientFromVersionControl } from '../../actions/public/get-ans-host-query-client-from-version-control'
+import { getAnsHostVersionFromVersionControl } from '../../actions/public/get-ans-host-version-from-version-control'
 import { getCosmWasmClient } from '../../actions/public/get-cosm-wasm-client'
 import { getManagerQueryClient } from '../../actions/public/get-manager-query-client'
 import { getProxyQueryClient } from '../../actions/public/get-proxy-query-client'
@@ -32,11 +36,26 @@ type CutCosmWasmClientAndApiUrlFromParameter<T extends (payload: any) => any> =
   >
 
 export type PublicActions = {
+  getAbstractModuleVersionFromVersionControl(
+    args: CutCosmWasmClientFromParameter<
+      typeof getAbstractModuleVersionFromVersionControl
+    >,
+  ): ReturnType<typeof getAbstractModuleVersionFromVersionControl>
+  getAbstractModuleAddressFromVersionControl(
+    args: CutCosmWasmClientFromParameter<
+      typeof getAbstractModuleAddressFromVersionControl
+    >,
+  ): ReturnType<typeof getAbstractModuleAddressFromVersionControl>
   getAccountFactoryAddressFromVersionControl(
     args: CutCosmWasmClientFromParameter<
-      typeof getAccountFactoryAddressAndVersionFromVersionControl
+      typeof getAccountFactoryAddressFromVersionControl
     >,
-  ): ReturnType<typeof getAccountFactoryAddressAndVersionFromVersionControl>
+  ): ReturnType<typeof getAccountFactoryAddressFromVersionControl>
+  getAccountFactoryVersionFromVersionControl(
+    args: CutCosmWasmClientFromParameter<
+      typeof getAccountFactoryVersionFromVersionControl
+    >,
+  ): ReturnType<typeof getAccountFactoryVersionFromVersionControl>
   getAccountFactoryQueryClientFromVersionControl(
     args: CutCosmWasmClientFromParameter<
       typeof getAccountFactoryQueryClientFromVersionControl
@@ -50,11 +69,16 @@ export type PublicActions = {
   getAccountFactoryQueryClient(
     args: CutCosmWasmClientFromParameter<typeof getAccountFactoryQueryClient>,
   ): ReturnType<typeof getAccountFactoryQueryClient>
+  getAnsHostVersionFromVersionControl(
+    args: CutCosmWasmClientFromParameter<
+      typeof getAnsHostVersionFromVersionControl
+    >,
+  ): ReturnType<typeof getAnsHostVersionFromVersionControl>
   getAnsHostAddressFromVersionControl(
     args: CutCosmWasmClientFromParameter<
-      typeof getAnsHostAddressAndVersionFromVersionControl
+      typeof getAnsHostAddressFromVersionControl
     >,
-  ): ReturnType<typeof getAnsHostAddressAndVersionFromVersionControl>
+  ): ReturnType<typeof getAnsHostAddressFromVersionControl>
   getAnsHostQueryClientFromVersionControl(
     args: CutCosmWasmClientFromParameter<
       typeof getAnsHostQueryClientFromVersionControl
@@ -93,8 +117,23 @@ export function publicActions(
   apiUrl: string,
 ): PublicActions {
   return {
+    getAbstractModuleAddressFromVersionControl: ({ args, ...rest }) =>
+      getAbstractModuleAddressFromVersionControl({
+        args: { ...args, cosmWasmClient },
+        ...rest,
+      }),
+    getAbstractModuleVersionFromVersionControl: ({ args, ...rest }) =>
+      getAbstractModuleVersionFromVersionControl({
+        args: { ...args, cosmWasmClient },
+        ...rest,
+      }),
+    getAccountFactoryVersionFromVersionControl: ({ args, ...rest }) =>
+      getAccountFactoryVersionFromVersionControl({
+        args: { ...args, cosmWasmClient },
+        ...rest,
+      }),
     getAccountFactoryAddressFromVersionControl: ({ args, ...rest }) =>
-      getAccountFactoryAddressAndVersionFromVersionControl({
+      getAccountFactoryAddressFromVersionControl({
         args: { ...args, cosmWasmClient },
         ...rest,
       }),
@@ -113,8 +152,15 @@ export function publicActions(
         args: { ...args, cosmWasmClient },
         ...rest,
       }),
+
+    getAnsHostVersionFromVersionControl: ({ args, ...rest }) =>
+      getAnsHostVersionFromVersionControl({
+        args: { ...args, cosmWasmClient },
+        ...rest,
+      }),
+
     getAnsHostAddressFromVersionControl: ({ args, ...rest }) =>
-      getAnsHostAddressAndVersionFromVersionControl({
+      getAnsHostAddressFromVersionControl({
         args: { ...args, cosmWasmClient },
         ...rest,
       }),
