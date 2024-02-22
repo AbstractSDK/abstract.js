@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 0.3.7
+
+### Patch Changes
+
+- [`6b6809d`](https://github.com/AbstractSDK/abstract.js/commit/6b6809d7f9b4288aa3626c18818218dbc6805728) Thanks [@dalechyn](https://github.com/dalechyn)! - Fix the parameters for hooks that get the version.
+
 ## 0.3.6
 
 ### Patch Changes
