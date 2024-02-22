@@ -1,5 +1,11 @@
 # @abstract-money/cli
 
+## 0.2.10
+
+### Patch Changes
+
+- [`b56c2db`](https://github.com/AbstractSDK/abstract.js/commit/b56c2db0d0fb4d0630cae3ea305071c7aeb1e99b) Thanks [@dalechyn](https://github.com/dalechyn)! - Fix imports.
+
 ## 0.2.9
 
 ### Patch Changes
