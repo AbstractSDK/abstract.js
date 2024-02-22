@@ -17,6 +17,7 @@ type QueryData = QueryFnData
 type QueryKey = readonly [
   'accountBaseAddresses',
   AccountPublicClient | undefined,
+  AccountId | undefined,
 ]
 
 type QueryOptions = Omit<
@@ -46,8 +47,8 @@ export function useAccountBaseAddressesFromApi(
     chainName: accountId?.chainName,
   })
   const queryKey = React.useMemo(
-    () => ['accountBaseAddresses', accountPublicClient] as const,
-    [accountPublicClient],
+    () => ['accountBaseAddresses', accountPublicClient, accountId] as const,
+    [accountPublicClient, accountId],
   )
 
   const enabled = React.useMemo(

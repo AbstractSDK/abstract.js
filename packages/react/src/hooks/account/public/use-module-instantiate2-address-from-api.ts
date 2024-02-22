@@ -20,6 +20,7 @@ type QueryData = QueryFnData
 type QueryKey = readonly [
   'moduleInstantiate2AddressFromApi',
   AccountPublicClient | undefined,
+  AccountId | undefined,
   UseModuleInstantiate2AddressFromApiArgs['args'],
 ]
 
@@ -68,8 +69,13 @@ export function useModuleInstantiate2AddressFromApi(
   })
   const queryKey = React.useMemo(
     () =>
-      ['moduleInstantiate2AddressFromApi', accountPublicClient, args] as const,
-    [accountPublicClient],
+      [
+        'moduleInstantiate2AddressFromApi',
+        accountPublicClient,
+        accountId,
+        args,
+      ] as const,
+    [accountPublicClient, accountId, args],
   )
 
   const enabled = React.useMemo(
