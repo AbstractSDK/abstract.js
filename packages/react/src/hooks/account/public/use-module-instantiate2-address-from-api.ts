@@ -1,5 +1,4 @@
 import { AccountId, AccountPublicClient } from '@abstract-money/core'
-import { MODULE_DELIMITER } from '@abstract-money/core'
 import {
   UseQueryOptions,
   UseQueryResult,
@@ -7,14 +6,12 @@ import {
 } from '@tanstack/react-query'
 import React from 'react'
 import { useAccountId, useConfig } from '../../../contexts'
-import { WithArgs } from '../../../types/utils'
 import { parseParametersWithArgs } from '../utils'
 
 type QueryFnData = Awaited<
   ReturnType<AccountPublicClient['getModuleInstantiate2AddressFromApi']>
 >
 
-type ModuleId = `${string}${typeof MODULE_DELIMITER}${string}`
 type QueryError = unknown
 type QueryData = QueryFnData
 type QueryKey = readonly [
@@ -30,11 +27,9 @@ type QueryOptions = Omit<
 >
 type QueryResult = UseQueryResult<QueryData, QueryError>
 
-type UseModuleInstantiate2AddressFromApiArgs = WithArgs<{
-  version?: string
-  moduleId: ModuleId
-}>
-
+type UseModuleInstantiate2AddressFromApiArgs = Parameters<
+  AccountPublicClient['getModuleInstantiate2AddressFromApi']
+>[0]
 export function useModuleInstantiate2AddressFromApi(
   parameters: UseModuleInstantiate2AddressFromApiArgs & {
     accountId: AccountId | undefined

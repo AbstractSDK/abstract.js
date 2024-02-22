@@ -14,7 +14,7 @@ export type GetAppModuleCodeIdFromVersionControl = WithArgs<{
   moduleId: `${ModuleId}`
   cosmWasmClient: CosmWasmClient
   versionControlAddress: string
-  version?: string
+  version?: VersionControlTypes.ModuleVersion
 }>
 
 export async function getAppModuleCodeIdFromVersionControl({
@@ -33,7 +33,7 @@ export async function getAppModuleCodeIdFromVersionControl({
         {
           name: moduleIdToName(moduleId),
           namespace: moduleIdToNamespace(moduleId),
-          version: version ? { version } : 'latest',
+          version: version ?? 'latest',
         } satisfies VersionControlTypes.ModuleInfo,
       ],
     })

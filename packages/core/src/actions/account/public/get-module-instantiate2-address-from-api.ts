@@ -13,7 +13,7 @@ import { getModuleFactoryAddressFromVersionControl } from '../../public/get-modu
 export type GetModuleInstantiate2AddressFromApi = WithArgs<{
   accountId: VersionControlTypes.AccountId
   moduleId: ModuleId
-  version?: string
+  version?: VersionControlTypes.ModuleVersion
   cosmWasmClient: CosmWasmClient
   apiUrl: string
 }>
