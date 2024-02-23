@@ -1,20 +1,10 @@
-import {
-  AccountId,
-  accountIdToString,
-  stringToAccountId,
-} from '@abstract-money/core'
+import { AccountId } from '@abstract-money/core'
 import dedent from 'dedent'
 import * as React from 'react'
 import { Prettify } from '../types/utils'
 
-const noop = () => {
-  throw new Error('noop')
-}
-
 type AbstractAccountIdContext = {
   accountId: AccountId
-  setAccountId: (accountId: AccountId) => void
-  persistKey?: string
 }
 
 type AbstractAccountIdContextWithPartialAccountId = Prettify<
@@ -25,7 +15,6 @@ type AbstractAccountIdContextWithPartialAccountId = Prettify<
 const Context =
   React.createContext<AbstractAccountIdContextWithPartialAccountId>({
     accountId: undefined,
-    setAccountId: noop,
   })
 
 /**
@@ -35,34 +24,15 @@ const Context =
  */
 export function AbstractAccountIdProvider({
   children,
-  accountId: defaultAccountId,
-  persistKey,
-}: React.PropsWithChildren<{ accountId: AccountId; persistKey?: string }>) {
-  const [accountId, setAccountId_] = React.useState<AccountId>(() => {
-    if (typeof window === 'undefined') return defaultAccountId
-    if (persistKey) {
-      const item = window.localStorage.getItem(persistKey)
-      if (item) return stringToAccountId(item)
-      return defaultAccountId
-    }
-    return defaultAccountId
-  })
-
-  const setAccountId = React.useCallback<(accountId: AccountId) => void>(
-    (accountId) => {
-      setAccountId_(accountId)
-      if (typeof window === 'undefined' || !persistKey) return
-
-      window.localStorage.setItem(persistKey, accountIdToString(accountId))
-    },
-    [],
-  )
-
+  accountId,
+}: React.PropsWithChildren<{
+  accountId: AccountId
+}>) {
   // Bailing out of using JSX
   // https://github.com/egoist/tsup/issues/390#issuecomment-933488738
   return React.createElement(Context.Provider, {
     children,
-    value: { accountId, persistKey, setAccountId },
+    value: { accountId },
   })
 }
 
@@ -87,7 +57,6 @@ export function useAccountId<
     if (parameters[0])
       return {
         accountId: parameters[0].accountId,
-        setAccountId: noop,
       } as unknown as TResult
 
     // If parameter is not passed, we suppose that the data has to be retrieved from the context
