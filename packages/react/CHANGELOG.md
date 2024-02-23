@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 0.2.27
+
+### Patch Changes
+
+- [`2edf0de`](https://github.com/AbstractSDK/abstract.js/commit/2edf0de7ae902a3543c8b6728a563d4583aec808) Thanks [@dalechyn](https://github.com/dalechyn)! - Make AbstractAccountIdProvider controllable.
+
 ## 0.2.26
 
 ### Patch Changes
