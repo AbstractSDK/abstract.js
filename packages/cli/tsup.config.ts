@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsup'
 
 import { getConfig } from '../../scripts/tsup'
-import { dependencies, devDependencies } from './package.json'
+import { dependencies } from './package.json'
 
 export default defineConfig(
   getConfig({
@@ -10,6 +10,7 @@ export default defineConfig(
     entry: [
       'src/index.ts',
       'src/cli.ts',
+      'src/cosmjs.ts',
       'src/config.ts',
       'src/plugins/index.ts',
     ],

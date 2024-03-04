@@ -5,8 +5,8 @@
 */
 
 import { UseQueryOptions, useQuery, useMutation, UseMutationOptions } from "@tanstack/react-query";
-import { ExecuteResult } from "@cosmjs/cosmwasm-stargate";
-import { StdFee, Coin } from "@cosmjs/amino";
+import { ExecuteResult } from "@abstract-money/cli/cosmjs";
+import { StdFee, Coin } from "@abstract-money/cli/cosmjs";
 import { Decimal, InstantiateMsg, ExecuteMsg, AssetEntry, AccountTrace, ChainName, Uint128, AccountOdds, AccountId, Bet, AnsAsset, QueryMsg, MigrateMsg, Addr, BetsResponse, ConfigResponse, ListOddsResponse, RoundStatus, RoundsResponse, RoundResponse, OddsResponse } from "./Betting.types";
 import { BettingAppQueryClient, BettingAppClient } from "./Betting.client";
 export const bettingQueryKeys = {
