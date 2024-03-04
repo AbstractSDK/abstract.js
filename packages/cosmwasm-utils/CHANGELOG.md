@@ -1,5 +1,11 @@
 # @abstract-money/cosmwasm-utils
 
+## 0.1.2
+
+### Patch Changes
+
+- [#71](https://github.com/AbstractSDK/abstract.js/pull/71) [`d7b32cf`](https://github.com/AbstractSDK/abstract.js/commit/d7b32cf3e3ca1ca8460ba91c7013ed4bf3f3e301) Thanks [@dalechyn](https://github.com/dalechyn)! - Fixes bad dependencies in all of the packages.
+
 ## 0.1.1
 
 ### Patch Changes
