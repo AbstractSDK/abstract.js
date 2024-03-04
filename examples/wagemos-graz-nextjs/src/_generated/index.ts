@@ -1,6 +1,6 @@
 'use client'
 
-import { ExecuteResult } from '@cosmjs/cosmwasm-stargate'
+import { ExecuteResult } from '@abstract-money/cli/cosmjs'
 import { UseMutationOptions } from '@tanstack/react-query'
 import { useMemo } from 'react'
 
@@ -49,7 +49,7 @@ import {
 // React
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const BETTING_MODULE_ID = 'abstract:betting'
+export const BETTING_MODULE_ID = 'abstract:betting'
 
 export const betting = {
   queries: {

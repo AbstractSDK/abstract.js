@@ -27,18 +27,20 @@
       "optional": true
     }
   },
+  "dependencies": {
+    "@cosmjs/cosmwasm-stargate": "^0.32.2"
+  },
   "type": "module",
   "peerDependencies": {
     "@abstract-money/react": "workspace:*",
-    "@cosmjs/cosmwasm-stargate": ">=0.28",
     "@cosmos-kit/react": "^2.6.0",
-    "react": "^18"
+    "react": ">=18.0.0",
+    "typescript": ">=5.0.4"
   },
   "devDependencies": {
     "@abstract-money/react": "workspace:*",
-    "@cosmjs/cosmwasm-stargate": "^0.31.0",
     "@cosmos-kit/react": "^2.6.0",
-    "@types/node": "^18.11.10",
+    "@types/node": "^20.0.0",
     "react": "^18",
     "rimraf": "^3.0.0"
   },

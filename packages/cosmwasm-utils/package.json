@@ -15,19 +15,21 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@cosmjs/encoding": "^0.31.0",
-    "@cosmjs/cosmwasm-stargate": "^0.31.0",
-    "@cosmjs/tendermint-rpc": "^0.31.0",
-    "@cosmjs/stargate": "^0.31.0"
+    "@cosmjs/encoding": "^0.32.2",
+    "@cosmjs/cosmwasm-stargate": "^0.32.2",
+    "@cosmjs/tendermint-rpc": "^0.32.2"
   },
   "peerDependenciesMeta": {
     "typescript": {
       "optional": true
     }
   },
+  "peerDependencies": {
+    "typescript": ">=5.0.4"
+  },
   "devDependencies": {
     "rimraf": "^3.0.0",
-    "@types/node": "^18.11.10"
+    "@types/node": "^20.0.0"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

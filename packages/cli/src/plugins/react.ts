@@ -114,10 +114,15 @@ export function react(options: ReactOptions = {}): ReactResult {
             )
             await fse.writeFile(
               resolve(generatedClientFilePath),
-              generatedClientFileContent.replace(
-                '@abstract-money/abstract.js',
-                '@abstract-money/core/legacy',
-              ),
+              generatedClientFileContent
+                .replace(
+                  '@abstract-money/abstract.js',
+                  '@abstract-money/core/legacy',
+                )
+                .replaceAll(
+                  /(@cosmjs\/cosmwasm-stargate|@cosmjs\/amino)/gm,
+                  '@abstract-money/cli/cosmjs',
+                ),
             )
 
             const generatedMessageBuilderFilePath = join(
@@ -177,6 +182,10 @@ export function react(options: ReactOptions = {}): ReactResult {
                   'args")), { ...options, enabled: !!args && ',
                 )
             })
+            .replaceAll(
+              /(@cosmjs\/cosmwasm-stargate|@cosmjs\/amino)/gm,
+              '@abstract-money/cli/cosmjs',
+            )
 
           await fse.writeFile(
             resolve(reactQueryFilePath),
@@ -460,7 +469,7 @@ export function react(options: ReactOptions = {}): ReactResult {
         imports: dedent`
           'use client';
 
-          import { ExecuteResult } from '@cosmjs/cosmwasm-stargate'
+          import { ExecuteResult } from '@abstract-money/cli/cosmjs'
           import { UseMutationOptions } from '@tanstack/react-query'
           import { useMemo } from 'react'
 
