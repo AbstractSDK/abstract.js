@@ -27,6 +27,9 @@
       "optional": true
     }
   },
+  "peerDependencies": {
+    "typescript": ">=5.0.4"
+  },
   "bin": {
     "abstract": "./dist/cli.js"
   },
@@ -49,18 +52,18 @@
     "pathe": "^1.0.0",
     "picocolors": "^1.0.0",
     "prettier": "^2.8.1",
-    "zod": "^3.21.4"
+    "zod": "^3.21.4",
+    "@cosmjs/amino": "^0.32.2",
+    "@cosmjs/cosmwasm-stargate": "^0.32.2"
   },
   "devDependencies": {
     "@types/jest": "^29.5.2",
-    "@types/node": "^18.11.10",
+    "@types/node": "^20.0.0",
     "@vitest/spy": "^1.0.4",
     "fixturez": "^1.1.0",
     "rimraf": "^3.0.0",
     "serve": "^14.2.0",
     "ts-jest": "^29.0.2",
-    "typedoc": "^0.23.25",
-    "typedoc-plugin-markdown": "^3.14.0",
     "vitest": "^1.0.2"
   },
   "main": "dist/index.js",
@@ -70,6 +73,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./cosmjs": {
+      "types": "./dist/cosmjs.d.ts",
+      "default": "./dist/cosmjs.js"
     },
     "./config": {
       "types": "./dist/config.d.ts",
@@ -82,6 +89,7 @@
     "./package.json": "./package.json"
   },
   "files": [
+    "/cosmjs",
     "/config",
     "/plugins",
     "/dist"

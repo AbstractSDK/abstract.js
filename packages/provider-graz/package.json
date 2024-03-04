@@ -28,11 +28,13 @@
     }
   },
   "type": "module",
+  "dependencies": {
+    "@cosmjs/cosmwasm-stargate": "^0.32.2"
+  },
   "devDependencies": {
     "@abstract-money/react": "workspace:*",
     "@abstract-money/core": "workspace:*",
-    "@cosmjs/cosmwasm-stargate": "^0.31.3",
-    "@types/node": "^18.11.10",
+    "@types/node": "^20.0.0",
     "graz": "^0.1.1",
     "rimraf": "^3.0.0"
   },
@@ -52,7 +54,7 @@
   "peerDependencies": {
     "@abstract-money/react": "workspace:*",
     "@abstract-money/core": "workspace:*",
-    "@cosmjs/cosmwasm-stargate": ">=0.28",
-    "graz": "^0.1.1"
+    "graz": "^0.1.1",
+    "typescript": ">=5.0.4"
   }
 }

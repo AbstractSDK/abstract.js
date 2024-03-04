@@ -26,12 +26,14 @@
   "dependencies": {
     "@abstract-money/core": "workspace:*",
     "@tanstack/react-query": "^4",
-    "dedent": "^0.7.0"
+    "dedent": "^0.7.0",
+    "@cosmjs/amino": "^0.32.2",
+    "@cosmjs/cosmwasm-stargate": "^0.32.2",
+    "@cosmjs/stargate": "^0.32.2",
+    "@cosmjs/encoding": "^0.32.2",
+    "@cosmjs/proto-signing": "^0.32.2"
   },
   "peerDependencies": {
-    "@cosmjs/amino": ">=0.28",
-    "@cosmjs/cosmwasm-stargate": ">=0.28",
-    "@cosmjs/encoding": ">=0.28",
     "react": ">=18.0.0",
     "typescript": ">=5.0.4"
   },
@@ -41,14 +43,9 @@
     }
   },
   "devDependencies": {
-    "@cosmjs/amino": "^0.31.0",
-    "@cosmjs/cosmwasm-stargate": "^0.31.0",
-    "@cosmjs/encoding": "^0.31.0",
-    "@cosmjs/proto-signing": "^0.31.0",
-    "@cosmjs/stargate": "^0.31.0",
     "@keplr-wallet/types": "^0.12.44",
-    "@types/node": "^18.11.10",
-    "@types/react": "^18.2.0",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
     "rimraf": "^3.0.0",
     "rome": "^12.1.2",
     "simple-git-hooks": "^2.8.1",
