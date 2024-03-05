@@ -3,6 +3,7 @@ import { claimNamespace } from '../../actions/account/wallet/claim-namespace'
 import { createSubAccount } from '../../actions/account/wallet/create-sub-account'
 import { deposit } from '../../actions/account/wallet/deposit'
 import { execute } from '../../actions/account/wallet/execute'
+import { executeOnModule } from '../../actions/account/wallet/execute-on-module'
 import { getManagerClientFromApi } from '../../actions/account/wallet/get-manager-client-from-api'
 import { getProxyClientFromApi } from '../../actions/account/wallet/get-proxy-client-from-api'
 import { revokeNamespace } from '../../actions/account/wallet/remove-namespace'
@@ -33,6 +34,9 @@ export type AccountWalletActions = {
   execute(
     args: CutSpecificArgsFromParameter<typeof execute>,
   ): ReturnType<typeof execute>
+  executeOnModule(
+    args: CutSpecificArgsFromParameter<typeof executeOnModule>,
+  ): ReturnType<typeof executeOnModule>
   getManagerClientFromApi(
     args: CutSpecificArgsFromParameter<typeof getManagerClientFromApi>,
   ): ReturnType<typeof getManagerClientFromApi>
@@ -71,6 +75,11 @@ export function accountWalletActions(
       }),
     execute: ({ args, ...rest }) =>
       execute({
+        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
+        ...rest,
+      }),
+    executeOnModule: ({ args, ...rest }) =>
+      executeOnModule({
         args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
         ...rest,
       }),

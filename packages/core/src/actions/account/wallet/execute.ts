@@ -1,14 +1,13 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import {
-  ManagerMsgComposer,
   ProxyExecuteMsgBuilder,
   ProxyTypes,
   VersionControlTypes,
 } from '../../../codegen/abstract'
+import { ModuleType } from '../../../codegen/gql/graphql'
 import { MaybeArray } from '../../../types/utils'
 import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
-import { jsonToBinary } from '../../../utils/encoding'
-import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
+import { executeOnModule } from './execute-on-module'
 
 export type ExecuteParameters = Omit<
   WithArgsAndCosmWasmSignOptions<{
@@ -21,31 +20,39 @@ export type ExecuteParameters = Omit<
   'funds'
 >
 
+/**
+ * Execute a message directly as the Account. Must be called by the owner.
+ * @param accountId
+ * @param signingCosmWasmClient
+ * @param apiUrl
+ * @param sender
+ * @param msgs
+ * @param fee
+ * @param memo
+ */
 export async function execute({
   args: { accountId, signingCosmWasmClient, apiUrl, sender, msgs },
   fee,
   memo,
 }: ExecuteParameters) {
-  const { managerAddress } = await getAccountBaseAddressesFromApi({
+  return executeOnModule({
     args: {
       accountId,
-      cosmWasmClient: signingCosmWasmClient,
+      signingCosmWasmClient,
       apiUrl,
-    },
-  })
-  return signingCosmWasmClient.signAndBroadcast(
-    sender,
-    [
-      new ManagerMsgComposer(sender, managerAddress).execOnModule({
-        moduleId: 'abstract:proxy',
-        execMsg: jsonToBinary(
-          ProxyExecuteMsgBuilder.moduleAction({
-            msgs: Array.isArray(msgs) ? msgs : [msgs],
-          }),
-        ),
+      sender,
+      moduleId: 'abstract:proxy',
+      moduleType: ModuleType.AccountBase,
+      msg: ProxyExecuteMsgBuilder.moduleAction({
+        msgs: Array.isArray(msgs) ? msgs : [msgs],
       }),
-    ],
+    },
     fee,
     memo,
-  )
+  })
 }
+
+/**
+ * Execute a message directly as the Account. Must be called by the owner.
+ */
+export const executeOnProxy = execute
