@@ -3,13 +3,10 @@ import { VersionControlTypes } from '../../../codegen/abstract'
 import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
 import { getVersionControlClientFromApi } from '../../wallet/get-version-control-client-from-api'
 import { getNamespace } from '../public/get-namespace'
+import { BaseWalletParameters } from './types'
 
-export type RevokeNamespaceParameters = WithArgsAndCosmWasmSignOptions<{
-  accountId: VersionControlTypes.AccountId
-  signingCosmWasmClient: SigningCosmWasmClient
-  apiUrl: string
-  sender: string
-}>
+export type RevokeNamespaceParameters =
+  WithArgsAndCosmWasmSignOptions<BaseWalletParameters>
 
 export async function revokeNamespace({
   args: { accountId, signingCosmWasmClient, apiUrl, sender },

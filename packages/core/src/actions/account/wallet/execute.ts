@@ -8,20 +8,19 @@ import { ModuleType } from '../../../codegen/gql/graphql'
 import { MaybeArray } from '../../../types/utils'
 import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
 import { executeOnModule } from './execute-on-module'
+import { BaseWalletParameters } from './types'
 
 export type ExecuteParameters = Omit<
-  WithArgsAndCosmWasmSignOptions<{
-    accountId: VersionControlTypes.AccountId
-    signingCosmWasmClient: SigningCosmWasmClient
-    apiUrl: string
-    sender: string
-    msgs: MaybeArray<ProxyTypes.CosmosMsgForEmpty>
-  }>,
+  WithArgsAndCosmWasmSignOptions<
+    BaseWalletParameters & {
+      msgs: MaybeArray<ProxyTypes.CosmosMsgForEmpty>
+    }
+  >,
   'funds'
 >
 
 /**
- * Execute a message directly as the Account. Must be called by the owner.
+ * Execute a message directly as the Account. Must be called by the owner. Encodes the message and sends it to the chain.
  * @param accountId
  * @param signingCosmWasmClient
  * @param apiUrl
@@ -43,7 +42,7 @@ export async function execute({
       sender,
       moduleId: 'abstract:proxy',
       moduleType: ModuleType.AccountBase,
-      msg: ProxyExecuteMsgBuilder.moduleAction({
+      moduleMsg: ProxyExecuteMsgBuilder.moduleAction({
         msgs: Array.isArray(msgs) ? msgs : [msgs],
       }),
     },
@@ -51,8 +50,3 @@ export async function execute({
     memo,
   })
 }
-
-/**
- * Execute a message directly as the Account. Must be called by the owner.
- */
-export const executeOnProxy = execute

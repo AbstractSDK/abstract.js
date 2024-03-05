@@ -3,15 +3,14 @@ import { VersionControlTypes } from '../../../codegen/abstract'
 import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
 import { Asset, encodeAssetsTransfersMsgs } from '../../../utils/assets'
 import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
+import { BaseWalletParameters } from './types'
 
 export type DepositParameters = Omit<
-  WithArgsAndCosmWasmSignOptions<{
-    accountId: VersionControlTypes.AccountId
-    signingCosmWasmClient: SigningCosmWasmClient
-    apiUrl: string
-    sender: string
-    assets: Asset[]
-  }>,
+  WithArgsAndCosmWasmSignOptions<
+    BaseWalletParameters & {
+      assets: Asset[]
+    }
+  >,
   'funds'
 >
 

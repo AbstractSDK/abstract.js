@@ -5,15 +5,14 @@ import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
 import { Asset, encodeAssetsProxyTransferMsgs } from '../../../utils/assets'
 import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
 import { execute } from './execute'
+import { BaseWalletParameters } from './types'
 
-export type WithdrawParameters = WithArgsAndCosmWasmSignOptions<{
-  accountId: VersionControlTypes.AccountId
-  signingCosmWasmClient: SigningCosmWasmClient
-  apiUrl: string
-  sender: string
-  assets: Asset[]
-  recipient: string
-}>
+export type WithdrawParameters = WithArgsAndCosmWasmSignOptions<
+  BaseWalletParameters & {
+    assets: Asset[]
+    recipient: string
+  }
+>
 
 export async function withdraw({
   fee,

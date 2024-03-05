@@ -1,8 +1,8 @@
-import { ManagerMsgComposer } from '../../../codegen/abstract'
+import { IbcClientTypes, ManagerTypes } from '../../../codegen/abstract'
 import { ModuleType } from '../../../codegen/gql/graphql'
 import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
 import { encodeModuleMsg } from '../../../utils/modules/encode-module-msg'
-import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
+import { executeOnRemote } from './execute-on-remote'
 import { BaseWalletParameters } from './types'
 
 type Base64EncodedJson = string
@@ -10,16 +10,18 @@ type Base64EncodedJson = string
 export type ExecuteParameters = Omit<
   WithArgsAndCosmWasmSignOptions<
     BaseWalletParameters & {
+      hostChainName: string
       moduleId: string
       moduleType?: ModuleType
       moduleMsg: Record<string, unknown> | Base64EncodedJson
+      callbackInfo?: IbcClientTypes.CallbackInfo
     }
   >,
   'funds'
 >
 
 /**
- * Execute a message on a module as the admin of the Account. Must be called by the owner.
+ * Execute a message on a remote module as the admin of the Account. Must be called by the owner.
  * @param accountId
  * @param signingCosmWasmClient
  * @param apiUrl
@@ -27,10 +29,13 @@ export type ExecuteParameters = Omit<
  * @param moduleId
  * @param moduleType
  * @param msg
+ * @param hostChainName
+ * @param callbackInfo
  * @param fee
  * @param memo
+ * @todo: ensure that remote module exists and is valid
  */
-export async function executeOnModule({
+export async function executeOnRemoteModule({
   args: {
     accountId,
     signingCosmWasmClient,
@@ -39,27 +44,30 @@ export async function executeOnModule({
     moduleId,
     moduleType,
     moduleMsg,
+    hostChainName,
+    callbackInfo,
   },
   fee,
   memo,
 }: ExecuteParameters) {
-  const { managerAddress } = await getAccountBaseAddressesFromApi({
+  const managerMsg: ManagerTypes.ExecuteMsg = {
+    exec_on_module: {
+      module_id: moduleId,
+      exec_msg: encodeModuleMsg(moduleMsg, moduleType),
+    },
+  }
+
+  return executeOnRemote({
     args: {
       accountId,
-      cosmWasmClient: signingCosmWasmClient,
+      signingCosmWasmClient,
       apiUrl,
+      sender,
+      managerMsg,
+      hostChainName,
+      callbackInfo,
     },
-  })
-
-  return signingCosmWasmClient.signAndBroadcast(
-    sender,
-    [
-      new ManagerMsgComposer(sender, managerAddress).execOnModule({
-        moduleId: moduleId,
-        execMsg: encodeModuleMsg(moduleMsg, moduleType),
-      }),
-    ],
     fee,
     memo,
-  )
+  })
 }

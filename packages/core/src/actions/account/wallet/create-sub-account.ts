@@ -1,18 +1,14 @@
-import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { ManagerClient, VersionControlTypes } from '../../../codegen/abstract'
+import { ManagerClient } from '../../../codegen/abstract'
 import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
 import { getManagerClientFromApi } from './get-manager-client-from-api'
+import { BaseWalletParameters } from './types'
 
 export type CreateSubAccountParameters = WithArgsAndCosmWasmSignOptions<
-  {
-    accountId: VersionControlTypes.AccountId
-    signingCosmWasmClient: SigningCosmWasmClient
-    apiUrl: string
-    sender: string
-  } & Omit<
-    Parameters<typeof ManagerClient.prototype.createSubAccount>[0],
-    'accountId'
-  > & { subAccountId?: number }
+  BaseWalletParameters &
+    Omit<
+      Parameters<typeof ManagerClient.prototype.createSubAccount>[0],
+      'accountId'
+    > & { subAccountId?: number }
 >
 
 export async function createSubAccount({
