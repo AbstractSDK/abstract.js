@@ -19,10 +19,10 @@ export type CreateRemoteAccountParameters = Omit<
 /**
  * Create a remote account.
  * @param accountId
- * @param subAccountId
  * @param signingCosmWasmClient
  * @param apiUrl
  * @param sender
+ * @param hostChainName
  * @param registerMsgParams
  * @param fee
  * @param memo
