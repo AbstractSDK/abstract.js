@@ -1,19 +1,12 @@
-import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import {
-  IbcClientTypes,
-  ManagerTypes,
-  ProxyTypes,
-  VersionControlTypes,
-} from '../../../codegen/abstract'
+import { IbcClientTypes, ManagerTypes } from '../../../codegen/abstract'
 import { CallbackInfo } from '../../../codegen/abstract/cosmwasm-codegen/IbcClient.types'
-import { ModuleType } from '../../../codegen/gql/graphql'
 import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
-import { executeOnModule } from './execute-on-module'
+import { executeIbcAction } from './execute-ibc-action'
 import { BaseWalletParameters } from './types'
 
 type Base64EncodedJson = string
 
-export type ExecuteParameters = Omit<
+export type ExecuteOnRemoteParameters = Omit<
   WithArgsAndCosmWasmSignOptions<
     BaseWalletParameters & {
       hostChainName: string
@@ -48,7 +41,7 @@ export async function executeOnRemote({
   },
   fee,
   memo,
-}: ExecuteParameters) {
+}: ExecuteOnRemoteParameters) {
   const remoteAction: IbcClientTypes.ExecuteMsg = {
     remote_action: {
       host_chain: hostChainName,
@@ -61,21 +54,13 @@ export async function executeOnRemote({
     },
   }
 
-  const proxyMsg: ProxyTypes.ExecuteMsg = {
-    ibc_action: {
-      msgs: [remoteAction],
-    },
-  }
-
-  return executeOnModule({
+  return executeIbcAction({
     args: {
       accountId,
       signingCosmWasmClient,
       apiUrl,
       sender,
-      moduleId: 'abstract:proxy',
-      moduleType: ModuleType.AccountBase,
-      moduleMsg: proxyMsg,
+      msgs: [remoteAction],
     },
     fee,
     memo,

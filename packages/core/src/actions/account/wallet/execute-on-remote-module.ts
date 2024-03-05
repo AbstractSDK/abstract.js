@@ -7,7 +7,7 @@ import { BaseWalletParameters } from './types'
 
 type Base64EncodedJson = string
 
-export type ExecuteParameters = Omit<
+export type ExecuteOnRemoteModuleParameters = Omit<
   WithArgsAndCosmWasmSignOptions<
     BaseWalletParameters & {
       hostChainName: string
@@ -49,7 +49,7 @@ export async function executeOnRemoteModule({
   },
   fee,
   memo,
-}: ExecuteParameters) {
+}: ExecuteOnRemoteModuleParameters) {
   const managerMsg: ManagerTypes.ExecuteMsg = {
     exec_on_module: {
       module_id: moduleId,

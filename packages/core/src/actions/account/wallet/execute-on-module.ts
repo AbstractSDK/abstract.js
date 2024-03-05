@@ -7,7 +7,7 @@ import { BaseWalletParameters } from './types'
 
 type Base64EncodedJson = string
 
-export type ExecuteParameters = Omit<
+export type ExecuteOnModuleParameters = Omit<
   WithArgsAndCosmWasmSignOptions<
     BaseWalletParameters & {
       moduleId: string
@@ -42,7 +42,7 @@ export async function executeOnModule({
   },
   fee,
   memo,
-}: ExecuteParameters) {
+}: ExecuteOnModuleParameters) {
   const { managerAddress } = await getAccountBaseAddressesFromApi({
     args: {
       accountId,

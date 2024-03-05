@@ -1,9 +1,12 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { claimNamespace } from '../../actions/account/wallet/claim-namespace'
+import { createRemoteAccount } from '../../actions/account/wallet/create-remote-account'
 import { createSubAccount } from '../../actions/account/wallet/create-sub-account'
 import { deposit } from '../../actions/account/wallet/deposit'
 import { execute } from '../../actions/account/wallet/execute'
 import { executeOnModule } from '../../actions/account/wallet/execute-on-module'
+import { executeOnRemote } from '../../actions/account/wallet/execute-on-remote'
+import { executeOnRemoteModule } from '../../actions/account/wallet/execute-on-remote-module'
 import { getManagerClientFromApi } from '../../actions/account/wallet/get-manager-client-from-api'
 import { getProxyClientFromApi } from '../../actions/account/wallet/get-proxy-client-from-api'
 import { revokeNamespace } from '../../actions/account/wallet/remove-namespace'
@@ -28,6 +31,9 @@ export type AccountWalletActions = {
   createSubAccount(
     args: CutSpecificArgsFromParameter<typeof createSubAccount>,
   ): ReturnType<typeof createSubAccount>
+  createRemoteAccount(
+    args: CutSpecificArgsFromParameter<typeof createRemoteAccount>,
+  ): ReturnType<typeof createRemoteAccount>
   deposit(
     args: CutSpecificArgsFromParameter<typeof deposit>,
   ): ReturnType<typeof deposit>
@@ -37,6 +43,12 @@ export type AccountWalletActions = {
   executeOnModule(
     args: CutSpecificArgsFromParameter<typeof executeOnModule>,
   ): ReturnType<typeof executeOnModule>
+  executeOnRemote(
+    args: CutSpecificArgsFromParameter<typeof executeOnRemote>,
+  ): ReturnType<typeof executeOnRemote>
+  executeOnRemoteModule(
+    args: CutSpecificArgsFromParameter<typeof executeOnRemoteModule>,
+  ): ReturnType<typeof executeOnRemoteModule>
   getManagerClientFromApi(
     args: CutSpecificArgsFromParameter<typeof getManagerClientFromApi>,
   ): ReturnType<typeof getManagerClientFromApi>
@@ -68,6 +80,11 @@ export function accountWalletActions(
         args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
         ...rest,
       }),
+    createRemoteAccount: ({ args, ...rest }) =>
+      createRemoteAccount({
+        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
+        ...rest,
+      }),
     deposit: ({ args, ...rest }) =>
       deposit({
         args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
@@ -80,6 +97,16 @@ export function accountWalletActions(
       }),
     executeOnModule: ({ args, ...rest }) =>
       executeOnModule({
+        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
+        ...rest,
+      }),
+    executeOnRemote: ({ args, ...rest }) =>
+      executeOnRemote({
+        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
+        ...rest,
+      }),
+    executeOnRemoteModule: ({ args, ...rest }) =>
+      executeOnRemoteModule({
         args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
         ...rest,
       }),
