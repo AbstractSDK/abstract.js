@@ -10,6 +10,8 @@ import { executeOnRemoteModule } from '../../actions/account/wallet/execute-on-r
 import { getManagerClientFromApi } from '../../actions/account/wallet/get-manager-client-from-api'
 import { getProxyClientFromApi } from '../../actions/account/wallet/get-proxy-client-from-api'
 import { revokeNamespace } from '../../actions/account/wallet/remove-namespace'
+import { requestFundsFromRemote } from '../../actions/account/wallet/request-remote-funds'
+import { sendFundsToRemote } from '../../actions/account/wallet/send-funds-to-remote'
 import { withdraw } from '../../actions/account/wallet/withdraw'
 import { VersionControlTypes } from '../../codegen/abstract/index'
 import { CutArgs } from '../../types/with-args'
@@ -49,6 +51,12 @@ export type AccountWalletActions = {
   executeOnRemoteModule(
     args: CutSpecificArgsFromParameter<typeof executeOnRemoteModule>,
   ): ReturnType<typeof executeOnRemoteModule>
+  sendFundsToRemote(
+    args: CutSpecificArgsFromParameter<typeof sendFundsToRemote>,
+  ): ReturnType<typeof sendFundsToRemote>
+  requestFundsFromRemote(
+    args: CutSpecificArgsFromParameter<typeof requestFundsFromRemote>,
+  ): ReturnType<typeof requestFundsFromRemote>
   getManagerClientFromApi(
     args: CutSpecificArgsFromParameter<typeof getManagerClientFromApi>,
   ): ReturnType<typeof getManagerClientFromApi>
@@ -110,6 +118,17 @@ export function accountWalletActions(
         args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
         ...rest,
       }),
+    sendFundsToRemote: ({ args, ...rest }) =>
+      sendFundsToRemote({
+        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
+        ...rest,
+      }),
+    requestFundsFromRemote: ({ args, ...rest }) =>
+      requestFundsFromRemote({
+        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
+        ...rest,
+      }),
+
     withdraw: ({ args, ...rest }) =>
       withdraw({
         args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
