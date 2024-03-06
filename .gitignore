@@ -17,13 +17,3 @@ tsconfig.tsbuildinfo
 .env.production.local
 .envrc
 .turbo/
-
-packages/core/account/
-packages/core/api/
-packages/core/apps/
-packages/core/chain-registry/
-packages/core/cw-plus/
-packages/core/modules/
-packages/core/native/
-packages/cosmwasm
-packages/react/internal
