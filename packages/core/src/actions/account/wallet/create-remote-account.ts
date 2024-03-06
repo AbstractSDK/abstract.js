@@ -8,9 +8,11 @@ export type CreateRemoteAccountParameters = Omit<
     BaseWalletParameters &
       Omit<
         Extract<IbcClientTypes.ExecuteMsg, { register: unknown }>['register'],
-        'host_chain'
+        'host_chain' | 'install_modules'
       > & {
         hostChainName: string
+        // for some reason we cannot use the `install_modules` type from the IbcClientTypes
+        installModules?: IbcClientTypes.ModuleInstallConfig[]
       }
   >,
   'funds'
@@ -34,6 +36,7 @@ export async function createRemoteAccount({
     apiUrl,
     sender,
     hostChainName,
+    installModules,
     ...registerMsgParams
   },
   fee,
@@ -42,6 +45,7 @@ export async function createRemoteAccount({
   const registerMsg: IbcClientTypes.ExecuteMsg = {
     register: {
       host_chain: hostChainName,
+      install_modules: installModules || [],
       ...registerMsgParams,
     },
   }
