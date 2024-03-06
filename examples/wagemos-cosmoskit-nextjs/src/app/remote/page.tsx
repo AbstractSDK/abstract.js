@@ -21,10 +21,10 @@ import {
 } from '../../components/ui/select'
 import { WalletButton } from '../_components/wallet-button'
 
-const CHAIN_NAME = 'juno'
+const CHAIN_NAME = 'neutron'
 export default function RemotePage() {
-  const { data: remoteHosts, isLoading } = useRemoteHosts(CHAIN_NAME)
-  const [chainInput, setChainInput] = useState(CHAIN_NAME)
+  const { data: remoteHosts, isLoading, refetch } = useRemoteHosts(CHAIN_NAME)
+  const [chainInput, setChainInput] = useState(remoteHosts?.[0]?.[0])
 
   const { address } = useChain(CHAIN_NAME)
 
@@ -45,10 +45,11 @@ export default function RemotePage() {
     [accounts],
   )
 
-  const { mutate: createRemoteAccount } = useCreateRemoteAccount({
-    accountId: firstAccount,
-  })
-  const { mutate: execRemote } = useExecuteOnRemote({
+  const { mutate: createRemoteAccount, isLoading: isCreating } =
+    useCreateRemoteAccount({
+      accountId: firstAccount,
+    })
+  const { mutate: execRemote, isLoading: isExecuting } = useExecuteOnRemote({
     accountId: firstAccount,
   })
 
@@ -63,6 +64,8 @@ export default function RemotePage() {
       return undefined
     }
 
+    console.log('creating remote account')
+
     createRemoteAccount({
       fee: 'auto',
       args: {
@@ -70,13 +73,14 @@ export default function RemotePage() {
         base_asset: 'juno>juno',
       },
     })
-  }, [createRemoteAccount])
+  }, [createRemoteAccount, chainInput])
 
   const onExecClick = useCallback(() => {
     if (!chainInput) {
       console.log('no chain input')
       return undefined
     }
+    console.log('executing remote account')
     execRemote({
       fee: 'auto',
       args: {
@@ -88,7 +92,7 @@ export default function RemotePage() {
         },
       },
     })
-  }, [execRemote])
+  }, [execRemote, chainInput])
 
   return (
     <>
@@ -109,14 +113,19 @@ export default function RemotePage() {
       </Select>
       {isLoading && <div>Loading...</div>}
       {/*<Input placeholder="chain" value={chainInput} onChange={(e) => setChainInput(e.target.value)} />*/}
-      <Button onClick={onCreateClick} disabled={!chainInput}>
-        Create Remote Account
+      <Button onClick={onCreateClick} disabled={!chainInput || isCreating}>
+        Creat{isCreating ? 'ing' : 'e'} Remote Account {isCreating && '...'}
       </Button>
-      <Button onClick={onExecClick} disabled={!chainInput}>
-        Update Remote Account
+      <Button onClick={onExecClick} disabled={!chainInput || isExecuting}>
+        Updat{isExecuting ? 'ing' : 'e'} Remote Account {isExecuting && '...'}
       </Button>
 
       <WalletButton />
+      <h3>Remote Accounts</h3>
+      <div>
+        <pre>{JSON.stringify(remoteAccountIds, null, 2)}</pre>
+      </div>
+      <Button onClick={() => refetch()}>Refresh</Button>
     </>
   )
 }

@@ -38,6 +38,6 @@ export async function getIbcClientQueryClientFromManager({
   }
 
   return getIbcClientQueryClient({
-    args: { cosmWasmClient, ibcClientAddress: ansHostAddress },
+    args: { cosmWasmClient, ibcClientAddress },
   })
 }
