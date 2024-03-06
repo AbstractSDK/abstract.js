@@ -10,7 +10,7 @@ import { ReactNode } from 'react'
 export function CosmosKitProvider(props: { children: ReactNode }) {
   const signerOptions = {
     signingCosmwasm: (chain: Chain) => {
-      let gasTokenName = ''
+      const gasTokenName = ''
       switch (chain.chain_name) {
         case 'localjuno':
         case 'junotestnet':
@@ -22,33 +22,27 @@ export function CosmosKitProvider(props: { children: ReactNode }) {
         case 'osmosistestnet5':
           return { gasPrice: GasPrice.fromString('0.035uosmo') }
         case 'neutron':
-          gasTokenName = 'untrn'
-          return { gasPrice: GasPrice.fromString(`.5${gasTokenName}`) }
         case 'neutrontestnet':
-          gasTokenName = 'untrn'
-          break
+          return { gasPrice: GasPrice.fromString('.5untrn') }
         case 'archwaytestnet':
-          gasTokenName = 'aconst'
-          return { gasPrice: GasPrice.fromString(`${1e12}${gasTokenName}`) }
+          return { gasPrice: GasPrice.fromString(`${1e12}aconst`) }
         case 'archway':
-          gasTokenName = 'aarch'
-          return { gasPrice: GasPrice.fromString(`${1e12}${gasTokenName}`) }
+          return { gasPrice: GasPrice.fromString(`${1e12}aarch`) }
       }
     },
   }
   return (
     <ChainProvider
       chains={chains.map((chain) => {
-        const hasRpcs = !!chain.apis?.rpc?.length
         return {
           ...chain,
           apis: {
             ...chain.apis,
-            rpc: hasRpcs
+            rpc: chain.apis?.rpc?.length
               ? [
-                  chain.apis!.rpc!.find((rpc) =>
+                  chain.apis.rpc.find((rpc) =>
                     rpc.address.includes('polkachu'),
-                  ) ?? chain.apis!.rpc![0],
+                  ) ?? chain.apis.rpc[0],
                 ]
               : [],
           },

@@ -11,7 +11,7 @@ export type GetIbcClientQueryClientParameters = WithArgs<{
   ibcClientAddress: string
 }>
 
-export async function getIbcClientQueryClient({
+export function getIbcClientQueryClient({
   args: { cosmWasmClient, ibcClientAddress },
 }: GetIbcClientQueryClientParameters) {
   return new IbcClientQueryClient(cosmWasmClient, ibcClientAddress)

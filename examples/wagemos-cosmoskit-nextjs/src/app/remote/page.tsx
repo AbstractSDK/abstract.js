@@ -32,7 +32,7 @@ export default function RemotePage() {
     {
       args: {
         chainName: CHAIN_NAME,
-        owner: address || '',
+        owner: address ?? '',
       },
     },
     {
