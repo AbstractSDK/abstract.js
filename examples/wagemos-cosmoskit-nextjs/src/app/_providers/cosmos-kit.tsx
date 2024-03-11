@@ -10,7 +10,6 @@ import { ReactNode } from 'react'
 export function CosmosKitProvider(props: { children: ReactNode }) {
   const signerOptions = {
     signingCosmwasm: (chain: Chain) => {
-      const gasTokenName = ''
       switch (chain.chain_name) {
         case 'localjuno':
         case 'junotestnet':
