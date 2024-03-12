@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 0.3.1
+
+### Patch Changes
+
+- [#77](https://github.com/AbstractSDK/abstract.js/pull/77) [`ecbdd3a`](https://github.com/AbstractSDK/abstract.js/commit/ecbdd3aec6226ff23e71f9b16596834bf808742f) Thanks [@dalechyn](https://github.com/dalechyn)! - Fixed typing of `QueryData` for certain hooks.
+
 ## 0.3.0
 
 ### Minor Changes
