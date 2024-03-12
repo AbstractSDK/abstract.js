@@ -21,7 +21,6 @@ import { WalletButton } from './_components/wallet-button'
 
 export default function Home() {
   const { data, isLoading, isError } = betting.queries.useListRounds({
-    chainName: 'neutron',
     accountId: stringToAccountId('neutron-18'),
     args: {},
   })

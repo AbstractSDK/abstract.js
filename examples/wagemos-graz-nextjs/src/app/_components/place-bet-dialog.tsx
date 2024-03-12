@@ -63,7 +63,6 @@ export function PlaceBetDialog({ round }: { round: RoundResponse }) {
 
   const { mutateAsync: placeBetAsync, isLoading } =
     betting.mutations.usePlaceBet({
-      chainName: 'neutron',
       accountId: stringToAccountId('neutron-18'),
     })
 

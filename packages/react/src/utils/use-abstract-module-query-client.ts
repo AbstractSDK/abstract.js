@@ -29,7 +29,6 @@ async function getAbstractModuleQueryClient<
   Module,
 }: {
   abstractQueryClient: AbstractQueryClient
-  chainName: string
   overrideApiUrl?: string
   accountId: AccountId
   moduleId: string
@@ -68,7 +67,6 @@ export function useAbstractModuleQueryClient<
 >(
   parameters: {
     accountId: AccountId | undefined
-    chainName: string | undefined
     moduleId: string
     Module: TModule
   },
@@ -82,7 +80,7 @@ export function useAbstractModuleQueryClient<
     TQueryKey<TModule>
   > = {},
 ) {
-  const { moduleId, accountId, Module, chainName } = parameters
+  const { moduleId, accountId, Module } = parameters
   const { apiUrl } = useConfig()
 
   const {
@@ -90,7 +88,10 @@ export function useAbstractModuleQueryClient<
     isLoading: isAbstractClientLoading,
     isError: isAbstractClientError,
     error: abstractClientError,
-  } = useAbstractQueryClient({ chainName: chainName }, { enabled: enabled_ })
+  } = useAbstractQueryClient(
+    { chainName: accountId?.chainName },
+    { enabled: enabled_ },
+  )
 
   const queryKey = React.useMemo(
     () =>
@@ -106,22 +107,20 @@ export function useAbstractModuleQueryClient<
 
   const queryFn = React.useCallback(() => {
     if (!abstractQueryClient) throw new Error('client is not defined')
-    if (!chainName) throw new Error('chain is not defined')
     if (!accountId) throw new Error('accountId is not defined')
 
     return getAbstractModuleQueryClient({
       abstractQueryClient,
-      chainName: chainName,
       overrideApiUrl: apiUrl,
       accountId,
       moduleId,
       Module,
     })
-  }, [abstractQueryClient, chainName, apiUrl, accountId, moduleId, Module])
+  }, [abstractQueryClient, apiUrl, accountId, moduleId, Module])
 
   const enabled = React.useMemo(
-    () => Boolean(abstractQueryClient && chainName && accountId && enabled_),
-    [enabled_, abstractQueryClient, chainName, accountId],
+    () => Boolean(abstractQueryClient && accountId && enabled_),
+    [enabled_, abstractQueryClient, accountId],
   )
 
   const {
