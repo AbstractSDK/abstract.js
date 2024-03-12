@@ -1,5 +1,14 @@
 # @abstract-money/react
 
+## 0.3.2
+
+### Patch Changes
+
+- [#79](https://github.com/AbstractSDK/abstract.js/pull/79) [`5c10a90`](https://github.com/AbstractSDK/abstract.js/commit/5c10a900f65240b80bb69ac407d3b2f1d43e3020) Thanks [@dalechyn](https://github.com/dalechyn)! - Dropped the `chainName` that was passed previously as a parameter to every query/mutation. It's not needed as the account always has a `chainName` set.
+
+- Updated dependencies []:
+  - @abstract-money/core@0.3.9
+
 ## 0.3.1
 
 ### Patch Changes

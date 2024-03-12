@@ -1,5 +1,16 @@
 # wagemos-cosmoskit-nextjs
 
+## 0.2.31
+
+### Patch Changes
+
+- [#79](https://github.com/AbstractSDK/abstract.js/pull/79) [`5c10a90`](https://github.com/AbstractSDK/abstract.js/commit/5c10a900f65240b80bb69ac407d3b2f1d43e3020) Thanks [@dalechyn](https://github.com/dalechyn)! - Dropped the `chainName` that was passed previously as a parameter to every query/mutation. It's not needed as the account always has a `chainName` set.
+
+- Updated dependencies [[`5c10a90`](https://github.com/AbstractSDK/abstract.js/commit/5c10a900f65240b80bb69ac407d3b2f1d43e3020)]:
+  - @abstract-money/react@0.3.2
+  - @abstract-money/core@0.3.9
+  - @abstract-money/provider-cosmoskit@1.0.2
+
 ## 0.2.30
 
 ### Patch Changes
