@@ -50,7 +50,6 @@ export function useAbstractModuleClient<
   TModule extends AbstractModuleClientConstructor,
 >(
   parameters: {
-    chainName: string | undefined
     accountId: AccountId | undefined
     moduleId: string
     Module: TModule
@@ -71,14 +70,17 @@ export function useAbstractModuleClient<
     ]
   > = {},
 ) {
-  const { moduleId, accountId, Module, chainName } = parameters
+  const { moduleId, accountId, Module } = parameters
 
   const {
     data: abstractClient,
     isLoading: isAbstractClientLoading,
     isError: isAbstractClientError,
     error: abstractClientError,
-  } = useAbstractClient({ chainName }, { enabled: enabled_ })
+  } = useAbstractClient(
+    { chainName: accountId?.chainName },
+    { enabled: enabled_ },
+  )
 
   const queryKey = React.useMemo(
     () =>
@@ -105,8 +107,8 @@ export function useAbstractModuleClient<
   }, [abstractClient, accountId, moduleId, Module])
 
   const enabled = React.useMemo(
-    () => Boolean(abstractClient && chainName && accountId && enabled_),
-    [enabled_, abstractClient, chainName, accountId],
+    () => Boolean(abstractClient && accountId && enabled_),
+    [enabled_, abstractClient, accountId],
   )
 
   const {

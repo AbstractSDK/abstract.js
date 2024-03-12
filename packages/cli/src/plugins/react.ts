@@ -294,7 +294,7 @@ export function react(options: ReactOptions = {}): ReactResult {
                   hasAbstractApp
                     ? 'accountId: AccountId | undefined;'
                     : 'contractAddress: string | undefined;'
-                } chainName: string | undefined }) => {
+                }}) => {
                     const {
                       data: ${queryClientCamelCase},
                       isLoading: is${queryClientPascalCase}Loading,
@@ -377,9 +377,9 @@ export function react(options: ReactOptions = {}): ReactResult {
                 hookNameWithoutModuleAndMutation,
                 dedent`
                   (
-                    { chainName, ${
+                    { ${
                       hasAbstractApp ? 'accountId' : 'contractAddress'
-                    } }: { chainName: string | undefined; ${
+                    } }: { ${
                   hasAbstractApp
                     ? 'accountId: AccountId | undefined'
                     : 'contractAddress: string | undefined'
@@ -409,7 +409,6 @@ export function react(options: ReactOptions = {}): ReactResult {
                         `
                             : 'contractAddress,'
                         }
-                        chainName,
                         Module: ${clientPascalCase},
                       }
                     )
