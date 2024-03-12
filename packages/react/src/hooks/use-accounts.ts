@@ -20,9 +20,9 @@ export function useAccounts(
     enabled: enabled_ = true,
     ...rest
   }: UseQueryOptions<
-    AccountId[] | undefined,
+    AccountId[],
     unknown,
-    AccountId[] | undefined,
+    AccountId[],
     readonly [
       'accountsOf',
       string | undefined,
