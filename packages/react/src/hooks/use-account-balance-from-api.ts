@@ -12,9 +12,9 @@ export function useAccountBalancesFromApi(
     enabled: enabled_ = true,
     ...rest
   }: UseQueryOptions<
-    Awaited<ReturnType<ApiClient['getAccountBalancesFromApi']>> | undefined,
+    Awaited<ReturnType<ApiClient['getAccountBalancesFromApi']>>,
     unknown,
-    Awaited<ReturnType<ApiClient['getAccountBalancesFromApi']>> | undefined,
+    Awaited<ReturnType<ApiClient['getAccountBalancesFromApi']>>,
     readonly [
       'accountBalancesFromApi',
       WithArgs<Parameters<ApiClient['getAccountBalancesFromApi']>[0]['args']>,

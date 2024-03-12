@@ -10,9 +10,9 @@ export function useAnsTokenFromAPI(
     enabled: enabled_ = true,
     ...rest
   }: UseQueryOptions<
-    AnsToken | undefined,
+    AnsToken,
     unknown,
-    AnsToken | undefined,
+    AnsToken,
     readonly [
       'ansTokenFromApi',
       WithArgs<Parameters<ApiClient['getAnsTokenFromApi']>[0]['args']>,
