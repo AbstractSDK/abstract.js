@@ -1,12 +1,7 @@
 'use client'
 
-import { stringToAccountId } from '@abstract-money/core'
 import { grazProvider } from '@abstract-money/provider-graz'
-import {
-  AbstractAccountIdProvider,
-  AbstractProvider,
-  createConfig,
-} from '@abstract-money/react'
+import { AbstractProvider, createConfig } from '@abstract-money/react'
 import { Inter, Poppins } from 'next/font/google'
 import { Toaster } from '../components/ui/toaster'
 import { cn } from '../utils'
@@ -36,15 +31,11 @@ export default function RootLayout({
       <body className={cn(inter.variable, poppins.variable)}>
         <GrazProvider>
           <AbstractProvider config={abstractConfig}>
-            <AbstractAccountIdProvider
-              accountId={stringToAccountId('neutron-18')}
-            >
-              <main className="flex flex-col items-center p-24 min-h-screen">
-                <section className="mt-10">
-                  <div className="mt-10">{children}</div>
-                </section>
-              </main>
-            </AbstractAccountIdProvider>
+            <main className="flex flex-col items-center p-24 min-h-screen">
+              <section className="mt-10">
+                <div className="mt-10">{children}</div>
+              </section>
+            </main>
           </AbstractProvider>
         </GrazProvider>
         <Toaster />

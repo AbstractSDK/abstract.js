@@ -60,7 +60,10 @@ export const betting = {
     }: Omit<
       Parameters<typeof useBettingBetsQuery<BettingTypes.BetsResponse>>[0],
       'client'
-    > & { accountId?: AccountId; chainName: string | undefined }) => {
+    > & {
+      accountId: AccountId | undefined
+      chainName: string | undefined
+    }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
@@ -122,7 +125,10 @@ export const betting = {
     }: Omit<
       Parameters<typeof useBettingConfigQuery<BettingTypes.ConfigResponse>>[0],
       'client'
-    > & { accountId?: AccountId; chainName: string | undefined }) => {
+    > & {
+      accountId: AccountId | undefined
+      chainName: string | undefined
+    }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
@@ -186,7 +192,10 @@ export const betting = {
         typeof useBettingListOddsQuery<BettingTypes.ListOddsResponse>
       >[0],
       'client'
-    > & { accountId?: AccountId; chainName: string | undefined }) => {
+    > & {
+      accountId: AccountId | undefined
+      chainName: string | undefined
+    }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
@@ -249,7 +258,10 @@ export const betting = {
     }: Omit<
       Parameters<typeof useBettingOddsQuery<BettingTypes.OddsResponse>>[0],
       'client'
-    > & { accountId?: AccountId; chainName: string | undefined }) => {
+    > & {
+      accountId: AccountId | undefined
+      chainName: string | undefined
+    }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
@@ -314,7 +326,10 @@ export const betting = {
         typeof useBettingListRoundsQuery<BettingTypes.RoundsResponse>
       >[0],
       'client'
-    > & { accountId?: AccountId; chainName: string | undefined }) => {
+    > & {
+      accountId: AccountId | undefined
+      chainName: string | undefined
+    }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
@@ -377,7 +392,10 @@ export const betting = {
     }: Omit<
       Parameters<typeof useBettingRoundQuery<BettingTypes.RoundResponse>>[0],
       'client'
-    > & { accountId?: AccountId; chainName: string | undefined }) => {
+    > & {
+      accountId: AccountId | undefined
+      chainName: string | undefined
+    }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
@@ -439,7 +457,7 @@ export const betting = {
       {
         chainName,
         accountId,
-      }: { chainName: string | undefined; accountId?: AccountId },
+      }: { chainName: string | undefined; accountId: AccountId | undefined },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -493,7 +511,7 @@ export const betting = {
       {
         chainName,
         accountId,
-      }: { chainName: string | undefined; accountId?: AccountId },
+      }: { chainName: string | undefined; accountId: AccountId | undefined },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -547,7 +565,7 @@ export const betting = {
       {
         chainName,
         accountId,
-      }: { chainName: string | undefined; accountId?: AccountId },
+      }: { chainName: string | undefined; accountId: AccountId | undefined },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -601,7 +619,7 @@ export const betting = {
       {
         chainName,
         accountId,
-      }: { chainName: string | undefined; accountId?: AccountId },
+      }: { chainName: string | undefined; accountId: AccountId | undefined },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -655,7 +673,7 @@ export const betting = {
       {
         chainName,
         accountId,
-      }: { chainName: string | undefined; accountId?: AccountId },
+      }: { chainName: string | undefined; accountId: AccountId | undefined },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -709,7 +727,7 @@ export const betting = {
       {
         chainName,
         accountId,
-      }: { chainName: string | undefined; accountId?: AccountId },
+      }: { chainName: string | undefined; accountId: AccountId | undefined },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -763,7 +781,7 @@ export const betting = {
       {
         chainName,
         accountId,
-      }: { chainName: string | undefined; accountId?: AccountId },
+      }: { chainName: string | undefined; accountId: AccountId | undefined },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,

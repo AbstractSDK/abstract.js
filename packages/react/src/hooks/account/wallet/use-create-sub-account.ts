@@ -1,4 +1,4 @@
-import { AccountWalletClient } from '@abstract-money/core'
+import { AccountId, AccountWalletClient } from '@abstract-money/core'
 import { UseMutationOptions, useMutation } from '@tanstack/react-query'
 import { useConfig } from '../../../contexts'
 
@@ -7,7 +7,7 @@ type CreateSubAccountMutation = Parameters<
 >[0]
 
 export function useCreateSubAccount(
-  { args: { chainName } }: { args: { chainName: string } },
+  { accountId }: { accountId: AccountId | undefined },
   options?: Omit<
     UseMutationOptions<
       Awaited<ReturnType<AccountWalletClient['createSubAccount']>>,
@@ -18,7 +18,10 @@ export function useCreateSubAccount(
   >,
 ) {
   const config = useConfig()
-  const walletClient = config.useAccountWalletClient({ chainName: chainName })
+  const walletClient = config.useAccountWalletClient({
+    chainName: accountId?.chainName,
+    accountId,
+  })
 
   return useMutation((parameters) => {
     if (!walletClient) throw new Error('walletClient is not defined')

@@ -5,8 +5,7 @@ import {
   useQuery,
 } from '@tanstack/react-query'
 import React from 'react'
-import { useAccountId, useConfig } from '../../../contexts'
-import { parseParameters } from '../utils'
+import { useConfig } from '../../../contexts'
 
 type QueryFnData = Awaited<
   ReturnType<AccountPublicClient['getAccountBaseAddresses']>
@@ -28,19 +27,8 @@ type QueryResult = UseQueryResult<QueryData, QueryError>
 
 export function useAccountBaseAddressesFromApi(
   { accountId }: { accountId: AccountId | undefined },
-  options?: QueryOptions,
-): QueryResult
-export function useAccountBaseAddressesFromApi(
-  options?: QueryOptions,
-): QueryResult
-
-export function useAccountBaseAddressesFromApi(
-  arg1: { accountId: AccountId | undefined } | QueryOptions = { enabled: true },
-  arg2: QueryOptions = { enabled: true },
-) {
-  const { accountId: accountIdParameter, options } = parseParameters(arg1, arg2)
-
-  const { accountId } = useAccountId({ accountId: accountIdParameter })
+  options: QueryOptions = { enabled: true },
+): QueryResult {
   const config = useConfig()
   const accountPublicClient = config.useAccountPublicClient({
     accountId,

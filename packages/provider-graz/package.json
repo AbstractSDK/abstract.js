@@ -55,6 +55,7 @@
     "@abstract-money/react": "workspace:*",
     "@abstract-money/core": "workspace:*",
     "graz": "^0.1.1",
+    "@cosmjs/amino": "^0.32.2",
     "typescript": ">=5.0.4"
   }
 }
