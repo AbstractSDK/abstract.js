@@ -1,5 +1,18 @@
 # wagemos-cosmoskit-nextjs
 
+## 0.2.29
+
+### Patch Changes
+
+- [#75](https://github.com/AbstractSDK/abstract.js/pull/75) [`6a02ff5`](https://github.com/AbstractSDK/abstract.js/commit/6a02ff503356d8d17bd94973f7b75c728b13b340) Thanks [@dalechyn](https://github.com/dalechyn)! - Deprecated `AbstractAccountIdProvider` in favor of custom client's accountId state management.
+  Introduced consequent changes to types involving `accountId`.
+  Fixes the peer-dependency issue in `provider-graz` package.
+  Dropped `@cosmjs/amino` in favor of `@cosmjs/stargate`
+- Updated dependencies [[`6a02ff5`](https://github.com/AbstractSDK/abstract.js/commit/6a02ff503356d8d17bd94973f7b75c728b13b340)]:
+  - @abstract-money/react@0.3.0
+  - @abstract-money/provider-cosmoskit@1.0.0
+  - @abstract-money/core@0.3.9
+
 ## 0.2.28
 
 ### Patch Changes
