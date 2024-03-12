@@ -20,9 +20,6 @@
       "chain-registry": [
         "node_modules/chain-registry/types"
       ],
-      "@cosmjs/amino": [
-        "node_modules/@cosmjs/amino/build"
-      ],
       "@vitest/spy": [
         "node_modules/@vitest/spy/dist"
       ],

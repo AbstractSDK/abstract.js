@@ -1,4 +1,4 @@
-import { Coin } from '@cosmjs/amino'
+import { Coin } from '@cosmjs/stargate'
 import { NativeAsset } from './types'
 
 export function nativeAssetToCoin<const TDenom extends string = string>(

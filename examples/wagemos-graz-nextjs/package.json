@@ -15,7 +15,7 @@
     "@abstract-money/core": "workspace:*",
     "@abstract-money/provider-graz": "workspace:*",
     "@abstract-money/react": "workspace:*",
-    "@cosmjs/amino": "^0.32.2",
+    "@cosmjs/stargate": "^0.32.2",
     "@hookform/resolvers": "^3.3.2",
     "@osmosis-labs/math": "^5.1.0",
     "@osmosis-labs/proto-codecs": "^5.1.0",

@@ -1,4 +1,4 @@
-import { type Coin } from '@cosmjs/amino'
+import { type Coin } from '@cosmjs/stargate'
 import { type AbstractQueryClient } from '../../clients/AbstractClient'
 import { EncodedMsg } from '../../messages'
 import { AnsAssetEntry } from './AnsAssetEntry'

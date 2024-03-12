@@ -20,7 +20,7 @@ import { useMemo } from 'react'
 import { Prettify } from './types/utils'
 
 type CommonProviderArgs = {
-  chainName?: string
+  chainName: string | undefined
 }
 
 export type Provider = {
@@ -85,7 +85,9 @@ export function createConfig(parameters: CreateConfigParameters) {
     accountId,
     ...rest
   }: Prettify<
-    { accountId?: AccountId } & Parameters<Provider['useCosmWasmClient']>[0]
+    { accountId: AccountId | undefined } & Parameters<
+      Provider['useCosmWasmClient']
+    >[0]
   >): AccountPublicClient | undefined {
     const cosmWasmClient = provider.useCosmWasmClient(rest)
     return useMemo(() => {
@@ -102,7 +104,7 @@ export function createConfig(parameters: CreateConfigParameters) {
     accountId,
     ...rest
   }: Prettify<
-    { accountId?: AccountId } & Parameters<
+    { accountId: AccountId | undefined } & Parameters<
       Provider['useSigningCosmWasmClient']
     >[0]
   >): AccountWalletClient | undefined {
@@ -142,12 +144,16 @@ export type Config = {
   ): WalletClient | undefined
   useAccountPublicClient(
     args: Prettify<
-      { accountId?: AccountId } & Parameters<Provider['useCosmWasmClient']>[0]
+      { accountId: AccountId | undefined } & Parameters<
+        Provider['useCosmWasmClient']
+      >[0]
     >,
   ): AccountPublicClient | undefined
   useAccountWalletClient(
     args: Prettify<
-      { accountId?: AccountId } & Parameters<Provider['useCosmWasmClient']>[0]
+      { accountId: AccountId | undefined } & Parameters<
+        Provider['useCosmWasmClient']
+      >[0]
     >,
   ): AccountWalletClient | undefined
 }

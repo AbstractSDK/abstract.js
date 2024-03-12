@@ -53,8 +53,8 @@
     "picocolors": "^1.0.0",
     "prettier": "^2.8.1",
     "zod": "^3.21.4",
-    "@cosmjs/amino": "^0.32.2",
-    "@cosmjs/cosmwasm-stargate": "^0.32.2"
+    "@cosmjs/cosmwasm-stargate": "^0.32.2",
+    "@cosmjs/stargate": "^0.32.2"
   },
   "devDependencies": {
     "@types/jest": "^29.5.2",

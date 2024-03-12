@@ -7,7 +7,6 @@ import {
   accountIdToLegacyAccountId,
 } from '@abstract-money/core/legacy'
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
-import { useAccountId } from '../contexts'
 import { useAbstractClient } from './use-abstract-client'
 
 interface AbstractModuleClientConstructor {
@@ -52,7 +51,7 @@ export function useAbstractModuleClient<
 >(
   parameters: {
     chainName: string | undefined
-    accountId?: AccountId
+    accountId: AccountId | undefined
     moduleId: string
     Module: TModule
   },
@@ -72,21 +71,8 @@ export function useAbstractModuleClient<
     ]
   > = {},
 ) {
-  const {
-    moduleId,
-    accountId: accountIdParameter,
-    Module,
-    chainName,
-  } = parameters
+  const { moduleId, accountId, Module, chainName } = parameters
 
-  const { accountId } = useAccountId(
-    // Workaround to not pass any parameters if the accountId was not fed as an argument
-    // in order to throw `accountId` not found error, as it might be defined as a property
-    // but be undefined.
-    ...((Object.hasOwnProperty.call(parameters, 'accountId')
-      ? [{ accountId: accountIdParameter }]
-      : []) as [any]),
-  )
   const {
     data: abstractClient,
     isLoading: isAbstractClientLoading,

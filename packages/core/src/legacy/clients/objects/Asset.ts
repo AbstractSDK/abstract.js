@@ -1,5 +1,5 @@
-import { type Coin } from '@cosmjs/amino'
-import { parseCoins } from '@cosmjs/amino/build/coins'
+import { type Coin } from '@cosmjs/stargate'
+import { parseCoins } from '@cosmjs/stargate'
 import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
 import { P, match } from 'ts-pattern'
 import { jsonToBinary, jsonToUtf8 } from '../../../utils/encoding'

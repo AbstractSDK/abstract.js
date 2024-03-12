@@ -5,8 +5,7 @@ import {
   useQuery,
 } from '@tanstack/react-query'
 import React from 'react'
-import { useAccountId, useConfig } from '../../../contexts'
-import { parseParametersWithArgs } from '../utils'
+import { useConfig } from '../../../contexts'
 
 type QueryFnData = Awaited<ReturnType<AccountPublicClient['getSubAccountIds']>>
 
@@ -32,29 +31,10 @@ export function useSubAccountIdsFromApi(
   parameters: UseSubAccountIdsFromApiArgs & {
     accountId: AccountId | undefined
   },
-  options?: QueryOptions,
-): QueryResult
-export function useSubAccountIdsFromApi(
-  parameters: UseSubAccountIdsFromApiArgs,
-  options?: QueryOptions,
-): QueryResult
-export function useSubAccountIdsFromApi(
-  arg1: UseSubAccountIdsFromApiArgs &
-    (
-      | {
-          accountId: AccountId | undefined
-        }
-      | {}
-    ),
-  arg2: QueryOptions = { enabled: true },
-) {
-  const {
-    args,
-    accountId: accountIdParameter,
-    options,
-  } = parseParametersWithArgs(arg1, arg2)
+  options: QueryOptions = { enabled: true },
+): QueryResult {
+  const { args, accountId } = parameters
 
-  const { accountId } = useAccountId({ accountId: accountIdParameter })
   const config = useConfig()
   const accountPublicClient = config.useAccountPublicClient({
     accountId,

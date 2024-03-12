@@ -2,11 +2,7 @@
 
 import { stringToAccountId } from '@abstract-money/core'
 import { cosmosKitProvider } from '@abstract-money/provider-cosmoskit'
-import {
-  AbstractAccountIdProvider,
-  AbstractProvider,
-  createConfig,
-} from '@abstract-money/react'
+import { AbstractProvider, createConfig } from '@abstract-money/react'
 import '@interchain-ui/react/styles'
 import { Inter, Poppins } from 'next/font/google'
 import { Toaster } from '../components/ui/toaster'
@@ -32,15 +28,11 @@ export default function RootLayout({
       <CosmosKitProvider>
         <body className={cn(inter.variable, poppins.variable)}>
           <AbstractProvider config={abstractConfig}>
-            <AbstractAccountIdProvider
-              accountId={stringToAccountId('neutron-18')}
-            >
-              <main className="flex flex-col items-center p-24 min-h-screen">
-                <section className="mt-10">
-                  <div className="mt-10">{children}</div>
-                </section>
-              </main>
-            </AbstractAccountIdProvider>
+            <main className="flex flex-col items-center p-24 min-h-screen">
+              <section className="mt-10">
+                <div className="mt-10">{children}</div>
+              </section>
+            </main>
           </AbstractProvider>
           <Toaster />
         </body>

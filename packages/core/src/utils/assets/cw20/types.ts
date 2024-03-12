@@ -1,4 +1,4 @@
-import { Coin } from '@cosmjs/amino'
+import { Coin } from '@cosmjs/stargate'
 import { CW20Token, isCW20Token } from '../../tokens/cw20/types'
 import { Asset } from '../asset'
 

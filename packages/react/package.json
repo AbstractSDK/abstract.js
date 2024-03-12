@@ -27,7 +27,6 @@
     "@abstract-money/core": "workspace:*",
     "@tanstack/react-query": "^4",
     "dedent": "^0.7.0",
-    "@cosmjs/amino": "^0.32.2",
     "@cosmjs/cosmwasm-stargate": "^0.32.2",
     "@cosmjs/stargate": "^0.32.2",
     "@cosmjs/encoding": "^0.32.2",

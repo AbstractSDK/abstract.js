@@ -1,6 +1,7 @@
 'use client'
 
-import { coin } from '@cosmjs/amino'
+import { stringToAccountId } from '@abstract-money/core'
+import { coin } from '@cosmjs/stargate'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { DialogDescription } from '@radix-ui/react-dialog'
 import { useAccount } from 'graz'
@@ -61,7 +62,10 @@ export function PlaceBetDialog({ round }: { round: RoundResponse }) {
   const { toast } = useToast()
 
   const { mutateAsync: placeBetAsync, isLoading } =
-    betting.mutations.usePlaceBet({ chainName: 'neutron' })
+    betting.mutations.usePlaceBet({
+      chainName: 'neutron',
+      accountId: stringToAccountId('neutron-18'),
+    })
 
   const onSubmit: SubmitHandler<z.infer<typeof placeBetSchema>> = useCallback(
     async ({ amount, accountSeq }) => {

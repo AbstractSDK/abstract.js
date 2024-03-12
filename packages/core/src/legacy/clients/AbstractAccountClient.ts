@@ -1,10 +1,10 @@
-import { type Coin } from '@cosmjs/amino'
 import {
   type ExecuteResult,
   type MsgExecuteContractEncodeObject,
   type SigningCosmWasmClient,
 } from '@cosmjs/cosmwasm-stargate'
 import { type JsonObject } from '@cosmjs/cosmwasm-stargate/build/modules'
+import { type Coin } from '@cosmjs/stargate'
 import { type StdFee } from '@cosmjs/stargate'
 import { match } from 'ts-pattern'
 import {

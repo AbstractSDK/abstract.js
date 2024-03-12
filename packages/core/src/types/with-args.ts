@@ -1,4 +1,4 @@
-import { Coin, StdFee } from '@cosmjs/amino'
+import { Coin, StdFee } from '@cosmjs/stargate'
 import { Prettify } from './utils'
 
 export type WithArgs<TArgs extends {} | readonly unknown[]> = {
