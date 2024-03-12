@@ -1,5 +1,14 @@
 # @abstract-money/cli
 
+## 0.2.12
+
+### Patch Changes
+
+- [#75](https://github.com/AbstractSDK/abstract.js/pull/75) [`6a02ff5`](https://github.com/AbstractSDK/abstract.js/commit/6a02ff503356d8d17bd94973f7b75c728b13b340) Thanks [@dalechyn](https://github.com/dalechyn)! - Deprecated `AbstractAccountIdProvider` in favor of custom client's accountId state management.
+  Introduced consequent changes to types involving `accountId`.
+  Fixes the peer-dependency issue in `provider-graz` package.
+  Dropped `@cosmjs/amino` in favor of `@cosmjs/stargate`
+
 ## 0.2.11
 
 ### Patch Changes
