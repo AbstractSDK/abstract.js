@@ -18,9 +18,6 @@
     "paths": {
       // TODO: Remove once issue is fixed
       // https://github.com/microsoft/TypeScript/issues/48212
-      "@cosmjs/amino": [
-        "node_modules/@cosmjs/amino/build"
-      ],
       "@cosmjs/cosmwasm-stargate": [
         "packages/core/node_modules/@cosmjs/cosmwasm-stargate/build"
       ],

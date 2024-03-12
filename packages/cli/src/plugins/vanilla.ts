@@ -57,6 +57,31 @@ export function vanilla(options: VanillaOptions = {}): VanillaResult {
         // See https://github.com/CosmWasm/ts-codegen/issues/114
         const contractNamePascalCase = pascalCase(contract.name)
 
+        // NOTE: The `@abstract-money/codegen` points to the old name of the core
+        // package `@abstract-money/abstract.js`, and has to be changed to the
+        // `@abstract-money/core` package.
+        const generatedClientFilePath = join(
+          cosmwasmCodegenDirPath,
+          `${contractNamePascalCase}.client.ts`,
+        )
+
+        const generatedClientFileContent = await fse.readFile(
+          resolve(generatedClientFilePath),
+          'utf8',
+        )
+        await fse.writeFile(
+          resolve(generatedClientFilePath),
+          generatedClientFileContent
+            .replace(
+              '@abstract-money/abstract.js',
+              '@abstract-money/core/legacy',
+            )
+            .replaceAll(
+              /(@cosmjs\/cosmwasm-stargate|@cosmjs\/amino)/gm,
+              '@abstract-money/cli/cosmjs',
+            ),
+        )
+
         const generatedMessageComposerFilePath = join(
           cosmwasmCodegenDirPath,
           `${contractNamePascalCase}.message-composer.ts`,

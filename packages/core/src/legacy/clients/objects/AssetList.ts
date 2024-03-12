@@ -1,5 +1,5 @@
-import { type Coin } from '@cosmjs/amino'
 import { toBase64 } from '@cosmjs/encoding'
+import { type Coin } from '@cosmjs/stargate'
 import { type MsgSend } from 'cosmjs-types/cosmos/bank/v1beta1/tx'
 import { type MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
 import { match } from 'ts-pattern'

@@ -28,7 +28,6 @@
   "dependencies": {
     "@abstract-money/cosmwasm-utils": "workspace:*",
     "@chain-registry/types": "^0.13.1",
-    "@cosmjs/amino": "^0.32.2",
     "@cosmjs/cosmwasm-stargate": "^0.32.2",
     "@cosmjs/encoding": "^0.32.2",
     "@cosmjs/stargate": "^0.32.2",

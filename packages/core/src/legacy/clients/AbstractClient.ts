@@ -2,12 +2,12 @@ import {
   BatchCosmWasmClient,
   type BatchCosmWasmClientOptions,
 } from '@abstract-money/cosmwasm-utils'
-import { Coin } from '@cosmjs/amino'
 import {
   CosmWasmClient,
   type HttpEndpoint,
   type SigningCosmWasmClient,
 } from '@cosmjs/cosmwasm-stargate'
+import { Coin } from '@cosmjs/stargate'
 import { Variables } from 'graphql-request'
 import semverSatisfies from 'semver/functions/satisfies'
 import {

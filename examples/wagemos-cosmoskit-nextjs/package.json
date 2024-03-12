@@ -14,7 +14,6 @@
     "@abstract-money/provider-cosmoskit": "workspace:*",
     "@abstract-money/react": "workspace:*",
     "@chain-registry/types": "^0.13.1",
-    "@cosmjs/amino": "^0.32.2",
     "@cosmjs/stargate": "^0.32.2",
     "@cosmos-kit/keplr": "^2.4.15",
     "@cosmos-kit/react": "^2.6.0",

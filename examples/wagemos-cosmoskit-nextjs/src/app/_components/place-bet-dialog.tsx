@@ -1,7 +1,7 @@
 'use client'
 
 import { stringToAccountId } from '@abstract-money/core'
-import { coin } from '@cosmjs/amino'
+import { coin } from '@cosmjs/stargate'
 import { useChain } from '@cosmos-kit/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { DialogDescription } from '@radix-ui/react-dialog'

@@ -1,10 +1,10 @@
-import { type Coin } from '@cosmjs/amino'
 import {
   type ExecuteResult,
   type MsgExecuteContractEncodeObject,
   type SigningCosmWasmClient,
 } from '@cosmjs/cosmwasm-stargate'
 import { toUtf8 } from '@cosmjs/encoding'
+import { type Coin } from '@cosmjs/stargate'
 import { type StdFee } from '@cosmjs/stargate'
 import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
 import { ContractMsg } from './messages'
