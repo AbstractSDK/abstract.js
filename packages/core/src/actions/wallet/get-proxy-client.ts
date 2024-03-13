@@ -1,16 +1,17 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
 import { ProxyClient } from '../../codegen/abstract'
-import { WithArgs } from '../../types/with-args'
 
-export type GetProxyClientParameters = WithArgs<{
+export type GetProxyClientParameters = {
   signingCosmWasmClient: SigningCosmWasmClient
   sender: string
   proxyAddress: string
-}>
+}
 
 export async function getProxyClient({
-  args: { signingCosmWasmClient, sender, proxyAddress },
+  signingCosmWasmClient,
+  sender,
+  proxyAddress,
 }: GetProxyClientParameters) {
   return new ProxyClient(signingCosmWasmClient, sender, proxyAddress)
 }

@@ -1,5 +1,4 @@
-import { Prettify } from '../types/utils'
-import { ABSTRACT_API_URL } from '../utils/constants'
+import { Evaluate } from '../types/utils'
 
 export type ClientConfig = {
   /** A key for the client. */
@@ -22,11 +21,11 @@ export type Client<
     extend: <const client extends Extended,>(
       fn: (client: Client<extended>) => client,
     ) => Client<
-      Prettify<client> & (extended extends Extended ? extended : unknown)
+      Evaluate<client> & (extended extends Extended ? extended : unknown)
     >
   }
 
-export type Extended<TClient extends BaseClient = BaseClient> = Prettify<
+export type Extended<TClient extends BaseClient = BaseClient> = Evaluate<
   // disallow redefining base properties
   { [_ in keyof TClient]?: undefined } & {
     [key: string]: unknown

@@ -6,8 +6,8 @@ import {
   AbstractQueryClient,
   accountIdToLegacyAccountId,
 } from '@abstract-money/core/legacy'
-import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import { useConfig } from '../contexts'
+import { UseQueryParameters, useQuery } from '../types/queries'
 import { useAbstractQueryClient } from './use-abstract-query-client'
 
 interface AbstractModuleQueryClientConstructor {
@@ -62,25 +62,28 @@ type TQueryKey<TModule extends AbstractModuleQueryClientConstructor> =
     AbstractQueryClient | undefined,
   ]
 
-export function useAbstractModuleQueryClient<
+export type UseAbstractModuleQueryClientParameters<
   TModule extends AbstractModuleQueryClientConstructor,
->(
-  parameters: {
-    accountId: AccountId | undefined
-    moduleId: string
-    Module: TModule
-  },
-  {
-    enabled: enabled_ = true,
-    ...rest
-  }: UseQueryOptions<
+> = {
+  accountId: AccountId | undefined
+  moduleId: string
+  Module: TModule
+  query?: UseQueryParameters<
     TQueryFnData<TModule>,
     unknown,
     TQueryData<TModule>,
     TQueryKey<TModule>
-  > = {},
-) {
-  const { moduleId, accountId, Module } = parameters
+  >
+}
+
+export function useAbstractModuleQueryClient<
+  TModule extends AbstractModuleQueryClientConstructor,
+>({
+  accountId,
+  moduleId,
+  Module,
+  query = {},
+}: UseAbstractModuleQueryClientParameters<TModule>) {
   const { apiUrl } = useConfig()
 
   const {
@@ -88,10 +91,10 @@ export function useAbstractModuleQueryClient<
     isLoading: isAbstractClientLoading,
     isError: isAbstractClientError,
     error: abstractClientError,
-  } = useAbstractQueryClient(
-    { chainName: accountId?.chainName },
-    { enabled: enabled_ },
-  )
+  } = useAbstractQueryClient({
+    chainName: accountId?.chainName,
+    query: { enabled: query.enabled ?? true },
+  })
 
   const queryKey = React.useMemo(
     () =>
@@ -118,9 +121,8 @@ export function useAbstractModuleQueryClient<
     })
   }, [abstractQueryClient, apiUrl, accountId, moduleId, Module])
 
-  const enabled = React.useMemo(
-    () => Boolean(abstractQueryClient && accountId && enabled_),
-    [enabled_, abstractQueryClient, accountId],
+  const enabled = Boolean(
+    abstractQueryClient && accountId && (query.enabled ?? true),
   )
 
   const {
@@ -128,7 +130,7 @@ export function useAbstractModuleQueryClient<
     isLoading: isAbstractModuleQueryClientLoading,
     isError: isAbstractModuleQueryClientError,
     error: abstractModuleQueryClientError,
-  } = useQuery(queryKey, queryFn, { enabled, ...rest })
+  } = useQuery({ queryKey, queryFn, ...query, enabled })
 
   if (isAbstractClientError)
     return {

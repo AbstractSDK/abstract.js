@@ -17,7 +17,7 @@ import {
   SigningCosmWasmClient,
 } from '@cosmjs/cosmwasm-stargate'
 import { useMemo } from 'react'
-import { Prettify } from './types/utils'
+import { Prettify } from './types/args'
 
 type CommonProviderArgs = {
   chainName: string | undefined

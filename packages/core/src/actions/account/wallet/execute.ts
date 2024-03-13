@@ -5,13 +5,13 @@ import {
   ProxyTypes,
   VersionControlTypes,
 } from '../../../codegen/abstract'
+import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { MaybeArray } from '../../../types/utils'
-import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
 import { jsonToBinary } from '../../../utils/encoding'
 import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
 
 export type ExecuteParameters = Omit<
-  WithArgsAndCosmWasmSignOptions<{
+  WithCosmWasmSignOptions<{
     accountId: VersionControlTypes.AccountId
     signingCosmWasmClient: SigningCosmWasmClient
     apiUrl: string
@@ -22,16 +22,18 @@ export type ExecuteParameters = Omit<
 >
 
 export async function execute({
-  args: { accountId, signingCosmWasmClient, apiUrl, sender, msgs },
+  accountId,
+  signingCosmWasmClient,
+  apiUrl,
+  sender,
+  msgs,
   fee,
   memo,
 }: ExecuteParameters) {
   const { managerAddress } = await getAccountBaseAddressesFromApi({
-    args: {
-      accountId,
-      cosmWasmClient: signingCosmWasmClient,
-      apiUrl,
-    },
+    accountId,
+    cosmWasmClient: signingCosmWasmClient,
+    apiUrl,
   })
   return signingCosmWasmClient.signAndBroadcast(
     sender,

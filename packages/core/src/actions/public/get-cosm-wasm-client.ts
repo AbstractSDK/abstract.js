@@ -1,13 +1,11 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
-import { WithArgs } from '../../types/with-args'
-
-export type GetCosmWasmClientParameters = WithArgs<{
+export type GetCosmWasmClientParameters = {
   cosmWasmClient: CosmWasmClient
-}>
+}
 
 export async function getCosmWasmClient({
-  args: { cosmWasmClient },
+  cosmWasmClient,
 }: GetCosmWasmClientParameters) {
   return cosmWasmClient
 }

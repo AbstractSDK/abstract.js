@@ -14,85 +14,72 @@ import { getProxyClient } from '../../actions/wallet/get-proxy-client'
 import { getSenderAddress } from '../../actions/wallet/get-sender-address'
 import { getSigningCosmWasmClient } from '../../actions/wallet/get-signing-cosm-wasm-client'
 import { getVersionControlClient } from '../../actions/wallet/get-version-control-client'
-import { CutArgs } from '../../types/with-args'
+import { ExtractAndOmitParameters } from '../../types/parameters'
 
-type CutSigningCosmWasmClientAndSenderFromParameter<
-  T extends (payload: any) => any,
-> = CutArgs<
-  {
-    readonly signingCosmWasmClient: SigningCosmWasmClient
-    readonly sender: string
-  },
-  T
->
-
-type CutSigningCosmWasmClientAndApiUrlFromParameter<
-  T extends (payload: any) => any,
-> = CutArgs<
-  {
-    readonly signingCosmWasmClient: SigningCosmWasmClient
-    readonly sender: string
-    readonly apiUrl: string
-  },
-  T
->
+type ExtractAndOmitDecoratedParametersFromParameters<
+  fn extends (payload: any) => any,
+> = ExtractAndOmitParameters<fn, 'signingCosmWasmClient' | 'sender' | 'apiUrl'>
 
 export type WalletActions = {
   createAccount(
-    args: CutSigningCosmWasmClientAndApiUrlFromParameter<typeof createAccount>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof createAccount
+    >,
   ): ReturnType<typeof createAccount>
   createAccountMonarchy(
-    args: CutSigningCosmWasmClientAndApiUrlFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof createAccountMonarchy
     >,
   ): ReturnType<typeof createAccountMonarchy>
   getAccountFactoryClient(
-    args: CutSigningCosmWasmClientAndSenderFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getAccountFactoryClient
     >,
   ): ReturnType<typeof getAccountFactoryClient>
   getAccountFactoryClientFromVersionControl(
-    args: CutSigningCosmWasmClientAndSenderFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getAccountFactoryClientFromVersionControl
     >,
   ): ReturnType<typeof getAccountFactoryClientFromVersionControl>
   getAccountFactoryClientFromApi(
-    args: CutSigningCosmWasmClientAndApiUrlFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getAccountFactoryClientFromApi
     >,
   ): ReturnType<typeof getAccountFactoryClientFromApi>
   getAnsHostClient(
-    args: CutSigningCosmWasmClientAndSenderFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getAnsHostClient
     >,
   ): ReturnType<typeof getAnsHostClient>
   getAnsHostClientFromApi(
-    args: CutSigningCosmWasmClientAndApiUrlFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getAnsHostClientFromApi
     >,
   ): ReturnType<typeof getAnsHostClientFromApi>
   getAnsHostClientFromVersionControl(
-    args: CutSigningCosmWasmClientAndSenderFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getAnsHostClientFromVersionControl
     >,
   ): ReturnType<typeof getAnsHostClientFromVersionControl>
   getVersionControlClient(
-    args: CutSigningCosmWasmClientAndSenderFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getVersionControlClient
     >,
   ): ReturnType<typeof getVersionControlClient>
   getVersionControlClientFromApi(
-    args: CutSigningCosmWasmClientAndApiUrlFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getVersionControlClientFromApi
     >,
   ): ReturnType<typeof getVersionControlClientFromApi>
   getManagerClient(
-    args: CutSigningCosmWasmClientAndSenderFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getManagerClient
     >,
   ): ReturnType<typeof getManagerClient>
   getProxyClient(
-    args: CutSigningCosmWasmClientAndSenderFromParameter<typeof getProxyClient>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getProxyClient
+    >,
   ): ReturnType<typeof getProxyClient>
   getSigningCosmWasmClient(): ReturnType<typeof getSigningCosmWasmClient>
   getSenderAddress(): ReturnType<typeof getSenderAddress>
@@ -104,77 +91,94 @@ export function walletActions(
   apiUrl: string,
 ): WalletActions {
   return {
-    createAccount: ({ args, ...rest }) =>
+    createAccount: (parameters) =>
       createAccount({
-        args: { ...args, signingCosmWasmClient, sender, apiUrl },
-        ...rest,
+        ...parameters,
+        signingCosmWasmClient,
+        sender,
+        apiUrl,
       }),
-    createAccountMonarchy: ({ args, ...rest }) =>
+    createAccountMonarchy: (parameters) =>
       createAccountMonarchy({
-        args: { ...args, signingCosmWasmClient, sender, apiUrl },
-        ...rest,
+        ...parameters,
+        signingCosmWasmClient,
+        sender,
+        apiUrl,
       }),
 
-    getAccountFactoryClient: ({ args, ...rest }) =>
+    getAccountFactoryClient: (parameters) =>
       getAccountFactoryClient({
-        args: { ...args, signingCosmWasmClient, sender },
-        ...rest,
+        ...parameters,
+        signingCosmWasmClient,
+        sender,
       }),
-    getAccountFactoryClientFromVersionControl: ({ args, ...rest }) =>
+    getAccountFactoryClientFromVersionControl: (parameters) =>
       getAccountFactoryClientFromVersionControl({
-        args: { ...args, signingCosmWasmClient, sender },
-        ...rest,
+        ...parameters,
+        signingCosmWasmClient,
+        sender,
       }),
-    getAccountFactoryClientFromApi: ({ args, ...rest }) =>
+    getAccountFactoryClientFromApi: (parameters) =>
       getAccountFactoryClientFromApi({
-        args: { ...args, signingCosmWasmClient, sender, apiUrl },
-        ...rest,
+        ...parameters,
+        signingCosmWasmClient,
+        sender,
+        apiUrl,
       }),
 
-    getAnsHostClient: ({ args, ...rest }) =>
+    getAnsHostClient: (parameters) =>
       getAnsHostClient({
-        args: { ...args, signingCosmWasmClient, sender },
-        ...rest,
+        ...parameters,
+        signingCosmWasmClient,
+        sender,
       }),
-    getAnsHostClientFromApi: ({ args, ...rest }) =>
+    getAnsHostClientFromApi: (parameters) =>
       getAnsHostClientFromApi({
-        args: { ...args, signingCosmWasmClient, sender, apiUrl },
-        ...rest,
+        ...parameters,
+        signingCosmWasmClient,
+        sender,
+        apiUrl,
       }),
-    getAnsHostClientFromVersionControl: ({ args, ...rest }) =>
+    getAnsHostClientFromVersionControl: (parameters) =>
       getAnsHostClientFromVersionControl({
-        args: { ...args, signingCosmWasmClient, sender },
-        ...rest,
+        ...parameters,
+        signingCosmWasmClient,
+        sender,
       }),
 
-    getVersionControlClientFromApi: ({ args, ...rest }) =>
+    getVersionControlClientFromApi: (parameters) =>
       getVersionControlClientFromApi({
-        args: { ...args, signingCosmWasmClient, sender, apiUrl },
-        ...rest,
+        ...parameters,
+        signingCosmWasmClient,
+        sender,
+        apiUrl,
       }),
-    getVersionControlClient: ({ args, ...rest }) =>
+    getVersionControlClient: (parameters) =>
       getVersionControlClient({
-        args: { ...args, signingCosmWasmClient, sender },
-        ...rest,
+        ...parameters,
+        signingCosmWasmClient,
+        sender,
       }),
 
-    getManagerClient: ({ args, ...rest }) =>
+    getManagerClient: (parameters) =>
       getManagerClient({
-        args: { ...args, signingCosmWasmClient, sender },
-        ...rest,
+        ...parameters,
+        signingCosmWasmClient,
+        sender,
       }),
-    getProxyClient: ({ args, ...rest }) =>
+    getProxyClient: (parameters) =>
       getProxyClient({
-        args: { ...args, signingCosmWasmClient, sender },
-        ...rest,
+        ...parameters,
+        signingCosmWasmClient,
+        sender,
       }),
     getSigningCosmWasmClient: () =>
       getSigningCosmWasmClient({
-        args: { signingCosmWasmClient },
+        signingCosmWasmClient,
       }),
     getSenderAddress: () =>
       getSenderAddress({
-        args: { sender },
+        sender,
       }),
   }
 }

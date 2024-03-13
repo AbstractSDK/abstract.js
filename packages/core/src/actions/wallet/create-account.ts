@@ -1,13 +1,13 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { AccountFactoryClient } from '../../codegen/abstract'
+import { WithCosmWasmSignOptions } from '../../types/parameters'
 import { WithOptional } from '../../types/utils'
-import { WithArgsAndCosmWasmSignOptions } from '../../types/with-args'
 import { accountIdToParameter } from '../../utils'
 import { parseCreateAccountExecuteResult } from '../../utils/account-factory/parse-create-account-execute-result'
 import { chainIdToName } from '../../utils/chain-registry'
 import { getAccountFactoryClientFromApi } from './get-account-factory-client-from-api'
 
-export type CreateAccountParameters = WithArgsAndCosmWasmSignOptions<
+export type CreateAccountParameters = WithCosmWasmSignOptions<
   {
     signingCosmWasmClient: SigningCosmWasmClient
     apiUrl: string
@@ -18,19 +18,17 @@ export type CreateAccountParameters = WithArgsAndCosmWasmSignOptions<
   >
 >
 export async function createAccount({
-  args: {
-    signingCosmWasmClient,
-    apiUrl,
-    sender,
-    installModules = [],
-    baseAsset,
-    description,
-    name,
-    namespace,
-    governance,
-    link,
-    accountId,
-  },
+  signingCosmWasmClient,
+  apiUrl,
+  sender,
+  installModules = [],
+  baseAsset,
+  description,
+  name,
+  namespace,
+  governance,
+  link,
+  accountId,
   fee,
   memo,
   funds,
@@ -38,11 +36,9 @@ export async function createAccount({
   const chainId = await signingCosmWasmClient.getChainId()
   const chainName = chainIdToName(chainId)
   const accountFactoryClient = await getAccountFactoryClientFromApi({
-    args: {
-      signingCosmWasmClient,
-      apiUrl,
-      sender,
-    },
+    signingCosmWasmClient,
+    apiUrl,
+    sender,
   })
 
   // @TODO: parameter validation

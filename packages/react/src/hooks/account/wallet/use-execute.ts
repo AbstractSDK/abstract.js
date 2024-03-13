@@ -1,21 +1,27 @@
-import { AccountId, AccountWalletClient } from '@abstract-money/core'
+import { AccountWalletClient } from '@abstract-money/core/clients'
+import { AccountId } from '@abstract-money/core/utils'
 import { DeliverTxResponse } from '@cosmjs/stargate'
-import {
-  UseMutationOptions,
-  UseMutationResult,
-  useMutation,
-} from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { useConfig } from '../../../contexts'
+import {
+  UseMutationParameters,
+  UseMutationReturnType,
+} from '../../../types/queries'
 
 type ExecuteMutation = Parameters<AccountWalletClient['execute']>[0]
 
-export function useExecute(
-  { accountId }: { accountId: AccountId | undefined },
-  options?: Omit<
-    UseMutationOptions<DeliverTxResponse, unknown, ExecuteMutation>,
-    'mutationFn'
-  >,
-): UseMutationResult<DeliverTxResponse, unknown, ExecuteMutation> {
+export type UseExecuteParameters = {
+  accountId: AccountId | undefined
+  mutation?: UseMutationParameters<DeliverTxResponse, unknown, ExecuteMutation>
+}
+export function useExecute({
+  accountId,
+  mutation,
+}: UseExecuteParameters): UseMutationReturnType<
+  DeliverTxResponse,
+  unknown,
+  ExecuteMutation
+> {
   const config = useConfig()
   const accountWalletClient = config.useAccountWalletClient({
     chainName: accountId?.chainName,
@@ -24,5 +30,5 @@ export function useExecute(
   return useMutation(({ ...rest }) => {
     if (!accountWalletClient) throw new Error('client is not defined')
     return accountWalletClient.execute(rest)
-  }, options)
+  }, mutation)
 }

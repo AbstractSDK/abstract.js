@@ -1,17 +1,18 @@
 import { request } from 'graphql-request'
 import { gql } from '../codegen/gql'
-import { WithArgs } from '../types/with-args'
 import { ansTokenFromApi } from '../utils/tokens/ans/ans-token-from-api'
 import { AnsId } from '../utils/tokens/ans/types'
 
-export type GetAnsTokensFromApiParameters = WithArgs<{
+export type GetAnsTokensFromApiParameters = {
   apiUrl: string
   chainName: string
   ids: AnsId[]
-}>
+}
 
 export async function getAnsTokensFromApi({
-  args: { apiUrl, chainName, ids },
+  apiUrl,
+  chainName,
+  ids,
 }: GetAnsTokensFromApiParameters) {
   const result = await request(
     apiUrl,

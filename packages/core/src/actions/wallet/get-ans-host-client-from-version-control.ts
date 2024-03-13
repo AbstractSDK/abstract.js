@@ -1,28 +1,30 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
-import { WithArgs } from '../../types/with-args'
 import { getAnsHostAddressFromVersionControl } from '../public/get-ans-host-address-from-version-control'
 import { getAnsHostClient } from './get-ans-host-client'
 
-export type GetAnsHostClientFromVersionControlParameters = WithArgs<{
+export type GetAnsHostClientFromVersionControlParameters = {
   signingCosmWasmClient: SigningCosmWasmClient
   sender: string
   versionControlAddress: string
   version?: string
-}>
+}
 
 export async function getAnsHostClientFromVersionControl({
-  args: { signingCosmWasmClient, sender, versionControlAddress, version },
+  signingCosmWasmClient,
+  sender,
+  versionControlAddress,
+  version,
 }: GetAnsHostClientFromVersionControlParameters) {
   const ansHostAddress = await getAnsHostAddressFromVersionControl({
-    args: {
-      cosmWasmClient: signingCosmWasmClient,
-      versionControlAddress,
-      version,
-    },
+    cosmWasmClient: signingCosmWasmClient,
+    versionControlAddress,
+    version,
   })
 
   return getAnsHostClient({
-    args: { signingCosmWasmClient, sender, ansHostAddress },
+    signingCosmWasmClient,
+    sender,
+    ansHostAddress,
   })
 }

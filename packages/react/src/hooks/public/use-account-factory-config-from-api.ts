@@ -1,11 +1,12 @@
-import { PublicClient } from '@abstract-money/core'
-import {
-  UseQueryOptions,
-  UseQueryResult,
-  useQuery,
-} from '@tanstack/react-query'
+import { PublicClient } from '@abstract-money/core/clients'
 import React from 'react'
 import { useConfig } from '../../contexts'
+import { WithArgs } from '../../types/args'
+import {
+  UseQueryParameters,
+  UseQueryReturnType,
+  useQuery,
+} from '../../types/queries'
 
 type QueryFnData = Awaited<
   ReturnType<
@@ -21,16 +22,23 @@ type QueryKey = readonly [
   'accountFactoryConfigFromApi',
   PublicClient | undefined,
 ]
-type QueryResult = UseQueryResult<QueryData, QueryError>
+type QueryResult = UseQueryReturnType<QueryData, QueryError>
 
-type QueryOptions = Omit<
-  UseQueryOptions<QueryFnData, QueryError, QueryData, QueryKey>,
-  'queryFn'
+type QueryOptions = UseQueryParameters<
+  QueryFnData,
+  QueryError,
+  QueryData,
+  QueryKey
 >
-export function useAccountFactoryConfigFromApi(
-  chainName?: string,
-  options: QueryOptions = { enabled: true },
-): QueryResult {
+
+export type UseAccountFactoryConfigFromApi = WithArgs<
+  Parameters<PublicClient['getAccountFactoryQueryClientFromApi']>[0]
+> & { chainName?: string | undefined; query?: QueryOptions }
+
+export function useAccountFactoryConfigFromApi({
+  chainName,
+  query = {},
+}: UseAccountFactoryConfigFromApi): QueryResult {
   const config = useConfig()
   const publicClient = config.usePublicClient({
     chainName,
@@ -40,10 +48,7 @@ export function useAccountFactoryConfigFromApi(
     [publicClient],
   )
 
-  const enabled = React.useMemo(
-    () => Boolean(publicClient && options?.enabled),
-    [options?.enabled, publicClient],
-  )
+  const enabled = Boolean(publicClient && (query.enabled ?? true))
 
   const queryFn = React.useCallback(async () => {
     if (!publicClient) throw new Error('No client')
@@ -54,5 +59,5 @@ export function useAccountFactoryConfigFromApi(
     return config
   }, [publicClient])
 
-  return useQuery(queryKey, queryFn, { ...options, enabled })
+  return useQuery({ queryKey, queryFn, ...query, enabled })
 }

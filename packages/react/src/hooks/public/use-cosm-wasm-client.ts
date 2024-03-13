@@ -1,29 +1,40 @@
 import { PublicClient } from '@abstract-money/core'
-import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import React from 'react'
-import { useConfig } from 'src/contexts'
+import { useConfig } from '../../contexts'
+import {
+  UseQueryParameters,
+  UseQueryReturnType,
+  useQuery,
+} from '../../types/queries'
 
-export function useCosmWasmClient(
-  args: {
-    /** Pass only if you are using cosmos-kit provider, graz doesn't need one. */
-    chainName: string | undefined
-  },
-  {
-    enabled: enabled_ = true,
-    ...rest
-  }: UseQueryOptions<
-    CosmWasmClient | undefined,
-    unknown,
-    CosmWasmClient | undefined,
-    readonly ['cosm-wasm-client', PublicClient | undefined]
-  > = {},
-) {
+type QueryFnData = Awaited<ReturnType<PublicClient['getCosmWasmClient']>>
+
+type QueryError = unknown
+type QueryData = QueryFnData
+type QueryKey = readonly ['cosmWasmClient', PublicClient | undefined]
+type QueryResult = UseQueryReturnType<QueryData, QueryError>
+
+type QueryOptions = UseQueryParameters<
+  QueryFnData,
+  QueryError,
+  QueryData,
+  QueryKey
+>
+
+export type UseCosmWasmClientParameters = {
+  chainName?: string | undefined
+  query?: QueryOptions
+}
+
+export function useCosmWasmClient({
+  chainName,
+  query = {},
+}: UseCosmWasmClientParameters): QueryResult {
   const config = useConfig()
-  const publicClient = config.usePublicClient({ chainName: args?.chainName })
+  const publicClient = config.usePublicClient({ chainName })
 
   const queryKey = React.useMemo(
-    () => ['cosm-wasm-client', publicClient] as const,
+    () => ['cosmWasmClient', publicClient] as const,
     [publicClient],
   )
 
@@ -33,10 +44,7 @@ export function useCosmWasmClient(
     return publicClient.getCosmWasmClient()
   }, [publicClient])
 
-  const enabled = React.useMemo(
-    () => Boolean(publicClient && enabled_),
-    [enabled_, publicClient],
-  )
+  const enabled = Boolean(publicClient && (query.enabled ?? true))
 
-  return useQuery(queryKey, queryFn, { enabled, ...rest })
+  return useQuery({ queryKey, queryFn, ...query, enabled })
 }

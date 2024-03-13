@@ -79,6 +79,10 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./actions": {
+      "types": "./dist/actions/index.d.ts",
+      "default": "./dist/actions/index.js"
+    },
     "./clients": {
       "types": "./dist/clients/index.d.ts",
       "default": "./dist/clients/index.js"
@@ -94,6 +98,7 @@
     "./package.json": "./package.json"
   },
   "files": [
+    "/actions",
     "/clients",
     "/utils",
     "/legacy",
