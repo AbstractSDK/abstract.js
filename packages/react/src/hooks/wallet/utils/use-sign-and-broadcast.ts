@@ -8,7 +8,7 @@ import { useSigningCosmWasmClient } from '../use-signing-cosm-wasm-client'
 type SignAndBroadcastMutation = {
   readonly fee: number | StdFee | 'auto'
   readonly memo?: string | undefined
-  args: {
+  readonly args: {
     messages: readonly EncodeObject[]
   }
 }

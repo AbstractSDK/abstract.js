@@ -1,11 +1,12 @@
 import { WalletClient } from '@abstract-money/core'
 import { useMutation } from '@tanstack/react-query'
 import { useConfig } from '../../contexts'
+import { ExtractArgsFromParameters } from '../../types/args'
 import { UseMutationParameters } from '../../types/queries'
 
-type CreateAccountMonarchyMutation = Parameters<
-  WalletClient['createAccountMonarchy']
->[0]
+type CreateAccountMonarchyMutation = ExtractArgsFromParameters<
+  Parameters<WalletClient['createAccountMonarchy']>[0]
+>
 
 export type UseCreateAccountMonarchyParameters = {
   chainName: string | undefined
@@ -23,8 +24,11 @@ export function useCreateAccountMonarchy({
   const config = useConfig()
   const walletClient = config.useWalletClient({ chainName: chainName })
 
-  return useMutation((parameters) => {
+  return useMutation(({ args, ...cosmWasmSignOptions }) => {
     if (!walletClient) throw new Error('walletClient is not defined')
-    return walletClient.createAccountMonarchy(parameters)
+    return walletClient.createAccountMonarchy({
+      ...args,
+      ...cosmWasmSignOptions,
+    })
   }, mutation)
 }

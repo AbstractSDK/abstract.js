@@ -17,7 +17,7 @@ import {
   SigningCosmWasmClient,
 } from '@cosmjs/cosmwasm-stargate'
 import { useMemo } from 'react'
-import { Prettify } from './types/args'
+import { Evaluate } from './types/utils'
 
 type CommonProviderArgs = {
   chainName: string | undefined
@@ -54,7 +54,7 @@ export function createConfig(parameters: CreateConfigParameters) {
   }
 
   function usePublicClient(
-    ...args: Prettify<Parameters<Provider['useCosmWasmClient']>>
+    ...args: Evaluate<Parameters<Provider['useCosmWasmClient']>>
   ): PublicClient | undefined {
     const cosmWasmClient = provider.useCosmWasmClient(...args)
     return useMemo(() => {
@@ -67,7 +67,7 @@ export function createConfig(parameters: CreateConfigParameters) {
   }
 
   function useWalletClient(
-    ...args: Prettify<Parameters<Provider['useSigningCosmWasmClient']>>
+    ...args: Evaluate<Parameters<Provider['useSigningCosmWasmClient']>>
   ): WalletClient | undefined {
     const signingCosmWasmClient = provider.useSigningCosmWasmClient(...args)
     const sender = provider.useSenderAddress(...args)
@@ -84,7 +84,7 @@ export function createConfig(parameters: CreateConfigParameters) {
   function useAccountPublicClient({
     accountId,
     ...rest
-  }: Prettify<
+  }: Evaluate<
     { accountId: AccountId | undefined } & Parameters<
       Provider['useCosmWasmClient']
     >[0]
@@ -103,7 +103,7 @@ export function createConfig(parameters: CreateConfigParameters) {
   function useAccountWalletClient({
     accountId,
     ...rest
-  }: Prettify<
+  }: Evaluate<
     { accountId: AccountId | undefined } & Parameters<
       Provider['useSigningCosmWasmClient']
     >[0]
@@ -140,17 +140,17 @@ export type Config = {
     ...args: Parameters<Provider['useCosmWasmClient']>
   ): PublicClient | undefined
   useWalletClient(
-    ...args: Prettify<Parameters<Provider['useSigningCosmWasmClient']>>
+    ...args: Evaluate<Parameters<Provider['useSigningCosmWasmClient']>>
   ): WalletClient | undefined
   useAccountPublicClient(
-    args: Prettify<
+    args: Evaluate<
       { accountId: AccountId | undefined } & Parameters<
         Provider['useCosmWasmClient']
       >[0]
     >,
   ): AccountPublicClient | undefined
   useAccountWalletClient(
-    args: Prettify<
+    args: Evaluate<
       { accountId: AccountId | undefined } & Parameters<
         Provider['useCosmWasmClient']
       >[0]

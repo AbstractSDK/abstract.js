@@ -3,12 +3,15 @@ import { AccountId } from '@abstract-money/core/utils'
 import { DeliverTxResponse } from '@cosmjs/stargate'
 import { useMutation } from '@tanstack/react-query'
 import { useConfig } from '../../../contexts'
+import { ExtractArgsFromParameters } from '../../../types/args'
 import {
   UseMutationParameters,
   UseMutationReturnType,
 } from '../../../types/queries'
 
-type ExecuteMutation = Parameters<AccountWalletClient['execute']>[0]
+type ExecuteMutation = ExtractArgsFromParameters<
+  Parameters<AccountWalletClient['execute']>[0]
+>
 
 export type UseExecuteParameters = {
   accountId: AccountId | undefined
@@ -27,8 +30,8 @@ export function useExecute({
     chainName: accountId?.chainName,
     accountId,
   })
-  return useMutation(({ ...rest }) => {
+  return useMutation(({ args, ...cosmWasmSignOptions }) => {
     if (!accountWalletClient) throw new Error('client is not defined')
-    return accountWalletClient.execute(rest)
+    return accountWalletClient.execute({ ...cosmWasmSignOptions, ...args })
   }, mutation)
 }

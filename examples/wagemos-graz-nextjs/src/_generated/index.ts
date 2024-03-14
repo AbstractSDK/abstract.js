@@ -66,14 +66,12 @@ export const betting = {
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useAbstractModuleQueryClient(
-        {
-          moduleId: BETTING_MODULE_ID,
-          ...rest,
-          Module: BettingAppQueryClient,
-        },
-        { enabled: options?.enabled },
-      )
+      } = useAbstractModuleQueryClient({
+        moduleId: BETTING_MODULE_ID,
+        ...rest,
+        Module: BettingAppQueryClient,
+        query: { enabled: options?.enabled },
+      })
 
       const {
         data,
@@ -128,14 +126,12 @@ export const betting = {
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useAbstractModuleQueryClient(
-        {
-          moduleId: BETTING_MODULE_ID,
-          ...rest,
-          Module: BettingAppQueryClient,
-        },
-        { enabled: options?.enabled },
-      )
+      } = useAbstractModuleQueryClient({
+        moduleId: BETTING_MODULE_ID,
+        ...rest,
+        Module: BettingAppQueryClient,
+        query: { enabled: options?.enabled },
+      })
 
       const {
         data,
@@ -192,14 +188,12 @@ export const betting = {
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useAbstractModuleQueryClient(
-        {
-          moduleId: BETTING_MODULE_ID,
-          ...rest,
-          Module: BettingAppQueryClient,
-        },
-        { enabled: options?.enabled },
-      )
+      } = useAbstractModuleQueryClient({
+        moduleId: BETTING_MODULE_ID,
+        ...rest,
+        Module: BettingAppQueryClient,
+        query: { enabled: options?.enabled },
+      })
 
       const {
         data,
@@ -255,14 +249,12 @@ export const betting = {
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useAbstractModuleQueryClient(
-        {
-          moduleId: BETTING_MODULE_ID,
-          ...rest,
-          Module: BettingAppQueryClient,
-        },
-        { enabled: options?.enabled },
-      )
+      } = useAbstractModuleQueryClient({
+        moduleId: BETTING_MODULE_ID,
+        ...rest,
+        Module: BettingAppQueryClient,
+        query: { enabled: options?.enabled },
+      })
 
       const {
         data,
@@ -320,14 +312,12 @@ export const betting = {
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useAbstractModuleQueryClient(
-        {
-          moduleId: BETTING_MODULE_ID,
-          ...rest,
-          Module: BettingAppQueryClient,
-        },
-        { enabled: options?.enabled },
-      )
+      } = useAbstractModuleQueryClient({
+        moduleId: BETTING_MODULE_ID,
+        ...rest,
+        Module: BettingAppQueryClient,
+        query: { enabled: options?.enabled },
+      })
 
       const {
         data,
@@ -383,14 +373,12 @@ export const betting = {
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useAbstractModuleQueryClient(
-        {
-          moduleId: BETTING_MODULE_ID,
-          ...rest,
-          Module: BettingAppQueryClient,
-        },
-        { enabled: options?.enabled },
-      )
+      } = useAbstractModuleQueryClient({
+        moduleId: BETTING_MODULE_ID,
+        ...rest,
+        Module: BettingAppQueryClient,
+        query: { enabled: options?.enabled },
+      })
 
       const {
         data,

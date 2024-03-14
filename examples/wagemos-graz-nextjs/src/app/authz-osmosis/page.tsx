@@ -36,10 +36,10 @@ export default function AuthzPage() {
   const { data: account } = useAccount({ chainId: 'osmosis-1' })
 
   const { data: accountFactory, isLoading } =
-    useAccountFactoryQueryClientFromApi(CHAIN_NAME)
+    useAccountFactoryQueryClientFromApi({ chainName: CHAIN_NAME, args: {} })
 
   const { mutate: createAccount } = useCreateAccountMonarchy({
-    args: { chainName: CHAIN_NAME },
+    chainName: CHAIN_NAME,
   })
 
   const onCreateAccount = useCallback(async () => {
@@ -59,17 +59,13 @@ export default function AuthzPage() {
     })
   }, [accountFactory])
 
-  const { data: savingsAppAddress } = useModuleInstantiate2AddressFromApi(
-    {
-      accountId: stringToAccountId(TEST_SAVINGS_ACCOUNT_ID, CHAIN_NAME),
-      args: {
-        moduleId: SAVINGS_APP_MODULE_ID,
-      },
+  const { data: savingsAppAddress } = useModuleInstantiate2AddressFromApi({
+    accountId: stringToAccountId(TEST_SAVINGS_ACCOUNT_ID, CHAIN_NAME),
+    args: {
+      moduleId: SAVINGS_APP_MODULE_ID,
     },
-    {
-      enabled: true,
-    },
-  )
+    query: { enabled: true },
+  })
 
   console.log('calculated savings app address', savingsAppAddress)
 
