@@ -3,14 +3,13 @@ import {
   IbcClientQueryClient,
   VersionControlTypes,
 } from '../../../codegen/abstract'
-import { WithArgs } from '../../../types/with-args'
 import { getModuleAddress } from './get-module-address'
 
-export type GetModuleAddressParameters = WithArgs<{
+export type GetIbcClientQueryClientFromManagerParameters = {
   accountId: VersionControlTypes.AccountId
   cosmWasmClient: CosmWasmClient
   apiUrl: string
-}>
+}
 
 const IBC_CLIENT_MODULE_ID = 'abstract:ibc-client'
 
@@ -22,10 +21,15 @@ const IBC_CLIENT_MODULE_ID = 'abstract:ibc-client'
  * @param apiUrl
  */
 export async function getIbcClientQueryClientFromManager({
-  args: { accountId, cosmWasmClient, apiUrl },
-}: GetModuleAddressParameters) {
+  accountId,
+  cosmWasmClient,
+  apiUrl,
+}: GetIbcClientQueryClientFromManagerParameters) {
   const ibcClientAddress = await getModuleAddress({
-    args: { accountId, cosmWasmClient, apiUrl, id: IBC_CLIENT_MODULE_ID },
+    accountId,
+    cosmWasmClient,
+    apiUrl,
+    id: IBC_CLIENT_MODULE_ID,
   })
 
   if (!ibcClientAddress) {

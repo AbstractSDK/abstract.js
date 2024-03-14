@@ -150,7 +150,8 @@ export class AbstractQueryClient implements IAbstractQueryClient {
     chains: string[],
   ): Promise<AbstractAccountId[]> {
     const result = await this._apiClient.getAccountsByOwnerFromApi({
-      args: { owner, chains },
+      owner,
+      chains,
     })
     return result.map((r) => new AbstractAccountId(r.chainName, r.seq, r.trace))
   }

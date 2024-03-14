@@ -1,13 +1,11 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
-import { WithArgs } from '../../types/with-args'
-
-export type GetSigningCosmWasmClientParameters = WithArgs<{
+export type GetSigningCosmWasmClientParameters = {
   signingCosmWasmClient: SigningCosmWasmClient
-}>
+}
 
 export async function getSigningCosmWasmClient({
-  args: { signingCosmWasmClient },
+  signingCosmWasmClient,
 }: GetSigningCosmWasmClientParameters) {
   return signingCosmWasmClient
 }

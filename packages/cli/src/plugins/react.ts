@@ -311,8 +311,12 @@ export function react(options: ReactOptions = {}): ReactResult {
                         }
                         ...rest,
                         Module: ${queryClientPascalCase},
+                      ${
+                        hasAbstractApp
+                          ? 'query: { enabled: options?.enabled }'
+                          : ''
+                      }
                       },
-                      ${hasAbstractApp ? '{ enabled: options?.enabled }' : ''}
                     )
 
                     const {

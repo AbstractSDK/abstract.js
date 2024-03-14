@@ -3,7 +3,6 @@ import { type CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { match } from 'ts-pattern'
 import { VersionControlTypes } from '../../codegen/abstract'
 import { type ModuleData } from '../../legacy/generics/Module.types'
-import { WithArgs } from '../../types/with-args'
 import { formatModuleIdWithVersion } from '../../utils/version-control/module-id/format-module-id-with-version'
 import { versionControlModuleToAddress } from '../../utils/version-control/version-control-module-to-address'
 import { versionControlModuleToCodeId } from '../../utils/version-control/version-control-module-to-code-id'
@@ -11,12 +10,13 @@ import { versionControlModuleToType } from '../../utils/version-control/version-
 
 export type GetVersionControlModuleDataParameters<
   TVcModule extends VersionControlTypes.Module = VersionControlTypes.Module,
-> = WithArgs<{ cosmWasmClient: CosmWasmClient; module: TVcModule }>
+> = { cosmWasmClient: CosmWasmClient; module: TVcModule }
 
 export async function getVersionControlModuleData<
   const TVcModule extends VersionControlTypes.Module = VersionControlTypes.Module,
 >({
-  args: { cosmWasmClient, module },
+  cosmWasmClient,
+  module,
 }: GetVersionControlModuleDataParameters<TVcModule>): Promise<ModuleData | null> {
   // Retrieve the first instantiation of the module
   const moduleType = versionControlModuleToType(module)

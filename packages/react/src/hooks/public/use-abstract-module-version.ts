@@ -1,7 +1,8 @@
-import { PublicClient } from '@abstract-money/core'
-import { UseQueryOptions, useQuery } from '@tanstack/react-query'
+import { PublicClient } from '@abstract-money/core/clients'
 import React from 'react'
 import { useConfig } from '../../contexts'
+import { WithArgs } from '../../types/args'
+import { UseQueryParameters, useQuery } from '../../types/queries'
 
 type QueryFnData = Awaited<ReturnType<PublicClient['getAbstractModuleVersion']>>
 
@@ -11,21 +12,24 @@ type QueryKey = readonly [
   'abstractModuleVersion',
   PublicClient | undefined,
   string | undefined,
-  UseAbstractModuleVersionArgs['args'],
+  UseAbstractModuleVersionParameters['args'],
 ]
 
-type QueryOptions = Omit<
-  UseQueryOptions<QueryFnData, QueryError, QueryData, QueryKey>,
-  'queryFn'
+type QueryOptions = UseQueryParameters<
+  QueryFnData,
+  QueryError,
+  QueryData,
+  QueryKey
 >
 
-type UseAbstractModuleVersionArgs = Parameters<
-  PublicClient['getAbstractModuleVersion']
->[0] & { chainName: string | undefined }
-export function useAbstractModuleVersion(
-  { args, chainName }: UseAbstractModuleVersionArgs,
-  options: QueryOptions = { enabled: true },
-) {
+export type UseAbstractModuleVersionParameters = WithArgs<
+  Parameters<PublicClient['getAbstractModuleVersion']>[0]
+> & { chainName?: string | undefined; query?: QueryOptions }
+export function useAbstractModuleVersion({
+  args,
+  chainName,
+  query = {},
+}: UseAbstractModuleVersionParameters) {
   const config = useConfig()
   const publicClient = config.usePublicClient({
     chainName,
@@ -35,19 +39,14 @@ export function useAbstractModuleVersion(
     [publicClient, args],
   )
 
-  const enabled = React.useMemo(
-    () => Boolean(publicClient && args && options?.enabled),
-    [options?.enabled, publicClient],
-  )
+  const enabled = Boolean(publicClient && args && (query.enabled ?? true))
 
   const queryFn = React.useCallback(() => {
     if (!publicClient) throw new Error('No client')
     if (!args) throw new Error('No args')
 
-    return publicClient.getAbstractModuleVersion({
-      args,
-    })
+    return publicClient.getAbstractModuleVersion(args)
   }, [publicClient])
 
-  return useQuery(queryKey, queryFn, { ...options, enabled })
+  return useQuery({ queryKey, queryFn, ...query, enabled })
 }

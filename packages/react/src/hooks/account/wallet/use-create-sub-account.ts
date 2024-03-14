@@ -1,30 +1,35 @@
-import { AccountId, AccountWalletClient } from '@abstract-money/core'
-import { UseMutationOptions, useMutation } from '@tanstack/react-query'
+import { AccountWalletClient } from '@abstract-money/core/clients'
+import { AccountId } from '@abstract-money/core/utils'
+import { useMutation } from '@tanstack/react-query'
 import { useConfig } from '../../../contexts'
+import { ExtractArgsFromParameters } from '../../../types/args'
+import { UseMutationParameters } from '../../../types/queries'
 
-type CreateSubAccountMutation = Parameters<
-  AccountWalletClient['createSubAccount']
->[0]
+type CreateSubAccountMutation = ExtractArgsFromParameters<
+  Parameters<AccountWalletClient['createSubAccount']>[0]
+>
 
-export function useCreateSubAccount(
-  { accountId }: { accountId: AccountId | undefined },
-  options?: Omit<
-    UseMutationOptions<
-      Awaited<ReturnType<AccountWalletClient['createSubAccount']>>,
-      unknown,
-      CreateSubAccountMutation
-    >,
-    'mutationFn'
-  >,
-) {
+export type UseCreateSubAccountParameters = {
+  accountId: AccountId | undefined
+  mutation?: UseMutationParameters<
+    Awaited<ReturnType<AccountWalletClient['createSubAccount']>>,
+    unknown,
+    CreateSubAccountMutation
+  >
+}
+
+export function useCreateSubAccount({
+  accountId,
+  mutation,
+}: UseCreateSubAccountParameters) {
   const config = useConfig()
   const walletClient = config.useAccountWalletClient({
     chainName: accountId?.chainName,
     accountId,
   })
 
-  return useMutation((parameters) => {
+  return useMutation(({ args, ...cosmWasmSignOptions }) => {
     if (!walletClient) throw new Error('walletClient is not defined')
-    return walletClient.createSubAccount(parameters)
-  }, options)
+    return walletClient.createSubAccount({ ...cosmWasmSignOptions, ...args })
+  }, mutation)
 }

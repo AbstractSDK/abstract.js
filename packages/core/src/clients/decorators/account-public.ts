@@ -1,5 +1,4 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { getCosmWasmClient } from 'src/actions/account/public/get-cosm-wasm-client'
 import { getAccountBaseAddressesFromApi } from '../../actions/account/public/get-account-base-addresses-from-api'
 import { getBaseToken } from '../../actions/account/public/get-base-token'
 import { getManagerQueryClientFromApi } from '../../actions/account/public/get-manager-query-client-from-api'
@@ -15,72 +14,83 @@ import { getSubAccountIds } from '../../actions/account/public/get-sub-account-i
 import { getSubAccountSequences } from '../../actions/account/public/get-sub-account-sequences'
 import { getTotalValue } from '../../actions/account/public/get-total-value'
 import { VersionControlTypes } from '../../codegen/abstract/index'
-import { CutArgs } from '../../types/with-args'
+import { ExtractAndOmitParameters } from '../../types/parameters'
 
-type CutCosmWasmClientFromParameter<T extends (payload: any) => any> = CutArgs<
-  {
-    readonly cosmWasmClient: CosmWasmClient
-  },
-  T
->
-
-type CutSpecificArgsFromParameter<T extends (payload: any) => any> = CutArgs<
-  {
-    readonly accountId: VersionControlTypes.AccountId
-    readonly cosmWasmClient: CosmWasmClient
-    readonly apiUrl: string
-  },
-  T
->
+type ExtractAndOmitDecoratedParametersFromParameters<
+  fn extends (parameters: any) => any,
+> = ExtractAndOmitParameters<fn, 'cosmWasmClient' | 'accountId' | 'apiUrl'>
 
 export type AccountPublicActions = {
   getAccountBaseAddresses(
-    args: CutSpecificArgsFromParameter<typeof getAccountBaseAddressesFromApi>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getAccountBaseAddressesFromApi
+    >,
   ): ReturnType<typeof getAccountBaseAddressesFromApi>
   getBaseToken(
-    args: CutSpecificArgsFromParameter<typeof getBaseToken>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getBaseToken
+    >,
   ): ReturnType<typeof getBaseToken>
   getManagerQueryClientFromApi(
-    args: CutSpecificArgsFromParameter<typeof getManagerQueryClientFromApi>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getManagerQueryClientFromApi
+    >,
   ): ReturnType<typeof getManagerQueryClientFromApi>
   getModuleAddress(
-    args: CutSpecificArgsFromParameter<typeof getModuleAddress>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getModuleAddress
+    >,
   ): ReturnType<typeof getModuleAddress>
   getModules(
-    args: CutSpecificArgsFromParameter<typeof getModules>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getModules
+    >,
   ): ReturnType<typeof getModules>
   getModuleInstantiate2AddressFromApi(
-    args: CutSpecificArgsFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getModuleInstantiate2AddressFromApi
     >,
   ): ReturnType<typeof getModuleInstantiate2AddressFromApi>
   getNamespace(
-    args: CutSpecificArgsFromParameter<typeof getNamespace>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getNamespace
+    >,
   ): ReturnType<typeof getNamespace>
   getOwner(
-    args: CutSpecificArgsFromParameter<typeof getOwner>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getOwner
+    >,
   ): ReturnType<typeof getOwner>
   getProxyQueryClientFromApi(
-    args: CutSpecificArgsFromParameter<typeof getProxyQueryClientFromApi>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getProxyQueryClientFromApi
+    >,
   ): ReturnType<typeof getProxyQueryClientFromApi>
   getSubAccountIds(
-    args: CutSpecificArgsFromParameter<typeof getSubAccountIds>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getSubAccountIds
+    >,
   ): ReturnType<typeof getSubAccountIds>
   getSubAccountSequences(
-    args: CutSpecificArgsFromParameter<typeof getSubAccountSequences>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getSubAccountSequences
+    >,
   ): ReturnType<typeof getSubAccountSequences>
   getRemoteAccountProxies(
-    args: CutSpecificArgsFromParameter<typeof getRemoteAccountProxies>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getRemoteAccountProxies
+    >,
   ): ReturnType<typeof getRemoteAccountProxies>
   getRemoteAccountIds(
-    args: CutSpecificArgsFromParameter<typeof getRemoteAccountIds>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getRemoteAccountIds
+    >,
   ): ReturnType<typeof getRemoteAccountIds>
   getTotalValue(
-    args: CutSpecificArgsFromParameter<typeof getTotalValue>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getTotalValue
+    >,
   ): ReturnType<typeof getTotalValue>
-  getCosmWasmClient(
-    args: CutCosmWasmClientFromParameter<typeof getCosmWasmClient>,
-  ): ReturnType<typeof getCosmWasmClient>
 }
 
 export function accountPublicActions(
@@ -89,81 +99,103 @@ export function accountPublicActions(
   apiUrl: string,
 ): AccountPublicActions {
   return {
-    getAccountBaseAddresses: ({ args, ...rest }) =>
+    getAccountBaseAddresses: (parameters) =>
       getAccountBaseAddressesFromApi({
-        args: { ...args, accountId, cosmWasmClient, apiUrl },
-        ...rest,
+        accountId,
+        cosmWasmClient,
+        apiUrl,
+        ...parameters,
       }),
-    getBaseToken: ({ args, ...rest }) =>
+    getBaseToken: (parameters) =>
       getBaseToken({
-        args: { ...args, accountId, cosmWasmClient, apiUrl },
-        ...rest,
+        ...parameters,
+        accountId,
+        cosmWasmClient,
+        apiUrl,
       }),
-    getManagerQueryClientFromApi: ({ args, ...rest }) =>
+    getManagerQueryClientFromApi: (parameters) =>
       getManagerQueryClientFromApi({
-        args: { ...args, accountId, cosmWasmClient, apiUrl },
-        ...rest,
+        ...parameters,
+        accountId,
+        cosmWasmClient,
+        apiUrl,
       }),
-    getModuleAddress: ({ args, ...rest }) =>
+    getModuleAddress: (parameters) =>
       getModuleAddress({
-        args: { ...args, accountId, cosmWasmClient, apiUrl },
-        ...rest,
+        ...parameters,
+        accountId,
+        cosmWasmClient,
+        apiUrl,
       }),
-    getModules: ({ args, ...rest }) =>
+    getModules: (parameters) =>
       getModules({
-        args: { ...args, accountId, cosmWasmClient, apiUrl },
-        ...rest,
+        ...parameters,
+        accountId,
+        cosmWasmClient,
+        apiUrl,
       }),
-    getModuleInstantiate2AddressFromApi: ({ args, ...rest }) =>
+    getModuleInstantiate2AddressFromApi: (parameters) =>
       getModuleInstantiate2AddressFromApi({
-        args: { ...args, accountId, cosmWasmClient, apiUrl },
-        ...rest,
+        ...parameters,
+        accountId,
+        cosmWasmClient,
+        apiUrl,
       }),
-    getNamespace: ({ args, ...rest }) =>
+    getNamespace: (parameters) =>
       getNamespace({
-        args: { ...args, accountId, cosmWasmClient, apiUrl },
-        ...rest,
+        ...parameters,
+        accountId,
+        cosmWasmClient,
+        apiUrl,
       }),
-    getOwner: ({ args, ...rest }) =>
+    getOwner: (parameters) =>
       getOwner({
-        args: { ...args, accountId, cosmWasmClient, apiUrl },
-        ...rest,
+        ...parameters,
+        accountId,
+        cosmWasmClient,
+        apiUrl,
       }),
-    getProxyQueryClientFromApi: ({ args, ...rest }) =>
+    getProxyQueryClientFromApi: (parameters) =>
       getProxyQueryClientFromApi({
-        args: { ...args, accountId, cosmWasmClient, apiUrl },
-        ...rest,
+        ...parameters,
+        accountId,
+        cosmWasmClient,
+        apiUrl,
       }),
-    getSubAccountIds: ({ args, ...rest }) =>
+    getSubAccountIds: (parameters) =>
       getSubAccountIds({
-        args: { ...args, accountId, cosmWasmClient, apiUrl },
-        ...rest,
+        ...parameters,
+        accountId,
+        cosmWasmClient,
+        apiUrl,
       }),
-    getSubAccountSequences: ({ args, ...rest }) =>
+    getSubAccountSequences: (parameters) =>
       getSubAccountSequences({
-        args: { ...args, accountId, cosmWasmClient, apiUrl },
-        ...rest,
+        ...parameters,
+        accountId,
+        cosmWasmClient,
+        apiUrl,
       }),
-    getRemoteAccountProxies: ({ args, ...rest }) =>
+    getRemoteAccountProxies: (parameters) =>
       getRemoteAccountProxies({
-        args: { ...args, accountId, cosmWasmClient, apiUrl },
-        ...rest,
+        ...parameters,
+        accountId,
+        cosmWasmClient,
+        apiUrl,
       }),
-    getRemoteAccountIds: ({ args, ...rest }) =>
+    getRemoteAccountIds: (parameters) =>
       getRemoteAccountIds({
-        args: { ...args, accountId, cosmWasmClient, apiUrl },
-        ...rest,
+        ...parameters,
+        accountId,
+        cosmWasmClient,
+        apiUrl,
       }),
-    getTotalValue: ({ args, ...rest }) =>
+    getTotalValue: (parameters) =>
       getTotalValue({
-        args: { ...args, accountId, cosmWasmClient, apiUrl },
-        ...rest,
-      }),
-
-    getCosmWasmClient: ({ args, ...rest }) =>
-      getCosmWasmClient({
-        args: { ...args, cosmWasmClient },
-        ...rest,
+        ...parameters,
+        accountId,
+        cosmWasmClient,
+        apiUrl,
       }),
   }
 }

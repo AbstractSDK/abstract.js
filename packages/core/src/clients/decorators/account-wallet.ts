@@ -8,42 +8,51 @@ import { getProxyClientFromApi } from '../../actions/account/wallet/get-proxy-cl
 import { revokeNamespace } from '../../actions/account/wallet/remove-namespace'
 import { withdraw } from '../../actions/account/wallet/withdraw'
 import { VersionControlTypes } from '../../codegen/abstract/index'
-import { CutArgs } from '../../types/with-args'
+import { ExtractAndOmitParameters } from '../../types/parameters'
 
-type CutSpecificArgsFromParameter<T extends (payload: any) => any> = CutArgs<
-  {
-    readonly accountId: VersionControlTypes.AccountId
-    readonly signingCosmWasmClient: SigningCosmWasmClient
-    readonly apiUrl: string
-    readonly sender: string
-  },
-  T
+type ExtractAndOmitDecoratedParametersFromParameters<
+  fn extends (payload: any) => any,
+> = ExtractAndOmitParameters<
+  fn,
+  'accountId' | 'signingCosmWasmClient' | 'apiUrl' | 'sender'
 >
 
 export type AccountWalletActions = {
   claimNamespace(
-    args: CutSpecificArgsFromParameter<typeof claimNamespace>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof claimNamespace
+    >,
   ): ReturnType<typeof claimNamespace>
   createSubAccount(
-    args: CutSpecificArgsFromParameter<typeof createSubAccount>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof createSubAccount
+    >,
   ): ReturnType<typeof createSubAccount>
   deposit(
-    args: CutSpecificArgsFromParameter<typeof deposit>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<typeof deposit>,
   ): ReturnType<typeof deposit>
   execute(
-    args: CutSpecificArgsFromParameter<typeof execute>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<typeof execute>,
   ): ReturnType<typeof execute>
   getManagerClientFromApi(
-    args: CutSpecificArgsFromParameter<typeof getManagerClientFromApi>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getManagerClientFromApi
+    >,
   ): ReturnType<typeof getManagerClientFromApi>
   getProxyClientFromApi(
-    args: CutSpecificArgsFromParameter<typeof getProxyClientFromApi>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getProxyClientFromApi
+    >,
   ): ReturnType<typeof getProxyClientFromApi>
   revokeNamespace(
-    args: CutSpecificArgsFromParameter<typeof revokeNamespace>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof revokeNamespace
+    >,
   ): ReturnType<typeof revokeNamespace>
   withdraw(
-    args: CutSpecificArgsFromParameter<typeof withdraw>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof withdraw
+    >,
   ): ReturnType<typeof withdraw>
 }
 
@@ -54,45 +63,69 @@ export function accountWalletActions(
   apiUrl: string,
 ): AccountWalletActions {
   return {
-    claimNamespace: ({ args, ...rest }) =>
+    claimNamespace: (parameters) =>
       claimNamespace({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
-    createSubAccount: ({ args, ...rest }) =>
+    createSubAccount: (parameters) =>
       createSubAccount({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
-    deposit: ({ args, ...rest }) =>
+    deposit: (parameters) =>
       deposit({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
-    execute: ({ args, ...rest }) =>
+    execute: (parameters) =>
       execute({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
-    withdraw: ({ args, ...rest }) =>
+    withdraw: (parameters) =>
       withdraw({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
-    getManagerClientFromApi: ({ args, ...rest }) =>
+    getManagerClientFromApi: (parameters) =>
       getManagerClientFromApi({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
-    getProxyClientFromApi: ({ args, ...rest }) =>
+    getProxyClientFromApi: (parameters) =>
       getProxyClientFromApi({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
-    revokeNamespace: ({ args, ...rest }) =>
+    revokeNamespace: (parameters) =>
       revokeNamespace({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
   }
 }

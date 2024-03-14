@@ -1,25 +1,29 @@
-import { AnsToken, ApiClient } from '@abstract-money/core'
-import { UseQueryOptions, useQuery } from '@tanstack/react-query'
+import { ApiClient } from '@abstract-money/core/clients'
+import { AnsToken } from '@abstract-money/core/utils'
 import React from 'react'
 import { useConfig } from '../contexts'
-import { WithArgs } from '../types/utils'
+import { WithArgs } from '../types/args'
+import { UseQueryParameters, useQuery } from '../types/queries'
 
-export function useAnsTokenFromAPI(
-  { args }: WithArgs<Parameters<ApiClient['getAnsTokenFromApi']>[0]['args']>,
-  {
-    enabled: enabled_ = true,
-    ...rest
-  }: UseQueryOptions<
+export type UseAnsTokenFromAPIParameters = WithArgs<
+  Parameters<ApiClient['getAnsTokenFromApi']>[0]
+> & {
+  query?: UseQueryParameters<
     AnsToken,
     unknown,
     AnsToken,
     readonly [
       'ansTokenFromApi',
-      WithArgs<Parameters<ApiClient['getAnsTokenFromApi']>[0]['args']>,
+      WithArgs<Parameters<ApiClient['getAnsTokenFromApi']>[0]>,
       ApiClient | undefined,
     ]
-  > = {},
-) {
+  >
+}
+
+export function useAnsTokenFromAPI({
+  args,
+  query = {},
+}: UseAnsTokenFromAPIParameters) {
   const config = useConfig()
   const client = config.useApiClient()
   const queryKey = React.useMemo(
@@ -27,9 +31,8 @@ export function useAnsTokenFromAPI(
     [args, client],
   )
 
-  const enabled = React.useMemo(
-    () => Boolean(client && args?.id && args?.chainName && enabled_),
-    [enabled_, client, args],
+  const enabled = Boolean(
+    client && args?.id && args?.chainName && (query.enabled ?? true),
   )
 
   const queryFn = React.useCallback(() => {
@@ -37,9 +40,10 @@ export function useAnsTokenFromAPI(
       throw new Error('No client or owner or chain')
 
     return client.getAnsTokenFromApi({
-      args: { chainName: args.chainName, id: args.id },
+      chainName: args.chainName,
+      id: args.id,
     })
   }, [client, args])
 
-  return useQuery(queryKey, queryFn, { enabled, ...rest })
+  return useQuery({ queryKey, queryFn, ...query, enabled })
 }

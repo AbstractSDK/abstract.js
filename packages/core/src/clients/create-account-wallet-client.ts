@@ -1,5 +1,5 @@
 import { VersionControlTypes } from '../codegen/abstract/index'
-import type { Prettify } from '../types/utils'
+import type { Evaluate } from '../types/utils'
 import { ABSTRACT_API_URL } from '../utils'
 import { type Client } from './create-client'
 import { WalletClientConfig, createWalletClient } from './create-wallet-client'
@@ -12,7 +12,7 @@ export type AccountWalletClientConfig = WalletClientConfig & {
   accountId: VersionControlTypes.AccountId
 }
 
-export type AccountWalletClient = Prettify<Client<AccountWalletActions>>
+export type AccountWalletClient = Evaluate<Client<AccountWalletActions>>
 
 export function createAccountWalletClient(
   parameters: AccountWalletClientConfig,

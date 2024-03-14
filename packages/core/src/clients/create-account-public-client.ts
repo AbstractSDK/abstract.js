@@ -1,5 +1,5 @@
 import { VersionControlTypes } from '../codegen/abstract/index'
-import type { Prettify } from '../types/utils'
+import type { Evaluate } from '../types/utils'
 import { ABSTRACT_API_URL } from '../utils'
 import { type Client } from './create-client'
 import { PublicClientConfig, createPublicClient } from './create-public-client'
@@ -12,7 +12,7 @@ export type AccountPublicClientConfig = PublicClientConfig & {
   accountId: VersionControlTypes.AccountId
 }
 
-export type AccountPublicClient = Prettify<Client<AccountPublicActions>>
+export type AccountPublicClient = Evaluate<Client<AccountPublicActions>>
 
 export function createAccountPublicClient(
   parameters: AccountPublicClientConfig,

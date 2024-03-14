@@ -1,5 +1,5 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import type { Prettify } from '../types/utils'
+import type { Evaluate } from '../types/utils'
 import { ABSTRACT_API_URL } from '../utils'
 import { ApiClientConfig, createApiClient } from './create-api-client'
 import { type Client } from './create-client'
@@ -9,7 +9,7 @@ export type PublicClientConfig = ApiClientConfig & {
   cosmWasmClient: CosmWasmClient
 }
 
-export type PublicClient = Prettify<Client<PublicActions>>
+export type PublicClient = Evaluate<Client<PublicActions>>
 
 export function createPublicClient(
   parameters: PublicClientConfig,

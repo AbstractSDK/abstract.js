@@ -6,7 +6,7 @@ import {
   AbstractClient,
   accountIdToLegacyAccountId,
 } from '@abstract-money/core/legacy'
-import { UseQueryOptions, useQuery } from '@tanstack/react-query'
+import { UseQueryParameters, useQuery } from '../types/queries'
 import { useAbstractClient } from './use-abstract-client'
 
 interface AbstractModuleClientConstructor {
@@ -46,18 +46,13 @@ async function getAbstractModuleClient<
   }) as InstanceType<TModule>
 }
 
-export function useAbstractModuleClient<
+export type UseAbstractModuleClientParameters<
   TModule extends AbstractModuleClientConstructor,
->(
-  parameters: {
-    accountId: AccountId | undefined
-    moduleId: string
-    Module: TModule
-  },
-  {
-    enabled: enabled_ = true,
-    ...rest
-  }: UseQueryOptions<
+> = {
+  accountId: AccountId | undefined
+  moduleId: string
+  Module: TModule
+  query?: UseQueryParameters<
     InstanceType<TModule> | undefined,
     unknown,
     InstanceType<TModule> | undefined,
@@ -68,19 +63,26 @@ export function useAbstractModuleClient<
       TModule,
       AbstractClient | undefined,
     ]
-  > = {},
-) {
-  const { moduleId, accountId, Module } = parameters
+  >
+}
 
+export function useAbstractModuleClient<
+  TModule extends AbstractModuleClientConstructor,
+>({
+  moduleId,
+  accountId,
+  Module,
+  query = {},
+}: UseAbstractModuleClientParameters<TModule>) {
   const {
     data: abstractClient,
     isLoading: isAbstractClientLoading,
     isError: isAbstractClientError,
     error: abstractClientError,
-  } = useAbstractClient(
-    { chainName: accountId?.chainName },
-    { enabled: enabled_ },
-  )
+  } = useAbstractClient({
+    chainName: accountId?.chainName,
+    query: { enabled: query.enabled ?? true },
+  })
 
   const queryKey = React.useMemo(
     () =>
@@ -106,9 +108,8 @@ export function useAbstractModuleClient<
     })
   }, [abstractClient, accountId, moduleId, Module])
 
-  const enabled = React.useMemo(
-    () => Boolean(abstractClient && accountId && enabled_),
-    [enabled_, abstractClient, accountId],
+  const enabled = Boolean(
+    abstractClient && accountId && (query.enabled ?? true),
   )
 
   const {
@@ -116,7 +117,7 @@ export function useAbstractModuleClient<
     isLoading: isAbstractModuleClientLoading,
     isError: isAbstractModuleClientError,
     error: abstractModuleClientError,
-  } = useQuery(queryKey, queryFn, { enabled, ...rest })
+  } = useQuery({ queryKey, queryFn, ...query, enabled })
 
   if (isAbstractClientError)
     return {
