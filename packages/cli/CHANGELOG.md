@@ -1,5 +1,11 @@
 # @abstract-money/cli
 
+## 0.3.1
+
+### Patch Changes
+
+- [#81](https://github.com/AbstractSDK/abstract.js/pull/81) [`8ac578d`](https://github.com/AbstractSDK/abstract.js/commit/8ac578dd0703391257e06fcce219ab32afe01fd9) Thanks [@dalechyn](https://github.com/dalechyn)! - Changed the API for `react` and `core` packages. Previously `core` package had unnecessary `args:{}` wrapping, now it doesn't. Also, `query` and `mutation` fields were added to the `react` package to have a clear separation of concerns, as well as fixed inconsistent API around `chainName` and types.
+
 ## 0.3.0
 
 ### Minor Changes
