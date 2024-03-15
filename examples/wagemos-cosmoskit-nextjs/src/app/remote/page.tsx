@@ -60,8 +60,7 @@ export default function RemotePage() {
 
   const onCreateClick = useCallback(() => {
     if (!chainInput) {
-      console.log('no chain input')
-      return undefined
+      throw new Error('chainInput is undefined')
     }
 
     console.log('creating remote account')
