@@ -76,8 +76,7 @@ export default function RemotePage() {
 
   const onExecClick = useCallback(() => {
     if (!chainInput) {
-      console.log('no chain input')
-      return undefined
+      throw new Error('chainInput is undefined')
     }
     console.log('executing remote account')
     execRemote({
