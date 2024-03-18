@@ -43,23 +43,21 @@ export async function getAbstractClient({
   )
 }
 
-export type UseAbstractClientParameters =
-  | {
-      chainName?: string | undefined
-      query?: UseQueryParameters<
-        AbstractClient | undefined,
-        unknown,
-        AbstractClient | undefined,
-        readonly [
-          'abstract-client',
-          string | undefined,
-          string | undefined,
-          string,
-          SigningCosmWasmClient | undefined,
-        ]
-      >
-    }
-  | never
+export type UseAbstractClientParameters = {
+  chainName: string | undefined
+  query?: UseQueryParameters<
+    AbstractClient | undefined,
+    unknown,
+    AbstractClient | undefined,
+    readonly [
+      'abstract-client',
+      string | undefined,
+      string | undefined,
+      string,
+      SigningCosmWasmClient | undefined,
+    ]
+  >
+}
 
 export function useAbstractClient(parameters: UseAbstractClientParameters) {
   const { chainName, query = {} } = parameters ?? {}
