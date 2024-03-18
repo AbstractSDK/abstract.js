@@ -41,7 +41,7 @@ async function getAbstractQueryClient({
 }
 
 export type UseAbstractQueryClientParameters = {
-  chainName?: string | undefined
+  chainName: string | undefined
   query?: UseQueryParameters<
     AbstractQueryClient | undefined,
     unknown,
@@ -55,10 +55,10 @@ export type UseAbstractQueryClientParameters = {
   >
 }
 
-export function useAbstractQueryClient({
-  chainName,
-  query = {},
-}: UseAbstractQueryClientParameters) {
+export function useAbstractQueryClient(
+  parameters: UseAbstractQueryClientParameters,
+) {
+  const { chainName, query = {} } = parameters ?? {}
   const { apiUrl } = useConfig()
 
   const {

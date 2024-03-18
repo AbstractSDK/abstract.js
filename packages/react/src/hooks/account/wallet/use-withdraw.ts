@@ -15,6 +15,7 @@ type WithdrawMutation = ExtractArgsFromParameters<
 
 export type UseWithdrawParameters = {
   accountId: AccountId | undefined
+  chainName: string | undefined
   mutation?: UseMutationParameters<DeliverTxResponse, unknown, WithdrawMutation>
 }
 
@@ -24,6 +25,7 @@ export type UseWithdrawParameters = {
  */
 export function useWithdraw({
   accountId,
+  chainName,
   mutation,
 }: UseWithdrawParameters): UseMutationReturnType<
   DeliverTxResponse,
@@ -32,7 +34,7 @@ export function useWithdraw({
 > {
   const config = useConfig()
   const accountWalletClient = config.useAccountWalletClient({
-    chainName: accountId?.chainName,
+    chainName,
     accountId,
   })
   return useMutation(({ args, ...cosmWasmSignOptions }) => {

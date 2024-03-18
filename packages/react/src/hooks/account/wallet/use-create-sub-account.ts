@@ -11,6 +11,7 @@ type CreateSubAccountMutation = ExtractArgsFromParameters<
 
 export type UseCreateSubAccountParameters = {
   accountId: AccountId | undefined
+  chainName: string | undefined
   mutation?: UseMutationParameters<
     Awaited<ReturnType<AccountWalletClient['createSubAccount']>>,
     unknown,
@@ -20,11 +21,12 @@ export type UseCreateSubAccountParameters = {
 
 export function useCreateSubAccount({
   accountId,
+  chainName,
   mutation,
 }: UseCreateSubAccountParameters) {
   const config = useConfig()
   const walletClient = config.useAccountWalletClient({
-    chainName: accountId?.chainName,
+    chainName,
     accountId,
   })
 

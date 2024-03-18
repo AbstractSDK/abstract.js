@@ -61,6 +61,7 @@ export default function AuthzPage() {
 
   const { data: savingsAppAddress } = useModuleInstantiate2AddressFromApi({
     accountId: stringToAccountId(TEST_SAVINGS_ACCOUNT_ID, CHAIN_NAME),
+    chainName: CHAIN_NAME,
     args: {
       moduleId: SAVINGS_APP_MODULE_ID,
     },

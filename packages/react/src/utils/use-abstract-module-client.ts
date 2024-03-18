@@ -50,6 +50,7 @@ export type UseAbstractModuleClientParameters<
   TModule extends AbstractModuleClientConstructor,
 > = {
   accountId: AccountId | undefined
+  chainName: string | undefined
   moduleId: string
   Module: TModule
   query?: UseQueryParameters<
@@ -71,6 +72,7 @@ export function useAbstractModuleClient<
 >({
   moduleId,
   accountId,
+  chainName,
   Module,
   query = {},
 }: UseAbstractModuleClientParameters<TModule>) {
@@ -80,7 +82,7 @@ export function useAbstractModuleClient<
     isError: isAbstractClientError,
     error: abstractClientError,
   } = useAbstractClient({
-    chainName: accountId?.chainName,
+    chainName,
     query: { enabled: query.enabled ?? true },
   })
 
