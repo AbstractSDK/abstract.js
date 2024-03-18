@@ -25,6 +25,7 @@ export type AbstractProviderProps = AbstractConfigProps
 export function AbstractProvider({
   children,
   config,
+  queryClientOptions,
 }: React.PropsWithChildren<AbstractProviderProps>) {
   // Bailing out of using JSX
   // https://github.com/egoist/tsup/issues/390#issuecomment-933488738
@@ -35,7 +36,8 @@ export function AbstractProvider({
       // biome-ignore lint/correctness/noChildrenProp: <explanation>
       children: React.createElement(QueryClientProvider, {
         children,
-        client,
+        client: client,
+        ...queryClientOptions,
       }),
     }),
   })
