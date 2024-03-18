@@ -1,5 +1,11 @@
 # @abstract-money/cli
 
+## 0.3.2
+
+### Patch Changes
+
+- [#84](https://github.com/AbstractSDK/abstract.js/pull/84) [`969a679`](https://github.com/AbstractSDK/abstract.js/commit/969a6797fae69f3285b3e7c303a1e498836951f4) Thanks [@dalechyn](https://github.com/dalechyn)! - Brought `chainName` parameter back to account-dependant hooks.
+
 ## 0.3.1
 
 ### Patch Changes
