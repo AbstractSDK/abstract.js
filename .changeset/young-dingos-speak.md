@@ -5,4 +5,4 @@
 "@abstract-money/react": patch
 ---
 
-Brought `chainName` parameter back to account-dependant hooks./
+Brought `chainName` parameter back to account-dependant hooks.
