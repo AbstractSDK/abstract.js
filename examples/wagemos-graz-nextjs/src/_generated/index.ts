@@ -444,6 +444,7 @@ export const betting = {
     useUpdateConfig: (
       {
         accountId,
+        chainName,
       }: { accountId: AccountId | undefined; chainName: string | undefined },
       options?: Omit<
         UseMutationOptions<
@@ -463,6 +464,7 @@ export const betting = {
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
+        chainName,
 
         Module: BettingAppClient,
       })
@@ -496,6 +498,7 @@ export const betting = {
     useCloseRound: (
       {
         accountId,
+        chainName,
       }: { accountId: AccountId | undefined; chainName: string | undefined },
       options?: Omit<
         UseMutationOptions<
@@ -515,6 +518,7 @@ export const betting = {
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
+        chainName,
 
         Module: BettingAppClient,
       })
@@ -548,6 +552,7 @@ export const betting = {
     useDistributeWinnings: (
       {
         accountId,
+        chainName,
       }: { accountId: AccountId | undefined; chainName: string | undefined },
       options?: Omit<
         UseMutationOptions<
@@ -567,6 +572,7 @@ export const betting = {
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
+        chainName,
 
         Module: BettingAppClient,
       })
@@ -600,6 +606,7 @@ export const betting = {
     usePlaceBet: (
       {
         accountId,
+        chainName,
       }: { accountId: AccountId | undefined; chainName: string | undefined },
       options?: Omit<
         UseMutationOptions<
@@ -619,6 +626,7 @@ export const betting = {
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
+        chainName,
 
         Module: BettingAppClient,
       })
@@ -652,6 +660,7 @@ export const betting = {
     useUpdateAccounts: (
       {
         accountId,
+        chainName,
       }: { accountId: AccountId | undefined; chainName: string | undefined },
       options?: Omit<
         UseMutationOptions<
@@ -671,6 +680,7 @@ export const betting = {
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
+        chainName,
 
         Module: BettingAppClient,
       })
@@ -704,6 +714,7 @@ export const betting = {
     useRegister: (
       {
         accountId,
+        chainName,
       }: { accountId: AccountId | undefined; chainName: string | undefined },
       options?: Omit<
         UseMutationOptions<
@@ -723,6 +734,7 @@ export const betting = {
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
+        chainName,
 
         Module: BettingAppClient,
       })
@@ -756,6 +768,7 @@ export const betting = {
     useCreateRound: (
       {
         accountId,
+        chainName,
       }: { accountId: AccountId | undefined; chainName: string | undefined },
       options?: Omit<
         UseMutationOptions<
@@ -775,6 +788,7 @@ export const betting = {
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
+        chainName,
 
         Module: BettingAppClient,
       })

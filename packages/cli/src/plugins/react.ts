@@ -382,7 +382,9 @@ export function react(options: ReactOptions = {}): ReactResult {
                 dedent`
                   (
                     { ${
-                      hasAbstractApp ? 'accountId' : 'contractAddress'
+                      hasAbstractApp
+                        ? 'accountId, chainName'
+                        : 'contractAddress'
                     } }: { ${
                   hasAbstractApp
                     ? 'accountId: AccountId | undefined; chainName: string | undefined'
@@ -410,6 +412,7 @@ export function react(options: ReactOptions = {}): ReactResult {
                             ? `
                         moduleId: ${constantCase(contract.name)}_MODULE_ID,
                         accountId,
+                        chainName,
                         `
                             : 'contractAddress,'
                         }
