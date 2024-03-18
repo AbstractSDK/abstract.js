@@ -17,6 +17,7 @@ export type UseSubAccountIdsFromApiParameters = WithArgs<
   Parameters<AccountPublicClient['getSubAccountIds']>[0]
 > & {
   query?: QueryOptions
+  chainName: string | undefined
   accountId: AccountId | undefined
 }
 type QueryKey = readonly [
@@ -35,12 +36,13 @@ type QueryResult = UseQueryReturnType<QueryData, QueryError>
 export function useSubAccountIdsFromApi({
   args,
   accountId,
+  chainName,
   query = {},
 }: UseSubAccountIdsFromApiParameters): QueryResult {
   const config = useConfig()
   const accountPublicClient = config.useAccountPublicClient({
     accountId,
-    chainName: accountId?.chainName,
+    chainName,
   })
   const queryKey = React.useMemo(
     () =>

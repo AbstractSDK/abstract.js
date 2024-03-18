@@ -34,17 +34,19 @@ export type UseModuleInstantiate2AddressFromApiParameters = WithArgs<
   Parameters<AccountPublicClient['getModuleInstantiate2AddressFromApi']>[0]
 > & {
   query?: QueryOptions
+  chainName: string | undefined
   accountId: AccountId | undefined
 }
 export function useModuleInstantiate2AddressFromApi({
   args,
   accountId,
+  chainName,
   query = {},
 }: UseModuleInstantiate2AddressFromApiParameters): QueryResult {
   const config = useConfig()
   const accountPublicClient = config.useAccountPublicClient({
     accountId,
-    chainName: accountId?.chainName,
+    chainName,
   })
   const queryKey = React.useMemo(
     () =>

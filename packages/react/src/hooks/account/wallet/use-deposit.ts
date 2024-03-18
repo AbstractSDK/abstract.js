@@ -15,6 +15,7 @@ type DepositMutation = ExtractArgsFromParameters<
 
 export type UseDepositParameters = {
   accountId: AccountId | undefined
+  chainName: string | undefined
   mutation?: UseMutationParameters<DeliverTxResponse, unknown, DepositMutation>
 }
 
@@ -24,6 +25,7 @@ export type UseDepositParameters = {
  */
 export function useDeposit({
   accountId,
+  chainName,
   mutation,
 }: UseDepositParameters): UseMutationReturnType<
   DeliverTxResponse,
@@ -33,7 +35,7 @@ export function useDeposit({
   const config = useConfig()
   const accountWalletClient = config.useAccountWalletClient({
     accountId,
-    chainName: accountId?.chainName,
+    chainName,
   })
   return useMutation(({ args, ...cosmWasmSignOptions }) => {
     if (!accountWalletClient) throw new Error('client is not defined')

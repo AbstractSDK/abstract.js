@@ -292,7 +292,7 @@ export function react(options: ReactOptions = {}): ReactResult {
                   hookName,
                 )}>>[0], 'client'> & { ${
                   hasAbstractApp
-                    ? 'accountId: AccountId | undefined;'
+                    ? 'accountId: AccountId | undefined; chainName: string | undefined;'
                     : 'contractAddress: string | undefined;'
                 }}) => {
                     const {
@@ -385,7 +385,7 @@ export function react(options: ReactOptions = {}): ReactResult {
                       hasAbstractApp ? 'accountId' : 'contractAddress'
                     } }: { ${
                   hasAbstractApp
-                    ? 'accountId: AccountId | undefined'
+                    ? 'accountId: AccountId | undefined; chainName: string | undefined'
                     : 'contractAddress: string | undefined'
                 } },
                     options?: Omit<

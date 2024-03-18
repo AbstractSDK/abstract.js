@@ -28,17 +28,19 @@ type QueryResult = UseQueryReturnType<QueryData, QueryError>
 
 export type UseAccountBaseAddressesFromApiParameters = {
   accountId: AccountId | undefined
+  chainName: string | undefined
   query?: QueryOptions
 }
 
 export function useAccountBaseAddressesFromApi({
   accountId,
+  chainName,
   query = {},
 }: UseAccountBaseAddressesFromApiParameters): QueryResult {
   const config = useConfig()
   const accountPublicClient = config.useAccountPublicClient({
     accountId,
-    chainName: accountId?.chainName,
+    chainName,
   })
   const queryKey = React.useMemo(
     () => ['accountBaseAddresses', accountPublicClient, accountId] as const,

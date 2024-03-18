@@ -15,10 +15,12 @@ type ExecuteMutation = ExtractArgsFromParameters<
 
 export type UseExecuteParameters = {
   accountId: AccountId | undefined
+  chainName: string | undefined
   mutation?: UseMutationParameters<DeliverTxResponse, unknown, ExecuteMutation>
 }
 export function useExecute({
   accountId,
+  chainName,
   mutation,
 }: UseExecuteParameters): UseMutationReturnType<
   DeliverTxResponse,
@@ -27,7 +29,7 @@ export function useExecute({
 > {
   const config = useConfig()
   const accountWalletClient = config.useAccountWalletClient({
-    chainName: accountId?.chainName,
+    chainName,
     accountId,
   })
   return useMutation(({ args, ...cosmWasmSignOptions }) => {

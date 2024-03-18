@@ -23,6 +23,7 @@ export default function Home() {
   const { data, isLoading, isError } = betting.queries.useListRounds({
     args: {},
     accountId: stringToAccountId('neutron-18'),
+    chainName: 'neutron',
   })
   if (isLoading) return <p>Loading...</p>
   if (isError) return <p>Error</p>
