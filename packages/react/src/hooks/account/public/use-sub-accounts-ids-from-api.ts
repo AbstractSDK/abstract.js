@@ -56,7 +56,7 @@ export function useSubAccountIdsFromApi({
   )
 
   const enabled = Boolean(
-    (accountPublicClient && args && query.enabled) ?? true,
+    accountPublicClient && args && (query.enabled ?? true),
   )
 
   const queryFn = React.useCallback(() => {
