@@ -60,11 +60,13 @@ export default defineConfig({
 })
 ```
 
-This has 2 dependencies majorly which you need to install:
+You need to also install `plugins`:
 
 ```sh
-npm install @abstract-money/cli @abstract-money/cli/plugins
+pnpm install @abstract-money/cli/plugins
 ```
+
+You can use `npm` or `yarn` as per your preference.
 
 Once done, you're ready to generate the code:
 
