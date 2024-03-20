@@ -46,27 +46,27 @@ export type AccountWalletActions = {
     parameters: ExtractAndOmitDecoratedParametersFromParameters<typeof execute>,
   ): ReturnType<typeof execute>
   executeOnModule(
-    args: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof executeOnModule
     >,
   ): ReturnType<typeof executeOnModule>
   executeOnRemote(
-    args: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof executeOnRemote
     >,
   ): ReturnType<typeof executeOnRemote>
   executeOnRemoteModule(
-    args: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof executeOnRemoteModule
     >,
   ): ReturnType<typeof executeOnRemoteModule>
   sendFundsToRemote(
-    args: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof sendFundsToRemote
     >,
   ): ReturnType<typeof sendFundsToRemote>
   requestFundsFromRemote(
-    args: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof requestFundsFromRemote
     >,
   ): ReturnType<typeof requestFundsFromRemote>

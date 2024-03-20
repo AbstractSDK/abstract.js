@@ -87,7 +87,7 @@ export type PublicActions = {
     >,
   ): ReturnType<typeof getAnsHostQueryClient>
   getIbcClientQueryClient(
-    args: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getIbcClientQueryClient
     >,
   ): ReturnType<typeof getIbcClientQueryClient>
@@ -117,7 +117,7 @@ export type PublicActions = {
     >,
   ): ReturnType<typeof getVersionControlQueryClient>
   getRemoteHosts(
-    args: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getRemoteHostsFromApi
     >,
   ): ReturnType<typeof getRemoteHostsFromApi>
