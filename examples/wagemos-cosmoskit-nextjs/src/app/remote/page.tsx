@@ -36,7 +36,7 @@ export default function RemotePage() {
   })
 
   const firstAccount = useMemo(
-    () => (accounts ? accounts[0] : undefined),
+    () => accounts?.[0]
     [accounts],
   )
 
