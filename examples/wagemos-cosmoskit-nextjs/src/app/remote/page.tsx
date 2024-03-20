@@ -1,14 +1,11 @@
 'use client'
-import { stringToAccountId } from '@abstract-money/core'
 import {
+  useAccounts,
+  useCreateRemoteAccount,
+  useExecuteOnRemote,
   useRemoteAccountIds,
   useRemoteHosts,
-  useSignAndBroadcast,
 } from '@abstract-money/react'
-import { useAccounts } from '@abstract-money/react'
-import { useCreateRemoteAccount } from '@abstract-money/react'
-import { useConfig } from '@abstract-money/react'
-import { useExecuteOnRemote } from '@abstract-money/react'
 import { useChain } from '@cosmos-kit/react'
 import { useCallback, useMemo, useState } from 'react'
 import { Button } from '../../components/ui/button'
@@ -28,17 +25,15 @@ export default function RemotePage() {
 
   const { address } = useChain(CHAIN_NAME)
 
-  const { data: accounts, status } = useAccounts(
-    {
-      args: {
-        chainName: CHAIN_NAME,
-        owner: address ?? '',
-      },
+  const { data: accounts, status } = useAccounts({
+    args: {
+      chainName: CHAIN_NAME,
+      owner: address ?? '',
     },
-    {
+    query: {
       enabled: !!address,
     },
-  )
+  })
 
   const firstAccount = useMemo(
     () => (accounts ? accounts[0] : undefined),
@@ -48,14 +43,17 @@ export default function RemotePage() {
   const { mutate: createRemoteAccount, isLoading: isCreating } =
     useCreateRemoteAccount({
       accountId: firstAccount,
+      chainName: firstAccount?.chainName,
     })
   const { mutate: execRemote, isLoading: isExecuting } = useExecuteOnRemote({
     accountId: firstAccount,
+    chainName: firstAccount?.chainName,
   })
 
   const { data: remoteAccountIds } = useRemoteAccountIds({
     args: {},
     accountId: firstAccount,
+    chainName: firstAccount?.chainName,
   })
 
   const onCreateClick = useCallback(() => {
@@ -67,6 +65,7 @@ export default function RemotePage() {
 
     createRemoteAccount({
       fee: 'auto',
+      funds: [],
       args: {
         hostChainName: chainInput,
         base_asset: 'juno>juno',
@@ -80,6 +79,7 @@ export default function RemotePage() {
     }
     console.log('executing remote account')
     execRemote({
+      funds: [],
       fee: 'auto',
       args: {
         hostChainName: chainInput,

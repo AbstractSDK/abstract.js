@@ -10,6 +10,7 @@ export default defineConfig(
     //dev: process.env.DEV === 'true',
     entry: [
       'src/index.ts',
+      'src/actions/index.ts',
       'src/clients/index.ts',
       'src/utils/index.ts',
       'src/legacy/index.ts',

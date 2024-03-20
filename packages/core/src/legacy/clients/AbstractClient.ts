@@ -2,12 +2,12 @@ import {
   BatchCosmWasmClient,
   type BatchCosmWasmClientOptions,
 } from '@abstract-money/cosmwasm-utils'
-import { Coin } from '@cosmjs/amino'
 import {
   CosmWasmClient,
   type HttpEndpoint,
   type SigningCosmWasmClient,
 } from '@cosmjs/cosmwasm-stargate'
+import { Coin } from '@cosmjs/stargate'
 import { Variables } from 'graphql-request'
 import semverSatisfies from 'semver/functions/satisfies'
 import {
@@ -150,7 +150,8 @@ export class AbstractQueryClient implements IAbstractQueryClient {
     chains: string[],
   ): Promise<AbstractAccountId[]> {
     const result = await this._apiClient.getAccountsByOwnerFromApi({
-      args: { owner, chains },
+      owner,
+      chains,
     })
     return result.map((r) => new AbstractAccountId(r.chainName, r.seq, r.trace))
   }

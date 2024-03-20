@@ -5,10 +5,10 @@ import {
   graphqlRequest,
 } from '@abstract-money/core/legacy'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import React from 'react'
-import { useConfig } from 'src/contexts'
-import { useCosmWasmClient } from 'src/hooks'
+import { useConfig } from '../contexts'
+import { useCosmWasmClient } from '../hooks'
+import { UseQueryParameters, useQuery } from '../types/queries'
 
 async function getAbstractQueryClient({
   client,
@@ -40,16 +40,9 @@ async function getAbstractQueryClient({
   )
 }
 
-export function useAbstractQueryClient(
-  {
-    chainName,
-  }: {
-    chainName: string | undefined
-  },
-  {
-    enabled: enabled_ = true,
-    ...rest
-  }: UseQueryOptions<
+export type UseAbstractQueryClientParameters = {
+  chainName: string | undefined
+  query?: UseQueryParameters<
     AbstractQueryClient | undefined,
     unknown,
     AbstractQueryClient | undefined,
@@ -59,8 +52,13 @@ export function useAbstractQueryClient(
       string,
       CosmWasmClient | undefined,
     ]
-  > = {},
+  >
+}
+
+export function useAbstractQueryClient(
+  parameters: UseAbstractQueryClientParameters,
 ) {
+  const { chainName, query = {} } = parameters ?? {}
   const { apiUrl } = useConfig()
 
   const {
@@ -86,14 +84,13 @@ export function useAbstractQueryClient(
     })
   }, [client, chainName, apiUrl])
 
-  const enabled = React.useMemo(
-    () => Boolean(client && chainName && enabled_),
-    [enabled_, client, chainName],
-  )
+  const enabled = Boolean(client && chainName && (query.enabled ?? true))
 
-  const { data, isLoading, isError, error } = useQuery(queryKey, queryFn, {
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey,
+    queryFn,
+    ...query,
     enabled,
-    ...rest,
   })
 
   if (isCosmWasmClientError)

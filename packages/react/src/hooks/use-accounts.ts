@@ -1,36 +1,34 @@
-import { AccountId, ApiClient } from '@abstract-money/core'
-import { UseQueryOptions, useQuery } from '@tanstack/react-query'
+import { ApiClient } from '@abstract-money/core/clients'
+import { AccountId } from '@abstract-money/core/utils'
 import React from 'react'
 import { useConfig } from '../contexts'
-import { MaybeArray, WithArgs } from '../types/utils'
+import { WithArgs } from '../types/args'
+import { UseQueryParameters, useQuery } from '../types/queries'
+import { MaybeArray } from '../types/utils'
 
-/**
- * Loads all accounts for a given owner and chain.
- * @param owner address of the owner. Will automatically translate to other chains' addresses.
- * @param chainName chain to load accounts for.
- */
-export function useAccounts(
-  {
-    args,
-  }: WithArgs<{
-    owner: string
-    chainName: MaybeArray<string>
-  }>,
-  {
-    enabled: enabled_ = true,
-    ...rest
-  }: UseQueryOptions<
-    AccountId[] | undefined,
+export type UseAccountsParameters = WithArgs<{
+  owner: string
+  chainName: MaybeArray<string>
+}> & {
+  query?: UseQueryParameters<
+    AccountId[],
     unknown,
-    AccountId[] | undefined,
+    AccountId[],
     readonly [
       'accountsOf',
       string | undefined,
       string[] | undefined,
       ApiClient | undefined,
     ]
-  > = {},
-) {
+  >
+}
+
+/**
+ * Loads all accounts for a given owner and chain.
+ * @param owner address of the owner. Will automatically translate to other chains' addresses.
+ * @param chainName chain to load accounts for.
+ */
+export function useAccounts({ args, query = {} }: UseAccountsParameters) {
   const chains = React.useMemo(
     () =>
       args?.chainName
@@ -47,9 +45,8 @@ export function useAccounts(
     [args?.owner, chains, client],
   )
 
-  const enabled = React.useMemo(
-    () => Boolean(client && chains && args?.owner && enabled_),
-    [enabled_, client, args?.owner, chains],
+  const enabled = Boolean(
+    client && chains && args?.owner && (query.enabled ?? true),
   )
 
   const queryFn = React.useCallback(() => {
@@ -57,9 +54,10 @@ export function useAccounts(
       throw new Error('No client or owner or chain')
 
     return client.getAccountsByOwnerFromApi({
-      args: { owner: args.owner, chains },
+      owner: args.owner,
+      chains,
     })
   }, [client, args?.owner, chains])
 
-  return useQuery(queryKey, queryFn, { enabled, ...rest })
+  return useQuery({ queryKey, queryFn, ...query, enabled })
 }

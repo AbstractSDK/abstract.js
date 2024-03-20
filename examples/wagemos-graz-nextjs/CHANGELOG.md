@@ -1,5 +1,59 @@
 # wagemos-graz-nextjs
 
+## 0.2.33
+
+### Patch Changes
+
+- [#84](https://github.com/AbstractSDK/abstract.js/pull/84) [`969a679`](https://github.com/AbstractSDK/abstract.js/commit/969a6797fae69f3285b3e7c303a1e498836951f4) Thanks [@dalechyn](https://github.com/dalechyn)! - Brought `chainName` parameter back to account-dependant hooks.
+
+- Updated dependencies [[`969a679`](https://github.com/AbstractSDK/abstract.js/commit/969a6797fae69f3285b3e7c303a1e498836951f4)]:
+  - @abstract-money/react@1.0.1
+  - @abstract-money/core@1.0.0
+  - @abstract-money/provider-graz@2.0.1
+
+## 0.2.32
+
+### Patch Changes
+
+- [#81](https://github.com/AbstractSDK/abstract.js/pull/81) [`8ac578d`](https://github.com/AbstractSDK/abstract.js/commit/8ac578dd0703391257e06fcce219ab32afe01fd9) Thanks [@dalechyn](https://github.com/dalechyn)! - Changed the API for `react` and `core` packages. Previously `core` package had unnecessary `args:{}` wrapping, now it doesn't. Also, `query` and `mutation` fields were added to the `react` package to have a clear separation of concerns, as well as fixed inconsistent API around `chainName` and types.
+
+- Updated dependencies [[`8ac578d`](https://github.com/AbstractSDK/abstract.js/commit/8ac578dd0703391257e06fcce219ab32afe01fd9)]:
+  - @abstract-money/core@1.0.0
+  - @abstract-money/react@1.0.0
+  - @abstract-money/provider-graz@2.0.0
+
+## 0.2.31
+
+### Patch Changes
+
+- [#79](https://github.com/AbstractSDK/abstract.js/pull/79) [`5c10a90`](https://github.com/AbstractSDK/abstract.js/commit/5c10a900f65240b80bb69ac407d3b2f1d43e3020) Thanks [@dalechyn](https://github.com/dalechyn)! - Dropped the `chainName` that was passed previously as a parameter to every query/mutation. It's not needed as the account always has a `chainName` set.
+
+- Updated dependencies [[`5c10a90`](https://github.com/AbstractSDK/abstract.js/commit/5c10a900f65240b80bb69ac407d3b2f1d43e3020)]:
+  - @abstract-money/react@0.3.2
+  - @abstract-money/core@0.3.9
+  - @abstract-money/provider-graz@1.0.2
+
+## 0.2.30
+
+### Patch Changes
+
+- Updated dependencies [[`ecbdd3a`](https://github.com/AbstractSDK/abstract.js/commit/ecbdd3aec6226ff23e71f9b16596834bf808742f)]:
+  - @abstract-money/react@0.3.1
+  - @abstract-money/provider-graz@1.0.1
+
+## 0.2.29
+
+### Patch Changes
+
+- [#75](https://github.com/AbstractSDK/abstract.js/pull/75) [`6a02ff5`](https://github.com/AbstractSDK/abstract.js/commit/6a02ff503356d8d17bd94973f7b75c728b13b340) Thanks [@dalechyn](https://github.com/dalechyn)! - Deprecated `AbstractAccountIdProvider` in favor of custom client's accountId state management.
+  Introduced consequent changes to types involving `accountId`.
+  Fixes the peer-dependency issue in `provider-graz` package.
+  Dropped `@cosmjs/amino` in favor of `@cosmjs/stargate`
+- Updated dependencies [[`6a02ff5`](https://github.com/AbstractSDK/abstract.js/commit/6a02ff503356d8d17bd94973f7b75c728b13b340)]:
+  - @abstract-money/react@0.3.0
+  - @abstract-money/provider-graz@1.0.0
+  - @abstract-money/core@0.3.9
+
 ## 0.2.28
 
 ### Patch Changes

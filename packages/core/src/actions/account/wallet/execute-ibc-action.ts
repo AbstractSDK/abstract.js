@@ -1,15 +1,14 @@
 import { IbcClientTypes, ProxyTypes } from '../../../codegen/abstract'
-import { CallbackInfo } from '../../../codegen/abstract/cosmwasm-codegen/IbcClient.types'
 import { ModuleType } from '../../../codegen/gql/graphql'
+import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { MaybeArray } from '../../../types/utils'
-import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
-import { CommonModuleNames } from '../../public/get-abstract-module-address-from-version-control'
+import { CommonModuleNames } from '../../public/types'
 import { getModuleAddress } from '../public/get-module-address'
 import { executeOnModule } from './execute-on-module'
 import { BaseWalletParameters } from './types'
 
 export type ExecuteIbcActionParameters = Omit<
-  WithArgsAndCosmWasmSignOptions<
+  WithCosmWasmSignOptions<
     BaseWalletParameters & {
       msgs: MaybeArray<IbcClientTypes.ExecuteMsg>
     }
@@ -28,21 +27,23 @@ export type ExecuteIbcActionParameters = Omit<
  * @param memo
  */
 export async function executeIbcAction({
-  args: { accountId, signingCosmWasmClient, apiUrl, sender, msgs },
+  accountId,
+  signingCosmWasmClient,
+  apiUrl,
+  sender,
+  msgs,
   fee,
   memo,
 }: ExecuteIbcActionParameters) {
   const ibcClientAddress = getModuleAddress({
-    args: {
-      accountId,
-      cosmWasmClient: signingCosmWasmClient,
-      apiUrl,
-      id: CommonModuleNames.IBC_CLIENT,
-    },
+    accountId,
+    cosmWasmClient: signingCosmWasmClient,
+    apiUrl,
+    id: CommonModuleNames.IBC_CLIENT,
   })
 
   if (!ibcClientAddress) {
-    throw new Error('abstract:ibc-client is not installed')
+    throw new Error(`${CommonModuleNames.IBC_CLIENT} is not installed`)
   }
 
   const proxyMsg: ProxyTypes.ExecuteMsg = {
@@ -52,15 +53,13 @@ export async function executeIbcAction({
   }
 
   return executeOnModule({
-    args: {
-      accountId,
-      signingCosmWasmClient,
-      apiUrl,
-      sender,
-      moduleId: 'abstract:proxy',
-      moduleType: ModuleType.AccountBase,
-      moduleMsg: proxyMsg,
-    },
+    accountId,
+    signingCosmWasmClient,
+    apiUrl,
+    sender,
+    moduleId: 'abstract:proxy',
+    moduleType: ModuleType.AccountBase,
+    moduleMsg: proxyMsg,
     fee,
     memo,
   })

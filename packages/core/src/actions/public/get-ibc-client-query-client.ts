@@ -1,18 +1,15 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
-import {
-  AnsHostQueryClient,
-  IbcClientQueryClient,
-} from '../../codegen/abstract'
-import { WithArgs } from '../../types/with-args'
+import { IbcClientQueryClient } from '../../codegen/abstract'
 
-export type GetIbcClientQueryClientParameters = WithArgs<{
+export type GetIbcClientQueryClientParameters = {
   cosmWasmClient: CosmWasmClient
   ibcClientAddress: string
-}>
+}
 
 export function getIbcClientQueryClient({
-  args: { cosmWasmClient, ibcClientAddress },
+  cosmWasmClient,
+  ibcClientAddress,
 }: GetIbcClientQueryClientParameters) {
   return new IbcClientQueryClient(cosmWasmClient, ibcClientAddress)
 }

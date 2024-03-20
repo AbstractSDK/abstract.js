@@ -1,52 +1,44 @@
-import { AccountId, AccountWalletClient } from '@abstract-money/core'
+import { AccountWalletClient } from '@abstract-money/core/clients'
+import { AccountId } from '@abstract-money/core/utils'
 import { DeliverTxResponse } from '@cosmjs/stargate'
+import { useMutation } from '@tanstack/react-query'
+import { useConfig } from '../../../contexts'
+import { ExtractArgsFromParameters } from '../../../types/args'
 import {
-  UseMutationOptions,
-  UseMutationResult,
-  useMutation,
-} from '@tanstack/react-query'
-import { useAccountId, useConfig } from '../../../contexts'
-import { parseParameters } from '../utils'
+  UseMutationParameters,
+  UseMutationReturnType,
+} from '../../../types/queries'
 
-type WithdrawMutation = Parameters<AccountWalletClient['withdraw']>[0]
+type WithdrawMutation = ExtractArgsFromParameters<
+  Parameters<AccountWalletClient['withdraw']>[0]
+>
 
-export function useWithdraw(
-  { accountId }: { accountId: AccountId | undefined },
-  options?: Omit<
-    UseMutationOptions<DeliverTxResponse, unknown, WithdrawMutation>,
-    'mutationFn'
-  >,
-): UseMutationResult<DeliverTxResponse, unknown, WithdrawMutation>
-export function useWithdraw(
-  options?: Omit<
-    UseMutationOptions<DeliverTxResponse, unknown, WithdrawMutation>,
-    'mutationFn'
-  >,
-): UseMutationResult<DeliverTxResponse, unknown, WithdrawMutation>
+export type UseWithdrawParameters = {
+  accountId: AccountId | undefined
+  chainName: string | undefined
+  mutation?: UseMutationParameters<DeliverTxResponse, unknown, WithdrawMutation>
+}
+
 /**
  * Hook to withdraw to an Account.
  * @param options withdraw options.
  */
-export function useWithdraw(
-  arg1?:
-    | { accountId: AccountId | undefined }
-    | Omit<
-        UseMutationOptions<DeliverTxResponse, unknown, WithdrawMutation>,
-        'mutationFn'
-      >,
-  arg2?: Omit<
-    UseMutationOptions<DeliverTxResponse, unknown, WithdrawMutation>,
-    'mutationFn'
-  >,
-) {
-  const { accountId: accountIdParameter, options } = parseParameters(arg1, arg2)
-  const { accountId } = useAccountId({ accountId: accountIdParameter })
+export function useWithdraw({
+  accountId,
+  chainName,
+  mutation,
+}: UseWithdrawParameters): UseMutationReturnType<
+  DeliverTxResponse,
+  unknown,
+  WithdrawMutation
+> {
   const config = useConfig()
   const accountWalletClient = config.useAccountWalletClient({
-    chainName: accountId?.chainName,
+    chainName,
+    accountId,
   })
-  return useMutation(({ ...rest }) => {
+  return useMutation(({ args, ...cosmWasmSignOptions }) => {
     if (!accountWalletClient) throw new Error('client is not defined')
-    return accountWalletClient.withdraw(rest)
-  }, options)
+    return accountWalletClient.withdraw({ ...args, ...cosmWasmSignOptions })
+  }, mutation)
 }

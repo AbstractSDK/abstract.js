@@ -1,12 +1,10 @@
-import { IbcClientTypes, ManagerClient } from '../../../codegen/abstract'
-import { MaybeArray } from '../../../types/utils'
-import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
-import { Asset, assetToNativeAsset } from '../../../utils/assets'
+import { IbcClientTypes } from '../../../codegen/abstract'
+import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { executeIbcAction } from './execute-ibc-action'
 import { BaseWalletParameters } from './types'
 
 export type RequestFundsFromRemoteParameters = Omit<
-  WithArgsAndCosmWasmSignOptions<
+  WithCosmWasmSignOptions<
     BaseWalletParameters & {
       hostChainName: string
     }
@@ -25,7 +23,11 @@ export type RequestFundsFromRemoteParameters = Omit<
  * @param memo
  */
 export async function requestFundsFromRemote({
-  args: { accountId, signingCosmWasmClient, apiUrl, sender, hostChainName },
+  accountId,
+  signingCosmWasmClient,
+  apiUrl,
+  sender,
+  hostChainName,
   fee,
   memo,
 }: RequestFundsFromRemoteParameters) {
@@ -40,13 +42,11 @@ export async function requestFundsFromRemote({
   }
 
   return executeIbcAction({
-    args: {
-      accountId,
-      signingCosmWasmClient,
-      apiUrl,
-      sender,
-      msgs: requestFundsMsg,
-    },
+    accountId,
+    signingCosmWasmClient,
+    apiUrl,
+    sender,
+    msgs: requestFundsMsg,
     fee,
     memo,
   })

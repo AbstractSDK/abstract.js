@@ -14,60 +14,81 @@ import { requestFundsFromRemote } from '../../actions/account/wallet/request-rem
 import { sendFundsToRemote } from '../../actions/account/wallet/send-funds-to-remote'
 import { withdraw } from '../../actions/account/wallet/withdraw'
 import { VersionControlTypes } from '../../codegen/abstract/index'
-import { CutArgs } from '../../types/with-args'
+import { ExtractAndOmitParameters } from '../../types/parameters'
 
-type CutSpecificArgsFromParameter<T extends (payload: any) => any> = CutArgs<
-  {
-    readonly accountId: VersionControlTypes.AccountId
-    readonly signingCosmWasmClient: SigningCosmWasmClient
-    readonly apiUrl: string
-    readonly sender: string
-  },
-  T
+type ExtractAndOmitDecoratedParametersFromParameters<
+  fn extends (payload: any) => any,
+> = ExtractAndOmitParameters<
+  fn,
+  'accountId' | 'signingCosmWasmClient' | 'apiUrl' | 'sender'
 >
 
 export type AccountWalletActions = {
   claimNamespace(
-    args: CutSpecificArgsFromParameter<typeof claimNamespace>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof claimNamespace
+    >,
   ): ReturnType<typeof claimNamespace>
   createSubAccount(
-    args: CutSpecificArgsFromParameter<typeof createSubAccount>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof createSubAccount
+    >,
   ): ReturnType<typeof createSubAccount>
   createRemoteAccount(
-    args: CutSpecificArgsFromParameter<typeof createRemoteAccount>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof createRemoteAccount
+    >,
   ): ReturnType<typeof createRemoteAccount>
   deposit(
-    args: CutSpecificArgsFromParameter<typeof deposit>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<typeof deposit>,
   ): ReturnType<typeof deposit>
   execute(
-    args: CutSpecificArgsFromParameter<typeof execute>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<typeof execute>,
   ): ReturnType<typeof execute>
   executeOnModule(
-    args: CutSpecificArgsFromParameter<typeof executeOnModule>,
+    args: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof executeOnModule
+    >,
   ): ReturnType<typeof executeOnModule>
   executeOnRemote(
-    args: CutSpecificArgsFromParameter<typeof executeOnRemote>,
+    args: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof executeOnRemote
+    >,
   ): ReturnType<typeof executeOnRemote>
   executeOnRemoteModule(
-    args: CutSpecificArgsFromParameter<typeof executeOnRemoteModule>,
+    args: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof executeOnRemoteModule
+    >,
   ): ReturnType<typeof executeOnRemoteModule>
   sendFundsToRemote(
-    args: CutSpecificArgsFromParameter<typeof sendFundsToRemote>,
+    args: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof sendFundsToRemote
+    >,
   ): ReturnType<typeof sendFundsToRemote>
   requestFundsFromRemote(
-    args: CutSpecificArgsFromParameter<typeof requestFundsFromRemote>,
+    args: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof requestFundsFromRemote
+    >,
   ): ReturnType<typeof requestFundsFromRemote>
   getManagerClientFromApi(
-    args: CutSpecificArgsFromParameter<typeof getManagerClientFromApi>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getManagerClientFromApi
+    >,
   ): ReturnType<typeof getManagerClientFromApi>
   getProxyClientFromApi(
-    args: CutSpecificArgsFromParameter<typeof getProxyClientFromApi>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getProxyClientFromApi
+    >,
   ): ReturnType<typeof getProxyClientFromApi>
   revokeNamespace(
-    args: CutSpecificArgsFromParameter<typeof revokeNamespace>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof revokeNamespace
+    >,
   ): ReturnType<typeof revokeNamespace>
   withdraw(
-    args: CutSpecificArgsFromParameter<typeof withdraw>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof withdraw
+    >,
   ): ReturnType<typeof withdraw>
 }
 
@@ -78,76 +99,118 @@ export function accountWalletActions(
   apiUrl: string,
 ): AccountWalletActions {
   return {
-    claimNamespace: ({ args, ...rest }) =>
+    claimNamespace: (parameters) =>
       claimNamespace({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
-    createSubAccount: ({ args, ...rest }) =>
+    createSubAccount: (parameters) =>
       createSubAccount({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
-    createRemoteAccount: ({ args, ...rest }) =>
+    createRemoteAccount: (parameters) =>
       createRemoteAccount({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
-    deposit: ({ args, ...rest }) =>
+    deposit: (parameters) =>
       deposit({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
-    execute: ({ args, ...rest }) =>
+    execute: (parameters) =>
       execute({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
-    executeOnModule: ({ args, ...rest }) =>
+    executeOnModule: (parameters) =>
       executeOnModule({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
-    executeOnRemote: ({ args, ...rest }) =>
+    executeOnRemote: (parameters) =>
       executeOnRemote({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
-    executeOnRemoteModule: ({ args, ...rest }) =>
+    executeOnRemoteModule: (parameters) =>
       executeOnRemoteModule({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
-    sendFundsToRemote: ({ args, ...rest }) =>
+    sendFundsToRemote: (parameters) =>
       sendFundsToRemote({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
-    requestFundsFromRemote: ({ args, ...rest }) =>
+    requestFundsFromRemote: (parameters) =>
       requestFundsFromRemote({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
 
-    withdraw: ({ args, ...rest }) =>
+    withdraw: (parameters) =>
       withdraw({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
-    getManagerClientFromApi: ({ args, ...rest }) =>
+    getManagerClientFromApi: (parameters) =>
       getManagerClientFromApi({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
-    getProxyClientFromApi: ({ args, ...rest }) =>
+    getProxyClientFromApi: (parameters) =>
       getProxyClientFromApi({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
-    revokeNamespace: ({ args, ...rest }) =>
+    revokeNamespace: (parameters) =>
       revokeNamespace({
-        args: { ...args, accountId, signingCosmWasmClient, apiUrl, sender },
-        ...rest,
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
       }),
   }
 }

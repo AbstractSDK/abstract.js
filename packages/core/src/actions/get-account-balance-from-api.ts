@@ -1,18 +1,18 @@
 import request from 'graphql-request'
-import { tokenFromApi } from 'src/utils/tokens/token-from-api'
 import { tokenToAsset } from '..'
 import { gql } from '../codegen/gql'
-import { WithArgs } from '../types/with-args'
 import { AccountId, accountIdToApiFormat } from '../utils/account-id'
+import { tokenFromApi } from '../utils/tokens/token-from-api'
 
-export type GetAccountBalancesFromApi = WithArgs<{
+export type GetAccountBalancesFromApiParameters = {
   apiUrl: string
   accountId: AccountId
-}>
+}
 
 export async function getAccountBalancesFromApi({
-  args: { apiUrl, accountId },
-}: GetAccountBalancesFromApi) {
+  apiUrl,
+  accountId,
+}: GetAccountBalancesFromApiParameters) {
   const result = await request(
     apiUrl,
     gql(/* GraphQL */ `

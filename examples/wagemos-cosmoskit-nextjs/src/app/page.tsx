@@ -1,5 +1,6 @@
 'use client'
 
+import { stringToAccountId } from '@abstract-money/core'
 import { betting } from '../_generated'
 import { PlaceBetDialog } from './_components/place-bet-dialog'
 import {
@@ -21,6 +22,7 @@ import { WalletButton } from './_components/wallet-button'
 export default function Home() {
   const { data, isLoading, isError } = betting.queries.useListRounds({
     args: {},
+    accountId: stringToAccountId('neutron-18'),
     chainName: 'neutron',
   })
   if (isLoading) return <p>Loading...</p>

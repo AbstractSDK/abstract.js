@@ -60,20 +60,21 @@ export const betting = {
     }: Omit<
       Parameters<typeof useBettingBetsQuery<BettingTypes.BetsResponse>>[0],
       'client'
-    > & { accountId?: AccountId; chainName: string | undefined }) => {
+    > & {
+      accountId: AccountId | undefined
+      chainName: string | undefined
+    }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useAbstractModuleQueryClient(
-        {
-          moduleId: BETTING_MODULE_ID,
-          ...rest,
-          Module: BettingAppQueryClient,
-        },
-        { enabled: options?.enabled },
-      )
+      } = useAbstractModuleQueryClient({
+        moduleId: BETTING_MODULE_ID,
+        ...rest,
+        Module: BettingAppQueryClient,
+        query: { enabled: options?.enabled },
+      })
 
       const {
         data,
@@ -122,20 +123,21 @@ export const betting = {
     }: Omit<
       Parameters<typeof useBettingConfigQuery<BettingTypes.ConfigResponse>>[0],
       'client'
-    > & { accountId?: AccountId; chainName: string | undefined }) => {
+    > & {
+      accountId: AccountId | undefined
+      chainName: string | undefined
+    }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useAbstractModuleQueryClient(
-        {
-          moduleId: BETTING_MODULE_ID,
-          ...rest,
-          Module: BettingAppQueryClient,
-        },
-        { enabled: options?.enabled },
-      )
+      } = useAbstractModuleQueryClient({
+        moduleId: BETTING_MODULE_ID,
+        ...rest,
+        Module: BettingAppQueryClient,
+        query: { enabled: options?.enabled },
+      })
 
       const {
         data,
@@ -186,20 +188,21 @@ export const betting = {
         typeof useBettingListOddsQuery<BettingTypes.ListOddsResponse>
       >[0],
       'client'
-    > & { accountId?: AccountId; chainName: string | undefined }) => {
+    > & {
+      accountId: AccountId | undefined
+      chainName: string | undefined
+    }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useAbstractModuleQueryClient(
-        {
-          moduleId: BETTING_MODULE_ID,
-          ...rest,
-          Module: BettingAppQueryClient,
-        },
-        { enabled: options?.enabled },
-      )
+      } = useAbstractModuleQueryClient({
+        moduleId: BETTING_MODULE_ID,
+        ...rest,
+        Module: BettingAppQueryClient,
+        query: { enabled: options?.enabled },
+      })
 
       const {
         data,
@@ -249,20 +252,21 @@ export const betting = {
     }: Omit<
       Parameters<typeof useBettingOddsQuery<BettingTypes.OddsResponse>>[0],
       'client'
-    > & { accountId?: AccountId; chainName: string | undefined }) => {
+    > & {
+      accountId: AccountId | undefined
+      chainName: string | undefined
+    }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useAbstractModuleQueryClient(
-        {
-          moduleId: BETTING_MODULE_ID,
-          ...rest,
-          Module: BettingAppQueryClient,
-        },
-        { enabled: options?.enabled },
-      )
+      } = useAbstractModuleQueryClient({
+        moduleId: BETTING_MODULE_ID,
+        ...rest,
+        Module: BettingAppQueryClient,
+        query: { enabled: options?.enabled },
+      })
 
       const {
         data,
@@ -314,20 +318,21 @@ export const betting = {
         typeof useBettingListRoundsQuery<BettingTypes.RoundsResponse>
       >[0],
       'client'
-    > & { accountId?: AccountId; chainName: string | undefined }) => {
+    > & {
+      accountId: AccountId | undefined
+      chainName: string | undefined
+    }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useAbstractModuleQueryClient(
-        {
-          moduleId: BETTING_MODULE_ID,
-          ...rest,
-          Module: BettingAppQueryClient,
-        },
-        { enabled: options?.enabled },
-      )
+      } = useAbstractModuleQueryClient({
+        moduleId: BETTING_MODULE_ID,
+        ...rest,
+        Module: BettingAppQueryClient,
+        query: { enabled: options?.enabled },
+      })
 
       const {
         data,
@@ -377,20 +382,21 @@ export const betting = {
     }: Omit<
       Parameters<typeof useBettingRoundQuery<BettingTypes.RoundResponse>>[0],
       'client'
-    > & { accountId?: AccountId; chainName: string | undefined }) => {
+    > & {
+      accountId: AccountId | undefined
+      chainName: string | undefined
+    }) => {
       const {
         data: bettingAppQueryClient,
         isLoading: isBettingAppQueryClientLoading,
         isError: isBettingAppQueryClientError,
         error: bettingAppQueryClientError,
-      } = useAbstractModuleQueryClient(
-        {
-          moduleId: BETTING_MODULE_ID,
-          ...rest,
-          Module: BettingAppQueryClient,
-        },
-        { enabled: options?.enabled },
-      )
+      } = useAbstractModuleQueryClient({
+        moduleId: BETTING_MODULE_ID,
+        ...rest,
+        Module: BettingAppQueryClient,
+        query: { enabled: options?.enabled },
+      })
 
       const {
         data,
@@ -437,9 +443,9 @@ export const betting = {
   mutations: {
     useUpdateConfig: (
       {
-        chainName,
         accountId,
-      }: { chainName: string | undefined; accountId?: AccountId },
+        chainName,
+      }: { accountId: AccountId | undefined; chainName: string | undefined },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -458,8 +464,8 @@ export const betting = {
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
-
         chainName,
+
         Module: BettingAppClient,
       })
 
@@ -491,9 +497,9 @@ export const betting = {
     },
     useCloseRound: (
       {
-        chainName,
         accountId,
-      }: { chainName: string | undefined; accountId?: AccountId },
+        chainName,
+      }: { accountId: AccountId | undefined; chainName: string | undefined },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -512,8 +518,8 @@ export const betting = {
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
-
         chainName,
+
         Module: BettingAppClient,
       })
 
@@ -545,9 +551,9 @@ export const betting = {
     },
     useDistributeWinnings: (
       {
-        chainName,
         accountId,
-      }: { chainName: string | undefined; accountId?: AccountId },
+        chainName,
+      }: { accountId: AccountId | undefined; chainName: string | undefined },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -566,8 +572,8 @@ export const betting = {
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
-
         chainName,
+
         Module: BettingAppClient,
       })
 
@@ -599,9 +605,9 @@ export const betting = {
     },
     usePlaceBet: (
       {
-        chainName,
         accountId,
-      }: { chainName: string | undefined; accountId?: AccountId },
+        chainName,
+      }: { accountId: AccountId | undefined; chainName: string | undefined },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -620,8 +626,8 @@ export const betting = {
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
-
         chainName,
+
         Module: BettingAppClient,
       })
 
@@ -653,9 +659,9 @@ export const betting = {
     },
     useUpdateAccounts: (
       {
-        chainName,
         accountId,
-      }: { chainName: string | undefined; accountId?: AccountId },
+        chainName,
+      }: { accountId: AccountId | undefined; chainName: string | undefined },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -674,8 +680,8 @@ export const betting = {
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
-
         chainName,
+
         Module: BettingAppClient,
       })
 
@@ -707,9 +713,9 @@ export const betting = {
     },
     useRegister: (
       {
-        chainName,
         accountId,
-      }: { chainName: string | undefined; accountId?: AccountId },
+        chainName,
+      }: { accountId: AccountId | undefined; chainName: string | undefined },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -728,8 +734,8 @@ export const betting = {
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
-
         chainName,
+
         Module: BettingAppClient,
       })
 
@@ -761,9 +767,9 @@ export const betting = {
     },
     useCreateRound: (
       {
-        chainName,
         accountId,
-      }: { chainName: string | undefined; accountId?: AccountId },
+        chainName,
+      }: { accountId: AccountId | undefined; chainName: string | undefined },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -782,8 +788,8 @@ export const betting = {
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
-
         chainName,
+
         Module: BettingAppClient,
       })
 

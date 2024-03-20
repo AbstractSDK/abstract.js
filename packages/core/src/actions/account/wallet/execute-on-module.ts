@@ -1,6 +1,6 @@
 import { ManagerMsgComposer } from '../../../codegen/abstract'
 import { ModuleType } from '../../../codegen/gql/graphql'
-import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
+import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { encodeModuleMsg } from '../../../utils/modules/encode-module-msg'
 import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
 import { BaseWalletParameters } from './types'
@@ -8,7 +8,7 @@ import { BaseWalletParameters } from './types'
 type Base64EncodedJson = string
 
 export type ExecuteOnModuleParameters = Omit<
-  WithArgsAndCosmWasmSignOptions<
+  WithCosmWasmSignOptions<
     BaseWalletParameters & {
       moduleId: string
       moduleType?: ModuleType
@@ -31,24 +31,20 @@ export type ExecuteOnModuleParameters = Omit<
  * @param memo
  */
 export async function executeOnModule({
-  args: {
-    accountId,
-    signingCosmWasmClient,
-    apiUrl,
-    sender,
-    moduleId,
-    moduleType,
-    moduleMsg,
-  },
+  accountId,
+  signingCosmWasmClient,
+  apiUrl,
+  sender,
+  moduleId,
+  moduleType,
+  moduleMsg,
   fee,
   memo,
 }: ExecuteOnModuleParameters) {
   const { managerAddress } = await getAccountBaseAddressesFromApi({
-    args: {
-      accountId,
-      cosmWasmClient: signingCosmWasmClient,
-      apiUrl,
-    },
+    accountId,
+    cosmWasmClient: signingCosmWasmClient,
+    apiUrl,
   })
 
   return signingCosmWasmClient.signAndBroadcast(

@@ -1,32 +1,27 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
 import { VersionControlTypes } from '../../codegen/abstract'
-import { WithArgs } from '../../types/with-args'
 import { versionControlModuleToAddress } from '../../utils/version-control/version-control-module-to-address'
 import { getVersionControlQueryClient } from './get-version-control-query-client'
 
-export enum CommonModuleNames {
-  ACCOUNT_FACTORY = 'account-factory',
-  MODULE_FACTORY = 'module-factory',
-  ANS_HOST = 'ans-host',
-  IBC_CLIENT = 'ibc-client',
-}
+const ABSTRACT_NAMESPACE = 'abstract'
 
-export type GetAbstractModuleAddressFromVersionControl = WithArgs<{
+export type GetAbstractModuleAddressFromVersionControl = {
   moduleName: string
   cosmWasmClient: CosmWasmClient
   versionControlAddress: string
   version?: string
-}>
+}
 
 export async function getAbstractModuleAddressFromVersionControl({
-  args: { moduleName, cosmWasmClient, versionControlAddress, version },
+  moduleName,
+  cosmWasmClient,
+  versionControlAddress,
+  version,
 }: GetAbstractModuleAddressFromVersionControl) {
   const versionControlQueryClient = getVersionControlQueryClient({
-    args: {
-      cosmWasmClient,
-      versionControlAddress,
-    },
+    cosmWasmClient,
+    versionControlAddress,
   })
 
   const [moduleAddress] = await versionControlQueryClient
@@ -34,7 +29,7 @@ export async function getAbstractModuleAddressFromVersionControl({
       infos: [
         {
           name: moduleName,
-          namespace: 'abstract',
+          namespace: ABSTRACT_NAMESPACE,
           version: version ? { version } : 'latest',
         } satisfies VersionControlTypes.ModuleInfo,
       ],

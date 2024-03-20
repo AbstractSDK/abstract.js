@@ -17,10 +17,10 @@ import {
   SigningCosmWasmClient,
 } from '@cosmjs/cosmwasm-stargate'
 import { useMemo } from 'react'
-import { Prettify } from './types/utils'
+import { Evaluate } from './types/utils'
 
 type CommonProviderArgs = {
-  chainName?: string
+  chainName: string | undefined
 }
 
 export type Provider = {
@@ -54,7 +54,7 @@ export function createConfig(parameters: CreateConfigParameters) {
   }
 
   function usePublicClient(
-    ...args: Prettify<Parameters<Provider['useCosmWasmClient']>>
+    ...args: Evaluate<Parameters<Provider['useCosmWasmClient']>>
   ): PublicClient | undefined {
     const cosmWasmClient = provider.useCosmWasmClient(...args)
     return useMemo(() => {
@@ -67,7 +67,7 @@ export function createConfig(parameters: CreateConfigParameters) {
   }
 
   function useWalletClient(
-    ...args: Prettify<Parameters<Provider['useSigningCosmWasmClient']>>
+    ...args: Evaluate<Parameters<Provider['useSigningCosmWasmClient']>>
   ): WalletClient | undefined {
     const signingCosmWasmClient = provider.useSigningCosmWasmClient(...args)
     const sender = provider.useSenderAddress(...args)
@@ -84,8 +84,10 @@ export function createConfig(parameters: CreateConfigParameters) {
   function useAccountPublicClient({
     accountId,
     ...rest
-  }: Prettify<
-    { accountId?: AccountId } & Parameters<Provider['useCosmWasmClient']>[0]
+  }: Evaluate<
+    { accountId: AccountId | undefined } & Parameters<
+      Provider['useCosmWasmClient']
+    >[0]
   >): AccountPublicClient | undefined {
     const cosmWasmClient = provider.useCosmWasmClient(rest)
     return useMemo(() => {
@@ -101,8 +103,8 @@ export function createConfig(parameters: CreateConfigParameters) {
   function useAccountWalletClient({
     accountId,
     ...rest
-  }: Prettify<
-    { accountId?: AccountId } & Parameters<
+  }: Evaluate<
+    { accountId: AccountId | undefined } & Parameters<
       Provider['useSigningCosmWasmClient']
     >[0]
   >): AccountWalletClient | undefined {
@@ -138,16 +140,20 @@ export type Config = {
     ...args: Parameters<Provider['useCosmWasmClient']>
   ): PublicClient | undefined
   useWalletClient(
-    ...args: Prettify<Parameters<Provider['useSigningCosmWasmClient']>>
+    ...args: Evaluate<Parameters<Provider['useSigningCosmWasmClient']>>
   ): WalletClient | undefined
   useAccountPublicClient(
-    args: Prettify<
-      { accountId?: AccountId } & Parameters<Provider['useCosmWasmClient']>[0]
+    args: Evaluate<
+      { accountId: AccountId | undefined } & Parameters<
+        Provider['useCosmWasmClient']
+      >[0]
     >,
   ): AccountPublicClient | undefined
   useAccountWalletClient(
-    args: Prettify<
-      { accountId?: AccountId } & Parameters<Provider['useCosmWasmClient']>[0]
+    args: Evaluate<
+      { accountId: AccountId | undefined } & Parameters<
+        Provider['useCosmWasmClient']
+      >[0]
     >,
   ): AccountWalletClient | undefined
 }

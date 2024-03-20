@@ -1,14 +1,14 @@
 import { request } from 'graphql-request'
 import { gql } from '../codegen/gql'
-import { WithArgs } from '../types/with-args'
 
-export type GetVersionControlAddressFromApiParameters = WithArgs<{
+export type GetVersionControlAddressFromApiParameters = {
   apiUrl: string
   chainName: string
-}>
+}
 
 export async function getVersionControlAddressFromApi({
-  args: { apiUrl, chainName },
+  apiUrl,
+  chainName,
 }: GetVersionControlAddressFromApiParameters) {
   const deploymentData = await request(
     apiUrl,

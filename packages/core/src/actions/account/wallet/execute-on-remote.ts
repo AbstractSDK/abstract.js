@@ -1,13 +1,13 @@
 import { IbcClientTypes, ManagerTypes } from '../../../codegen/abstract'
 import { CallbackInfo } from '../../../codegen/abstract/cosmwasm-codegen/IbcClient.types'
-import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
+import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { executeIbcAction } from './execute-ibc-action'
 import { BaseWalletParameters } from './types'
 
 type Base64EncodedJson = string
 
 export type ExecuteOnRemoteParameters = Omit<
-  WithArgsAndCosmWasmSignOptions<
+  WithCosmWasmSignOptions<
     BaseWalletParameters & {
       hostChainName: string
       managerMsg: ManagerTypes.ExecuteMsg
@@ -30,15 +30,13 @@ export type ExecuteOnRemoteParameters = Omit<
  * @param memo
  */
 export async function executeOnRemote({
-  args: {
-    accountId,
-    signingCosmWasmClient,
-    apiUrl,
-    sender,
-    managerMsg,
-    callbackInfo,
-    hostChainName,
-  },
+  accountId,
+  signingCosmWasmClient,
+  apiUrl,
+  sender,
+  managerMsg,
+  callbackInfo,
+  hostChainName,
   fee,
   memo,
 }: ExecuteOnRemoteParameters) {
@@ -55,13 +53,11 @@ export async function executeOnRemote({
   }
 
   return executeIbcAction({
-    args: {
-      accountId,
-      signingCosmWasmClient,
-      apiUrl,
-      sender,
-      msgs: [remoteAction],
-    },
+    accountId,
+    signingCosmWasmClient,
+    apiUrl,
+    sender,
+    msgs: [remoteAction],
     fee,
     memo,
   })

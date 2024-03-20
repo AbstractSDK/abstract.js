@@ -15,106 +15,112 @@ import { getCosmWasmClient } from '../../actions/public/get-cosm-wasm-client'
 import { getIbcClientQueryClient } from '../../actions/public/get-ibc-client-query-client'
 import { getManagerQueryClient } from '../../actions/public/get-manager-query-client'
 import { getProxyQueryClient } from '../../actions/public/get-proxy-query-client'
-import { getRemoteHosts } from '../../actions/public/get-remote-hosts'
+import { getRemoteHostsFromApi } from '../../actions/public/get-remote-hosts-from-api'
 import { getVersionControlModuleData } from '../../actions/public/get-version-control-module-data'
 import { getVersionControlQueryClient } from '../../actions/public/get-version-control-query-client'
 import { getVersionControlQueryClientFromApi } from '../../actions/public/get-version-control-query-client-from-api'
-import { CutArgs } from '../../types/with-args'
+import { ExtractAndOmitParameters } from '../../types/parameters'
 
-type CutCosmWasmClientFromParameter<T extends (payload: any) => any> = CutArgs<
-  {
-    readonly cosmWasmClient: CosmWasmClient
-  },
-  T
->
-
-type CutCosmWasmClientAndApiUrlFromParameter<T extends (payload: any) => any> =
-  CutArgs<
-    {
-      readonly cosmWasmClient: CosmWasmClient
-      readonly apiUrl: string
-    },
-    T
-  >
+type ExtractAndOmitDecoratedParametersFromParameters<
+  fn extends (payload: any) => any,
+> = ExtractAndOmitParameters<fn, 'cosmWasmClient' | 'apiUrl'>
 
 export type PublicActions = {
   getAbstractModuleVersion(
-    args: CutCosmWasmClientAndApiUrlFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getAbstractModuleVersion
     >,
   ): ReturnType<typeof getAbstractModuleVersion>
   getAbstractModuleAddressFromVersionControl(
-    args: CutCosmWasmClientFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getAbstractModuleAddressFromVersionControl
     >,
   ): ReturnType<typeof getAbstractModuleAddressFromVersionControl>
   getAccountFactoryAddressFromVersionControl(
-    args: CutCosmWasmClientFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getAccountFactoryAddressFromVersionControl
     >,
   ): ReturnType<typeof getAccountFactoryAddressFromVersionControl>
   getAccountFactoryVersion(
-    args: CutCosmWasmClientAndApiUrlFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getAccountFactoryVersion
     >,
   ): ReturnType<typeof getAccountFactoryVersion>
   getAccountFactoryQueryClientFromVersionControl(
-    args: CutCosmWasmClientFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getAccountFactoryQueryClientFromVersionControl
     >,
   ): ReturnType<typeof getAccountFactoryQueryClientFromVersionControl>
   getAccountFactoryQueryClientFromApi(
-    args: CutCosmWasmClientAndApiUrlFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getAccountFactoryQueryClientFromApi
     >,
   ): ReturnType<typeof getAccountFactoryQueryClientFromApi>
   getAccountFactoryQueryClient(
-    args: CutCosmWasmClientFromParameter<typeof getAccountFactoryQueryClient>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getAccountFactoryQueryClient
+    >,
   ): ReturnType<typeof getAccountFactoryQueryClient>
   getAnsHostVersion(
-    args: CutCosmWasmClientAndApiUrlFromParameter<typeof getAnsHostVersion>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getAnsHostVersion
+    >,
   ): ReturnType<typeof getAnsHostVersion>
   getAnsHostAddressFromVersionControl(
-    args: CutCosmWasmClientFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getAnsHostAddressFromVersionControl
     >,
   ): ReturnType<typeof getAnsHostAddressFromVersionControl>
   getAnsHostQueryClientFromVersionControl(
-    args: CutCosmWasmClientFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getAnsHostQueryClientFromVersionControl
     >,
   ): ReturnType<typeof getAnsHostQueryClientFromVersionControl>
   getAnsHostQueryClientFromApi(
-    args: CutCosmWasmClientAndApiUrlFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getAnsHostQueryClientFromApi
     >,
   ): ReturnType<typeof getAnsHostQueryClientFromApi>
   getAnsHostQueryClient(
-    args: CutCosmWasmClientFromParameter<typeof getAnsHostQueryClient>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getAnsHostQueryClient
+    >,
   ): ReturnType<typeof getAnsHostQueryClient>
   getIbcClientQueryClient(
-    args: CutCosmWasmClientFromParameter<typeof getIbcClientQueryClient>,
+    args: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getIbcClientQueryClient
+    >,
   ): ReturnType<typeof getIbcClientQueryClient>
   getManagerQueryClient(
-    args: CutCosmWasmClientFromParameter<typeof getManagerQueryClient>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getManagerQueryClient
+    >,
   ): ReturnType<typeof getManagerQueryClient>
   getProxyQueryClient(
-    args: CutCosmWasmClientFromParameter<typeof getProxyQueryClient>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getProxyQueryClient
+    >,
   ): ReturnType<typeof getProxyQueryClient>
   getVersionControlModuleData(
-    args: CutCosmWasmClientFromParameter<typeof getVersionControlModuleData>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getVersionControlModuleData
+    >,
   ): ReturnType<typeof getVersionControlModuleData>
   getVersionControlQueryClientFromApi(
-    args: CutCosmWasmClientAndApiUrlFromParameter<
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getVersionControlQueryClientFromApi
     >,
   ): ReturnType<typeof getVersionControlQueryClientFromApi>
   getVersionControlQueryClient(
-    args: CutCosmWasmClientFromParameter<typeof getVersionControlQueryClient>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getVersionControlQueryClient
+    >,
   ): ReturnType<typeof getVersionControlQueryClient>
   getRemoteHosts(
-    args: CutCosmWasmClientAndApiUrlFromParameter<typeof getRemoteHosts>,
-  ): ReturnType<typeof getRemoteHosts>
+    args: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getRemoteHostsFromApi
+    >,
+  ): ReturnType<typeof getRemoteHostsFromApi>
   getCosmWasmClient(): ReturnType<typeof getCosmWasmClient>
 }
 
@@ -123,107 +129,114 @@ export function publicActions(
   apiUrl: string,
 ): PublicActions {
   return {
-    getAbstractModuleAddressFromVersionControl: ({ args, ...rest }) =>
+    getAbstractModuleAddressFromVersionControl: (parameters) =>
       getAbstractModuleAddressFromVersionControl({
-        args: { ...args, cosmWasmClient },
-        ...rest,
+        ...parameters,
+        cosmWasmClient,
       }),
-    getAbstractModuleVersion: ({ args, ...rest }) =>
+    getAbstractModuleVersion: (parameters) =>
       getAbstractModuleVersion({
-        args: { ...args, cosmWasmClient, apiUrl },
-        ...rest,
+        ...parameters,
+        cosmWasmClient,
+        apiUrl,
       }),
-    getAccountFactoryVersion: ({ args, ...rest }) =>
+    getAccountFactoryVersion: (parameters) =>
       getAccountFactoryVersion({
-        args: { ...args, cosmWasmClient, apiUrl },
-        ...rest,
+        ...parameters,
+        cosmWasmClient,
+        apiUrl,
       }),
-    getAccountFactoryAddressFromVersionControl: ({ args, ...rest }) =>
+    getAccountFactoryAddressFromVersionControl: (parameters) =>
       getAccountFactoryAddressFromVersionControl({
-        args: { ...args, cosmWasmClient },
-        ...rest,
+        ...parameters,
+        cosmWasmClient,
       }),
-    getAccountFactoryQueryClientFromVersionControl: ({ args, ...rest }) =>
+    getAccountFactoryQueryClientFromVersionControl: (parameters) =>
       getAccountFactoryQueryClientFromVersionControl({
-        args: { ...args, cosmWasmClient },
-        ...rest,
+        ...parameters,
+        cosmWasmClient,
       }),
-    getAccountFactoryQueryClientFromApi: ({ args, ...rest }) =>
+    getAccountFactoryQueryClientFromApi: (parameters) =>
       getAccountFactoryQueryClientFromApi({
-        args: { ...args, cosmWasmClient, apiUrl },
-        ...rest,
+        ...parameters,
+        cosmWasmClient,
+        apiUrl,
       }),
-    getAccountFactoryQueryClient: ({ args, ...rest }) =>
+    getAccountFactoryQueryClient: (parameters) =>
       getAccountFactoryQueryClient({
-        args: { ...args, cosmWasmClient },
-        ...rest,
+        ...parameters,
+        cosmWasmClient,
       }),
 
-    getAnsHostVersion: ({ args, ...rest }) =>
+    getAnsHostVersion: (parameters) =>
       getAnsHostVersion({
-        args: { ...args, apiUrl, cosmWasmClient },
-        ...rest,
+        ...parameters,
+        apiUrl,
+        cosmWasmClient,
       }),
 
-    getAnsHostAddressFromVersionControl: ({ args, ...rest }) =>
+    getAnsHostAddressFromVersionControl: (parameters) =>
       getAnsHostAddressFromVersionControl({
-        args: { ...args, cosmWasmClient },
-        ...rest,
+        ...parameters,
+        cosmWasmClient,
       }),
 
-    getAnsHostQueryClientFromVersionControl: ({ args, ...rest }) =>
+    getAnsHostQueryClientFromVersionControl: (parameters) =>
       getAnsHostQueryClientFromVersionControl({
-        args: { ...args, cosmWasmClient },
-        ...rest,
+        ...parameters,
+        cosmWasmClient,
       }),
-    getAnsHostQueryClientFromApi: ({ args, ...rest }) =>
+    getAnsHostQueryClientFromApi: (parameters) =>
       getAnsHostQueryClientFromApi({
-        args: { ...args, cosmWasmClient, apiUrl },
-        ...rest,
+        ...parameters,
+        cosmWasmClient,
+        apiUrl,
       }),
-    getAnsHostQueryClient: ({ args, ...rest }) =>
+    getAnsHostQueryClient: (parameters) =>
       getAnsHostQueryClient({
-        args: { ...args, cosmWasmClient },
-        ...rest,
+        ...parameters,
+        cosmWasmClient,
       }),
-    getIbcClientQueryClient: ({ args, ...rest }) =>
+    getIbcClientQueryClient: (parameters) =>
       getIbcClientQueryClient({
-        args: { ...args, cosmWasmClient },
-        ...rest,
+        ...parameters,
+        cosmWasmClient,
       }),
-    getVersionControlModuleData: ({ args, ...rest }) =>
+    getVersionControlModuleData: (parameters) =>
       getVersionControlModuleData({
-        args: { ...args, cosmWasmClient },
-        ...rest,
+        ...parameters,
+        cosmWasmClient,
       }),
-    getVersionControlQueryClientFromApi: ({ args, ...rest }) =>
+    getVersionControlQueryClientFromApi: (parameters) =>
       getVersionControlQueryClientFromApi({
-        args: { ...args, cosmWasmClient, apiUrl },
-        ...rest,
+        ...parameters,
+        cosmWasmClient,
+        apiUrl,
       }),
-    getVersionControlQueryClient: ({ args, ...rest }) =>
+    getVersionControlQueryClient: (parameters) =>
       getVersionControlQueryClient({
-        args: { ...args, cosmWasmClient },
-        ...rest,
+        ...parameters,
+        cosmWasmClient,
       }),
-    getManagerQueryClient: ({ args, ...rest }) =>
+    getManagerQueryClient: (parameters) =>
       getManagerQueryClient({
-        args: { ...args, cosmWasmClient },
-        ...rest,
+        ...parameters,
+        cosmWasmClient,
       }),
-    getProxyQueryClient: ({ args, ...rest }) =>
+    getProxyQueryClient: (parameters) =>
       getProxyQueryClient({
-        args: { ...args, cosmWasmClient },
-        ...rest,
+        ...parameters,
+        cosmWasmClient,
       }),
-    getRemoteHosts: ({ args, ...rest }) =>
-      getRemoteHosts({
-        args: { ...args, cosmWasmClient, apiUrl },
-        ...rest,
+    getRemoteHosts: (parameters) =>
+      getRemoteHostsFromApi({
+        ...parameters,
+        cosmWasmClient,
+        apiUrl,
       }),
     getCosmWasmClient: () =>
       getCosmWasmClient({
-        args: { cosmWasmClient },
+        cosmWasmClient,
       }),
   }
 }

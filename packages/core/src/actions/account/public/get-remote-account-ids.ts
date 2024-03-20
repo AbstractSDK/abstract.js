@@ -1,11 +1,4 @@
 import { AccountId, chainIdToName } from '@abstract-money/core'
-import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import {
-  IbcClientQueryClient,
-  VersionControlTypes,
-} from '../../../codegen/abstract'
-import { WithArgs } from '../../../types/with-args'
-import { getIbcClientQueryClientFromManager } from './get-ibc-client-query-client-from-manager'
 import {
   GetRemoteProxiesParameters,
   getRemoteAccountProxies,
@@ -20,10 +13,14 @@ export type GetRemoteAccountIdsParameters = GetRemoteProxiesParameters
  * @param apiUrl
  */
 export async function getRemoteAccountIds({
-  args: { accountId, cosmWasmClient, apiUrl },
+  accountId,
+  cosmWasmClient,
+  apiUrl,
 }: GetRemoteAccountIdsParameters): Promise<AccountId[]> {
   const remoteProxies = await getRemoteAccountProxies({
-    args: { accountId, cosmWasmClient, apiUrl },
+    accountId,
+    cosmWasmClient,
+    apiUrl,
   })
 
   const chainId = await cosmWasmClient.getChainId()

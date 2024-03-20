@@ -1,22 +1,24 @@
 import { EncodeObject } from '@cosmjs/proto-signing'
 import { DeliverTxResponse, StdFee } from '@cosmjs/stargate'
-import { UseMutationOptions, useMutation } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
+import { UseMutationParameters } from '../../../types/queries'
 import { useSenderAddress } from '../use-sender-address'
 import { useSigningCosmWasmClient } from '../use-signing-cosm-wasm-client'
 
 type SignAndBroadcastMutation = {
   readonly fee: number | StdFee | 'auto'
   readonly memo?: string | undefined
-  args: {
+  readonly args: {
     messages: readonly EncodeObject[]
   }
 }
 
 export function useSignAndBroadcast(
   { args: { chainName } }: { args: { chainName: string } },
-  options?: Omit<
-    UseMutationOptions<DeliverTxResponse, unknown, SignAndBroadcastMutation>,
-    'mutationFn'
+  options?: UseMutationParameters<
+    DeliverTxResponse,
+    unknown,
+    SignAndBroadcastMutation
   >,
 ) {
   const { data: signingCosmWasmClient } = useSigningCosmWasmClient({

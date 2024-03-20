@@ -1,53 +1,44 @@
-import { AccountId, AccountWalletClient } from '@abstract-money/core'
+import { AccountWalletClient } from '@abstract-money/core/clients'
+import { AccountId } from '@abstract-money/core/utils'
 import { DeliverTxResponse } from '@cosmjs/stargate'
+import { useMutation } from '@tanstack/react-query'
+import { useConfig } from '../../../contexts'
+import { ExtractArgsFromParameters } from '../../../types/args'
 import {
-  UseMutationOptions,
-  UseMutationResult,
-  useMutation,
-} from '@tanstack/react-query'
-import { useAccountId, useConfig } from '../../../contexts'
-import { parseParameters } from '../utils'
+  UseMutationParameters,
+  UseMutationReturnType,
+} from '../../../types/queries'
 
-type DepositMutation = Parameters<AccountWalletClient['deposit']>[0]
+type DepositMutation = ExtractArgsFromParameters<
+  Parameters<AccountWalletClient['deposit']>[0]
+>
 
-export function useDeposit(
-  { accountId }: { accountId: AccountId | undefined },
-  options?: Omit<
-    UseMutationOptions<DeliverTxResponse, unknown, DepositMutation>,
-    'mutationFn'
-  >,
-): UseMutationResult<DeliverTxResponse, unknown, DepositMutation>
-export function useDeposit(
-  options?: Omit<
-    UseMutationOptions<DeliverTxResponse, unknown, DepositMutation>,
-    'mutationFn'
-  >,
-): UseMutationResult<DeliverTxResponse, unknown, DepositMutation>
+export type UseDepositParameters = {
+  accountId: AccountId | undefined
+  chainName: string | undefined
+  mutation?: UseMutationParameters<DeliverTxResponse, unknown, DepositMutation>
+}
+
 /**
  * Hook to deposit assets to an Account.
  * @param options deposit options.
  */
-export function useDeposit(
-  arg1?:
-    | { accountId: AccountId | undefined }
-    | Omit<
-        UseMutationOptions<DeliverTxResponse, unknown, DepositMutation>,
-        'mutationFn'
-      >,
-  arg2?: Omit<
-    UseMutationOptions<DeliverTxResponse, unknown, DepositMutation>,
-    'mutationFn'
-  >,
-): UseMutationResult<DeliverTxResponse, unknown, DepositMutation> {
-  const { accountId: accountIdParameter, options } = parseParameters(arg1, arg2)
-  const { accountId } = useAccountId({ accountId: accountIdParameter })
+export function useDeposit({
+  accountId,
+  chainName,
+  mutation,
+}: UseDepositParameters): UseMutationReturnType<
+  DeliverTxResponse,
+  unknown,
+  DepositMutation
+> {
   const config = useConfig()
   const accountWalletClient = config.useAccountWalletClient({
     accountId,
-    chainName: accountId?.chainName,
+    chainName,
   })
-  return useMutation(({ ...rest }) => {
+  return useMutation(({ args, ...cosmWasmSignOptions }) => {
     if (!accountWalletClient) throw new Error('client is not defined')
-    return accountWalletClient.deposit(rest)
-  }, options)
+    return accountWalletClient.deposit({ ...args, ...cosmWasmSignOptions })
+  }, mutation)
 }

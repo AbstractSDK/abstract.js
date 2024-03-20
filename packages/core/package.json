@@ -1,6 +1,6 @@
 {
   "name": "@abstract-money/core",
-  "version": "0.3.9",
+  "version": "1.0.0",
   "description": "Typings for Abstract smart contracts",
   "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
   "author": "adairrr <adair@abstract.money>",
@@ -28,7 +28,6 @@
   "dependencies": {
     "@abstract-money/cosmwasm-utils": "workspace:*",
     "@chain-registry/types": "^0.13.1",
-    "@cosmjs/amino": "^0.32.2",
     "@cosmjs/cosmwasm-stargate": "^0.32.2",
     "@cosmjs/encoding": "^0.32.2",
     "@cosmjs/stargate": "^0.32.2",
@@ -80,6 +79,10 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./actions": {
+      "types": "./dist/actions/index.d.ts",
+      "default": "./dist/actions/index.js"
+    },
     "./clients": {
       "types": "./dist/clients/index.d.ts",
       "default": "./dist/clients/index.js"
@@ -95,6 +98,7 @@
     "./package.json": "./package.json"
   },
   "files": [
+    "/actions",
     "/clients",
     "/utils",
     "/legacy",

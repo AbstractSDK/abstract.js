@@ -1,10 +1,10 @@
-import { IbcClientTypes, ManagerClient } from '../../../codegen/abstract'
-import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
+import { IbcClientTypes } from '../../../codegen/abstract'
+import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { executeIbcAction } from './execute-ibc-action'
 import { BaseWalletParameters } from './types'
 
 export type CreateRemoteAccountParameters = Omit<
-  WithArgsAndCosmWasmSignOptions<
+  WithCosmWasmSignOptions<
     BaseWalletParameters &
       Omit<
         Extract<IbcClientTypes.ExecuteMsg, { register: unknown }>['register'],
@@ -30,17 +30,15 @@ export type CreateRemoteAccountParameters = Omit<
  * @param memo
  */
 export async function createRemoteAccount({
-  args: {
-    accountId,
-    signingCosmWasmClient,
-    apiUrl,
-    sender,
-    hostChainName,
-    installModules,
-    ...registerMsgParams
-  },
+  accountId,
+  signingCosmWasmClient,
+  apiUrl,
+  sender,
+  hostChainName,
+  installModules,
   fee,
   memo,
+  ...registerMsgParams
 }: CreateRemoteAccountParameters) {
   const registerMsg: IbcClientTypes.ExecuteMsg = {
     register: {
@@ -51,13 +49,11 @@ export async function createRemoteAccount({
   }
 
   return executeIbcAction({
-    args: {
-      accountId,
-      signingCosmWasmClient,
-      apiUrl,
-      sender,
-      msgs: registerMsg,
-    },
+    accountId,
+    signingCosmWasmClient,
+    apiUrl,
+    sender,
+    msgs: registerMsg,
     fee,
     memo,
   })

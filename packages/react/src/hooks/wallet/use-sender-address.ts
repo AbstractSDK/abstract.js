@@ -1,26 +1,24 @@
 import { WalletClient } from '@abstract-money/core'
-import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import React from 'react'
-import { useConfig } from 'src/contexts'
+import { useConfig } from '../../contexts'
+import { UseQueryParameters, useQuery } from '../../types/queries'
 
-export function useSenderAddress(
-  /** Pass only if you are using cosmos-kit provider, graz doesn't need one */
-  args?: {
-    /** Pass only if you are using cosmos-kit provider, graz doesn't need one. */
-    chainName: string | undefined
-  },
-  {
-    enabled: enabled_ = true,
-    ...rest
-  }: UseQueryOptions<
-    string | undefined,
-    unknown,
-    string | undefined,
-    readonly ['sender-address', WalletClient | undefined]
-  > = {},
-) {
+export type UseSenderAddressParameters =
+  | {
+      chainName?: string | undefined
+      query?: UseQueryParameters<
+        string | undefined,
+        unknown,
+        string | undefined,
+        readonly ['sender-address', WalletClient | undefined]
+      >
+    }
+  | never
+
+export function useSenderAddress(parameters: UseSenderAddressParameters) {
+  const { query = {}, chainName } = parameters ?? {}
   const config = useConfig()
-  const walletClient = config.useWalletClient({ chainName: args?.chainName })
+  const walletClient = config.useWalletClient({ chainName })
 
   const queryKey = React.useMemo(
     () => ['sender-address', walletClient] as const,
@@ -33,10 +31,7 @@ export function useSenderAddress(
     return walletClient.getSenderAddress()
   }, [walletClient])
 
-  const enabled = React.useMemo(
-    () => Boolean(walletClient && enabled_),
-    [enabled_, walletClient],
-  )
+  const enabled = Boolean(walletClient && (query.enabled ?? true))
 
-  return useQuery(queryKey, queryFn, { enabled, ...rest })
+  return useQuery({ queryKey, queryFn, ...query, enabled })
 }

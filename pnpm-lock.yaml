@@ -104,9 +104,6 @@ importers:
       '@chain-registry/types':
         specifier: ^0.13.1
         version: 0.13.1
-      '@cosmjs/amino':
-        specifier: ^0.32.2
-        version: 0.32.2
       '@cosmjs/stargate':
         specifier: ^0.32.2
         version: 0.32.2
@@ -219,7 +216,7 @@ importers:
       '@abstract-money/react':
         specifier: workspace:*
         version: link:../../packages/react
-      '@cosmjs/amino':
+      '@cosmjs/stargate':
         specifier: ^0.32.2
         version: 0.32.2
       '@hookform/resolvers':
@@ -257,7 +254,7 @@ importers:
         version: 0.8.0
       graz:
         specifier: ^0.1.5
-        version: 0.1.5(@cosmjs/amino@0.32.2)(@cosmjs/cosmwasm-stargate@0.32.2)(@cosmjs/launchpad@0.27.1)(@cosmjs/proto-signing@0.32.2)(@cosmjs/stargate@0.32.2)(@cosmjs/tendermint-rpc@0.32.2)(@terra-money/feather.js@1.2.1)(@types/react@18.2.38)(axios@0.27.2)(long@5.2.3)(react-dom@18.2.0)(react@18.2.0)
+        version: 0.1.5(@cosmjs/amino@0.31.3)(@cosmjs/cosmwasm-stargate@0.32.2)(@cosmjs/launchpad@0.27.1)(@cosmjs/proto-signing@0.32.2)(@cosmjs/stargate@0.32.2)(@cosmjs/tendermint-rpc@0.32.2)(@terra-money/feather.js@1.2.1)(@types/react@18.2.38)(axios@0.27.2)(long@5.2.3)(react-dom@18.2.0)(react@18.2.0)
       long:
         specifier: ^5.2.3
         version: 5.2.3
@@ -350,10 +347,10 @@ importers:
       '@abstract-money/ts-codegen':
         specifier: ^0.35.4
         version: 0.35.4
-      '@cosmjs/amino':
+      '@cosmjs/cosmwasm-stargate':
         specifier: ^0.32.2
         version: 0.32.2
-      '@cosmjs/cosmwasm-stargate':
+      '@cosmjs/stargate':
         specifier: ^0.32.2
         version: 0.32.2
       abort-controller:
@@ -441,9 +438,6 @@ importers:
       '@chain-registry/types':
         specifier: ^0.13.1
         version: 0.13.1
-      '@cosmjs/amino':
-        specifier: ^0.32.2
-        version: 0.32.2
       '@cosmjs/cosmwasm-stargate':
         specifier: ^0.32.2
         version: 0.32.2
@@ -622,9 +616,6 @@ importers:
       '@abstract-money/core':
         specifier: workspace:*
         version: link:../core
-      '@cosmjs/amino':
-        specifier: ^0.32.2
-        version: 0.32.2
       '@cosmjs/cosmwasm-stargate':
         specifier: ^0.32.2
         version: 0.32.2
@@ -2911,7 +2902,6 @@ packages:
       '@cosmjs/encoding': 0.31.3
       '@cosmjs/math': 0.31.3
       '@cosmjs/utils': 0.31.3
-    dev: true
 
   /@cosmjs/amino@0.32.2:
     resolution: {integrity: sha512-lcK5RCVm4OfdAooxKcF2+NwaDVVpghOq6o/A40c2mHXDUzUoRZ33VAHjVJ9Me6vOFxshrw/XEFn1f4KObntjYA==}
@@ -2992,7 +2982,6 @@ packages:
       bn.js: 5.2.1
       elliptic: 6.5.4
       libsodium-wrappers-sumo: 0.7.13
-    dev: true
 
   /@cosmjs/crypto@0.32.2:
     resolution: {integrity: sha512-RuxrYKzhrPF9g6NmU7VEq++Hn1vZJjqqJpZ9Tmw9lOYOV8BUsv+j/0BE86kmWi7xVJ7EwxiuxYsKuM8IR18CIA==}
@@ -3042,7 +3031,6 @@ packages:
       base64-js: 1.5.1
       bech32: 1.1.4
       readonly-date: 1.0.0
-    dev: true
 
   /@cosmjs/encoding@0.32.2:
     resolution: {integrity: sha512-WX7m1wLpA9V/zH0zRcz4EmgZdAv1F44g4dbXOgNj1eXZw1PIGR12p58OEkLN51Ha3S4DKRtCv5CkhK1KHEvQtg==}
@@ -3117,7 +3105,6 @@ packages:
     resolution: {integrity: sha512-kZ2C6glA5HDb9hLz1WrftAjqdTBb3fWQsRR+Us2HsjAYdeE6M3VdXMsYCP5M3yiihal1WDwAY2U7HmfJw7Uh4A==}
     dependencies:
       bn.js: 5.2.1
-    dev: true
 
   /@cosmjs/math@0.32.2:
     resolution: {integrity: sha512-b8+ruAAY8aKtVKWSft2IvtCVCUH1LigIlf9ALIiY8n9jtM4kMASiaRbQ/27etnSAInV88IaezKK9rQZrtxTjcw==}
@@ -3279,7 +3266,6 @@ packages:
 
   /@cosmjs/utils@0.31.3:
     resolution: {integrity: sha512-VBhAgzrrYdIe0O5IbKRqwszbQa7ZyQLx9nEQuHQ3HUplQW7P44COG/ye2n6AzCudtqxmwdX7nyX8ta1J07GoqA==}
-    dev: true
 
   /@cosmjs/utils@0.32.2:
     resolution: {integrity: sha512-Gg5t+eR7vPJMAmhkFt6CZrzPd0EKpAslWwk5rFVYZpJsM8JG5KT9XQ99hgNM3Ov6ScNoIWbXkpX27F6A9cXR4Q==}
@@ -7918,21 +7904,6 @@ packages:
       '@terra-money/feather.js': 1.2.1
       axios: 0.27.2
       bech32: 2.0.0
-    dev: true
-
-  /@terra-money/station-connector@1.0.15(@cosmjs/amino@0.32.2)(@terra-money/feather.js@1.2.1)(axios@0.27.2):
-    resolution: {integrity: sha512-iCLXPPmQXyP8egOi7FA3U5MuEeMMrVnUaRiCUrBLuh4QNPCmJar082ilKDEavgkczKXNIqEGCAAT0LVrky/TPA==}
-    engines: {node: '>=16'}
-    peerDependencies:
-      '@cosmjs/amino': ^0.31.0
-      '@terra-money/feather.js': ^1.0.8
-      axios: ^0.27.2
-    dependencies:
-      '@cosmjs/amino': 0.32.2
-      '@terra-money/feather.js': 1.2.1
-      axios: 0.27.2
-      bech32: 2.0.0
-    dev: false
 
   /@terra-money/terra.proto@0.1.7:
     resolution: {integrity: sha512-NXD7f6pQCulvo6+mv6MAPzhOkUzRjgYVuHZE/apih+lVnPG5hDBU0rRYnOGGofwvKT5/jQoOENnFn/gioWWnyQ==}
@@ -8982,7 +8953,7 @@ packages:
   /axios@0.21.1:
     resolution: {integrity: sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==}
     dependencies:
-      follow-redirects: 1.15.3
+      follow-redirects: 1.15.5
     transitivePeerDependencies:
       - debug
     dev: false
@@ -8990,14 +8961,14 @@ packages:
   /axios@0.21.4:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
-      follow-redirects: 1.15.3
+      follow-redirects: 1.15.5
     transitivePeerDependencies:
       - debug
 
   /axios@0.27.2:
     resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
     dependencies:
-      follow-redirects: 1.15.3
+      follow-redirects: 1.15.5
       form-data: 4.0.0
     transitivePeerDependencies:
       - debug
@@ -11309,15 +11280,6 @@ packages:
       tempy: 0.2.1
     dev: true
 
-  /follow-redirects@1.15.3:
-    resolution: {integrity: sha512-1VzOtuEM8pC9SFU1E+8KfTjZyMztRsgEfwQl44z8A25uy13jSzTj6dyK2Df52iV0vgHCfBwLhDWevLn95w5v6Q==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
-
   /follow-redirects@1.15.5:
     resolution: {integrity: sha512-vSFWUON1B+yAw1VN4xMfxgn5fTUiaOzAJCKBwIIgT/+7CuGy9+r+5gITvP62j3RmaD5Ph65UaERdOSRGUzZtgw==}
     engines: {node: '>=4.0'}
@@ -11715,7 +11677,7 @@ packages:
       - utf-8-validate
     dev: true
 
-  /graz@0.1.5(@cosmjs/amino@0.32.2)(@cosmjs/cosmwasm-stargate@0.32.2)(@cosmjs/launchpad@0.27.1)(@cosmjs/proto-signing@0.32.2)(@cosmjs/stargate@0.32.2)(@cosmjs/tendermint-rpc@0.32.2)(@terra-money/feather.js@1.2.1)(@types/react@18.2.38)(axios@0.27.2)(long@5.2.3)(react-dom@18.2.0)(react@18.2.0):
+  /graz@0.1.5(@cosmjs/amino@0.31.3)(@cosmjs/cosmwasm-stargate@0.32.2)(@cosmjs/launchpad@0.27.1)(@cosmjs/proto-signing@0.32.2)(@cosmjs/stargate@0.32.2)(@cosmjs/tendermint-rpc@0.32.2)(@terra-money/feather.js@1.2.1)(@types/react@18.2.38)(axios@0.27.2)(long@5.2.3)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-OaKapshiab/W25gebS1u6t56YTxBzE97GnY/iie2+eBnFQ1YqNgPGG4X8OWfX61uPAGDWVYDoprC7GoRbcLQbA==}
     hasBin: true
     peerDependencies:
@@ -11740,7 +11702,7 @@ packages:
       '@keplr-wallet/types': 0.12.44
       '@metamask/providers': 12.0.0
       '@tanstack/react-query': 4.36.1(react-dom@18.2.0)(react@18.2.0)
-      '@terra-money/station-connector': 1.0.15(@cosmjs/amino@0.32.2)(@terra-money/feather.js@1.2.1)(axios@0.27.2)
+      '@terra-money/station-connector': 1.0.15(@cosmjs/amino@0.31.3)(@terra-money/feather.js@1.2.1)(axios@0.27.2)
       '@vectis/extension-client': 0.7.2
       '@walletconnect/sign-client': 2.10.5
       '@walletconnect/types': 2.10.5

@@ -1,11 +1,11 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { AccountFactoryClient } from '../../codegen/abstract'
+import { WithCosmWasmSignOptions } from '../../types/parameters'
 import { WithOptional } from '../../types/utils'
-import { WithArgsAndCosmWasmSignOptions } from '../../types/with-args'
 import { accountIdToParameter } from '../../utils'
 import { createAccount } from './create-account'
 
-export type CreateAccountMonarchyParameters = WithArgsAndCosmWasmSignOptions<
+export type CreateAccountMonarchyParameters = WithCosmWasmSignOptions<
   {
     signingCosmWasmClient: SigningCosmWasmClient
     apiUrl: string
@@ -21,41 +21,37 @@ export type CreateAccountMonarchyParameters = WithArgsAndCosmWasmSignOptions<
 >
 
 export async function createAccountMonarchy({
-  args: {
-    signingCosmWasmClient,
-    apiUrl,
-    sender,
-    installModules = [],
-    baseAsset,
-    description,
-    name,
-    namespace,
-    link,
-    owner,
-    accountId,
-  },
+  signingCosmWasmClient,
+  apiUrl,
+  sender,
+  installModules = [],
+  baseAsset,
+  description,
+  name,
+  namespace,
+  link,
+  owner,
+  accountId,
   fee,
   memo,
   funds,
 }: CreateAccountMonarchyParameters) {
   return createAccount({
-    args: {
-      signingCosmWasmClient,
-      apiUrl,
-      sender,
-      governance: {
-        Monarchy: {
-          monarch: owner,
-        },
+    signingCosmWasmClient,
+    apiUrl,
+    sender,
+    governance: {
+      Monarchy: {
+        monarch: owner,
       },
-      name,
-      description,
-      link,
-      installModules,
-      baseAsset,
-      namespace,
-      accountId: accountId ? accountIdToParameter(accountId) : undefined,
     },
+    name,
+    description,
+    link,
+    installModules,
+    baseAsset,
+    namespace,
+    accountId: accountId ? accountIdToParameter(accountId) : undefined,
     fee,
     memo,
     funds,

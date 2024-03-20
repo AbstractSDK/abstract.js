@@ -1,17 +1,13 @@
-import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import {
-  ProxyExecuteMsgBuilder,
-  ProxyTypes,
-  VersionControlTypes,
-} from '../../../codegen/abstract'
+import { ProxyExecuteMsgBuilder, ProxyTypes } from '../../../codegen/abstract'
 import { ModuleType } from '../../../codegen/gql/graphql'
 import { MaybeArray } from '../../../types/utils'
-import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
 import { executeOnModule } from './execute-on-module'
 import { BaseWalletParameters } from './types'
 
+import { WithCosmWasmSignOptions } from '../../../types/parameters'
+import { CommonModuleNames } from '../../public/types'
 export type ExecuteParameters = Omit<
-  WithArgsAndCosmWasmSignOptions<
+  WithCosmWasmSignOptions<
     BaseWalletParameters & {
       msgs: MaybeArray<ProxyTypes.CosmosMsgForEmpty>
     }
@@ -30,22 +26,24 @@ export type ExecuteParameters = Omit<
  * @param memo
  */
 export async function execute({
-  args: { accountId, signingCosmWasmClient, apiUrl, sender, msgs },
+  accountId,
+  signingCosmWasmClient,
+  apiUrl,
+  sender,
+  msgs,
   fee,
   memo,
 }: ExecuteParameters) {
   return executeOnModule({
-    args: {
-      accountId,
-      signingCosmWasmClient,
-      apiUrl,
-      sender,
-      moduleId: 'abstract:proxy',
-      moduleType: ModuleType.AccountBase,
-      moduleMsg: ProxyExecuteMsgBuilder.moduleAction({
-        msgs: Array.isArray(msgs) ? msgs : [msgs],
-      }),
-    },
+    accountId,
+    signingCosmWasmClient,
+    apiUrl,
+    sender,
+    moduleId: CommonModuleNames.PROXY,
+    moduleType: ModuleType.AccountBase,
+    moduleMsg: ProxyExecuteMsgBuilder.moduleAction({
+      msgs: Array.isArray(msgs) ? msgs : [msgs],
+    }),
     fee,
     memo,
   })

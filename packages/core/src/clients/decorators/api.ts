@@ -5,75 +5,86 @@ import { getAnsHostAddressFromApi } from '../../actions/get-ans-host-address-fro
 import { getAnsTokenFromApi } from '../../actions/get-ans-token-from-api'
 import { getAnsTokensFromApi } from '../../actions/get-ans-tokens-from-api'
 import { getVersionControlAddressFromApi } from '../../actions/get-version-control-address-from-api'
-import { CutArgs } from '../../types/with-args'
+import { ExtractAndOmitParameters } from '../../types/parameters'
 
-type CutSpecificArgsFromParameter<T extends (payload: any) => any> = CutArgs<
-  {
-    readonly apiUrl: string
-  },
-  T
->
+type ExtractAndOmitDecoratedParametersFromParameters<
+  fn extends (payload: any) => any,
+> = ExtractAndOmitParameters<fn, 'apiUrl'>
 
 export type ApiActions = {
   getAccountFactoryAddressFromApi(
-    args: CutSpecificArgsFromParameter<typeof getAccountFactoryAddressFromApi>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getAccountFactoryAddressFromApi
+    >,
   ): ReturnType<typeof getAccountFactoryAddressFromApi>
   getAnsHostAddressFromApi(
-    args: CutSpecificArgsFromParameter<typeof getAnsHostAddressFromApi>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getAnsHostAddressFromApi
+    >,
   ): ReturnType<typeof getAnsHostAddressFromApi>
   getAccountsByOwnerFromApi(
-    args: CutSpecificArgsFromParameter<typeof getAccountsByOwnerFromApi>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getAccountsByOwnerFromApi
+    >,
   ): ReturnType<typeof getAccountsByOwnerFromApi>
   getAnsTokenFromApi(
-    args: CutSpecificArgsFromParameter<typeof getAnsTokenFromApi>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getAnsTokenFromApi
+    >,
   ): ReturnType<typeof getAnsTokenFromApi>
   getAnsTokensFromApi(
-    args: CutSpecificArgsFromParameter<typeof getAnsTokensFromApi>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getAnsTokensFromApi
+    >,
   ): ReturnType<typeof getAnsTokensFromApi>
   getVersionControlAddressFromApi(
-    args: CutSpecificArgsFromParameter<typeof getVersionControlAddressFromApi>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getVersionControlAddressFromApi
+    >,
   ): ReturnType<typeof getVersionControlAddressFromApi>
   getAccountBalancesFromApi(
-    args: CutSpecificArgsFromParameter<typeof getAccountBalancesFromApi>,
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getAccountBalancesFromApi
+    >,
   ): ReturnType<typeof getAccountBalancesFromApi>
 }
 
 export function apiActions(apiUrl: string): ApiActions {
   return {
-    getAccountBalancesFromApi: ({ args, ...rest }) =>
+    getAccountBalancesFromApi: (parameters) =>
       getAccountBalancesFromApi({
-        args: { ...args, apiUrl },
-        ...rest,
+        ...parameters,
+        apiUrl,
       }),
-    getAccountFactoryAddressFromApi: ({ args, ...rest }) =>
+    getAccountFactoryAddressFromApi: (parameters) =>
       getAccountFactoryAddressFromApi({
-        args: { ...args, apiUrl },
-        ...rest,
+        ...parameters,
+        apiUrl,
       }),
-    getAnsHostAddressFromApi: ({ args, ...rest }) =>
+    getAnsHostAddressFromApi: (parameters) =>
       getAnsHostAddressFromApi({
-        args: { ...args, apiUrl },
-        ...rest,
+        ...parameters,
+        apiUrl,
       }),
-    getAccountsByOwnerFromApi: ({ args, ...rest }) =>
+    getAccountsByOwnerFromApi: (parameters) =>
       getAccountsByOwnerFromApi({
-        args: { ...args, apiUrl },
-        ...rest,
+        ...parameters,
+        apiUrl,
       }),
-    getAnsTokenFromApi: ({ args, ...rest }) =>
+    getAnsTokenFromApi: (parameters) =>
       getAnsTokenFromApi({
-        args: { ...args, apiUrl },
-        ...rest,
+        ...parameters,
+        apiUrl,
       }),
-    getAnsTokensFromApi: ({ args, ...rest }) =>
+    getAnsTokensFromApi: (parameters) =>
       getAnsTokensFromApi({
-        args: { ...args, apiUrl },
-        ...rest,
+        ...parameters,
+        apiUrl,
       }),
-    getVersionControlAddressFromApi: ({ args, ...rest }) =>
+    getVersionControlAddressFromApi: (parameters) =>
       getVersionControlAddressFromApi({
-        args: { ...args, apiUrl },
-        ...rest,
+        ...parameters,
+        apiUrl,
       }),
   }
 }

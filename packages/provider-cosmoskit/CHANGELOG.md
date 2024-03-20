@@ -1,5 +1,40 @@
 # @abstract-money/provider-cosmoskit
 
+## 2.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`969a679`](https://github.com/AbstractSDK/abstract.js/commit/969a6797fae69f3285b3e7c303a1e498836951f4)]:
+  - @abstract-money/react@1.0.1
+
+## 2.0.0
+
+### Patch Changes
+
+- Updated dependencies [[`8ac578d`](https://github.com/AbstractSDK/abstract.js/commit/8ac578dd0703391257e06fcce219ab32afe01fd9)]:
+  - @abstract-money/react@1.0.0
+
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies [[`5c10a90`](https://github.com/AbstractSDK/abstract.js/commit/5c10a900f65240b80bb69ac407d3b2f1d43e3020)]:
+  - @abstract-money/react@0.3.2
+
+## 1.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`ecbdd3a`](https://github.com/AbstractSDK/abstract.js/commit/ecbdd3aec6226ff23e71f9b16596834bf808742f)]:
+  - @abstract-money/react@0.3.1
+
+## 1.0.0
+
+### Patch Changes
+
+- Updated dependencies [[`6a02ff5`](https://github.com/AbstractSDK/abstract.js/commit/6a02ff503356d8d17bd94973f7b75c728b13b340)]:
+  - @abstract-money/react@0.3.0
+
 ## 0.0.27
 
 ### Patch Changes

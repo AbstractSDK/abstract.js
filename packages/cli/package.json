@@ -1,6 +1,6 @@
 {
   "name": "@abstract-money/cli",
-  "version": "0.2.11",
+  "version": "0.3.2",
   "description": "CLI tool to generate modules to build with Abstract SDK",
   "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
   "author": "dalechyn <vlad@abstract.money>",
@@ -53,8 +53,8 @@
     "picocolors": "^1.0.0",
     "prettier": "^2.8.1",
     "zod": "^3.21.4",
-    "@cosmjs/amino": "^0.32.2",
-    "@cosmjs/cosmwasm-stargate": "^0.32.2"
+    "@cosmjs/cosmwasm-stargate": "^0.32.2",
+    "@cosmjs/stargate": "^0.32.2"
   },
   "devDependencies": {
     "@types/jest": "^29.5.2",

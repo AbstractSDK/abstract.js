@@ -6,25 +6,25 @@ import {
   moduleIdToNamespace,
 } from '@abstract-money/core'
 import { VersionControlTypes } from '../../codegen/abstract'
-import { WithArgs } from '../../types/with-args'
 import { versionControlModuleToCodeId } from '../../utils/version-control/version-control-module-to-code-id'
 import { getVersionControlQueryClient } from './get-version-control-query-client'
 
-export type GetAppModuleCodeIdFromVersionControl = WithArgs<{
+export type GetAppModuleCodeIdFromVersionControl = {
   moduleId: `${ModuleId}`
   cosmWasmClient: CosmWasmClient
   versionControlAddress: string
   version?: VersionControlTypes.ModuleVersion
-}>
+}
 
 export async function getAppModuleCodeIdFromVersionControl({
-  args: { moduleId, cosmWasmClient, versionControlAddress, version },
+  moduleId,
+  cosmWasmClient,
+  versionControlAddress,
+  version,
 }: GetAppModuleCodeIdFromVersionControl) {
   const versionControlQueryClient = getVersionControlQueryClient({
-    args: {
-      cosmWasmClient,
-      versionControlAddress,
-    },
+    cosmWasmClient,
+    versionControlAddress,
   })
 
   const [moduleAddress] = await versionControlQueryClient

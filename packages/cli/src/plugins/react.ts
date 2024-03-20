@@ -292,9 +292,9 @@ export function react(options: ReactOptions = {}): ReactResult {
                   hookName,
                 )}>>[0], 'client'> & { ${
                   hasAbstractApp
-                    ? 'accountId?: AccountId;'
+                    ? 'accountId: AccountId | undefined; chainName: string | undefined;'
                     : 'contractAddress: string | undefined;'
-                } chainName: string | undefined }) => {
+                }}) => {
                     const {
                       data: ${queryClientCamelCase},
                       isLoading: is${queryClientPascalCase}Loading,
@@ -311,8 +311,12 @@ export function react(options: ReactOptions = {}): ReactResult {
                         }
                         ...rest,
                         Module: ${queryClientPascalCase},
+                      ${
+                        hasAbstractApp
+                          ? 'query: { enabled: options?.enabled }'
+                          : ''
+                      }
                       },
-                      ${hasAbstractApp ? '{ enabled: options?.enabled }' : ''}
                     )
 
                     const {
@@ -377,11 +381,13 @@ export function react(options: ReactOptions = {}): ReactResult {
                 hookNameWithoutModuleAndMutation,
                 dedent`
                   (
-                    { chainName, ${
-                      hasAbstractApp ? 'accountId' : 'contractAddress'
-                    } }: { chainName: string | undefined; ${
+                    { ${
+                      hasAbstractApp
+                        ? 'accountId, chainName'
+                        : 'contractAddress'
+                    } }: { ${
                   hasAbstractApp
-                    ? 'accountId?: AccountId'
+                    ? 'accountId: AccountId | undefined; chainName: string | undefined'
                     : 'contractAddress: string | undefined'
                 } },
                     options?: Omit<
@@ -406,10 +412,10 @@ export function react(options: ReactOptions = {}): ReactResult {
                             ? `
                         moduleId: ${constantCase(contract.name)}_MODULE_ID,
                         accountId,
+                        chainName,
                         `
                             : 'contractAddress,'
                         }
-                        chainName,
                         Module: ${clientPascalCase},
                       }
                     )

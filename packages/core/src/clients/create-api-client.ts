@@ -1,4 +1,4 @@
-import type { Prettify } from '../types/utils'
+import type { Evaluate } from '../types/utils'
 import { ABSTRACT_API_URL } from '../utils/constants'
 import { type Client, type ClientConfig, createClient } from './create-client'
 import { type ApiActions, apiActions } from './decorators/api'
@@ -7,7 +7,7 @@ export type ApiClientConfig = ClientConfig & {
   apiUrl?: string
 }
 
-export type ApiClient = Prettify<Client<ApiActions>>
+export type ApiClient = Evaluate<Client<ApiActions>>
 
 export function createApiClient(parameters: ApiClientConfig): ApiClient {
   const {

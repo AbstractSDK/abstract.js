@@ -1,11 +1,7 @@
-import { WithArgs } from '../../types/with-args'
-
-export type GetSenderAddressParameters = WithArgs<{
+export type GetSenderAddressParameters = {
   sender: string
-}>
+}
 
-export async function getSenderAddress({
-  args: { sender },
-}: GetSenderAddressParameters) {
+export async function getSenderAddress({ sender }: GetSenderAddressParameters) {
   return sender
 }

@@ -1,25 +1,22 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
-import { WithArgs } from '../../types/with-args'
-import {
-  CommonModuleNames,
-  getAbstractModuleVersion,
-} from './get-abstract-module-version'
+import { getAbstractModuleVersion } from './get-abstract-module-version'
+import { CommonModuleNames } from './types'
 
-export type GetModuleFactoryVersionParameters = WithArgs<{
+export type GetModuleFactoryVersionParameters = {
   cosmWasmClient: CosmWasmClient
   apiUrl: string
   version?: string
-}>
+}
 export async function getModuleFactoryVersion({
-  args: { cosmWasmClient, apiUrl, version },
+  cosmWasmClient,
+  apiUrl,
+  version,
 }: GetModuleFactoryVersionParameters) {
   return getAbstractModuleVersion({
-    args: {
-      moduleName: CommonModuleNames.MODULE_FACTORY,
-      cosmWasmClient,
-      apiUrl,
-      version,
-    },
+    moduleName: CommonModuleNames.MODULE_FACTORY,
+    cosmWasmClient,
+    apiUrl,
+    version,
   })
 }

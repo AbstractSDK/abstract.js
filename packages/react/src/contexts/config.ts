@@ -1,3 +1,4 @@
+import { QueryClientProviderProps } from '@tanstack/react-query/src/QueryClientProvider'
 import * as React from 'react'
 import { Config } from '../create-config'
 
@@ -5,6 +6,9 @@ const ConfigContext = React.createContext<Config | undefined>(undefined)
 
 export type AbstractConfigProps = {
   config: Config
+  queryClientOptions?: Partial<
+    Omit<QueryClientProviderProps, 'children' | 'contextSharing'>
+  >
 }
 
 export function AbstractConfigContext({

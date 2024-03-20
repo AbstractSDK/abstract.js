@@ -1,25 +1,22 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
-import { WithArgs } from '../../types/with-args'
-import {
-  CommonModuleNames,
-  getAbstractModuleAddressFromVersionControl,
-} from './get-abstract-module-address-from-version-control'
+import { getAbstractModuleAddressFromVersionControl } from './get-abstract-module-address-from-version-control'
+import { CommonModuleNames } from './types'
 
-export type GetAccountFactoryAddressFromVersionControlParameters = WithArgs<{
+export type GetAccountFactoryAddressFromVersionControlParameters = {
   cosmWasmClient: CosmWasmClient
   versionControlAddress: string
   version?: string
-}>
+}
 export async function getAccountFactoryAddressFromVersionControl({
-  args: { cosmWasmClient, versionControlAddress, version },
+  cosmWasmClient,
+  versionControlAddress,
+  version,
 }: GetAccountFactoryAddressFromVersionControlParameters) {
   return getAbstractModuleAddressFromVersionControl({
-    args: {
-      moduleName: CommonModuleNames.ACCOUNT_FACTORY,
-      cosmWasmClient,
-      versionControlAddress,
-      version,
-    },
+    moduleName: CommonModuleNames.ACCOUNT_FACTORY,
+    cosmWasmClient,
+    versionControlAddress,
+    version,
   })
 }

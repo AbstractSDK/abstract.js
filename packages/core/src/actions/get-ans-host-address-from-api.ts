@@ -1,14 +1,14 @@
 import { request } from 'graphql-request'
 import { gql } from '../codegen/gql'
-import { WithArgs } from '../types/with-args'
 
-export type GetAnsHostAddressFromApiParameters = WithArgs<{
+export type GetAnsHostAddressFromApiParameters = {
   apiUrl: string
   chainName: string
-}>
+}
 
 export async function getAnsHostAddressFromApi({
-  args: { apiUrl, chainName },
+  apiUrl,
+  chainName,
 }: GetAnsHostAddressFromApiParameters) {
   const deploymentData = await request(
     apiUrl,

@@ -1,23 +1,22 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { VersionControlTypes } from '../../../codegen/abstract'
-import { WithArgs } from '../../../types/with-args'
 import { accountIdToParameter } from '../../../utils/account-id'
 import { getVersionControlQueryClientFromApi } from '../../public/get-version-control-query-client-from-api'
 
-export type GetNamespaceParameters = WithArgs<{
+export type GetNamespaceParameters = {
   accountId: VersionControlTypes.AccountId
   cosmWasmClient: CosmWasmClient
   apiUrl: string
-}>
+}
 
 export async function getNamespace({
-  args: { accountId, cosmWasmClient, apiUrl },
+  accountId,
+  cosmWasmClient,
+  apiUrl,
 }: GetNamespaceParameters): Promise<string | null> {
   const versionControlQueryClient = await getVersionControlQueryClientFromApi({
-    args: {
-      cosmWasmClient,
-      apiUrl,
-    },
+    cosmWasmClient,
+    apiUrl,
   })
   const namespace = await versionControlQueryClient
     .namespaces({ accounts: [accountIdToParameter(accountId)] })

@@ -1,6 +1,6 @@
 import { IbcClientTypes, ManagerTypes } from '../../../codegen/abstract'
 import { ModuleType } from '../../../codegen/gql/graphql'
-import { WithArgsAndCosmWasmSignOptions } from '../../../types/with-args'
+import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { encodeModuleMsg } from '../../../utils/modules/encode-module-msg'
 import { executeOnRemote } from './execute-on-remote'
 import { BaseWalletParameters } from './types'
@@ -8,7 +8,7 @@ import { BaseWalletParameters } from './types'
 type Base64EncodedJson = string
 
 export type ExecuteOnRemoteModuleParameters = Omit<
-  WithArgsAndCosmWasmSignOptions<
+  WithCosmWasmSignOptions<
     BaseWalletParameters & {
       hostChainName: string
       moduleId: string
@@ -36,17 +36,15 @@ export type ExecuteOnRemoteModuleParameters = Omit<
  * @todo: ensure that remote module exists and is valid
  */
 export async function executeOnRemoteModule({
-  args: {
-    accountId,
-    signingCosmWasmClient,
-    apiUrl,
-    sender,
-    moduleId,
-    moduleType,
-    moduleMsg,
-    hostChainName,
-    callbackInfo,
-  },
+  accountId,
+  signingCosmWasmClient,
+  apiUrl,
+  sender,
+  moduleId,
+  moduleType,
+  moduleMsg,
+  hostChainName,
+  callbackInfo,
   fee,
   memo,
 }: ExecuteOnRemoteModuleParameters) {
@@ -58,15 +56,13 @@ export async function executeOnRemoteModule({
   }
 
   return executeOnRemote({
-    args: {
-      accountId,
-      signingCosmWasmClient,
-      apiUrl,
-      sender,
-      managerMsg,
-      hostChainName,
-      callbackInfo,
-    },
+    accountId,
+    signingCosmWasmClient,
+    apiUrl,
+    sender,
+    managerMsg,
+    hostChainName,
+    callbackInfo,
     fee,
     memo,
   })

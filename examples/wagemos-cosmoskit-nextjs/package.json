@@ -1,6 +1,6 @@
 {
   "name": "wagemos-cosmoskit-nextjs",
-  "version": "0.2.28",
+  "version": "0.2.33",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -14,7 +14,6 @@
     "@abstract-money/provider-cosmoskit": "workspace:*",
     "@abstract-money/react": "workspace:*",
     "@chain-registry/types": "^0.13.1",
-    "@cosmjs/amino": "^0.32.2",
     "@cosmjs/stargate": "^0.32.2",
     "@cosmos-kit/keplr": "^2.4.15",
     "@cosmos-kit/react": "^2.6.0",

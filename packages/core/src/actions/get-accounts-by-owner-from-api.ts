@@ -1,17 +1,18 @@
 import request from 'graphql-request'
 import { gql } from '../codegen/gql'
-import { WithArgs } from '../types/with-args'
 import { accountIdApiFormatToAccountId } from '../utils/account-id/account-id-api-format-to-account-id'
 
-export type GetAccountsByOwnerFromApi = WithArgs<{
+export type GetAccountsByOwnerFromApiParameters = {
   apiUrl: string
   owner: string
   chains: string[]
-}>
+}
 
 export async function getAccountsByOwnerFromApi({
-  args: { apiUrl, owner, chains },
-}: GetAccountsByOwnerFromApi) {
+  apiUrl,
+  owner,
+  chains,
+}: GetAccountsByOwnerFromApiParameters) {
   const result = await request(
     apiUrl,
     gql(/* GraphQL */ `

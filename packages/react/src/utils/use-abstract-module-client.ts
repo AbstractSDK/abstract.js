@@ -6,8 +6,7 @@ import {
   AbstractClient,
   accountIdToLegacyAccountId,
 } from '@abstract-money/core/legacy'
-import { UseQueryOptions, useQuery } from '@tanstack/react-query'
-import { useAccountId } from '../contexts'
+import { UseQueryParameters, useQuery } from '../types/queries'
 import { useAbstractClient } from './use-abstract-client'
 
 interface AbstractModuleClientConstructor {
@@ -47,19 +46,14 @@ async function getAbstractModuleClient<
   }) as InstanceType<TModule>
 }
 
-export function useAbstractModuleClient<
+export type UseAbstractModuleClientParameters<
   TModule extends AbstractModuleClientConstructor,
->(
-  parameters: {
-    chainName: string | undefined
-    accountId?: AccountId
-    moduleId: string
-    Module: TModule
-  },
-  {
-    enabled: enabled_ = true,
-    ...rest
-  }: UseQueryOptions<
+> = {
+  accountId: AccountId | undefined
+  chainName: string | undefined
+  moduleId: string
+  Module: TModule
+  query?: UseQueryParameters<
     InstanceType<TModule> | undefined,
     unknown,
     InstanceType<TModule> | undefined,
@@ -70,29 +64,27 @@ export function useAbstractModuleClient<
       TModule,
       AbstractClient | undefined,
     ]
-  > = {},
-) {
-  const {
-    moduleId,
-    accountId: accountIdParameter,
-    Module,
-    chainName,
-  } = parameters
+  >
+}
 
-  const { accountId } = useAccountId(
-    // Workaround to not pass any parameters if the accountId was not fed as an argument
-    // in order to throw `accountId` not found error, as it might be defined as a property
-    // but be undefined.
-    ...((Object.hasOwnProperty.call(parameters, 'accountId')
-      ? [{ accountId: accountIdParameter }]
-      : []) as [any]),
-  )
+export function useAbstractModuleClient<
+  TModule extends AbstractModuleClientConstructor,
+>({
+  moduleId,
+  accountId,
+  chainName,
+  Module,
+  query = {},
+}: UseAbstractModuleClientParameters<TModule>) {
   const {
     data: abstractClient,
     isLoading: isAbstractClientLoading,
     isError: isAbstractClientError,
     error: abstractClientError,
-  } = useAbstractClient({ chainName }, { enabled: enabled_ })
+  } = useAbstractClient({
+    chainName,
+    query: { enabled: query.enabled ?? true },
+  })
 
   const queryKey = React.useMemo(
     () =>
@@ -118,9 +110,8 @@ export function useAbstractModuleClient<
     })
   }, [abstractClient, accountId, moduleId, Module])
 
-  const enabled = React.useMemo(
-    () => Boolean(abstractClient && chainName && accountId && enabled_),
-    [enabled_, abstractClient, chainName, accountId],
+  const enabled = Boolean(
+    abstractClient && accountId && (query.enabled ?? true),
   )
 
   const {
@@ -128,7 +119,7 @@ export function useAbstractModuleClient<
     isLoading: isAbstractModuleClientLoading,
     isError: isAbstractModuleClientError,
     error: abstractModuleClientError,
-  } = useQuery(queryKey, queryFn, { enabled, ...rest })
+  } = useQuery({ queryKey, queryFn, ...query, enabled })
 
   if (isAbstractClientError)
     return {

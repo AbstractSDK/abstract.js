@@ -5,8 +5,8 @@ import {
   useQuery,
 } from '@tanstack/react-query'
 import React from 'react'
-import { useAccountId, useConfig } from '../../../contexts'
-import { parseParametersWithArgs } from '../utils'
+import { useConfig } from '../../../contexts'
+import { WithArgs } from '../../../types/args'
 
 type QueryFnData = Awaited<
   ReturnType<AccountPublicClient['getRemoteAccountIds']>
@@ -14,9 +14,9 @@ type QueryFnData = Awaited<
 
 type QueryError = unknown
 type QueryData = QueryFnData
-type UseRemoteAccountIdsFromApiArgs = Parameters<
-  AccountPublicClient['getRemoteAccountIds']
->[0]
+type UseRemoteAccountIdsFromApiArgs = WithArgs<
+  Parameters<AccountPublicClient['getRemoteAccountIds']>[0]
+>
 type QueryKey = readonly [
   'getRemoteAccountIds',
   AccountPublicClient | undefined,
@@ -30,37 +30,24 @@ type QueryOptions = Omit<
 >
 type QueryResult = UseQueryResult<QueryData, QueryError>
 
-export function useRemoteAccountIds(
-  parameters: UseRemoteAccountIdsFromApiArgs & {
-    accountId: AccountId | undefined
-  },
-  options?: QueryOptions,
-): QueryResult
-export function useRemoteAccountIds(
-  parameters: UseRemoteAccountIdsFromApiArgs,
-  options?: QueryOptions,
-): QueryResult
-export function useRemoteAccountIds(
-  arg1: UseRemoteAccountIdsFromApiArgs &
-    (
-      | {
-          accountId: AccountId | undefined
-        }
-      | {}
-    ),
-  arg2: QueryOptions = { enabled: true },
-) {
-  const {
-    args,
-    accountId: accountIdParameter,
-    options,
-  } = parseParametersWithArgs(arg1, arg2)
+export type UseRemoteAccountIdsParameters = WithArgs<
+  Parameters<AccountPublicClient['getRemoteAccountIds']>[0]
+> & {
+  query?: QueryOptions
+  chainName: string | undefined
+  accountId: AccountId | undefined
+}
 
-  const { accountId } = useAccountId({ accountId: accountIdParameter })
+export function useRemoteAccountIds({
+  args,
+  accountId,
+  chainName,
+  query = {},
+}: UseRemoteAccountIdsParameters): QueryResult {
   const config = useConfig()
   const accountPublicClient = config.useAccountPublicClient({
     accountId,
-    chainName: accountId?.chainName,
+    chainName: chainName,
   })
   const queryKey = React.useMemo(
     () =>
@@ -69,8 +56,8 @@ export function useRemoteAccountIds(
   )
 
   const enabled = React.useMemo(
-    () => Boolean(accountPublicClient && args && options.enabled),
-    [options.enabled, accountPublicClient],
+    () => Boolean(accountPublicClient && args && (query.enabled ?? true)),
+    [query.enabled, accountPublicClient],
   )
 
   const queryFn = React.useCallback(() => {
@@ -82,5 +69,5 @@ export function useRemoteAccountIds(
     })
   }, [accountPublicClient])
 
-  return useQuery(queryKey, queryFn, { ...options, enabled })
+  return useQuery({ queryKey, queryFn, ...query, enabled })
 }

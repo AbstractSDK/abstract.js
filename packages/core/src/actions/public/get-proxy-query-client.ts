@@ -1,14 +1,14 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { ProxyQueryClient } from '../../codegen/abstract'
-import { WithArgs } from '../../types/with-args'
 
-export type GetProxyQueryClientParameters = WithArgs<{
+export type GetProxyQueryClientParameters = {
   cosmWasmClient: CosmWasmClient
   proxyAddress: string
-}>
+}
 
 export async function getProxyQueryClient({
-  args: { cosmWasmClient, proxyAddress },
+  cosmWasmClient,
+  proxyAddress,
 }: GetProxyQueryClientParameters) {
   return new ProxyQueryClient(cosmWasmClient, proxyAddress)
 }

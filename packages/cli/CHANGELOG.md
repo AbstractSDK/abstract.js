@@ -1,5 +1,32 @@
 # @abstract-money/cli
 
+## 0.3.2
+
+### Patch Changes
+
+- [#84](https://github.com/AbstractSDK/abstract.js/pull/84) [`969a679`](https://github.com/AbstractSDK/abstract.js/commit/969a6797fae69f3285b3e7c303a1e498836951f4) Thanks [@dalechyn](https://github.com/dalechyn)! - Brought `chainName` parameter back to account-dependant hooks.
+
+## 0.3.1
+
+### Patch Changes
+
+- [#81](https://github.com/AbstractSDK/abstract.js/pull/81) [`8ac578d`](https://github.com/AbstractSDK/abstract.js/commit/8ac578dd0703391257e06fcce219ab32afe01fd9) Thanks [@dalechyn](https://github.com/dalechyn)! - Changed the API for `react` and `core` packages. Previously `core` package had unnecessary `args:{}` wrapping, now it doesn't. Also, `query` and `mutation` fields were added to the `react` package to have a clear separation of concerns, as well as fixed inconsistent API around `chainName` and types.
+
+## 0.3.0
+
+### Minor Changes
+
+- [#79](https://github.com/AbstractSDK/abstract.js/pull/79) [`5c10a90`](https://github.com/AbstractSDK/abstract.js/commit/5c10a900f65240b80bb69ac407d3b2f1d43e3020) Thanks [@dalechyn](https://github.com/dalechyn)! - Dropped the `chainName` that was passed previously as a parameter to every query/mutation. It's not needed as the account always has a `chainName` set.
+
+## 0.2.12
+
+### Patch Changes
+
+- [#75](https://github.com/AbstractSDK/abstract.js/pull/75) [`6a02ff5`](https://github.com/AbstractSDK/abstract.js/commit/6a02ff503356d8d17bd94973f7b75c728b13b340) Thanks [@dalechyn](https://github.com/dalechyn)! - Deprecated `AbstractAccountIdProvider` in favor of custom client's accountId state management.
+  Introduced consequent changes to types involving `accountId`.
+  Fixes the peer-dependency issue in `provider-graz` package.
+  Dropped `@cosmjs/amino` in favor of `@cosmjs/stargate`
+
 ## 0.2.11
 
 ### Patch Changes
