@@ -1,5 +1,13 @@
 # @abstract-money/react
 
+## 1.0.2
+
+### Patch Changes
+
+- [#83](https://github.com/AbstractSDK/abstract.js/pull/83) [`8d4ec17`](https://github.com/AbstractSDK/abstract.js/commit/8d4ec1775a0c18c4540f16a432564cf2b9e022e8) Thanks [@adairrr](https://github.com/adairrr)! - Add query client options to abtsract provider
+
+- [#89](https://github.com/AbstractSDK/abstract.js/pull/89) [`7601ab6`](https://github.com/AbstractSDK/abstract.js/commit/7601ab662060030ae4943c94f7bf7134533df071) Thanks [@dalechyn](https://github.com/dalechyn)! - Fixed the `enabled` prop that always resolved to `true` in subaccounts query.
+
 ## 1.0.1
 
 ### Patch Changes
