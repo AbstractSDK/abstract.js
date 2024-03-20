@@ -18,7 +18,6 @@ type QueryOptions = Omit<
   'queryFn'
 >
 
-type GetRemoteHostsArgs = { chainName: string | undefined }
 export function useRemoteHosts(
   chainName: string | undefined,
   options: QueryOptions = { enabled: true },
@@ -45,5 +44,5 @@ export function useRemoteHosts(
     })
   }, [publicClient])
 
-  return useQuery(queryKey, queryFn, { ...options, enabled })
+  return useQuery({ queryKey, queryFn, ...options, enabled })
 }
