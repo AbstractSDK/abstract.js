@@ -35,10 +35,7 @@ export default function RemotePage() {
     },
   })
 
-  const firstAccount = useMemo(
-    () => accounts?.[0]
-    [accounts],
-  )
+  const firstAccount = useMemo(() => accounts?.[0][accounts])
 
   const { mutate: createRemoteAccount, isLoading: isCreating } =
     useCreateRemoteAccount({
