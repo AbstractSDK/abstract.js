@@ -1,14 +1,8 @@
-import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { VersionControlTypes } from '../../../codegen/abstract'
 import { getProxyClient } from '../../wallet/get-proxy-client'
 import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
+import { BaseWalletParameters } from './types'
 
-export type GetProxyClientFromApiParameters = {
-  accountId: VersionControlTypes.AccountId
-  signingCosmWasmClient: SigningCosmWasmClient
-  sender: string
-  apiUrl: string
-}
+export type GetProxyClientFromApiParameters = BaseWalletParameters
 
 export async function getProxyClientFromApi({
   accountId,

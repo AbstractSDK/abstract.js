@@ -12,8 +12,10 @@ import { getAnsHostQueryClientFromApi } from '../../actions/public/get-ans-host-
 import { getAnsHostQueryClientFromVersionControl } from '../../actions/public/get-ans-host-query-client-from-version-control'
 import { getAnsHostVersion } from '../../actions/public/get-ans-host-version'
 import { getCosmWasmClient } from '../../actions/public/get-cosm-wasm-client'
+import { getIbcClientQueryClient } from '../../actions/public/get-ibc-client-query-client'
 import { getManagerQueryClient } from '../../actions/public/get-manager-query-client'
 import { getProxyQueryClient } from '../../actions/public/get-proxy-query-client'
+import { getRemoteHostsFromApi } from '../../actions/public/get-remote-hosts-from-api'
 import { getVersionControlModuleData } from '../../actions/public/get-version-control-module-data'
 import { getVersionControlQueryClient } from '../../actions/public/get-version-control-query-client'
 import { getVersionControlQueryClientFromApi } from '../../actions/public/get-version-control-query-client-from-api'
@@ -84,6 +86,11 @@ export type PublicActions = {
       typeof getAnsHostQueryClient
     >,
   ): ReturnType<typeof getAnsHostQueryClient>
+  getIbcClientQueryClient(
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getIbcClientQueryClient
+    >,
+  ): ReturnType<typeof getIbcClientQueryClient>
   getManagerQueryClient(
     parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getManagerQueryClient
@@ -109,6 +116,11 @@ export type PublicActions = {
       typeof getVersionControlQueryClient
     >,
   ): ReturnType<typeof getVersionControlQueryClient>
+  getRemoteHosts(
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getRemoteHostsFromApi
+    >,
+  ): ReturnType<typeof getRemoteHostsFromApi>
   getCosmWasmClient(): ReturnType<typeof getCosmWasmClient>
 }
 
@@ -185,6 +197,11 @@ export function publicActions(
         ...parameters,
         cosmWasmClient,
       }),
+    getIbcClientQueryClient: (parameters) =>
+      getIbcClientQueryClient({
+        ...parameters,
+        cosmWasmClient,
+      }),
     getVersionControlModuleData: (parameters) =>
       getVersionControlModuleData({
         ...parameters,
@@ -210,6 +227,12 @@ export function publicActions(
       getProxyQueryClient({
         ...parameters,
         cosmWasmClient,
+      }),
+    getRemoteHosts: (parameters) =>
+      getRemoteHostsFromApi({
+        ...parameters,
+        cosmWasmClient,
+        apiUrl,
       }),
     getCosmWasmClient: () =>
       getCosmWasmClient({

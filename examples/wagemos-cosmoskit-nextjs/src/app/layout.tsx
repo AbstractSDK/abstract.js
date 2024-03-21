@@ -16,7 +16,10 @@ const poppins = Poppins({
   weight: ['900', '800', '700'],
   variable: '--font-display',
 })
-const abstractConfig = createConfig({ provider: cosmosKitProvider })
+const abstractConfig = createConfig({
+  provider: cosmosKitProvider,
+  apiUrl: 'https://api.abstract.money/graphql',
+})
 
 export default function RootLayout({
   children,

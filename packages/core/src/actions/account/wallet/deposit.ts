@@ -1,17 +1,14 @@
-import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { VersionControlTypes } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { Asset, encodeAssetsTransfersMsgs } from '../../../utils/assets'
 import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
+import { BaseWalletParameters } from './types'
 
 export type DepositParameters = Omit<
-  WithCosmWasmSignOptions<{
-    accountId: VersionControlTypes.AccountId
-    signingCosmWasmClient: SigningCosmWasmClient
-    apiUrl: string
-    sender: string
-    assets: Asset[]
-  }>,
+  WithCosmWasmSignOptions<
+    BaseWalletParameters & {
+      assets: Asset[]
+    }
+  >,
   'funds'
 >
 

@@ -1,26 +1,30 @@
-import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import {
-  ManagerMsgComposer,
-  ProxyExecuteMsgBuilder,
-  ProxyTypes,
-  VersionControlTypes,
-} from '../../../codegen/abstract'
-import { WithCosmWasmSignOptions } from '../../../types/parameters'
+import { ProxyExecuteMsgBuilder, ProxyTypes } from '../../../codegen/abstract'
+import { ModuleType } from '../../../codegen/gql/graphql'
 import { MaybeArray } from '../../../types/utils'
-import { jsonToBinary } from '../../../utils/encoding'
-import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
+import { executeOnModule } from './execute-on-module'
+import { BaseWalletParameters } from './types'
 
+import { WithCosmWasmSignOptions } from '../../../types/parameters'
+import { CommonModuleNames } from '../../public/types'
 export type ExecuteParameters = Omit<
-  WithCosmWasmSignOptions<{
-    accountId: VersionControlTypes.AccountId
-    signingCosmWasmClient: SigningCosmWasmClient
-    apiUrl: string
-    sender: string
-    msgs: MaybeArray<ProxyTypes.CosmosMsgForEmpty>
-  }>,
+  WithCosmWasmSignOptions<
+    BaseWalletParameters & {
+      msgs: MaybeArray<ProxyTypes.CosmosMsgForEmpty>
+    }
+  >,
   'funds'
 >
 
+/**
+ * Execute a message directly as the Account. Must be called by the owner. Encodes the message and sends it to the chain.
+ * @param accountId
+ * @param signingCosmWasmClient
+ * @param apiUrl
+ * @param sender
+ * @param msgs
+ * @param fee
+ * @param memo
+ */
 export async function execute({
   accountId,
   signingCosmWasmClient,
@@ -30,24 +34,17 @@ export async function execute({
   fee,
   memo,
 }: ExecuteParameters) {
-  const { managerAddress } = await getAccountBaseAddressesFromApi({
+  return executeOnModule({
     accountId,
-    cosmWasmClient: signingCosmWasmClient,
+    signingCosmWasmClient,
     apiUrl,
-  })
-  return signingCosmWasmClient.signAndBroadcast(
     sender,
-    [
-      new ManagerMsgComposer(sender, managerAddress).execOnModule({
-        moduleId: 'abstract:proxy',
-        execMsg: jsonToBinary(
-          ProxyExecuteMsgBuilder.moduleAction({
-            msgs: Array.isArray(msgs) ? msgs : [msgs],
-          }),
-        ),
-      }),
-    ],
+    moduleId: CommonModuleNames.PROXY,
+    moduleType: ModuleType.AccountBase,
+    moduleMsg: ProxyExecuteMsgBuilder.moduleAction({
+      msgs: Array.isArray(msgs) ? msgs : [msgs],
+    }),
     fee,
     memo,
-  )
+  })
 }

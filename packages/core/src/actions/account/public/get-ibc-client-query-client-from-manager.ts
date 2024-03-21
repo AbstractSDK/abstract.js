@@ -3,6 +3,8 @@ import {
   IbcClientQueryClient,
   VersionControlTypes,
 } from '../../../codegen/abstract'
+import { getIbcClientQueryClient } from '../../public/get-ibc-client-query-client'
+import { CommonModuleNames } from '../../public/types'
 import { getModuleAddress } from './get-module-address'
 
 export type GetIbcClientQueryClientFromManagerParameters = {
@@ -10,8 +12,6 @@ export type GetIbcClientQueryClientFromManagerParameters = {
   cosmWasmClient: CosmWasmClient
   apiUrl: string
 }
-
-const IBC_CLIENT_MODULE_ID = 'abstract:ibc-client'
 
 /**
  * Retrieve the {@link IbcClientQueryClient} from the manager account.
@@ -29,12 +29,15 @@ export async function getIbcClientQueryClientFromManager({
     accountId,
     cosmWasmClient,
     apiUrl,
-    id: IBC_CLIENT_MODULE_ID,
+    id: CommonModuleNames.IBC_CLIENT,
   })
 
   if (!ibcClientAddress) {
     throw new Error('IBC-client module not installed')
   }
 
-  return new IbcClientQueryClient(cosmWasmClient, ibcClientAddress)
+  return getIbcClientQueryClient({
+    cosmWasmClient,
+    ibcClientAddress,
+  })
 }

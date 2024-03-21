@@ -4,6 +4,8 @@ import { VersionControlTypes } from '../../codegen/abstract'
 import { versionControlModuleToAddress } from '../../utils/version-control/version-control-module-to-address'
 import { getVersionControlQueryClient } from './get-version-control-query-client'
 
+const ABSTRACT_NAMESPACE = 'abstract'
+
 export type GetAbstractModuleAddressFromVersionControl = {
   moduleName: string
   cosmWasmClient: CosmWasmClient
@@ -27,7 +29,7 @@ export async function getAbstractModuleAddressFromVersionControl({
       infos: [
         {
           name: moduleName,
-          namespace: 'abstract',
+          namespace: ABSTRACT_NAMESPACE,
           version: version ? { version } : 'latest',
         } satisfies VersionControlTypes.ModuleInfo,
       ],
