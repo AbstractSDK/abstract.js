@@ -88,4 +88,4 @@ You should get an output like:
 ✔ Writing to src/generated/index.ts
 ```
 
-And we should be good to now to the types generated directly into our codebase.
+And you should be all set to use the types generated directly into your codebase.
