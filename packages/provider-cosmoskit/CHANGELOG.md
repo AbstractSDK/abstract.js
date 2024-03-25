@@ -1,5 +1,14 @@
 # @abstract-money/provider-cosmoskit
 
+## 2.0.3
+
+### Patch Changes
+
+- [#90](https://github.com/AbstractSDK/abstract.js/pull/90) [`a3f19b4`](https://github.com/AbstractSDK/abstract.js/commit/a3f19b4bb076c6ad4821e1ff8ad8ef45cf637f68) Thanks [@dalechyn](https://github.com/dalechyn)! - Moved query client to be defined outside of the abstract provider. Now you either need to declare one in your app in case you're using cosmos-kit, or the sdk will use graz provider's query client.
+
+- Updated dependencies [[`a3f19b4`](https://github.com/AbstractSDK/abstract.js/commit/a3f19b4bb076c6ad4821e1ff8ad8ef45cf637f68)]:
+  - @abstract-money/react@1.0.3
+
 ## 2.0.2
 
 ### Patch Changes
