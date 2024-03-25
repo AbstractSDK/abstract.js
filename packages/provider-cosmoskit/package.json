@@ -27,9 +27,6 @@
       "optional": true
     }
   },
-  "dependencies": {
-    "@cosmjs/cosmwasm-stargate": "^0.32.2"
-  },
   "type": "module",
   "peerDependencies": {
     "@abstract-money/react": "workspace:*",

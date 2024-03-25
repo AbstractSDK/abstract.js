@@ -28,9 +28,6 @@
     }
   },
   "type": "module",
-  "dependencies": {
-    "@cosmjs/cosmwasm-stargate": "^0.32.2"
-  },
   "devDependencies": {
     "@abstract-money/react": "workspace:*",
     "@abstract-money/core": "workspace:*",

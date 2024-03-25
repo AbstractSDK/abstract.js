@@ -1,8 +1,4 @@
 import { Provider } from '@abstract-money/react'
-import {
-  type CosmWasmClient,
-  type SigningCosmWasmClient,
-} from '@cosmjs/cosmwasm-stargate'
 import { useChain } from '@cosmos-kit/react'
 import { useEffect, useMemo, useState } from 'react'
 
@@ -12,9 +8,10 @@ import { useEffect, useMemo, useState } from 'react'
  */
 const USE_CHAIN_HACK_CHAIN_NAME = 'neutron'
 
-export const cosmosKitProvider = {
-  useCosmWasmClient(parameters: Parameters<Provider['useCosmWasmClient']>[0]) {
-    const [client, setClient] = useState<CosmWasmClient | undefined>(undefined)
+export const cosmosKitProvider: Provider = {
+  useCosmWasmClient(parameters) {
+    const [client, setClient] =
+      useState<ReturnType<Provider['useCosmWasmClient']>>(undefined)
     const { getCosmWasmClient: _getCosmWasmClient } = useChain(
       parameters?.chainName ?? USE_CHAIN_HACK_CHAIN_NAME,
     )
@@ -31,12 +28,9 @@ export const cosmosKitProvider = {
 
     return client
   },
-  useSigningCosmWasmClient(
-    parameters: Parameters<Provider['useSigningCosmWasmClient']>[0],
-  ) {
-    const [client, setClient] = useState<SigningCosmWasmClient | undefined>(
-      undefined,
-    )
+  useSigningCosmWasmClient(parameters) {
+    const [client, setClient] =
+      useState<ReturnType<Provider['useSigningCosmWasmClient']>>(undefined)
     const {
       getSigningCosmWasmClient: _getSigningCosmWasmClient,
       isWalletConnected,
