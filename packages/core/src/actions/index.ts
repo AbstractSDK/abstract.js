@@ -5,6 +5,7 @@ export * from './get-ans-host-address-from-api'
 export * from './get-ans-token-from-api'
 export * from './get-ans-tokens-from-api'
 export * from './get-version-control-address-from-api'
+export * from './get-sub-account-ids-by-module-id'
 
 export * from './account/public/get-account-base-addresses-from-api'
 export * from './account/public/get-base-token'
