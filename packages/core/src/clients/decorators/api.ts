@@ -1,3 +1,4 @@
+import { getSubAccountIdsByModuleIdFromApi } from 'src/actions'
 import { getAccountBalancesFromApi } from '../../actions/get-account-balance-from-api'
 import { getAccountFactoryAddressFromApi } from '../../actions/get-account-factory-address-from-api'
 import { getAccountsByOwnerFromApi } from '../../actions/get-accounts-by-owner-from-api'
@@ -47,6 +48,11 @@ export type ApiActions = {
       typeof getAccountBalancesFromApi
     >,
   ): ReturnType<typeof getAccountBalancesFromApi>
+  getSubAccountIdsByModuleIdFromApi(
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getSubAccountIdsByModuleIdFromApi
+    >,
+  ): ReturnType<typeof getSubAccountIdsByModuleIdFromApi>
 }
 
 export function apiActions(apiUrl: string): ApiActions {
@@ -83,6 +89,11 @@ export function apiActions(apiUrl: string): ApiActions {
       }),
     getVersionControlAddressFromApi: (parameters) =>
       getVersionControlAddressFromApi({
+        ...parameters,
+        apiUrl,
+      }),
+    getSubAccountIdsByModuleIdFromApi: (parameters) =>
+      getSubAccountIdsByModuleIdFromApi({
         ...parameters,
         apiUrl,
       }),
