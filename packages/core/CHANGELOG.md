@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 1.0.1
+
+### Patch Changes
+
+- [#93](https://github.com/AbstractSDK/abstract.js/pull/93) [`2f770a3`](https://github.com/AbstractSDK/abstract.js/commit/2f770a3e83bbcdf114adbad246abddeb8fa4a581) Thanks [@dalechyn](https://github.com/dalechyn)! - Added new hook to query sub account ids by module id.
+
 ## 1.0.0
 
 ### Major Changes
