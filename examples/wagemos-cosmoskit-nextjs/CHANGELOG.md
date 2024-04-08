@@ -1,5 +1,14 @@
 # wagemos-cosmoskit-nextjs
 
+## 0.2.37
+
+### Patch Changes
+
+- [#96](https://github.com/AbstractSDK/abstract.js/pull/96) [`fc1d460`](https://github.com/AbstractSDK/abstract.js/commit/fc1d46077f5f242c02a6d671920b1906e3dbd5de) Thanks [@dalechyn](https://github.com/dalechyn)! - Return full query result from generated queries.
+
+- Updated dependencies []:
+  - @abstract-money/core@1.0.1
+
 ## 0.2.36
 
 ### Patch Changes
