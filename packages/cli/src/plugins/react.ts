@@ -297,9 +297,6 @@ export function react(options: ReactOptions = {}): ReactResult {
                 }}) => {
                     const {
                       data: ${queryClientCamelCase},
-                      isLoading: is${queryClientPascalCase}Loading,
-                      isError: is${queryClientPascalCase}Error,
-                      error: ${queryClientCamelCase}Error,
                     } = use${hasAbstractApp ? 'Abstract' : ''}ModuleQueryClient(
                       {
                         ${
@@ -319,46 +316,11 @@ export function react(options: ReactOptions = {}): ReactResult {
                       },
                     )
 
-                    const {
-                      data,
-                      isLoading: is${hookNamePascalCaseWithoutUse}Loading,
-                      isError: is${hookNamePascalCaseWithoutUse}Error,
-                      error: ${hookNameCamelCaseWithoutUse}Error,
-                    } = use${hookNamePascalCaseWithoutUse}({
+                    return use${hookNamePascalCaseWithoutUse}({
                       client: ${queryClientCamelCase},
                       options,
                       ${hasArgs ? 'args, ' : ''}
                     })
-
-                    if (is${queryClientPascalCase}Error)
-                      return {
-                        data: undefined,
-                        isLoading: false,
-                        isError: true,
-                        isSuccess: false,
-                        error: ${queryClientCamelCase}Error,
-                      } as const
-                    if (is${hookNamePascalCaseWithoutUse}Error)
-                      return {
-                        data: undefined,
-                        isLoading: false,
-                        isError: true,
-                        isSuccess: false,
-                        error: ${hookNameCamelCaseWithoutUse}Error,
-                      } as const
-                    if (is${queryClientPascalCase}Loading || is${hookNamePascalCaseWithoutUse}Loading)
-                      return {
-                        data: undefined,
-                        isLoading: true,
-                        isError: false,
-                        isSuccess: false,
-                      } as const
-                    return {
-                      data,
-                      isLoading: false,
-                      isError: false,
-                      isSuccess: true,
-                    } as const
                   }
                 `,
               )
