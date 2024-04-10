@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 1.0.5
+
+### Patch Changes
+
+- [`b5dd99c`](https://github.com/AbstractSDK/abstract.js/commit/b5dd99cae260bf44ff510cbb18a6793ee593a0d7) Thanks [@dalechyn](https://github.com/dalechyn)! - Added `useModules` query to fetch modules of an account.
+
 ## 1.0.4
 
 ### Patch Changes
