@@ -1,6 +1,6 @@
 {
   "name": "wagemos-graz-nextjs",
-  "version": "0.2.37",
+  "version": "0.2.38",
   "private": true,
   "scripts": {
     "dev": "NODE_OPTIONS='--inspect' next dev",

@@ -1,6 +1,6 @@
 {
   "name": "@abstract-money/provider-cosmoskit",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Provider for CosmosKit",
   "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
   "author": "dalechyn <vlad@abstract.money>",
