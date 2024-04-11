@@ -8,9 +8,9 @@ export type UseModulesFromApiParameters = WithArgs<
   Parameters<ApiClient['getModulesFromApi']>[0]
 > & {
   query?: UseQueryParameters<
-    ReturnType<ApiClient['getModulesFromApi']>,
+    Awaited<ReturnType<ApiClient['getModulesFromApi']>>,
     unknown,
-    ReturnType<ApiClient['getModulesFromApi']>,
+    Awaited<ReturnType<ApiClient['getModulesFromApi']>>,
     readonly [
       'modulesFromApi',
       WithArgs<Parameters<ApiClient['getModulesFromApi']>[0]>,
