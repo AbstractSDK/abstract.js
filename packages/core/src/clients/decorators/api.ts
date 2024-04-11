@@ -5,6 +5,7 @@ import { getAccountsByOwnerFromApi } from '../../actions/get-accounts-by-owner-f
 import { getAnsHostAddressFromApi } from '../../actions/get-ans-host-address-from-api'
 import { getAnsTokenFromApi } from '../../actions/get-ans-token-from-api'
 import { getAnsTokensFromApi } from '../../actions/get-ans-tokens-from-api'
+import { getModulesFromApi } from '../../actions/get-modules-from-api'
 import { getVersionControlAddressFromApi } from '../../actions/get-version-control-address-from-api'
 import { ExtractAndOmitParameters } from '../../types/parameters'
 
@@ -38,6 +39,11 @@ export type ApiActions = {
       typeof getAnsTokensFromApi
     >,
   ): ReturnType<typeof getAnsTokensFromApi>
+  getModulesFromApi(
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getModulesFromApi
+    >,
+  ): ReturnType<typeof getModulesFromApi>
   getVersionControlAddressFromApi(
     parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getVersionControlAddressFromApi
@@ -84,6 +90,11 @@ export function apiActions(apiUrl: string): ApiActions {
       }),
     getAnsTokensFromApi: (parameters) =>
       getAnsTokensFromApi({
+        ...parameters,
+        apiUrl,
+      }),
+    getModulesFromApi: (parameters) =>
+      getModulesFromApi({
         ...parameters,
         apiUrl,
       }),

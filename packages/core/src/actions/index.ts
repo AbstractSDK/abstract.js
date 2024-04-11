@@ -4,6 +4,7 @@ export * from './get-accounts-by-owner-from-api'
 export * from './get-ans-host-address-from-api'
 export * from './get-ans-token-from-api'
 export * from './get-ans-tokens-from-api'
+export * from './get-modules-from-api'
 export * from './get-version-control-address-from-api'
 export * from './get-sub-account-ids-by-module-id'
 
