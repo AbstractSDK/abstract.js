@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 1.0.3
+
+### Patch Changes
+
+- [#101](https://github.com/AbstractSDK/abstract.js/pull/101) [`6b763ee`](https://github.com/AbstractSDK/abstract.js/commit/6b763ee9d2cd4aeb257fa24d3f258bd4d13f1a09) Thanks [@dalechyn](https://github.com/dalechyn)! - Added query to fetch modules.
+
 ## 1.0.2
 
 ### Patch Changes
