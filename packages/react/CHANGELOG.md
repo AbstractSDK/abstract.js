@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 1.0.8
+
+### Patch Changes
+
+- [`32d747a`](https://github.com/AbstractSDK/abstract.js/commit/32d747a0c759bef64c8a439bffd5b82a506bda94) Thanks [@dalechyn](https://github.com/dalechyn)! - Fixed return type of get modules from api query.
+
 ## 1.0.7
 
 ### Patch Changes
