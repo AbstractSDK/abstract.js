@@ -1,5 +1,12 @@
 # @abstract-money/provider-cosmoskit
 
+## 2.0.8
+
+### Patch Changes
+
+- Updated dependencies [[`32d747a`](https://github.com/AbstractSDK/abstract.js/commit/32d747a0c759bef64c8a439bffd5b82a506bda94)]:
+  - @abstract-money/react@1.0.8
+
 ## 2.0.7
 
 ### Patch Changes
