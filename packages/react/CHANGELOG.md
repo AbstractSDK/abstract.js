@@ -1,5 +1,14 @@
 # @abstract-money/react
 
+## 1.0.7
+
+### Patch Changes
+
+- [#101](https://github.com/AbstractSDK/abstract.js/pull/101) [`6b763ee`](https://github.com/AbstractSDK/abstract.js/commit/6b763ee9d2cd4aeb257fa24d3f258bd4d13f1a09) Thanks [@dalechyn](https://github.com/dalechyn)! - Added query to fetch modules.
+
+- Updated dependencies [[`6b763ee`](https://github.com/AbstractSDK/abstract.js/commit/6b763ee9d2cd4aeb257fa24d3f258bd4d13f1a09)]:
+  - @abstract-money/core@1.0.3
+
 ## 1.0.6
 
 ### Patch Changes
