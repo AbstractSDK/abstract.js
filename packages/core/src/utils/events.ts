@@ -1,21 +1,20 @@
 import { type Attribute, type ExecuteResult } from '@cosmjs/cosmwasm-stargate'
-import { type Log } from '@cosmjs/stargate/build/logs'
+import { type Event } from '@cosmjs/stargate/build/events'
 
 /**
- * Searches in logs for the first event of the given event type and in that event
+ * Searches in events for event of the given event type and in that event
  * for the first attribute with the given attribute key.
  *
  * Throws if the attribute was not found.
  * See @cosmjs/stargate/build/logs for original definition.
  */
 export function findAttribute(
-  logs: readonly Log[],
+  events: readonly Event[] | undefined,
   eventType: string,
   attrKey: string,
 ): Attribute {
-  const firstLogs = logs.find(() => true)
-  const out = firstLogs?.events
-    .filter(({ type }) => type === eventType)
+  const out = events
+    ?.filter(({ type }) => type === eventType)
     ?.flatMap(({ attributes }) => attributes)
     ?.find(({ key }) => key === attrKey)
   if (!out) {
@@ -41,5 +40,12 @@ export function findAbstractAttribute(
   executeResult: ExecuteResult,
   key: string,
 ): Attribute {
-  return findAttribute(executeResult.logs, ABSTRACT_EVENT_MARKER, key)
+  executeResult.events
+  return findAttribute(
+    executeResult.logs.length > 0
+      ? executeResult.logs[0]?.events
+      : executeResult.events,
+    ABSTRACT_EVENT_MARKER,
+    key,
+  )
 }
