@@ -15,9 +15,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@cosmjs/encoding": "^0.32.2",
-    "@cosmjs/cosmwasm-stargate": "^0.32.2",
-    "@cosmjs/tendermint-rpc": "^0.32.2"
+    "@cosmjs/encoding": "^0.32.3",
+    "@cosmjs/cosmwasm-stargate": "^0.32.3",
+    "@cosmjs/tendermint-rpc": "^0.32.3"
   },
   "peerDependenciesMeta": {
     "typescript": {
@@ -48,10 +48,6 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "/client",
-    "/query",
-    "/dist"
-  ],
+  "files": ["/client", "/query", "/dist"],
   "sideEffects": false
 }

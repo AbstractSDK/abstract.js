@@ -27,10 +27,10 @@
     "@abstract-money/core": "workspace:*",
     "@tanstack/react-query": "^4",
     "dedent": "^0.7.0",
-    "@cosmjs/cosmwasm-stargate": "^0.32.2",
-    "@cosmjs/stargate": "^0.32.2",
-    "@cosmjs/encoding": "^0.32.2",
-    "@cosmjs/proto-signing": "^0.32.2"
+    "@cosmjs/cosmwasm-stargate": "^0.32.3",
+    "@cosmjs/stargate": "^0.32.3",
+    "@cosmjs/encoding": "^0.32.3",
+    "@cosmjs/proto-signing": "^0.32.3"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
@@ -64,10 +64,7 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "/hooks",
-    "/dist"
-  ],
+  "files": ["/hooks", "/dist"],
   "simple-git-hooks": {
     "pre-commit": "pnpm format && pnpm lint:fix"
   },
