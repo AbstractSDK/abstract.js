@@ -1,5 +1,11 @@
 # @abstract-money/cosmwasm-utils
 
+## 0.1.3
+
+### Patch Changes
+
+- [`21f8b18`](https://github.com/AbstractSDK/abstract.js/commit/21f8b18a813b44ff0399c422bbec971a328f34a2) Thanks [@dalechyn](https://github.com/dalechyn)! - Bumped @cosmjs dependencies versions.
+
 ## 0.1.2
 
 ### Patch Changes

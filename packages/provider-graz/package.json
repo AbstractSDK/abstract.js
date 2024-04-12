@@ -1,6 +1,6 @@
 {
   "name": "@abstract-money/provider-graz",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "Provider for Graz",
   "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
   "author": "dalechyn <vlad@abstract.money>",
