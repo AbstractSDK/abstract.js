@@ -1,6 +1,6 @@
 {
   "name": "@abstract-money/react",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "React Hooks for Abstract SDK",
   "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
   "author": "dalechyn <vlad@abstract.money>",
@@ -64,7 +64,10 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["/hooks", "/dist"],
+  "files": [
+    "/hooks",
+    "/dist"
+  ],
   "simple-git-hooks": {
     "pre-commit": "pnpm format && pnpm lint:fix"
   },

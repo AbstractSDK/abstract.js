@@ -1,5 +1,16 @@
 # wagemos-graz-nextjs
 
+## 0.2.42
+
+### Patch Changes
+
+- [`21f8b18`](https://github.com/AbstractSDK/abstract.js/commit/21f8b18a813b44ff0399c422bbec971a328f34a2) Thanks [@dalechyn](https://github.com/dalechyn)! - Bumped @cosmjs dependencies versions.
+
+- Updated dependencies [[`21f8b18`](https://github.com/AbstractSDK/abstract.js/commit/21f8b18a813b44ff0399c422bbec971a328f34a2)]:
+  - @abstract-money/core@1.0.4
+  - @abstract-money/react@1.0.9
+  - @abstract-money/provider-graz@2.0.9
+
 ## 0.2.41
 
 ### Patch Changes
