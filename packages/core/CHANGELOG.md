@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 1.0.5
+
+### Patch Changes
+
+- [`3d7057a`](https://github.com/AbstractSDK/abstract.js/commit/3d7057a2e20d127d40f83fd4a3ac69bfe324f9f9) Thanks [@dalechyn](https://github.com/dalechyn)! - Fixed the attribute search issue where deprecated `logs` were used. Now both `events` and `logs` are used to extract attributes.
+
 ## 1.0.4
 
 ### Patch Changes
