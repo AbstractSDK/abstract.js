@@ -35,8 +35,9 @@ void (async () => {
     // Parse CLI args without running command
     cli.parse(process.argv, { run: false })
     if (!cli.matchedCommand) {
-      if (cli.args.length === 0) cli.outputHelp()
-      else throw new Error(`Unknown command: ${cli.args.join(' ')}`)
+      if (cli.args.length === 0) {
+        if (!cli.options.help && !cli.options.version) cli.outputHelp()
+      } else throw new Error(`Unknown command: ${cli.args.join(' ')}`)
     }
     await cli.runMatchedCommand()
   } catch (error) {
