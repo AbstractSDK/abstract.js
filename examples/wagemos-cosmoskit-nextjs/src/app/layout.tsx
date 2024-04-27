@@ -1,9 +1,9 @@
 'use client'
 
-import { stringToAccountId } from '@abstract-money/core'
 import { cosmosKitProvider } from '@abstract-money/provider-cosmoskit'
 import { AbstractProvider, createConfig } from '@abstract-money/react'
 import '@interchain-ui/react/styles'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Inter, Poppins } from 'next/font/google'
 import { Toaster } from '../components/ui/toaster'
 import { cn } from '../utils'
@@ -21,6 +21,20 @@ const abstractConfig = createConfig({
   apiUrl: 'https://api.abstract.money/graphql',
 })
 
+const client = new QueryClient({
+  defaultOptions: {
+    queries: {
+      cacheTime: 1_000 * 60 * 60 * 24, // 24 hours
+      networkMode: 'offlineFirst',
+      refetchOnWindowFocus: false,
+      retry: 0,
+    },
+    mutations: {
+      networkMode: 'offlineFirst',
+    },
+  },
+})
+
 export default function RootLayout({
   children,
 }: {
@@ -30,13 +44,15 @@ export default function RootLayout({
     <html lang="en">
       <CosmosKitProvider>
         <body className={cn(inter.variable, poppins.variable)}>
-          <AbstractProvider config={abstractConfig}>
-            <main className="flex flex-col items-center p-24 min-h-screen">
-              <section className="mt-10">
-                <div className="mt-10">{children}</div>
-              </section>
-            </main>
-          </AbstractProvider>
+          <QueryClientProvider client={client}>
+            <AbstractProvider config={abstractConfig}>
+              <main className="flex flex-col items-center p-24 min-h-screen">
+                <section className="mt-10">
+                  <div className="mt-10">{children}</div>
+                </section>
+              </main>
+            </AbstractProvider>
+          </QueryClientProvider>
           <Toaster />
         </body>
       </CosmosKitProvider>

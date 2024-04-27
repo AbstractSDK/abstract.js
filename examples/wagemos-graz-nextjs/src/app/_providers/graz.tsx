@@ -2,11 +2,14 @@
 
 import { GrazProvider as Provider } from 'graz'
 import { mainnetChains } from 'graz/chains'
-import { PropsWithChildren } from 'react'
+import { ComponentProps } from 'react'
 
-export function GrazProvider(props: PropsWithChildren) {
+export function GrazProvider(
+  props: Pick<ComponentProps<typeof Provider>, 'children' | 'client'>,
+) {
   return (
     <Provider
+      client={props.client}
       grazOptions={{
         chains: [mainnetChains.neutron, mainnetChains.osmosis],
         chainsConfig: {

@@ -1,5 +1,74 @@
 # @abstract-money/react
 
+## 1.0.10
+
+### Patch Changes
+
+- Updated dependencies [[`3d7057a`](https://github.com/AbstractSDK/abstract.js/commit/3d7057a2e20d127d40f83fd4a3ac69bfe324f9f9)]:
+  - @abstract-money/core@1.0.5
+
+## 1.0.9
+
+### Patch Changes
+
+- [`21f8b18`](https://github.com/AbstractSDK/abstract.js/commit/21f8b18a813b44ff0399c422bbec971a328f34a2) Thanks [@dalechyn](https://github.com/dalechyn)! - Bumped @cosmjs dependencies versions.
+
+- Updated dependencies [[`21f8b18`](https://github.com/AbstractSDK/abstract.js/commit/21f8b18a813b44ff0399c422bbec971a328f34a2)]:
+  - @abstract-money/core@1.0.4
+
+## 1.0.8
+
+### Patch Changes
+
+- [`32d747a`](https://github.com/AbstractSDK/abstract.js/commit/32d747a0c759bef64c8a439bffd5b82a506bda94) Thanks [@dalechyn](https://github.com/dalechyn)! - Fixed return type of get modules from api query.
+
+## 1.0.7
+
+### Patch Changes
+
+- [#101](https://github.com/AbstractSDK/abstract.js/pull/101) [`6b763ee`](https://github.com/AbstractSDK/abstract.js/commit/6b763ee9d2cd4aeb257fa24d3f258bd4d13f1a09) Thanks [@dalechyn](https://github.com/dalechyn)! - Added query to fetch modules.
+
+- Updated dependencies [[`6b763ee`](https://github.com/AbstractSDK/abstract.js/commit/6b763ee9d2cd4aeb257fa24d3f258bd4d13f1a09)]:
+  - @abstract-money/core@1.0.3
+
+## 1.0.6
+
+### Patch Changes
+
+- [#99](https://github.com/AbstractSDK/abstract.js/pull/99) [`5f849f4`](https://github.com/AbstractSDK/abstract.js/commit/5f849f4de8aace7b8bc21b20a876236376042b38) Thanks [@dalechyn](https://github.com/dalechyn)! - Added query and action to upgrade a module.
+
+- Updated dependencies [[`5f849f4`](https://github.com/AbstractSDK/abstract.js/commit/5f849f4de8aace7b8bc21b20a876236376042b38)]:
+  - @abstract-money/core@1.0.2
+
+## 1.0.5
+
+### Patch Changes
+
+- [`b5dd99c`](https://github.com/AbstractSDK/abstract.js/commit/b5dd99cae260bf44ff510cbb18a6793ee593a0d7) Thanks [@dalechyn](https://github.com/dalechyn)! - Added `useModules` query to fetch modules of an account.
+
+## 1.0.4
+
+### Patch Changes
+
+- [#93](https://github.com/AbstractSDK/abstract.js/pull/93) [`2f770a3`](https://github.com/AbstractSDK/abstract.js/commit/2f770a3e83bbcdf114adbad246abddeb8fa4a581) Thanks [@dalechyn](https://github.com/dalechyn)! - Added new hook to query sub account ids by module id.
+
+- Updated dependencies [[`2f770a3`](https://github.com/AbstractSDK/abstract.js/commit/2f770a3e83bbcdf114adbad246abddeb8fa4a581)]:
+  - @abstract-money/core@1.0.1
+
+## 1.0.3
+
+### Patch Changes
+
+- [#90](https://github.com/AbstractSDK/abstract.js/pull/90) [`a3f19b4`](https://github.com/AbstractSDK/abstract.js/commit/a3f19b4bb076c6ad4821e1ff8ad8ef45cf637f68) Thanks [@dalechyn](https://github.com/dalechyn)! - Moved query client to be defined outside of the abstract provider. Now you either need to declare one in your app in case you're using cosmos-kit, or the sdk will use graz provider's query client.
+
+## 1.0.2
+
+### Patch Changes
+
+- [#83](https://github.com/AbstractSDK/abstract.js/pull/83) [`8d4ec17`](https://github.com/AbstractSDK/abstract.js/commit/8d4ec1775a0c18c4540f16a432564cf2b9e022e8) Thanks [@adairrr](https://github.com/adairrr)! - Add query client options to abtsract provider
+
+- [#89](https://github.com/AbstractSDK/abstract.js/pull/89) [`7601ab6`](https://github.com/AbstractSDK/abstract.js/commit/7601ab662060030ae4943c94f7bf7134533df071) Thanks [@dalechyn](https://github.com/dalechyn)! - Fixed the `enabled` prop that always resolved to `true` in subaccounts query.
+
 ## 1.0.1
 
 ### Patch Changes

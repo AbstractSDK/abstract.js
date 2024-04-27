@@ -1,5 +1,95 @@
 # wagemos-graz-nextjs
 
+## 0.2.43
+
+### Patch Changes
+
+- Updated dependencies [[`3d7057a`](https://github.com/AbstractSDK/abstract.js/commit/3d7057a2e20d127d40f83fd4a3ac69bfe324f9f9)]:
+  - @abstract-money/core@1.0.5
+  - @abstract-money/provider-graz@2.0.10
+  - @abstract-money/react@1.0.10
+
+## 0.2.42
+
+### Patch Changes
+
+- [`21f8b18`](https://github.com/AbstractSDK/abstract.js/commit/21f8b18a813b44ff0399c422bbec971a328f34a2) Thanks [@dalechyn](https://github.com/dalechyn)! - Bumped @cosmjs dependencies versions.
+
+- Updated dependencies [[`21f8b18`](https://github.com/AbstractSDK/abstract.js/commit/21f8b18a813b44ff0399c422bbec971a328f34a2)]:
+  - @abstract-money/core@1.0.4
+  - @abstract-money/react@1.0.9
+  - @abstract-money/provider-graz@2.0.9
+
+## 0.2.41
+
+### Patch Changes
+
+- Updated dependencies [[`32d747a`](https://github.com/AbstractSDK/abstract.js/commit/32d747a0c759bef64c8a439bffd5b82a506bda94)]:
+  - @abstract-money/react@1.0.8
+  - @abstract-money/provider-graz@2.0.8
+
+## 0.2.40
+
+### Patch Changes
+
+- Updated dependencies [[`6b763ee`](https://github.com/AbstractSDK/abstract.js/commit/6b763ee9d2cd4aeb257fa24d3f258bd4d13f1a09)]:
+  - @abstract-money/core@1.0.3
+  - @abstract-money/react@1.0.7
+  - @abstract-money/provider-graz@2.0.7
+
+## 0.2.39
+
+### Patch Changes
+
+- Updated dependencies [[`5f849f4`](https://github.com/AbstractSDK/abstract.js/commit/5f849f4de8aace7b8bc21b20a876236376042b38)]:
+  - @abstract-money/core@1.0.2
+  - @abstract-money/react@1.0.6
+  - @abstract-money/provider-graz@2.0.6
+
+## 0.2.38
+
+### Patch Changes
+
+- Updated dependencies [[`b5dd99c`](https://github.com/AbstractSDK/abstract.js/commit/b5dd99cae260bf44ff510cbb18a6793ee593a0d7)]:
+  - @abstract-money/react@1.0.5
+  - @abstract-money/provider-graz@2.0.5
+
+## 0.2.37
+
+### Patch Changes
+
+- [#96](https://github.com/AbstractSDK/abstract.js/pull/96) [`fc1d460`](https://github.com/AbstractSDK/abstract.js/commit/fc1d46077f5f242c02a6d671920b1906e3dbd5de) Thanks [@dalechyn](https://github.com/dalechyn)! - Return full query result from generated queries.
+
+- Updated dependencies []:
+  - @abstract-money/core@1.0.1
+
+## 0.2.36
+
+### Patch Changes
+
+- Updated dependencies [[`2f770a3`](https://github.com/AbstractSDK/abstract.js/commit/2f770a3e83bbcdf114adbad246abddeb8fa4a581)]:
+  - @abstract-money/core@1.0.1
+  - @abstract-money/react@1.0.4
+  - @abstract-money/provider-graz@2.0.4
+
+## 0.2.35
+
+### Patch Changes
+
+- [#90](https://github.com/AbstractSDK/abstract.js/pull/90) [`a3f19b4`](https://github.com/AbstractSDK/abstract.js/commit/a3f19b4bb076c6ad4821e1ff8ad8ef45cf637f68) Thanks [@dalechyn](https://github.com/dalechyn)! - Moved query client to be defined outside of the abstract provider. Now you either need to declare one in your app in case you're using cosmos-kit, or the sdk will use graz provider's query client.
+
+- Updated dependencies [[`a3f19b4`](https://github.com/AbstractSDK/abstract.js/commit/a3f19b4bb076c6ad4821e1ff8ad8ef45cf637f68)]:
+  - @abstract-money/provider-graz@2.0.3
+  - @abstract-money/react@1.0.3
+
+## 0.2.34
+
+### Patch Changes
+
+- Updated dependencies [[`8d4ec17`](https://github.com/AbstractSDK/abstract.js/commit/8d4ec1775a0c18c4540f16a432564cf2b9e022e8), [`7601ab6`](https://github.com/AbstractSDK/abstract.js/commit/7601ab662060030ae4943c94f7bf7134533df071)]:
+  - @abstract-money/react@1.0.2
+  - @abstract-money/provider-graz@2.0.2
+
 ## 0.2.33
 
 ### Patch Changes

@@ -9,22 +9,14 @@ import {
   useQuery,
 } from '../../../types/queries'
 
-type QueryFnData = Awaited<ReturnType<AccountPublicClient['getSubAccountIds']>>
+type QueryFnData = Awaited<ReturnType<AccountPublicClient['getModules']>>
 
 type QueryError = unknown
 type QueryData = QueryFnData
-export type UseSubAccountIdsFromApiParameters = WithArgs<
-  Parameters<AccountPublicClient['getSubAccountIds']>[0]
-> & {
-  query?: QueryOptions
-  chainName: string | undefined
-  accountId: AccountId | undefined
-}
 type QueryKey = readonly [
-  'getSubAccountIdsFromApi',
+  'modules',
   AccountPublicClient | undefined,
   AccountId | undefined,
-  UseSubAccountIdsFromApiParameters['args'],
 ]
 
 type QueryOptions = Omit<
@@ -33,37 +25,36 @@ type QueryOptions = Omit<
 >
 type QueryResult = UseQueryReturnType<QueryData, QueryError>
 
-export function useSubAccountIdsFromApi({
-  args,
+export type UseModulesParameters = WithArgs<
+  Parameters<AccountPublicClient['getModules']>[0]
+> & {
+  accountId: AccountId | undefined
+  chainName: string | undefined
+  query?: QueryOptions
+}
+
+export function useModules({
   accountId,
   chainName,
   query = {},
-}: UseSubAccountIdsFromApiParameters): QueryResult {
+  args = {},
+}: UseModulesParameters): QueryResult {
   const config = useConfig()
   const accountPublicClient = config.useAccountPublicClient({
     accountId,
     chainName,
   })
   const queryKey = React.useMemo(
-    () =>
-      [
-        'getSubAccountIdsFromApi',
-        accountPublicClient,
-        accountId,
-        args,
-      ] as const,
-    [accountPublicClient, accountId, args],
+    () => ['modules', accountPublicClient, accountId] as const,
+    [accountPublicClient, accountId],
   )
 
-  const enabled = Boolean(
-    accountPublicClient && args && (query.enabled ?? true),
-  )
+  const enabled = Boolean(accountPublicClient && (query.enabled ?? true))
 
   const queryFn = React.useCallback(() => {
     if (!accountPublicClient) throw new Error('No client')
-    if (!args) throw new Error('No args')
 
-    return accountPublicClient.getSubAccountIds(args)
+    return accountPublicClient.getModules(args)
   }, [accountPublicClient])
 
   return useQuery({ queryKey, queryFn, ...query, enabled })

@@ -1,9 +1,11 @@
+import { getSubAccountIdsByModuleIdFromApi } from 'src/actions'
 import { getAccountBalancesFromApi } from '../../actions/get-account-balance-from-api'
 import { getAccountFactoryAddressFromApi } from '../../actions/get-account-factory-address-from-api'
 import { getAccountsByOwnerFromApi } from '../../actions/get-accounts-by-owner-from-api'
 import { getAnsHostAddressFromApi } from '../../actions/get-ans-host-address-from-api'
 import { getAnsTokenFromApi } from '../../actions/get-ans-token-from-api'
 import { getAnsTokensFromApi } from '../../actions/get-ans-tokens-from-api'
+import { getModulesFromApi } from '../../actions/get-modules-from-api'
 import { getVersionControlAddressFromApi } from '../../actions/get-version-control-address-from-api'
 import { ExtractAndOmitParameters } from '../../types/parameters'
 
@@ -37,6 +39,11 @@ export type ApiActions = {
       typeof getAnsTokensFromApi
     >,
   ): ReturnType<typeof getAnsTokensFromApi>
+  getModulesFromApi(
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getModulesFromApi
+    >,
+  ): ReturnType<typeof getModulesFromApi>
   getVersionControlAddressFromApi(
     parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getVersionControlAddressFromApi
@@ -47,6 +54,11 @@ export type ApiActions = {
       typeof getAccountBalancesFromApi
     >,
   ): ReturnType<typeof getAccountBalancesFromApi>
+  getSubAccountIdsByModuleIdFromApi(
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof getSubAccountIdsByModuleIdFromApi
+    >,
+  ): ReturnType<typeof getSubAccountIdsByModuleIdFromApi>
 }
 
 export function apiActions(apiUrl: string): ApiActions {
@@ -81,8 +93,18 @@ export function apiActions(apiUrl: string): ApiActions {
         ...parameters,
         apiUrl,
       }),
+    getModulesFromApi: (parameters) =>
+      getModulesFromApi({
+        ...parameters,
+        apiUrl,
+      }),
     getVersionControlAddressFromApi: (parameters) =>
       getVersionControlAddressFromApi({
+        ...parameters,
+        apiUrl,
+      }),
+    getSubAccountIdsByModuleIdFromApi: (parameters) =>
+      getSubAccountIdsByModuleIdFromApi({
         ...parameters,
         apiUrl,
       }),

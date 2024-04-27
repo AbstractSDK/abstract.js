@@ -76,46 +76,11 @@ export const betting = {
         query: { enabled: options?.enabled },
       })
 
-      const {
-        data,
-        isLoading: isBettingBetsQueryLoading,
-        isError: isBettingBetsQueryError,
-        error: bettingBetsQueryError,
-      } = useBettingBetsQuery({
+      return useBettingBetsQuery({
         client: bettingAppQueryClient,
         options,
         args,
       })
-
-      if (isBettingAppQueryClientError)
-        return {
-          data: undefined,
-          isLoading: false,
-          isError: true,
-          isSuccess: false,
-          error: bettingAppQueryClientError,
-        } as const
-      if (isBettingBetsQueryError)
-        return {
-          data: undefined,
-          isLoading: false,
-          isError: true,
-          isSuccess: false,
-          error: bettingBetsQueryError,
-        } as const
-      if (isBettingAppQueryClientLoading || isBettingBetsQueryLoading)
-        return {
-          data: undefined,
-          isLoading: true,
-          isError: false,
-          isSuccess: false,
-        } as const
-      return {
-        data,
-        isLoading: false,
-        isError: false,
-        isSuccess: true,
-      } as const
     },
     useConfig: ({
       options,
@@ -139,45 +104,10 @@ export const betting = {
         query: { enabled: options?.enabled },
       })
 
-      const {
-        data,
-        isLoading: isBettingConfigQueryLoading,
-        isError: isBettingConfigQueryError,
-        error: bettingConfigQueryError,
-      } = useBettingConfigQuery({
+      return useBettingConfigQuery({
         client: bettingAppQueryClient,
         options,
       })
-
-      if (isBettingAppQueryClientError)
-        return {
-          data: undefined,
-          isLoading: false,
-          isError: true,
-          isSuccess: false,
-          error: bettingAppQueryClientError,
-        } as const
-      if (isBettingConfigQueryError)
-        return {
-          data: undefined,
-          isLoading: false,
-          isError: true,
-          isSuccess: false,
-          error: bettingConfigQueryError,
-        } as const
-      if (isBettingAppQueryClientLoading || isBettingConfigQueryLoading)
-        return {
-          data: undefined,
-          isLoading: true,
-          isError: false,
-          isSuccess: false,
-        } as const
-      return {
-        data,
-        isLoading: false,
-        isError: false,
-        isSuccess: true,
-      } as const
     },
     useListOdds: ({
       options,
@@ -204,46 +134,11 @@ export const betting = {
         query: { enabled: options?.enabled },
       })
 
-      const {
-        data,
-        isLoading: isBettingListOddsQueryLoading,
-        isError: isBettingListOddsQueryError,
-        error: bettingListOddsQueryError,
-      } = useBettingListOddsQuery({
+      return useBettingListOddsQuery({
         client: bettingAppQueryClient,
         options,
         args,
       })
-
-      if (isBettingAppQueryClientError)
-        return {
-          data: undefined,
-          isLoading: false,
-          isError: true,
-          isSuccess: false,
-          error: bettingAppQueryClientError,
-        } as const
-      if (isBettingListOddsQueryError)
-        return {
-          data: undefined,
-          isLoading: false,
-          isError: true,
-          isSuccess: false,
-          error: bettingListOddsQueryError,
-        } as const
-      if (isBettingAppQueryClientLoading || isBettingListOddsQueryLoading)
-        return {
-          data: undefined,
-          isLoading: true,
-          isError: false,
-          isSuccess: false,
-        } as const
-      return {
-        data,
-        isLoading: false,
-        isError: false,
-        isSuccess: true,
-      } as const
     },
     useOdds: ({
       options,
@@ -268,46 +163,11 @@ export const betting = {
         query: { enabled: options?.enabled },
       })
 
-      const {
-        data,
-        isLoading: isBettingOddsQueryLoading,
-        isError: isBettingOddsQueryError,
-        error: bettingOddsQueryError,
-      } = useBettingOddsQuery({
+      return useBettingOddsQuery({
         client: bettingAppQueryClient,
         options,
         args,
       })
-
-      if (isBettingAppQueryClientError)
-        return {
-          data: undefined,
-          isLoading: false,
-          isError: true,
-          isSuccess: false,
-          error: bettingAppQueryClientError,
-        } as const
-      if (isBettingOddsQueryError)
-        return {
-          data: undefined,
-          isLoading: false,
-          isError: true,
-          isSuccess: false,
-          error: bettingOddsQueryError,
-        } as const
-      if (isBettingAppQueryClientLoading || isBettingOddsQueryLoading)
-        return {
-          data: undefined,
-          isLoading: true,
-          isError: false,
-          isSuccess: false,
-        } as const
-      return {
-        data,
-        isLoading: false,
-        isError: false,
-        isSuccess: true,
-      } as const
     },
     useListRounds: ({
       options,
@@ -334,46 +194,11 @@ export const betting = {
         query: { enabled: options?.enabled },
       })
 
-      const {
-        data,
-        isLoading: isBettingListRoundsQueryLoading,
-        isError: isBettingListRoundsQueryError,
-        error: bettingListRoundsQueryError,
-      } = useBettingListRoundsQuery({
+      return useBettingListRoundsQuery({
         client: bettingAppQueryClient,
         options,
         args,
       })
-
-      if (isBettingAppQueryClientError)
-        return {
-          data: undefined,
-          isLoading: false,
-          isError: true,
-          isSuccess: false,
-          error: bettingAppQueryClientError,
-        } as const
-      if (isBettingListRoundsQueryError)
-        return {
-          data: undefined,
-          isLoading: false,
-          isError: true,
-          isSuccess: false,
-          error: bettingListRoundsQueryError,
-        } as const
-      if (isBettingAppQueryClientLoading || isBettingListRoundsQueryLoading)
-        return {
-          data: undefined,
-          isLoading: true,
-          isError: false,
-          isSuccess: false,
-        } as const
-      return {
-        data,
-        isLoading: false,
-        isError: false,
-        isSuccess: true,
-      } as const
     },
     useRound: ({
       options,
@@ -398,46 +223,11 @@ export const betting = {
         query: { enabled: options?.enabled },
       })
 
-      const {
-        data,
-        isLoading: isBettingRoundQueryLoading,
-        isError: isBettingRoundQueryError,
-        error: bettingRoundQueryError,
-      } = useBettingRoundQuery({
+      return useBettingRoundQuery({
         client: bettingAppQueryClient,
         options,
         args,
       })
-
-      if (isBettingAppQueryClientError)
-        return {
-          data: undefined,
-          isLoading: false,
-          isError: true,
-          isSuccess: false,
-          error: bettingAppQueryClientError,
-        } as const
-      if (isBettingRoundQueryError)
-        return {
-          data: undefined,
-          isLoading: false,
-          isError: true,
-          isSuccess: false,
-          error: bettingRoundQueryError,
-        } as const
-      if (isBettingAppQueryClientLoading || isBettingRoundQueryLoading)
-        return {
-          data: undefined,
-          isLoading: true,
-          isError: false,
-          isSuccess: false,
-        } as const
-      return {
-        data,
-        isLoading: false,
-        isError: false,
-        isSuccess: true,
-      } as const
     },
   },
   mutations: {

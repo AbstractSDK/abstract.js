@@ -1,5 +1,70 @@
 # @abstract-money/provider-cosmoskit
 
+## 2.0.10
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @abstract-money/react@1.0.10
+
+## 2.0.9
+
+### Patch Changes
+
+- Updated dependencies [[`21f8b18`](https://github.com/AbstractSDK/abstract.js/commit/21f8b18a813b44ff0399c422bbec971a328f34a2)]:
+  - @abstract-money/react@1.0.9
+
+## 2.0.8
+
+### Patch Changes
+
+- Updated dependencies [[`32d747a`](https://github.com/AbstractSDK/abstract.js/commit/32d747a0c759bef64c8a439bffd5b82a506bda94)]:
+  - @abstract-money/react@1.0.8
+
+## 2.0.7
+
+### Patch Changes
+
+- Updated dependencies [[`6b763ee`](https://github.com/AbstractSDK/abstract.js/commit/6b763ee9d2cd4aeb257fa24d3f258bd4d13f1a09)]:
+  - @abstract-money/react@1.0.7
+
+## 2.0.6
+
+### Patch Changes
+
+- Updated dependencies [[`5f849f4`](https://github.com/AbstractSDK/abstract.js/commit/5f849f4de8aace7b8bc21b20a876236376042b38)]:
+  - @abstract-money/react@1.0.6
+
+## 2.0.5
+
+### Patch Changes
+
+- Updated dependencies [[`b5dd99c`](https://github.com/AbstractSDK/abstract.js/commit/b5dd99cae260bf44ff510cbb18a6793ee593a0d7)]:
+  - @abstract-money/react@1.0.5
+
+## 2.0.4
+
+### Patch Changes
+
+- Updated dependencies [[`2f770a3`](https://github.com/AbstractSDK/abstract.js/commit/2f770a3e83bbcdf114adbad246abddeb8fa4a581)]:
+  - @abstract-money/react@1.0.4
+
+## 2.0.3
+
+### Patch Changes
+
+- [#90](https://github.com/AbstractSDK/abstract.js/pull/90) [`a3f19b4`](https://github.com/AbstractSDK/abstract.js/commit/a3f19b4bb076c6ad4821e1ff8ad8ef45cf637f68) Thanks [@dalechyn](https://github.com/dalechyn)! - Moved query client to be defined outside of the abstract provider. Now you either need to declare one in your app in case you're using cosmos-kit, or the sdk will use graz provider's query client.
+
+- Updated dependencies [[`a3f19b4`](https://github.com/AbstractSDK/abstract.js/commit/a3f19b4bb076c6ad4821e1ff8ad8ef45cf637f68)]:
+  - @abstract-money/react@1.0.3
+
+## 2.0.2
+
+### Patch Changes
+
+- Updated dependencies [[`8d4ec17`](https://github.com/AbstractSDK/abstract.js/commit/8d4ec1775a0c18c4540f16a432564cf2b9e022e8), [`7601ab6`](https://github.com/AbstractSDK/abstract.js/commit/7601ab662060030ae4943c94f7bf7134533df071)]:
+  - @abstract-money/react@1.0.2
+
 ## 2.0.1
 
 ### Patch Changes

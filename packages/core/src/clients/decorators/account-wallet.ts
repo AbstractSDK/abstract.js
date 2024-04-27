@@ -12,6 +12,7 @@ import { getProxyClientFromApi } from '../../actions/account/wallet/get-proxy-cl
 import { revokeNamespace } from '../../actions/account/wallet/remove-namespace'
 import { requestFundsFromRemote } from '../../actions/account/wallet/request-remote-funds'
 import { sendFundsToRemote } from '../../actions/account/wallet/send-funds-to-remote'
+import { upgradeModule } from '../../actions/account/wallet/upgrade-module'
 import { withdraw } from '../../actions/account/wallet/withdraw'
 import { VersionControlTypes } from '../../codegen/abstract/index'
 import { ExtractAndOmitParameters } from '../../types/parameters'
@@ -85,6 +86,11 @@ export type AccountWalletActions = {
       typeof revokeNamespace
     >,
   ): ReturnType<typeof revokeNamespace>
+  upgradeModule(
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof upgradeModule
+    >,
+  ): ReturnType<typeof upgradeModule>
   withdraw(
     parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof withdraw
@@ -147,6 +153,14 @@ export function accountWalletActions(
         apiUrl,
         sender,
       }),
+    upgradeModule: (parameters) =>
+      upgradeModule({
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
+      }),
     executeOnRemote: (parameters) =>
       executeOnRemote({
         ...parameters,
@@ -179,7 +193,6 @@ export function accountWalletActions(
         apiUrl,
         sender,
       }),
-
     withdraw: (parameters) =>
       withdraw({
         ...parameters,

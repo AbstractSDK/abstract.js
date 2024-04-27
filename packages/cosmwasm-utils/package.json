@@ -1,6 +1,6 @@
 {
   "name": "@abstract-money/cosmwasm-utils",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Cosmwasm utils",
   "author": "adairrr <adair@abstract.money>",
   "license": "MIT",
@@ -15,9 +15,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@cosmjs/encoding": "^0.32.2",
-    "@cosmjs/cosmwasm-stargate": "^0.32.2",
-    "@cosmjs/tendermint-rpc": "^0.32.2"
+    "@cosmjs/encoding": "^0.32.3",
+    "@cosmjs/cosmwasm-stargate": "^0.32.3",
+    "@cosmjs/tendermint-rpc": "^0.32.3"
   },
   "peerDependenciesMeta": {
     "typescript": {

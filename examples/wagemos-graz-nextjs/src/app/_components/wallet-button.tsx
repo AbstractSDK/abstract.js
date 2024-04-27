@@ -73,7 +73,7 @@ function ConnectButton() {
   const { connect } = useConnect()
 
   const handleConnect = (wallet: WalletType) => {
-    connect({ walletType: wallet, chainId: 'osmosis-1' })
+    connect({ walletType: wallet, chainId: ['osmosis-1', 'neutron-1'] })
     setIsOpen(false)
   }
   return (

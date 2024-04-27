@@ -2,11 +2,26 @@
 
 import { grazProvider } from '@abstract-money/provider-graz'
 import { AbstractProvider, createConfig } from '@abstract-money/react'
+import { QueryClient } from '@tanstack/react-query'
 import { Inter, Poppins } from 'next/font/google'
 import { Toaster } from '../components/ui/toaster'
 import { cn } from '../utils'
 import { GrazProvider } from './_providers/graz'
 import './globals.css'
+
+const client = new QueryClient({
+  defaultOptions: {
+    queries: {
+      cacheTime: 1_000 * 60 * 60 * 24, // 24 hours
+      networkMode: 'offlineFirst',
+      refetchOnWindowFocus: false,
+      retry: 0,
+    },
+    mutations: {
+      networkMode: 'offlineFirst',
+    },
+  },
+})
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-body' })
 
@@ -29,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(inter.variable, poppins.variable)}>
-        <GrazProvider>
+        <GrazProvider client={client}>
           <AbstractProvider config={abstractConfig}>
             <main className="flex flex-col items-center p-24 min-h-screen">
               <section className="mt-10">

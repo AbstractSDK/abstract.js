@@ -1,5 +1,38 @@
 ## 0.1.0
 
+## 1.0.5
+
+### Patch Changes
+
+- [`3d7057a`](https://github.com/AbstractSDK/abstract.js/commit/3d7057a2e20d127d40f83fd4a3ac69bfe324f9f9) Thanks [@dalechyn](https://github.com/dalechyn)! - Fixed the attribute search issue where deprecated `logs` were used. Now both `events` and `logs` are used to extract attributes.
+
+## 1.0.4
+
+### Patch Changes
+
+- [`21f8b18`](https://github.com/AbstractSDK/abstract.js/commit/21f8b18a813b44ff0399c422bbec971a328f34a2) Thanks [@dalechyn](https://github.com/dalechyn)! - Bumped @cosmjs dependencies versions.
+
+- Updated dependencies [[`21f8b18`](https://github.com/AbstractSDK/abstract.js/commit/21f8b18a813b44ff0399c422bbec971a328f34a2)]:
+  - @abstract-money/cosmwasm-utils@0.1.3
+
+## 1.0.3
+
+### Patch Changes
+
+- [#101](https://github.com/AbstractSDK/abstract.js/pull/101) [`6b763ee`](https://github.com/AbstractSDK/abstract.js/commit/6b763ee9d2cd4aeb257fa24d3f258bd4d13f1a09) Thanks [@dalechyn](https://github.com/dalechyn)! - Added query to fetch modules.
+
+## 1.0.2
+
+### Patch Changes
+
+- [#99](https://github.com/AbstractSDK/abstract.js/pull/99) [`5f849f4`](https://github.com/AbstractSDK/abstract.js/commit/5f849f4de8aace7b8bc21b20a876236376042b38) Thanks [@dalechyn](https://github.com/dalechyn)! - Added query and action to upgrade a module.
+
+## 1.0.1
+
+### Patch Changes
+
+- [#93](https://github.com/AbstractSDK/abstract.js/pull/93) [`2f770a3`](https://github.com/AbstractSDK/abstract.js/commit/2f770a3e83bbcdf114adbad246abddeb8fa4a581) Thanks [@dalechyn](https://github.com/dalechyn)! - Added new hook to query sub account ids by module id.
+
 ## 1.0.0
 
 ### Major Changes
