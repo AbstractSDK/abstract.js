@@ -26,10 +26,10 @@ export default function RemotePage() {
   const { address } = useChain(CHAIN_NAME)
 
   const { data: accounts, status } = useAccounts({
-    args: {
+    args: address ? {
       chainName: CHAIN_NAME,
-      owner: address ?? '',
-    },
+      owner: address,
+    } : undefined,
     query: {
       enabled: !!address,
     },
