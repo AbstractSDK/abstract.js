@@ -1,5 +1,13 @@
 # @abstract-money/cli
 
+## 0.3.5
+
+### Patch Changes
+
+- [#74](https://github.com/AbstractSDK/abstract.js/pull/74) [`ceee727`](https://github.com/AbstractSDK/abstract.js/commit/ceee727a9fa8f028f9c8169d775cb23c58dee4ff) Thanks [@adairrr](https://github.com/adairrr)! - Added IBC hooks.
+
+- [#106](https://github.com/AbstractSDK/abstract.js/pull/106) [`155df50`](https://github.com/AbstractSDK/abstract.js/commit/155df50115c4e615ff93c84e847ca3d25f606ba8) Thanks [@dalechyn](https://github.com/dalechyn)! - Fixed a small issue where `--help` output was shown twice.
+
 ## 0.3.4
 
 ### Patch Changes
