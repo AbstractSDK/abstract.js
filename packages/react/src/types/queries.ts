@@ -30,10 +30,10 @@ export type UseMutationReturnType<
   variables = void,
   context = unknown,
 > = Evaluate<
-  Omit<
-    UseMutationResult<data, error, variables, context>,
-    'mutate' | 'mutateAsync'
-  >
+  // Omit<
+  UseMutationResult<data, error, variables, context> /* , */
+  //   'mutate' | 'mutateAsync'
+  // >
 >
 
 ////////////////////////////////////////////////////////////////////////////////

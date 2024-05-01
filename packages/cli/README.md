@@ -60,6 +60,7 @@ export default defineConfig({
 })
 ```
 
+
 You need to also install `@abstract-money/cli/plugins`:
 
 ```sh

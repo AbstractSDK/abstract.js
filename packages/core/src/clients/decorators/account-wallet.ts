@@ -1,11 +1,17 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { claimNamespace } from '../../actions/account/wallet/claim-namespace'
+import { createRemoteAccount } from '../../actions/account/wallet/create-remote-account'
 import { createSubAccount } from '../../actions/account/wallet/create-sub-account'
 import { deposit } from '../../actions/account/wallet/deposit'
 import { execute } from '../../actions/account/wallet/execute'
+import { executeOnModule } from '../../actions/account/wallet/execute-on-module'
+import { executeOnRemote } from '../../actions/account/wallet/execute-on-remote'
+import { executeOnRemoteModule } from '../../actions/account/wallet/execute-on-remote-module'
 import { getManagerClientFromApi } from '../../actions/account/wallet/get-manager-client-from-api'
 import { getProxyClientFromApi } from '../../actions/account/wallet/get-proxy-client-from-api'
 import { revokeNamespace } from '../../actions/account/wallet/remove-namespace'
+import { requestFundsFromRemote } from '../../actions/account/wallet/request-remote-funds'
+import { sendFundsToRemote } from '../../actions/account/wallet/send-funds-to-remote'
 import { upgradeModule } from '../../actions/account/wallet/upgrade-module'
 import { withdraw } from '../../actions/account/wallet/withdraw'
 import { VersionControlTypes } from '../../codegen/abstract/index'
@@ -29,12 +35,42 @@ export type AccountWalletActions = {
       typeof createSubAccount
     >,
   ): ReturnType<typeof createSubAccount>
+  createRemoteAccount(
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof createRemoteAccount
+    >,
+  ): ReturnType<typeof createRemoteAccount>
   deposit(
     parameters: ExtractAndOmitDecoratedParametersFromParameters<typeof deposit>,
   ): ReturnType<typeof deposit>
   execute(
     parameters: ExtractAndOmitDecoratedParametersFromParameters<typeof execute>,
   ): ReturnType<typeof execute>
+  executeOnModule(
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof executeOnModule
+    >,
+  ): ReturnType<typeof executeOnModule>
+  executeOnRemote(
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof executeOnRemote
+    >,
+  ): ReturnType<typeof executeOnRemote>
+  executeOnRemoteModule(
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof executeOnRemoteModule
+    >,
+  ): ReturnType<typeof executeOnRemoteModule>
+  sendFundsToRemote(
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof sendFundsToRemote
+    >,
+  ): ReturnType<typeof sendFundsToRemote>
+  requestFundsFromRemote(
+    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+      typeof requestFundsFromRemote
+    >,
+  ): ReturnType<typeof requestFundsFromRemote>
   getManagerClientFromApi(
     parameters: ExtractAndOmitDecoratedParametersFromParameters<
       typeof getManagerClientFromApi
@@ -85,6 +121,14 @@ export function accountWalletActions(
         apiUrl,
         sender,
       }),
+    createRemoteAccount: (parameters) =>
+      createRemoteAccount({
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
+      }),
     deposit: (parameters) =>
       deposit({
         ...parameters,
@@ -101,8 +145,48 @@ export function accountWalletActions(
         apiUrl,
         sender,
       }),
+    executeOnModule: (parameters) =>
+      executeOnModule({
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
+      }),
     upgradeModule: (parameters) =>
       upgradeModule({
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
+      }),
+    executeOnRemote: (parameters) =>
+      executeOnRemote({
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
+      }),
+    executeOnRemoteModule: (parameters) =>
+      executeOnRemoteModule({
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
+      }),
+    sendFundsToRemote: (parameters) =>
+      sendFundsToRemote({
+        ...parameters,
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
+      }),
+    requestFundsFromRemote: (parameters) =>
+      requestFundsFromRemote({
         ...parameters,
         accountId,
         signingCosmWasmClient,

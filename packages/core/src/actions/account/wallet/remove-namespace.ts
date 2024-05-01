@@ -1,15 +1,10 @@
-import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { VersionControlTypes } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { getVersionControlClientFromApi } from '../../wallet/get-version-control-client-from-api'
 import { getNamespace } from '../public/get-namespace'
+import { BaseWalletParameters } from './types'
 
-export type RevokeNamespaceParameters = WithCosmWasmSignOptions<{
-  accountId: VersionControlTypes.AccountId
-  signingCosmWasmClient: SigningCosmWasmClient
-  apiUrl: string
-  sender: string
-}>
+export type RevokeNamespaceParameters =
+  WithCosmWasmSignOptions<BaseWalletParameters>
 
 export async function revokeNamespace({
   accountId,
