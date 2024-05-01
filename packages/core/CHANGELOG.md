@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 1.0.6
+
+### Patch Changes
+
+- [#74](https://github.com/AbstractSDK/abstract.js/pull/74) [`ceee727`](https://github.com/AbstractSDK/abstract.js/commit/ceee727a9fa8f028f9c8169d775cb23c58dee4ff) Thanks [@adairrr](https://github.com/adairrr)! - Added IBC hooks.
+
 ## 1.0.5
 
 ### Patch Changes

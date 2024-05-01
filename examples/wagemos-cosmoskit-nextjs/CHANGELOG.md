@@ -1,5 +1,16 @@
 # wagemos-cosmoskit-nextjs
 
+## 0.2.44
+
+### Patch Changes
+
+- [#74](https://github.com/AbstractSDK/abstract.js/pull/74) [`ceee727`](https://github.com/AbstractSDK/abstract.js/commit/ceee727a9fa8f028f9c8169d775cb23c58dee4ff) Thanks [@adairrr](https://github.com/adairrr)! - Added IBC hooks.
+
+- Updated dependencies [[`ceee727`](https://github.com/AbstractSDK/abstract.js/commit/ceee727a9fa8f028f9c8169d775cb23c58dee4ff)]:
+  - @abstract-money/core@1.0.6
+  - @abstract-money/react@1.0.11
+  - @abstract-money/provider-cosmoskit@2.0.11
+
 ## 0.2.43
 
 ### Patch Changes
