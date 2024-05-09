@@ -37,7 +37,6 @@ export async function requestFundsFromRemote({
       action: {
         helpers: 'send_all_back',
       },
-      callback_info: null,
     },
   }
 

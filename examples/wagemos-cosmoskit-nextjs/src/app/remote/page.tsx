@@ -39,6 +39,7 @@ export default function RemotePage() {
 
   const firstAccount = useMemo(() => accounts?.[0], [accounts])
 
+
   const { mutate: createRemoteAccount, isLoading: isCreating } =
     useCreateRemoteAccount({
       accountId: firstAccount,
@@ -48,6 +49,7 @@ export default function RemotePage() {
     accountId: firstAccount,
     chainName: firstAccount?.chainName,
   })
+
 
   const { data: remoteAccountIds } = useRemoteAccountIds({
     args: {},
@@ -60,7 +62,7 @@ export default function RemotePage() {
       throw new Error('chainInput is undefined')
     }
 
-    console.log('creating remote account')
+    console.log('creating remote account on', chainInput)
 
     createRemoteAccount({
       fee: 'auto',
@@ -91,6 +93,7 @@ export default function RemotePage() {
     })
   }, [execRemote, chainInput])
 
+
   return (
     <>
       <h3>Host</h3>
@@ -117,7 +120,7 @@ export default function RemotePage() {
         Updat{isExecuting ? 'ing' : 'e'} Remote Account {isExecuting && '...'}
       </Button>
 
-      <WalletButton />
+      <WalletButton chainName={CHAIN_NAME} />
       <h3>Remote Accounts</h3>
       <div>
         <pre>{JSON.stringify(remoteAccountIds, null, 2)}</pre>

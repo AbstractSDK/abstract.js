@@ -1,4 +1,4 @@
-import { IbcClientTypes, ManagerTypes } from '../../../codegen/abstract'
+import { ManagerTypes } from '../../../codegen/abstract'
 import { ModuleType } from '../../../codegen/gql/graphql'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { encodeModuleMsg } from '../../../utils/modules/encode-module-msg'
@@ -14,7 +14,6 @@ export type ExecuteOnRemoteModuleParameters = Omit<
       moduleId: string
       moduleType?: ModuleType
       moduleMsg: Record<string, unknown> | Base64EncodedJson
-      callbackInfo?: IbcClientTypes.CallbackInfo
     }
   >,
   'funds'
@@ -44,7 +43,6 @@ export async function executeOnRemoteModule({
   moduleType,
   moduleMsg,
   hostChainName,
-  callbackInfo,
   fee,
   memo,
 }: ExecuteOnRemoteModuleParameters) {
@@ -62,7 +60,6 @@ export async function executeOnRemoteModule({
     sender,
     managerMsg,
     hostChainName,
-    callbackInfo,
     fee,
     memo,
   })

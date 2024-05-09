@@ -12,18 +12,15 @@ export const cosmosKitProvider: Provider = {
   useCosmWasmClient(parameters) {
     const [client, setClient] =
       useState<ReturnType<Provider['useCosmWasmClient']>>(undefined)
-    const { getCosmWasmClient: _getCosmWasmClient } = useChain(
+    const { getCosmWasmClient } = useChain(
       parameters?.chainName ?? USE_CHAIN_HACK_CHAIN_NAME,
     )
 
-    const getCosmWasmClient = useMemo(() => {
-      if (!parameters?.chainName) return undefined
-      return _getCosmWasmClient
-    }, [_getCosmWasmClient, parameters?.chainName])
-
     useEffect(() => {
-      if (!getCosmWasmClient) return
-      getCosmWasmClient().then((client) => setClient(client))
+      if (client || !parameters?.chainName ) return 
+      (async () => {
+        setClient(await getCosmWasmClient())
+      })()
     }, [getCosmWasmClient])
 
     return client
@@ -32,18 +29,14 @@ export const cosmosKitProvider: Provider = {
     const [client, setClient] =
       useState<ReturnType<Provider['useSigningCosmWasmClient']>>(undefined)
     const {
-      getSigningCosmWasmClient: _getSigningCosmWasmClient,
+      getSigningCosmWasmClient,
       isWalletConnected,
     } = useChain(parameters?.chainName ?? USE_CHAIN_HACK_CHAIN_NAME)
-
-    const getSigningCosmWasmClient = useMemo(() => {
-      if (!parameters?.chainName || !isWalletConnected) return undefined
-      return _getSigningCosmWasmClient
-    }, [_getSigningCosmWasmClient, parameters?.chainName])
-
     useEffect(() => {
-      if (!getSigningCosmWasmClient) return
-      getSigningCosmWasmClient().then((client) => setClient(client))
+      if (client || !parameters?.chainName || !isWalletConnected) return 
+      (async () => {
+        setClient(await getSigningCosmWasmClient())
+      })()
     }, [getSigningCosmWasmClient])
 
     return client

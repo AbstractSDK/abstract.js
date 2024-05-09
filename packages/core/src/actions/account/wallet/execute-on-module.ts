@@ -47,6 +47,8 @@ export async function executeOnModule({
     apiUrl,
   })
 
+  console.log(moduleMsg)
+
   return signingCosmWasmClient.signAndBroadcast(
     sender,
     [

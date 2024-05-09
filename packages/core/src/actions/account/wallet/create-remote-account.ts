@@ -45,7 +45,7 @@ export async function createRemoteAccount({
       host_chain: hostChainName,
       install_modules: installModules ?? [],
       ...registerMsgParams,
-    },
+    }
   }
 
   return executeIbcAction({

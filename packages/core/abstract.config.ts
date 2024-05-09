@@ -26,14 +26,20 @@ const contractsConfig = [
     name: 'account-factory',
     version: '0.21.0',
   },
-  {
-    name: 'ibc-client',
-    version: '0.21.0',
-  },
+  // {
+  //   name: 'ibc-client',
+  //   version: '0.21.0',
+  // },
 ]
 
 export default defineConfig({
   out: 'src/codegen/abstract',
+  contracts: [{
+    name: 'ibc-client',
+     version: '0.22.0',
+    namespace:'abstract',
+    path: './ibc-client'
+  }],
   plugins: [
     vanilla(),
     registry({

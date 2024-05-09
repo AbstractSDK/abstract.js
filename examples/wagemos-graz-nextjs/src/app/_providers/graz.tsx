@@ -1,11 +1,10 @@
 'use client'
 
-import { GrazProvider as Provider } from 'graz'
+import { GrazProviderProps, GrazProvider as Provider } from 'graz'
 import { mainnetChains } from 'graz/chains'
-import { ComponentProps } from 'react'
 
 export function GrazProvider(
-  props: Pick<ComponentProps<typeof Provider>, 'children' | 'client'>,
+  props: Pick<GrazProviderProps, 'children' | 'client'>,
 ) {
   return (
     <Provider

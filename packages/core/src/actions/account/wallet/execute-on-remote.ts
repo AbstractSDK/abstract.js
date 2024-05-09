@@ -1,5 +1,4 @@
 import { IbcClientTypes, ManagerTypes } from '../../../codegen/abstract'
-import { CallbackInfo } from '../../../codegen/abstract/cosmwasm-codegen/IbcClient.types'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { executeIbcAction } from './execute-ibc-action'
 import { BaseWalletParameters } from './types'
@@ -11,7 +10,6 @@ export type ExecuteOnRemoteParameters = Omit<
     BaseWalletParameters & {
       hostChainName: string
       managerMsg: ManagerTypes.ExecuteMsg
-      callbackInfo?: CallbackInfo
     }
   >,
   'funds'
@@ -24,7 +22,6 @@ export type ExecuteOnRemoteParameters = Omit<
  * @param apiUrl
  * @param sender
  * @param managerMsg
- * @param callbackInfo
  * @param hostChainName
  * @param fee
  * @param memo
@@ -35,7 +32,6 @@ export async function executeOnRemote({
   apiUrl,
   sender,
   managerMsg,
-  callbackInfo,
   hostChainName,
   fee,
   memo,
@@ -45,10 +41,9 @@ export async function executeOnRemote({
       host_chain: hostChainName,
       action: {
         dispatch: {
-          manager_msg: managerMsg,
+          manager_msgs: [managerMsg],
         },
       },
-      callback_info: callbackInfo,
     },
   }
 

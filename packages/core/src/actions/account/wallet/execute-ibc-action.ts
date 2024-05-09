@@ -1,4 +1,4 @@
-import { IbcClientTypes, ProxyTypes } from '../../../codegen/abstract'
+import { IbcClientTypes } from '../../../codegen/abstract'
 import { ModuleType } from '../../../codegen/gql/graphql'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { MaybeArray } from '../../../types/utils'
@@ -46,7 +46,7 @@ export async function executeIbcAction({
     throw new Error(`${CommonModuleNames.IBC_CLIENT} is not installed`)
   }
 
-  const proxyMsg: ProxyTypes.ExecuteMsg = {
+  const proxyMsg = {
     ibc_action: {
       msgs: Array.isArray(msgs) ? msgs : [msgs],
     },
