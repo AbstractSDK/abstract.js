@@ -1,6 +1,6 @@
 'use client'
 import { useChain } from '@cosmos-kit/react'
-import { useCallback, useMemo } from 'react'
+import { useCallback } from 'react'
 import { Button } from '../../components/ui/button'
 import { useToast } from '../../components/ui/use-toast'
 
@@ -9,11 +9,11 @@ function DisconnectButton() {
 
   const { toast } = useToast()
 
-  const handleCopy = useCallback(() => {
+  const handleCopy = () => {
     if (!address) return
     navigator.clipboard.writeText(address)
     toast({ title: 'Address copied to clipboard' })
-  }, [])
+  }
 
   const handleDisconnect = useCallback(
     async function handleDisconnect() {
@@ -64,11 +64,8 @@ function ConnectButton() {
 
 export function WalletButton() {
   const { isWalletConnected: isConnected } = useChain('neutron')
-
-  return useMemo(() => {
-    if (isConnected) {
-      return <DisconnectButton />
-    }
-    return <ConnectButton />
-  }, [isConnected])
+  if (isConnected) {
+    return <DisconnectButton />
+  }
+  return <ConnectButton />
 }
