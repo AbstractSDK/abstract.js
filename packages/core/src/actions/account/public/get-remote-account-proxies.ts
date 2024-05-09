@@ -48,7 +48,7 @@ export async function getRemoteAccountProxies({
     accountId,
   })
 
-  console.log('remoteProxies',remoteProxies)
+  console.log('remoteProxies', remoteProxies)
 
   return Object.fromEntries(remoteProxies.proxies)
 }

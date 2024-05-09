@@ -6,85 +6,89 @@ import { glob } from 'fast-glob'
 
 console.log('Setting up packages for development.')
 
-// Get all package.json files
-const packagePaths = await glob('**/package.json', {
-  ignore: ['**/dist/**', '**/node_modules/**'],
-})
+async function main() {
+  // Get all package.json files
+  const packagePaths = await glob('**/package.json', {
+    ignore: ['**/dist/**', '**/node_modules/**'],
+  })
 
-let count = 0
-for (const packagePath of packagePaths) {
-  type Package = {
-    bin?: Record<string, string> | undefined
-    exports?:
-      | Record<string, { types: string; default: string } | string>
-      | undefined
-    name?: string | undefined
-    private?: boolean | undefined
-  }
-  const file = await fs.readFile(packagePath, 'utf8')
-  const packageJson = (await JSON.parse(file)) as Package
+  let count = 0
+  for (const packagePath of packagePaths) {
+    type Package = {
+      bin?: Record<string, string> | undefined
+      exports?:
+        | Record<string, { types: string; default: string } | string>
+        | undefined
+      name?: string | undefined
+      private?: boolean | undefined
+    }
+    const file = await fs.readFile(packagePath, 'utf8')
+    const packageJson = (await JSON.parse(file)) as Package
 
-  // Skip private packages
-  if (packageJson.private) continue
-  if (!packageJson.exports) continue
+    // Skip private packages
+    if (packageJson.private) continue
+    if (!packageJson.exports) continue
 
-  count += 1
-  console.log(`${packageJson.name} — ${path.dirname(packagePath)}`)
+    count += 1
+    console.log(`${packageJson.name} — ${path.dirname(packagePath)}`)
 
-  const dir = path.resolve(path.dirname(packagePath))
+    const dir = path.resolve(path.dirname(packagePath))
 
-  // Empty dist directory
-  const distDirName = 'dist'
-  const dist = path.resolve(dir, distDirName)
-  let files: string[] = []
-  try {
-    files = await fs.readdir(dist)
-  } catch {
-    await fs.mkdir(dist)
-  }
+    // Empty dist directory
+    const distDirName = 'dist'
+    const dist = path.resolve(dir, distDirName)
+    let files: string[] = []
+    try {
+      files = await fs.readdir(dist)
+    } catch {
+      await fs.mkdir(dist)
+    }
 
-  const promises: Promise<void>[] = []
-  for (const file of files) {
-    promises.push(
-      fs.rm(path.join(dist, file), { recursive: true, force: true }),
-    )
-  }
-  await Promise.all(promises)
-
-  // Link exports to dist locations
-  for (const [key, exports] of Object.entries(packageJson.exports)) {
-    // Skip `package.json` exports
-    if (/package\.json$/.test(key)) continue
-
-    let entries: any
-    if (typeof exports === 'string')
-      entries = [
-        ['default', exports],
-        ['types', exports.replace('.js', '.d.ts')],
-      ]
-    else entries = Object.entries(exports)
+    const promises: Promise<void>[] = []
+    for (const file of files) {
+      promises.push(
+        fs.rm(path.join(dist, file), { recursive: true, force: true }),
+      )
+    }
+    await Promise.all(promises)
 
     // Link exports to dist locations
-    for (const [, value] of entries as [
-      type: 'types' | 'default',
-      value: string,
-    ][]) {
-      const srcDir = path.resolve(
-        dir,
-        path.dirname(value).replace(distDirName, ''),
-      )
-      const srcFilePath = path.resolve(srcDir, 'index.ts')
+    for (const [key, exports] of Object.entries(packageJson.exports)) {
+      // Skip `package.json` exports
+      if (/package\.json$/.test(key)) continue
 
-      const distDir = path.resolve(dir, path.dirname(value))
-      const distFileName = path.basename(value)
-      const distFilePath = path.resolve(distDir, distFileName)
+      let entries: any
+      if (typeof exports === 'string')
+        entries = [
+          ['default', exports],
+          ['types', exports.replace('.js', '.d.ts')],
+        ]
+      else entries = Object.entries(exports)
 
-      await fs.mkdir(distDir, { recursive: true })
+      // Link exports to dist locations
+      for (const [, value] of entries as [
+        type: 'types' | 'default',
+        value: string,
+      ][]) {
+        const srcDir = path.resolve(
+          dir,
+          'src',
+          path.dirname(value).replace(distDirName, ''),
+        )
+        const srcFilePath = path.resolve(srcDir, 'index.ts')
 
-      // Symlink src to dist file
-      await fs.symlink(srcFilePath, distFilePath, 'file').catch(() => {})
+        const distDir = path.resolve(dir, path.dirname(value))
+        const distFileName = path.basename(value)
+        const distFilePath = path.resolve(distDir, distFileName)
+
+        await fs.mkdir(distDir, { recursive: true })
+
+        // Symlink src to dist file
+        await fs.symlink(srcFilePath, distFilePath, 'file').catch(() => {})
+      }
     }
   }
-}
 
-console.log(`Done. Set up ${count} ${count === 1 ? 'package' : 'packages'}.`)
+  console.log(`Done. Set up ${count} ${count === 1 ? 'package' : 'packages'}.`)
+}
+main()

@@ -1,7 +1,7 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import * as React from 'react'
 
-import { useSenderAddress } from 'src/hooks'
+import { useSenderAddress } from '../hooks'
 import { useSigningCosmWasmClient } from '../hooks/wallet/use-signing-cosm-wasm-client'
 
 interface ModuleClientConstructor {
