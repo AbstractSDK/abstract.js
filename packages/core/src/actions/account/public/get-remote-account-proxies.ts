@@ -32,12 +32,14 @@ export async function getRemoteAccountProxies({
 }: GetRemoteProxiesParameters): Promise<Record<ChainName, MaybeProxyAddress>> {
   let ibcClient: IbcClientQueryClient
   try {
+    console.log('remoteProxies trying')
     ibcClient = await getIbcClientQueryClientFromManager({
       accountId,
       cosmWasmClient,
       apiUrl,
     })
   } catch (e) {
+    console.log('remoteProxies error', e)
     // IBC client not installed
     return {}
   }
@@ -45,6 +47,8 @@ export async function getRemoteAccountProxies({
   const remoteProxies = await ibcClient.listRemoteProxiesByAccountId({
     accountId,
   })
+
+  console.log('remoteProxies',remoteProxies)
 
   return Object.fromEntries(remoteProxies.proxies)
 }

@@ -60,6 +60,7 @@ export default function RemotePage() {
     accountId: firstAccount,
     chainName: firstAccount?.chainName,
   })
+  console.log(remoteAccountIds)
 
   const onCreateClick = useCallback(() => {
     if (!chainInput) {
@@ -69,7 +70,7 @@ export default function RemotePage() {
     console.log('creating remote account')
 
     createRemoteAccount({
-      fee: 1000000000,
+      fee: 'auto',
       funds: [],
       args: {
         hostChainName: chainInput,

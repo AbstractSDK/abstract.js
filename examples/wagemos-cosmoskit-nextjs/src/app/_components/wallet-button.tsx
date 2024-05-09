@@ -4,8 +4,8 @@ import { useCallback } from 'react'
 import { Button } from '../../components/ui/button'
 import { useToast } from '../../components/ui/use-toast'
 
-function DisconnectButton() {
-  const { disconnect, address } = useChain('neutron')
+function DisconnectButton({chainName = 'neutron'}: {chainName?: string}) {
+  const { disconnect, address } = useChain(chainName)
 
   const { toast } = useToast()
 
@@ -44,8 +44,8 @@ function DisconnectButton() {
   )
 }
 
-function ConnectButton() {
-  const { connect } = useChain('neutron')
+function ConnectButton({chainName = 'neutron'}: {chainName?: string}) {
+  const { connect } = useChain(chainName)
 
   const { toast } = useToast()
 
@@ -62,10 +62,10 @@ function ConnectButton() {
   return <Button onClick={handleConnect}>Connect Wallet</Button>
 }
 
-export function WalletButton() {
-  const { isWalletConnected: isConnected } = useChain('neutron')
+export function WalletButton({chainName = 'neutron'}: {chainName?: string}) {
+  const { isWalletConnected: isConnected } = useChain(chainName)
   if (isConnected) {
-    return <DisconnectButton />
+    return <DisconnectButton chainName={chainName} />
   }
-  return <ConnectButton />
+  return <ConnectButton chainName={chainName} />
 }

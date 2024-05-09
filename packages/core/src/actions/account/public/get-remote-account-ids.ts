@@ -23,6 +23,8 @@ export async function getRemoteAccountIds({
     apiUrl,
   })
 
+  console.log('remote account ids: proxies', remoteProxies)
+
   const chainId = await cosmWasmClient.getChainId()
   const sourceChainName = chainIdToName(chainId)
 

@@ -11,6 +11,7 @@
     "lint": "biome check .",
     "lint:fix": "pnpm lint --apply",
     "preinstall": "npx only-allow pnpm",
+    "preconstruct": "node --import tsx .scripts/preconstruct.ts",
     "prepare": "npx simple-git-hooks",
     "typecheck": "turbo typecheck"
   },
@@ -40,6 +41,8 @@
     "simple-git-hooks": "^2.8.1",
     "tsup": "^8.0.0",
     "turbo": "1.10.9",
+        "tsx": "^4.7.1",
+
     "typescript": "^5.0.4"
   },
   "simple-git-hooks": {
