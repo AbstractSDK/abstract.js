@@ -8,7 +8,7 @@ import {
   useRemoteHosts,
 } from '@abstract-money/react'
 import { useChain } from '@cosmos-kit/react'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Button } from '../../components/ui/button'
 import {
   Select,
@@ -19,7 +19,7 @@ import {
 } from '../../components/ui/select'
 import { WalletButton } from '../_components/wallet-button'
 
-const CONTROLLER_CHAINS = ['neutron', 'archway', 'juno']
+const CONTROLLER_CHAINS = ['juno', 'neutron', 'archway', 'terra']
 const CHAIN_NAME = 'neutron'
 
 export default function RemotePage() {
@@ -43,6 +43,17 @@ export default function RemotePage() {
   })
 
   const firstAccount = useMemo(() => accounts?.[0], [accounts])
+
+  useEffect(() => {
+    console.log('accounts changed')
+  }, [accounts])
+  useEffect(() => {
+    console.log('remoteHosts changed')
+  }, [remoteHosts])
+
+  useEffect(() => {
+    console.log('firstaccount changed')
+  }, [firstAccount])
 
   const { mutate: createRemoteAccount, isLoading: isCreating } =
     useCreateRemoteAccount({
@@ -69,7 +80,11 @@ export default function RemotePage() {
     console.log('creating remote account')
 
     createRemoteAccount({
-      fee: 1000000000,
+      // fee: {
+      //   amount: [{ denom: 'ujuno', amount: '100000000' }],
+      //   gas: '500000'
+      // },
+      fee: 'auto',
       funds: [],
       args: {
         hostChainName: chainInput,
@@ -101,37 +116,28 @@ export default function RemotePage() {
   return (
     <>
       <h3>Controller</h3>
-
-      <Select onValueChange={setController} defaultValue={controller}>
-        <SelectTrigger>
-          <SelectValue placeholder="Select a host" />
-        </SelectTrigger>
-        <SelectContent>
-          {CONTROLLER_CHAINS?.map((chainName) => {
-            return (
-              <SelectItem key={chainName} value={chainName}>
-                {chainName}
-              </SelectItem>
-            )
-          })}
-        </SelectContent>
-      </Select>
+      <select
+        value={controller}
+        onChange={(e) => setController(e.target.value)}
+      >
+        {CONTROLLER_CHAINS?.map((chainName) => (
+          <option key={chainName} value={chainName}>
+            {chainName}
+          </option>
+        ))}
+      </select>
 
       <h3>Host</h3>
-      <Select onValueChange={setChainInput} defaultValue={chainInput}>
-        <SelectTrigger>
-          <SelectValue placeholder="Select a host" />
-        </SelectTrigger>
-        <SelectContent>
-          {remoteHosts?.map(([chainName]) => {
-            return (
-              <SelectItem key={chainName} value={chainName}>
-                {chainName}
-              </SelectItem>
-            )
-          })}
-        </SelectContent>
-      </Select>
+      <select
+        value={chainInput}
+        onChange={(e) => setChainInput(e.target.value)}
+      >
+        {remoteHosts?.map(([chainName]) => (
+          <option key={chainName} value={chainName}>
+            {chainName}
+          </option>
+        ))}
+      </select>
       {isLoading && <div>Loading...</div>}
       {/*<Input placeholder="chain" value={chainInput} onChange={(e) => setChainInput(e.target.value)} />*/}
       <Button onClick={onCreateClick} disabled={!chainInput || isCreating}>
