@@ -49,7 +49,7 @@ export async function sendFundsToRemote({
     signingCosmWasmClient,
     apiUrl,
     sender,
-    msgs: sendFundsMsg,
+    msg: sendFundsMsg,
     fee,
     memo,
   })

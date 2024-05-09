@@ -1,4 +1,5 @@
 'use client'
+import { accountIdToString } from '@abstract-money/core'
 import {
   useAccounts,
   useCreateRemoteAccount,
@@ -18,17 +19,21 @@ import {
 } from '../../components/ui/select'
 import { WalletButton } from '../_components/wallet-button'
 
+const CONTROLLER_CHAINS = ['neutron', 'archway', 'juno']
 const CHAIN_NAME = 'neutron'
+
 export default function RemotePage() {
-  const { data: remoteHosts, isLoading, refetch } = useRemoteHosts(CHAIN_NAME)
+  const [controller, setController] = useState(CONTROLLER_CHAINS[0])
+
+  const { data: remoteHosts, isLoading, refetch } = useRemoteHosts(controller)
   const [chainInput, setChainInput] = useState(remoteHosts?.[0]?.[0])
 
-  const { address } = useChain(CHAIN_NAME)
+  const { address, isWalletConnected } = useChain(controller)
 
   const { data: accounts, status } = useAccounts({
     args: address
       ? {
-          chainName: CHAIN_NAME,
+          chainName: [controller, 'osmosis'],
           owner: address,
         }
       : undefined,
@@ -44,6 +49,7 @@ export default function RemotePage() {
       accountId: firstAccount,
       chainName: firstAccount?.chainName,
     })
+
   const { mutate: execRemote, isLoading: isExecuting } = useExecuteOnRemote({
     accountId: firstAccount,
     chainName: firstAccount?.chainName,
@@ -63,11 +69,12 @@ export default function RemotePage() {
     console.log('creating remote account')
 
     createRemoteAccount({
-      fee: 'auto',
+      fee: 1000000000,
       funds: [],
       args: {
         hostChainName: chainInput,
         base_asset: 'juno>juno',
+        installModules: [],
       },
     })
   }, [createRemoteAccount, chainInput])
@@ -93,6 +100,23 @@ export default function RemotePage() {
 
   return (
     <>
+      <h3>Controller</h3>
+
+      <Select onValueChange={setController} defaultValue={controller}>
+        <SelectTrigger>
+          <SelectValue placeholder="Select a host" />
+        </SelectTrigger>
+        <SelectContent>
+          {CONTROLLER_CHAINS?.map((chainName) => {
+            return (
+              <SelectItem key={chainName} value={chainName}>
+                {chainName}
+              </SelectItem>
+            )
+          })}
+        </SelectContent>
+      </Select>
+
       <h3>Host</h3>
       <Select onValueChange={setChainInput} defaultValue={chainInput}>
         <SelectTrigger>
@@ -118,6 +142,16 @@ export default function RemotePage() {
       </Button>
 
       <WalletButton />
+      {/* link to the abstract console with the account id */}
+      {firstAccount && (
+        <a
+          href={`https://console.abstract.money/account/${accountIdToString(
+            firstAccount,
+          )}/home?chainName=${firstAccount?.chainName}`}
+        >
+          Account Console
+        </a>
+      )}
       <h3>Remote Accounts</h3>
       <div>
         <pre>{JSON.stringify(remoteAccountIds, null, 2)}</pre>
