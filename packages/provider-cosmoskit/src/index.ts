@@ -19,9 +19,10 @@ export const cosmosKitProvider: Provider = {
     useEffect(() => {
       if (client || !parameters?.chainName) return
       ;(async () => {
-        setClient(await getCosmWasmClient())
+        const client_ = await getCosmWasmClient()
+        setClient(client_)
       })()
-    }, [getCosmWasmClient])
+    }, [getCosmWasmClient, parameters?.chainName])
 
     return client
   },
@@ -36,7 +37,7 @@ export const cosmosKitProvider: Provider = {
       ;(async () => {
         setClient(await getSigningCosmWasmClient())
       })()
-    }, [getSigningCosmWasmClient])
+    }, [getSigningCosmWasmClient, parameters?.chainName])
 
     return client
   },

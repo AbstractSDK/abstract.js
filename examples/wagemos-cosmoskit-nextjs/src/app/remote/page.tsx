@@ -60,7 +60,6 @@ export default function RemotePage() {
     accountId: firstAccount,
     chainName: firstAccount?.chainName,
   })
-  console.log(remoteAccountIds)
 
   const onCreateClick = useCallback(() => {
     if (!chainInput) {
