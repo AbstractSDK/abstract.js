@@ -46,7 +46,9 @@ export async function executeIbcAction({
   })
 
   if (!ibcClientAddress) {
-    throw new Error(`${CommonModuleNames.IBC_CLIENT} is not installed`)
+    throw new Error(
+      `${abstractModuleId(CommonModuleNames.IBC_CLIENT)} is not installed`,
+    )
   }
 
   const proxyVersion = await getModuleVersion({
