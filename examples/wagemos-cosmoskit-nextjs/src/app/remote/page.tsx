@@ -20,7 +20,7 @@ import {
 import { WalletButton } from '../_components/wallet-button'
 
 const CONTROLLER_CHAINS = ['neutron', 'archway', 'juno']
-const CHAIN_NAME = 'neutron'
+// const CHAIN_NAME = 'neutron'
 
 export default function RemotePage() {
   const [controller, setController] = useState(CONTROLLER_CHAINS[0])
@@ -28,9 +28,9 @@ export default function RemotePage() {
   const { data: remoteHosts, isLoading, refetch } = useRemoteHosts(controller)
   const [chainInput, setChainInput] = useState(remoteHosts?.[0]?.[0])
 
-  const { address, isWalletConnected } = useChain(controller)
+  const { address } = useChain(controller)
 
-  const { data: accounts, status } = useAccounts({
+  const { data: accounts } = useAccounts({
     args: address
       ? {
           chainName: [controller, 'osmosis'],

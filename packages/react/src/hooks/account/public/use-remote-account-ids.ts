@@ -55,7 +55,6 @@ export function useRemoteAccountIds({
     [accountPublicClient, accountId, args],
   )
 
-  console.log('accountPublicClient', accountPublicClient)
   const enabled = React.useMemo(
     () => Boolean(accountPublicClient && args && (query.enabled ?? true)),
     [query.enabled, accountPublicClient],

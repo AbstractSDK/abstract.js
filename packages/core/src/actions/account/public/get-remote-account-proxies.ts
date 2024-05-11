@@ -3,6 +3,7 @@ import {
   IbcClientQueryClient,
   VersionControlTypes,
 } from '../../../codegen/abstract'
+import { accountIdToParameter } from '../../../utils/account-id/account-id-to-parameter'
 import { getIbcClientQueryClientFromManager } from './get-ibc-client-query-client-from-manager'
 
 export type GetRemoteProxiesParameters = {
@@ -32,7 +33,6 @@ export async function getRemoteAccountProxies({
 }: GetRemoteProxiesParameters): Promise<Record<ChainName, MaybeProxyAddress>> {
   let ibcClient: IbcClientQueryClient
   try {
-    console.log('remoteProxies trying')
     ibcClient = await getIbcClientQueryClientFromManager({
       accountId,
       cosmWasmClient,
@@ -45,10 +45,8 @@ export async function getRemoteAccountProxies({
   }
 
   const remoteProxies = await ibcClient.listRemoteProxiesByAccountId({
-    accountId,
+    accountId: accountIdToParameter(accountId),
   })
-
-  console.log('remoteProxies', remoteProxies)
 
   return Object.fromEntries(remoteProxies.proxies)
 }
