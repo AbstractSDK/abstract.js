@@ -1,5 +1,15 @@
 # @abstract-money/provider-graz
 
+## 2.0.12
+
+### Patch Changes
+
+- [`805888a`](https://github.com/AbstractSDK/abstract.js/commit/805888a3807a8e09dd2424978d7acc5cbdf5e494) Thanks [@dalechyn](https://github.com/dalechyn)! - Fixed IBC Action queries.
+
+- Updated dependencies [[`805888a`](https://github.com/AbstractSDK/abstract.js/commit/805888a3807a8e09dd2424978d7acc5cbdf5e494)]:
+  - @abstract-money/core@1.0.7
+  - @abstract-money/react@1.0.12
+
 ## 2.0.11
 
 ### Patch Changes
