@@ -3,6 +3,7 @@ import {
   IbcClientQueryClient,
   VersionControlTypes,
 } from '../../../codegen/abstract'
+import { abstractModuleId } from '../../../utils/modules/abstract-module-id'
 import { getIbcClientQueryClient } from '../../public/get-ibc-client-query-client'
 import { CommonModuleNames } from '../../public/types'
 import { getModuleAddress } from './get-module-address'
@@ -29,7 +30,7 @@ export async function getIbcClientQueryClientFromManager({
     accountId,
     cosmWasmClient,
     apiUrl,
-    id: CommonModuleNames.IBC_CLIENT,
+    id: abstractModuleId(CommonModuleNames.IBC_CLIENT),
   })
 
   if (!ibcClientAddress) {

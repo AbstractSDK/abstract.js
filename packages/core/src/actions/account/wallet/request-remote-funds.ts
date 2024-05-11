@@ -37,7 +37,6 @@ export async function requestFundsFromRemote({
       action: {
         helpers: 'send_all_back',
       },
-      callback_info: null,
     },
   }
 
@@ -46,7 +45,7 @@ export async function requestFundsFromRemote({
     signingCosmWasmClient,
     apiUrl,
     sender,
-    msgs: requestFundsMsg,
+    msg: requestFundsMsg,
     fee,
     memo,
   })

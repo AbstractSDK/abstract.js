@@ -1,4 +1,3 @@
-import { getSubAccountIdsByModuleIdFromApi } from 'src/actions'
 import { getAccountBalancesFromApi } from '../../actions/get-account-balance-from-api'
 import { getAccountFactoryAddressFromApi } from '../../actions/get-account-factory-address-from-api'
 import { getAccountsByOwnerFromApi } from '../../actions/get-accounts-by-owner-from-api'
@@ -6,6 +5,7 @@ import { getAnsHostAddressFromApi } from '../../actions/get-ans-host-address-fro
 import { getAnsTokenFromApi } from '../../actions/get-ans-token-from-api'
 import { getAnsTokensFromApi } from '../../actions/get-ans-tokens-from-api'
 import { getModulesFromApi } from '../../actions/get-modules-from-api'
+import { getSubAccountIdsByModuleIdFromApi } from '../../actions/get-sub-account-ids-by-module-id'
 import { getVersionControlAddressFromApi } from '../../actions/get-version-control-address-from-api'
 import { ExtractAndOmitParameters } from '../../types/parameters'
 

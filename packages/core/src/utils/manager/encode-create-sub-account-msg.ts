@@ -1,4 +1,4 @@
-import { ManagerMsgComposer } from 'src/codegen/abstract'
+import { ManagerMsgComposer } from '../../codegen/abstract'
 
 export function encodeCreateSubAccountMsg({
   sender,

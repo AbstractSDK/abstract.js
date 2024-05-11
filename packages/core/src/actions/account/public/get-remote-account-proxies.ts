@@ -3,6 +3,7 @@ import {
   IbcClientQueryClient,
   VersionControlTypes,
 } from '../../../codegen/abstract'
+import { accountIdToParameter } from '../../../utils/account-id/account-id-to-parameter'
 import { getIbcClientQueryClientFromManager } from './get-ibc-client-query-client-from-manager'
 
 export type GetRemoteProxiesParameters = {
@@ -38,12 +39,13 @@ export async function getRemoteAccountProxies({
       apiUrl,
     })
   } catch (e) {
+    console.log('remoteProxies error', e)
     // IBC client not installed
     return {}
   }
 
   const remoteProxies = await ibcClient.listRemoteProxiesByAccountId({
-    accountId,
+    accountId: accountIdToParameter(accountId),
   })
 
   return Object.fromEntries(remoteProxies.proxies)

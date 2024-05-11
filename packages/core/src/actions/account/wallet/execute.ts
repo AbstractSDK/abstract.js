@@ -5,6 +5,7 @@ import { executeOnModule } from './execute-on-module'
 import { BaseWalletParameters } from './types'
 
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
+import { abstractModuleId } from '../../../utils/modules/abstract-module-id'
 import { CommonModuleNames } from '../../public/types'
 export type ExecuteParameters = Omit<
   WithCosmWasmSignOptions<
@@ -39,7 +40,7 @@ export async function execute({
     signingCosmWasmClient,
     apiUrl,
     sender,
-    moduleId: CommonModuleNames.PROXY,
+    moduleId: abstractModuleId(CommonModuleNames.PROXY),
     moduleType: ModuleType.AccountBase,
     moduleMsg: ProxyExecuteMsgBuilder.moduleAction({
       msgs: Array.isArray(msgs) ? msgs : [msgs],

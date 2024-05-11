@@ -34,17 +34,19 @@ export async function createRemoteAccount({
   signingCosmWasmClient,
   apiUrl,
   sender,
-  hostChainName,
-  installModules,
   fee,
   memo,
-  ...registerMsgParams
+  hostChainName,
+  installModules,
+  base_asset,
+  namespace,
 }: CreateRemoteAccountParameters) {
   const registerMsg: IbcClientTypes.ExecuteMsg = {
     register: {
       host_chain: hostChainName,
       install_modules: installModules ?? [],
-      ...registerMsgParams,
+      base_asset,
+      namespace,
     },
   }
 
@@ -53,7 +55,7 @@ export async function createRemoteAccount({
     signingCosmWasmClient,
     apiUrl,
     sender,
-    msgs: registerMsg,
+    msg: registerMsg,
     fee,
     memo,
   })
