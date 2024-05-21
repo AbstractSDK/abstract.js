@@ -6,6 +6,7 @@ import { getAccountFactoryQueryClient } from '../../actions/public/get-account-f
 import { getAccountFactoryQueryClientFromApi } from '../../actions/public/get-account-factory-query-client-from-api'
 import { getAccountFactoryQueryClientFromVersionControl } from '../../actions/public/get-account-factory-query-client-from-version-control'
 import { getAccountFactoryVersion } from '../../actions/public/get-account-factory-version'
+import { getAccountsBaseAddressesFromApi } from '../../actions/public/get-accounts-base-addresses-from-api'
 import { getAnsHostAddressFromVersionControl } from '../../actions/public/get-ans-host-address-from-version-control'
 import { getAnsHostQueryClient } from '../../actions/public/get-ans-host-query-client'
 import { getAnsHostQueryClientFromApi } from '../../actions/public/get-ans-host-query-client-from-api'
@@ -26,6 +27,11 @@ type ExtractAndPartializeDecoratedParametersFromParameters<
 > = ExtractAndPartializeParameters<fn, 'cosmWasmClient' | 'apiUrl'>
 
 export type PublicActions = {
+  getAccountsBaseAddresses(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof getAccountsBaseAddressesFromApi
+    >,
+  ): ReturnType<typeof getAccountsBaseAddressesFromApi>
   getAbstractModuleVersion(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAbstractModuleVersion
@@ -129,6 +135,13 @@ export function publicActions(
   apiUrl: string,
 ): PublicActions {
   return {
+    getAccountsBaseAddresses: ({ extra, ...parameters }) =>
+      getAccountsBaseAddressesFromApi({
+        cosmWasmClient,
+        apiUrl,
+        ...parameters,
+        ...extra,
+      }),
     getAbstractModuleAddressFromVersionControl: ({ extra, ...parameters }) =>
       getAbstractModuleAddressFromVersionControl({
         cosmWasmClient,

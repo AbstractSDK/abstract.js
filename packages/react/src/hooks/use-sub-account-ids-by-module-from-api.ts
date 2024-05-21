@@ -44,7 +44,7 @@ export function useSubAccountIdsByModuleIdFromApi({
   args,
   extra,
   query = {},
-}: UseSubAccountIdsByModuleIdFromApiParameters) {
+}: UseSubAccountIdsByModuleIdFromApiParameters): QueryResult {
   const config = useConfig()
   const client = config.useApiClient()
   const queryKey = React.useMemo(

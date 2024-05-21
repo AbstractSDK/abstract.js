@@ -1,5 +1,4 @@
 import { ApiClient } from '@abstract-money/core/clients'
-import { AnsToken } from '@abstract-money/core/utils'
 import { QueryFunction } from '@tanstack/react-query'
 import React from 'react'
 import { useConfig } from '../contexts'
@@ -45,9 +44,7 @@ export function useAnsTokenFromApi({
     [args, client, extra],
   )
 
-  const enabled = Boolean(
-    client && args && args?.chainName && (query.enabled ?? true),
-  )
+  const enabled = Boolean(client && args && (query.enabled ?? true))
 
   const queryFn = React.useCallback<QueryFunction<QueryFnData, QueryKey>>(
     ({ queryKey: [_, client, args, extra] }) => {

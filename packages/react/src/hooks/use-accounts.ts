@@ -1,5 +1,4 @@
 import { ApiClient } from '@abstract-money/core/clients'
-import { AccountId } from '@abstract-money/core/utils'
 import { QueryFunction } from '@tanstack/react-query'
 import React from 'react'
 import { useConfig } from '../contexts'
@@ -9,7 +8,6 @@ import {
   UseQueryReturnType,
   useQuery,
 } from '../types/queries'
-import { MaybeArray } from '../types/utils'
 
 type QueryFnData = Awaited<ReturnType<ApiClient['getAccountsByOwnerFromApi']>>
 
@@ -43,7 +41,7 @@ export function useAccounts({
   args,
   extra,
   query = {},
-}: UseAccountsParameters) {
+}: UseAccountsParameters): QueryResult {
   const config = useConfig()
   const client = config.useApiClient()
   const queryKey = React.useMemo(

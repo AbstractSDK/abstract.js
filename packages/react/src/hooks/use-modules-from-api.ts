@@ -44,7 +44,7 @@ export function useModulesFromApi({
     [args, client, extra],
   )
 
-  const enabled = Boolean(client && args?.chainName && (query.enabled ?? true))
+  const enabled = Boolean(client && args && (query.enabled ?? true))
 
   const queryFn = React.useCallback<
     QueryFunction<QueryFnData, QueryKey>

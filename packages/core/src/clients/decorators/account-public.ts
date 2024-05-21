@@ -14,6 +14,7 @@ import { getRemoteAccountProxies } from '../../actions/account/public/get-remote
 import { getSubAccountIds } from '../../actions/account/public/get-sub-account-ids'
 import { getSubAccountSequences } from '../../actions/account/public/get-sub-account-sequences'
 import { getTotalValue } from '../../actions/account/public/get-total-value'
+import { getAccountsBaseAddressesFromApi } from '../../actions/public/get-accounts-base-addresses-from-api'
 import { VersionControlTypes } from '../../codegen/abstract/index'
 import { ExtractAndPartializeParameters } from '../../types/parameters'
 
