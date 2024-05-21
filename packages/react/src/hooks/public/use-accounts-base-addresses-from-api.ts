@@ -1,5 +1,4 @@
 import { PublicClient } from '@abstract-money/core/clients'
-import { AccountId } from '@abstract-money/core/utils'
 import { QueryFunction } from '@tanstack/react-query'
 import React from 'react'
 import { useConfig } from '../../contexts'
@@ -37,7 +36,6 @@ export type UseAccountsBaseAddressesFromApiParameters = WithArgs<
 > & {
   chainName?: string | undefined
   query?: QueryOptions
-  accountId: AccountId | undefined
 }
 
 export function useAccountsBaseAddressesFromApi({
