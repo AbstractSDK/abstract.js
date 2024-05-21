@@ -1,5 +1,6 @@
 import { AccountId, AccountPublicClient } from '@abstract-money/core'
 import {
+  QueryFunction,
   UseQueryOptions,
   UseQueryResult,
   useQuery,
@@ -14,14 +15,15 @@ type QueryFnData = Awaited<
 
 type QueryError = unknown
 type QueryData = QueryFnData
-type UseRemoteAccountIdsFromApiArgs = WithArgs<
-  Parameters<AccountPublicClient['getRemoteAccountIds']>[0]
->
 type QueryKey = readonly [
   'getRemoteAccountIds',
   AccountPublicClient | undefined,
-  AccountId | undefined,
-  UseRemoteAccountIdsFromApiArgs['args'],
+  (
+    | NonNullable<
+        Parameters<AccountPublicClient['getRemoteAccountIds']>[0]
+      >['extra']
+    | undefined
+  ),
 ]
 
 type QueryOptions = Omit<
@@ -39,35 +41,40 @@ export type UseRemoteAccountIdsParameters = WithArgs<
 }
 
 export function useRemoteAccountIds({
-  args,
   accountId,
+  extra,
   chainName,
   query = {},
 }: UseRemoteAccountIdsParameters): QueryResult {
   const config = useConfig()
   const accountPublicClient = config.useAccountPublicClient({
     accountId,
-    chainName: chainName,
+    chainName,
   })
   const queryKey = React.useMemo(
-    () =>
-      ['getRemoteAccountIds', accountPublicClient, accountId, args] as const,
-    [accountPublicClient, accountId, args],
+    () => ['getRemoteAccountIds', accountPublicClient, extra] as const,
+    [accountPublicClient, extra],
   )
 
   const enabled = React.useMemo(
-    () => Boolean(accountPublicClient && args && (query.enabled ?? true)),
+    () => Boolean(accountPublicClient && (query.enabled ?? true)),
     [query.enabled, accountPublicClient],
   )
 
-  const queryFn = React.useCallback(() => {
-    if (!accountPublicClient) throw new Error('No client')
-    if (!args) throw new Error('No args')
+  const queryFn = React.useCallback<QueryFunction<QueryFnData, QueryKey>>(
+    ({ queryKey: [_, accountPublicClient, extra] }) => {
+      if (!accountPublicClient) throw new Error('No client')
 
-    return accountPublicClient.getRemoteAccountIds({
-      args,
-    })
-  }, [accountPublicClient])
+      return accountPublicClient.getRemoteAccountIds(
+        extra
+          ? {
+              extra,
+            }
+          : undefined,
+      )
+    },
+    [],
+  )
 
   return useQuery({ queryKey, queryFn, ...query, enabled })
 }

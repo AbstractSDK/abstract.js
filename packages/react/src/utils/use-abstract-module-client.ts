@@ -65,6 +65,7 @@ export type UseAbstractModuleClientParameters<
       AbstractClient | undefined,
     ]
   >
+  sender?: string | undefined
 }
 
 export function useAbstractModuleClient<
@@ -75,6 +76,7 @@ export function useAbstractModuleClient<
   chainName,
   Module,
   query = {},
+  sender,
 }: UseAbstractModuleClientParameters<TModule>) {
   const {
     data: abstractClient,
@@ -83,6 +85,7 @@ export function useAbstractModuleClient<
     error: abstractClientError,
   } = useAbstractClient({
     chainName,
+    sender,
     query: { enabled: query.enabled ?? true },
   })
 

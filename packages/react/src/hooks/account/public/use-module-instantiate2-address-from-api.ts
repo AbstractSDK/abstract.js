@@ -1,5 +1,6 @@
 import { AccountPublicClient } from '@abstract-money/core/clients'
 import { AccountId } from '@abstract-money/core/utils'
+import { QueryFunction } from '@tanstack/react-query'
 import React from 'react'
 import { useConfig } from '../../../contexts'
 import { WithArgs } from '../../../types/args'
@@ -18,8 +19,13 @@ type QueryData = QueryFnData
 type QueryKey = readonly [
   'moduleInstantiate2AddressFromApi',
   AccountPublicClient | undefined,
-  AccountId | undefined,
   UseModuleInstantiate2AddressFromApiParameters['args'],
+  (
+    | Parameters<
+        AccountPublicClient['getModuleInstantiate2AddressFromApi']
+      >[0]['extra']
+    | undefined
+  ),
 ]
 
 type QueryOptions = UseQueryParameters<
@@ -41,6 +47,7 @@ export function useModuleInstantiate2AddressFromApi({
   args,
   accountId,
   chainName,
+  extra,
   query = {},
 }: UseModuleInstantiate2AddressFromApiParameters): QueryResult {
   const config = useConfig()
@@ -53,22 +60,28 @@ export function useModuleInstantiate2AddressFromApi({
       [
         'moduleInstantiate2AddressFromApi',
         accountPublicClient,
-        accountId,
         args,
+        extra,
       ] as const,
-    [accountPublicClient, accountId, args],
+    [accountPublicClient, args, extra],
   )
 
   const enabled = Boolean(
     accountPublicClient && args && (query.enabled ?? true),
   )
 
-  const queryFn = React.useCallback(() => {
-    if (!accountPublicClient) throw new Error('No client')
-    if (!args) throw new Error('No args')
+  const queryFn = React.useCallback<QueryFunction<QueryFnData, QueryKey>>(
+    ({ queryKey: [_, accountPublicClient, args, extra] }) => {
+      if (!accountPublicClient) throw new Error('No client')
+      if (!args) throw new Error('No args')
 
-    return accountPublicClient.getModuleInstantiate2AddressFromApi(args)
-  }, [accountPublicClient])
+      return accountPublicClient.getModuleInstantiate2AddressFromApi({
+        ...args,
+        ...extra,
+      })
+    },
+    [],
+  )
 
   return useQuery({ queryKey, queryFn, ...query, enabled })
 }

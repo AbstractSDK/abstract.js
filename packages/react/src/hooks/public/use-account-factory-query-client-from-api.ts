@@ -1,4 +1,5 @@
 import { PublicClient } from '@abstract-money/core/clients'
+import { QueryFunction } from '@tanstack/react-query'
 import React from 'react'
 import { useConfig } from '../../contexts'
 import { WithArgs } from '../../types/args'
@@ -17,6 +18,9 @@ type QueryData = QueryFnData
 type QueryKey = readonly [
   'accountFactoryQueryClientFromApi',
   PublicClient | undefined,
+  NonNullable<
+    Parameters<PublicClient['getAccountFactoryQueryClientFromApi']>[0]
+  >['extra'],
 ]
 type QueryResult = UseQueryReturnType<QueryData, QueryError>
 
@@ -33,6 +37,7 @@ export type UseAccountFactoryQueryClientFromApi = WithArgs<
 
 export function useAccountFactoryQueryClientFromApi({
   chainName,
+  extra,
   query = {},
 }: UseAccountFactoryQueryClientFromApi): QueryResult {
   const config = useConfig()
@@ -40,17 +45,22 @@ export function useAccountFactoryQueryClientFromApi({
     chainName,
   })
   const queryKey = React.useMemo(
-    () => ['accountFactoryQueryClientFromApi', publicClient] as const,
-    [publicClient],
+    () => ['accountFactoryQueryClientFromApi', publicClient, extra] as const,
+    [publicClient, extra],
   )
 
   const enabled = Boolean(publicClient && (query.enabled ?? true))
 
-  const queryFn = React.useCallback(() => {
-    if (!publicClient) throw new Error('No client')
+  const queryFn = React.useCallback<QueryFunction<QueryFnData, QueryKey>>(
+    ({ queryKey: [_, publicClient, extra] }) => {
+      if (!publicClient) throw new Error('No client')
 
-    return publicClient.getAccountFactoryQueryClientFromApi({})
-  }, [publicClient])
+      return publicClient.getAccountFactoryQueryClientFromApi(
+        extra ? { extra } : undefined,
+      )
+    },
+    [],
+  )
 
   return useQuery({ queryKey, queryFn, ...query, enabled })
 }

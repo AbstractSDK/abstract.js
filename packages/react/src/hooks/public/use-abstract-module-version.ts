@@ -1,4 +1,5 @@
 import { PublicClient } from '@abstract-money/core/clients'
+import { QueryFunction } from '@tanstack/react-query'
 import React from 'react'
 import { useConfig } from '../../contexts'
 import { WithArgs } from '../../types/args'
@@ -11,8 +12,8 @@ type QueryData = QueryFnData
 type QueryKey = readonly [
   'abstractModuleVersion',
   PublicClient | undefined,
-  string | undefined,
   UseAbstractModuleVersionParameters['args'],
+  Parameters<PublicClient['getAbstractModuleVersion']>[0]['extra'],
 ]
 
 type QueryOptions = UseQueryParameters<
@@ -27,6 +28,7 @@ export type UseAbstractModuleVersionParameters = WithArgs<
 > & { chainName?: string | undefined; query?: QueryOptions }
 export function useAbstractModuleVersion({
   args,
+  extra,
   chainName,
   query = {},
 }: UseAbstractModuleVersionParameters) {
@@ -35,18 +37,21 @@ export function useAbstractModuleVersion({
     chainName,
   })
   const queryKey = React.useMemo(
-    () => ['abstractModuleVersion', publicClient, chainName, args] as const,
-    [publicClient, args],
+    () => ['abstractModuleVersion', publicClient, args, extra] as const,
+    [publicClient, args, extra],
   )
 
   const enabled = Boolean(publicClient && args && (query.enabled ?? true))
 
-  const queryFn = React.useCallback(() => {
-    if (!publicClient) throw new Error('No client')
-    if (!args) throw new Error('No args')
+  const queryFn = React.useCallback<QueryFunction<QueryFnData, QueryKey>>(
+    ({ queryKey: [_, publicClient, args, extra] }) => {
+      if (!publicClient) throw new Error('No client')
+      if (!args) throw new Error('No args')
 
-    return publicClient.getAbstractModuleVersion(args)
-  }, [publicClient])
+      return publicClient.getAbstractModuleVersion({ ...args, extra })
+    },
+    [],
+  )
 
   return useQuery({ queryKey, queryFn, ...query, enabled })
 }

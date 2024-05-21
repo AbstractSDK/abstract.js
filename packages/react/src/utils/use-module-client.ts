@@ -17,9 +17,10 @@ export function useModuleClient<
 >(parameters: {
   contractAddress: string | undefined
   chainName: string | undefined
+  sender?: string | undefined
   Module: TModule
 }) {
-  const { contractAddress, Module, chainName } = parameters
+  const { contractAddress, Module, chainName, sender: sender_ } = parameters
 
   const {
     data: client,
@@ -35,8 +36,13 @@ export function useModuleClient<
   } = useSenderAddress({ chainName })
 
   const data = React.useMemo(() => {
-    if (!client || !contractAddress || !sender) return undefined
-    return new Module(client, sender, contractAddress) as InstanceType<TModule>
+    if (!client || !contractAddress) return undefined
+    if ((!sender_ && !sender) || !sender) return undefined
+    return new Module(
+      client,
+      sender_ ?? sender,
+      contractAddress,
+    ) as InstanceType<TModule>
   }, [client, contractAddress])
 
   if (isSigningCosmWasmClientError)

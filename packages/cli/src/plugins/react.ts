@@ -345,12 +345,12 @@ export function react(options: ReactOptions = {}): ReactResult {
                   (
                     { ${
                       hasAbstractApp
-                        ? 'accountId, chainName'
-                        : 'contractAddress'
+                        ? 'accountId, chainName, sender'
+                        : 'contractAddress, sender'
                     } }: { ${
                   hasAbstractApp
-                    ? 'accountId: AccountId | undefined; chainName: string | undefined'
-                    : 'contractAddress: string | undefined'
+                    ? 'accountId: AccountId | undefined; chainName: string | undefined; sender?: string | undefined;'
+                    : 'contractAddress: string | undefined; sender?: string | undefined;'
                 } },
                     options?: Omit<
                       UseMutationOptions<
@@ -375,6 +375,7 @@ export function react(options: ReactOptions = {}): ReactResult {
                         moduleId: ${constantCase(contract.name)}_MODULE_ID,
                         accountId,
                         chainName,
+                        sender,
                         `
                             : 'contractAddress,'
                         }

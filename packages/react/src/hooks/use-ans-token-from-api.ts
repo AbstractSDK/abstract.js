@@ -1,49 +1,62 @@
 import { ApiClient } from '@abstract-money/core/clients'
 import { AnsToken } from '@abstract-money/core/utils'
+import { QueryFunction } from '@tanstack/react-query'
 import React from 'react'
 import { useConfig } from '../contexts'
 import { WithArgs } from '../types/args'
-import { UseQueryParameters, useQuery } from '../types/queries'
+import {
+  UseQueryParameters,
+  UseQueryReturnType,
+  useQuery,
+} from '../types/queries'
 
-export type UseAnsTokenFromAPIParameters = WithArgs<
+type QueryFnData = Awaited<ReturnType<ApiClient['getAnsTokenFromApi']>>
+
+type QueryError = unknown
+type QueryData = QueryFnData
+type QueryKey = readonly [
+  'ansTokenFromApi',
+  ApiClient | undefined,
+  WithArgs<Parameters<ApiClient['getAnsTokenFromApi']>[0]>['args'],
+  NonNullable<Parameters<ApiClient['getAnsTokenFromApi']>[0]>['extra'],
+]
+
+type QueryOptions = Omit<
+  UseQueryParameters<QueryFnData, QueryError, QueryData, QueryKey>,
+  'queryFn'
+>
+type QueryResult = UseQueryReturnType<QueryData, QueryError>
+
+export type UseAnsTokenFromApiParameters = WithArgs<
   Parameters<ApiClient['getAnsTokenFromApi']>[0]
 > & {
-  query?: UseQueryParameters<
-    AnsToken,
-    unknown,
-    AnsToken,
-    readonly [
-      'ansTokenFromApi',
-      WithArgs<Parameters<ApiClient['getAnsTokenFromApi']>[0]>,
-      ApiClient | undefined,
-    ]
-  >
+  query?: QueryOptions
 }
 
-export function useAnsTokenFromAPI({
+export function useAnsTokenFromApi({
   args,
+  extra,
   query = {},
-}: UseAnsTokenFromAPIParameters) {
+}: UseAnsTokenFromApiParameters): QueryResult {
   const config = useConfig()
   const client = config.useApiClient()
   const queryKey = React.useMemo(
-    () => ['ansTokenFromApi', { args }, client] as const,
-    [args, client],
+    () => ['ansTokenFromApi', client, args, extra] as const,
+    [args, client, extra],
   )
 
   const enabled = Boolean(
-    client && args?.id && args?.chainName && (query.enabled ?? true),
+    client && args && args?.chainName && (query.enabled ?? true),
   )
 
-  const queryFn = React.useCallback(() => {
-    if (!client || !args?.chainName || !args?.id)
-      throw new Error('No client or owner or chain')
+  const queryFn = React.useCallback<QueryFunction<QueryFnData, QueryKey>>(
+    ({ queryKey: [_, client, args, extra] }) => {
+      if (!client || !args) throw new Error('No client or owner or chain')
 
-    return client.getAnsTokenFromApi({
-      chainName: args.chainName,
-      id: args.id,
-    })
-  }, [client, args])
+      return client.getAnsTokenFromApi({ ...args, ...extra })
+    },
+    [],
+  )
 
   return useQuery({ queryKey, queryFn, ...query, enabled })
 }

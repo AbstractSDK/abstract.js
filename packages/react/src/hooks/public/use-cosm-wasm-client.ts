@@ -1,4 +1,5 @@
 import { PublicClient } from '@abstract-money/core'
+import { QueryFunction } from '@tanstack/react-query'
 import React from 'react'
 import { useConfig } from '../../contexts'
 import {
@@ -38,11 +39,14 @@ export function useCosmWasmClient({
     [publicClient],
   )
 
-  const queryFn = React.useCallback(() => {
-    if (!publicClient) throw new Error('client is not defined')
+  const queryFn = React.useCallback<QueryFunction<QueryFnData, QueryKey>>(
+    ({ queryKey: [_, publicClient] }) => {
+      if (!publicClient) throw new Error('client is not defined')
 
-    return publicClient.getCosmWasmClient()
-  }, [publicClient])
+      return publicClient.getCosmWasmClient()
+    },
+    [],
+  )
 
   const enabled = Boolean(publicClient && (query.enabled ?? true))
 

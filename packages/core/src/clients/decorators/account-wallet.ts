@@ -16,89 +16,93 @@ import { updateSettings } from '../../actions/account/wallet/update-settings'
 import { upgradeModule } from '../../actions/account/wallet/upgrade-module'
 import { withdraw } from '../../actions/account/wallet/withdraw'
 import { VersionControlTypes } from '../../codegen/abstract/index'
-import { ExtractAndOmitParameters } from '../../types/parameters'
+import { ExtractAndPartializeParameters } from '../../types/parameters'
 
-type ExtractAndOmitDecoratedParametersFromParameters<
+type ExtractAndPartializeDecoratedParametersFromParameters<
   fn extends (payload: any) => any,
-> = ExtractAndOmitParameters<
+> = ExtractAndPartializeParameters<
   fn,
   'accountId' | 'signingCosmWasmClient' | 'apiUrl' | 'sender'
 >
 
 export type AccountWalletActions = {
   claimNamespace(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof claimNamespace
     >,
   ): ReturnType<typeof claimNamespace>
   createSubAccount(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof createSubAccount
     >,
   ): ReturnType<typeof createSubAccount>
   createRemoteAccount(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof createRemoteAccount
     >,
   ): ReturnType<typeof createRemoteAccount>
   deposit(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<typeof deposit>,
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof deposit
+    >,
   ): ReturnType<typeof deposit>
   execute(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<typeof execute>,
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof execute
+    >,
   ): ReturnType<typeof execute>
   executeOnModule(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof executeOnModule
     >,
   ): ReturnType<typeof executeOnModule>
   executeOnRemote(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof executeOnRemote
     >,
   ): ReturnType<typeof executeOnRemote>
   executeOnRemoteModule(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof executeOnRemoteModule
     >,
   ): ReturnType<typeof executeOnRemoteModule>
   sendFundsToRemote(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof sendFundsToRemote
     >,
   ): ReturnType<typeof sendFundsToRemote>
   requestFundsFromRemote(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof requestFundsFromRemote
     >,
   ): ReturnType<typeof requestFundsFromRemote>
   getManagerClientFromApi(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getManagerClientFromApi
     >,
   ): ReturnType<typeof getManagerClientFromApi>
   getProxyClientFromApi(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getProxyClientFromApi
     >,
   ): ReturnType<typeof getProxyClientFromApi>
   revokeNamespace(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof revokeNamespace
     >,
   ): ReturnType<typeof revokeNamespace>
   upgradeModule(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof upgradeModule
     >,
   ): ReturnType<typeof upgradeModule>
   withdraw(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof withdraw
     >,
   ): ReturnType<typeof withdraw>
   updateSettings(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof updateSettings
     >,
   ): ReturnType<typeof updateSettings>
@@ -111,133 +115,149 @@ export function accountWalletActions(
   apiUrl: string,
 ): AccountWalletActions {
   return {
-    claimNamespace: (parameters) =>
+    claimNamespace: ({ extra, ...parameters }) =>
       claimNamespace({
-        ...parameters,
         accountId,
         signingCosmWasmClient,
         apiUrl,
         sender,
+        ...parameters,
+        ...extra,
       }),
-    createSubAccount: (parameters) =>
+    createSubAccount: ({ extra, ...parameters }) =>
       createSubAccount({
-        ...parameters,
         accountId,
         signingCosmWasmClient,
         apiUrl,
         sender,
+        ...parameters,
+        ...extra,
       }),
-    createRemoteAccount: (parameters) =>
+    createRemoteAccount: ({ extra, ...parameters }) =>
       createRemoteAccount({
-        ...parameters,
         accountId,
         signingCosmWasmClient,
         apiUrl,
         sender,
+        ...parameters,
+        ...extra,
       }),
-    deposit: (parameters) =>
+    deposit: ({ extra, ...parameters }) =>
       deposit({
-        ...parameters,
         accountId,
         signingCosmWasmClient,
         apiUrl,
         sender,
+        ...parameters,
+        ...extra,
       }),
-    execute: (parameters) =>
+    execute: ({ extra, ...parameters }) =>
       execute({
-        ...parameters,
         accountId,
         signingCosmWasmClient,
         apiUrl,
         sender,
+        ...parameters,
+        ...extra,
       }),
-    executeOnModule: (parameters) =>
+    executeOnModule: ({ extra, ...parameters }) =>
       executeOnModule({
-        ...parameters,
         accountId,
         signingCosmWasmClient,
         apiUrl,
         sender,
+        ...parameters,
+        ...extra,
       }),
-    upgradeModule: (parameters) =>
+    upgradeModule: ({ extra, ...parameters }) =>
       upgradeModule({
-        ...parameters,
         accountId,
         signingCosmWasmClient,
         apiUrl,
         sender,
+        ...parameters,
+        ...extra,
       }),
-    executeOnRemote: (parameters) =>
+    executeOnRemote: ({ extra, ...parameters }) =>
       executeOnRemote({
-        ...parameters,
         accountId,
         signingCosmWasmClient,
         apiUrl,
         sender,
+        ...parameters,
+        ...extra,
       }),
-    executeOnRemoteModule: (parameters) =>
+    executeOnRemoteModule: ({ extra, ...parameters }) =>
       executeOnRemoteModule({
-        ...parameters,
         accountId,
         signingCosmWasmClient,
         apiUrl,
         sender,
+        ...parameters,
+        ...extra,
       }),
-    sendFundsToRemote: (parameters) =>
+    sendFundsToRemote: ({ extra, ...parameters }) =>
       sendFundsToRemote({
-        ...parameters,
         accountId,
         signingCosmWasmClient,
         apiUrl,
         sender,
+        ...parameters,
+        ...extra,
       }),
-    requestFundsFromRemote: (parameters) =>
+    requestFundsFromRemote: ({ extra, ...parameters }) =>
       requestFundsFromRemote({
-        ...parameters,
         accountId,
         signingCosmWasmClient,
         apiUrl,
         sender,
+        ...parameters,
+        ...extra,
       }),
-    withdraw: (parameters) =>
+    withdraw: ({ extra, ...parameters }) =>
       withdraw({
-        ...parameters,
         accountId,
         signingCosmWasmClient,
         apiUrl,
         sender,
+        ...parameters,
+        ...extra,
       }),
-    updateSettings: (parameters) =>
+    updateSettings: ({ extra, ...parameters }) =>
       updateSettings({
-        ...parameters,
         accountId,
         signingCosmWasmClient,
         apiUrl,
         sender,
+        ...parameters,
+        ...extra,
       }),
-    getManagerClientFromApi: (parameters) =>
+    getManagerClientFromApi: ({ extra, ...parameters }) =>
       getManagerClientFromApi({
-        ...parameters,
         accountId,
         signingCosmWasmClient,
         apiUrl,
         sender,
+        ...parameters,
+        ...extra,
       }),
-    getProxyClientFromApi: (parameters) =>
+    getProxyClientFromApi: ({ extra, ...parameters }) =>
       getProxyClientFromApi({
-        ...parameters,
         accountId,
         signingCosmWasmClient,
         apiUrl,
         sender,
+        ...parameters,
+        ...extra,
       }),
-    revokeNamespace: (parameters) =>
+    revokeNamespace: ({ extra, ...parameters }) =>
       revokeNamespace({
-        ...parameters,
         accountId,
         signingCosmWasmClient,
         apiUrl,
         sender,
+        ...parameters,
+        ...extra,
       }),
   }
 }

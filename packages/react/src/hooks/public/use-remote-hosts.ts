@@ -1,48 +1,61 @@
 import { PublicClient } from '@abstract-money/core'
-import { UseQueryOptions, useQuery } from '@tanstack/react-query'
+import { QueryFunction } from '@tanstack/react-query'
 import React from 'react'
 import { useConfig } from '../../contexts'
+import { WithArgs } from '../../types/args'
+import {
+  UseQueryParameters,
+  UseQueryReturnType,
+  useQuery,
+} from '../../types/queries'
 
 type QueryFnData = Awaited<ReturnType<PublicClient['getRemoteHosts']>>
 
 type QueryError = unknown
 type QueryData = QueryFnData
 type QueryKey = readonly [
-  'remoteHosts',
+  'getRemoteHosts',
   PublicClient | undefined,
-  string | undefined,
+  (
+    | NonNullable<Parameters<PublicClient['getRemoteHosts']>[0]>['extra']
+    | undefined
+  ),
 ]
 
 type QueryOptions = Omit<
-  UseQueryOptions<QueryFnData, QueryError, QueryData, QueryKey>,
+  UseQueryParameters<QueryFnData, QueryError, QueryData, QueryKey>,
   'queryFn'
 >
+type QueryResult = UseQueryReturnType<QueryData, QueryError>
 
-export function useRemoteHosts(
-  chainName: string | undefined,
-  options: QueryOptions = { enabled: true },
-) {
+export type UseRemoteHostsParameters = WithArgs<
+  Parameters<PublicClient['getRemoteHosts']>[0]
+> & { chainName?: string | undefined; query?: QueryOptions }
+
+export function useRemoteHosts({
+  chainName,
+  extra,
+  query = {},
+}: UseRemoteHostsParameters): QueryResult {
   const config = useConfig()
   const publicClient = config.usePublicClient({
     chainName,
   })
   const queryKey = React.useMemo(
-    () => ['remoteHosts', publicClient, chainName] as const,
-    [publicClient],
+    () => ['getRemoteHosts', publicClient, extra] as const,
+    [publicClient, extra],
   )
 
-  const enabled = React.useMemo(
-    () => Boolean(publicClient && options?.enabled),
-    [options?.enabled, publicClient],
+  const enabled = Boolean(publicClient && (query.enabled ?? true))
+
+  const queryFn = React.useCallback<QueryFunction<QueryFnData, QueryKey>>(
+    ({ queryKey: [_, publicClient, extra] }) => {
+      if (!publicClient) throw new Error('No client')
+
+      return publicClient.getRemoteHosts(extra ? { extra } : undefined)
+    },
+    [],
   )
 
-  const queryFn = React.useCallback(() => {
-    if (!publicClient) throw new Error('No client')
-
-    return publicClient.getRemoteHosts({
-      args: {},
-    })
-  }, [publicClient])
-
-  return useQuery({ queryKey, queryFn, ...options, enabled })
+  return useQuery({ queryKey, queryFn, ...query, enabled })
 }

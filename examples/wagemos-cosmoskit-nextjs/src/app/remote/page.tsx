@@ -25,7 +25,11 @@ const CONTROLLER_CHAINS = ['neutron', 'archway', 'juno']
 export default function RemotePage() {
   const [controller, setController] = useState(CONTROLLER_CHAINS[0])
 
-  const { data: remoteHosts, isLoading, refetch } = useRemoteHosts(controller)
+  const {
+    data: remoteHosts,
+    isLoading,
+    refetch,
+  } = useRemoteHosts({ chainName: controller })
   const [chainInput, setChainInput] = useState(remoteHosts?.[0]?.[0])
 
   const { address } = useChain(controller)
@@ -33,7 +37,7 @@ export default function RemotePage() {
   const { data: accounts } = useAccounts({
     args: address
       ? {
-          chainName: [controller, 'osmosis'],
+          chains: [controller, 'osmosis'],
           owner: address,
         }
       : undefined,
@@ -56,7 +60,6 @@ export default function RemotePage() {
   })
 
   const { data: remoteAccountIds } = useRemoteAccountIds({
-    args: {},
     accountId: firstAccount,
     chainName: firstAccount?.chainName,
   })

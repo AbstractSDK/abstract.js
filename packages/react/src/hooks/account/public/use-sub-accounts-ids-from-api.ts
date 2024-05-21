@@ -1,5 +1,6 @@
 import { AccountPublicClient } from '@abstract-money/core/clients'
 import { AccountId } from '@abstract-money/core/utils'
+import { QueryFunction } from '@tanstack/react-query'
 import React from 'react'
 import { useConfig } from '../../../contexts'
 import { WithArgs } from '../../../types/args'
@@ -23,8 +24,7 @@ export type UseSubAccountIdsFromApiParameters = WithArgs<
 type QueryKey = readonly [
   'getSubAccountIdsFromApi',
   AccountPublicClient | undefined,
-  AccountId | undefined,
-  UseSubAccountIdsFromApiParameters['args'],
+  NonNullable<Parameters<AccountPublicClient['getSubAccountIds']>[0]>['extra'],
 ]
 
 type QueryOptions = Omit<
@@ -34,9 +34,9 @@ type QueryOptions = Omit<
 type QueryResult = UseQueryReturnType<QueryData, QueryError>
 
 export function useSubAccountIdsFromApi({
-  args,
   accountId,
   chainName,
+  extra,
   query = {},
 }: UseSubAccountIdsFromApiParameters): QueryResult {
   const config = useConfig()
@@ -45,26 +45,20 @@ export function useSubAccountIdsFromApi({
     chainName,
   })
   const queryKey = React.useMemo(
-    () =>
-      [
-        'getSubAccountIdsFromApi',
-        accountPublicClient,
-        accountId,
-        args,
-      ] as const,
-    [accountPublicClient, accountId, args],
+    () => ['getSubAccountIdsFromApi', accountPublicClient, extra] as const,
+    [accountPublicClient, extra],
   )
 
-  const enabled = Boolean(
-    accountPublicClient && args && (query.enabled ?? true),
+  const enabled = Boolean(accountPublicClient && (query.enabled ?? true))
+
+  const queryFn = React.useCallback<QueryFunction<QueryFnData, QueryKey>>(
+    ({ queryKey: [_, accountPublicClient, extra] }) => {
+      if (!accountPublicClient) throw new Error('No client')
+
+      return accountPublicClient.getSubAccountIds(extra ? { extra } : undefined)
+    },
+    [],
   )
-
-  const queryFn = React.useCallback(() => {
-    if (!accountPublicClient) throw new Error('No client')
-    if (!args) throw new Error('No args')
-
-    return accountPublicClient.getSubAccountIds(args)
-  }, [accountPublicClient])
 
   return useQuery({ queryKey, queryFn, ...query, enabled })
 }

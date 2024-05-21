@@ -11,7 +11,11 @@ export type WithCosmWasmSignOptions<
   }
 >
 
-export type ExtractAndOmitParameters<
+export type ExtractAndPartializeParameters<
   fn extends (parameters: any) => any,
   keys extends keyof Parameters<fn>[0],
-> = Evaluate<Omit<Parameters<fn>[0], keys>>
+> = Evaluate<
+  Omit<Parameters<fn>[0], keys> & {
+    readonly extra?: Partial<Pick<Parameters<fn>[0], keys>>
+  }
+>

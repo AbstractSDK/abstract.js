@@ -19,105 +19,105 @@ import { getRemoteHostsFromApi } from '../../actions/public/get-remote-hosts-fro
 import { getVersionControlModuleData } from '../../actions/public/get-version-control-module-data'
 import { getVersionControlQueryClient } from '../../actions/public/get-version-control-query-client'
 import { getVersionControlQueryClientFromApi } from '../../actions/public/get-version-control-query-client-from-api'
-import { ExtractAndOmitParameters } from '../../types/parameters'
+import { ExtractAndPartializeParameters } from '../../types/parameters'
 
-type ExtractAndOmitDecoratedParametersFromParameters<
+type ExtractAndPartializeDecoratedParametersFromParameters<
   fn extends (payload: any) => any,
-> = ExtractAndOmitParameters<fn, 'cosmWasmClient' | 'apiUrl'>
+> = ExtractAndPartializeParameters<fn, 'cosmWasmClient' | 'apiUrl'>
 
 export type PublicActions = {
   getAbstractModuleVersion(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAbstractModuleVersion
     >,
   ): ReturnType<typeof getAbstractModuleVersion>
   getAbstractModuleAddressFromVersionControl(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAbstractModuleAddressFromVersionControl
     >,
   ): ReturnType<typeof getAbstractModuleAddressFromVersionControl>
   getAccountFactoryAddressFromVersionControl(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAccountFactoryAddressFromVersionControl
     >,
   ): ReturnType<typeof getAccountFactoryAddressFromVersionControl>
   getAccountFactoryVersion(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAccountFactoryVersion
     >,
   ): ReturnType<typeof getAccountFactoryVersion>
   getAccountFactoryQueryClientFromVersionControl(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAccountFactoryQueryClientFromVersionControl
     >,
   ): ReturnType<typeof getAccountFactoryQueryClientFromVersionControl>
   getAccountFactoryQueryClientFromApi(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAccountFactoryQueryClientFromApi
     >,
   ): ReturnType<typeof getAccountFactoryQueryClientFromApi>
   getAccountFactoryQueryClient(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAccountFactoryQueryClient
     >,
   ): ReturnType<typeof getAccountFactoryQueryClient>
   getAnsHostVersion(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAnsHostVersion
     >,
   ): ReturnType<typeof getAnsHostVersion>
   getAnsHostAddressFromVersionControl(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAnsHostAddressFromVersionControl
     >,
   ): ReturnType<typeof getAnsHostAddressFromVersionControl>
   getAnsHostQueryClientFromVersionControl(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAnsHostQueryClientFromVersionControl
     >,
   ): ReturnType<typeof getAnsHostQueryClientFromVersionControl>
   getAnsHostQueryClientFromApi(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAnsHostQueryClientFromApi
     >,
   ): ReturnType<typeof getAnsHostQueryClientFromApi>
   getAnsHostQueryClient(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAnsHostQueryClient
     >,
   ): ReturnType<typeof getAnsHostQueryClient>
   getIbcClientQueryClient(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getIbcClientQueryClient
     >,
   ): ReturnType<typeof getIbcClientQueryClient>
   getManagerQueryClient(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getManagerQueryClient
     >,
   ): ReturnType<typeof getManagerQueryClient>
   getProxyQueryClient(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getProxyQueryClient
     >,
   ): ReturnType<typeof getProxyQueryClient>
   getVersionControlModuleData(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getVersionControlModuleData
     >,
   ): ReturnType<typeof getVersionControlModuleData>
   getVersionControlQueryClientFromApi(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getVersionControlQueryClientFromApi
     >,
   ): ReturnType<typeof getVersionControlQueryClientFromApi>
   getVersionControlQueryClient(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getVersionControlQueryClient
     >,
   ): ReturnType<typeof getVersionControlQueryClient>
   getRemoteHosts(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getRemoteHostsFromApi
     >,
   ): ReturnType<typeof getRemoteHostsFromApi>
@@ -129,110 +129,132 @@ export function publicActions(
   apiUrl: string,
 ): PublicActions {
   return {
-    getAbstractModuleAddressFromVersionControl: (parameters) =>
+    getAbstractModuleAddressFromVersionControl: ({ extra, ...parameters }) =>
       getAbstractModuleAddressFromVersionControl({
-        ...parameters,
         cosmWasmClient,
+        ...parameters,
+        ...extra,
       }),
-    getAbstractModuleVersion: (parameters) =>
+    getAbstractModuleVersion: ({ extra, ...parameters }) =>
       getAbstractModuleVersion({
-        ...parameters,
         cosmWasmClient,
         apiUrl,
+        ...parameters,
+        ...extra,
       }),
-    getAccountFactoryVersion: (parameters) =>
+    getAccountFactoryVersion: ({ extra, ...parameters } = {}) =>
       getAccountFactoryVersion({
-        ...parameters,
         cosmWasmClient,
         apiUrl,
+        ...parameters,
+        ...extra,
       }),
-    getAccountFactoryAddressFromVersionControl: (parameters) =>
+    getAccountFactoryAddressFromVersionControl: ({ extra, ...parameters }) =>
       getAccountFactoryAddressFromVersionControl({
-        ...parameters,
         cosmWasmClient,
+        ...parameters,
+        ...extra,
       }),
-    getAccountFactoryQueryClientFromVersionControl: (parameters) =>
+    getAccountFactoryQueryClientFromVersionControl: ({
+      extra,
+      ...parameters
+    }) =>
       getAccountFactoryQueryClientFromVersionControl({
-        ...parameters,
         cosmWasmClient,
+        ...parameters,
+        ...extra,
       }),
-    getAccountFactoryQueryClientFromApi: (parameters) =>
+    getAccountFactoryQueryClientFromApi: ({ extra, ...parameters } = {}) =>
       getAccountFactoryQueryClientFromApi({
-        ...parameters,
         cosmWasmClient,
         apiUrl,
+        ...parameters,
+        ...extra,
       }),
-    getAccountFactoryQueryClient: (parameters) =>
+    getAccountFactoryQueryClient: ({ extra, ...parameters }) =>
       getAccountFactoryQueryClient({
-        ...parameters,
         cosmWasmClient,
+        ...parameters,
+        ...extra,
       }),
 
-    getAnsHostVersion: (parameters) =>
+    getAnsHostVersion: ({ extra, ...parameters } = {}) =>
       getAnsHostVersion({
-        ...parameters,
         apiUrl,
         cosmWasmClient,
+        ...parameters,
+        ...extra,
       }),
 
-    getAnsHostAddressFromVersionControl: (parameters) =>
+    getAnsHostAddressFromVersionControl: ({ extra, ...parameters }) =>
       getAnsHostAddressFromVersionControl({
-        ...parameters,
         cosmWasmClient,
+        ...parameters,
+        ...extra,
       }),
 
-    getAnsHostQueryClientFromVersionControl: (parameters) =>
+    getAnsHostQueryClientFromVersionControl: ({ extra, ...parameters }) =>
       getAnsHostQueryClientFromVersionControl({
-        ...parameters,
         cosmWasmClient,
+        ...parameters,
+        ...extra,
       }),
-    getAnsHostQueryClientFromApi: (parameters) =>
+    getAnsHostQueryClientFromApi: ({ extra, ...parameters } = {}) =>
       getAnsHostQueryClientFromApi({
-        ...parameters,
         cosmWasmClient,
         apiUrl,
+        ...parameters,
+        ...extra,
       }),
-    getAnsHostQueryClient: (parameters) =>
+    getAnsHostQueryClient: ({ extra, ...parameters }) =>
       getAnsHostQueryClient({
-        ...parameters,
         cosmWasmClient,
+        ...parameters,
+        ...extra,
       }),
-    getIbcClientQueryClient: (parameters) =>
+    getIbcClientQueryClient: ({ extra, ...parameters }) =>
       getIbcClientQueryClient({
-        ...parameters,
         cosmWasmClient,
+        ...parameters,
+        ...extra,
       }),
-    getVersionControlModuleData: (parameters) =>
+    getVersionControlModuleData: ({ extra, ...parameters }) =>
       getVersionControlModuleData({
-        ...parameters,
         cosmWasmClient,
+        ...parameters,
+        ...extra,
       }),
-    getVersionControlQueryClientFromApi: (parameters) =>
+    getVersionControlQueryClientFromApi: ({ extra, ...parameters } = {}) =>
       getVersionControlQueryClientFromApi({
-        ...parameters,
         cosmWasmClient,
         apiUrl,
+        ...parameters,
+        ...extra,
       }),
-    getVersionControlQueryClient: (parameters) =>
+    getVersionControlQueryClient: ({ extra, ...parameters }) =>
       getVersionControlQueryClient({
-        ...parameters,
         cosmWasmClient,
+        ...parameters,
+        ...extra,
       }),
-    getManagerQueryClient: (parameters) =>
+    getManagerQueryClient: ({ extra, ...parameters }) =>
       getManagerQueryClient({
-        ...parameters,
         cosmWasmClient,
+        ...parameters,
+        ...extra,
       }),
-    getProxyQueryClient: (parameters) =>
+    getProxyQueryClient: ({ extra, ...parameters }) =>
       getProxyQueryClient({
-        ...parameters,
         cosmWasmClient,
-      }),
-    getRemoteHosts: (parameters) =>
-      getRemoteHostsFromApi({
         ...parameters,
+        ...extra,
+      }),
+    getRemoteHosts: ({ extra, ...parameters } = {}) =>
+      getRemoteHostsFromApi({
         cosmWasmClient,
         apiUrl,
+        ...parameters,
+        ...extra,
       }),
     getCosmWasmClient: () =>
       getCosmWasmClient({

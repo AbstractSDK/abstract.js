@@ -45,12 +45,14 @@ export async function getAbstractClient({
 
 export type UseAbstractClientParameters = {
   chainName: string | undefined
+  sender?: string | undefined
   query?: UseQueryParameters<
     AbstractClient | undefined,
     unknown,
     AbstractClient | undefined,
     readonly [
       'abstract-client',
+      string | undefined,
       string | undefined,
       string | undefined,
       string,
@@ -60,7 +62,7 @@ export type UseAbstractClientParameters = {
 }
 
 export function useAbstractClient(parameters: UseAbstractClientParameters) {
-  const { chainName, query = {} } = parameters ?? {}
+  const { chainName, query = {}, sender: sender_ } = parameters ?? {}
   const { apiUrl } = useConfig()
 
   const {
@@ -77,22 +79,23 @@ export function useAbstractClient(parameters: UseAbstractClientParameters) {
   } = useSenderAddress({ chainName })
 
   const queryKey = React.useMemo(
-    () => ['abstract-client', sender, chainName, apiUrl, client] as const,
-    [sender, chainName, apiUrl, client],
+    () =>
+      ['abstract-client', sender_, sender, chainName, apiUrl, client] as const,
+    [sender_, sender, chainName, apiUrl, client],
   )
 
   const queryFn = React.useCallback(() => {
     if (!client) throw new Error('client is not defined')
-    if (!sender) throw new Error('sender is not defined')
+    if (!sender || !sender_) throw new Error('sender is not defined')
     if (!chainName) throw new Error('chain is not defined')
 
     return getAbstractClient({
-      sender,
+      sender: sender_ ?? sender,
       client,
       chainName: chainName,
       overrideApiUrl: apiUrl,
     })
-  }, [client, chainName, apiUrl])
+  }, [sender_, sender, client, chainName, apiUrl])
 
   const enabled = Boolean(client && chainName && (query.enabled ?? true))
 

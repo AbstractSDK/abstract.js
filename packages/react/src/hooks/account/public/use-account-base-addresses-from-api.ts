@@ -1,7 +1,9 @@
 import { AccountPublicClient } from '@abstract-money/core/clients'
 import { AccountId } from '@abstract-money/core/utils'
+import { QueryFunction } from '@tanstack/react-query'
 import React from 'react'
 import { useConfig } from '../../../contexts'
+import { WithArgs } from '../../../types/args'
 import {
   UseQueryParameters,
   UseQueryReturnType,
@@ -17,7 +19,12 @@ type QueryData = QueryFnData
 type QueryKey = readonly [
   'accountBaseAddresses',
   AccountPublicClient | undefined,
-  AccountId | undefined,
+  (
+    | NonNullable<
+        Parameters<AccountPublicClient['getAccountBaseAddresses']>[0]
+      >['extra']
+    | undefined
+  ),
 ]
 
 type QueryOptions = Omit<
@@ -26,15 +33,18 @@ type QueryOptions = Omit<
 >
 type QueryResult = UseQueryReturnType<QueryData, QueryError>
 
-export type UseAccountBaseAddressesFromApiParameters = {
-  accountId: AccountId | undefined
-  chainName: string | undefined
+export type UseAccountBaseAddressesFromApiParameters = WithArgs<
+  Parameters<AccountPublicClient['getAccountBaseAddresses']>[0]
+> & {
+  chainName?: string | undefined
   query?: QueryOptions
+  accountId: AccountId | undefined
 }
 
 export function useAccountBaseAddressesFromApi({
   accountId,
   chainName,
+  extra,
   query = {},
 }: UseAccountBaseAddressesFromApiParameters): QueryResult {
   const config = useConfig()
@@ -43,17 +53,22 @@ export function useAccountBaseAddressesFromApi({
     chainName,
   })
   const queryKey = React.useMemo(
-    () => ['accountBaseAddresses', accountPublicClient, accountId] as const,
-    [accountPublicClient, accountId],
+    () => ['accountBaseAddresses', accountPublicClient, extra] as const,
+    [accountPublicClient, extra],
   )
 
   const enabled = Boolean(accountPublicClient && (query.enabled ?? true))
 
-  const queryFn = React.useCallback(() => {
-    if (!accountPublicClient) throw new Error('No client')
+  const queryFn = React.useCallback<QueryFunction<QueryFnData, QueryKey>>(
+    ({ queryKey: [_, accountPublicClient, extra] }) => {
+      if (!accountPublicClient) throw new Error('No client')
 
-    return accountPublicClient.getAccountBaseAddresses({})
-  }, [accountPublicClient])
+      return accountPublicClient.getAccountBaseAddresses(
+        extra ? { extra } : undefined,
+      )
+    },
+    [],
+  )
 
   return useQuery({ queryKey, queryFn, ...query, enabled })
 }

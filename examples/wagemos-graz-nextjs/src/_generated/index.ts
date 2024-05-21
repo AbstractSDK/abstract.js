@@ -205,7 +205,12 @@ export const betting = {
       {
         accountId,
         chainName,
-      }: { accountId: AccountId | undefined; chainName: string | undefined },
+        sender,
+      }: {
+        accountId: AccountId | undefined
+        chainName: string | undefined
+        sender?: string | undefined
+      },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -225,6 +230,7 @@ export const betting = {
         moduleId: BETTING_MODULE_ID,
         accountId,
         chainName,
+        sender,
 
         Module: BettingAppClient,
       })
@@ -259,7 +265,12 @@ export const betting = {
       {
         accountId,
         chainName,
-      }: { accountId: AccountId | undefined; chainName: string | undefined },
+        sender,
+      }: {
+        accountId: AccountId | undefined
+        chainName: string | undefined
+        sender?: string | undefined
+      },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -279,6 +290,7 @@ export const betting = {
         moduleId: BETTING_MODULE_ID,
         accountId,
         chainName,
+        sender,
 
         Module: BettingAppClient,
       })
@@ -313,7 +325,12 @@ export const betting = {
       {
         accountId,
         chainName,
-      }: { accountId: AccountId | undefined; chainName: string | undefined },
+        sender,
+      }: {
+        accountId: AccountId | undefined
+        chainName: string | undefined
+        sender?: string | undefined
+      },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -333,6 +350,7 @@ export const betting = {
         moduleId: BETTING_MODULE_ID,
         accountId,
         chainName,
+        sender,
 
         Module: BettingAppClient,
       })
@@ -367,7 +385,12 @@ export const betting = {
       {
         accountId,
         chainName,
-      }: { accountId: AccountId | undefined; chainName: string | undefined },
+        sender,
+      }: {
+        accountId: AccountId | undefined
+        chainName: string | undefined
+        sender?: string | undefined
+      },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -387,6 +410,7 @@ export const betting = {
         moduleId: BETTING_MODULE_ID,
         accountId,
         chainName,
+        sender,
 
         Module: BettingAppClient,
       })
@@ -421,7 +445,12 @@ export const betting = {
       {
         accountId,
         chainName,
-      }: { accountId: AccountId | undefined; chainName: string | undefined },
+        sender,
+      }: {
+        accountId: AccountId | undefined
+        chainName: string | undefined
+        sender?: string | undefined
+      },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -441,6 +470,7 @@ export const betting = {
         moduleId: BETTING_MODULE_ID,
         accountId,
         chainName,
+        sender,
 
         Module: BettingAppClient,
       })
@@ -475,7 +505,12 @@ export const betting = {
       {
         accountId,
         chainName,
-      }: { accountId: AccountId | undefined; chainName: string | undefined },
+        sender,
+      }: {
+        accountId: AccountId | undefined
+        chainName: string | undefined
+        sender?: string | undefined
+      },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -495,6 +530,7 @@ export const betting = {
         moduleId: BETTING_MODULE_ID,
         accountId,
         chainName,
+        sender,
 
         Module: BettingAppClient,
       })
@@ -529,7 +565,12 @@ export const betting = {
       {
         accountId,
         chainName,
-      }: { accountId: AccountId | undefined; chainName: string | undefined },
+        sender,
+      }: {
+        accountId: AccountId | undefined
+        chainName: string | undefined
+        sender?: string | undefined
+      },
       options?: Omit<
         UseMutationOptions<
           ExecuteResult,
@@ -549,6 +590,7 @@ export const betting = {
         moduleId: BETTING_MODULE_ID,
         accountId,
         chainName,
+        sender,
 
         Module: BettingAppClient,
       })

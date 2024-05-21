@@ -12,6 +12,12 @@ export type ExactPartial<type> = {
   [key in keyof type]?: type[key] | undefined
 }
 
+export type IsEqual<type1, type2> = type1 extends type2
+  ? type2 extends type1
+    ? true
+    : false
+  : false
+
 /** Checks if {@link type} can be narrowed further than {@link type2} */
 export type IsNarrowable<type, type2> = IsUnknown<type> extends true
   ? false

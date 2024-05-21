@@ -7,55 +7,55 @@ import { getAnsTokensFromApi } from '../../actions/get-ans-tokens-from-api'
 import { getModulesFromApi } from '../../actions/get-modules-from-api'
 import { getSubAccountIdsByModuleIdFromApi } from '../../actions/get-sub-account-ids-by-module-id'
 import { getVersionControlAddressFromApi } from '../../actions/get-version-control-address-from-api'
-import { ExtractAndOmitParameters } from '../../types/parameters'
+import { ExtractAndPartializeParameters } from '../../types/parameters'
 
-type ExtractAndOmitDecoratedParametersFromParameters<
+type ExtractAndPartializeDecoratedParametersFromParameters<
   fn extends (payload: any) => any,
-> = ExtractAndOmitParameters<fn, 'apiUrl'>
+> = ExtractAndPartializeParameters<fn, 'apiUrl'>
 
 export type ApiActions = {
   getAccountFactoryAddressFromApi(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAccountFactoryAddressFromApi
     >,
   ): ReturnType<typeof getAccountFactoryAddressFromApi>
   getAnsHostAddressFromApi(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAnsHostAddressFromApi
     >,
   ): ReturnType<typeof getAnsHostAddressFromApi>
   getAccountsByOwnerFromApi(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAccountsByOwnerFromApi
     >,
   ): ReturnType<typeof getAccountsByOwnerFromApi>
   getAnsTokenFromApi(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAnsTokenFromApi
     >,
   ): ReturnType<typeof getAnsTokenFromApi>
   getAnsTokensFromApi(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAnsTokensFromApi
     >,
   ): ReturnType<typeof getAnsTokensFromApi>
   getModulesFromApi(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getModulesFromApi
     >,
   ): ReturnType<typeof getModulesFromApi>
   getVersionControlAddressFromApi(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getVersionControlAddressFromApi
     >,
   ): ReturnType<typeof getVersionControlAddressFromApi>
   getAccountBalancesFromApi(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAccountBalancesFromApi
     >,
   ): ReturnType<typeof getAccountBalancesFromApi>
   getSubAccountIdsByModuleIdFromApi(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getSubAccountIdsByModuleIdFromApi
     >,
   ): ReturnType<typeof getSubAccountIdsByModuleIdFromApi>
@@ -63,50 +63,59 @@ export type ApiActions = {
 
 export function apiActions(apiUrl: string): ApiActions {
   return {
-    getAccountBalancesFromApi: (parameters) =>
+    getAccountBalancesFromApi: ({ extra, ...parameters }) =>
       getAccountBalancesFromApi({
-        ...parameters,
         apiUrl,
+        ...parameters,
+        ...extra,
       }),
-    getAccountFactoryAddressFromApi: (parameters) =>
+    getAccountFactoryAddressFromApi: ({ extra, ...parameters }) =>
       getAccountFactoryAddressFromApi({
-        ...parameters,
         apiUrl,
+        ...parameters,
+        ...extra,
       }),
-    getAnsHostAddressFromApi: (parameters) =>
+    getAnsHostAddressFromApi: ({ extra, ...parameters }) =>
       getAnsHostAddressFromApi({
-        ...parameters,
         apiUrl,
+        ...parameters,
+        ...extra,
       }),
-    getAccountsByOwnerFromApi: (parameters) =>
+    getAccountsByOwnerFromApi: ({ extra, ...parameters }) =>
       getAccountsByOwnerFromApi({
-        ...parameters,
         apiUrl,
+        ...parameters,
+        ...extra,
       }),
-    getAnsTokenFromApi: (parameters) =>
+    getAnsTokenFromApi: ({ extra, ...parameters }) =>
       getAnsTokenFromApi({
-        ...parameters,
         apiUrl,
+        ...parameters,
+        ...extra,
       }),
-    getAnsTokensFromApi: (parameters) =>
+    getAnsTokensFromApi: ({ extra, ...parameters }) =>
       getAnsTokensFromApi({
-        ...parameters,
         apiUrl,
+        ...parameters,
+        ...extra,
       }),
-    getModulesFromApi: (parameters) =>
+    getModulesFromApi: ({ extra, ...parameters }) =>
       getModulesFromApi({
-        ...parameters,
         apiUrl,
+        ...parameters,
+        ...extra,
       }),
-    getVersionControlAddressFromApi: (parameters) =>
+    getVersionControlAddressFromApi: ({ extra, ...parameters }) =>
       getVersionControlAddressFromApi({
-        ...parameters,
         apiUrl,
+        ...parameters,
+        ...extra,
       }),
-    getSubAccountIdsByModuleIdFromApi: (parameters) =>
+    getSubAccountIdsByModuleIdFromApi: ({ extra, ...parameters }) =>
       getSubAccountIdsByModuleIdFromApi({
-        ...parameters,
         apiUrl,
+        ...parameters,
+        ...extra,
       }),
   }
 }

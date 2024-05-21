@@ -14,70 +14,73 @@ import { getProxyClient } from '../../actions/wallet/get-proxy-client'
 import { getSenderAddress } from '../../actions/wallet/get-sender-address'
 import { getSigningCosmWasmClient } from '../../actions/wallet/get-signing-cosm-wasm-client'
 import { getVersionControlClient } from '../../actions/wallet/get-version-control-client'
-import { ExtractAndOmitParameters } from '../../types/parameters'
+import { ExtractAndPartializeParameters } from '../../types/parameters'
 
-type ExtractAndOmitDecoratedParametersFromParameters<
+type ExtractAndPartializeDecoratedParametersFromParameters<
   fn extends (payload: any) => any,
-> = ExtractAndOmitParameters<fn, 'signingCosmWasmClient' | 'sender' | 'apiUrl'>
+> = ExtractAndPartializeParameters<
+  fn,
+  'signingCosmWasmClient' | 'sender' | 'apiUrl'
+>
 
 export type WalletActions = {
   createAccount(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof createAccount
     >,
   ): ReturnType<typeof createAccount>
   createAccountMonarchy(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof createAccountMonarchy
     >,
   ): ReturnType<typeof createAccountMonarchy>
   getAccountFactoryClient(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAccountFactoryClient
     >,
   ): ReturnType<typeof getAccountFactoryClient>
   getAccountFactoryClientFromVersionControl(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAccountFactoryClientFromVersionControl
     >,
   ): ReturnType<typeof getAccountFactoryClientFromVersionControl>
   getAccountFactoryClientFromApi(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAccountFactoryClientFromApi
     >,
   ): ReturnType<typeof getAccountFactoryClientFromApi>
   getAnsHostClient(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAnsHostClient
     >,
   ): ReturnType<typeof getAnsHostClient>
   getAnsHostClientFromApi(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAnsHostClientFromApi
     >,
   ): ReturnType<typeof getAnsHostClientFromApi>
   getAnsHostClientFromVersionControl(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAnsHostClientFromVersionControl
     >,
   ): ReturnType<typeof getAnsHostClientFromVersionControl>
   getVersionControlClient(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getVersionControlClient
     >,
   ): ReturnType<typeof getVersionControlClient>
   getVersionControlClientFromApi(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getVersionControlClientFromApi
     >,
   ): ReturnType<typeof getVersionControlClientFromApi>
   getManagerClient(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getManagerClient
     >,
   ): ReturnType<typeof getManagerClient>
   getProxyClient(
-    parameters: ExtractAndOmitDecoratedParametersFromParameters<
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getProxyClient
     >,
   ): ReturnType<typeof getProxyClient>
@@ -91,86 +94,98 @@ export function walletActions(
   apiUrl: string,
 ): WalletActions {
   return {
-    createAccount: (parameters) =>
+    createAccount: ({ extra, ...parameters }) =>
       createAccount({
-        ...parameters,
         signingCosmWasmClient,
         sender,
         apiUrl,
+        ...parameters,
+        ...extra,
       }),
-    createAccountMonarchy: (parameters) =>
+    createAccountMonarchy: ({ extra, ...parameters }) =>
       createAccountMonarchy({
-        ...parameters,
         signingCosmWasmClient,
         sender,
         apiUrl,
+        ...parameters,
+        ...extra,
       }),
 
-    getAccountFactoryClient: (parameters) =>
+    getAccountFactoryClient: ({ extra, ...parameters }) =>
       getAccountFactoryClient({
-        ...parameters,
         signingCosmWasmClient,
         sender,
+        ...parameters,
+        ...extra,
       }),
-    getAccountFactoryClientFromVersionControl: (parameters) =>
+    getAccountFactoryClientFromVersionControl: ({ extra, ...parameters }) =>
       getAccountFactoryClientFromVersionControl({
-        ...parameters,
         signingCosmWasmClient,
         sender,
+        ...parameters,
+        ...extra,
       }),
-    getAccountFactoryClientFromApi: (parameters) =>
+    getAccountFactoryClientFromApi: ({ extra, ...parameters } = {}) =>
       getAccountFactoryClientFromApi({
-        ...parameters,
         signingCosmWasmClient,
         sender,
         apiUrl,
+        ...parameters,
+        ...extra,
       }),
 
-    getAnsHostClient: (parameters) =>
+    getAnsHostClient: ({ extra, ...parameters }) =>
       getAnsHostClient({
-        ...parameters,
         signingCosmWasmClient,
         sender,
+        ...parameters,
+        ...extra,
       }),
-    getAnsHostClientFromApi: (parameters) =>
+    getAnsHostClientFromApi: ({ extra, ...parameters } = {}) =>
       getAnsHostClientFromApi({
-        ...parameters,
         signingCosmWasmClient,
         sender,
         apiUrl,
+        ...parameters,
+        ...extra,
       }),
-    getAnsHostClientFromVersionControl: (parameters) =>
+    getAnsHostClientFromVersionControl: ({ extra, ...parameters }) =>
       getAnsHostClientFromVersionControl({
-        ...parameters,
         signingCosmWasmClient,
         sender,
+        ...parameters,
+        ...extra,
       }),
 
-    getVersionControlClientFromApi: (parameters) =>
+    getVersionControlClientFromApi: ({ extra, ...parameters } = {}) =>
       getVersionControlClientFromApi({
-        ...parameters,
         signingCosmWasmClient,
         sender,
         apiUrl,
-      }),
-    getVersionControlClient: (parameters) =>
-      getVersionControlClient({
         ...parameters,
+        ...extra,
+      }),
+    getVersionControlClient: ({ extra, ...parameters }) =>
+      getVersionControlClient({
         signingCosmWasmClient,
         sender,
+        ...parameters,
+        ...extra,
       }),
 
-    getManagerClient: (parameters) =>
+    getManagerClient: ({ extra, ...parameters }) =>
       getManagerClient({
-        ...parameters,
         signingCosmWasmClient,
         sender,
+        ...parameters,
+        ...extra,
       }),
-    getProxyClient: (parameters) =>
+    getProxyClient: ({ extra, ...parameters }) =>
       getProxyClient({
-        ...parameters,
         signingCosmWasmClient,
         sender,
+        ...parameters,
+        ...extra,
       }),
     getSigningCosmWasmClient: () =>
       getSigningCosmWasmClient({

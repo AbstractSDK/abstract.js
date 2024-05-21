@@ -36,7 +36,7 @@ export default function AuthzPage() {
   const { data: account } = useAccount({ chainId: 'osmosis-1' })
 
   const { data: accountFactory, isLoading } =
-    useAccountFactoryQueryClientFromApi({ chainName: CHAIN_NAME, args: {} })
+    useAccountFactoryQueryClientFromApi({ chainName: CHAIN_NAME })
 
   const { mutate: createAccount } = useCreateAccountMonarchy({
     chainName: CHAIN_NAME,

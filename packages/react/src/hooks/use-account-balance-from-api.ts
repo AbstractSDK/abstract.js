@@ -1,44 +1,59 @@
 import { ApiClient } from '@abstract-money/core/clients'
+import { QueryFunction } from '@tanstack/react-query'
 import React from 'react'
 import { useConfig } from '../contexts'
 import { WithArgs } from '../types/args'
-import { UseQueryParameters, useQuery } from '../types/queries'
+import {
+  UseQueryParameters,
+  UseQueryReturnType,
+  useQuery,
+} from '../types/queries'
+
+type QueryFnData = Awaited<ReturnType<ApiClient['getAccountBalancesFromApi']>>
+
+type QueryError = unknown
+type QueryData = QueryFnData
+type QueryKey = readonly [
+  'accountBalancesFromApi',
+  ApiClient | undefined,
+  WithArgs<Parameters<ApiClient['getAccountBalancesFromApi']>[0]>['args'],
+  NonNullable<Parameters<ApiClient['getAccountBalancesFromApi']>[0]>['extra'],
+]
+
+type QueryOptions = Omit<
+  UseQueryParameters<QueryFnData, QueryError, QueryData, QueryKey>,
+  'queryFn'
+>
+type QueryResult = UseQueryReturnType<QueryData, QueryError>
 
 export type UseAccountBalancesFromApiParameters = WithArgs<
   Parameters<ApiClient['getAccountBalancesFromApi']>[0]
 > & {
-  query?: UseQueryParameters<
-    Awaited<ReturnType<ApiClient['getAccountBalancesFromApi']>>,
-    unknown,
-    Awaited<ReturnType<ApiClient['getAccountBalancesFromApi']>>,
-    readonly [
-      'accountBalancesFromApi',
-      WithArgs<Parameters<ApiClient['getAccountBalancesFromApi']>[0]>,
-      ApiClient | undefined,
-    ]
-  >
+  query?: QueryOptions
 }
 
 export function useAccountBalancesFromApi({
   args,
+  extra,
   query = {},
-}: UseAccountBalancesFromApiParameters) {
+}: UseAccountBalancesFromApiParameters): QueryResult {
   const config = useConfig()
   const client = config.useApiClient()
   const queryKey = React.useMemo(
-    () => ['accountBalancesFromApi', { args }, client] as const,
-    [args, client],
+    () => ['accountBalancesFromApi', client, args, extra] as const,
+    [args, client, extra],
   )
 
-  const enabled = Boolean(client && args?.accountId && (query.enabled ?? true))
+  const enabled = Boolean(client && args && (query.enabled ?? true))
 
-  const queryFn = React.useCallback(() => {
-    if (!client || !args?.accountId) throw new Error('No client or accountid')
+  const queryFn = React.useCallback<QueryFunction<QueryFnData, QueryKey>>(
+    ({ queryKey: [_, client, args, extra] }) => {
+      if (!client || !args) throw new Error('No client or accountid')
 
-    return client.getAccountBalancesFromApi({
-      accountId: args.accountId,
-    })
-  }, [client, args])
+      return client.getAccountBalancesFromApi({ ...args, ...extra })
+    },
+    [],
+  )
 
   return useQuery({ queryKey, queryFn, ...query, enabled })
 }
