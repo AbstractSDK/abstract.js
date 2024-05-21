@@ -1,5 +1,16 @@
 ## 0.1.0
 
+## 1.1.0
+
+### Minor Changes
+
+- [`ccf8001`](https://github.com/AbstractSDK/abstract.js/commit/ccf80013d12e8033da273eed6d486edf6762441d) Thanks [@dalechyn](https://github.com/dalechyn)! - Added overrideable parameters that are decorated via `extra` property.
+
+### Patch Changes
+
+- Updated dependencies [[`ccf8001`](https://github.com/AbstractSDK/abstract.js/commit/ccf80013d12e8033da273eed6d486edf6762441d)]:
+  - @abstract-money/cosmwasm-utils@0.2.0
+
 ## 1.0.7
 
 ### Patch Changes
