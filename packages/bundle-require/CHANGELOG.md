@@ -1,5 +1,11 @@
 # @abstract-money/bundle-require
 
+## 0.1.0
+
+### Minor Changes
+
+- [`ccf8001`](https://github.com/AbstractSDK/abstract.js/commit/ccf80013d12e8033da273eed6d486edf6762441d) Thanks [@dalechyn](https://github.com/dalechyn)! - Added overrideable parameters that are decorated via `extra` property.
+
 ## 0.0.2
 
 ### Patch Changes
