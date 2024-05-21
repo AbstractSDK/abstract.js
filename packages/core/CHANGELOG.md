@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 1.1.1
+
+### Patch Changes
+
+- [`ed50660`](https://github.com/AbstractSDK/abstract.js/commit/ed5066049de491a9a8793211dcb0d07f18424851) Thanks [@dalechyn](https://github.com/dalechyn)! - Added `useAccountsBaseAddressesFromApi` hook.
+
 ## 1.1.0
 
 ### Minor Changes
