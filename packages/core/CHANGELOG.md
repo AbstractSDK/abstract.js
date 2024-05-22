@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 1.1.2
+
+### Patch Changes
+
+- [`310ed97`](https://github.com/AbstractSDK/abstract.js/commit/310ed9799c5c86a06fad2a6032f181fed5d0b354) Thanks [@dalechyn](https://github.com/dalechyn)! - Fixed wrong id check in `getAccountSettings`.
+
 ## 1.1.1
 
 ### Patch Changes
