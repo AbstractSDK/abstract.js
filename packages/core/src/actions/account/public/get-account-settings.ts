@@ -28,7 +28,7 @@ export async function getAccountSettings({
     })
     if (fetchedModules.module_infos.length === 0) break
     for (const moduleInfo of fetchedModules.module_infos)
-      if (moduleInfo.id === CommonModuleNames.IBC_CLIENT)
+      if (moduleInfo.id === `abstract:${CommonModuleNames.IBC_CLIENT}`)
         return { ibcEnabled: true }
     page += 20
   }
