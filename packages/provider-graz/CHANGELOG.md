@@ -1,5 +1,15 @@
 # @abstract-money/provider-graz
 
+## 3.0.4
+
+### Patch Changes
+
+- [`310ed97`](https://github.com/AbstractSDK/abstract.js/commit/310ed9799c5c86a06fad2a6032f181fed5d0b354) Thanks [@dalechyn](https://github.com/dalechyn)! - Fixed wrong id check in `getAccountSettings`.
+
+- Updated dependencies [[`310ed97`](https://github.com/AbstractSDK/abstract.js/commit/310ed9799c5c86a06fad2a6032f181fed5d0b354)]:
+  - @abstract-money/core@1.1.2
+  - @abstract-money/react@1.1.4
+
 ## 3.0.3
 
 ### Patch Changes
