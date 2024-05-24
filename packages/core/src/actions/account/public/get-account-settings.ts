@@ -1,5 +1,5 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { CommonModuleNames } from 'src/actions/public/types'
+import { CommonModuleNames } from '../../../actions/public/types'
 import { VersionControlTypes } from '../../../codegen/abstract'
 import { getManagerQueryClientFromApi } from './get-manager-query-client-from-api'
 

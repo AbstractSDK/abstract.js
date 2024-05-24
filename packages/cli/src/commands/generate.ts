@@ -5,6 +5,7 @@ import pc from 'picocolors'
 import { z } from 'zod'
 
 import { pascalCase } from 'change-case'
+import { fixSchemaResultOfError } from 'src/utils/fix-schema-result-of-error'
 import type { Contract, ContractConfig, Plugin } from '../config'
 import { fromZodError } from '../errors'
 import * as logger from '../logger'
@@ -112,6 +113,22 @@ export async function generate(options: Generate = {}) {
       plugin: Pick<Plugin, 'name'>
     } & Awaited<ReturnType<Required<Plugin>['run']>>
     const outputs: Output[] = []
+
+    for (const contract of contracts) {
+      const moduleSchemaPath = join(contract.path, 'module-schema.json')
+      const executeMsgPath = join(contract.path, 'execute_msg.json')
+      const queryMsgPath = join(contract.path, 'query_msg.json')
+      for (const path of [
+        moduleSchemaPath,
+        ...(fse.existsSync(executeMsgPath) ? [executeMsgPath] : []),
+        ...(fse.existsSync(queryMsgPath) ? [queryMsgPath] : []),
+      ])
+        fse.writeFileSync(
+          path,
+          fixSchemaResultOfError(fse.readFileSync(path, 'utf8')),
+        )
+    }
+
     spinner.start('Running plugins')
     for (const plugin of plugins) {
       if (!plugin.run) continue

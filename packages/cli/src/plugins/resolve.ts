@@ -4,9 +4,9 @@ import { AbortError, default as fetch } from 'node-fetch'
 import { join } from 'pathe'
 
 import { homedir } from 'os'
-import { pascalCase } from 'change-case'
 import type { ContractConfig, ContractVersion, Plugin } from '../config'
 import type { MaybeArray, RequiredBy } from '../types'
+import { fixSchemaResultOfError } from '../utils/fix-schema-result-of-error'
 import { RegistrySchemaNotFoundError } from './registry'
 
 export type ResolveConfig<
@@ -93,7 +93,7 @@ export function resolve<
           10,
         )
 
-        let path
+        let path: string | undefined
         if (cacheTimestamp > Date.now()) path = cacheFolderPath
         else {
           const AbortController =
@@ -123,11 +123,8 @@ export function resolve<
               const schema = await parse({ response })
               // HACK: Replaces the undescored `Result_of` to be PascalCased as
               // it raises an error that is pretty complex to debug. Needs to be deleted later.
-              const schemaString = JSON.stringify(schema, null, 2).replaceAll(
-                /(Result_of_[A-Za-z-_]+)/gm,
-                (substitution) => {
-                  return pascalCase(substitution)
-                },
+              const schemaString = fixSchemaResultOfError(
+                JSON.stringify(schema, null, 2),
               )
               await fse.writeFile(cacheFilePath, schemaString)
               path = cacheFolderPath

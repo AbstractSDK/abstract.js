@@ -35,9 +35,11 @@
   },
   "type": "module",
   "dependencies": {
-    "@abstract-money/ts-codegen": "^0.35.4",
-    "abort-controller": "^3.0.0",
     "@abstract-money/bundle-require": "workspace:*",
+    "@abstract-money/ts-codegen": "^0.35.5",
+    "@cosmjs/cosmwasm-stargate": "^0.32.3",
+    "@cosmjs/stargate": "^0.32.3",
+    "abort-controller": "^3.0.0",
     "cac": "^6.7.12",
     "change-case": "^4.1.2",
     "dedent": "^0.7.0",
@@ -52,9 +54,7 @@
     "pathe": "^1.0.0",
     "picocolors": "^1.0.0",
     "prettier": "^2.8.1",
-    "zod": "^3.21.4",
-    "@cosmjs/cosmwasm-stargate": "^0.32.3",
-    "@cosmjs/stargate": "^0.32.3"
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@types/jest": "^29.5.2",
