@@ -1,6 +1,6 @@
 {
   "name": "@abstract-money/react",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "React Hooks for Abstract SDK",
   "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
   "author": "dalechyn <vlad@abstract.money>",
