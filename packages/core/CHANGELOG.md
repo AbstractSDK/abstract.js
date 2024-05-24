@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 1.1.3
+
+### Patch Changes
+
+- [`b83b132`](https://github.com/AbstractSDK/abstract.js/commit/b83b132568594d85ec2b3ee27ee445904527e698) Thanks [@dalechyn](https://github.com/dalechyn)! - Introduced a runtime util to fix bad contract schemas on fly.
+
 ## 1.1.2
 
 ### Patch Changes

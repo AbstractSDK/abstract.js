@@ -1,5 +1,11 @@
 # @abstract-money/cli
 
+## 0.4.1
+
+### Patch Changes
+
+- [`b83b132`](https://github.com/AbstractSDK/abstract.js/commit/b83b132568594d85ec2b3ee27ee445904527e698) Thanks [@dalechyn](https://github.com/dalechyn)! - Introduced a runtime util to fix bad contract schemas on fly.
+
 ## 0.4.0
 
 ### Minor Changes
