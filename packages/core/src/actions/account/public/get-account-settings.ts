@@ -20,17 +20,18 @@ export async function getAccountSettings({
     apiUrl,
   })
 
-  let page = 0
-  while (true) {
+  let cursor: string | undefined
+  do {
     const fetchedModules = await managerClient.moduleInfos({
       limit: 20,
-      startAfter: `${page}`,
+      startAfter: cursor,
     })
     if (fetchedModules.module_infos.length === 0) break
     for (const moduleInfo of fetchedModules.module_infos)
       if (moduleInfo.id === `abstract:${CommonModuleNames.IBC_CLIENT}`)
         return { ibcEnabled: true }
-    page += 20
-  }
+    cursor =
+      fetchedModules.module_infos[fetchedModules.module_infos.length - 1]?.id
+  } while (cursor !== undefined)
   return { ibcEnabled: false }
 }
