@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 1.1.4
+
+### Patch Changes
+
+- [`8f27b28`](https://github.com/AbstractSDK/abstract.js/commit/8f27b28890e01f256b78a2d94805992b6cc5433f) Thanks [@dalechyn](https://github.com/dalechyn)! - Fixed pagination in `getAccountSettings`.
+
 ## 1.1.3
 
 ### Patch Changes
