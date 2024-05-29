@@ -37,10 +37,13 @@ export default defineConfig({
   plugins: [
     vanilla(),
     registry({
-      contracts: contractsConfig.map(
-        (contractConfig) =>
-          ({ namespace: 'abstract', ...contractConfig }) as const,
-      ),
+      contracts: [
+        ...contractsConfig.map(
+          (contractConfig) =>
+            ({ namespace: 'abstract', ...contractConfig }) as const,
+        ),
+        ...[{ namespace: 'cw-plus', name: 'cw20-base', version: '1.0.1' }],
+      ],
     }),
   ],
 })
