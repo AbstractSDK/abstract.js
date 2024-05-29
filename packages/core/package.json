@@ -87,6 +87,10 @@
       "types": "./dist/clients/index.d.ts",
       "default": "./dist/clients/index.js"
     },
+    "./codegen/abstract": {
+      "types": "./dist/codegen/abstract/index.d.ts",
+      "default": "./dist/codegen/abstract/index.js"
+    },
     "./utils": {
       "types": "./dist/utils/index.d.ts",
       "default": "./dist/utils/index.js"
@@ -97,12 +101,6 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "/actions",
-    "/clients",
-    "/utils",
-    "/legacy",
-    "/dist"
-  ],
+  "files": ["/actions", "/clients", "/codegen", "/utils", "/legacy", "/dist"],
   "sideEffects": false
 }
