@@ -1,5 +1,11 @@
 # @abstract-money/cli
 
+## 0.4.2
+
+### Patch Changes
+
+- Update ts-codegen
+
 ## 0.4.1
 
 ### Patch Changes
