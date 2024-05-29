@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 1.1.5
+
+### Patch Changes
+
+- [`66e4e7a`](https://github.com/AbstractSDK/abstract.js/commit/66e4e7a2ca0dd51f3d024e41d044150df73ad271) Thanks [@dalechyn](https://github.com/dalechyn)! - Added codegen to exports of `core` package.
+
 ## 1.1.4
 
 ### Patch Changes

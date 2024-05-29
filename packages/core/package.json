@@ -1,6 +1,6 @@
 {
   "name": "@abstract-money/core",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Typings for Abstract smart contracts",
   "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
   "author": "adairrr <adair@abstract.money>",
@@ -101,6 +101,13 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["/actions", "/clients", "/codegen", "/utils", "/legacy", "/dist"],
+  "files": [
+    "/actions",
+    "/clients",
+    "/codegen",
+    "/utils",
+    "/legacy",
+    "/dist"
+  ],
   "sideEffects": false
 }
