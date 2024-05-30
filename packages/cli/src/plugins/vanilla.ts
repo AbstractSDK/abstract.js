@@ -139,12 +139,20 @@ export function vanilla(options: VanillaOptions = {}): VanillaResult {
           `,
         )
 
+        // TODO: Apps are duplicating the type imports
+        const isAppEnabled = options.enableAppstractAppFor?.includes(
+          contract.name,
+        )
+        const importTypesLine = isAppEnabled
+          ? ''
+          : `import * as ${contractNamePascalCase}Types from './cosmwasm-codegen/${contractNamePascalCase}.types'`
+
         content.push(
           dedent`
           export * from './cosmwasm-codegen/${contractNamePascalCase}.client'
           export * from './cosmwasm-codegen/${contractNamePascalCase}.message-builder'
           export * from './cosmwasm-codegen/${contractNamePascalCase}.message-composer'
-          // import * as ${contractNamePascalCase}Types from './cosmwasm-codegen/${contractNamePascalCase}.types'
+          ${importTypesLine}
           export { ${contractNamePascalCase}Types }
           `,
         )

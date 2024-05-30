@@ -1,5 +1,11 @@
 # @abstract-money/cli
 
+## 0.4.4
+
+### Patch Changes
+
+- Ensure non-duplicated app types
+
 ## 0.4.3
 
 ### Patch Changes
