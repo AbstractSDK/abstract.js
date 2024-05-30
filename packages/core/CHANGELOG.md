@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 1.1.6
+
+### Patch Changes
+
+- [`7e1694c`](https://github.com/AbstractSDK/abstract.js/commit/7e1694cb2e77c0aae76259e3763ff9957cef0caf) Thanks [@dalechyn](https://github.com/dalechyn)! - Code-generate cw-plus.
+
 ## 1.1.5
 
 ### Patch Changes
