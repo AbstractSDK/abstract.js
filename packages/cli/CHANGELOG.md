@@ -1,5 +1,11 @@
 # @abstract-money/cli
 
+## 0.4.3
+
+### Patch Changes
+
+- Add moduleType option
+
 ## 0.4.2
 
 ### Patch Changes
