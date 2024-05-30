@@ -41,14 +41,29 @@ export function vanilla(options: VanillaOptions = {}): VanillaResult {
         outPath: cosmwasmCodegenDirPath,
       })
 
-      if (options.enableAppstractAppFor?.length !== 0)
-        await codegen({
-          options: { ...codegenOptions, abstractApp: { enabled: true } },
-          contracts: contracts
-            .filter(({ name }) => options.enableAppstractAppFor?.includes(name))
-            .map(({ name, path }) => ({ name, dir: path })),
-          outPath: cosmwasmCodegenDirPath,
-        })
+      if (options.enableAppstractAppFor?.length !== 0) {
+        const abstractContracts = contracts.filter(({ name }) =>
+          options.enableAppstractAppFor?.includes(name),
+        )
+
+        for (const abstractContract of abstractContracts) {
+          const ac = {
+            name: abstractContract.name,
+            dir: abstractContract.path,
+          }
+          await codegen({
+            options: {
+              ...codegenOptions,
+              abstractApp: {
+                enabled: true,
+                moduleType: abstractContract.moduleType,
+              },
+            },
+            contracts: [ac],
+            outPath: cosmwasmCodegenDirPath,
+          })
+        }
+      }
 
       const content: string[] = []
 
@@ -129,7 +144,7 @@ export function vanilla(options: VanillaOptions = {}): VanillaResult {
           export * from './cosmwasm-codegen/${contractNamePascalCase}.client'
           export * from './cosmwasm-codegen/${contractNamePascalCase}.message-builder'
           export * from './cosmwasm-codegen/${contractNamePascalCase}.message-composer'
-          import * as ${contractNamePascalCase}Types from './cosmwasm-codegen/${contractNamePascalCase}.types'
+          // import * as ${contractNamePascalCase}Types from './cosmwasm-codegen/${contractNamePascalCase}.types'
           export { ${contractNamePascalCase}Types }
           `,
         )

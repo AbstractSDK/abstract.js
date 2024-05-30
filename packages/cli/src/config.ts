@@ -21,6 +21,10 @@ export type ContractConfig = {
    * Contract version.
    */
   version: ContractVersion
+  /**
+   * Module type
+   */
+  moduleType?: 'app' | 'adapter'
 }
 
 export type Contract = ContractConfig & {
