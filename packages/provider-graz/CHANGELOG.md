@@ -1,5 +1,13 @@
 # @abstract-money/provider-graz
 
+## 4.0.0
+
+### Patch Changes
+
+- Updated dependencies [[`711365a`](https://github.com/AbstractSDK/abstract.js/commit/711365a5548f75d885e79635f68d5ba6dfdf2abf)]:
+  - @abstract-money/core@1.2.0
+  - @abstract-money/react@1.2.0
+
 ## 3.0.8
 
 ### Patch Changes

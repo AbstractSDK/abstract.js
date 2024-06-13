@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 1.2.0
+
+### Minor Changes
+
+- [`711365a`](https://github.com/AbstractSDK/abstract.js/commit/711365a5548f75d885e79635f68d5ba6dfdf2abf) Thanks [@adairrr](https://github.com/adairrr)! - Update remote execution
+
 ## 1.1.6
 
 ### Patch Changes
