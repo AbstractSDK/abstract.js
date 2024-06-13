@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 1.2.1
+
+### Patch Changes
+
+- Add remote account proxies query
+
 ## 1.2.0
 
 ### Minor Changes
