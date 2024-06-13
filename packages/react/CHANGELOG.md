@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 1.2.2
+
+### Patch Changes
+
+- Add TData to queries
+
 ## 1.2.1
 
 ### Patch Changes
