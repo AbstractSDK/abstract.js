@@ -3,7 +3,7 @@ import { accountIdToString } from '@abstract-money/core'
 import {
   useAccounts,
   useCreateRemoteAccount,
-  useExecuteOnRemote,
+  useExecuteOnRemoteManager,
   useRemoteAccountIds,
   useRemoteHosts,
 } from '@abstract-money/react'
@@ -54,10 +54,11 @@ export default function RemotePage() {
       chainName: firstAccount?.chainName,
     })
 
-  const { mutate: execRemote, isLoading: isExecuting } = useExecuteOnRemote({
-    accountId: firstAccount,
-    chainName: firstAccount?.chainName,
-  })
+  const { mutate: execRemote, isLoading: isExecuting } =
+    useExecuteOnRemoteManager({
+      accountId: firstAccount,
+      chainName: firstAccount?.chainName,
+    })
 
   const { data: remoteAccountIds } = useRemoteAccountIds({
     accountId: firstAccount,

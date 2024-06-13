@@ -29,7 +29,7 @@ export type ExecuteOnRemoteParameters = Omit<
  * @param fee
  * @param memo
  */
-export async function executeOnRemote({
+export async function executeOnRemoteManager({
   accountId,
   signingCosmWasmClient,
   apiUrl,

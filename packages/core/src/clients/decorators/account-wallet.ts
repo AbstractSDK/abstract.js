@@ -5,8 +5,9 @@ import { createSubAccount } from '../../actions/account/wallet/create-sub-accoun
 import { deposit } from '../../actions/account/wallet/deposit'
 import { execute } from '../../actions/account/wallet/execute'
 import { executeOnModule } from '../../actions/account/wallet/execute-on-module'
-import { executeOnRemote } from '../../actions/account/wallet/execute-on-remote'
+import { executeOnRemoteManager } from '../../actions/account/wallet/execute-on-remote-manager'
 import { executeOnRemoteModule } from '../../actions/account/wallet/execute-on-remote-module'
+import { executeRemote } from '../../actions/account/wallet/execute-remote'
 import { getManagerClientFromApi } from '../../actions/account/wallet/get-manager-client-from-api'
 import { getProxyClientFromApi } from '../../actions/account/wallet/get-proxy-client-from-api'
 import { revokeNamespace } from '../../actions/account/wallet/remove-namespace'
@@ -56,16 +57,21 @@ export type AccountWalletActions = {
       typeof executeOnModule
     >,
   ): ReturnType<typeof executeOnModule>
-  executeOnRemote(
+  executeOnRemoteManager(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof executeOnRemote
+      typeof executeOnRemoteManager
     >,
-  ): ReturnType<typeof executeOnRemote>
+  ): ReturnType<typeof executeOnRemoteManager>
   executeOnRemoteModule(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof executeOnRemoteModule
     >,
   ): ReturnType<typeof executeOnRemoteModule>
+  executeRemote(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof executeRemote
+    >,
+  ): ReturnType<typeof executeRemote>
   sendFundsToRemote(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof sendFundsToRemote
@@ -178,8 +184,8 @@ export function accountWalletActions(
         ...parameters,
         ...extra,
       }),
-    executeOnRemote: ({ extra, ...parameters }) =>
-      executeOnRemote({
+    executeOnRemoteManager: ({ extra, ...parameters }) =>
+      executeOnRemoteManager({
         accountId,
         signingCosmWasmClient,
         apiUrl,
@@ -189,6 +195,15 @@ export function accountWalletActions(
       }),
     executeOnRemoteModule: ({ extra, ...parameters }) =>
       executeOnRemoteModule({
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
+        ...parameters,
+        ...extra,
+      }),
+    executeRemote: ({ extra, ...parameters }) =>
+      executeRemote({
         accountId,
         signingCosmWasmClient,
         apiUrl,

@@ -2,7 +2,7 @@ import { ManagerTypes } from '../../../codegen/abstract'
 import { ModuleType } from '../../../codegen/gql/graphql'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { encodeModuleMsg } from '../../../utils/modules/encode-module-msg'
-import { executeOnRemote } from './execute-on-remote'
+import { executeOnRemoteManager } from './execute-on-remote-manager'
 import { BaseWalletParameters } from './types'
 
 type Base64EncodedJson = string
@@ -52,7 +52,7 @@ export async function executeOnRemoteModule({
     },
   }
 
-  return executeOnRemote({
+  return executeOnRemoteManager({
     accountId,
     signingCosmWasmClient,
     apiUrl,

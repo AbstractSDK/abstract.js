@@ -4,25 +4,25 @@ import { useConfig } from '../../../contexts'
 import { ExtractArgsFromParameters } from '../../../types/args'
 import { UseMutationParameters } from '../../../types/queries'
 
-type ExecuteOnRemoteAccountMutation = ExtractArgsFromParameters<
-  Parameters<AccountWalletClient['executeOnRemote']>[0]
+type ExecuteRemoteAccountMutation = ExtractArgsFromParameters<
+  Parameters<AccountWalletClient['executeRemote']>[0]
 >
 
-export type UseExecuteOnRemoteParameters = {
+export type UseExecuteRemoteParameters = {
   accountId: AccountId | undefined
   chainName: string | undefined
   mutation?: UseMutationParameters<
-    Awaited<ReturnType<AccountWalletClient['executeOnRemote']>>,
+    Awaited<ReturnType<AccountWalletClient['executeRemote']>>,
     unknown,
-    ExecuteOnRemoteAccountMutation
+    ExecuteRemoteAccountMutation
   >
 }
 
-export function useExecuteOnRemote({
+export function useExecuteRemote({
   accountId,
   chainName,
   mutation,
-}: UseExecuteOnRemoteParameters) {
+}: UseExecuteRemoteParameters) {
   const config = useConfig()
   const walletClient = config.useAccountWalletClient({
     accountId,
@@ -31,6 +31,6 @@ export function useExecuteOnRemote({
 
   return useMutation(({ args, ...cosmWasmSignOptions }) => {
     if (!walletClient) throw new Error('walletClient is not defined')
-    return walletClient.executeOnRemote({ ...cosmWasmSignOptions, ...args })
+    return walletClient.executeRemote({ ...cosmWasmSignOptions, ...args })
   }, mutation)
 }
