@@ -25,11 +25,11 @@ type QueryKey = readonly [
   ),
 ]
 
-type QueryOptions = Omit<
-  UseQueryParameters<QueryFnData, QueryError, QueryData, QueryKey>,
+type QueryOptions<TData = QueryData> = Omit<
+  UseQueryParameters<QueryFnData, QueryError, TData, QueryKey>,
   'queryFn'
 >
-type QueryResult = UseQueryReturnType<QueryData, QueryError>
+type QueryResult<TData = QueryData> = UseQueryReturnType<TData, QueryError>
 
 export type UseAccountsBaseAddressesFromApiParameters = WithArgs<
   Parameters<PublicClient['getAccountsBaseAddresses']>[0]

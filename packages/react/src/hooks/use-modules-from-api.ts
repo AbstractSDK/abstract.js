@@ -20,23 +20,23 @@ type QueryKey = readonly [
   NonNullable<Parameters<ApiClient['getModulesFromApi']>[0]>['extra'],
 ]
 
-type QueryOptions = Omit<
-  UseQueryParameters<QueryFnData, QueryError, QueryData, QueryKey>,
+type QueryOptions<TData = QueryData> = Omit<
+  UseQueryParameters<QueryFnData, QueryError, TData, QueryKey>,
   'queryFn'
 >
-type QueryResult = UseQueryReturnType<QueryData, QueryError>
+type QueryResult<TData = QueryData> = UseQueryReturnType<TData, QueryError>
 
-export type UseModulesFromApiParameters = WithArgs<
+export type UseModulesFromApiParameters<TData = QueryData> = WithArgs<
   Parameters<ApiClient['getModulesFromApi']>[0]
 > & {
-  query?: QueryOptions
+  query?: QueryOptions<TData>
 }
 
-export function useModulesFromApi({
+export function useModulesFromApi<TData = QueryData>({
   args,
   extra,
   query = {},
-}: UseModulesFromApiParameters): QueryResult {
+}: UseModulesFromApiParameters<TData>): QueryResult<TData> {
   const config = useConfig()
   const client = config.useApiClient()
   const queryKey = React.useMemo(

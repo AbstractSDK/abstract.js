@@ -27,26 +27,26 @@ type QueryKey = readonly [
   ),
 ]
 
-type QueryOptions = Omit<
-  UseQueryParameters<QueryFnData, QueryError, QueryData, QueryKey>,
+type QueryOptions<TData = QueryData> = Omit<
+  UseQueryParameters<QueryFnData, QueryError, TData, QueryKey>,
   'queryFn'
 >
-type QueryResult = UseQueryReturnType<QueryData, QueryError>
+type QueryResult<TData = QueryData> = UseQueryReturnType<TData, QueryError>
 
-export type UseAccountSettingsParameters = WithArgs<
+export type UseAccountSettingsParameters<TData = QueryData> = WithArgs<
   Parameters<AccountPublicClient['getAccountSettings']>[0]
 > & {
   accountId: AccountId | undefined
   chainName: string | undefined
-  query?: QueryOptions
+  query?: QueryOptions<TData>
 }
 
-export function useAccountSettings({
+export function useAccountSettings<TData = QueryData>({
   accountId,
   extra,
   chainName,
   query = {},
-}: UseAccountSettingsParameters): QueryResult {
+}: UseAccountSettingsParameters<TData>): QueryResult<TData> {
   const config = useConfig()
   const accountPublicClient = config.useAccountPublicClient({
     accountId,

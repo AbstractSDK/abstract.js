@@ -28,28 +28,29 @@ type QueryKey = readonly [
   ),
 ]
 
-type QueryOptions = UseQueryParameters<
+type QueryOptions<TData = QueryData> = UseQueryParameters<
   QueryFnData,
   QueryError,
-  QueryData,
+  TData,
   QueryKey
 >
-type QueryResult = UseQueryReturnType<QueryData, QueryError>
+type QueryResult<TData = QueryData> = UseQueryReturnType<TData, QueryError>
 
-export type UseModuleInstantiate2AddressFromApiParameters = WithArgs<
-  Parameters<AccountPublicClient['getModuleInstantiate2AddressFromApi']>[0]
-> & {
-  query?: QueryOptions
-  chainName: string | undefined
-  accountId: AccountId | undefined
-}
-export function useModuleInstantiate2AddressFromApi({
+export type UseModuleInstantiate2AddressFromApiParameters<TData = QueryData> =
+  WithArgs<
+    Parameters<AccountPublicClient['getModuleInstantiate2AddressFromApi']>[0]
+  > & {
+    query?: QueryOptions<TData>
+    chainName: string | undefined
+    accountId: AccountId | undefined
+  }
+export function useModuleInstantiate2AddressFromApi<TData = QueryData>({
   args,
   accountId,
   chainName,
   extra,
   query = {},
-}: UseModuleInstantiate2AddressFromApiParameters): QueryResult {
+}: UseModuleInstantiate2AddressFromApiParameters<TData>): QueryResult<TData> {
   const config = useConfig()
   const accountPublicClient = config.useAccountPublicClient({
     accountId,

@@ -26,26 +26,26 @@ type QueryKey = readonly [
   ),
 ]
 
-type QueryOptions = Omit<
-  UseQueryOptions<QueryFnData, QueryError, QueryData, QueryKey>,
+type QueryOptions<TData = QueryData> = Omit<
+  UseQueryOptions<QueryFnData, QueryError, TData, QueryKey>,
   'queryFn'
 >
-type QueryResult = UseQueryResult<QueryData, QueryError>
+type QueryResult<TData = QueryData> = UseQueryResult<TData, QueryError>
 
-export type UseRemoteAccountIdsParameters = WithArgs<
+export type UseRemoteAccountIdsParameters<TData = QueryData> = WithArgs<
   Parameters<AccountPublicClient['getRemoteAccountIds']>[0]
 > & {
-  query?: QueryOptions
+  query?: QueryOptions<TData>
   chainName: string | undefined
   accountId: AccountId | undefined
 }
 
-export function useRemoteAccountIds({
+export function useRemoteAccountIds<TData = QueryData>({
   accountId,
   extra,
   chainName,
   query = {},
-}: UseRemoteAccountIdsParameters): QueryResult {
+}: UseRemoteAccountIdsParameters<TData>): QueryResult<TData> {
   const config = useConfig()
   const accountPublicClient = config.useAccountPublicClient({
     accountId,

@@ -24,26 +24,26 @@ type QueryKey = readonly [
   ),
 ]
 
-type QueryOptions = Omit<
-  UseQueryParameters<QueryFnData, QueryError, QueryData, QueryKey>,
+type QueryOptions<TData = QueryData> = Omit<
+  UseQueryParameters<QueryFnData, QueryError, TData, QueryKey>,
   'queryFn'
 >
-type QueryResult = UseQueryReturnType<QueryData, QueryError>
+type QueryResult<TData = QueryData> = UseQueryReturnType<TData, QueryError>
 
-export type UseModulesParameters = WithArgs<
+export type UseModulesParameters<TData = QueryData> = WithArgs<
   Parameters<AccountPublicClient['getModules']>[0]
 > & {
   accountId: AccountId | undefined
   chainName: string | undefined
-  query?: QueryOptions
+  query?: QueryOptions<TData>
 }
 
-export function useModules({
+export function useModules<TData = QueryData>({
   accountId,
   chainName,
   extra,
   query = {},
-}: UseModulesParameters): QueryResult {
+}: UseModulesParameters<TData>): QueryResult<TData> {
   const config = useConfig()
   const accountPublicClient = config.useAccountPublicClient({
     accountId,

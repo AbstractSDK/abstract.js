@@ -14,10 +14,10 @@ type QueryFnData = Awaited<ReturnType<AccountPublicClient['getSubAccountIds']>>
 
 type QueryError = unknown
 type QueryData = QueryFnData
-export type UseSubAccountIdsFromApiParameters = WithArgs<
+export type UseSubAccountIdsFromApiParameters<TData = QueryData> = WithArgs<
   Parameters<AccountPublicClient['getSubAccountIds']>[0]
 > & {
-  query?: QueryOptions
+  query?: QueryOptions<TData>
   chainName: string | undefined
   accountId: AccountId | undefined
 }
@@ -27,18 +27,18 @@ type QueryKey = readonly [
   NonNullable<Parameters<AccountPublicClient['getSubAccountIds']>[0]>['extra'],
 ]
 
-type QueryOptions = Omit<
-  UseQueryParameters<QueryFnData, QueryError, QueryData, QueryKey>,
+type QueryOptions<TData = QueryData> = Omit<
+  UseQueryParameters<QueryFnData, QueryError, TData, QueryKey>,
   'queryFn'
 >
-type QueryResult = UseQueryReturnType<QueryData, QueryError>
+type QueryResult<TData = QueryData> = UseQueryReturnType<TData, QueryError>
 
-export function useSubAccountIdsFromApi({
+export function useSubAccountIdsFromApi<TData = QueryData>({
   accountId,
   chainName,
   extra,
   query = {},
-}: UseSubAccountIdsFromApiParameters): QueryResult {
+}: UseSubAccountIdsFromApiParameters<TData>): QueryResult<TData> {
   const config = useConfig()
   const accountPublicClient = config.useAccountPublicClient({
     accountId,

@@ -28,23 +28,22 @@ type QueryKey = readonly [
   ),
 ]
 
-type QueryOptions = Omit<
-  UseQueryParameters<QueryFnData, QueryError, QueryData, QueryKey>,
+type QueryOptions<TData = QueryData> = Omit<
+  UseQueryParameters<QueryFnData, QueryError, TData, QueryKey>,
   'queryFn'
 >
-type QueryResult = UseQueryReturnType<QueryData, QueryError>
+type QueryResult<TData = QueryData> = UseQueryReturnType<TData, QueryError>
 
-export type UseSubAccountIdsByModuleIdFromApiParameters = WithArgs<
-  Parameters<ApiClient['getSubAccountIdsByModuleIdFromApi']>[0]
-> & {
-  query?: QueryOptions
-}
+export type UseSubAccountIdsByModuleIdFromApiParameters<TData = QueryData> =
+  WithArgs<Parameters<ApiClient['getSubAccountIdsByModuleIdFromApi']>[0]> & {
+    query?: QueryOptions<TData>
+  }
 
-export function useSubAccountIdsByModuleIdFromApi({
+export function useSubAccountIdsByModuleIdFromApi<TData = QueryData>({
   args,
   extra,
   query = {},
-}: UseSubAccountIdsByModuleIdFromApiParameters): QueryResult {
+}: UseSubAccountIdsByModuleIdFromApiParameters<TData>): QueryResult<TData> {
   const config = useConfig()
   const client = config.useApiClient()
   const queryKey = React.useMemo(

@@ -20,16 +20,16 @@ type QueryKey = readonly [
   NonNullable<Parameters<ApiClient['getAccountsByOwnerFromApi']>[0]>['extra'],
 ]
 
-type QueryOptions = Omit<
-  UseQueryParameters<QueryFnData, QueryError, QueryData, QueryKey>,
+type QueryOptions<TData = QueryData> = Omit<
+  UseQueryParameters<QueryFnData, QueryError, TData, QueryKey>,
   'queryFn'
 >
-type QueryResult = UseQueryReturnType<QueryData, QueryError>
+type QueryResult<TData = QueryData> = UseQueryReturnType<TData, QueryError>
 
-export type UseAccountsParameters = WithArgs<
+export type UseAccountsParameters<TData = QueryData> = WithArgs<
   Parameters<ApiClient['getAccountsByOwnerFromApi']>[0]
 > & {
-  query?: QueryOptions
+  query?: QueryOptions<TData>
 }
 
 /**
@@ -37,11 +37,11 @@ export type UseAccountsParameters = WithArgs<
  * @param owner address of the owner. Will automatically translate to other chains' addresses.
  * @param chainName chain to load accounts for.
  */
-export function useAccounts({
+export function useAccounts<TData = QueryData>({
   args,
   extra,
   query = {},
-}: UseAccountsParameters): QueryResult {
+}: UseAccountsParameters<TData>): QueryResult<TData> {
   const config = useConfig()
   const client = config.useApiClient()
   const queryKey = React.useMemo(

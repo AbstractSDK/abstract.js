@@ -20,23 +20,23 @@ type QueryKey = readonly [
   NonNullable<Parameters<ApiClient['getAccountBalancesFromApi']>[0]>['extra'],
 ]
 
-type QueryOptions = Omit<
-  UseQueryParameters<QueryFnData, QueryError, QueryData, QueryKey>,
+type QueryOptions<TData = QueryData> = Omit<
+  UseQueryParameters<QueryFnData, QueryError, TData, QueryKey>,
   'queryFn'
 >
-type QueryResult = UseQueryReturnType<QueryData, QueryError>
+type QueryResult<TData = QueryData> = UseQueryReturnType<TData, QueryError>
 
-export type UseAccountBalancesFromApiParameters = WithArgs<
+export type UseAccountBalancesFromApiParameters<TData = QueryData> = WithArgs<
   Parameters<ApiClient['getAccountBalancesFromApi']>[0]
 > & {
-  query?: QueryOptions
+  query?: QueryOptions<TData>
 }
 
-export function useAccountBalancesFromApi({
+export function useAccountBalancesFromApi<TData = QueryData>({
   args,
   extra,
   query = {},
-}: UseAccountBalancesFromApiParameters): QueryResult {
+}: UseAccountBalancesFromApiParameters<TData>): QueryResult<TData> {
   const config = useConfig()
   const client = config.useApiClient()
   const queryKey = React.useMemo(
