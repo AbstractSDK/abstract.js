@@ -8,6 +8,7 @@ import {
   UseQueryReturnType,
   useQuery,
 } from '../../types/queries'
+import { MaybeChainName } from './index'
 
 type QueryFnData = Awaited<ReturnType<PublicClient['getRemoteHosts']>>
 
@@ -15,6 +16,7 @@ type QueryError = unknown
 type QueryData = QueryFnData
 type QueryKey = readonly [
   'getRemoteHosts',
+  MaybeChainName,
   PublicClient | undefined,
   (
     | NonNullable<Parameters<PublicClient['getRemoteHosts']>[0]>['extra']
@@ -42,14 +44,14 @@ export function useRemoteHosts({
     chainName,
   })
   const queryKey = React.useMemo(
-    () => ['getRemoteHosts', publicClient, extra] as const,
-    [publicClient, extra],
+    () => ['getRemoteHosts', chainName, publicClient, extra] as const,
+    [chainName, publicClient, extra],
   )
 
   const enabled = Boolean(publicClient && (query.enabled ?? true))
 
   const queryFn = React.useCallback<QueryFunction<QueryFnData, QueryKey>>(
-    ({ queryKey: [_, publicClient, extra] }) => {
+    ({ queryKey: [_, _chainName, publicClient, extra] }) => {
       if (!publicClient) throw new Error('No client')
 
       return publicClient.getRemoteHosts(extra ? { extra } : undefined)

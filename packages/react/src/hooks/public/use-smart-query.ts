@@ -6,6 +6,7 @@ import {
   UseQueryReturnType,
   useQuery,
 } from '../../types/queries'
+import { MaybeChainName } from './index'
 import { useCosmWasmClient } from './use-cosm-wasm-client'
 
 type QueryFnData = Record<string, unknown>
@@ -14,6 +15,7 @@ type QueryError = unknown
 type QueryData = QueryFnData
 type QueryKey = readonly [
   'smartQuery',
+  MaybeChainName,
   CosmWasmClient | undefined,
   string,
   Record<string, unknown>,
@@ -43,14 +45,14 @@ export function useSmartQuery<TData = QueryData>({
   const { data: cosmWasmClient, isSuccess } = useCosmWasmClient({ chainName })
 
   const queryKey = React.useMemo(
-    () => ['smartQuery', cosmWasmClient, address, queryMsg] as const,
-    [cosmWasmClient, address, queryMsg],
+    () => ['smartQuery', chainName, cosmWasmClient, address, queryMsg] as const,
+    [cosmWasmClient, chainName, address, queryMsg],
   )
 
   const queryFn = React.useCallback<QueryFunction<QueryFnData, QueryKey>>(
-    async ({ queryKey: [_, cosmWasmClient] }) => {
+    async ({ queryKey: [_, _chainName, cosmWasmClient] }) => {
       if (!cosmWasmClient) {
-        throw new Error('client is not defined')
+        throw new Error(`client is not defined for ${chainName}`)
       }
       return cosmWasmClient.queryContractSmart(address, queryMsg)
     },

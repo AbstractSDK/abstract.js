@@ -4,6 +4,7 @@ import React from 'react'
 import { useConfig } from '../../contexts'
 import { WithArgs } from '../../types/args'
 import { UseQueryParameters, useQuery } from '../../types/queries'
+import { MaybeChainName } from './index'
 
 type QueryFnData = Awaited<ReturnType<PublicClient['getAbstractModuleVersion']>>
 
@@ -11,6 +12,7 @@ type QueryError = unknown
 type QueryData = QueryFnData
 type QueryKey = readonly [
   'abstractModuleVersion',
+  MaybeChainName,
   PublicClient | undefined,
   UseAbstractModuleVersionParameters['args'],
   Parameters<PublicClient['getAbstractModuleVersion']>[0]['extra'],
@@ -37,14 +39,15 @@ export function useAbstractModuleVersion({
     chainName,
   })
   const queryKey = React.useMemo(
-    () => ['abstractModuleVersion', publicClient, args, extra] as const,
-    [publicClient, args, extra],
+    () =>
+      ['abstractModuleVersion', chainName, publicClient, args, extra] as const,
+    [publicClient, chainName, args, extra],
   )
 
   const enabled = Boolean(publicClient && args && (query.enabled ?? true))
 
   const queryFn = React.useCallback<QueryFunction<QueryFnData, QueryKey>>(
-    ({ queryKey: [_, publicClient, args, extra] }) => {
+    ({ queryKey: [_, _chainName, publicClient, args, extra] }) => {
       if (!publicClient) throw new Error('No client')
       if (!args) throw new Error('No args')
 

@@ -7,12 +7,17 @@ import {
   UseQueryReturnType,
   useQuery,
 } from '../../types/queries'
+import { MaybeChainName } from './index'
 
 type QueryFnData = Awaited<ReturnType<PublicClient['getCosmWasmClient']>>
 
 type QueryError = unknown
 type QueryData = QueryFnData
-type QueryKey = readonly ['cosmWasmClient', PublicClient | undefined]
+type QueryKey = readonly [
+  'cosmWasmClient',
+  MaybeChainName,
+  PublicClient | undefined,
+]
 type QueryResult = UseQueryReturnType<QueryData, QueryError>
 
 type QueryOptions = UseQueryParameters<
@@ -35,13 +40,14 @@ export function useCosmWasmClient({
   const publicClient = config.usePublicClient({ chainName })
 
   const queryKey = React.useMemo(
-    () => ['cosmWasmClient', publicClient] as const,
-    [publicClient],
+    () => ['cosmWasmClient', chainName, publicClient] as const,
+    [chainName, publicClient],
   )
 
   const queryFn = React.useCallback<QueryFunction<QueryFnData, QueryKey>>(
-    ({ queryKey: [_, publicClient] }) => {
-      if (!publicClient) throw new Error('client is not defined')
+    ({ queryKey: [_, chainName, publicClient] }) => {
+      if (!publicClient)
+        throw new Error(`client is not defined for ${chainName}`)
 
       return publicClient.getCosmWasmClient()
     },

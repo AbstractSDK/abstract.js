@@ -8,6 +8,7 @@ import {
   UseQueryReturnType,
   useQuery,
 } from '../../types/queries'
+import { MaybeChainName } from './index'
 
 type QueryFnData = Awaited<
   ReturnType<PublicClient['getAccountFactoryQueryClientFromApi']>
@@ -17,6 +18,7 @@ type QueryError = unknown
 type QueryData = QueryFnData
 type QueryKey = readonly [
   'accountFactoryQueryClientFromApi',
+  MaybeChainName,
   PublicClient | undefined,
   NonNullable<
     Parameters<PublicClient['getAccountFactoryQueryClientFromApi']>[0]
@@ -45,14 +47,20 @@ export function useAccountFactoryQueryClientFromApi({
     chainName,
   })
   const queryKey = React.useMemo(
-    () => ['accountFactoryQueryClientFromApi', publicClient, extra] as const,
-    [publicClient, extra],
+    () =>
+      [
+        'accountFactoryQueryClientFromApi',
+        chainName,
+        publicClient,
+        extra,
+      ] as const,
+    [chainName, publicClient, extra],
   )
 
   const enabled = Boolean(publicClient && (query.enabled ?? true))
 
   const queryFn = React.useCallback<QueryFunction<QueryFnData, QueryKey>>(
-    ({ queryKey: [_, publicClient, extra] }) => {
+    ({ queryKey: [_, _chainName, publicClient, extra] }) => {
       if (!publicClient) throw new Error('No client')
 
       return publicClient.getAccountFactoryQueryClientFromApi(

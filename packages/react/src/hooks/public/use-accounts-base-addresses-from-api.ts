@@ -8,6 +8,7 @@ import {
   UseQueryReturnType,
   useQuery,
 } from '../../types/queries'
+import { MaybeChainName } from './index'
 
 type QueryFnData = Awaited<ReturnType<PublicClient['getAccountsBaseAddresses']>>
 
@@ -15,6 +16,7 @@ type QueryError = unknown
 type QueryData = QueryFnData
 type QueryKey = readonly [
   'accountBaseAddresses',
+  MaybeChainName,
   PublicClient | undefined,
   WithArgs<Parameters<PublicClient['getAccountsBaseAddresses']>[0]>['args'],
   (
@@ -49,8 +51,15 @@ export function useAccountsBaseAddressesFromApi({
     chainName,
   })
   const queryKey = React.useMemo(
-    () => ['accountBaseAddresses', accountPublicClient, args, extra] as const,
-    [accountPublicClient, args, extra],
+    () =>
+      [
+        'accountBaseAddresses',
+        chainName,
+        accountPublicClient,
+        args,
+        extra,
+      ] as const,
+    [accountPublicClient, chainName, args, extra],
   )
 
   const enabled = Boolean(
@@ -58,7 +67,7 @@ export function useAccountsBaseAddressesFromApi({
   )
 
   const queryFn = React.useCallback<QueryFunction<QueryFnData, QueryKey>>(
-    ({ queryKey: [_, accountPublicClient, args, extra] }) => {
+    ({ queryKey: [_, _chainName, accountPublicClient, args, extra] }) => {
       if (!accountPublicClient || !args) throw new Error('No client or args')
 
       return accountPublicClient.getAccountsBaseAddresses({ extra, ...args })

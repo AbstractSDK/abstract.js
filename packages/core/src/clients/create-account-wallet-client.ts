@@ -1,6 +1,6 @@
 import { VersionControlTypes } from '../codegen/abstract/index'
 import type { Evaluate } from '../types/utils'
-import { ABSTRACT_API_URL } from '../utils'
+import { ABSTRACT_API_URL, versionControlAccountIdToString } from '../utils'
 import { type Client } from './create-client'
 import { WalletClientConfig, createWalletClient } from './create-wallet-client'
 import {
@@ -17,9 +17,11 @@ export type AccountWalletClient = Evaluate<Client<AccountWalletActions>>
 export function createAccountWalletClient(
   parameters: AccountWalletClientConfig,
 ): AccountWalletClient {
+  const accountIdString = versionControlAccountIdToString(parameters.accountId)
+  // TODO: the sender may need to be included in the URL
   const {
-    key = 'account-wallet',
-    name = 'AccountWallet Client',
+    key = `account-wallet-${accountIdString}`,
+    name = `AccountWallet Client (${accountIdString})`,
     accountId,
     signingCosmWasmClient,
     sender,
