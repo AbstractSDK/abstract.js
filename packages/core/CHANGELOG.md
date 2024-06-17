@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 1.2.1
+
+### Patch Changes
+
+- [`1c784b5`](https://github.com/AbstractSDK/abstract.js/commit/1c784b5616db96e6a0cc86dca083df18bf358c8f) Thanks [@adairrr](https://github.com/adairrr)! - Update keys to include account id
+
 ## 1.2.0
 
 ### Minor Changes

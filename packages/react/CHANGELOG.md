@@ -1,5 +1,16 @@
 # @abstract-money/react
 
+## 1.2.3
+
+### Patch Changes
+
+- [`1c784b5`](https://github.com/AbstractSDK/abstract.js/commit/1c784b5616db96e6a0cc86dca083df18bf358c8f) Thanks [@adairrr](https://github.com/adairrr)! - Update keys to include account id
+
+- [`1c784b5`](https://github.com/AbstractSDK/abstract.js/commit/1c784b5616db96e6a0cc86dca083df18bf358c8f) Thanks [@adairrr](https://github.com/adairrr)! - Add chainName to query key
+
+- Updated dependencies [[`1c784b5`](https://github.com/AbstractSDK/abstract.js/commit/1c784b5616db96e6a0cc86dca083df18bf358c8f)]:
+  - @abstract-money/core@1.2.1
+
 ## 1.2.2
 
 ### Patch Changes
