@@ -1,5 +1,16 @@
 # @abstract-money/react
 
+## 1.3.0
+
+### Minor Changes
+
+- [#120](https://github.com/AbstractSDK/abstract.js/pull/120) [`0082bc6`](https://github.com/AbstractSDK/abstract.js/commit/0082bc613c6a3013964799a69f6a214bbb4fc9ac) Thanks [@adairrr](https://github.com/adairrr)! - Add new init2 address generation, 0.23 changes
+
+### Patch Changes
+
+- Updated dependencies [[`0082bc6`](https://github.com/AbstractSDK/abstract.js/commit/0082bc613c6a3013964799a69f6a214bbb4fc9ac)]:
+  - @abstract-money/core@1.3.0
+
 ## 1.2.3
 
 ### Patch Changes
