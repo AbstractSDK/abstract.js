@@ -11,20 +11,18 @@ import {
 } from '../../../types/queries'
 
 type QueryFnData = Awaited<
-  ReturnType<AccountPublicClient['getModuleInstantiate2AddressFromApi']>
+  ReturnType<AccountPublicClient['getManagerInstantiate2Address']>
 >
 
 type QueryError = unknown
 type QueryData = QueryFnData
 type QueryKey = readonly [
-  'moduleInstantiate2AddressFromApi',
+  'managerInstantiate2Address',
   AccountPublicClient | undefined,
-  UseModuleInstantiate2AddressFromApiParameters['args'],
   (
-    | Parameters<
-        AccountPublicClient['getModuleInstantiate2AddressFromApi']
-      >[0]['extra']
-    | undefined
+    | NonNullable<
+        Parameters<AccountPublicClient['getManagerInstantiate2Address']>[0]
+      >['extra']
   ),
 ]
 
@@ -36,50 +34,39 @@ type QueryOptions<TData = QueryData> = UseQueryParameters<
 >
 type QueryResult<TData = QueryData> = UseQueryReturnType<TData, QueryError>
 
-export type UseModuleInstantiate2AddressFromApiParameters<TData = QueryData> =
+export type UseManagerInstantiate2AddressParameters<TData = QueryData> =
   WithArgs<
-    Parameters<AccountPublicClient['getModuleInstantiate2AddressFromApi']>[0]
+    Parameters<AccountPublicClient['getManagerInstantiate2Address']>[0]
   > & {
     query?: QueryOptions<TData>
     chainName: string | undefined
     accountId: AccountId | undefined
   }
-export function useModuleInstantiate2AddressFromApi<TData = QueryData>({
-  args,
+export function useManagerInstantiate2Address<TData = QueryData>({
   accountId,
   chainName,
   extra,
   query = {},
-}: UseModuleInstantiate2AddressFromApiParameters<TData>): QueryResult<TData> {
+}: UseManagerInstantiate2AddressParameters<TData>): QueryResult<TData> {
   const config = useConfig()
   const accountPublicClient = config.useAccountPublicClient({
     accountId,
     chainName,
   })
   const queryKey = React.useMemo(
-    () =>
-      [
-        'moduleInstantiate2AddressFromApi',
-        accountPublicClient,
-        args,
-        extra,
-      ] as const,
-    [accountPublicClient, args, extra],
+    () => ['managerInstantiate2Address', accountPublicClient, extra] as const,
+    [accountPublicClient, extra],
   )
 
-  const enabled = Boolean(
-    accountPublicClient && args && (query.enabled ?? true),
-  )
+  const enabled = Boolean(accountPublicClient && (query.enabled ?? true))
 
   const queryFn = React.useCallback<QueryFunction<QueryFnData, QueryKey>>(
-    ({ queryKey: [_, accountPublicClient, args, extra] }) => {
+    ({ queryKey: [_, accountPublicClient, extra] }) => {
       if (!accountPublicClient) throw new Error('No client')
-      if (!args) throw new Error('No args')
 
-      return accountPublicClient.getModuleInstantiate2AddressFromApi({
-        ...args,
-        ...extra,
-      })
+      return accountPublicClient.getManagerInstantiate2Address(
+        extra ? { extra } : undefined,
+      )
     },
     [],
   )

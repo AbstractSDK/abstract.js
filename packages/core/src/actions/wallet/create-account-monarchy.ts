@@ -11,6 +11,7 @@ export type CreateAccountMonarchyParameters = WithCosmWasmSignOptions<
     apiUrl: string
     sender: string
     owner: string
+    enableIbc?: boolean
   } & WithOptional<
     Omit<
       Parameters<typeof AccountFactoryClient.prototype.createAccount>[0],
@@ -20,6 +21,24 @@ export type CreateAccountMonarchyParameters = WithCosmWasmSignOptions<
   >
 >
 
+/**
+ *
+ * @param signingCosmWasmClient
+ * @param apiUrl
+ * @param sender
+ * @param installModules
+ * @param baseAsset
+ * @param description
+ * @param name
+ * @param namespace
+ * @param link
+ * @param owner
+ * @param accountId
+ * @param enableIbc only compatible with versions 0.23+
+ * @param fee
+ * @param memo
+ * @param funds
+ */
 export async function createAccountMonarchy({
   signingCosmWasmClient,
   apiUrl,
@@ -32,6 +51,7 @@ export async function createAccountMonarchy({
   link,
   owner,
   accountId,
+  enableIbc,
   fee,
   memo,
   funds,
@@ -52,6 +72,7 @@ export async function createAccountMonarchy({
     baseAsset,
     namespace,
     accountId: accountId ? accountIdToParameter(accountId) : undefined,
+    enableIbc,
     fee,
     memo,
     funds,

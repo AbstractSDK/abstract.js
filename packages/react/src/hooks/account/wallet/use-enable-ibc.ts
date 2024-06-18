@@ -5,25 +5,33 @@ import { useConfig } from '../../../contexts'
 import { ExtractArgsFromParameters } from '../../../types/args'
 import { UseMutationParameters } from '../../../types/queries'
 
-type UpgradeModuleMutation = ExtractArgsFromParameters<
-  Parameters<AccountWalletClient['upgradeModule']>[0]
+type EnableIbcMutation = ExtractArgsFromParameters<
+  Parameters<AccountWalletClient['enableIbc']>[0] & {
+    ibcEnabled?: boolean
+  }
 >
 
-export type UseUpgradeModuleParameters = {
+export type UseEnableIbcParameters = {
   accountId: AccountId | undefined
   chainName: string | undefined
   mutation?: UseMutationParameters<
-    Awaited<ReturnType<AccountWalletClient['upgradeModule']>>,
+    Awaited<ReturnType<AccountWalletClient['enableIbc']>>,
     unknown,
-    UpgradeModuleMutation
+    EnableIbcMutation
   >
 }
 
-export function useUpgradeModule({
+/**
+ * Enable IBC on the account.
+ * @param accountId
+ * @param chainName
+ * @param mutation
+ */
+export function useEnableIbc({
   accountId,
   chainName,
   mutation,
-}: UseUpgradeModuleParameters) {
+}: UseEnableIbcParameters) {
   const config = useConfig()
   const walletClient = config.useAccountWalletClient({
     chainName,
@@ -32,6 +40,10 @@ export function useUpgradeModule({
 
   return useMutation(({ args, ...cosmWasmSignOptions }) => {
     if (!walletClient) throw new Error('walletClient is not defined')
-    return walletClient.upgradeModule({ ...cosmWasmSignOptions, ...args })
+    if (!args.ibcEnabled) {
+      throw new Error('no action')
+    }
+
+    return walletClient.enableIbc({ ...cosmWasmSignOptions, ...args })
   }, mutation)
 }

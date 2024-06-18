@@ -31,7 +31,7 @@ export * from './account/wallet/execute'
 export * from './account/wallet/get-manager-client-from-api'
 export * from './account/wallet/get-proxy-client-from-api'
 export * from './account/wallet/remove-namespace'
-export * from './account/wallet/upgrade-module'
+export * from './account/wallet/upgrade-modules'
 export * from './account/wallet/withdraw'
 
 export * from './public/get-abstract-module-address-from-version-control'

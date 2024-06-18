@@ -27,7 +27,7 @@ export async function getAppModuleCodeIdFromVersionControl({
     versionControlAddress,
   })
 
-  const [moduleAddress] = await versionControlQueryClient
+  const [moduleCodeId] = await versionControlQueryClient
     .modules({
       infos: [
         {
@@ -41,11 +41,11 @@ export async function getAppModuleCodeIdFromVersionControl({
       modules.map(({ module }) => versionControlModuleToCodeId(module)),
     )
 
-  if (!moduleAddress) {
+  if (!moduleCodeId) {
     throw new Error(
       `Could not fetch code id for app module ${moduleId} version ${version} from registry ${versionControlAddress}`,
     )
   }
 
-  return moduleAddress
+  return moduleCodeId
 }

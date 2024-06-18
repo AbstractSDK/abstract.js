@@ -17,11 +17,7 @@ type QueryData = QueryFnData
 type QueryKey = readonly [
   'modules',
   AccountPublicClient | undefined,
-  (
-    | NonNullable<
-        Parameters<AccountPublicClient['getAccountBaseAddresses']>[0]
-      >['extra']
-  ),
+  NonNullable<Parameters<AccountPublicClient['getModules']>[0]>['extra'],
 ]
 
 type QueryOptions<TData = QueryData> = Omit<
