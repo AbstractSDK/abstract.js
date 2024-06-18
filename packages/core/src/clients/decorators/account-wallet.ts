@@ -3,6 +3,7 @@ import { claimNamespace } from '../../actions/account/wallet/claim-namespace'
 import { createRemoteAccount } from '../../actions/account/wallet/create-remote-account'
 import { createSubAccount } from '../../actions/account/wallet/create-sub-account'
 import { deposit } from '../../actions/account/wallet/deposit'
+import { enableIbc } from '../../actions/account/wallet/enable-ibc'
 import { execute } from '../../actions/account/wallet/execute'
 import { executeOnModule } from '../../actions/account/wallet/execute-on-module'
 import { executeOnRemoteManager } from '../../actions/account/wallet/execute-on-remote-manager'
@@ -10,11 +11,16 @@ import { executeOnRemoteModule } from '../../actions/account/wallet/execute-on-r
 import { executeRemote } from '../../actions/account/wallet/execute-remote'
 import { getManagerClientFromApi } from '../../actions/account/wallet/get-manager-client-from-api'
 import { getProxyClientFromApi } from '../../actions/account/wallet/get-proxy-client-from-api'
+import { installModules } from '../../actions/account/wallet/install-modules'
+import { proposeOwner } from '../../actions/account/wallet/propose-owner'
 import { revokeNamespace } from '../../actions/account/wallet/remove-namespace'
 import { requestFundsFromRemote } from '../../actions/account/wallet/request-remote-funds'
 import { sendFundsToRemote } from '../../actions/account/wallet/send-funds-to-remote'
-import { updateSettings } from '../../actions/account/wallet/update-settings'
-import { upgradeModule } from '../../actions/account/wallet/upgrade-module'
+import { uninstallModule } from '../../actions/account/wallet/uninstall-module'
+import { updateInfo } from '../../actions/account/wallet/update-info'
+import { updateOwnership } from '../../actions/account/wallet/update-ownership'
+import { updateStatus } from '../../actions/account/wallet/update-status'
+import { upgradeModules } from '../../actions/account/wallet/upgrade-modules'
 import { withdraw } from '../../actions/account/wallet/withdraw'
 import { VersionControlTypes } from '../../codegen/abstract/index'
 import { ExtractAndPartializeParameters } from '../../types/parameters'
@@ -47,6 +53,11 @@ export type AccountWalletActions = {
       typeof deposit
     >,
   ): ReturnType<typeof deposit>
+  withdraw(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof withdraw
+    >,
+  ): ReturnType<typeof withdraw>
   execute(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof execute
@@ -97,21 +108,46 @@ export type AccountWalletActions = {
       typeof revokeNamespace
     >,
   ): ReturnType<typeof revokeNamespace>
-  upgradeModule(
+  updateInfo(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof upgradeModule
+      typeof updateInfo
     >,
-  ): ReturnType<typeof upgradeModule>
-  withdraw(
+  ): ReturnType<typeof updateInfo>
+  upgradeModules(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof withdraw
+      typeof upgradeModules
     >,
-  ): ReturnType<typeof withdraw>
-  updateSettings(
+  ): ReturnType<typeof upgradeModules>
+  installModules(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof updateSettings
+      typeof installModules
     >,
-  ): ReturnType<typeof updateSettings>
+  ): ReturnType<typeof installModules>
+  uninstallModule(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof uninstallModule
+    >,
+  ): ReturnType<typeof uninstallModule>
+  updateStatus(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof updateStatus
+    >,
+  ): ReturnType<typeof updateStatus>
+  updateOwnership(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof updateOwnership
+    >,
+  ): ReturnType<typeof updateOwnership>
+  proposeOwner(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof proposeOwner
+    >,
+  ): ReturnType<typeof proposeOwner>
+  enableIbc(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof enableIbc
+    >,
+  ): ReturnType<typeof enableIbc>
 }
 
 export function accountWalletActions(
@@ -175,8 +211,26 @@ export function accountWalletActions(
         ...parameters,
         ...extra,
       }),
-    upgradeModule: ({ extra, ...parameters }) =>
-      upgradeModule({
+    upgradeModules: ({ extra, ...parameters }) =>
+      upgradeModules({
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
+        ...parameters,
+        ...extra,
+      }),
+    installModules: ({ extra, ...parameters }) =>
+      installModules({
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
+        ...parameters,
+        ...extra,
+      }),
+    uninstallModule: ({ extra, ...parameters }) =>
+      uninstallModule({
         accountId,
         signingCosmWasmClient,
         apiUrl,
@@ -238,8 +292,53 @@ export function accountWalletActions(
         ...parameters,
         ...extra,
       }),
-    updateSettings: ({ extra, ...parameters }) =>
-      updateSettings({
+    updateStatus: ({ extra, ...parameters }) =>
+      updateStatus({
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
+        ...parameters,
+        ...extra,
+      }),
+    updateInfo: ({ extra, ...parameters }) =>
+      updateInfo({
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
+        ...parameters,
+        ...extra,
+      }),
+    updateOwnership: ({ extra, ...parameters }) =>
+      updateOwnership({
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
+        ...parameters,
+        ...extra,
+      }),
+    proposeOwner: ({ extra, ...parameters }) =>
+      proposeOwner({
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
+        ...parameters,
+        ...extra,
+      }),
+    enableIbc: ({ extra, ...parameters }) =>
+      enableIbc({
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
+        ...parameters,
+        ...extra,
+      }),
+    revokeNamespace: ({ extra, ...parameters }) =>
+      revokeNamespace({
         accountId,
         signingCosmWasmClient,
         apiUrl,
@@ -258,15 +357,6 @@ export function accountWalletActions(
       }),
     getProxyClientFromApi: ({ extra, ...parameters }) =>
       getProxyClientFromApi({
-        accountId,
-        signingCosmWasmClient,
-        apiUrl,
-        sender,
-        ...parameters,
-        ...extra,
-      }),
-    revokeNamespace: ({ extra, ...parameters }) =>
-      revokeNamespace({
         accountId,
         signingCosmWasmClient,
         apiUrl,

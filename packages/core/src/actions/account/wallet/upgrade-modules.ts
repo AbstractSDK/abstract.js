@@ -2,22 +2,14 @@ import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { ManagerClient, VersionControlTypes } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { getManagerClientFromApi } from './get-manager-client-from-api'
+import { BaseWalletParameters } from './types'
 
-export type UpgradeModuleParameters = WithCosmWasmSignOptions<
-  {
-    accountId: VersionControlTypes.AccountId
-    signingCosmWasmClient: SigningCosmWasmClient
-    apiUrl: string
-    sender: string
-  } & Omit<
-    Parameters<typeof ManagerClient.prototype.upgrade>[0],
-    'accountId'
-  > & { subAccountId?: number }
+export type UpgradeModulesParameters = WithCosmWasmSignOptions<
+  BaseWalletParameters & Parameters<typeof ManagerClient.prototype.upgrade>[0]
 >
 
-export async function upgradeModule({
+export async function upgradeModules({
   accountId,
-  subAccountId,
   signingCosmWasmClient,
   apiUrl,
   sender,
@@ -25,7 +17,7 @@ export async function upgradeModule({
   memo,
   funds,
   ...rest
-}: UpgradeModuleParameters) {
+}: UpgradeModulesParameters) {
   const managerClient = await getManagerClientFromApi({
     accountId,
     signingCosmWasmClient,

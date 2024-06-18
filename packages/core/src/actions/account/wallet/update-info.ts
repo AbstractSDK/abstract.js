@@ -3,14 +3,13 @@ import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { getManagerClientFromApi } from './get-manager-client-from-api'
 import { BaseWalletParameters } from './types'
 
-export type CreateSubAccountParameters = WithCosmWasmSignOptions<
+export type UpdateInfoParameters = WithCosmWasmSignOptions<
   BaseWalletParameters &
-    Parameters<typeof ManagerClient.prototype.updateSettings>[0]
+    Parameters<typeof ManagerClient.prototype.updateInfo>[0]
 >
 
-export async function updateSettings({
+export async function updateInfo({
   accountId,
-  ibcEnabled,
   signingCosmWasmClient,
   apiUrl,
   sender,
@@ -18,12 +17,12 @@ export async function updateSettings({
   memo,
   funds,
   ...rest
-}: CreateSubAccountParameters) {
+}: UpdateInfoParameters) {
   const managerClient = await getManagerClientFromApi({
     accountId,
     signingCosmWasmClient,
     sender,
     apiUrl,
   })
-  return managerClient.updateSettings({ ...rest, ibcEnabled }, fee, memo, funds)
+  return managerClient.updateInfo({ ...rest }, fee, memo, funds)
 }
