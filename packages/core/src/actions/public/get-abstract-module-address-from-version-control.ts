@@ -1,10 +1,9 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
+import { ABSTRACT_NAMESPACE } from '@abstract-money/core'
 import { VersionControlTypes } from '../../codegen/abstract'
 import { versionControlModuleToAddress } from '../../utils/version-control/version-control-module-to-address'
 import { getVersionControlQueryClient } from './get-version-control-query-client'
-
-const ABSTRACT_NAMESPACE = 'abstract'
 
 export type GetAbstractModuleAddressFromVersionControl = {
   moduleName: string
