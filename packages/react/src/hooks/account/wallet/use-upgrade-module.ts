@@ -6,20 +6,20 @@ import { ExtractArgsFromParameters } from '../../../types/args'
 import { UseMutationParameters } from '../../../types/queries'
 
 type UpgradeModuleMutation = ExtractArgsFromParameters<
-  Parameters<AccountWalletClient['upgradeModule']>[0]
+  Parameters<AccountWalletClient['upgradeModules']>[0]
 >
 
 export type UseUpgradeModuleParameters = {
   accountId: AccountId | undefined
   chainName: string | undefined
   mutation?: UseMutationParameters<
-    Awaited<ReturnType<AccountWalletClient['upgradeModule']>>,
+    Awaited<ReturnType<AccountWalletClient['upgradeModules']>>,
     unknown,
     UpgradeModuleMutation
   >
 }
 
-export function useUpgradeModule({
+export function useUpgradeModules({
   accountId,
   chainName,
   mutation,
@@ -32,6 +32,12 @@ export function useUpgradeModule({
 
   return useMutation(({ args, ...cosmWasmSignOptions }) => {
     if (!walletClient) throw new Error('walletClient is not defined')
-    return walletClient.upgradeModule({ ...cosmWasmSignOptions, ...args })
+    return walletClient.upgradeModules({ ...cosmWasmSignOptions, ...args })
   }, mutation)
 }
+
+/**
+ * @deprecated use useUpgradeModules
+ */
+const useUpgradeModule = useUpgradeModules
+export { useUpgradeModule }

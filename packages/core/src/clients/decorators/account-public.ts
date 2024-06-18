@@ -15,7 +15,6 @@ import { getRemoteAccountProxies } from '../../actions/account/public/get-remote
 import { getSubAccountIds } from '../../actions/account/public/get-sub-account-ids'
 import { getSubAccountSequences } from '../../actions/account/public/get-sub-account-sequences'
 import { getTotalValue } from '../../actions/account/public/get-total-value'
-import { getAccountsBaseAddressesFromApi } from '../../actions/public/get-accounts-base-addresses-from-api'
 import { VersionControlTypes } from '../../codegen/abstract/index'
 import { ExtractAndPartializeParameters } from '../../types/parameters'
 
@@ -56,13 +55,13 @@ export type AccountPublicActions = {
       typeof getModules
     >,
   ): ReturnType<typeof getModules>
-  getModuleInstantiate2AddressFromApi(
+  getModuleInstantiate2Address(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getModuleInstantiate2AddressFromApi
     >,
   ): ReturnType<typeof getModuleInstantiate2AddressFromApi>
-  getManagerInstantiate2AddressFromApi(
-    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+  getManagerInstantiate2Address(
+    parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getManagerInstantiate2AddressFromApi
     >,
   ): ReturnType<typeof getManagerInstantiate2AddressFromApi>
@@ -162,7 +161,7 @@ export function accountPublicActions(
         ...parameters,
         ...extra,
       }),
-    getModuleInstantiate2AddressFromApi: ({ extra, ...parameters }) =>
+    getModuleInstantiate2Address: ({ extra, ...parameters }) =>
       getModuleInstantiate2AddressFromApi({
         accountId,
         cosmWasmClient,
@@ -170,7 +169,7 @@ export function accountPublicActions(
         ...parameters,
         ...extra,
       }),
-    getManagerInstantiate2AddressFromApi: ({ extra, ...parameters }) =>
+    getManagerInstantiate2Address: ({ extra, ...parameters } = {}) =>
       getManagerInstantiate2AddressFromApi({
         accountId,
         cosmWasmClient,

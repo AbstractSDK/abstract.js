@@ -5,25 +5,25 @@ import { useConfig } from '../../../contexts'
 import { ExtractArgsFromParameters } from '../../../types/args'
 import { UseMutationParameters } from '../../../types/queries'
 
-type UpdateSettingsMutation = ExtractArgsFromParameters<
-  Parameters<AccountWalletClient['updateSettings']>[0]
+type UpdateStatusMutation = ExtractArgsFromParameters<
+  Parameters<AccountWalletClient['updateStatus']>[0]
 >
 
-export type UseUpdateSettingsParameters = {
+export type UseUpdateStatusParameters = {
   accountId: AccountId | undefined
   chainName: string | undefined
   mutation?: UseMutationParameters<
-    Awaited<ReturnType<AccountWalletClient['updateSettings']>>,
+    Awaited<ReturnType<AccountWalletClient['updateStatus']>>,
     unknown,
-    UpdateSettingsMutation
+    UpdateStatusMutation
   >
 }
 
-export function useUpdateSettings({
+export function useUpdateStatus({
   accountId,
   chainName,
   mutation,
-}: UseUpdateSettingsParameters) {
+}: UseUpdateStatusParameters) {
   const config = useConfig()
   const walletClient = config.useAccountWalletClient({
     chainName,
@@ -32,6 +32,6 @@ export function useUpdateSettings({
 
   return useMutation(({ args, ...cosmWasmSignOptions }) => {
     if (!walletClient) throw new Error('walletClient is not defined')
-    return walletClient.updateSettings({ ...cosmWasmSignOptions, ...args })
+    return walletClient.updateStatus({ ...cosmWasmSignOptions, ...args })
   }, mutation)
 }

@@ -11,18 +11,18 @@ import {
 } from '../../../types/queries'
 
 type QueryFnData = Awaited<
-  ReturnType<AccountPublicClient['getModuleInstantiate2AddressFromApi']>
+  ReturnType<AccountPublicClient['getModuleInstantiate2Address']>
 >
 
 type QueryError = unknown
 type QueryData = QueryFnData
 type QueryKey = readonly [
-  'moduleInstantiate2AddressFromApi',
+  'moduleInstantiate2Address',
   AccountPublicClient | undefined,
-  UseModuleInstantiate2AddressFromApiParameters['args'],
+  UseModuleInstantiate2AddressParameters['args'],
   (
     | Parameters<
-        AccountPublicClient['getModuleInstantiate2AddressFromApi']
+        AccountPublicClient['getModuleInstantiate2Address']
       >[0]['extra']
     | undefined
   ),
@@ -36,21 +36,22 @@ type QueryOptions<TData = QueryData> = UseQueryParameters<
 >
 type QueryResult<TData = QueryData> = UseQueryReturnType<TData, QueryError>
 
-export type UseModuleInstantiate2AddressFromApiParameters<TData = QueryData> =
+export type UseModuleInstantiate2AddressParameters<TData = QueryData> =
   WithArgs<
-    Parameters<AccountPublicClient['getModuleInstantiate2AddressFromApi']>[0]
+    Parameters<AccountPublicClient['getModuleInstantiate2Address']>[0]
   > & {
     query?: QueryOptions<TData>
     chainName: string | undefined
     accountId: AccountId | undefined
   }
-export function useModuleInstantiate2AddressFromApi<TData = QueryData>({
+
+export function useModuleInstantiate2Address<TData = QueryData>({
   args,
   accountId,
   chainName,
   extra,
   query = {},
-}: UseModuleInstantiate2AddressFromApiParameters<TData>): QueryResult<TData> {
+}: UseModuleInstantiate2AddressParameters<TData>): QueryResult<TData> {
   const config = useConfig()
   const accountPublicClient = config.useAccountPublicClient({
     accountId,
@@ -58,12 +59,7 @@ export function useModuleInstantiate2AddressFromApi<TData = QueryData>({
   })
   const queryKey = React.useMemo(
     () =>
-      [
-        'moduleInstantiate2AddressFromApi',
-        accountPublicClient,
-        args,
-        extra,
-      ] as const,
+      ['moduleInstantiate2Address', accountPublicClient, args, extra] as const,
     [accountPublicClient, args, extra],
   )
 
@@ -76,7 +72,7 @@ export function useModuleInstantiate2AddressFromApi<TData = QueryData>({
       if (!accountPublicClient) throw new Error('No client')
       if (!args) throw new Error('No args')
 
-      return accountPublicClient.getModuleInstantiate2AddressFromApi({
+      return accountPublicClient.getModuleInstantiate2Address({
         ...args,
         ...extra,
       })
@@ -86,3 +82,9 @@ export function useModuleInstantiate2AddressFromApi<TData = QueryData>({
 
   return useQuery({ queryKey, queryFn, ...query, enabled })
 }
+
+/**
+ * @deprecated
+ */
+const useModuleInstantiate2AddressFromApi = useModuleInstantiate2Address
+export { useModuleInstantiate2AddressFromApi }
