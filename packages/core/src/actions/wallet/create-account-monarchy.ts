@@ -21,6 +21,24 @@ export type CreateAccountMonarchyParameters = WithCosmWasmSignOptions<
   >
 >
 
+/**
+ *
+ * @param signingCosmWasmClient
+ * @param apiUrl
+ * @param sender
+ * @param installModules
+ * @param baseAsset
+ * @param description
+ * @param name
+ * @param namespace
+ * @param link
+ * @param owner
+ * @param accountId
+ * @param enableIbc only compatible with versions 0.23+
+ * @param fee
+ * @param memo
+ * @param funds
+ */
 export async function createAccountMonarchy({
   signingCosmWasmClient,
   apiUrl,
