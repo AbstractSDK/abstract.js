@@ -2,6 +2,7 @@ import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { getAccountBaseAddressesFromApi } from '../../actions/account/public/get-account-base-addresses-from-api'
 import { getAccountSettings } from '../../actions/account/public/get-account-settings'
 import { getBaseToken } from '../../actions/account/public/get-base-token'
+import { getManagerInstantiate2AddressFromApi } from '../../actions/account/public/get-manager-instantiate2-address-from-api'
 import { getManagerQueryClientFromApi } from '../../actions/account/public/get-manager-query-client-from-api'
 import { getModuleAddress } from '../../actions/account/public/get-module-address'
 import { getModuleInstantiate2AddressFromApi } from '../../actions/account/public/get-module-instantiate2-address-from-api'
@@ -60,6 +61,11 @@ export type AccountPublicActions = {
       typeof getModuleInstantiate2AddressFromApi
     >,
   ): ReturnType<typeof getModuleInstantiate2AddressFromApi>
+  getManagerInstantiate2AddressFromApi(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof getManagerInstantiate2AddressFromApi
+    >,
+  ): ReturnType<typeof getManagerInstantiate2AddressFromApi>
   getNamespace(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getNamespace
@@ -158,6 +164,14 @@ export function accountPublicActions(
       }),
     getModuleInstantiate2AddressFromApi: ({ extra, ...parameters }) =>
       getModuleInstantiate2AddressFromApi({
+        accountId,
+        cosmWasmClient,
+        apiUrl,
+        ...parameters,
+        ...extra,
+      }),
+    getManagerInstantiate2AddressFromApi: ({ extra, ...parameters }) =>
+      getManagerInstantiate2AddressFromApi({
         accountId,
         cosmWasmClient,
         apiUrl,

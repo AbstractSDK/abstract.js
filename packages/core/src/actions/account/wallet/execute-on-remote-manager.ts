@@ -1,11 +1,8 @@
 import { IbcClientTypes, ManagerTypes } from '../../../codegen/abstract'
-import { CallbackInfo } from '../../../codegen/abstract/cosmwasm-codegen/IbcClient.types'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { MaybeArray } from '../../../types/utils'
 import { executeIbcAction } from './execute-ibc-action'
 import { BaseWalletParameters } from './types'
-
-type Base64EncodedJson = string
 
 export type ExecuteOnRemoteParameters = Omit<
   WithCosmWasmSignOptions<
