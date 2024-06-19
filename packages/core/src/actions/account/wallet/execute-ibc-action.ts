@@ -59,7 +59,7 @@ export async function executeIbcAction({
   })
 
   const isNewerThanV022 = proxyVersion
-    ? semver.satisfies(proxyVersion.version, '>=0.22.0')
+    ? semver.minor(proxyVersion.version) >= 22
     : true
 
   let proxyMsg

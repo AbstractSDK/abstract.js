@@ -1,5 +1,13 @@
 # @abstract-money/provider-graz
 
+## 5.0.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @abstract-money/core@1.3.1
+  - @abstract-money/react@1.3.1
+
 ## 5.0.0
 
 ### Patch Changes
