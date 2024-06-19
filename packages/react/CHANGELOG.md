@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 1.3.3
+
+### Patch Changes
+
+- [#121](https://github.com/AbstractSDK/abstract.js/pull/121) [`4084d7a`](https://github.com/AbstractSDK/abstract.js/commit/4084d7a33f751883c8fa83898007edefa4a5a2ff) Thanks [@adairrr](https://github.com/adairrr)! - Add mutation keys to mutations, overrideable by consumers
+
 ## 1.3.2
 
 ### Patch Changes
