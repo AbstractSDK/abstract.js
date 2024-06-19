@@ -25,15 +25,19 @@ export function useUpgradeModules({
   mutation,
 }: UseUpgradeModulesParameters) {
   const config = useConfig()
-  const walletClient = config.useAccountWalletClient({
+  const accountClient = config.useAccountWalletClient({
     chainName,
     accountId,
   })
 
-  return useMutation(({ args, ...cosmWasmSignOptions }) => {
-    if (!walletClient) throw new Error('walletClient is not defined')
-    return walletClient.upgradeModules({ ...cosmWasmSignOptions, ...args })
-  }, mutation)
+  return useMutation(
+    ['upgradeModules', chainName, accountClient],
+    ({ args, ...cosmWasmSignOptions }) => {
+      if (!accountClient) throw new Error('accountClient is not defined')
+      return accountClient.upgradeModules({ ...cosmWasmSignOptions, ...args })
+    },
+    mutation,
+  )
 }
 
 /**

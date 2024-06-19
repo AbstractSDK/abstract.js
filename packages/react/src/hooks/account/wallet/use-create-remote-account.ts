@@ -24,13 +24,20 @@ export function useCreateRemoteAccount({
   mutation,
 }: UseCreateRemoteAccountParameters) {
   const config = useConfig()
-  const walletClient = config.useAccountWalletClient({
+  const accountClient = config.useAccountWalletClient({
     chainName,
     accountId,
   })
 
-  return useMutation(({ args, ...cosmWasmSignOptions }) => {
-    if (!walletClient) throw new Error('walletClient is not defined')
-    return walletClient.createRemoteAccount({ ...cosmWasmSignOptions, ...args })
-  }, mutation)
+  return useMutation(
+    ['createRemoteAccount', chainName, accountClient],
+    ({ args, ...cosmWasmSignOptions }) => {
+      if (!accountClient) throw new Error('accountClient is not defined')
+      return accountClient.createRemoteAccount({
+        ...cosmWasmSignOptions,
+        ...args,
+      })
+    },
+    mutation,
+  )
 }

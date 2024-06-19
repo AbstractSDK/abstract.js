@@ -25,13 +25,20 @@ export function useUseSendFundsToRemote({
   mutation,
 }: UseSendFundsToRemoteParameters) {
   const config = useConfig()
-  const walletClient = config.useAccountWalletClient({
+  const accountClient = config.useAccountWalletClient({
     chainName,
     accountId,
   })
 
-  return useMutation(({ args, ...cosmWasmSignOptions }) => {
-    if (!walletClient) throw new Error('walletClient is not defined')
-    return walletClient.sendFundsToRemote({ ...cosmWasmSignOptions, ...args })
-  }, mutation)
+  return useMutation(
+    ['sendFundsToRemote', chainName, accountClient],
+    ({ args, ...cosmWasmSignOptions }) => {
+      if (!accountClient) throw new Error('accountClient is not defined')
+      return accountClient.sendFundsToRemote({
+        ...cosmWasmSignOptions,
+        ...args,
+      })
+    },
+    mutation,
+  )
 }

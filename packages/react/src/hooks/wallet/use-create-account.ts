@@ -21,8 +21,12 @@ export function useCreateAccount({ chainName, mutation }: UseCreateAccount) {
   const config = useConfig()
   const walletClient = config.useWalletClient({ chainName: chainName })
 
-  return useMutation(({ args, ...cosmWasmSignOptions }) => {
-    if (!walletClient) throw new Error('walletClient is not defined')
-    return walletClient.createAccount({ ...args, ...cosmWasmSignOptions })
-  }, mutation)
+  return useMutation(
+    ['createAccount', chainName, walletClient],
+    ({ args, ...cosmWasmSignOptions }) => {
+      if (!walletClient) throw new Error('walletClient is not defined')
+      return walletClient.createAccount({ ...args, ...cosmWasmSignOptions })
+    },
+    mutation,
+  )
 }

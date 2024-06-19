@@ -20,7 +20,7 @@ export type UseMutationParameters<
 > = Evaluate<
   Omit<
     UseMutationOptions<data, error, Evaluate<variables>, context>,
-    'mutationFn' | 'mutationKey'
+    'mutationFn'
   >
 >
 

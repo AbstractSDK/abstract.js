@@ -24,16 +24,20 @@ export function useExecuteOnRemoteManager({
   mutation,
 }: UseExecuteOnRemoteManagerParameters) {
   const config = useConfig()
-  const walletClient = config.useAccountWalletClient({
+  const accountClient = config.useAccountWalletClient({
     accountId,
     chainName: chainName,
   })
 
-  return useMutation(({ args, ...cosmWasmSignOptions }) => {
-    if (!walletClient) throw new Error('walletClient is not defined')
-    return walletClient.executeOnRemoteManager({
-      ...cosmWasmSignOptions,
-      ...args,
-    })
-  }, mutation)
+  return useMutation(
+    ['executeOnRemoteManager', chainName, accountClient],
+    ({ args, ...cosmWasmSignOptions }) => {
+      if (!accountClient) throw new Error('accountClient is not defined')
+      return accountClient.executeOnRemoteManager({
+        ...cosmWasmSignOptions,
+        ...args,
+      })
+    },
+    mutation,
+  )
 }

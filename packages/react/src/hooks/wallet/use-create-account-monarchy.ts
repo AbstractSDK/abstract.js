@@ -24,11 +24,15 @@ export function useCreateAccountMonarchy({
   const config = useConfig()
   const walletClient = config.useWalletClient({ chainName: chainName })
 
-  return useMutation(({ args, ...cosmWasmSignOptions }) => {
-    if (!walletClient) throw new Error('walletClient is not defined')
-    return walletClient.createAccountMonarchy({
-      ...args,
-      ...cosmWasmSignOptions,
-    })
-  }, mutation)
+  return useMutation(
+    ['createAccountMonarchy', chainName, walletClient],
+    ({ args, ...cosmWasmSignOptions }) => {
+      if (!walletClient) throw new Error('walletClient is not defined')
+      return walletClient.createAccountMonarchy({
+        ...args,
+        ...cosmWasmSignOptions,
+      })
+    },
+    mutation,
+  )
 }

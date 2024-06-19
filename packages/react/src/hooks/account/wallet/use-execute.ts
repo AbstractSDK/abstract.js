@@ -28,12 +28,16 @@ export function useExecute({
   ExecuteMutation
 > {
   const config = useConfig()
-  const accountWalletClient = config.useAccountWalletClient({
+  const accountClient = config.useAccountWalletClient({
     chainName,
     accountId,
   })
-  return useMutation(({ args, ...cosmWasmSignOptions }) => {
-    if (!accountWalletClient) throw new Error('client is not defined')
-    return accountWalletClient.execute({ ...cosmWasmSignOptions, ...args })
-  }, mutation)
+  return useMutation(
+    ['execute', chainName, accountClient],
+    ({ args, ...cosmWasmSignOptions }) => {
+      if (!accountClient) throw new Error('client is not defined')
+      return accountClient.execute({ ...cosmWasmSignOptions, ...args })
+    },
+    mutation,
+  )
 }
