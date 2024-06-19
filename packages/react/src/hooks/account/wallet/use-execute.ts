@@ -33,7 +33,7 @@ export function useExecute({
     accountId,
   })
   return useMutation(
-    ['execute', chainName, accountClient],
+    ['execute', chainName, accountId],
     ({ args, ...cosmWasmSignOptions }) => {
       if (!accountClient) throw new Error('client is not defined')
       return accountClient.execute({ ...cosmWasmSignOptions, ...args })

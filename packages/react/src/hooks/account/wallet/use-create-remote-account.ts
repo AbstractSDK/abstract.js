@@ -30,7 +30,7 @@ export function useCreateRemoteAccount({
   })
 
   return useMutation(
-    ['createRemoteAccount', chainName, accountClient],
+    ['createRemoteAccount', chainName, accountId],
     ({ args, ...cosmWasmSignOptions }) => {
       if (!accountClient) throw new Error('accountClient is not defined')
       return accountClient.createRemoteAccount({

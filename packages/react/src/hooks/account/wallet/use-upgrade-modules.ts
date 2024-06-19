@@ -31,7 +31,7 @@ export function useUpgradeModules({
   })
 
   return useMutation(
-    ['upgradeModules', chainName, accountClient],
+    ['upgradeModules', chainName, accountId],
     ({ args, ...cosmWasmSignOptions }) => {
       if (!accountClient) throw new Error('accountClient is not defined')
       return accountClient.upgradeModules({ ...cosmWasmSignOptions, ...args })

@@ -30,7 +30,7 @@ export function useExecuteOnRemoteManager({
   })
 
   return useMutation(
-    ['executeOnRemoteManager', chainName, accountClient],
+    ['executeOnRemoteManager', chainName, accountId],
     ({ args, ...cosmWasmSignOptions }) => {
       if (!accountClient) throw new Error('accountClient is not defined')
       return accountClient.executeOnRemoteManager({

@@ -22,7 +22,7 @@ export function useCreateAccount({ chainName, mutation }: UseCreateAccount) {
   const walletClient = config.useWalletClient({ chainName: chainName })
 
   return useMutation(
-    ['createAccount', chainName, walletClient],
+    ['createAccount', chainName],
     ({ args, ...cosmWasmSignOptions }) => {
       if (!walletClient) throw new Error('walletClient is not defined')
       return walletClient.createAccount({ ...args, ...cosmWasmSignOptions })

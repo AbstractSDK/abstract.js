@@ -31,7 +31,7 @@ export function useCreateSubAccount({
   })
 
   return useMutation(
-    ['createSubAccount', chainName, accountClient],
+    ['createSubAccount', chainName, accountId],
     ({ args, ...cosmWasmSignOptions }) => {
       if (!accountClient) throw new Error('accountClient is not defined')
       return accountClient.createSubAccount({ ...cosmWasmSignOptions, ...args })

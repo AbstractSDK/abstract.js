@@ -31,7 +31,7 @@ export function useUpdateStatus({
   })
 
   return useMutation(
-    ['updateStatus', chainName, accountClient],
+    ['updateStatus', chainName, accountId],
     ({ args, ...cosmWasmSignOptions }) => {
       if (!accountClient) throw new Error('accountClient is not defined')
       return accountClient.updateStatus({ ...cosmWasmSignOptions, ...args })

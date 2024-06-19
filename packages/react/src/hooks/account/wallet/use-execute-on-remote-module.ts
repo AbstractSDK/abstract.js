@@ -30,7 +30,7 @@ export function useExecuteOnRemoteModule({
   })
 
   return useMutation(
-    ['executeOnRemoteModule', chainName, accountClient],
+    ['executeOnRemoteModule', chainName, accountId],
     ({ args, ...cosmWasmSignOptions }) => {
       if (!accountClient) throw new Error('accountClient is not defined')
       return accountClient.executeOnRemoteModule({

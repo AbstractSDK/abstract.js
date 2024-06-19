@@ -39,7 +39,7 @@ export function useEnableIbc({
   })
 
   return useMutation(
-    ['enableIbc', chainName, accountClient],
+    ['enableIbc', chainName, accountId],
     ({ args, ...cosmWasmSignOptions }) => {
       if (!accountClient) throw new Error('accountClient is not defined')
       if (!args.ibcEnabled) {

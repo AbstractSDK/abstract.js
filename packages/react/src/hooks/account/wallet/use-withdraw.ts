@@ -38,7 +38,7 @@ export function useWithdraw({
     accountId,
   })
   return useMutation(
-    ['withdraw', chainName, accountClient],
+    ['withdraw', chainName, accountId],
     ({ args, ...cosmWasmSignOptions }) => {
       if (!accountClient) throw new Error('accountClient is not defined')
       return accountClient.withdraw({ ...args, ...cosmWasmSignOptions })

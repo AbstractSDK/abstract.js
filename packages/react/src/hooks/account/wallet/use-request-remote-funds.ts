@@ -31,7 +31,7 @@ export function useRequestRemoteFunds({
   })
 
   return useMutation(
-    ['requestRemoteFunds', chainName, accountClient],
+    ['requestRemoteFunds', chainName, accountId],
     ({ args, ...cosmWasmSignOptions }) => {
       if (!accountClient) throw new Error('accountClient is not defined')
       return accountClient.requestFundsFromRemote({

@@ -38,7 +38,7 @@ export function useDeposit({
     chainName,
   })
   return useMutation(
-    ['deposit', chainName, accountClient],
+    ['deposit', chainName, accountId],
     ({ args, ...cosmWasmSignOptions }) => {
       if (!accountClient) throw new Error('client is not defined')
       return accountClient.deposit({ ...args, ...cosmWasmSignOptions })
