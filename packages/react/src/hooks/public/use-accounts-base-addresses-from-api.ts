@@ -33,19 +33,18 @@ type QueryOptions<TData = QueryData> = Omit<
 >
 type QueryResult<TData = QueryData> = UseQueryReturnType<TData, QueryError>
 
-export type UseAccountsBaseAddressesFromApiParameters = WithArgs<
-  Parameters<PublicClient['getAccountsBaseAddresses']>[0]
-> & {
-  chainName?: string | undefined
-  query?: QueryOptions
-}
+export type UseAccountsBaseAddressesFromApiParameters<TData = QueryData> =
+  WithArgs<Parameters<PublicClient['getAccountsBaseAddresses']>[0]> & {
+    chainName?: string | undefined
+    query?: QueryOptions<TData>
+  }
 
-export function useAccountsBaseAddressesFromApi({
+export function useAccountsBaseAddressesFromApi<TData = QueryData>({
   chainName,
   args,
   extra,
   query = {},
-}: UseAccountsBaseAddressesFromApiParameters): QueryResult {
+}: UseAccountsBaseAddressesFromApiParameters<TData>): QueryResult<TData> {
   const config = useConfig()
   const accountPublicClient = config.usePublicClient({
     chainName,

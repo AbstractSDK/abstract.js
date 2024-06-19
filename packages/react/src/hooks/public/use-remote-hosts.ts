@@ -30,15 +30,15 @@ type QueryOptions<TData = QueryData> = Omit<
 >
 type QueryResult<TData = QueryData> = UseQueryReturnType<TData, QueryError>
 
-export type UseRemoteHostsParameters = WithArgs<
+export type UseRemoteHostsParameters<TData = QueryData> = WithArgs<
   Parameters<PublicClient['getRemoteHosts']>[0]
-> & { chainName?: string | undefined; query?: QueryOptions }
+> & { chainName?: string | undefined; query?: QueryOptions<TData> }
 
-export function useRemoteHosts({
+export function useRemoteHosts<TData = QueryData>({
   chainName,
   extra,
   query = {},
-}: UseRemoteHostsParameters): QueryResult {
+}: UseRemoteHostsParameters<TData>): QueryResult<TData> {
   const config = useConfig()
   const publicClient = config.usePublicClient({
     chainName,

@@ -18,22 +18,22 @@ type QueryKey = readonly [
   Parameters<PublicClient['getAbstractModuleVersion']>[0]['extra'],
 ]
 
-type QueryOptions = UseQueryParameters<
+type QueryOptions<TData = QueryData> = UseQueryParameters<
   QueryFnData,
   QueryError,
-  QueryData,
+  TData,
   QueryKey
 >
 
-export type UseAbstractModuleVersionParameters = WithArgs<
+export type UseAbstractModuleVersionParameters<TData = QueryData> = WithArgs<
   Parameters<PublicClient['getAbstractModuleVersion']>[0]
-> & { chainName?: string | undefined; query?: QueryOptions }
-export function useAbstractModuleVersion({
+> & { chainName?: string | undefined; query?: QueryOptions<TData> }
+export function useAbstractModuleVersion<TData = QueryData>({
   args,
   extra,
   chainName,
   query = {},
-}: UseAbstractModuleVersionParameters) {
+}: UseAbstractModuleVersionParameters<TData>) {
   const config = useConfig()
   const publicClient = config.usePublicClient({
     chainName,

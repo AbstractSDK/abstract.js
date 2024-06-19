@@ -31,24 +31,24 @@ type QueryKey = readonly [
     | undefined
   ),
 ]
-type QueryResult = UseQueryReturnType<QueryData, QueryError>
+type QueryResult<TData = QueryData> = UseQueryReturnType<TData, QueryError>
 
-type QueryOptions = UseQueryParameters<
+type QueryOptions<TData = QueryData> = UseQueryParameters<
   QueryFnData,
   QueryError,
-  QueryData,
+  TData,
   QueryKey
 >
 
-export type UseAccountFactoryConfigFromApi = WithArgs<
+export type UseAccountFactoryConfigFromApi<TData = QueryData> = WithArgs<
   Parameters<PublicClient['getAccountFactoryQueryClientFromApi']>[0]
-> & { chainName?: string | undefined; query?: QueryOptions }
+> & { chainName?: string | undefined; query?: QueryOptions<TData> }
 
-export function useAccountFactoryConfigFromApi({
+export function useAccountFactoryConfigFromApi<TData = QueryData>({
   chainName,
   query = {},
   ...parameters
-}: UseAccountFactoryConfigFromApi): QueryResult {
+}: UseAccountFactoryConfigFromApi<TData>): QueryResult<TData> {
   const { extra } = parameters ?? {}
   const config = useConfig()
   const publicClient = config.usePublicClient({

@@ -1,5 +1,13 @@
 # wagemos-graz-nextjs
 
+## 0.3.17
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @abstract-money/react@1.3.4
+  - @abstract-money/provider-graz@5.0.4
+
 ## 0.3.16
 
 ### Patch Changes

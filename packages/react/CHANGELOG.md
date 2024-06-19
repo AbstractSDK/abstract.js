@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 1.3.4
+
+### Patch Changes
+
+- Ensure that TData is avaliable in all queries
+
 ## 1.3.3
 
 ### Patch Changes

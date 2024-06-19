@@ -24,24 +24,24 @@ type QueryKey = readonly [
     Parameters<PublicClient['getAccountFactoryQueryClientFromApi']>[0]
   >['extra'],
 ]
-type QueryResult = UseQueryReturnType<QueryData, QueryError>
+type QueryResult<TData = QueryData> = UseQueryReturnType<TData, QueryError>
 
-type QueryOptions = UseQueryParameters<
+type QueryOptions<TData = QueryData> = UseQueryParameters<
   QueryFnData,
   QueryError,
-  QueryData,
+  TData,
   QueryKey
 >
 
-export type UseAccountFactoryQueryClientFromApi = WithArgs<
+export type UseAccountFactoryQueryClientFromApi<TData = QueryData> = WithArgs<
   Parameters<PublicClient['getAccountFactoryQueryClientFromApi']>[0]
-> & { chainName?: string | undefined; query?: QueryOptions }
+> & { chainName?: string | undefined; query?: QueryOptions<TData> }
 
-export function useAccountFactoryQueryClientFromApi({
+export function useAccountFactoryQueryClientFromApi<TData = QueryData>({
   chainName,
   extra,
   query = {},
-}: UseAccountFactoryQueryClientFromApi): QueryResult {
+}: UseAccountFactoryQueryClientFromApi<TData>): QueryResult<TData> {
   const config = useConfig()
   const publicClient = config.usePublicClient({
     chainName,
