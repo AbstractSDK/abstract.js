@@ -1,4 +1,5 @@
 export * from './use-account-base-addresses-from-api'
+export * from './use-remote-simulation-result'
 export * from './use-account-settings'
 export * from './use-module-instantiate2-address'
 export * from './use-manager-instantiate2-address'

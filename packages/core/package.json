@@ -30,7 +30,9 @@
     "@chain-registry/types": "^0.13.1",
     "@cosmjs/cosmwasm-stargate": "^0.32.3",
     "@cosmjs/encoding": "^0.32.3",
+    "@cosmjs/proto-signing": "^0.32.3",
     "@cosmjs/stargate": "^0.32.3",
+    "@cosmjs/tendermint-rpc": "^0.32.3",
     "@rimbu/bimap": "^1.1.1",
     "bech32": "^2.0.0",
     "chain-registry": "^1.18.1",
@@ -56,6 +58,7 @@
   "type": "module",
   "devDependencies": {
     "@abstract-money/cli": "workspace:*",
+    "@cosmology/telescope": "^1.7.1",
     "@graphql-codegen/cli": "^5.0.2",
     "@graphql-codegen/client-preset": "^4.2.4",
     "@graphql-typed-document-node/core": "^3.2.0",

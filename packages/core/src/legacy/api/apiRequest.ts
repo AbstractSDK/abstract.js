@@ -1,6 +1,5 @@
 import { type TypedDocumentNode } from '@graphql-typed-document-node/core'
 import request, { type RequestDocument, type Variables } from 'graphql-request'
-import type { VariablesAndRequestHeadersArgs } from 'graphql-request/build/esm/types'
 
 /**
  * A strongly-typed query to the Abstract API
@@ -8,15 +7,6 @@ import type { VariablesAndRequestHeadersArgs } from 'graphql-request/build/esm/t
  * @param gqlQuery
  * @param variablesAndRequestHeaders
  */
-export const graphqlRequest = <TResult, V extends Variables = Variables>(
-  url: string,
-  gqlQuery: RequestDocument | TypedDocumentNode<TResult, V>,
-  ...variablesAndRequestHeaders: VariablesAndRequestHeadersArgs<V>
-) => request(url, gqlQuery, ...variablesAndRequestHeaders)
+export const graphqlRequest = request
 
-export type {
-  VariablesAndRequestHeadersArgs,
-  RequestDocument,
-  Variables,
-  TypedDocumentNode,
-}
+export type { RequestDocument, Variables, TypedDocumentNode }
