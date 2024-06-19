@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 1.3.2
+
+### Patch Changes
+
+- Patch react with new core changes
+
 ## 1.3.1
 
 ### Patch Changes
