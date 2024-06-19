@@ -39,7 +39,11 @@ export function useUpdateSettings({
     mutation,
   })
 
-  return useMutation(async ({ args, ...cosmWasmSignOptions }) => {
-    return await mutateAsync({ ...cosmWasmSignOptions, args })
-  }, mutation)
+  return useMutation(
+    ['updateSettings', chainName, accountId],
+    async ({ args, ...cosmWasmSignOptions }) => {
+      return await mutateAsync({ ...cosmWasmSignOptions, args })
+    },
+    mutation,
+  )
 }

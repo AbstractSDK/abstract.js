@@ -33,12 +33,16 @@ export function useWithdraw({
   WithdrawMutation
 > {
   const config = useConfig()
-  const accountWalletClient = config.useAccountWalletClient({
+  const accountClient = config.useAccountWalletClient({
     chainName,
     accountId,
   })
-  return useMutation(({ args, ...cosmWasmSignOptions }) => {
-    if (!accountWalletClient) throw new Error('client is not defined')
-    return accountWalletClient.withdraw({ ...args, ...cosmWasmSignOptions })
-  }, mutation)
+  return useMutation(
+    ['withdraw', chainName, accountId],
+    ({ args, ...cosmWasmSignOptions }) => {
+      if (!accountClient) throw new Error('accountClient is not defined')
+      return accountClient.withdraw({ ...args, ...cosmWasmSignOptions })
+    },
+    mutation,
+  )
 }

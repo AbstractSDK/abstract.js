@@ -33,12 +33,16 @@ export function useDeposit({
   DepositMutation
 > {
   const config = useConfig()
-  const accountWalletClient = config.useAccountWalletClient({
+  const accountClient = config.useAccountWalletClient({
     accountId,
     chainName,
   })
-  return useMutation(({ args, ...cosmWasmSignOptions }) => {
-    if (!accountWalletClient) throw new Error('client is not defined')
-    return accountWalletClient.deposit({ ...args, ...cosmWasmSignOptions })
-  }, mutation)
+  return useMutation(
+    ['deposit', chainName, accountId],
+    ({ args, ...cosmWasmSignOptions }) => {
+      if (!accountClient) throw new Error('client is not defined')
+      return accountClient.deposit({ ...args, ...cosmWasmSignOptions })
+    },
+    mutation,
+  )
 }

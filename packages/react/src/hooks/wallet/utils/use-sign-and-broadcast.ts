@@ -27,14 +27,20 @@ export function useSignAndBroadcast(
 
   const { data: senderAddress } = useSenderAddress({ chainName })
 
-  return useMutation(({ args, fee, memo }) => {
-    if (!signingCosmWasmClient || !senderAddress)
-      throw new Error('signingCosmWasmClient or senderAddress are not defined')
-    return signingCosmWasmClient?.signAndBroadcast(
-      senderAddress,
-      args.messages,
-      fee,
-      memo,
-    )
-  }, options)
+  return useMutation(
+    ['signAndBroadcast', chainName, senderAddress],
+    ({ args, fee, memo }) => {
+      if (!signingCosmWasmClient || !senderAddress)
+        throw new Error(
+          'signingCosmWasmClient or senderAddress are not defined',
+        )
+      return signingCosmWasmClient?.signAndBroadcast(
+        senderAddress,
+        args.messages,
+        fee,
+        memo,
+      )
+    },
+    options,
+  )
 }

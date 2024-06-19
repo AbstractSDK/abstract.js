@@ -25,13 +25,17 @@ export function useUpdateStatus({
   mutation,
 }: UseUpdateStatusParameters) {
   const config = useConfig()
-  const walletClient = config.useAccountWalletClient({
+  const accountClient = config.useAccountWalletClient({
     chainName,
     accountId,
   })
 
-  return useMutation(({ args, ...cosmWasmSignOptions }) => {
-    if (!walletClient) throw new Error('walletClient is not defined')
-    return walletClient.updateStatus({ ...cosmWasmSignOptions, ...args })
-  }, mutation)
+  return useMutation(
+    ['updateStatus', chainName, accountId],
+    ({ args, ...cosmWasmSignOptions }) => {
+      if (!accountClient) throw new Error('accountClient is not defined')
+      return accountClient.updateStatus({ ...cosmWasmSignOptions, ...args })
+    },
+    mutation,
+  )
 }
