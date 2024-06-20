@@ -1,4 +1,5 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { getRemoteSimulationResultFromApi } from '../../actions/get-remote-simulation-result-from-api'
 import { getAbstractModuleAddressFromVersionControl } from '../../actions/public/get-abstract-module-address-from-version-control'
 import { getAbstractModuleVersion } from '../../actions/public/get-abstract-module-version'
 import { getAccountFactoryAddressFromVersionControl } from '../../actions/public/get-account-factory-address-from-version-control'
@@ -128,6 +129,11 @@ export type PublicActions = {
     >,
   ): ReturnType<typeof getRemoteHostsFromApi>
   getCosmWasmClient(): ReturnType<typeof getCosmWasmClient>
+  getRemoteSimulationResult(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof getRemoteSimulationResultFromApi
+    >,
+  ): ReturnType<typeof getRemoteSimulationResultFromApi>
 }
 
 export function publicActions(
@@ -272,6 +278,13 @@ export function publicActions(
     getCosmWasmClient: () =>
       getCosmWasmClient({
         cosmWasmClient,
+      }),
+    getRemoteSimulationResult: ({ extra, ...parameters }) =>
+      getRemoteSimulationResultFromApi({
+        cosmWasmClient,
+        apiUrl,
+        ...parameters,
+        ...extra,
       }),
   }
 }

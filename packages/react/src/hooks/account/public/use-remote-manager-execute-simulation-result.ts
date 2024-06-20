@@ -11,19 +11,18 @@ import {
 } from '../../../types/queries'
 
 type QueryFnData = Awaited<
-  ReturnType<AccountPublicClient['getRemoteSimulationResult']>
+  ReturnType<AccountPublicClient['getRemoteManagerExecuteSimulationResult']>
 >
 
 type QueryError = unknown
 type QueryData = QueryFnData
 type QueryKey = readonly [
-  'remoteSimulationResult',
+  'remoteManagerExecuteSimulationResult',
   AccountPublicClient | undefined,
-  UseRemoteSimulationResultParameters['args'],
-  (
-    | Parameters<AccountPublicClient['getRemoteSimulationResult']>[0]['extra']
-    | undefined
-  ),
+  UseRemoteManagerExecuteSimulationResultParameters['args'],
+  Parameters<
+    AccountPublicClient['getRemoteManagerExecuteSimulationResult']
+  >[0]['extra'],
 ]
 
 type QueryOptions<TData = QueryData> = UseQueryParameters<
@@ -34,28 +33,36 @@ type QueryOptions<TData = QueryData> = UseQueryParameters<
 >
 type QueryResult<TData = QueryData> = UseQueryReturnType<TData, QueryError>
 
-export type UseRemoteSimulationResultParameters<TData = QueryData> = WithArgs<
-  Parameters<AccountPublicClient['getRemoteSimulationResult']>[0]
+export type UseRemoteManagerExecuteSimulationResultParameters<
+  TData = QueryData,
+> = WithArgs<
+  Parameters<AccountPublicClient['getRemoteManagerExecuteSimulationResult']>[0]
 > & {
   query?: QueryOptions<TData>
   chainName: string | undefined
   accountId: AccountId | undefined
 }
 
-export function useRemoteSimulationResult<TData = QueryData>({
+export function useRemoteManagerExecuteSimulationResult<TData = QueryData>({
   args,
   accountId,
   chainName,
   extra,
   query = {},
-}: UseRemoteSimulationResultParameters<TData>): QueryResult<TData> {
+}: UseRemoteManagerExecuteSimulationResultParameters<TData>): QueryResult<TData> {
   const config = useConfig()
   const accountPublicClient = config.useAccountPublicClient({
     accountId,
     chainName,
   })
   const queryKey = React.useMemo(
-    () => ['remoteSimulationResult', accountPublicClient, args, extra] as const,
+    () =>
+      [
+        'remoteManagerExecuteSimulationResult',
+        accountPublicClient,
+        args,
+        extra,
+      ] as const,
     [accountPublicClient, args, extra],
   )
 
@@ -68,7 +75,7 @@ export function useRemoteSimulationResult<TData = QueryData>({
       if (!accountPublicClient) throw new Error('No client')
       if (!args) throw new Error('No args')
 
-      return accountPublicClient.getRemoteSimulationResult({
+      return accountPublicClient.getRemoteManagerExecuteSimulationResult({
         ...args,
         ...extra,
       })

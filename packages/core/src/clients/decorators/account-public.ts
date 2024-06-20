@@ -12,7 +12,7 @@ import { getOwner } from '../../actions/account/public/get-owner'
 import { getProxyQueryClientFromApi } from '../../actions/account/public/get-proxy-query-client-from-api'
 import { getRemoteAccountIds } from '../../actions/account/public/get-remote-account-ids'
 import { getRemoteAccountProxies } from '../../actions/account/public/get-remote-account-proxies'
-import { getRemoteSimulationResult } from '../../actions/account/public/get-remote-simulation-result'
+import { getRemoteManagerExecuteSimulationResult } from '../../actions/account/public/get-remote-manager-execute-simulation-result'
 import { getSubAccountIds } from '../../actions/account/public/get-sub-account-ids'
 import { getSubAccountSequences } from '../../actions/account/public/get-sub-account-sequences'
 import { getTotalValue } from '../../actions/account/public/get-total-value'
@@ -106,11 +106,11 @@ export type AccountPublicActions = {
       typeof getTotalValue
     >,
   ): ReturnType<typeof getTotalValue>
-  getRemoteSimulationResult(
+  getRemoteManagerExecuteSimulationResult(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getRemoteSimulationResult
+      typeof getRemoteManagerExecuteSimulationResult
     >,
-  ): ReturnType<typeof getRemoteSimulationResult>
+  ): ReturnType<typeof getRemoteManagerExecuteSimulationResult>
 }
 
 export function accountPublicActions(
@@ -247,8 +247,8 @@ export function accountPublicActions(
         ...parameters,
         ...extra,
       }),
-    getRemoteSimulationResult: ({ extra, ...parameters }) =>
-      getRemoteSimulationResult({
+    getRemoteManagerExecuteSimulationResult: ({ extra, ...parameters }) =>
+      getRemoteManagerExecuteSimulationResult({
         accountId,
         cosmWasmClient,
         apiUrl,
