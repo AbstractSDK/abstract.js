@@ -6,8 +6,10 @@ import {
   useExecuteOnRemoteManager,
   useRemoteAccountIds,
   useRemoteHosts,
+  useSimulateExecuteRemoteManager,
 } from '@abstract-money/react'
 import { useChain } from '@cosmos-kit/react'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { useCallback, useMemo, useState } from 'react'
 import { Button } from '../../components/ui/button'
 import {
@@ -102,6 +104,26 @@ export default function RemotePage() {
     })
   }, [execRemote, chainInput])
 
+  const { mutate: simulateRemote, isLoading: isSimulating } =
+    useSimulateExecuteRemoteManager({
+      accountId: firstAccount,
+      chainName: firstAccount?.chainName,
+    })
+  const onSimulateClick = useCallback(() => {
+    if (!chainInput) {
+      throw new Error('chainInput is undefined')
+    }
+    console.log('simulating remote account')
+    simulateRemote({
+      hostChainName: chainInput,
+      managerMsg: {
+        update_info: {
+          name: 'test',
+        },
+      },
+    })
+  }, [simulateRemote, chainInput])
+
   return (
     <>
       <h3>Controller</h3>
@@ -140,6 +162,10 @@ export default function RemotePage() {
       {/*<Input placeholder="chain" value={chainInput} onChange={(e) => setChainInput(e.target.value)} />*/}
       <Button onClick={onCreateClick} disabled={!chainInput || isCreating}>
         Creat{isCreating ? 'ing' : 'e'} Remote Account {isCreating && '...'}
+      </Button>
+      <Button onClick={onSimulateClick} disabled={!chainInput || isSimulating}>
+        Simulat{isSimulating ? 'ing' : 'e'} Remote Account{' '}
+        {isSimulating && '...'}
       </Button>
       <Button onClick={onExecClick} disabled={!chainInput || isExecuting}>
         Updat{isExecuting ? 'ing' : 'e'} Remote Account {isExecuting && '...'}

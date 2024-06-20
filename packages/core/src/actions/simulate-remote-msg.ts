@@ -6,36 +6,35 @@ import { getCometClientFromApi } from './get-comet-client-from-api'
 import { getVersionControlAddressFromApi } from './get-version-control-address-from-api'
 import { getIbcHostAddressFromVersionControl } from './public/get-ibc-host-address-from-version-control'
 
-export type GetRemoteSimulationResultParameters = {
+export type SimulateRemoteMsgParameters = {
   apiUrl: string
-  remoteChainName: string
+  hostChainName: string
   msgs: MaybeArray<ProxyTypes.CosmosMsgForEmpty>
 }
 
-type ChainName = string
-type MaybeProxyAddress = string | null
-
 /**
- * Simulate messages to be executed on a remote chain.
+ * Simulate messages to be executed on a remote chain. This simulates execution as the IBC host.
+ * Not from API because it only retrieves the RPC / version control from API.
  * @param accountId
  * @param apiUrl
- * @param remoteChainName
+ * @param hostChainName
  * @param msgs
+ * @experimental
  */
-export async function getRemoteSimulationResultFromApi({
+export async function simulateRemoteMsg({
   apiUrl,
-  remoteChainName,
+  hostChainName,
   msgs,
-}: GetRemoteSimulationResultParameters) {
+}: SimulateRemoteMsgParameters) {
   // TODO: these queries could be combined
   const remoteVcAddress = await getVersionControlAddressFromApi({
     apiUrl,
-    chainName: remoteChainName,
+    chainName: hostChainName,
   })
 
   const remoteComet = await getCometClientFromApi({
     apiUrl,
-    chainName: remoteChainName,
+    chainName: hostChainName,
   })
 
   const remoteCwClient = await CosmWasmClient.create(remoteComet)

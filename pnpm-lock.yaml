@@ -137,6 +137,9 @@ importers:
       '@tanstack/react-query':
         specifier: ^4
         version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
+      '@tanstack/react-query-devtools':
+        specifier: ^5.40.0
+        version: 5.40.0(@tanstack/react-query@4.36.1)(react@18.2.0)
       chain-registry:
         specifier: ^1.18.1
         version: 1.20.0
@@ -617,8 +620,8 @@ importers:
         specifier: ^20.0.0
         version: 20.10.0
       graz:
-        specifier: ^0.1.1
-        version: 0.1.1(@cosmjs/amino@0.31.3)(@cosmjs/cosmwasm-stargate@0.32.3)(@cosmjs/launchpad@0.27.1)(@cosmjs/proto-signing@0.32.3)(@cosmjs/stargate@0.32.3)(@cosmjs/tendermint-rpc@0.32.3)(@terra-money/feather.js@1.2.1)(@types/react@18.2.38)(axios@0.27.2)(long@5.2.3)(react@18.2.0)
+        specifier: ^0.1.5
+        version: 0.1.5(@cosmjs/amino@0.31.3)(@cosmjs/cosmwasm-stargate@0.32.3)(@cosmjs/launchpad@0.27.1)(@cosmjs/proto-signing@0.32.3)(@cosmjs/stargate@0.32.3)(@cosmjs/tendermint-rpc@0.32.3)(@terra-money/feather.js@1.2.1)(@types/react@18.2.38)(axios@0.27.2)(long@5.2.3)(react-dom@18.2.0)(react@18.2.0)
       rimraf:
         specifier: ^3.0.0
         version: 3.0.2
@@ -638,6 +641,9 @@ importers:
         specifier: ^0.32.3
         version: 0.32.3
       '@cosmjs/stargate':
+        specifier: ^0.32.3
+        version: 0.32.3
+      '@cosmjs/tendermint-rpc':
         specifier: ^0.32.3
         version: 0.32.3
       '@tanstack/react-query':
@@ -8096,6 +8102,21 @@ packages:
   /@tanstack/query-core@4.36.1:
     resolution: {integrity: sha512-DJSilV5+ytBP1FbFcEJovv4rnnm/CokuVvrBEtW/Va9DvuJ3HksbXUJEpI0aV1KtuL4ZoO9AVE6PyNLzF7tLeA==}
 
+  /@tanstack/query-devtools@5.37.1:
+    resolution: {integrity: sha512-XcG4IIHIv0YQKrexTqo2zogQWR1Sz672tX2KsfE9kzB+9zhx44vRKH5si4WDILE1PIWQpStFs/NnrDQrBAUQpg==}
+    dev: false
+
+  /@tanstack/react-query-devtools@5.40.0(@tanstack/react-query@4.36.1)(react@18.2.0):
+    resolution: {integrity: sha512-JoQOQj/LKaHoHVMAh73R0pc4lIAHiZMV8L4DGHsTSvHcKi22LZmSC9aYBY9oMkqGpFtKmbspwrUIn55+czNSbA==}
+    peerDependencies:
+      '@tanstack/react-query': ^5.40.0
+      react: ^18 || ^19
+    dependencies:
+      '@tanstack/query-devtools': 5.37.1
+      '@tanstack/react-query': 4.36.1(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+    dev: false
+
   /@tanstack/react-query@4.36.1(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-y7ySVHFyyQblPl3J3eQBWpXZkliroki3ARnBKsdJchlgt7yJLRDUcf4B8soufgiYt3pEQIkBWBx1N9/ZPIeUWw==}
     peerDependencies:
@@ -11903,68 +11924,6 @@ packages:
     resolution: {integrity: sha512-59LZHPdGZVh695Ud9lRzPBVTtlX9ZCV150Er2W43ro37wVof0ctenSaskPPjN7lVTIN8mSZt8PHUNKZuNQUuxw==}
     engines: {node: ^12.22.0 || ^14.16.0 || ^16.0.0 || >=17.0.0}
 
-  /graz@0.1.1(@cosmjs/amino@0.31.3)(@cosmjs/cosmwasm-stargate@0.32.3)(@cosmjs/launchpad@0.27.1)(@cosmjs/proto-signing@0.32.3)(@cosmjs/stargate@0.32.3)(@cosmjs/tendermint-rpc@0.32.3)(@terra-money/feather.js@1.2.1)(@types/react@18.2.38)(axios@0.27.2)(long@5.2.3)(react@18.2.0):
-    resolution: {integrity: sha512-aFuAK2LDcS5aliFF5jmnatyzkjfhjhQcj1RPfZhvhPg9J19gE3/mUEWjwGBrvPDau8NiKzYu2Un6wAjKWxgnzw==}
-    hasBin: true
-    peerDependencies:
-      '@cosmjs/cosmwasm-stargate': '*'
-      '@cosmjs/launchpad': '*'
-      '@cosmjs/proto-signing': '*'
-      '@cosmjs/stargate': '*'
-      '@cosmjs/tendermint-rpc': '*'
-      long: '*'
-      react: '>=17'
-    peerDependenciesMeta:
-      long:
-        optional: true
-    dependencies:
-      '@clack/prompts': 0.7.0
-      '@cosmjs/cosmwasm-stargate': 0.32.3
-      '@cosmjs/launchpad': 0.27.1
-      '@cosmjs/proto-signing': 0.32.3
-      '@cosmjs/stargate': 0.32.3
-      '@cosmjs/tendermint-rpc': 0.32.3
-      '@keplr-wallet/cosmos': 0.12.44
-      '@keplr-wallet/types': 0.12.44
-      '@metamask/providers': 12.0.0
-      '@tanstack/react-query': 4.36.1(react-dom@18.2.0)(react@18.2.0)
-      '@terra-money/station-connector': 1.0.15(@cosmjs/amino@0.31.3)(@terra-money/feather.js@1.2.1)(axios@0.27.2)
-      '@vectis/extension-client': 0.7.2
-      '@walletconnect/sign-client': 2.10.5
-      '@walletconnect/types': 2.10.5
-      '@walletconnect/utils': 2.10.5
-      '@web3modal/standalone': 2.4.3(react@18.2.0)
-      cac: 6.7.14
-      cosmos-directory-client: 0.0.6
-      long: 5.2.3
-      react: 18.2.0
-      wadesta: 0.0.5(long@5.2.3)
-      zustand: 4.5.2(@types/react@18.2.38)(immer@10.0.4)(react@18.2.0)
-    transitivePeerDependencies:
-      - '@azure/app-configuration'
-      - '@azure/cosmos'
-      - '@azure/data-tables'
-      - '@azure/identity'
-      - '@azure/keyvault-secrets'
-      - '@azure/storage-blob'
-      - '@capacitor/preferences'
-      - '@cosmjs/amino'
-      - '@netlify/blobs'
-      - '@planetscale/database'
-      - '@react-native-async-storage/async-storage'
-      - '@terra-money/feather.js'
-      - '@types/react'
-      - '@upstash/redis'
-      - '@vercel/kv'
-      - axios
-      - bufferutil
-      - immer
-      - react-dom
-      - react-native
-      - supports-color
-      - utf-8-validate
-    dev: true
-
   /graz@0.1.5(@cosmjs/amino@0.31.3)(@cosmjs/cosmwasm-stargate@0.32.3)(@cosmjs/launchpad@0.27.1)(@cosmjs/proto-signing@0.32.3)(@cosmjs/stargate@0.32.3)(@cosmjs/tendermint-rpc@0.32.3)(@terra-money/feather.js@1.2.1)(@types/react@18.2.38)(axios@0.27.2)(long@5.2.3)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-OaKapshiab/W25gebS1u6t56YTxBzE97GnY/iie2+eBnFQ1YqNgPGG4X8OWfX61uPAGDWVYDoprC7GoRbcLQbA==}
     hasBin: true
@@ -12025,7 +11984,6 @@ packages:
       - react-native
       - supports-color
       - utf-8-validate
-    dev: false
 
   /h3@1.9.0:
     resolution: {integrity: sha512-+F3ZqrNV/CFXXfZ2lXBINHi+rM4Xw3CDC5z2CDK3NMPocjonKipGLLDSkrqY9DOrioZNPTIdDMWfQKm//3X2DA==}
@@ -13737,14 +13695,9 @@ packages:
     dependencies:
       tslib: 2.6.2
 
-  /lru-cache@10.1.0:
-    resolution: {integrity: sha512-/1clY/ui8CzjKFyjdvwPWJUYKiFVXG2I2cY0ssG7h4+hwk+XOIX7ZSG9Q7TW8TW3Kp3BUSqgFWBLgL4PJ+Blag==}
-    engines: {node: 14 || >=16.14}
-
   /lru-cache@10.2.2:
     resolution: {integrity: sha512-9hp3Vp2/hFQUiIwKo8XCeFVnrg8Pk3TYNPIR7tJADKi5YfcF7vEaK7avFHTlSy3kOKYaJQaalfEo6YuXdceBOQ==}
     engines: {node: 14 || >=16.14}
-    dev: true
 
   /lru-cache@4.1.5:
     resolution: {integrity: sha512-sWZlbEP2OsHNkXrMl5GYk/jKk70MBng6UU4YI/qGDYbgf6YbP4EvmqISbXCoJiRKs+1bSpFHVgQxvJ17F2li5g==}
@@ -16813,7 +16766,7 @@ packages:
       idb-keyval: 6.2.1
       ioredis: 5.3.2
       listhen: 1.5.5
-      lru-cache: 10.1.0
+      lru-cache: 10.2.2
       mri: 1.2.0
       node-fetch-native: 1.6.4
       ofetch: 1.3.3

@@ -32,7 +32,7 @@
     "@abstract-money/react": "workspace:*",
     "@abstract-money/core": "workspace:*",
     "@types/node": "^20.0.0",
-    "graz": "^0.1.1",
+    "graz": "^0.1.5",
     "rimraf": "^3.0.0"
   },
   "main": "dist/index.js",

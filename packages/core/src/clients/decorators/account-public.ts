@@ -12,10 +12,11 @@ import { getOwner } from '../../actions/account/public/get-owner'
 import { getProxyQueryClientFromApi } from '../../actions/account/public/get-proxy-query-client-from-api'
 import { getRemoteAccountIds } from '../../actions/account/public/get-remote-account-ids'
 import { getRemoteAccountProxies } from '../../actions/account/public/get-remote-account-proxies'
-import { getRemoteManagerExecuteSimulationResult } from '../../actions/account/public/get-remote-manager-execute-simulation-result'
 import { getSubAccountIds } from '../../actions/account/public/get-sub-account-ids'
 import { getSubAccountSequences } from '../../actions/account/public/get-sub-account-sequences'
 import { getTotalValue } from '../../actions/account/public/get-total-value'
+import { simulateExecuteRemote } from '../../actions/account/public/simulate-execute-remote'
+import { simulateExecuteRemoteManager } from '../../actions/account/public/simulate-execute-remote-manager'
 import { VersionControlTypes } from '../../codegen/abstract/index'
 import { ExtractAndPartializeParameters } from '../../types/parameters'
 
@@ -106,11 +107,16 @@ export type AccountPublicActions = {
       typeof getTotalValue
     >,
   ): ReturnType<typeof getTotalValue>
-  getRemoteManagerExecuteSimulationResult(
+  simulateExecuteRemoteManager(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getRemoteManagerExecuteSimulationResult
+      typeof simulateExecuteRemoteManager
     >,
-  ): ReturnType<typeof getRemoteManagerExecuteSimulationResult>
+  ): ReturnType<typeof simulateExecuteRemoteManager>
+  simulateExecuteRemote(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof simulateExecuteRemote
+    >,
+  ): ReturnType<typeof simulateExecuteRemote>
 }
 
 export function accountPublicActions(
@@ -247,8 +253,16 @@ export function accountPublicActions(
         ...parameters,
         ...extra,
       }),
-    getRemoteManagerExecuteSimulationResult: ({ extra, ...parameters }) =>
-      getRemoteManagerExecuteSimulationResult({
+    simulateExecuteRemoteManager: ({ extra, ...parameters }) =>
+      simulateExecuteRemoteManager({
+        accountId,
+        cosmWasmClient,
+        apiUrl,
+        ...parameters,
+        ...extra,
+      }),
+    simulateExecuteRemote: ({ extra, ...parameters }) =>
+      simulateExecuteRemote({
         accountId,
         cosmWasmClient,
         apiUrl,

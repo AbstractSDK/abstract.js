@@ -1,14 +1,17 @@
 import { request } from 'graphql-request'
 import { gql } from '../codegen/gql'
+import { ModuleFilter } from '../codegen/gql/graphql'
 
 export type GetModulesFromApiParameters = {
   apiUrl: string
   chainName: string
+  filter?: ModuleFilter
 }
 
 export async function getModulesFromApi({
   apiUrl,
   chainName,
+  filter,
 }: GetModulesFromApiParameters) {
   const result = await request(
     apiUrl,
@@ -22,6 +25,7 @@ export async function getModulesFromApi({
   `),
     {
       chain: chainName,
+      filter,
     },
   )
 
