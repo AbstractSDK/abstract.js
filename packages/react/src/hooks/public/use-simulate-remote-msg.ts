@@ -19,6 +19,11 @@ export type UseSimulateRemoteMsgParameters = {
 
 type SimulatedReturn = Awaited<ReturnType<PublicClient['simulateRemoteMsg']>>
 
+/**
+ * Simulate a message to be executed on a remote chain by the ibc host.
+ * @param chainName local chain name
+ * @param mutation
+ */
 export function useSimulateRemoteMsg({
   chainName,
   mutation,

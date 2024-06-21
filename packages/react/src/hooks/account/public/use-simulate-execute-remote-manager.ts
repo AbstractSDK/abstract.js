@@ -29,6 +29,13 @@ export type UseSimulateExecuteRemoteManagerParameters = {
     SimulateExecuteRemoteManagerMutation
   >
 }
+
+/**
+ * Simulate a message to be executed on a manager on a remote chain.
+ * @param accountId
+ * @param chainName
+ * @param mutation
+ */
 export function useSimulateExecuteRemoteManager({
   accountId,
   chainName,
