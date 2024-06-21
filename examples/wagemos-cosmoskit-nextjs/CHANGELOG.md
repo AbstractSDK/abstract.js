@@ -1,5 +1,16 @@
 # wagemos-cosmoskit-nextjs
 
+## 0.3.18
+
+### Patch Changes
+
+- Add remote simulation capabilities
+
+- Updated dependencies []:
+  - @abstract-money/core@1.3.2
+  - @abstract-money/react@1.3.5
+  - @abstract-money/provider-cosmoskit@5.0.5
+
 ## 0.3.17
 
 ### Patch Changes
