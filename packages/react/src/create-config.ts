@@ -16,7 +16,6 @@ import {
   CosmWasmClient,
   SigningCosmWasmClient,
 } from '@cosmjs/cosmwasm-stargate'
-import { CometClient } from '@cosmjs/tendermint-rpc'
 import { useMemo } from 'react'
 import { Evaluate } from './types/utils'
 
