@@ -1,7 +1,10 @@
 import { ManagerTypes } from '../../../codegen/abstract'
 import { ModuleType } from '../../../codegen/gql/graphql'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
-import { encodeModuleMsg } from '../../../utils/modules/encode-module-msg'
+import {
+  encodeModuleMsg,
+  executeOnModuleMsg,
+} from '../../../utils/modules/encode-module-msg'
 import { executeOnRemoteManager } from './execute-on-remote-manager'
 import { BaseWalletParameters } from './types'
 
@@ -45,12 +48,11 @@ export async function executeOnRemoteModule({
   fee,
   memo,
 }: ExecuteOnRemoteModuleParameters) {
-  const managerMsg: ManagerTypes.ExecuteMsg = {
-    exec_on_module: {
-      module_id: moduleId,
-      exec_msg: encodeModuleMsg(moduleMsg, moduleType),
-    },
-  }
+  const managerMsg: ManagerTypes.ExecuteMsg = executeOnModuleMsg(
+    moduleId,
+    moduleMsg,
+    moduleType,
+  )
 
   return executeOnRemoteManager({
     accountId,

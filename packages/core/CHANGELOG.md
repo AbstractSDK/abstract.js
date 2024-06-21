@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 1.3.2
+
+### Patch Changes
+
+- Add remote simulation capabilities
+
 ## 1.3.1
 
 ### Patch Changes

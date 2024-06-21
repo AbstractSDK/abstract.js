@@ -4,6 +4,7 @@ import { cosmosKitProvider } from '@abstract-money/provider-cosmoskit'
 import { AbstractProvider, createConfig } from '@abstract-money/react'
 import '@interchain-ui/react/styles'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Inter, Poppins } from 'next/font/google'
 import { Toaster } from '../components/ui/toaster'
 import { cn } from '../utils'
@@ -45,13 +46,17 @@ export default function RootLayout({
       <CosmosKitProvider>
         <body className={cn(inter.variable, poppins.variable)}>
           <QueryClientProvider client={client}>
-            <AbstractProvider config={abstractConfig}>
+            <AbstractProvider
+              config={abstractConfig}
+              queryClientOptions={{ client }}
+            >
               <main className="flex flex-col items-center p-24 min-h-screen">
                 <section className="mt-10">
                   <div className="mt-10">{children}</div>
                 </section>
               </main>
             </AbstractProvider>
+            <ReactQueryDevtools client={client} />
           </QueryClientProvider>
           <Toaster />
         </body>

@@ -1,5 +1,14 @@
 import { jsonToBinary } from '@abstract-money/core'
+import { CommonModuleNames } from '../../actions'
+import {
+  ManagerTypes,
+  ProxyExecuteMsgBuilder,
+  ProxyTypes,
+} from '../../codegen/abstract'
+import { CosmosMsgForEmpty } from '../../codegen/abstract/cosmwasm-codegen/Proxy.types'
 import { ModuleType } from '../../codegen/gql/graphql'
+import { MaybeArray } from '../../types/utils'
+import { abstractModuleId } from './abstract-module-id'
 import { wrapModuleExecMsg } from './wrap-module-exec-msg'
 
 /**
@@ -7,10 +16,45 @@ import { wrapModuleExecMsg } from './wrap-module-exec-msg'
  * @param msg - if a string, it is assumed to be a base64 encoded JSON string and is returned as is.
  * @param moduleType
  */
-export const encodeModuleMsg = (
-  msg: Record<string, unknown> | string,
+export const encodeModuleMsg = <TModuleMsg extends Record<string, unknown>>(
+  msg: TModuleMsg | string,
   moduleType?: ModuleType,
 ) =>
   typeof msg === 'string'
     ? msg
     : jsonToBinary(wrapModuleExecMsg(msg, moduleType))
+
+/**
+ * Encode a message to be executed on a module.
+ * @param moduleId
+ * @param moduleMsg
+ * @param moduleType
+ */
+export const executeOnModuleMsg = <TModuleMsg extends Record<string, unknown>>(
+  moduleId: string,
+  moduleMsg: TModuleMsg | string,
+  moduleType?: ModuleType,
+): ManagerTypes.ExecuteMsg => ({
+  exec_on_module: {
+    module_id: moduleId,
+    exec_msg: encodeModuleMsg(moduleMsg, moduleType),
+  },
+})
+
+/**
+ * Encode messages to be executed on the proxy via the manager.
+ * @param proxyMsgs
+ */
+export const executeOnProxyMsg = (
+  proxyMsgs: MaybeArray<CosmosMsgForEmpty>,
+): ManagerTypes.ExecuteMsg => {
+  const proxyMsg: ProxyTypes.ExecuteMsg = ProxyExecuteMsgBuilder.moduleAction({
+    msgs: Array.isArray(proxyMsgs) ? proxyMsgs : [proxyMsgs],
+  })
+
+  return executeOnModuleMsg(
+    abstractModuleId(CommonModuleNames.PROXY),
+    proxyMsg,
+    ModuleType.AccountBase,
+  )
+}

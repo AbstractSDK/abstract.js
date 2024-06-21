@@ -1,5 +1,15 @@
 # @abstract-money/provider-graz
 
+## 5.0.5
+
+### Patch Changes
+
+- Add remote simulation capabilities
+
+- Updated dependencies []:
+  - @abstract-money/core@1.3.2
+  - @abstract-money/react@1.3.5
+
 ## 5.0.4
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "wagemos-cosmoskit-nextjs",
-  "version": "0.3.17",
+  "version": "0.3.18",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -17,6 +17,7 @@
     "@cosmjs/stargate": "^0.32.3",
     "@cosmos-kit/keplr": "^2.4.15",
     "@cosmos-kit/react": "^2.6.0",
+    "@tanstack/react-query-devtools": "^5.40.0",
     "@hookform/resolvers": "^3.3.2",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-label": "^2.0.2",

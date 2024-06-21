@@ -1,4 +1,5 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { getSimulationResultFromApi } from '../../actions/get-simulation-result-from-api'
 import { getAbstractModuleAddressFromVersionControl } from '../../actions/public/get-abstract-module-address-from-version-control'
 import { getAbstractModuleVersion } from '../../actions/public/get-abstract-module-version'
 import { getAccountFactoryAddressFromVersionControl } from '../../actions/public/get-account-factory-address-from-version-control'
@@ -20,6 +21,7 @@ import { getRemoteHostsFromApi } from '../../actions/public/get-remote-hosts-fro
 import { getVersionControlModuleData } from '../../actions/public/get-version-control-module-data'
 import { getVersionControlQueryClient } from '../../actions/public/get-version-control-query-client'
 import { getVersionControlQueryClientFromApi } from '../../actions/public/get-version-control-query-client-from-api'
+import { simulateRemoteMsg } from '../../actions/simulate-remote-msg'
 import { ExtractAndPartializeParameters } from '../../types/parameters'
 
 type ExtractAndPartializeDecoratedParametersFromParameters<
@@ -128,6 +130,16 @@ export type PublicActions = {
     >,
   ): ReturnType<typeof getRemoteHostsFromApi>
   getCosmWasmClient(): ReturnType<typeof getCosmWasmClient>
+  getSimulationResult(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof getSimulationResultFromApi
+    >,
+  ): ReturnType<typeof getSimulationResultFromApi>
+  simulateRemoteMsg(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof simulateRemoteMsg
+    >,
+  ): ReturnType<typeof simulateRemoteMsg>
 }
 
 export function publicActions(
@@ -272,6 +284,20 @@ export function publicActions(
     getCosmWasmClient: () =>
       getCosmWasmClient({
         cosmWasmClient,
+      }),
+    getSimulationResult: ({ extra, ...parameters }) =>
+      getSimulationResultFromApi({
+        cosmWasmClient,
+        apiUrl,
+        ...parameters,
+        ...extra,
+      }),
+    simulateRemoteMsg: ({ extra, ...parameters }) =>
+      simulateRemoteMsg({
+        cosmWasmClient,
+        apiUrl,
+        ...parameters,
+        ...extra,
       }),
   }
 }

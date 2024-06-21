@@ -28,7 +28,7 @@ export async function getRemoteAccountIds({
   const chainId = await cosmWasmClient.getChainId()
   const sourceChainName = chainIdToName(chainId)
 
-  return Object.keys(remoteProxies).map((remoteChainName) => {
+  return Object.keys(remoteProxies).map((hostChainName) => {
     // local accounts are now remote accounts, remote accounts are now one hop further
     const remoteTrace =
       accountId.trace === 'local'
@@ -38,7 +38,7 @@ export async function getRemoteAccountIds({
     return {
       seq: accountId.seq,
       trace: { remote: remoteTrace },
-      chainName: remoteChainName,
+      chainName: hostChainName,
     } satisfies AccountId
   })
 }

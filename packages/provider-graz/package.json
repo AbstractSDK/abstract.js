@@ -1,6 +1,6 @@
 {
   "name": "@abstract-money/provider-graz",
-  "version": "5.0.4",
+  "version": "5.0.5",
   "description": "Provider for Graz",
   "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
   "author": "dalechyn <vlad@abstract.money>",
@@ -32,7 +32,7 @@
     "@abstract-money/react": "workspace:*",
     "@abstract-money/core": "workspace:*",
     "@types/node": "^20.0.0",
-    "graz": "^0.1.1",
+    "graz": "^0.1.5",
     "rimraf": "^3.0.0"
   },
   "main": "dist/index.js",

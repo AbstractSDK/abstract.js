@@ -15,6 +15,8 @@ import { getRemoteAccountProxies } from '../../actions/account/public/get-remote
 import { getSubAccountIds } from '../../actions/account/public/get-sub-account-ids'
 import { getSubAccountSequences } from '../../actions/account/public/get-sub-account-sequences'
 import { getTotalValue } from '../../actions/account/public/get-total-value'
+import { simulateExecuteRemote } from '../../actions/account/public/simulate-execute-remote'
+import { simulateExecuteRemoteManager } from '../../actions/account/public/simulate-execute-remote-manager'
 import { VersionControlTypes } from '../../codegen/abstract/index'
 import { ExtractAndPartializeParameters } from '../../types/parameters'
 
@@ -105,6 +107,16 @@ export type AccountPublicActions = {
       typeof getTotalValue
     >,
   ): ReturnType<typeof getTotalValue>
+  simulateExecuteRemoteManager(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof simulateExecuteRemoteManager
+    >,
+  ): ReturnType<typeof simulateExecuteRemoteManager>
+  simulateExecuteRemote(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof simulateExecuteRemote
+    >,
+  ): ReturnType<typeof simulateExecuteRemote>
 }
 
 export function accountPublicActions(
@@ -235,6 +247,22 @@ export function accountPublicActions(
       }),
     getTotalValue: ({ extra, ...parameters } = {}) =>
       getTotalValue({
+        accountId,
+        cosmWasmClient,
+        apiUrl,
+        ...parameters,
+        ...extra,
+      }),
+    simulateExecuteRemoteManager: ({ extra, ...parameters }) =>
+      simulateExecuteRemoteManager({
+        accountId,
+        cosmWasmClient,
+        apiUrl,
+        ...parameters,
+        ...extra,
+      }),
+    simulateExecuteRemote: ({ extra, ...parameters }) =>
+      simulateExecuteRemote({
         accountId,
         cosmWasmClient,
         apiUrl,
