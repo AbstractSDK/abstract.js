@@ -2,11 +2,11 @@ import { IbcClientTypes, ManagerTypes } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { MaybeArray } from '../../../types/utils'
 import { executeIbcAction } from './execute-ibc-action'
-import { BaseWalletParameters } from './types'
+import { BaseAccountWalletParameters } from './types'
 
 export type ExecuteOnRemoteParameters = Omit<
   WithCosmWasmSignOptions<
-    BaseWalletParameters & {
+    BaseAccountWalletParameters & {
       hostChainName: string
       managerMsg: MaybeArray<ManagerTypes.ExecuteMsg>
     }

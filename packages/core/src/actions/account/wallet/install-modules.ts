@@ -2,10 +2,10 @@ import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { ManagerClient, VersionControlTypes } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { getManagerClientFromApi } from './get-manager-client-from-api'
-import { BaseWalletParameters } from './types'
+import { BaseAccountWalletParameters } from './types'
 
 export type InstallModulesParameters = WithCosmWasmSignOptions<
-  BaseWalletParameters &
+  BaseAccountWalletParameters &
     Parameters<typeof ManagerClient.prototype.installModules>[0]
 >
 

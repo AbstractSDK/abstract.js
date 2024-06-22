@@ -2,14 +2,14 @@ import { ProxyExecuteMsgBuilder, ProxyTypes } from '../../../codegen/abstract'
 import { ModuleType } from '../../../codegen/gql/graphql'
 import { MaybeArray } from '../../../types/utils'
 import { executeOnModule } from './execute-on-module'
-import { BaseWalletParameters } from './types'
+import { BaseAccountWalletParameters } from './types'
 
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { abstractModuleId } from '../../../utils/modules/abstract-module-id'
 import { CommonModuleNames } from '../../public/types'
 export type ExecuteParameters = Omit<
   WithCosmWasmSignOptions<
-    BaseWalletParameters & {
+    BaseAccountWalletParameters & {
       msgs: MaybeArray<ProxyTypes.CosmosMsgForEmpty>
     }
   >,

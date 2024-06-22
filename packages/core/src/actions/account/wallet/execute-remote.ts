@@ -11,11 +11,11 @@ import { encodeModuleMsg } from '../../../utils/modules/encode-module-msg'
 import { CommonModuleNames } from '../../public/types'
 import { executeOnRemoteManager } from './execute-on-remote-manager'
 import { executeOnRemoteModule } from './execute-on-remote-module'
-import { BaseWalletParameters } from './types'
+import { BaseAccountWalletParameters } from './types'
 
 export type ExecuteOnRemoteParameters = Omit<
   WithCosmWasmSignOptions<
-    BaseWalletParameters & {
+    BaseAccountWalletParameters & {
       hostChainName: string
       msgs: MaybeArray<ProxyTypes.CosmosMsgForEmpty>
     }

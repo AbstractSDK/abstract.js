@@ -1,8 +1,8 @@
 import { getManagerClient } from '../../wallet/get-manager-client'
 import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
-import { BaseWalletParameters } from './types'
+import { BaseAccountWalletParameters } from './types'
 
-export type GetManagerClientFromApiParameters = BaseWalletParameters
+export type GetManagerClientFromApiParameters = BaseAccountWalletParameters
 
 export async function getManagerClientFromApi({
   accountId,

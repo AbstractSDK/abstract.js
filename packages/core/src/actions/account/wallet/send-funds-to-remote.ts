@@ -3,11 +3,11 @@ import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { MaybeArray } from '../../../types/utils'
 import { Asset, assetToNativeAsset } from '../../../utils/assets'
 import { executeIbcAction } from './execute-ibc-action'
-import { BaseWalletParameters } from './types'
+import { BaseAccountWalletParameters } from './types'
 
 export type SendFundsToRemoteParameters = Omit<
   WithCosmWasmSignOptions<
-    BaseWalletParameters & {
+    BaseAccountWalletParameters & {
       hostChainName: string
       assets: MaybeArray<Asset>
     }

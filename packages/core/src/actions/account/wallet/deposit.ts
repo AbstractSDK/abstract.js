@@ -1,11 +1,11 @@
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { Asset, encodeAssetsTransfersMsgs } from '../../../utils/assets'
 import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
-import { BaseWalletParameters } from './types'
+import { BaseAccountWalletParameters } from './types'
 
 export type DepositParameters = Omit<
   WithCosmWasmSignOptions<
-    BaseWalletParameters & {
+    BaseAccountWalletParameters & {
       assets: Asset[]
     }
   >,

@@ -1,5 +1,14 @@
 # wagemos-cosmoskit-nextjs
 
+## 0.3.19
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @abstract-money/core@1.3.3
+  - @abstract-money/react@1.3.6
+  - @abstract-money/provider-cosmoskit@5.0.6
+
 ## 0.3.18
 
 ### Patch Changes

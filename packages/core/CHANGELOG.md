@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 1.3.3
+
+### Patch Changes
+
+- Update inner base type and include useUpdateInfo
+
 ## 1.3.2
 
 ### Patch Changes

@@ -6,13 +6,13 @@ import {
   executeOnModuleMsg,
 } from '../../../utils/modules/encode-module-msg'
 import { executeOnRemoteManager } from './execute-on-remote-manager'
-import { BaseWalletParameters } from './types'
+import { BaseAccountWalletParameters } from './types'
 
 type Base64EncodedJson = string
 
 export type ExecuteOnRemoteModuleParameters = Omit<
   WithCosmWasmSignOptions<
-    BaseWalletParameters & {
+    BaseAccountWalletParameters & {
       hostChainName: string
       moduleId: string
       moduleType?: ModuleType

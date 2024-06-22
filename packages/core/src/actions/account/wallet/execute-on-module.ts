@@ -3,13 +3,13 @@ import { ModuleType } from '../../../codegen/gql/graphql'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { encodeModuleMsg } from '../../../utils/modules/encode-module-msg'
 import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
-import { BaseWalletParameters } from './types'
+import { BaseAccountWalletParameters } from './types'
 
 type Base64EncodedJson = string
 
 export type ExecuteOnModuleParameters = Omit<
   WithCosmWasmSignOptions<
-    BaseWalletParameters & {
+    BaseAccountWalletParameters & {
       moduleId: string
       moduleType?: ModuleType
       moduleMsg: Record<string, unknown> | Base64EncodedJson

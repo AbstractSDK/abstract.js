@@ -1,11 +1,11 @@
 import { IbcClientTypes } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { executeIbcAction } from './execute-ibc-action'
-import { BaseWalletParameters } from './types'
+import { BaseAccountWalletParameters } from './types'
 
 export type RequestFundsFromRemoteParameters = Omit<
   WithCosmWasmSignOptions<
-    BaseWalletParameters & {
+    BaseAccountWalletParameters & {
       hostChainName: string
     }
   >,

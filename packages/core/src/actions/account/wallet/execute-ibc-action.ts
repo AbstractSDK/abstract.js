@@ -8,11 +8,11 @@ import { CommonModuleNames } from '../../public/types'
 import { getModuleAddress } from '../public/get-module-address'
 import { getModuleVersion } from '../public/get-module-version'
 import { executeOnModule } from './execute-on-module'
-import { BaseWalletParameters } from './types'
+import { BaseAccountWalletParameters } from './types'
 
 export type ExecuteIbcActionParameters = Omit<
   WithCosmWasmSignOptions<
-    BaseWalletParameters & {
+    BaseAccountWalletParameters & {
       msg: IbcClientTypes.ExecuteMsg
     }
   >,

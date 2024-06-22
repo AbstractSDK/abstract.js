@@ -2,10 +2,10 @@ import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { Asset, encodeAssetsProxyTransferMsgs } from '../../../utils/assets'
 import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
 import { execute } from './execute'
-import { BaseWalletParameters } from './types'
+import { BaseAccountWalletParameters } from './types'
 
 export type WithdrawParameters = WithCosmWasmSignOptions<
-  BaseWalletParameters & {
+  BaseAccountWalletParameters & {
     assets: Asset[]
     recipient: string
   }

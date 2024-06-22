@@ -1,5 +1,14 @@
 # @abstract-money/react
 
+## 1.3.6
+
+### Patch Changes
+
+- Update inner base type and include useUpdateInfo
+
+- Updated dependencies []:
+  - @abstract-money/core@1.3.3
+
 ## 1.3.5
 
 ### Patch Changes

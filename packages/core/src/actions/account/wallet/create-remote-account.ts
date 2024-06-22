@@ -1,11 +1,11 @@
 import { IbcClientTypes } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { executeIbcAction } from './execute-ibc-action'
-import { BaseWalletParameters } from './types'
+import { BaseAccountWalletParameters } from './types'
 
 export type CreateRemoteAccountParameters = Omit<
   WithCosmWasmSignOptions<
-    BaseWalletParameters &
+    BaseAccountWalletParameters &
       Omit<
         Extract<IbcClientTypes.ExecuteMsg, { register: unknown }>['register'],
         'host_chain' | 'install_modules'

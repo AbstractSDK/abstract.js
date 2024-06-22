@@ -1,10 +1,10 @@
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { getVersionControlClientFromApi } from '../../wallet/get-version-control-client-from-api'
 import { getNamespace } from '../public/get-namespace'
-import { BaseWalletParameters } from './types'
+import { BaseAccountWalletParameters } from './types'
 
 export type RevokeNamespaceParameters =
-  WithCosmWasmSignOptions<BaseWalletParameters>
+  WithCosmWasmSignOptions<BaseAccountWalletParameters>
 
 export async function revokeNamespace({
   accountId,
