@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 1.3.4
+
+### Patch Changes
+
+- Add host chain name helpers and fix bug with remote-account-ids
+
 ## 1.3.3
 
 ### Patch Changes

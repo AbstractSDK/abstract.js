@@ -1,5 +1,14 @@
 # @abstract-money/react
 
+## 1.3.7
+
+### Patch Changes
+
+- Add host chain name helpers and fix bug with remote-account-ids
+
+- Updated dependencies []:
+  - @abstract-money/core@1.3.4
+
 ## 1.3.6
 
 ### Patch Changes

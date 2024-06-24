@@ -1,4 +1,6 @@
 export * from './assets'
 export * from './chains'
 export * from './chain-id-to-name'
+export * from './host-chain-name-to-name'
+export * from './chain-id-to-host-chain-name'
 export * from './chain-name-to-id'

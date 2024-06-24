@@ -1,4 +1,8 @@
-import { AccountId, chainIdToName } from '@abstract-money/core'
+import {
+  AccountId,
+  chainIdToName,
+  hostChainNameToName,
+} from '@abstract-money/core'
 import {
   GetRemoteProxiesParameters,
   getRemoteAccountProxies,
@@ -35,10 +39,12 @@ export async function getRemoteAccountIds({
         ? [sourceChainName]
         : accountId.trace.remote.concat(sourceChainName)
 
+    const remoteChainName = hostChainNameToName(hostChainName)
+
     return {
       seq: accountId.seq,
       trace: { remote: remoteTrace },
-      chainName: hostChainName,
+      chainName: remoteChainName,
     } satisfies AccountId
   })
 }
