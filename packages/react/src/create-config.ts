@@ -58,7 +58,10 @@ export function createConfig(parameters: CreateConfigParameters) {
   ): PublicClient | undefined {
     const cosmWasmClient = provider.useCosmWasmClient(...args)
     return useMemo(() => {
-      if (!cosmWasmClient) return undefined
+      if (!cosmWasmClient) {
+        console.debug('usePublicClient: no cosmWasmClient')
+        return undefined
+      }
       return createPublicClient({
         apiUrl,
         cosmWasmClient,
@@ -72,7 +75,13 @@ export function createConfig(parameters: CreateConfigParameters) {
     const signingCosmWasmClient = provider.useSigningCosmWasmClient(...args)
     const sender = provider.useSenderAddress(...args)
     return useMemo(() => {
-      if (!signingCosmWasmClient || !sender) return undefined
+      if (!signingCosmWasmClient || !sender) {
+        console.debug('useWalletClient: no signingCosmWasmClient or sender', {
+          signingCosmWasmClient,
+          sender,
+        })
+        return undefined
+      }
       return createWalletClient({
         apiUrl,
         sender,
@@ -91,7 +100,16 @@ export function createConfig(parameters: CreateConfigParameters) {
   >): AccountPublicClient | undefined {
     const cosmWasmClient = provider.useCosmWasmClient(rest)
     return useMemo(() => {
-      if (!cosmWasmClient || !accountId) return undefined
+      if (!cosmWasmClient || !accountId) {
+        console.debug(
+          'useAccountPublicClient: no cosmWasmClient or accountId',
+          {
+            cosmWasmClient,
+            accountId,
+          },
+        )
+        return undefined
+      }
       return createAccountPublicClient({
         apiUrl,
         cosmWasmClient,
@@ -111,7 +129,17 @@ export function createConfig(parameters: CreateConfigParameters) {
     const signingCosmWasmClient = provider.useSigningCosmWasmClient(rest)
     const sender = provider.useSenderAddress(rest)
     return useMemo(() => {
-      if (!signingCosmWasmClient || !sender || !accountId) return undefined
+      if (!signingCosmWasmClient || !sender || !accountId) {
+        console.debug(
+          'useAccountWalletClient: no signingCosmWasmClient, sender, or accountId',
+          {
+            signingCosmWasmClient,
+            sender,
+            accountId,
+          },
+        )
+        return undefined
+      }
       return createAccountWalletClient({
         apiUrl,
         sender,

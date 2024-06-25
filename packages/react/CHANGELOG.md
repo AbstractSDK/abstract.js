@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 1.3.8
+
+### Patch Changes
+
+- Adds debug code to the providers
+
 ## 1.3.7
 
 ### Patch Changes
