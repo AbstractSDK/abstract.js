@@ -57,13 +57,7 @@ export type UseAbstractModuleClientParameters<
     InstanceType<TModule> | undefined,
     unknown,
     InstanceType<TModule> | undefined,
-    readonly [
-      'module-mutation-client',
-      string,
-      AccountId | undefined,
-      TModule,
-      AbstractClient | undefined,
-    ]
+    readonly ['module-mutation-client', string, AccountId | undefined, TModule]
   >
   sender?: string | undefined
 }
@@ -90,15 +84,8 @@ export function useAbstractModuleClient<
   })
 
   const queryKey = React.useMemo(
-    () =>
-      [
-        'module-mutation-client',
-        moduleId,
-        accountId,
-        Module,
-        abstractClient,
-      ] as const,
-    [moduleId, accountId, abstractClient, Module],
+    () => ['module-mutation-client', moduleId, accountId, Module] as const,
+    [moduleId, accountId, Module],
   )
 
   const queryFn = React.useCallback(() => {

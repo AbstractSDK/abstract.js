@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 1.3.11
+
+### Patch Changes
+
+- Remove abstractclient from query key in module client request
+
 ## 1.3.10
 
 ### Patch Changes
