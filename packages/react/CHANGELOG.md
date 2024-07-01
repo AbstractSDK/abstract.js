@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 1.3.10
+
+### Patch Changes
+
+- Ensure that sender is defined for abstract client
+
 ## 1.3.9
 
 ### Patch Changes

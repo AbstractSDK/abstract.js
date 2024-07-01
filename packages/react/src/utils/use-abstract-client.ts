@@ -86,11 +86,12 @@ export function useAbstractClient(parameters: UseAbstractClientParameters) {
 
   const queryFn = React.useCallback(() => {
     if (!client) throw new Error('client is not defined')
-    if (!sender || !sender_) throw new Error('sender is not defined')
+    const txSender = sender_ ?? sender
+    if (!txSender) throw new Error('sender is not defined')
     if (!chainName) throw new Error('chain is not defined')
 
     return getAbstractClient({
-      sender: sender_ ?? sender,
+      sender: txSender,
       client,
       chainName: chainName,
       overrideApiUrl: apiUrl,
