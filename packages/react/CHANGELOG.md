@@ -1,5 +1,11 @@
 # @abstract-money/react
 
+## 1.3.9
+
+### Patch Changes
+
+- Remove signingcosmwasmclient from account client query key
+
 ## 1.3.8
 
 ### Patch Changes

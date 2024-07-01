@@ -43,6 +43,14 @@ export async function getAbstractClient({
   )
 }
 
+type QueryKey = readonly [
+  'abstract-client',
+  string | undefined,
+  string | undefined,
+  string | undefined,
+  string,
+]
+
 export type UseAbstractClientParameters = {
   chainName: string | undefined
   sender?: string | undefined
@@ -50,14 +58,7 @@ export type UseAbstractClientParameters = {
     AbstractClient | undefined,
     unknown,
     AbstractClient | undefined,
-    readonly [
-      'abstract-client',
-      string | undefined,
-      string | undefined,
-      string | undefined,
-      string,
-      SigningCosmWasmClient | undefined,
-    ]
+    QueryKey
   >
 }
 
@@ -79,9 +80,8 @@ export function useAbstractClient(parameters: UseAbstractClientParameters) {
   } = useSenderAddress({ chainName })
 
   const queryKey = React.useMemo(
-    () =>
-      ['abstract-client', sender_, sender, chainName, apiUrl, client] as const,
-    [sender_, sender, chainName, apiUrl, client],
+    () => ['abstract-client', sender_, sender, chainName, apiUrl] as const,
+    [sender_, sender, chainName, apiUrl],
   )
 
   const queryFn = React.useCallback(() => {
