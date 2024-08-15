@@ -22,6 +22,7 @@ import {
 } from '../../codegen/abstract'
 
 type ManagerModuleInfo = ManagerTypes.ManagerModuleInfo
+type GovernanceDetails = ManagerTypes.GovernanceDetailsForString
 type CosmosMsgForEmpty = ProxyTypes.CosmosMsgForEmpty
 import { ABSTRACT_CONSTANTS } from '../constants'
 import {
@@ -35,7 +36,6 @@ import {
 } from '../generics/adapter/Adapter.msg-factory'
 type ModuleReference = VersionControlTypes.ModuleReference
 import semver from 'semver/preload'
-import { GovernanceDetailsForAddr } from '../../../.tsup/declaration/account/manager/Manager.types'
 import { jsonToBinary } from '../../utils/encoding'
 import { ContractMsg, EncodedMsg } from '../messages'
 import { type AbstractClient, type AbstractQueryClient } from './AbstractClient'
@@ -246,7 +246,7 @@ export class AbstractAccountQueryClient implements IAbstractAccountQueryClient {
 
       // > 0.23.0 returns the full governance type
       if (semver.gte(version, '0.23.0')) {
-        const governance = owner as unknown as GovernanceDetailsForAddr
+        const governance = owner as unknown as GovernanceDetails
 
         this._owner = match(governance)
           .with({ Monarchy: { monarch: P.select() } }, (monarch) => monarch)
