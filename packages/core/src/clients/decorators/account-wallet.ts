@@ -12,7 +12,6 @@ import { executeRemote } from '../../actions/account/wallet/execute-remote'
 import { getManagerClientFromApi } from '../../actions/account/wallet/get-manager-client-from-api'
 import { getProxyClientFromApi } from '../../actions/account/wallet/get-proxy-client-from-api'
 import { installModules } from '../../actions/account/wallet/install-modules'
-import { proposeOwner } from '../../actions/account/wallet/propose-owner'
 import { revokeNamespace } from '../../actions/account/wallet/remove-namespace'
 import { requestFundsFromRemote } from '../../actions/account/wallet/request-remote-funds'
 import { sendFundsToRemote } from '../../actions/account/wallet/send-funds-to-remote'
@@ -138,11 +137,6 @@ export type AccountWalletActions = {
       typeof updateOwnership
     >,
   ): ReturnType<typeof updateOwnership>
-  proposeOwner(
-    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof proposeOwner
-    >,
-  ): ReturnType<typeof proposeOwner>
   enableIbc(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof enableIbc
@@ -312,15 +306,6 @@ export function accountWalletActions(
       }),
     updateOwnership: ({ extra, ...parameters }) =>
       updateOwnership({
-        accountId,
-        signingCosmWasmClient,
-        apiUrl,
-        sender,
-        ...parameters,
-        ...extra,
-      }),
-    proposeOwner: ({ extra, ...parameters }) =>
-      proposeOwner({
         accountId,
         signingCosmWasmClient,
         apiUrl,
