@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- Update Abstarct to 0.23
+- Update Abstract to 0.23
 
   This change updates:
 
