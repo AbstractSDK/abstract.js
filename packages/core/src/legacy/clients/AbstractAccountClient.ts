@@ -6,7 +6,7 @@ import {
 import { type JsonObject } from '@cosmjs/cosmwasm-stargate/build/modules'
 import { type Coin } from '@cosmjs/stargate'
 import { type StdFee } from '@cosmjs/stargate'
-import { match } from 'ts-pattern'
+import { P, match } from 'ts-pattern'
 import {
   ManagerClient,
   ManagerExecuteMsgBuilder,
@@ -22,6 +22,7 @@ import {
 } from '../../codegen/abstract'
 
 type ManagerModuleInfo = ManagerTypes.ManagerModuleInfo
+type GovernanceDetails = ManagerTypes.GovernanceDetailsForString
 type CosmosMsgForEmpty = ProxyTypes.CosmosMsgForEmpty
 import { ABSTRACT_CONSTANTS } from '../constants'
 import {
@@ -34,9 +35,11 @@ import {
   AdapterQueryMsgBuilder,
 } from '../generics/adapter/Adapter.msg-factory'
 type ModuleReference = VersionControlTypes.ModuleReference
+import semver from 'semver/preload'
 import { jsonToBinary } from '../../utils/encoding'
 import { ContractMsg, EncodedMsg } from '../messages'
 import { type AbstractClient, type AbstractQueryClient } from './AbstractClient'
+import { rawQuery } from './helpers'
 import { AbstractAccountId } from './objects/AbstractAccountId'
 import { AnsAssetList } from './objects/AnsAssetList'
 import { AssetInfo } from './objects/AssetInfo'
@@ -215,6 +218,18 @@ export class AbstractAccountQueryClient implements IAbstractAccountQueryClient {
     return namespace ?? null
   }
 
+  public async managerVersion(): Promise<string> {
+    const { version } = await rawQuery<{
+      contract: string
+      version: string
+    }>({
+      readOnlyClient: this.managerQueryClient.client,
+      address: this.managerQueryClient.contractAddress,
+      key: 'contract_info',
+    })
+    return version
+  }
+
   /**
    * Return the owner of the Account.
    *
@@ -223,16 +238,36 @@ export class AbstractAccountQueryClient implements IAbstractAccountQueryClient {
    */
   public async getOwner(invalidateCache?: boolean): Promise<string | null> {
     if (invalidateCache || this._owner === undefined) {
-      this._owner = await this.managerQueryClient
+      const version = await this.managerVersion()
+
+      const owner = (await this.managerQueryClient
         .ownership()
-        .then((res) => res.owner ?? null)
-        .catch((error) => {
-          console.error('Failed to fetch the owner:', error)
-          throw error
-        })
+        .then(({ owner }) => owner)) as unknown
+
+      // > 0.23.0 returns the full governance type
+      if (semver.gte(version, '0.23.0')) {
+        const governance = owner as unknown as GovernanceDetails
+
+        this._owner = match(governance)
+          .with({ Monarchy: { monarch: P.select() } }, (monarch) => monarch)
+          .with({ SubAccount: { proxy: P.select() } }, (proxy) => proxy)
+          .with({ Renounced: {} }, () => null)
+          .with({ NFT: { collection_addr: P.select() } }, (col) => col)
+          .with({ External: { governance_address: P.select() } }, (ext) => ext)
+          .otherwise((e) => {
+            console.warn(
+              `Unknown governance type for ${
+                this.managerAddress
+              }: ${JSON.stringify(e)}`,
+            )
+            return JSON.stringify(e)
+          })
+      } else {
+        this._owner = owner as string
+      }
     }
 
-    return this._owner
+    return this._owner ?? null
   }
 
   /**

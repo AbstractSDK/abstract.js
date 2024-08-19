@@ -1,12 +1,11 @@
-import { ManagerClient } from '../../../codegen/abstract'
-import { Action } from '../../../codegen/abstract/cosmwasm-codegen/Manager.types'
+import { GovAction } from '../../../codegen/abstract/cosmwasm-codegen/Manager.types'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { getManagerClientFromApi } from './get-manager-client-from-api'
 import { BaseAccountWalletParameters } from './types'
 
 export type UpdateOwnershipParameters = WithCosmWasmSignOptions<
   BaseAccountWalletParameters & {
-    update: Action
+    update: GovAction
   }
 >
 
