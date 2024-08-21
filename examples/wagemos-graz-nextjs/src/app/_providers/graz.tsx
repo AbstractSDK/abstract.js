@@ -11,7 +11,10 @@ export function GrazProvider(
     <Provider
       client={props.client}
       grazOptions={{
-        chains: [mainnetChains.neutron, mainnetChains.osmosis],
+        chains: [
+          { ...mainnetChains.neutron, rpc: 'https://neutron-rpc.polkachu.com' },
+          mainnetChains.osmosis,
+        ],
         chainsConfig: {
           [mainnetChains.osmosis.chainId]: {
             gas: {
