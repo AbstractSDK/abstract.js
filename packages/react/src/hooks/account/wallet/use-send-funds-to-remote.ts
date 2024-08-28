@@ -19,7 +19,7 @@ export type UseSendFundsToRemoteParameters = {
   >
 }
 
-export function useUseSendFundsToRemote({
+export function useSendFundsToRemote({
   accountId,
   chainName,
   mutation,
@@ -42,3 +42,8 @@ export function useUseSendFundsToRemote({
     mutation,
   )
 }
+
+/**
+ * @deprecated Use `useSendFundsToRemote` instead.
+ */
+export const useUseSendFundsToRemote = useSendFundsToRemote
