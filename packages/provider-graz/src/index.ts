@@ -13,12 +13,18 @@ export const grazProvider = {
     ).data,
   useSigningCosmWasmClient: (
     parameters: Parameters<Provider['useSigningCosmWasmClient']>[0],
-  ) =>
-    useCosmWasmSigningClient(
+  ) => {
+    const client = useCosmWasmSigningClient(
       parameters?.chainName
         ? { chainId: chainNameToId(parameters.chainName) }
         : undefined,
-    ).data,
+    ).data
+    if (client === null) {
+      console.warn('No signing client found for chain', parameters?.chainName)
+      return undefined
+    }
+    return client
+  },
   useSenderAddress: (parameters: Parameters<Provider['useSenderAddress']>[0]) =>
     useAccount(
       parameters?.chainName
