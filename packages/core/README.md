@@ -63,6 +63,7 @@ generates:
         JSON: any
         Semver: string
         Bech32Address: string
+        SafeInt: number
 ```
 3. Add `codegen` command to `package.json`
 ```json
