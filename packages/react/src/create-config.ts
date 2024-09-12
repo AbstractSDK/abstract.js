@@ -34,10 +34,11 @@ export type Provider = {
 export type CreateConfigParameters = {
   provider: Provider
   apiUrl?: string
+  providers?: Record<string, Provider>
 }
 
 export function createConfig(parameters: CreateConfigParameters) {
-  const { apiUrl = ABSTRACT_API_URL, provider } = parameters
+  const { apiUrl = ABSTRACT_API_URL, provider, providers } = parameters
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Set up clients
@@ -152,6 +153,7 @@ export function createConfig(parameters: CreateConfigParameters) {
   return {
     apiUrl,
     provider,
+    providers,
     useApiClient,
     usePublicClient,
     useWalletClient,
@@ -163,6 +165,7 @@ export function createConfig(parameters: CreateConfigParameters) {
 export type Config = {
   apiUrl: string
   provider: Provider
+  providers?: Record<string, Provider>
   useApiClient(): ApiClient | undefined
   usePublicClient(
     ...args: Parameters<Provider['useCosmWasmClient']>
