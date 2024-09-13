@@ -1,15 +1,22 @@
 import { QueryClientProviderProps } from '@tanstack/react-query/src/QueryClientProvider'
-import * as React from 'react'
+import {
+  Dispatch,
+  PropsWithChildren,
+  createContext,
+  createElement,
+  useCallback,
+  useContext,
+  useMemo,
+  useReducer,
+} from 'react'
 import { Config, Provider, createConfig } from '../create-config'
 
 type ConfigContextType = {
   config: Config
-  dispatch: React.Dispatch<ConfigAction>
+  dispatch: Dispatch<ConfigAction>
 }
 
-const ConfigContext = React.createContext<ConfigContextType | undefined>(
-  undefined,
-)
+const ConfigContext = createContext<ConfigContextType | undefined>(undefined)
 
 type SelectProviderArgs = { providerName: keyof Config['providers'] }
 
@@ -44,19 +51,21 @@ export type AbstractConfigProps = {
 export function AbstractConfigContext({
   children,
   config: initialConfig,
-}: React.PropsWithChildren<AbstractConfigProps>) {
-  const [config, dispatch] = React.useReducer(configReducer, initialConfig)
+}: PropsWithChildren<AbstractConfigProps>) {
+  const [config, dispatch] = useReducer(configReducer, initialConfig)
 
-  const value = React.useMemo(() => ({ config, dispatch }), [config])
+  const value = useMemo(() => ({ config, dispatch }), [config])
 
-  return React.createElement(ConfigContext.Provider, { value }, children)
+  // Bailing out of using JSX
+  // https://github.com/egoist/tsup/issues/390#issuecomment-933488738
+  return createElement(ConfigContext.Provider, { children, value })
 }
 
 /**
  * Internal hook to retrieve the Abstract configuration from the {@link AbstractConfigContext} context.
  */
 export function useConfig() {
-  const context = React.useContext(ConfigContext)
+  const context = useContext(ConfigContext)
   if (!context) {
     throw new Error('`useConfig` must be used within `AbstractConfigContext`.')
   }
@@ -64,7 +73,7 @@ export function useConfig() {
 }
 
 export function useSelectProvider() {
-  const context = React.useContext(ConfigContext)
+  const context = useContext(ConfigContext)
   if (!context) {
     throw new Error(
       '`useSelectProvider` must be used within `AbstractConfigContext`.',
@@ -72,7 +81,7 @@ export function useSelectProvider() {
   }
   const { dispatch } = context
 
-  return React.useCallback(
+  return useCallback(
     (args: SelectProviderArgs) => {
       dispatch({ type: 'SELECT_PROVIDER', args })
     },
