@@ -72,7 +72,7 @@ export function useConfig() {
   return context.config
 }
 
-export function useSelectProvider() {
+export function useProvider() {
   const context = useContext(ConfigContext)
   if (!context) {
     throw new Error(
@@ -81,10 +81,20 @@ export function useSelectProvider() {
   }
   const { dispatch } = context
 
-  return useCallback(
+  const selectProvider = useCallback(
     (args: SelectProviderArgs) => {
       dispatch({ type: 'SELECT_PROVIDER', args })
     },
     [dispatch],
   )
+
+  const selectedProviderName = useMemo(() => {
+    return (
+      Object.entries(context.config.providers || {}).find(
+        ([_, provider]) => provider === context.config.provider,
+      )?.[0] || null
+    )
+  }, [context.config.provider])
+
+  return { selectProvider, selectedProviderName }
 }

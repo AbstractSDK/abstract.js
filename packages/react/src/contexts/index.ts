@@ -1,2 +1,2 @@
 export { AbstractProvider } from './provider'
-export { useConfig } from './config'
+export { useConfig, useProvider } from './config'

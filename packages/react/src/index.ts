@@ -1,6 +1,7 @@
 export {
   AbstractProvider,
   useConfig,
+  useProvider,
 } from './contexts'
 
 export * from './hooks'
