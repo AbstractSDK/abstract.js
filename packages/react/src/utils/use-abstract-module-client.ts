@@ -32,16 +32,14 @@ async function getAbstractModuleClient<
   moduleId: string
   Module: TModule
 }) {
-  const { account_base } = await abstractClient.registryQueryClient.accountBase(
-    {
-      accountId: accountIdToParameter(accountId),
-    },
-  )
+  const { account } = await abstractClient.registryQueryClient.accountBase({
+    accountId: accountIdToParameter(accountId),
+  })
   return new Module({
     abstractClient: abstractClient,
     accountId: accountIdToLegacyAccountId(accountId),
-    managerAddress: account_base.manager,
-    proxyAddress: account_base.proxy,
+    managerAddress: account.manager,
+    proxyAddress: account.proxy,
     moduleId,
   }) as InstanceType<TModule>
 }

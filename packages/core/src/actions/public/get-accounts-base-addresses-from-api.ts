@@ -24,7 +24,7 @@ export async function getAccountsBaseAddressesFromApi({
         .accountBase({
           accountId: accountIdToParameter(accountId),
         })
-        .then(({ account_base: accountBase }) => ({
+        .then(({ account: accountBase }) => ({
           managerAddress: accountBase.manager,
           proxyAddress: accountBase.proxy,
         })),

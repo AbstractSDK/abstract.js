@@ -106,7 +106,7 @@ export class AbstractModule implements VcModule {
    */
   get type(): ModuleType {
     return match(this.reference)
-      .with({ account_base: P.select() }, () => 'account_base' as const)
+      .with({ account: P.select() }, () => 'account' as const)
       .with({ app: P.select() }, () => 'app' as const)
       .with({ standalone: P.select() }, () => 'standalone' as const)
       .with({ native: P.select() }, () => 'native' as const)
@@ -129,7 +129,7 @@ export class AbstractModule implements VcModule {
 
   get codeId(): number {
     return match(this.reference)
-      .with({ account_base: P.select() }, (core) => core)
+      .with({ account: P.select() }, (core) => core)
       .with({ app: P.select() }, (app) => app)
       .with({ standalone: P.select() }, (standalone) => standalone)
       .otherwise((x) => {
@@ -167,7 +167,7 @@ export class AbstractModule implements VcModule {
         }
         return Promise.resolve(firstInstantiation)
       })
-      .with('native', 'account_base', () => {
+      .with('native', 'account', () => {
         return null
       })
       .otherwise(() => {

@@ -8,22 +8,17 @@ import { type Coin } from '@cosmjs/stargate'
 import { type StdFee } from '@cosmjs/stargate'
 import { P, match } from 'ts-pattern'
 import {
-  AccountMsgComposer as ManagerMessageComposer,
-  ManagerClient,
-  ManagerExecuteMsgBuilder,
-  ManagerQueryClient,
-  ManagerTypes,
-  ProxyClient,
-  ProxyExecuteMsgBuilder,
-  ProxyMsgComposer as ProxyMessageComposer,
-  ProxyQueryClient,
-  ProxyTypes,
+  AccountClient,
+  AccountExecuteMsgBuilder,
+  AccountMsgComposer as AccountMessageComposer,
+  AccountQueryClient,
+  AccountTypes,
   VersionControlTypes,
 } from '../../codegen/abstract'
 
-type ManagerModuleInfo = ManagerTypes.ManagerModuleInfo
-type GovernanceDetails = ManagerTypes.GovernanceDetailsForString
-type CosmosMsgForEmpty = ProxyTypes.CosmosMsgForEmpty
+type ManagerModuleInfo = AccountTypes.AccountModuleInfo
+type GovernanceDetails = AccountTypes.GovernanceDetailsForString
+type CosmosMsgForEmpty = AccountTypes.CosmosMsgForEmpty
 import { ABSTRACT_CONSTANTS } from '../constants'
 import {
   AppExecuteMsgFactory,
@@ -103,31 +98,30 @@ export class AbstractAccountQueryClient implements IAbstractAccountQueryClient {
     abstractClient: AbstractQueryClient,
     accountId: AbstractAccountId,
   ): Promise<AbstractAccountQueryClient> {
-    const { account_base } =
-      await abstractClient.registryQueryClient.accountBase({
-        accountId: accountId.into(),
-      })
+    const { account } = await abstractClient.registryQueryClient.account({
+      accountId: accountId.into(),
+    })
 
     return new AbstractAccountQueryClient({
       abstract: abstractClient,
       accountId,
-      managerAddress: account_base.manager,
-      proxyAddress: account_base.proxy,
+      managerAddress: account,
+      proxyAddress: account,
     })
   }
 
   /**
    * Get the manager query client.
    */
-  get managerQueryClient(): ManagerQueryClient {
-    return new ManagerQueryClient(this.abstract.client, this.managerAddress)
+  get managerQueryClient(): AccountQueryClient {
+    return new AccountQueryClient(this.abstract.client, this.managerAddress)
   }
 
   /**
    * Get the proxy query client.
    */
-  get proxyQueryClient(): ProxyQueryClient {
-    return new ProxyQueryClient(this.abstract.client, this.proxyAddress)
+  get proxyQueryClient(): AccountQueryClient {
+    return new AccountQueryClient(this.abstract.client, this.proxyAddress)
   }
 
   /**
@@ -616,7 +610,7 @@ export class AbstractAccountClient extends AbstractAccountQueryClient {
     return this.composeExecuteOnModule(
       {
         moduleId: PROXY_MODULE_ID,
-        moduleType: 'account_base',
+        moduleType: 'account',
         execMsg: ProxyExecuteMsgBuilder.moduleAction({ msgs: [msgs].flat() }),
       },
       funds,
@@ -635,7 +629,7 @@ export class AbstractAccountClient extends AbstractAccountQueryClient {
     return await this.executeOnModule(
       {
         moduleId: PROXY_MODULE_ID,
-        moduleType: 'account_base',
+        moduleType: 'account',
         execMsg: ProxyExecuteMsgBuilder.moduleAction({ msgs: [msgs].flat() }),
       },
       funds,

@@ -18,10 +18,9 @@ export async function getAccountBaseAddressesFromApi({
     cosmWasmClient,
     apiUrl,
   })
-  const { account_base: accountBase } =
-    await versionControlQueryClient.accountBase({
-      accountId: accountIdToParameter(accountId),
-    })
+  const { account: accountBase } = await versionControlQueryClient.accountBase({
+    accountId: accountIdToParameter(accountId),
+  })
   return {
     managerAddress: accountBase.manager,
     proxyAddress: accountBase.proxy,

@@ -43,7 +43,7 @@ export async function getVersionControlModuleData<
       }
       return Promise.resolve(firstInstantiation)
     })
-    .with('native', 'account_base', () => {
+    .with('native', 'account', () => {
       return null
     })
     .otherwise(() => {

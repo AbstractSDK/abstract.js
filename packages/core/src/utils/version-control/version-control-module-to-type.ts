@@ -5,7 +5,7 @@ export function versionControlModuleToType<
   const TVcModule extends VersionControlTypes.Module = VersionControlTypes.Module,
 >(module: TVcModule) {
   return match(module.reference)
-    .with({ account_base: P.select() }, () => 'account_base' as const)
+    .with({ account: P.select() }, () => 'account' as const)
     .with({ app: P.select() }, () => 'app' as const)
     .with({ standalone: P.select() }, () => 'standalone' as const)
     .with({ native: P.select() }, () => 'native' as const)
