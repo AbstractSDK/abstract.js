@@ -1,11 +1,7 @@
 import { jsonToBinary } from '@abstract-money/core'
 import { CommonModuleNames } from '../../actions'
-import {
-  ManagerTypes,
-  ProxyExecuteMsgBuilder,
-  ProxyTypes,
-} from '../../codegen/abstract'
-import { CosmosMsgForEmpty } from '../../codegen/abstract/cosmwasm-codegen/Proxy.types'
+import { AccountExecuteMsgBuilder, AccountTypes } from '../../codegen/abstract'
+import { CosmosMsgForEmpty } from '../../codegen/abstract/cosmwasm-codegen/Account.types'
 import { ModuleType } from '../../codegen/gql/graphql'
 import { MaybeArray } from '../../types/utils'
 import { abstractModuleId } from './abstract-module-id'
@@ -34,7 +30,7 @@ export const executeOnModuleMsg = <TModuleMsg extends Record<string, unknown>>(
   moduleId: string,
   moduleMsg: TModuleMsg | string,
   moduleType?: ModuleType,
-): ManagerTypes.ExecuteMsg => ({
+): AccountTypes.ExecuteMsg => ({
   exec_on_module: {
     module_id: moduleId,
     exec_msg: encodeModuleMsg(moduleMsg, moduleType),
@@ -47,10 +43,11 @@ export const executeOnModuleMsg = <TModuleMsg extends Record<string, unknown>>(
  */
 export const executeOnProxyMsg = (
   proxyMsgs: MaybeArray<CosmosMsgForEmpty>,
-): ManagerTypes.ExecuteMsg => {
-  const proxyMsg: ProxyTypes.ExecuteMsg = ProxyExecuteMsgBuilder.moduleAction({
-    msgs: Array.isArray(proxyMsgs) ? proxyMsgs : [proxyMsgs],
-  })
+): AccountTypes.ExecuteMsg => {
+  const proxyMsg: AccountTypes.ExecuteMsg =
+    AccountExecuteMsgBuilder.moduleAction({
+      msgs: Array.isArray(proxyMsgs) ? proxyMsgs : [proxyMsgs],
+    })
 
   return executeOnModuleMsg(
     abstractModuleId(CommonModuleNames.PROXY),

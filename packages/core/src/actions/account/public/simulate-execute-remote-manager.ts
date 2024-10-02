@@ -1,6 +1,6 @@
 import { cosmosWasmExecuteMsg, jsonToBinary } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { ManagerTypes, VersionControlTypes } from '../../../codegen/abstract'
+import { AccountTypes, VersionControlTypes } from '../../../codegen/abstract'
 import { CosmosMsgForEmpty } from '../../../codegen/abstract/cosmwasm-codegen/Proxy.types'
 import { rawQuery } from '../../../utils'
 import { getCosmWasmClientFromApi } from '../../get-cosmwasm-client-from-api'
@@ -12,7 +12,7 @@ export type SimulateExecuteRemoteManagerParameters = {
   cosmWasmClient: CosmWasmClient
   apiUrl: string
   hostChainName: string
-  managerMsg: ManagerTypes.ExecuteMsg
+  managerMsg: AccountTypes.ExecuteMsg
 }
 
 /**

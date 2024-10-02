@@ -2,8 +2,8 @@ import { cosmosWasmExecuteMsg, jsonToBinary } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { MaybeArray } from 'src/types/utils'
 import {
+  AccountTypes,
   ManagerExecuteMsgBuilder,
-  ManagerTypes,
   ProxyExecuteMsgBuilder,
   ProxyTypes,
   VersionControlTypes,

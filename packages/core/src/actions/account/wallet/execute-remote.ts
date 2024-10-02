@@ -1,5 +1,5 @@
 import {
-  ManagerTypes,
+  AccountTypes,
   ProxyExecuteMsgBuilder,
   ProxyTypes,
 } from '../../../codegen/abstract'

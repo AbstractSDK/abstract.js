@@ -1,13 +1,12 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { AccountFactoryClient } from '../../codegen/abstract'
+import { CamelCasedProperties } from 'type-fest'
+import { AccountTypes } from '../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../types/parameters'
 import { WithOptional } from '../../types/utils'
 import { ABSTRACT_NAMESPACE, accountIdToParameter } from '../../utils'
 import { parseCreateAccountExecuteResult } from '../../utils/account-factory/parse-create-account-execute-result'
 import { chainIdToName } from '../../utils/chain-registry'
-import { abstractModuleId } from '../../utils/modules/abstract-module-id'
 import { getVersionControlAddressFromApi } from '../get-version-control-address-from-api'
-import { getAbstractModuleVersion } from '../public/get-abstract-module-version'
 import { getAppModuleCodeIdFromVersionControl } from '../public/get-app-module-code-id-from-version-control'
 import { CommonModuleNames } from '../public/types'
 
@@ -17,9 +16,8 @@ export type CreateAccountParameters = WithCosmWasmSignOptions<
     apiUrl: string
     sender: string
     enableIbc?: boolean
-  } & WithOptional<
-    Parameters<typeof AccountFactoryClient.prototype.createAccount>[0],
-    'installModules'
+  } & CamelCasedProperties<
+    WithOptional<AccountTypes.InstantiateMsg, 'install_modules' | 'owner'>
   >
 >
 export async function createAccount({
@@ -27,14 +25,14 @@ export async function createAccount({
   apiUrl,
   sender,
   installModules = [],
-  baseAsset,
   description,
   name,
   namespace,
-  governance,
+  authenticator,
   link,
   accountId,
   enableIbc,
+  owner,
   fee,
   memo,
   funds,
@@ -71,20 +69,26 @@ export async function createAccount({
     version: 'latest',
   })
 
+  const instantiateMsg: AccountTypes.InstantiateMsg = {
+    owner: owner || {
+      Monarchy: {
+        monarch: sender,
+      },
+    },
+    install_modules: installModules,
+    description,
+    name,
+    namespace,
+    link,
+    account_id: accountId ? accountIdToParameter(accountId) : undefined,
+    authenticator,
+  }
+
   // @TODO: parameter validation
   const result = await signingCosmWasmClient.instantiate(
     sender,
     accountCodeId,
-    {
-      installModules,
-      baseAsset,
-      description,
-      name,
-      namespace,
-      governance,
-      link,
-      accountId: accountId ? accountIdToParameter(accountId) : undefined,
-    },
+    instantiateMsg,
     'Abstract Account',
     fee,
     {

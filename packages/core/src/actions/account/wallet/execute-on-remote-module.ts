@@ -1,4 +1,4 @@
-import { ManagerTypes } from '../../../codegen/abstract'
+import { AccountTypes } from '../../../codegen/abstract'
 import { ModuleType } from '../../../codegen/gql/graphql'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import {
@@ -48,7 +48,7 @@ export async function executeOnRemoteModule({
   fee,
   memo,
 }: ExecuteOnRemoteModuleParameters) {
-  const managerMsg: ManagerTypes.ExecuteMsg = executeOnModuleMsg(
+  const managerMsg: AccountTypes.ExecuteMsg = executeOnModuleMsg(
     moduleId,
     moduleMsg,
     moduleType,
