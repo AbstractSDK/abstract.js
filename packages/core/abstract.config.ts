@@ -3,32 +3,20 @@ import { registry, vanilla } from '@abstract-money/cli/plugins'
 
 const contractsConfig = [
   {
-    name: 'manager',
-    version: '0.23.0',
-  },
-  {
-    name: 'proxy',
-    version: '0.23.0',
-  },
-  {
-    name: 'module-factory',
-    version: '0.23.0',
+    name: 'account',
+    version: '0.24.0-rc.1',
   },
   {
     name: 'version-control',
-    version: '0.23.0',
+    version: '0.24.0-rc.1',
   },
   {
     name: 'ans-host',
-    version: '0.23.0',
-  },
-  {
-    name: 'account-factory',
-    version: '0.23.0',
+    version: '0.24.0-rc.1',
   },
   {
     name: 'ibc-client',
-    version: '0.23.0',
+    version: '0.24.0-rc.1',
   },
 ]
 
