@@ -2,11 +2,6 @@ import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { getSimulationResultFromApi } from '../../actions/get-simulation-result-from-api'
 import { getAbstractModuleAddressFromVersionControl } from '../../actions/public/get-abstract-module-address-from-version-control'
 import { getAbstractModuleVersion } from '../../actions/public/get-abstract-module-version'
-import { getAccountFactoryAddressFromVersionControl } from '../../actions/public/get-account-factory-address-from-version-control'
-import { getAccountFactoryQueryClient } from '../../actions/public/get-account-factory-query-client'
-import { getAccountFactoryQueryClientFromApi } from '../../actions/public/get-account-factory-query-client-from-api'
-import { getAccountFactoryQueryClientFromVersionControl } from '../../actions/public/get-account-factory-query-client-from-version-control'
-import { getAccountFactoryVersion } from '../../actions/public/get-account-factory-version'
 import { getAccountsBaseAddressesFromApi } from '../../actions/public/get-accounts-base-addresses-from-api'
 import { getAnsHostAddressFromVersionControl } from '../../actions/public/get-ans-host-address-from-version-control'
 import { getAnsHostQueryClient } from '../../actions/public/get-ans-host-query-client'
@@ -44,31 +39,6 @@ export type PublicActions = {
       typeof getAbstractModuleAddressFromVersionControl
     >,
   ): ReturnType<typeof getAbstractModuleAddressFromVersionControl>
-  getAccountFactoryAddressFromVersionControl(
-    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getAccountFactoryAddressFromVersionControl
-    >,
-  ): ReturnType<typeof getAccountFactoryAddressFromVersionControl>
-  getAccountFactoryVersion(
-    parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getAccountFactoryVersion
-    >,
-  ): ReturnType<typeof getAccountFactoryVersion>
-  getAccountFactoryQueryClientFromVersionControl(
-    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getAccountFactoryQueryClientFromVersionControl
-    >,
-  ): ReturnType<typeof getAccountFactoryQueryClientFromVersionControl>
-  getAccountFactoryQueryClientFromApi(
-    parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getAccountFactoryQueryClientFromApi
-    >,
-  ): ReturnType<typeof getAccountFactoryQueryClientFromApi>
-  getAccountFactoryQueryClient(
-    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getAccountFactoryQueryClient
-    >,
-  ): ReturnType<typeof getAccountFactoryQueryClient>
   getAnsHostVersion(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAnsHostVersion
@@ -167,42 +137,6 @@ export function publicActions(
         ...parameters,
         ...extra,
       }),
-    getAccountFactoryVersion: ({ extra, ...parameters } = {}) =>
-      getAccountFactoryVersion({
-        cosmWasmClient,
-        apiUrl,
-        ...parameters,
-        ...extra,
-      }),
-    getAccountFactoryAddressFromVersionControl: ({ extra, ...parameters }) =>
-      getAccountFactoryAddressFromVersionControl({
-        cosmWasmClient,
-        ...parameters,
-        ...extra,
-      }),
-    getAccountFactoryQueryClientFromVersionControl: ({
-      extra,
-      ...parameters
-    }) =>
-      getAccountFactoryQueryClientFromVersionControl({
-        cosmWasmClient,
-        ...parameters,
-        ...extra,
-      }),
-    getAccountFactoryQueryClientFromApi: ({ extra, ...parameters } = {}) =>
-      getAccountFactoryQueryClientFromApi({
-        cosmWasmClient,
-        apiUrl,
-        ...parameters,
-        ...extra,
-      }),
-    getAccountFactoryQueryClient: ({ extra, ...parameters }) =>
-      getAccountFactoryQueryClient({
-        cosmWasmClient,
-        ...parameters,
-        ...extra,
-      }),
-
     getAnsHostVersion: ({ extra, ...parameters } = {}) =>
       getAnsHostVersion({
         apiUrl,

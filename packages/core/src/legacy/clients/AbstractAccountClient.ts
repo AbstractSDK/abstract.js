@@ -8,9 +8,9 @@ import { type Coin } from '@cosmjs/stargate'
 import { type StdFee } from '@cosmjs/stargate'
 import { P, match } from 'ts-pattern'
 import {
+  AccountMsgComposer as ManagerMessageComposer,
   ManagerClient,
   ManagerExecuteMsgBuilder,
-  ManagerMsgComposer as ManagerMessageComposer,
   ManagerQueryClient,
   ManagerTypes,
   ProxyClient,
@@ -420,7 +420,7 @@ export class AbstractAccountClient extends AbstractAccountQueryClient {
     return new ProxyClient(this.abstract.client, this.sender, this.proxyAddress)
   }
 
-  public managerMsgComposer(sender?: string): ManagerMessageComposer {
+  public AccountMsgComposer(sender?: string): ManagerMessageComposer {
     return new ManagerMessageComposer(
       sender || this.sender,
       this.managerAddress,
@@ -565,7 +565,7 @@ export class AbstractAccountClient extends AbstractAccountQueryClient {
   ): MsgExecuteContractEncodeObject {
     const moduleExecMsg = this.wrapModuleExecMsg(execMsg, moduleType)
 
-    return this.managerMsgComposer().execOnModule(
+    return this.AccountMsgComposer().execOnModule(
       {
         execMsg: jsonToBinary(moduleExecMsg),
         moduleId,

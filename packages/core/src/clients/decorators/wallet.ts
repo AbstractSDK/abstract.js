@@ -1,5 +1,3 @@
-import { getAccountFactoryClientFromApi } from '../../actions/wallet/get-account-factory-client-from-api'
-import { getAccountFactoryClientFromVersionControl } from '../../actions/wallet/get-account-factory-client-from-version-control'
 import { getAnsHostClientFromApi } from '../../actions/wallet/get-ans-host-client-from-api'
 import { getAnsHostClientFromVersionControl } from '../../actions/wallet/get-ans-host-client-from-version-control'
 import { getVersionControlClientFromApi } from '../../actions/wallet/get-version-control-client-from-api'
@@ -7,7 +5,6 @@ import { getVersionControlClientFromApi } from '../../actions/wallet/get-version
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { createAccount } from '../../actions/wallet/create-account'
 import { createAccountMonarchy } from '../../actions/wallet/create-account-monarchy'
-import { getAccountFactoryClient } from '../../actions/wallet/get-account-factory-client'
 import { getAnsHostClient } from '../../actions/wallet/get-ans-host-client'
 import { getManagerClient } from '../../actions/wallet/get-manager-client'
 import { getProxyClient } from '../../actions/wallet/get-proxy-client'
@@ -34,21 +31,6 @@ export type WalletActions = {
       typeof createAccountMonarchy
     >,
   ): ReturnType<typeof createAccountMonarchy>
-  getAccountFactoryClient(
-    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getAccountFactoryClient
-    >,
-  ): ReturnType<typeof getAccountFactoryClient>
-  getAccountFactoryClientFromVersionControl(
-    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getAccountFactoryClientFromVersionControl
-    >,
-  ): ReturnType<typeof getAccountFactoryClientFromVersionControl>
-  getAccountFactoryClientFromApi(
-    parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getAccountFactoryClientFromApi
-    >,
-  ): ReturnType<typeof getAccountFactoryClientFromApi>
   getAnsHostClient(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAnsHostClient
@@ -104,29 +86,6 @@ export function walletActions(
       }),
     createAccountMonarchy: ({ extra, ...parameters }) =>
       createAccountMonarchy({
-        signingCosmWasmClient,
-        sender,
-        apiUrl,
-        ...parameters,
-        ...extra,
-      }),
-
-    getAccountFactoryClient: ({ extra, ...parameters }) =>
-      getAccountFactoryClient({
-        signingCosmWasmClient,
-        sender,
-        ...parameters,
-        ...extra,
-      }),
-    getAccountFactoryClientFromVersionControl: ({ extra, ...parameters }) =>
-      getAccountFactoryClientFromVersionControl({
-        signingCosmWasmClient,
-        sender,
-        ...parameters,
-        ...extra,
-      }),
-    getAccountFactoryClientFromApi: ({ extra, ...parameters } = {}) =>
-      getAccountFactoryClientFromApi({
         signingCosmWasmClient,
         sender,
         apiUrl,

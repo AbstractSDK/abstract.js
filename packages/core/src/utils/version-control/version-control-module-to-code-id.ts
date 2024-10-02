@@ -5,7 +5,7 @@ export function versionControlModuleToCodeId<
   const TVcModule extends VersionControlTypes.Module = VersionControlTypes.Module,
 >(module: TVcModule) {
   return match(module.reference)
-    .with({ account_base: P.select() }, (core) => core)
+    .with({ account: P.select() }, (account) => account)
     .with({ app: P.select() }, (app) => app)
     .with({ standalone: P.select() }, (standalone) => standalone)
     .otherwise((x) => {

@@ -1,5 +1,4 @@
 import { getAccountBalancesFromApi } from '../../actions/get-account-balance-from-api'
-import { getAccountFactoryAddressFromApi } from '../../actions/get-account-factory-address-from-api'
 import { getAccountsByOwnerFromApi } from '../../actions/get-accounts-by-owner-from-api'
 import { getAnsHostAddressFromApi } from '../../actions/get-ans-host-address-from-api'
 import { getAnsTokenFromApi } from '../../actions/get-ans-token-from-api'
@@ -14,11 +13,6 @@ type ExtractAndPartializeDecoratedParametersFromParameters<
 > = ExtractAndPartializeParameters<fn, 'apiUrl'>
 
 export type ApiActions = {
-  getAccountFactoryAddressFromApi(
-    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getAccountFactoryAddressFromApi
-    >,
-  ): ReturnType<typeof getAccountFactoryAddressFromApi>
   getAnsHostAddressFromApi(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAnsHostAddressFromApi
@@ -65,12 +59,6 @@ export function apiActions(apiUrl: string): ApiActions {
   return {
     getAccountBalancesFromApi: ({ extra, ...parameters }) =>
       getAccountBalancesFromApi({
-        apiUrl,
-        ...parameters,
-        ...extra,
-      }),
-    getAccountFactoryAddressFromApi: ({ extra, ...parameters }) =>
-      getAccountFactoryAddressFromApi({
         apiUrl,
         ...parameters,
         ...extra,

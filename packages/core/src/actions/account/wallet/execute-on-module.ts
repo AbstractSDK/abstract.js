@@ -1,4 +1,4 @@
-import { ManagerMsgComposer } from '../../../codegen/abstract'
+import { AccountMsgComposer } from '../../../codegen/abstract'
 import { ModuleType } from '../../../codegen/gql/graphql'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { encodeModuleMsg } from '../../../utils/modules/encode-module-msg'
@@ -50,7 +50,7 @@ export async function executeOnModule({
   return signingCosmWasmClient.signAndBroadcast(
     sender,
     [
-      new ManagerMsgComposer(sender, managerAddress).execOnModule({
+      new AccountMsgComposer(sender, managerAddress).execOnModule({
         moduleId: moduleId,
         execMsg: encodeModuleMsg(moduleMsg, moduleType),
       }),

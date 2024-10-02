@@ -6,8 +6,10 @@ import { ABSTRACT_NAMESPACE, accountIdToParameter } from '../../utils'
 import { parseCreateAccountExecuteResult } from '../../utils/account-factory/parse-create-account-execute-result'
 import { chainIdToName } from '../../utils/chain-registry'
 import { abstractModuleId } from '../../utils/modules/abstract-module-id'
+import { getVersionControlAddressFromApi } from '../get-version-control-address-from-api'
+import { getAbstractModuleVersion } from '../public/get-abstract-module-version'
+import { getAppModuleCodeIdFromVersionControl } from '../public/get-app-module-code-id-from-version-control'
 import { CommonModuleNames } from '../public/types'
-import { getAccountFactoryClientFromApi } from './get-account-factory-client-from-api'
 
 export type CreateAccountParameters = WithCosmWasmSignOptions<
   {
@@ -57,14 +59,22 @@ export async function createAccount({
     })
   }
 
-  const accountFactoryClient = await getAccountFactoryClientFromApi({
-    signingCosmWasmClient,
+  const versionControlAddress = await getVersionControlAddressFromApi({
     apiUrl,
-    sender,
+    chainName,
+  })
+
+  const accountCodeId = await getAppModuleCodeIdFromVersionControl({
+    cosmWasmClient: signingCosmWasmClient,
+    versionControlAddress,
+    moduleId: 'abstract:account',
+    version: 'latest',
   })
 
   // @TODO: parameter validation
-  const result = await accountFactoryClient.createAccount(
+  const result = await signingCosmWasmClient.instantiate(
+    sender,
+    accountCodeId,
     {
       installModules,
       baseAsset,
@@ -75,9 +85,13 @@ export async function createAccount({
       link,
       accountId: accountId ? accountIdToParameter(accountId) : undefined,
     },
+    'Abstract Account',
     fee,
-    memo,
-    funds,
+    {
+      memo,
+      funds,
+      admin: sender,
+    },
   )
 
   return parseCreateAccountExecuteResult(result, chainName)
