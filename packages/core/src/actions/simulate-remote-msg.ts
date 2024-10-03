@@ -1,5 +1,5 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { ProxyTypes } from '../codegen/abstract'
+import { AccountTypes } from '../codegen/abstract'
 import { MaybeArray } from '../types/utils'
 import { simulateWasmCosmosMsgs } from '../utils/cosmos'
 import { getCometClientFromApi } from './get-comet-client-from-api'
@@ -9,7 +9,7 @@ import { getIbcHostAddressFromVersionControl } from './public/get-ibc-host-addre
 export type SimulateRemoteMsgParameters = {
   apiUrl: string
   hostChainName: string
-  msgs: MaybeArray<ProxyTypes.CosmosMsgForEmpty>
+  msgs: MaybeArray<AccountTypes.CosmosMsgForEmpty>
 }
 
 /**

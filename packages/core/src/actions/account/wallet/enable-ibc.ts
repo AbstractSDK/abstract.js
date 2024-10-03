@@ -3,7 +3,7 @@ import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { ManagerClient, VersionControlTypes } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { CommonModuleNames } from '../../public/types'
-import { getManagerClientFromApi } from './get-manager-client-from-api'
+import { getAccountClientFromApi } from './get-account-client-from-api'
 import { installModules } from './install-modules'
 
 export type EnableIbcParameters = WithCosmWasmSignOptions<{

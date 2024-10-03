@@ -1,6 +1,6 @@
 import { match } from 'ts-pattern'
 import { ModuleType } from '../../codegen/gql/graphql'
-import { AdapterExecuteMsgFactory, AppExecuteMsgFactory } from '../../legacy'
+import { AdapterExecuteMsgFactory, AppExecuteMsgFactory } from './msg-factory'
 
 export const wrapModuleExecMsg = <TModuleMsg extends Record<string, unknown>>(
   msg: TModuleMsg,

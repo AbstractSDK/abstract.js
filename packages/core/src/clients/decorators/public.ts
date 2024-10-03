@@ -2,7 +2,8 @@ import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { getSimulationResultFromApi } from '../../actions/get-simulation-result-from-api'
 import { getAbstractModuleAddressFromVersionControl } from '../../actions/public/get-abstract-module-address-from-version-control'
 import { getAbstractModuleVersion } from '../../actions/public/get-abstract-module-version'
-import { getAccountsBaseAddressesFromApi } from '../../actions/public/get-accounts-base-addresses-from-api'
+import { getAccountAddressesFromApi } from '../../actions/public/get-account-addresses-from-api'
+import { getAccountQueryClient } from '../../actions/public/get-account-query-client'
 import { getAnsHostAddressFromVersionControl } from '../../actions/public/get-ans-host-address-from-version-control'
 import { getAnsHostQueryClient } from '../../actions/public/get-ans-host-query-client'
 import { getAnsHostQueryClientFromApi } from '../../actions/public/get-ans-host-query-client-from-api'
@@ -10,8 +11,6 @@ import { getAnsHostQueryClientFromVersionControl } from '../../actions/public/ge
 import { getAnsHostVersion } from '../../actions/public/get-ans-host-version'
 import { getCosmWasmClient } from '../../actions/public/get-cosm-wasm-client'
 import { getIbcClientQueryClient } from '../../actions/public/get-ibc-client-query-client'
-import { getManagerQueryClient } from '../../actions/public/get-manager-query-client'
-import { getProxyQueryClient } from '../../actions/public/get-proxy-query-client'
 import { getRemoteHostsFromApi } from '../../actions/public/get-remote-hosts-from-api'
 import { getVersionControlModuleData } from '../../actions/public/get-version-control-module-data'
 import { getVersionControlQueryClient } from '../../actions/public/get-version-control-query-client'
@@ -26,9 +25,9 @@ type ExtractAndPartializeDecoratedParametersFromParameters<
 export type PublicActions = {
   getAccountsBaseAddresses(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getAccountsBaseAddressesFromApi
+      typeof getAccountAddressesFromApi
     >,
-  ): ReturnType<typeof getAccountsBaseAddressesFromApi>
+  ): ReturnType<typeof getAccountAddressesFromApi>
   getAbstractModuleVersion(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAbstractModuleVersion
@@ -71,14 +70,9 @@ export type PublicActions = {
   ): ReturnType<typeof getIbcClientQueryClient>
   getManagerQueryClient(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getManagerQueryClient
+      typeof getAccountQueryClient
     >,
-  ): ReturnType<typeof getManagerQueryClient>
-  getProxyQueryClient(
-    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getProxyQueryClient
-    >,
-  ): ReturnType<typeof getProxyQueryClient>
+  ): ReturnType<typeof getAccountQueryClient>
   getVersionControlModuleData(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getVersionControlModuleData
@@ -118,7 +112,7 @@ export function publicActions(
 ): PublicActions {
   return {
     getAccountsBaseAddresses: ({ extra, ...parameters }) =>
-      getAccountsBaseAddressesFromApi({
+      getAccountAddressesFromApi({
         cosmWasmClient,
         apiUrl,
         ...parameters,
@@ -197,13 +191,7 @@ export function publicActions(
         ...extra,
       }),
     getManagerQueryClient: ({ extra, ...parameters }) =>
-      getManagerQueryClient({
-        cosmWasmClient,
-        ...parameters,
-        ...extra,
-      }),
-    getProxyQueryClient: ({ extra, ...parameters }) =>
-      getProxyQueryClient({
+      getAccountQueryClient({
         cosmWasmClient,
         ...parameters,
         ...extra,

@@ -5,9 +5,8 @@ import { getVersionControlClientFromApi } from '../../actions/wallet/get-version
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { createAccount } from '../../actions/wallet/create-account'
 import { createAccountMonarchy } from '../../actions/wallet/create-account-monarchy'
+import { getAccountClient } from '../../actions/wallet/get-account-client'
 import { getAnsHostClient } from '../../actions/wallet/get-ans-host-client'
-import { getManagerClient } from '../../actions/wallet/get-manager-client'
-import { getProxyClient } from '../../actions/wallet/get-proxy-client'
 import { getSenderAddress } from '../../actions/wallet/get-sender-address'
 import { getSigningCosmWasmClient } from '../../actions/wallet/get-signing-cosm-wasm-client'
 import { getVersionControlClient } from '../../actions/wallet/get-version-control-client'
@@ -58,14 +57,9 @@ export type WalletActions = {
   ): ReturnType<typeof getVersionControlClientFromApi>
   getManagerClient(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getManagerClient
+      typeof getAccountClient
     >,
-  ): ReturnType<typeof getManagerClient>
-  getProxyClient(
-    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getProxyClient
-    >,
-  ): ReturnType<typeof getProxyClient>
+  ): ReturnType<typeof getAccountClient>
   getSigningCosmWasmClient(): ReturnType<typeof getSigningCosmWasmClient>
   getSenderAddress(): ReturnType<typeof getSenderAddress>
 }
@@ -133,14 +127,7 @@ export function walletActions(
       }),
 
     getManagerClient: ({ extra, ...parameters }) =>
-      getManagerClient({
-        signingCosmWasmClient,
-        sender,
-        ...parameters,
-        ...extra,
-      }),
-    getProxyClient: ({ extra, ...parameters }) =>
-      getProxyClient({
+      getAccountClient({
         signingCosmWasmClient,
         sender,
         ...parameters,

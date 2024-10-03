@@ -2,7 +2,7 @@ import { AccountMsgComposer } from '../../../codegen/abstract'
 import { ModuleType } from '../../../codegen/gql/graphql'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { encodeModuleMsg } from '../../../utils/modules/encode-module-msg'
-import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
+import { getAccountAddressFromApi } from '../public/get-account-address-from-api'
 import { BaseAccountWalletParameters } from './types'
 
 type Base64EncodedJson = string
@@ -41,7 +41,7 @@ export async function executeOnModule({
   fee,
   memo,
 }: ExecuteOnModuleParameters) {
-  const { managerAddress } = await getAccountBaseAddressesFromApi({
+  const { account } = await getAccountAddressFromApi({
     accountId,
     cosmWasmClient: signingCosmWasmClient,
     apiUrl,
@@ -50,7 +50,7 @@ export async function executeOnModule({
   return signingCosmWasmClient.signAndBroadcast(
     sender,
     [
-      new AccountMsgComposer(sender, managerAddress).execOnModule({
+      new AccountMsgComposer(sender, account).execOnModule({
         moduleId: moduleId,
         execMsg: encodeModuleMsg(moduleMsg, moduleType),
       }),

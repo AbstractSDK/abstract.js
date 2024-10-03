@@ -1,5 +1,4 @@
-import { EncodedMsg } from '../../../legacy/messages'
-import { jsonToUtf8 } from '../../encoding'
+import { EncodedMsg, jsonToUtf8 } from '../../encoding'
 import { CW20Asset } from './types'
 
 export function encodeCW20AssetTransferMsg<

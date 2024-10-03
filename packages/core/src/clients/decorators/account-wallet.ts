@@ -9,8 +9,7 @@ import { executeOnModule } from '../../actions/account/wallet/execute-on-module'
 import { executeOnRemoteManager } from '../../actions/account/wallet/execute-on-remote-manager'
 import { executeOnRemoteModule } from '../../actions/account/wallet/execute-on-remote-module'
 import { executeRemote } from '../../actions/account/wallet/execute-remote'
-import { getManagerClientFromApi } from '../../actions/account/wallet/get-manager-client-from-api'
-import { getProxyClientFromApi } from '../../actions/account/wallet/get-proxy-client-from-api'
+import { getAccountClientFromApi } from '../../actions/account/wallet/get-account-client-from-api'
 import { installModules } from '../../actions/account/wallet/install-modules'
 import { revokeNamespace } from '../../actions/account/wallet/remove-namespace'
 import { requestFundsFromRemote } from '../../actions/account/wallet/request-remote-funds'
@@ -94,14 +93,9 @@ export type AccountWalletActions = {
   ): ReturnType<typeof requestFundsFromRemote>
   getManagerClientFromApi(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getManagerClientFromApi
+      typeof getAccountClientFromApi
     >,
-  ): ReturnType<typeof getManagerClientFromApi>
-  getProxyClientFromApi(
-    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getProxyClientFromApi
-    >,
-  ): ReturnType<typeof getProxyClientFromApi>
+  ): ReturnType<typeof getAccountClientFromApi>
   revokeNamespace(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof revokeNamespace
@@ -332,16 +326,7 @@ export function accountWalletActions(
         ...extra,
       }),
     getManagerClientFromApi: ({ extra, ...parameters }) =>
-      getManagerClientFromApi({
-        accountId,
-        signingCosmWasmClient,
-        apiUrl,
-        sender,
-        ...parameters,
-        ...extra,
-      }),
-    getProxyClientFromApi: ({ extra, ...parameters }) =>
-      getProxyClientFromApi({
+      getAccountClientFromApi({
         accountId,
         signingCosmWasmClient,
         apiUrl,

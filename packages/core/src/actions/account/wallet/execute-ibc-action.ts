@@ -1,5 +1,5 @@
 import semver from 'semver/preload'
-import { IbcClientTypes, ProxyTypes } from '../../../codegen/abstract'
+import { AccountTypes, IbcClientTypes } from '../../../codegen/abstract'
 import { ModuleType } from '../../../codegen/gql/graphql'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { MaybeArray } from '../../../types/utils'
@@ -68,7 +68,7 @@ export async function executeIbcAction({
       ibc_action: {
         msg,
       },
-    } satisfies ProxyTypes.ExecuteMsg
+    } satisfies AccountTypes.ExecuteMsg
   } else {
     // older versions accept an array
     proxyMsg = {

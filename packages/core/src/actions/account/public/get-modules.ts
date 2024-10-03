@@ -3,7 +3,7 @@ import {
   ManagerQueryClient,
   VersionControlTypes,
 } from '../../../codegen/abstract'
-import { getManagerQueryClientFromApi } from './get-manager-query-client-from-api'
+import { getAccountQueryClientFromApi } from './get-account-query-client-from-api'
 
 export type GetModulesParameters = {
   accountId: VersionControlTypes.AccountId
@@ -17,7 +17,7 @@ export async function getModules({
   apiUrl,
   ...params
 }: GetModulesParameters) {
-  const managerQueryClient = await getManagerQueryClientFromApi({
+  const managerQueryClient = await getAccountQueryClientFromApi({
     accountId,
     cosmWasmClient,
     apiUrl,

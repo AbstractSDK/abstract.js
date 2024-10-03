@@ -1,15 +1,12 @@
 import {
+  AccountExecuteMsgBuilder,
   AccountTypes,
-  ProxyExecuteMsgBuilder,
-  ProxyTypes,
 } from '../../../codegen/abstract'
 import { ModuleType } from '../../../codegen/gql/graphql'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { MaybeArray } from '../../../types/utils'
 import { abstractModuleId } from '../../../utils/modules/abstract-module-id'
-import { encodeModuleMsg } from '../../../utils/modules/encode-module-msg'
 import { CommonModuleNames } from '../../public/types'
-import { executeOnRemoteManager } from './execute-on-remote-manager'
 import { executeOnRemoteModule } from './execute-on-remote-module'
 import { BaseAccountWalletParameters } from './types'
 
@@ -17,7 +14,7 @@ export type ExecuteOnRemoteParameters = Omit<
   WithCosmWasmSignOptions<
     BaseAccountWalletParameters & {
       hostChainName: string
-      msgs: MaybeArray<ProxyTypes.CosmosMsgForEmpty>
+      msgs: MaybeArray<AccountTypes.CosmosMsgForEmpty>
     }
   >,
   'funds'
@@ -45,9 +42,10 @@ export async function executeRemote({
   fee,
   memo,
 }: ExecuteOnRemoteParameters) {
-  const proxyMsg: ProxyTypes.ExecuteMsg = ProxyExecuteMsgBuilder.moduleAction({
-    msgs: Array.isArray(msgs) ? msgs : [msgs],
-  })
+  const proxyMsg: AccountTypes.ExecuteMsg =
+    AccountExecuteMsgBuilder.moduleAction({
+      msgs: Array.isArray(msgs) ? msgs : [msgs],
+    })
 
   return executeOnRemoteModule({
     accountId,

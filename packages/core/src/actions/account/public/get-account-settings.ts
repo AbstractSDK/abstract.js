@@ -1,7 +1,7 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { CommonModuleNames } from '../../../actions/public/types'
 import { VersionControlTypes } from '../../../codegen/abstract'
-import { getManagerQueryClientFromApi } from './get-manager-query-client-from-api'
+import { getAccountQueryClientFromApi } from './get-account-query-client-from-api'
 
 export type GetAccountSettingsParameters = {
   accountId: VersionControlTypes.AccountId
@@ -14,7 +14,7 @@ export async function getAccountSettings({
   cosmWasmClient,
   apiUrl,
 }: GetAccountSettingsParameters) {
-  const managerClient = await getManagerQueryClientFromApi({
+  const managerClient = await getAccountQueryClientFromApi({
     accountId,
     cosmWasmClient,
     apiUrl,

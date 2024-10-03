@@ -1,4 +1,7 @@
-import { ProxyExecuteMsgBuilder, ProxyTypes } from '../../../codegen/abstract'
+import {
+  AccountExecuteMsgBuilder,
+  AccountTypes,
+} from '../../../codegen/abstract'
 import { ModuleType } from '../../../codegen/gql/graphql'
 import { MaybeArray } from '../../../types/utils'
 import { executeOnModule } from './execute-on-module'
@@ -10,7 +13,7 @@ import { CommonModuleNames } from '../../public/types'
 export type ExecuteParameters = Omit<
   WithCosmWasmSignOptions<
     BaseAccountWalletParameters & {
-      msgs: MaybeArray<ProxyTypes.CosmosMsgForEmpty>
+      msgs: MaybeArray<AccountTypes.CosmosMsgForEmpty>
     }
   >,
   'funds'
@@ -42,7 +45,7 @@ export async function execute({
     sender,
     moduleId: abstractModuleId(CommonModuleNames.PROXY),
     moduleType: ModuleType.AccountBase,
-    moduleMsg: ProxyExecuteMsgBuilder.moduleAction({
+    moduleMsg: AccountExecuteMsgBuilder.moduleAction({
       msgs: Array.isArray(msgs) ? msgs : [msgs],
     }),
     fee,

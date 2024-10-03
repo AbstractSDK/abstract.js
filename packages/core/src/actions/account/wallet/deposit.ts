@@ -1,6 +1,6 @@
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { Asset, encodeAssetsTransfersMsgs } from '../../../utils/assets'
-import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
+import { getAccountAddressFromApi } from '../public/get-account-address-from-api'
 import { BaseAccountWalletParameters } from './types'
 
 export type DepositParameters = Omit<
@@ -21,14 +21,14 @@ export async function deposit({
   fee,
   memo,
 }: DepositParameters) {
-  const { proxyAddress } = await getAccountBaseAddressesFromApi({
+  const { account } = await getAccountAddressFromApi({
     accountId,
     cosmWasmClient: signingCosmWasmClient,
     apiUrl,
   })
   return signingCosmWasmClient.signAndBroadcast(
     sender,
-    encodeAssetsTransfersMsgs(assets, sender, proxyAddress),
+    encodeAssetsTransfersMsgs(assets, sender, account),
     fee,
     memo,
   )

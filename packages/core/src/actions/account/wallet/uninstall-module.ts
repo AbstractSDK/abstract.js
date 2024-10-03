@@ -1,7 +1,7 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { ManagerClient, VersionControlTypes } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
-import { getManagerClientFromApi } from './get-manager-client-from-api'
+import { getAccountClientFromApi } from './get-account-client-from-api'
 import { BaseAccountWalletParameters } from './types'
 
 export type UninstallModulesParameters = WithCosmWasmSignOptions<
@@ -19,7 +19,7 @@ export async function uninstallModule({
   funds,
   ...rest
 }: UninstallModulesParameters) {
-  const managerClient = await getManagerClientFromApi({
+  const managerClient = await getAccountClientFromApi({
     accountId,
     signingCosmWasmClient,
     sender,
