@@ -1,6 +1,6 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import {
-  ManagerQueryClient,
+  AccountQueryClient,
   VersionControlTypes,
 } from '../../../codegen/abstract'
 import { getAccountQueryClientFromApi } from './get-account-query-client-from-api'
@@ -9,7 +9,7 @@ export type GetSubAccountSequencesParameters = {
   accountId: VersionControlTypes.AccountId
   cosmWasmClient: CosmWasmClient
   apiUrl: string
-} & Parameters<typeof ManagerQueryClient.prototype.subAccountIds>[0]
+} & Parameters<typeof AccountQueryClient.prototype.subAccountIds>[0]
 
 export async function getSubAccountSequences({
   accountId,
@@ -17,12 +17,12 @@ export async function getSubAccountSequences({
   apiUrl,
   ...params
 }: GetSubAccountSequencesParameters) {
-  const managerQueryClient = await getAccountQueryClientFromApi({
+  const AccountQueryClient = await getAccountQueryClientFromApi({
     accountId,
     cosmWasmClient,
     apiUrl,
   })
-  const { sub_accounts } = await managerQueryClient.subAccountIds(params)
+  const { sub_accounts } = await AccountQueryClient.subAccountIds(params)
 
   return sub_accounts
 }

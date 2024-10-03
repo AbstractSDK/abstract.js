@@ -1,7 +1,7 @@
 import { AccountId } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import {
-  ManagerQueryClient,
+  AccountQueryClient,
   VersionControlTypes,
 } from '../../../codegen/abstract'
 import { sequenceToLocalAccountId } from '../../../utils/account-id/seq-to-local-account-id'
@@ -12,7 +12,7 @@ export type GetSubAccountIdsParameters = {
   accountId: VersionControlTypes.AccountId
   cosmWasmClient: CosmWasmClient
   apiUrl: string
-} & Parameters<typeof ManagerQueryClient.prototype.subAccountIds>[0]
+} & Parameters<typeof AccountQueryClient.prototype.subAccountIds>[0]
 
 export async function getSubAccountIds({
   accountId,

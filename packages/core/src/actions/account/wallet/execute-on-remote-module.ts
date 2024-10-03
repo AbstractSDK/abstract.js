@@ -5,7 +5,7 @@ import {
   encodeModuleMsg,
   executeOnModuleMsg,
 } from '../../../utils/modules/encode-module-msg'
-import { executeOnRemoteManager } from './execute-on-remote-manager'
+import { executeOnRemoteAccount } from './execute-on-remote-account'
 import { BaseAccountWalletParameters } from './types'
 
 type Base64EncodedJson = string
@@ -48,18 +48,18 @@ export async function executeOnRemoteModule({
   fee,
   memo,
 }: ExecuteOnRemoteModuleParameters) {
-  const managerMsg: AccountTypes.ExecuteMsg = executeOnModuleMsg(
+  const accountMsg: AccountTypes.ExecuteMsg = executeOnModuleMsg(
     moduleId,
     moduleMsg,
     moduleType,
   )
 
-  return executeOnRemoteManager({
+  return executeOnRemoteAccount({
     accountId,
     signingCosmWasmClient,
     apiUrl,
     sender,
-    managerMsg,
+    accountMsg,
     hostChainName,
     fee,
     memo,

@@ -11,7 +11,7 @@ import { getAppModuleCodeIdFromVersionControl } from '../../public/get-app-modul
 import { getModuleFactoryAddressFromVersionControl } from '../../public/get-module-factory-address-from-version-control'
 import { CommonModuleNames } from '../../public/types'
 
-export type GetManagerInstantiate2AddressFromApi = {
+export type GetAccountInstantiate2AddressFromApi = {
   accountId: VersionControlTypes.AccountId
   cosmWasmClient: CosmWasmClient
   apiUrl: string
@@ -23,11 +23,11 @@ export type GetManagerInstantiate2AddressFromApi = {
  * @param cosmWasmClient
  * @param apiUrl
  */
-export async function getManagerInstantiate2AddressFromApi({
+export async function getAccountInstantiate2AddressFromApi({
   accountId,
   cosmWasmClient,
   apiUrl,
-}: GetManagerInstantiate2AddressFromApi) {
+}: GetAccountInstantiate2AddressFromApi) {
   const chainId = await cosmWasmClient.getChainId()
   const chainName = chainIdToName(chainId)
 
@@ -41,14 +41,14 @@ export async function getManagerInstantiate2AddressFromApi({
     versionControlAddress,
   })
 
-  const managerCodeId = await getAppModuleCodeIdFromVersionControl({
-    moduleId: abstractModuleId(CommonModuleNames.MANAGER),
+  const accountCodeId = await getAppModuleCodeIdFromVersionControl({
+    moduleId: abstractModuleId(CommonModuleNames.ACCOUNT),
     version: 'latest',
     cosmWasmClient,
     versionControlAddress,
   })
 
-  const moduleCodeDetails = await cosmWasmClient.getCodeDetails(managerCodeId)
+  const moduleCodeDetails = await cosmWasmClient.getCodeDetails(accountCodeId)
 
   return getInstantiate2Address(
     moduleFactoryAddress,

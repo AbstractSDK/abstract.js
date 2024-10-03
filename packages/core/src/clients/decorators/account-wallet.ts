@@ -6,7 +6,7 @@ import { deposit } from '../../actions/account/wallet/deposit'
 import { enableIbc } from '../../actions/account/wallet/enable-ibc'
 import { execute } from '../../actions/account/wallet/execute'
 import { executeOnModule } from '../../actions/account/wallet/execute-on-module'
-import { executeOnRemoteManager } from '../../actions/account/wallet/execute-on-remote-manager'
+import { executeOnRemoteAccount } from '../../actions/account/wallet/execute-on-remote-account'
 import { executeOnRemoteModule } from '../../actions/account/wallet/execute-on-remote-module'
 import { executeRemote } from '../../actions/account/wallet/execute-remote'
 import { getAccountClientFromApi } from '../../actions/account/wallet/get-account-client-from-api'
@@ -68,9 +68,9 @@ export type AccountWalletActions = {
   ): ReturnType<typeof executeOnModule>
   executeOnRemoteManager(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof executeOnRemoteManager
+      typeof executeOnRemoteAccount
     >,
-  ): ReturnType<typeof executeOnRemoteManager>
+  ): ReturnType<typeof executeOnRemoteAccount>
   executeOnRemoteModule(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof executeOnRemoteModule
@@ -91,7 +91,7 @@ export type AccountWalletActions = {
       typeof requestFundsFromRemote
     >,
   ): ReturnType<typeof requestFundsFromRemote>
-  getManagerClientFromApi(
+  getAccountClientFromApi(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAccountClientFromApi
     >,
@@ -227,7 +227,7 @@ export function accountWalletActions(
         ...extra,
       }),
     executeOnRemoteManager: ({ extra, ...parameters }) =>
-      executeOnRemoteManager({
+      executeOnRemoteAccount({
         accountId,
         signingCosmWasmClient,
         apiUrl,
@@ -325,7 +325,7 @@ export function accountWalletActions(
         ...parameters,
         ...extra,
       }),
-    getManagerClientFromApi: ({ extra, ...parameters }) =>
+    getAccountClientFromApi: ({ extra, ...parameters }) =>
       getAccountClientFromApi({
         accountId,
         signingCosmWasmClient,

@@ -55,7 +55,7 @@ export type WalletActions = {
       typeof getVersionControlClientFromApi
     >,
   ): ReturnType<typeof getVersionControlClientFromApi>
-  getManagerClient(
+  getAccountClient(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAccountClient
     >,
@@ -126,7 +126,7 @@ export function walletActions(
         ...extra,
       }),
 
-    getManagerClient: ({ extra, ...parameters }) =>
+    getAccountClient: ({ extra, ...parameters }) =>
       getAccountClient({
         signingCosmWasmClient,
         sender,

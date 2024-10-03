@@ -1,8 +1,8 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { getAccountAddressFromApi } from '../../actions/account/public/get-account-address-from-api'
+import { getAccountInstantiate2AddressFromApi } from '../../actions/account/public/get-account-instantiate2-address-from-api'
 import { getAccountQueryClientFromApi } from '../../actions/account/public/get-account-query-client-from-api'
 import { getAccountSettings } from '../../actions/account/public/get-account-settings'
-import { getManagerInstantiate2AddressFromApi } from '../../actions/account/public/get-manager-instantiate2-address-from-api'
 import { getModuleAddress } from '../../actions/account/public/get-module-address'
 import { getModuleInstantiate2AddressFromApi } from '../../actions/account/public/get-module-instantiate2-address-from-api'
 import { getModules } from '../../actions/account/public/get-modules'
@@ -34,7 +34,7 @@ export type AccountPublicActions = {
       typeof getAccountSettings
     >,
   ): ReturnType<typeof getAccountSettings>
-  getManagerQueryClientFromApi(
+  getAccountQueryClientFromApi(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAccountQueryClientFromApi
     >,
@@ -56,9 +56,9 @@ export type AccountPublicActions = {
   ): ReturnType<typeof getModuleInstantiate2AddressFromApi>
   getManagerInstantiate2Address(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getManagerInstantiate2AddressFromApi
+      typeof getAccountInstantiate2AddressFromApi
     >,
-  ): ReturnType<typeof getManagerInstantiate2AddressFromApi>
+  ): ReturnType<typeof getAccountInstantiate2AddressFromApi>
   getNamespace(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getNamespace
@@ -123,7 +123,7 @@ export function accountPublicActions(
         ...parameters,
         ...extra,
       }),
-    getManagerQueryClientFromApi: ({ extra, ...parameters } = {}) =>
+    getAccountQueryClientFromApi: ({ extra, ...parameters } = {}) =>
       getAccountQueryClientFromApi({
         accountId,
         cosmWasmClient,
@@ -156,7 +156,7 @@ export function accountPublicActions(
         ...extra,
       }),
     getManagerInstantiate2Address: ({ extra, ...parameters } = {}) =>
-      getManagerInstantiate2AddressFromApi({
+      getAccountInstantiate2AddressFromApi({
         accountId,
         cosmWasmClient,
         apiUrl,

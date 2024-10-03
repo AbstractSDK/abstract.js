@@ -50,7 +50,7 @@ export async function executeOnModule({
   return signingCosmWasmClient.signAndBroadcast(
     sender,
     [
-      new AccountMsgComposer(sender, account).execOnModule({
+      new AccountMsgComposer(sender, account).executeOnModule({
         moduleId: moduleId,
         execMsg: encodeModuleMsg(moduleMsg, moduleType),
       }),

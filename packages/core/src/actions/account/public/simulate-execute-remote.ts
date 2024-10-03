@@ -1,8 +1,11 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { MaybeArray } from 'src/types/utils'
-import { VersionControlTypes } from '../../../codegen/abstract'
+import {
+  AccountExecuteMsgBuilder,
+  AccountTypes,
+  VersionControlTypes,
+} from '../../../codegen/abstract'
 import { CosmosMsgForEmpty } from '../../../codegen/abstract/cosmwasm-codegen/Account.types'
-import { executeOnProxyMsg } from '../../../utils/modules/encode-module-msg'
 import { simulateExecuteRemoteAccount } from './simulate-execute-remote-account'
 
 export type SimulateExecuteRemoteParameters = {
@@ -28,11 +31,14 @@ export async function simulateExecuteRemote({
   hostChainName,
   msgs,
 }: SimulateExecuteRemoteParameters) {
+  const accountMsg: AccountTypes.ExecuteMsg = AccountExecuteMsgBuilder.execute({
+    msgs: Array.isArray(msgs) ? msgs : [msgs],
+  })
   return simulateExecuteRemoteAccount({
     apiUrl,
     accountId,
     cosmWasmClient,
     hostChainName,
-    accountMsg: executeOnProxyMsg(msgs),
+    accountMsg,
   })
 }

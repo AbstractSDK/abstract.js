@@ -27,7 +27,7 @@ export async function revokeNamespace({
   })
   if (!namespace) throw new Error('Namespace not found')
 
-  return versionControlClient.removeNamespaces(
+  return versionControlClient.forgoNamespace(
     { namespaces: [namespace] },
     fee,
     memo,

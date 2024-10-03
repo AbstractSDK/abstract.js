@@ -16,7 +16,7 @@ import {
 import { AuthInfo, Fee, Tx, TxBody } from 'cosmjs-types/cosmos/tx/v1beta1/tx'
 import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
 import { Any } from 'cosmjs-types/google/protobuf/any'
-import { CosmosMsgForEmpty } from '../../legacy'
+import { CosmosMsgForEmpty } from '../../codegen/abstract/cosmwasm-codegen/Account.types'
 import { encodeWasmCosmosMsgForEmpty } from './encoding'
 
 const typesRegistry = new Registry([

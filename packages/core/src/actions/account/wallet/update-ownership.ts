@@ -1,4 +1,4 @@
-import { GovAction } from '../../../codegen/abstract/cosmwasm-codegen/Manager.types'
+import { GovAction } from '../../../codegen/abstract/cosmwasm-codegen/Account.types'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { getAccountClientFromApi } from './get-account-client-from-api'
 import { BaseAccountWalletParameters } from './types'
@@ -19,11 +19,11 @@ export async function updateOwnership({
   funds,
   update,
 }: UpdateOwnershipParameters) {
-  const managerClient = await getAccountClientFromApi({
+  const accountClient = await getAccountClientFromApi({
     accountId,
     signingCosmWasmClient,
     sender,
     apiUrl,
   })
-  return managerClient.updateOwnership(update, fee, memo, funds)
+  return accountClient.updateOwnership(update, fee, memo, funds)
 }

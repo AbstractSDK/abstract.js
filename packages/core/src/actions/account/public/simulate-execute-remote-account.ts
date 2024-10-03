@@ -1,9 +1,7 @@
-import { cosmosWasmExecuteMsg, jsonToBinary } from '@abstract-money/core'
+import { cosmosWasmExecuteMsg } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { AccountTypes, VersionControlTypes } from '../../../codegen/abstract'
 import { CosmosMsgForEmpty } from '../../../codegen/abstract/cosmwasm-codegen/Account.types'
-import { rawQuery } from '../../../utils'
-import { getCosmWasmClientFromApi } from '../../get-cosmwasm-client-from-api'
 import { simulateRemoteMsg } from '../../simulate-remote-msg'
 import { getRemoteAccountProxies } from './get-remote-account-proxies'
 
@@ -37,24 +35,13 @@ export async function simulateExecuteRemoteAccount({
     apiUrl,
   })
 
-  const remoteProxy = remoteProxies[hostChainName]
-  if (!remoteProxy) {
+  const remoteAccountAddress = remoteProxies[hostChainName]
+  if (!remoteAccountAddress) {
     throw new Error(`No remote proxy found for chain ${hostChainName}`)
   }
 
-  const remoteCwClient = await getCosmWasmClientFromApi({
-    apiUrl,
-    chainName: hostChainName,
-  })
-
-  const remoteManager = await rawQuery<string>({
-    cosmWasmClient: remoteCwClient,
-    address: remoteProxy,
-    key: 'admin',
-  })
-
-  const cosmosManagerMsg: CosmosMsgForEmpty = cosmosWasmExecuteMsg(
-    remoteManager,
+  const cosmosAccountMsg: CosmosMsgForEmpty = cosmosWasmExecuteMsg(
+    remoteAccountAddress,
     accountMsg,
     [],
   )
@@ -62,6 +49,6 @@ export async function simulateExecuteRemoteAccount({
   return simulateRemoteMsg({
     apiUrl,
     hostChainName,
-    msgs: cosmosManagerMsg,
+    msgs: cosmosAccountMsg,
   })
 }

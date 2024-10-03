@@ -68,7 +68,7 @@ export type PublicActions = {
       typeof getIbcClientQueryClient
     >,
   ): ReturnType<typeof getIbcClientQueryClient>
-  getManagerQueryClient(
+  getAccountQueryClient(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAccountQueryClient
     >,
@@ -190,7 +190,7 @@ export function publicActions(
         ...parameters,
         ...extra,
       }),
-    getManagerQueryClient: ({ extra, ...parameters }) =>
+    getAccountQueryClient: ({ extra, ...parameters }) =>
       getAccountQueryClient({
         cosmWasmClient,
         ...parameters,

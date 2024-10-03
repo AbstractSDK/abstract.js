@@ -7,6 +7,7 @@ import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { MaybeArray } from '../../../types/utils'
 import { abstractModuleId } from '../../../utils/modules/abstract-module-id'
 import { CommonModuleNames } from '../../public/types'
+import { executeOnRemoteAccount } from './execute-on-remote-account'
 import { executeOnRemoteModule } from './execute-on-remote-module'
 import { BaseAccountWalletParameters } from './types'
 
@@ -42,19 +43,16 @@ export async function executeRemote({
   fee,
   memo,
 }: ExecuteOnRemoteParameters) {
-  const proxyMsg: AccountTypes.ExecuteMsg =
-    AccountExecuteMsgBuilder.moduleAction({
-      msgs: Array.isArray(msgs) ? msgs : [msgs],
-    })
+  const proxyMsg: AccountTypes.ExecuteMsg = AccountExecuteMsgBuilder.execute({
+    msgs: Array.isArray(msgs) ? msgs : [msgs],
+  })
 
-  return executeOnRemoteModule({
+  return executeOnRemoteAccount({
     accountId,
     signingCosmWasmClient,
     apiUrl,
     sender,
-    moduleId: abstractModuleId(CommonModuleNames.PROXY),
-    moduleType: ModuleType.AccountBase,
-    moduleMsg: proxyMsg,
+    accountMsg: proxyMsg,
     hostChainName,
     fee,
     memo,

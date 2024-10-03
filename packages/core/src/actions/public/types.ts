@@ -1,7 +1,6 @@
 export enum CommonModuleNames {
+  ACCOUNT = 'account',
   PROXY = 'proxy',
-  MANAGER = 'manager',
-  ACCOUNT_FACTORY = 'account-factory',
   MODULE_FACTORY = 'module-factory',
   ANS_HOST = 'ans-host',
   IBC_CLIENT = 'ibc-client',

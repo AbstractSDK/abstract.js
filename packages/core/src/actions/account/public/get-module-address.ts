@@ -15,12 +15,12 @@ export async function getModuleAddress({
   apiUrl,
   id,
 }: GetModuleAddressParameters) {
-  const managerQueryClient = await getAccountQueryClientFromApi({
+  const AccountQueryClient = await getAccountQueryClientFromApi({
     accountId,
     cosmWasmClient,
     apiUrl,
   })
-  const { modules } = await managerQueryClient.moduleAddresses({ ids: [id] })
+  const { modules } = await AccountQueryClient.moduleAddresses({ ids: [id] })
 
   return modules[0]?.[1] ?? null
 }

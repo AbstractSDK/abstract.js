@@ -38,14 +38,12 @@ export async function createRemoteAccount({
   memo,
   hostChainName,
   installModules,
-  base_asset,
   namespace,
 }: CreateRemoteAccountParameters) {
   const registerMsg: IbcClientTypes.ExecuteMsg = {
     register: {
       host_chain: hostChainName,
       install_modules: installModules ?? [],
-      base_asset,
       namespace,
     },
   }

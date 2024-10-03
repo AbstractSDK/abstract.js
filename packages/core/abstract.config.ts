@@ -4,7 +4,7 @@ import { registry, vanilla } from '@abstract-money/cli/plugins'
 const contractsConfig = [
   {
     name: 'account',
-    version: '0.24.0-rc.1',
+    version: '0.24.0-test.1',
   },
   {
     name: 'version-control',

@@ -31,27 +31,8 @@ export const executeOnModuleMsg = <TModuleMsg extends Record<string, unknown>>(
   moduleMsg: TModuleMsg | string,
   moduleType?: ModuleType,
 ): AccountTypes.ExecuteMsg => ({
-  exec_on_module: {
+  execute_on_module: {
     module_id: moduleId,
     exec_msg: encodeModuleMsg(moduleMsg, moduleType),
   },
 })
-
-/**
- * Encode messages to be executed on the proxy via the manager.
- * @param proxyMsgs
- */
-export const executeOnProxyMsg = (
-  proxyMsgs: MaybeArray<CosmosMsgForEmpty>,
-): AccountTypes.ExecuteMsg => {
-  const proxyMsg: AccountTypes.ExecuteMsg =
-    AccountExecuteMsgBuilder.moduleAction({
-      msgs: Array.isArray(proxyMsgs) ? proxyMsgs : [proxyMsgs],
-    })
-
-  return executeOnModuleMsg(
-    abstractModuleId(CommonModuleNames.PROXY),
-    proxyMsg,
-    ModuleType.AccountBase,
-  )
-}

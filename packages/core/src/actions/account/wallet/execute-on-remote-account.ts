@@ -8,30 +8,30 @@ export type ExecuteOnRemoteParameters = Omit<
   WithCosmWasmSignOptions<
     BaseAccountWalletParameters & {
       hostChainName: string
-      managerMsg: MaybeArray<AccountTypes.ExecuteMsg>
+      accountMsg: MaybeArray<AccountTypes.ExecuteMsg>
     }
   >,
   'funds'
 >
 
 /**
- * Execute one message on a remote chain.
+ * Execute one message on a remote chain on the remote account itself as the account.
  * @param accountId
  * @param signingCosmWasmClient
  * @param apiUrl
  * @param sender
- * @param managerMsg
+ * @param accountMsg
  * @param callbackInfo
  * @param hostChainName
  * @param fee
  * @param memo
  */
-export async function executeOnRemoteManager({
+export async function executeOnRemoteAccount({
   accountId,
   signingCosmWasmClient,
   apiUrl,
   sender,
-  managerMsg,
+  accountMsg,
   hostChainName,
   fee,
   memo,
@@ -41,7 +41,7 @@ export async function executeOnRemoteManager({
       host_chain: hostChainName,
       action: {
         dispatch: {
-          manager_msgs: Array.isArray(managerMsg) ? managerMsg : [managerMsg],
+          account_msgs: Array.isArray(accountMsg) ? accountMsg : [accountMsg],
         },
       },
     },

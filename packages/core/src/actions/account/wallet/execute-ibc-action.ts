@@ -1,13 +1,20 @@
 import semver from 'semver/preload'
-import { AccountTypes, IbcClientTypes } from '../../../codegen/abstract'
+import {
+  AccountClient,
+  AccountMsgComposer,
+  AccountTypes,
+  IbcClientTypes,
+} from '../../../codegen/abstract'
 import { ModuleType } from '../../../codegen/gql/graphql'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { MaybeArray } from '../../../types/utils'
 import { abstractModuleId } from '../../../utils/modules/abstract-module-id'
+import { encodeModuleMsg } from '../../../utils/modules/encode-module-msg'
 import { CommonModuleNames } from '../../public/types'
 import { getModuleAddress } from '../public/get-module-address'
 import { getModuleVersion } from '../public/get-module-version'
 import { executeOnModule } from './execute-on-module'
+import { getAccountClientFromApi } from './get-account-client-from-api'
 import { BaseAccountWalletParameters } from './types'
 
 export type ExecuteIbcActionParameters = Omit<
@@ -51,44 +58,11 @@ export async function executeIbcAction({
     )
   }
 
-  const proxyVersion = await getModuleVersion({
-    accountId,
-    cosmWasmClient: signingCosmWasmClient,
-    apiUrl,
-    id: abstractModuleId(CommonModuleNames.PROXY),
-  })
-
-  const isNewerThanV022 = proxyVersion
-    ? semver.minor(proxyVersion.version) >= 22
-    : true
-
-  let proxyMsg
-  if (isNewerThanV022) {
-    proxyMsg = {
-      ibc_action: {
-        msg,
-      },
-    } satisfies AccountTypes.ExecuteMsg
-  } else {
-    // older versions accept an array
-    proxyMsg = {
-      ibc_action: {
-        msgs: [msg],
-      },
-    }
-  }
-
-  console.log('proxyMsg', proxyMsg)
-
-  return executeOnModule({
+  const accountClient = await getAccountClientFromApi({
     accountId,
     signingCosmWasmClient,
-    apiUrl,
     sender,
-    moduleId: abstractModuleId(CommonModuleNames.PROXY),
-    moduleType: ModuleType.AccountBase,
-    moduleMsg: proxyMsg,
-    fee,
-    memo,
+    apiUrl,
   })
+  return accountClient.ibcAction({ msg }, fee, memo)
 }

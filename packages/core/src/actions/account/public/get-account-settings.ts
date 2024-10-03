@@ -14,7 +14,7 @@ export async function getAccountSettings({
   cosmWasmClient,
   apiUrl,
 }: GetAccountSettingsParameters) {
-  const managerClient = await getAccountQueryClientFromApi({
+  const accountClient = await getAccountQueryClientFromApi({
     accountId,
     cosmWasmClient,
     apiUrl,
@@ -22,7 +22,7 @@ export async function getAccountSettings({
 
   let cursor: string | undefined
   do {
-    const fetchedModules = await managerClient.moduleInfos({
+    const fetchedModules = await accountClient.moduleInfos({
       limit: 20,
       startAfter: cursor,
     })
