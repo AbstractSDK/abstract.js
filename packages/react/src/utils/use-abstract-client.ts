@@ -1,9 +1,3 @@
-import {
-  ABSTRACT_API_URL,
-  AbstractClient,
-  CHAIN_DEPLOYMENT_QUERY,
-  graphqlRequest,
-} from '@abstract-money/core/legacy'
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import React from 'react'
 import { useConfig } from '../contexts'

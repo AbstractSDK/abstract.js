@@ -2,7 +2,6 @@ import {
   ABSTRACT_API_URL,
   AbstractQueryClient,
   CHAIN_DEPLOYMENT_QUERY,
-  graphqlRequest,
 } from '@abstract-money/core/legacy'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import React from 'react'
@@ -19,7 +18,7 @@ async function getAbstractQueryClient({
   chainName: string
   overrideApiUrl?: string
 }) {
-  const data = await graphqlRequest(overrideApiUrl, CHAIN_DEPLOYMENT_QUERY, {
+  const data = await request(overrideApiUrl, CHAIN_DEPLOYMENT_QUERY, {
     chain: chainName,
   })
 

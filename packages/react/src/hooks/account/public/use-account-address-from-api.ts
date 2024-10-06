@@ -10,18 +10,16 @@ import {
   useQuery,
 } from '../../../types/queries'
 
-type QueryFnData = Awaited<
-  ReturnType<AccountPublicClient['getAccountBaseAddresses']>
->
+type QueryFnData = Awaited<ReturnType<AccountPublicClient['getAccountAddress']>>
 
 type QueryError = unknown
 type QueryData = QueryFnData
 type QueryKey = readonly [
-  'accountBaseAddresses',
+  'accountAddress',
   AccountPublicClient | undefined,
   (
     | NonNullable<
-        Parameters<AccountPublicClient['getAccountBaseAddresses']>[0]
+        Parameters<AccountPublicClient['getAccountAddress']>[0]
       >['extra']
     | undefined
   ),
@@ -33,26 +31,27 @@ type QueryOptions<TData = QueryData> = Omit<
 >
 type QueryResult<TData = QueryData> = UseQueryReturnType<TData, QueryError>
 
-export type UseAccountBaseAddressesFromApiParameters<TData = QueryData> =
-  WithArgs<Parameters<AccountPublicClient['getAccountBaseAddresses']>[0]> & {
-    chainName?: string | undefined
-    query?: QueryOptions<TData>
-    accountId: AccountId | undefined
-  }
+export type UseAccountAddressFromApiParameters<TData = QueryData> = WithArgs<
+  Parameters<AccountPublicClient['getAccountAddress']>[0]
+> & {
+  chainName?: string | undefined
+  query?: QueryOptions<TData>
+  accountId: AccountId | undefined
+}
 
-export function useAccountBaseAddressesFromApi<TData = QueryData>({
+export function useAccountAddressFromApi<TData = QueryData>({
   accountId,
   chainName,
   extra,
   query = {},
-}: UseAccountBaseAddressesFromApiParameters<TData>): QueryResult<TData> {
+}: UseAccountAddressFromApiParameters<TData>): QueryResult<TData> {
   const config = useConfig()
   const accountPublicClient = config.useAccountPublicClient({
     accountId,
     chainName,
   })
   const queryKey = React.useMemo(
-    () => ['accountBaseAddresses', accountPublicClient, extra] as const,
+    () => ['accountAddress', accountPublicClient, extra] as const,
     [accountPublicClient, extra],
   )
 
@@ -62,7 +61,7 @@ export function useAccountBaseAddressesFromApi<TData = QueryData>({
     ({ queryKey: [_, accountPublicClient, extra] }) => {
       if (!accountPublicClient) throw new Error('No client')
 
-      return accountPublicClient.getAccountBaseAddresses(
+      return accountPublicClient.getAccountAddress(
         extra ? { extra } : undefined,
       )
     },

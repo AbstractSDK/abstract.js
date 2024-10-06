@@ -14,7 +14,6 @@ export default defineConfig(
       'src/clients/index.ts',
       'src/codegen/abstract/index.ts',
       'src/utils/index.ts',
-      'src/legacy/index.ts',
     ],
     external: [...Object.keys(dependencies)],
   }),

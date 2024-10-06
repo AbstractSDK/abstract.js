@@ -16,7 +16,7 @@ const contractsConfig = [
   },
   {
     name: 'ibc-client',
-    version: '0.24.0-rc.1',
+    version: '0.24.0-test.1',
   },
 ]
 

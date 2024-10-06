@@ -19,7 +19,6 @@ export function parseCreateAccountExecuteResult(
         : { remote: trace.split(ACCOUNT_ID_CHAIN_DELIMITER) },
   } satisfies AccountId
 
-  const managerAddress = findAbstractAttribute(result, 'manager_address').value
-  const proxyAddress = findAbstractAttribute(result, 'proxy_address').value
-  return { accountId, managerAddress, proxyAddress }
+  const accountAddress = findAbstractAttribute(result, 'account_address').value
+  return { accountId, accountAddress }
 }

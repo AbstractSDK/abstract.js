@@ -1,6 +1,7 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { CamelCasedProperties } from 'type-fest'
-import { AccountTypes } from '../../codegen/abstract'
+import { CamelCasedProperties, Merge } from 'type-fest'
+import { OverrideProperties } from 'type-fest/source/override-properties'
+import { AccountTypes, VersionControlTypes } from '../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../types/parameters'
 import { WithOptional } from '../../types/utils'
 import { accountIdToParameter } from '../../utils'
@@ -14,7 +15,16 @@ export type CreateAccountMonarchyParameters = WithCosmWasmSignOptions<
     owner: string
     enableIbc?: boolean
   } & CamelCasedProperties<
-    WithOptional<Omit<AccountTypes.InstantiateMsg, 'owner'>, 'install_modules'>
+    WithOptional<
+      Omit<
+        OverrideProperties<
+          AccountTypes.InstantiateMsg,
+          { account_id?: VersionControlTypes.AccountId }
+        >,
+        'owner'
+      >,
+      'install_modules'
+    >
   >
 >
 
@@ -24,7 +34,6 @@ export type CreateAccountMonarchyParameters = WithCosmWasmSignOptions<
  * @param apiUrl
  * @param sender
  * @param installModules
- * @param baseAsset
  * @param description
  * @param name
  * @param namespace
@@ -57,7 +66,7 @@ export async function createAccountMonarchy({
     apiUrl,
     sender,
     owner: {
-      Monarchy: {
+      monarchy: {
         monarch: owner,
       },
     },

@@ -98,10 +98,6 @@
       "types": "./dist/utils/index.d.ts",
       "default": "./dist/utils/index.js"
     },
-    "./legacy": {
-      "types": "./dist/legacy/index.d.ts",
-      "default": "./dist/legacy/index.js"
-    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -109,7 +105,6 @@
     "/clients",
     "/codegen",
     "/utils",
-    "/legacy",
     "/dist"
   ],
   "sideEffects": false

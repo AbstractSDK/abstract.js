@@ -43,7 +43,7 @@ export async function executeRemote({
   fee,
   memo,
 }: ExecuteOnRemoteParameters) {
-  const proxyMsg: AccountTypes.ExecuteMsg = AccountExecuteMsgBuilder.execute({
+  const accountMsg: AccountTypes.ExecuteMsg = AccountExecuteMsgBuilder.execute({
     msgs: Array.isArray(msgs) ? msgs : [msgs],
   })
 
@@ -52,7 +52,7 @@ export async function executeRemote({
     signingCosmWasmClient,
     apiUrl,
     sender,
-    accountMsg: proxyMsg,
+    accountMsg: accountMsg,
     hostChainName,
     fee,
     memo,
