@@ -15,12 +15,12 @@ export async function getModuleVersion({
   apiUrl,
   id,
 }: GetModuleVersionParameters) {
-  const AccountQueryClient = await getAccountQueryClientFromApi({
+  const accountQueryClient = await getAccountQueryClientFromApi({
     accountId,
     cosmWasmClient,
     apiUrl,
   })
-  const { versions } = await AccountQueryClient.moduleVersions({ ids: [id] })
+  const { versions } = await accountQueryClient.moduleVersions({ ids: [id] })
 
   return versions[0] ?? null
 }

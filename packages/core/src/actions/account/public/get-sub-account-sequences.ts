@@ -17,12 +17,12 @@ export async function getSubAccountSequences({
   apiUrl,
   ...params
 }: GetSubAccountSequencesParameters) {
-  const AccountQueryClient = await getAccountQueryClientFromApi({
+  const accountQueryClient = await getAccountQueryClientFromApi({
     accountId,
     cosmWasmClient,
     apiUrl,
   })
-  const { sub_accounts } = await AccountQueryClient.subAccountIds(params)
+  const { sub_accounts } = await accountQueryClient.subAccountIds(params)
 
   return sub_accounts
 }

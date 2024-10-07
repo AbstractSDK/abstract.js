@@ -1,4 +1,6 @@
+import { ContractMsg } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { queryModule } from 'src/actions/account/public/query-module'
 import { getAccountAddressFromApi } from '../../actions/account/public/get-account-address-from-api'
 import { getAccountInstantiate2AddressFromApi } from '../../actions/account/public/get-account-instantiate2-address-from-api'
 import { getAccountQueryClientFromApi } from '../../actions/account/public/get-account-query-client-from-api'
@@ -99,6 +101,11 @@ export type AccountPublicActions = {
       typeof simulateExecuteRemote
     >,
   ): ReturnType<typeof simulateExecuteRemote>
+  queryModule<TModuleMsg extends ContractMsg>(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof queryModule<TModuleMsg>
+    >,
+  ): ReturnType<typeof queryModule<TModuleMsg>>
 }
 
 export function accountPublicActions(
@@ -221,6 +228,14 @@ export function accountPublicActions(
       }),
     simulateExecuteRemote: ({ extra, ...parameters }) =>
       simulateExecuteRemote({
+        accountId,
+        cosmWasmClient,
+        apiUrl,
+        ...parameters,
+        ...extra,
+      }),
+    queryModule: ({ extra, ...parameters }) =>
+      queryModule({
         accountId,
         cosmWasmClient,
         apiUrl,

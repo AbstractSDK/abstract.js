@@ -13,12 +13,13 @@ export async function getOwner({
   cosmWasmClient,
   apiUrl,
 }: GetOwnerParameters) {
-  const AccountQueryClient = await getAccountQueryClientFromApi({
+  const accountQueryClient = await getAccountQueryClientFromApi({
     accountId,
     cosmWasmClient,
     apiUrl,
   })
-  return AccountQueryClient.ownership()
+  return accountQueryClient
+    .ownership()
     .then((res) => res.owner ?? null)
     .catch((error) => {
       console.error('Failed to fetch the owner:', error)

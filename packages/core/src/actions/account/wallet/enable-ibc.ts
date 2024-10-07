@@ -1,5 +1,5 @@
 import { ABSTRACT_NAMESPACE } from '@abstract-money/core'
-import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { ExecuteResult, SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { AccountClient, VersionControlTypes } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { CommonModuleNames } from '../../public/types'
@@ -13,7 +13,9 @@ export type EnableIbcParameters = WithCosmWasmSignOptions<{
   sender: string
 }>
 
-export async function enableIbc({ ...parameters }: EnableIbcParameters) {
+export async function enableIbc({
+  ...parameters
+}: EnableIbcParameters): Promise<ExecuteResult> {
   return installModules({
     ...parameters,
     modules: [

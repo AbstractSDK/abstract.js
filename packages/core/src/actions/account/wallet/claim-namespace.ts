@@ -1,4 +1,4 @@
-import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { ExecuteResult, SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { VersionControlClient } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { accountIdToParameter } from '../../../utils/account-id'
@@ -22,7 +22,7 @@ export async function claimNamespace({
   fee,
   funds,
   memo,
-}: ClaimNamespaceParameters) {
+}: ClaimNamespaceParameters): Promise<ExecuteResult> {
   const versionControlClient = await getVersionControlClientFromApi({
     signingCosmWasmClient,
     apiUrl,

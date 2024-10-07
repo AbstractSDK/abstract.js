@@ -17,12 +17,12 @@ export async function getModules({
   apiUrl,
   ...params
 }: GetModulesParameters) {
-  const AccountQueryClient = await getAccountQueryClientFromApi({
+  const accountQueryClient = await getAccountQueryClientFromApi({
     accountId,
     cosmWasmClient,
     apiUrl,
   })
-  const { module_infos: modules } = await AccountQueryClient.moduleInfos(params)
+  const { module_infos: modules } = await accountQueryClient.moduleInfos(params)
 
   return modules
 }

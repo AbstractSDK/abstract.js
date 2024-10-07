@@ -6,13 +6,14 @@
 
 import { CamelCasedProperties } from "type-fest";
 import { SigningCosmWasmClient, ExecuteResult } from "@abstract-money/cli/cosmjs";
-import { AbstractQueryClient, AbstractAccountQueryClient, AbstractAccountClient, AppExecuteMsg, AppExecuteMsgFactory, AbstractClient, AbstractAccountId } from "@abstract-money/core/legacy";
+import { PublicClient, AccountId, AccountPublicClient, AccountWalletClient, AppExecuteMsg, AppExecuteMsgFactory } from "@abstract-money/core";
 import { StdFee, Coin } from "@abstract-money/cli/cosmjs";
-import { Decimal, InstantiateMsg, ExecuteMsg, AssetEntry, AccountTrace, ChainName, Uint128, AccountOdds, AccountId, Bet, AnsAsset, QueryMsg, MigrateMsg, Addr, BetsResponse, ConfigResponse, ListOddsResponse, RoundStatus, RoundsResponse, RoundResponse, OddsResponse } from "./Betting.types";
+import { Decimal, InstantiateMsg, ExecuteMsg, AssetEntry, AccountTrace, ChainName, Uint128, AccountOdds, Bet, AnsAsset, QueryMsg, MigrateMsg, Addr, BetsResponse, ConfigResponse, ListOddsResponse, RoundStatus, RoundsResponse, RoundResponse, OddsResponse } from "./Betting.types";
 import { BettingQueryMsgBuilder, BettingExecuteMsgBuilder } from "./Betting.message-builder";
+
 export interface IBettingAppQueryClient {
   moduleId: string;
-  accountQueryClient: AbstractAccountQueryClient;
+  accountPublicClient: AccountPublicClient;
   _moduleAddress: string | undefined;
   round: (params: CamelCasedProperties<Extract<QueryMsg, {
     round: unknown;
@@ -30,33 +31,21 @@ export interface IBettingAppQueryClient {
   bets: (params: CamelCasedProperties<Extract<QueryMsg, {
     bets: unknown;
   }>["bets"]>) => Promise<BetsResponse>;
-  connectSigningClient: (signingClient: SigningCosmWasmClient, address: string) => BettingAppClient;
   getAddress: () => Promise<string>;
 }
 export class BettingAppQueryClient implements IBettingAppQueryClient {
-  accountQueryClient: AbstractAccountQueryClient;
+  accountPublicClient: AccountPublicClient;
   moduleId: string;
   _moduleAddress: string | undefined;
 
   constructor({
-    abstractQueryClient,
-    accountId,
-    managerAddress,
-    proxyAddress,
+    accountPublicClient,
     moduleId
   }: {
-    abstractQueryClient: AbstractQueryClient;
-    accountId: AbstractAccountId;
-    managerAddress: string;
-    proxyAddress: string;
+    accountPublicClient: AccountPublicClient;
     moduleId: string;
   }) {
-    this.accountQueryClient = new AbstractAccountQueryClient({
-      abstract: abstractQueryClient,
-      accountId,
-      managerAddress,
-      proxyAddress
-    });
+    this.accountPublicClient = accountPublicClient;
     this.moduleId = moduleId;
     this.round = this.round.bind(this);
     this.listRounds = this.listRounds.bind(this);
@@ -96,7 +85,9 @@ export class BettingAppQueryClient implements IBettingAppQueryClient {
   };
   getAddress = async (): Promise<string> => {
     if (!this._moduleAddress) {
-      const address = await this.accountQueryClient.getModuleAddress(this.moduleId);
+      const address = await this.accountPublicClient.getModuleAddress({
+        id: this.moduleId,
+      });
 
       if (address === null) {
         throw new Error(`Module ${this.moduleId} not installed`);
@@ -107,17 +98,8 @@ export class BettingAppQueryClient implements IBettingAppQueryClient {
 
     return this._moduleAddress!;
   };
-  connectSigningClient = (signingClient: SigningCosmWasmClient, address: string): BettingAppClient => {
-    return new BettingAppClient({
-      accountId: this.accountQueryClient.accountId,
-      managerAddress: this.accountQueryClient.managerAddress,
-      proxyAddress: this.accountQueryClient.proxyAddress,
-      moduleId: this.moduleId,
-      abstractClient: this.accountQueryClient.abstract.connectSigningClient(signingClient, address)
-    });
-  };
   _query = async (queryMsg: QueryMsg): Promise<any> => {
-    return this.accountQueryClient.queryModule({
+    return this.accountPublicClient.queryModule({
       moduleId: this.moduleId,
       moduleType: "app",
       queryMsg
@@ -125,7 +107,7 @@ export class BettingAppQueryClient implements IBettingAppQueryClient {
   };
 }
 export interface IBettingAppClient extends IBettingAppQueryClient {
-  accountClient: AbstractAccountClient;
+  accountWalletClient: AccountWalletClient;
   createRound: (params: CamelCasedProperties<Extract<ExecuteMsg, {
     create_round: unknown;
   }>["create_round"]>, fee?: number | StdFee | "auto", memo?: string, _funds?: Coin[]) => Promise<ExecuteResult>;
@@ -149,29 +131,22 @@ export interface IBettingAppClient extends IBettingAppQueryClient {
   }>["update_config"]>, fee?: number | StdFee | "auto", memo?: string, _funds?: Coin[]) => Promise<ExecuteResult>;
 }
 export class BettingAppClient extends BettingAppQueryClient implements IBettingAppClient {
-  accountClient: AbstractAccountClient;
+  accountWalletClient: AccountWalletClient;
 
   constructor({
-    abstractClient,
-    accountId,
-    managerAddress,
-    proxyAddress,
+    accountPublicClient,
+    accountWalletClient,
     moduleId
   }: {
-    abstractClient: AbstractClient;
-    accountId: AbstractAccountId;
-    managerAddress: string;
-    proxyAddress: string;
+    accountWalletClient: AccountWalletClient;
+    accountPublicClient: AccountPublicClient;
     moduleId: string;
   }) {
     super({
-      abstractQueryClient: abstractClient,
-      accountId,
-      managerAddress,
-      proxyAddress,
+      accountPublicClient: accountPublicClient,
       moduleId
     });
-    this.accountClient = AbstractAccountClient.fromQueryClient(this.accountQueryClient, abstractClient);
+    this.accountWalletClient = accountWalletClient;
     this.createRound = this.createRound.bind(this);
     this.register = this.register.bind(this);
     this.updateAccounts = this.updateAccounts.bind(this);
@@ -217,7 +192,9 @@ export class BettingAppClient extends BettingAppQueryClient implements IBettingA
     return this._execute(BettingExecuteMsgBuilder.updateConfig(params), fee, memo, _funds);
   };
   _execute = async (msg: ExecuteMsg, fee: number | StdFee | "auto" = "auto", memo?: string, _funds?: Coin[]): Promise<ExecuteResult> => {
+    const signingCwClient = await this.accountWalletClient.getSigningCosmWasmClient();
+    const sender = await this.accountWalletClient.getSenderAddress();
     const moduleMsg: AppExecuteMsg<ExecuteMsg> = AppExecuteMsgFactory.executeApp(msg);
-    return await this.accountClient.abstract.client.execute(this.accountClient.sender, await this.getAddress(), moduleMsg, fee, memo, _funds);
+    return await signingCwClient.execute(sender, await this.getAddress(), moduleMsg, fee, memo, _funds);
   };
 }

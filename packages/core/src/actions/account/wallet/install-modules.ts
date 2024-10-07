@@ -1,4 +1,4 @@
-import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { ExecuteResult, SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { AccountClient, VersionControlTypes } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { getAccountClientFromApi } from './get-account-client-from-api'
@@ -18,7 +18,7 @@ export async function installModules({
   memo,
   funds,
   ...rest
-}: InstallModulesParameters) {
+}: InstallModulesParameters): Promise<ExecuteResult> {
   const accountClient = await getAccountClientFromApi({
     accountId,
     signingCosmWasmClient,

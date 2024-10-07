@@ -7,12 +7,15 @@ import {
   type AccountWalletActions,
   accountWalletActions,
 } from './decorators/account-wallet'
+import { WalletActions } from './decorators/wallet'
 
 export type AccountWalletClientConfig = WalletClientConfig & {
   accountId: VersionControlTypes.AccountId
 }
 
-export type AccountWalletClient = Evaluate<Client<AccountWalletActions>>
+export type AccountWalletClient = Evaluate<
+  Client<AccountWalletActions & WalletActions>
+>
 
 export function createAccountWalletClient(
   parameters: AccountWalletClientConfig,

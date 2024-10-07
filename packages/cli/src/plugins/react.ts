@@ -115,10 +115,10 @@ export function react(options: ReactOptions = {}): ReactResult {
             await fse.writeFile(
               resolve(generatedClientFilePath),
               generatedClientFileContent
-                .replace(
-                  '@abstract-money/abstract.js',
-                  '@abstract-money/core/legacy',
-                )
+                // .replace(
+                //   '@abstract-money/abstract.js',
+                //   '@abstract-money/core/legacy',
+                // )
                 .replaceAll(
                   /(@cosmjs\/cosmwasm-stargate|@cosmjs\/amino)/gm,
                   '@abstract-money/cli/cosmjs',
