@@ -1,8 +1,4 @@
-import {
-  ModuleId,
-  chainIdToName,
-  getInstantiate2Address,
-} from '@abstract-money/core'
+import { chainIdToName, getInstantiate2Address } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { RegistryTypes } from '../../../codegen/abstract'
 import { abstractModuleId } from '../../../utils/modules/abstract-module-id'

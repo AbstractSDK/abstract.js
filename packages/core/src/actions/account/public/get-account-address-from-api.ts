@@ -2,6 +2,7 @@ import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { RegistryTypes } from '../../../codegen/abstract'
 import { accountIdToParameter } from '../../../utils/account-id'
 import { getRegistryQueryClientFromApi } from '../../public/get-registry-query-client-from-api'
+import { getAccountAddressFromRegistry } from './get-account-address-from-registry'
 
 export type GetAccountAddressFromApiParameters = {
   accountId: RegistryTypes.AccountId
@@ -18,10 +19,9 @@ export async function getAccountAddressFromApi({
     cosmWasmClient,
     apiUrl,
   })
-  const { account } = await registryQueryClient.account({
-    accountId: accountIdToParameter(accountId),
+  return getAccountAddressFromRegistry({
+    accountId,
+    cosmWasmClient,
+    registryAddress: registryQueryClient.contractAddress,
   })
-  return {
-    account,
-  }
 }

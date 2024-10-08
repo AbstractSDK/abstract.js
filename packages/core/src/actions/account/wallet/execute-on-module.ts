@@ -24,9 +24,9 @@ export type ExecuteOnModuleParameters = Omit<
  * @param signingCosmWasmClient
  * @param apiUrl
  * @param sender
- * @param moduleId
- * @param moduleType
- * @param msg
+ * @param moduleId - The ID of the module on which the message should be executed.
+ * @param moduleType - The type of the module.
+ * @param msg - The execution message.
  * @param fee
  * @param memo
  */

@@ -90,6 +90,10 @@
       "types": "./dist/clients/index.d.ts",
       "default": "./dist/clients/index.js"
     },
+    "./legacy": {
+      "types": "./dist/legacy/index.d.ts",
+      "default": "./dist/legacy/index.js"
+    },
     "./codegen/abstract": {
       "types": "./dist/codegen/abstract/index.d.ts",
       "default": "./dist/codegen/abstract/index.js"
@@ -103,6 +107,7 @@
   "files": [
     "/actions",
     "/clients",
+    "/legacy",
     "/codegen",
     "/utils",
     "/dist"
