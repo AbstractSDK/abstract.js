@@ -1,10 +1,7 @@
+import { ModuleType } from '@abstract-money/core'
 import { AccountTypes } from '../../../codegen/abstract'
-import { ModuleType } from '../../../codegen/gql/graphql'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
-import {
-  encodeModuleMsg,
-  executeOnModuleMsg,
-} from '../../../utils/modules/encode-module-msg'
+import { executeOnModuleMsg } from '../../../utils/modules/encode-module-msg'
 import { executeOnRemoteAccount } from './execute-on-remote-account'
 import { BaseAccountWalletParameters } from './types'
 

@@ -1,4 +1,9 @@
 {
   "type": "module",
-  "main": "../dist/legacy/index.js"
+  "main": "../dist/legacy/index.cjs",
+  "module": "../dist/legacy/index.js",
+  "exports": {
+    "require": "../dist/legacy/index.cjs",
+    "import": "../dist/legacy/index.js"
+  }
 }

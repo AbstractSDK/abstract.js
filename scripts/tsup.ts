@@ -13,6 +13,7 @@ type GetConfig = Omit<
   experimentalDts?: boolean
   dev?: boolean
   noExport?: string[]
+  format?: Format[]
 }
 
 export function getConfig({ dev, noExport, ...options }: GetConfig): Options {
@@ -79,7 +80,8 @@ export function getConfig({ dev, noExport, ...options }: GetConfig): Options {
 }
 
 type Exports = {
-  [key: string]: string | { types?: string; default: string }
+  [key: string]: string | { types?: string; require: string; import: string }
+  // [key: string]: string | { types?: string; default: string }
 }
 
 /**
@@ -98,13 +100,19 @@ async function generateExports(entry: string[], noExport?: string[]) {
       /^src\//g,
       './dist/',
     )}.js`
+    const distRequireFile = `${fileWithoutExtension.replace(
+      /^src\//g,
+      './dist/',
+    )}.cjs`
     const distTypesFile = `${fileWithoutExtension.replace(
       /^src\//g,
       './dist/',
     )}.d.ts`
     exports[name] = {
       types: distTypesFile,
-      default: distSourceFile,
+      require: distRequireFile,
+      import: distSourceFile,
+      // default: distSourceFile,
     }
   }
 
@@ -129,20 +137,32 @@ async function generateProxyPackages(exports: Exports) {
   for (const [key, value] of Object.entries(exports)) {
     if (typeof value === 'string') continue
     if (key === '.') continue
-    if (!value.default) continue
+    if (!value.import) continue
     await fs.ensureDir(key)
-    const entrypoint = path.relative(key, value.default)
-    const fileExists = await fs.pathExists(value.default)
-    if (!fileExists)
+    const esmEntrypoint = path.relative(key, value.import)
+    const esmFileExists = await fs.pathExists(value.import)
+    if (!esmFileExists)
       throw new Error(
-        `Proxy package "${key}" entrypoint "${entrypoint}" does not exist.`,
+        `Proxy package "${key}" entrypoint "${esmEntrypoint}" does not exist.`,
+      )
+
+    const cjsEntrypoint = path.relative(key, value.require)
+    const cjsFileExists = await fs.pathExists(value.require)
+    if (!cjsFileExists)
+      throw new Error(
+        `Proxy package "${key}" cjsEntrypoint "${cjsEntrypoint}" does not exist.`,
       )
 
     await fs.outputFile(
       `${key}/package.json`,
       dedent`{
         "type": "module",
-        "main": "${entrypoint}"
+        "main": "${cjsEntrypoint}",
+        "module": "${esmEntrypoint}",
+        "exports": {
+          "require": "${cjsEntrypoint}",
+          "import": "${esmEntrypoint}"
+        }
       }`,
     )
     ignorePaths.push(key.replace(/^\.\//g, ''))

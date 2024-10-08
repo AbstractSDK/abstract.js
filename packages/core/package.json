@@ -1,6 +1,6 @@
 {
   "name": "@abstract-money/core",
-  "version": "1.4.0",
+  "version": "2.0.0-rc.8",
   "description": "Typings for Abstract smart contracts",
   "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
   "author": "adairrr <adair@abstract.money>",
@@ -75,32 +75,39 @@
     "serve": "^14.2.0",
     "ts-jest": "^29.0.2"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
     },
     "./actions": {
       "types": "./dist/actions/index.d.ts",
-      "default": "./dist/actions/index.js"
+      "require": "./dist/actions/index.cjs",
+      "import": "./dist/actions/index.js"
     },
     "./clients": {
       "types": "./dist/clients/index.d.ts",
-      "default": "./dist/clients/index.js"
+      "require": "./dist/clients/index.cjs",
+      "import": "./dist/clients/index.js"
     },
     "./legacy": {
       "types": "./dist/legacy/index.d.ts",
-      "default": "./dist/legacy/index.js"
+      "require": "./dist/legacy/index.cjs",
+      "import": "./dist/legacy/index.js"
     },
     "./codegen/abstract": {
       "types": "./dist/codegen/abstract/index.d.ts",
-      "default": "./dist/codegen/abstract/index.js"
+      "require": "./dist/codegen/abstract/index.cjs",
+      "import": "./dist/codegen/abstract/index.js"
     },
     "./utils": {
       "types": "./dist/utils/index.d.ts",
-      "default": "./dist/utils/index.js"
+      "require": "./dist/utils/index.cjs",
+      "import": "./dist/utils/index.js"
     },
     "./package.json": "./package.json"
   },

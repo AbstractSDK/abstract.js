@@ -37,7 +37,6 @@ export interface IAbstractQueryClient {
   client: CosmWasmClient
   readonly registryAddress: string
   readonly ansHostAddress: string
-  readonly factoryAddress: string
   connectSigningClient(
     signingClient: SigningCosmWasmClient,
     sender: string,
@@ -101,14 +100,12 @@ export const DEFAULT_ABSTRACT_QUERY_CLIENT_OPTIONS = { useBatchClient: false }
  * @property client - An instance of {@link CosmWasmClient}, used for blockchain interactions.
  * @property registryAddress - The address of the registry contract.
  * @property ansHostAddress - The address of the Abstract Name Service host.
- * @property factoryAddress - The address of the Account Factory.
  */
 export class AbstractQueryClient implements IAbstractQueryClient {
   readonly _publicClient: PublicClient
   readonly _apiClient: ApiClient
   client: CosmWasmClient
   readonly registryAddress: string
-  readonly factoryAddress: string
   readonly ansHostAddress: string
   readonly apiUrl: string
   accountCache: Map<string, AbstractAccountQueryClient> = new Map()
@@ -119,14 +116,12 @@ export class AbstractQueryClient implements IAbstractQueryClient {
       client,
       registryAddress,
       ansHostAddress,
-      factoryAddress,
     }: Omit<IAbstractQueryClient, 'connectSigningClient'>,
     options?: { apiUrl?: string },
   ) {
     if (!client) throw new Error(`CosmWasm client is missing: ${client}`)
     this.client = client
     this.registryAddress = registryAddress
-    this.factoryAddress = factoryAddress
     this.ansHostAddress = ansHostAddress
     this.apiUrl = options?.apiUrl ?? ABSTRACT_API_URL
     this.connectSigningClient = this.connectSigningClient.bind(this)
@@ -175,8 +170,8 @@ export class AbstractQueryClient implements IAbstractQueryClient {
       registryAddress,
     )
 
-    const [factoryAddress, ansHostAddress] = await Promise.all(
-      ['account-factory', 'ans-host'].map(async (moduleName) => {
+    const [ansHostAddress] = await Promise.all(
+      ['ans-host'].map(async (moduleName) => {
         const module = await AbstractModule.loadById(
           registryClient,
           `abstract:${moduleName}`,
@@ -192,7 +187,6 @@ export class AbstractQueryClient implements IAbstractQueryClient {
         client: cosmWasmClient,
         registryAddress: registryAddress,
         ansHostAddress: ansHostAddress as string,
-        factoryAddress: factoryAddress as string,
       },
       { apiUrl },
     )
@@ -219,11 +213,8 @@ export class AbstractQueryClient implements IAbstractQueryClient {
     )
     // TODO: check that the version of the subgraph matches that in ABstractJS
 
-    const {
-      ansHost: ansHostAddress,
-      registry: registryAddress,
-      accountFactory: factoryAddress,
-    } = deploymentData.deployment
+    const { ansHost: ansHostAddress, registry: registryAddress } =
+      deploymentData.deployment
 
     const rpcEndpoint = options.rpcUrl || deploymentData.chainInfo.rpcUrl
 
@@ -236,7 +227,6 @@ export class AbstractQueryClient implements IAbstractQueryClient {
         client: cosmWasmClient,
         registryAddress,
         ansHostAddress,
-        factoryAddress,
       },
       { apiUrl },
     )

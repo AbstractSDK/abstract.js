@@ -9,5 +9,6 @@ export default defineConfig(
     //dev: process.env.DEV === 'true',
     entry: ['src/index.ts', 'src/client/index.ts', 'src/query/index.ts'],
     external: [...Object.keys(dependencies)],
+    format: ['esm', 'cjs'],
   }),
 )

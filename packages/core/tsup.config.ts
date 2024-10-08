@@ -17,5 +17,6 @@ export default defineConfig(
       'src/utils/index.ts',
     ],
     external: [...Object.keys(dependencies)],
+    format: ['esm', 'cjs'],
   }),
 )

@@ -1,5 +1,5 @@
+import { ModuleType } from '@abstract-money/core'
 import { AccountMsgComposer } from '../../../codegen/abstract'
-import { ModuleType } from '../../../codegen/gql/graphql'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { encodeModuleMsg } from '../../../utils/modules/encode-module-msg'
 import { getAccountAddressFromApi } from '../public/get-account-address-from-api'

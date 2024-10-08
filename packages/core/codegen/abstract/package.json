@@ -1,4 +1,9 @@
 {
   "type": "module",
-  "main": "../../dist/codegen/abstract/index.js"
+  "main": "../../dist/codegen/abstract/index.cjs",
+  "module": "../../dist/codegen/abstract/index.js",
+  "exports": {
+    "require": "../../dist/codegen/abstract/index.cjs",
+    "import": "../../dist/codegen/abstract/index.js"
+  }
 }
