@@ -1,6 +1,6 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { getIbcClientQueryClientFromVersionControl } from './get-ibc-client-query-client-from-version-control'
-import { getVersionControlQueryClientFromApi } from './get-version-control-query-client-from-api'
+import { getIbcClientQueryClientFromRegistry } from './get-ibc-client-query-client-from-registry'
+import { getRegistryQueryClientFromApi } from './get-registry-query-client-from-api'
 
 export type GetRemoteHosts = {
   cosmWasmClient: CosmWasmClient
@@ -11,14 +11,14 @@ export async function getRemoteHostsFromApi({
   cosmWasmClient,
   apiUrl,
 }: GetRemoteHosts) {
-  const versionControlQueryClient = await getVersionControlQueryClientFromApi({
+  const registryQueryClient = await getRegistryQueryClientFromApi({
     cosmWasmClient,
     apiUrl,
   })
 
-  const ibcQueryClient = await getIbcClientQueryClientFromVersionControl({
+  const ibcQueryClient = await getIbcClientQueryClientFromRegistry({
     cosmWasmClient,
-    versionControlAddress: versionControlQueryClient.contractAddress,
+    registryAddress: registryQueryClient.contractAddress,
   })
   const { hosts } = await ibcQueryClient.listRemoteHosts()
 

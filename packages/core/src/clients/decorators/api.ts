@@ -4,8 +4,8 @@ import { getAnsHostAddressFromApi } from '../../actions/get-ans-host-address-fro
 import { getAnsTokenFromApi } from '../../actions/get-ans-token-from-api'
 import { getAnsTokensFromApi } from '../../actions/get-ans-tokens-from-api'
 import { getModulesFromApi } from '../../actions/get-modules-from-api'
+import { getRegistryAddressFromApi } from '../../actions/get-registry-address-from-api'
 import { getSubAccountIdsByModuleIdFromApi } from '../../actions/get-sub-account-ids-by-module-id'
-import { getVersionControlAddressFromApi } from '../../actions/get-version-control-address-from-api'
 import { ExtractAndPartializeParameters } from '../../types/parameters'
 
 type ExtractAndPartializeDecoratedParametersFromParameters<
@@ -41,11 +41,11 @@ export type ApiActions = {
       typeof getModulesFromApi
     >,
   ): ReturnType<typeof getModulesFromApi>
-  getVersionControlAddressFromApi(
+  getRegistryAddressFromApi(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getVersionControlAddressFromApi
+      typeof getRegistryAddressFromApi
     >,
-  ): ReturnType<typeof getVersionControlAddressFromApi>
+  ): ReturnType<typeof getRegistryAddressFromApi>
   getAccountBalancesFromApi(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAccountBalancesFromApi
@@ -96,8 +96,8 @@ export function apiActions(apiUrl: string): ApiActions {
         ...parameters,
         ...extra,
       }),
-    getVersionControlAddressFromApi: ({ extra, ...parameters }) =>
-      getVersionControlAddressFromApi({
+    getRegistryAddressFromApi: ({ extra, ...parameters }) =>
+      getRegistryAddressFromApi({
         apiUrl,
         ...parameters,
         ...extra,

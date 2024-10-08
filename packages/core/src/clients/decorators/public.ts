@@ -1,20 +1,20 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { getSimulationResultFromApi } from '../../actions/get-simulation-result-from-api'
-import { getAbstractModuleAddressFromVersionControl } from '../../actions/public/get-abstract-module-address-from-version-control'
+import { getAbstractModuleAddressFromRegistry } from '../../actions/public/get-abstract-module-address-from-registry'
 import { getAbstractModuleVersion } from '../../actions/public/get-abstract-module-version'
 import { getAccountAddressesFromApi } from '../../actions/public/get-account-addresses-from-api'
 import { getAccountQueryClient } from '../../actions/public/get-account-query-client'
-import { getAnsHostAddressFromVersionControl } from '../../actions/public/get-ans-host-address-from-version-control'
+import { getAnsHostAddressFromRegistry } from '../../actions/public/get-ans-host-address-from-registry'
 import { getAnsHostQueryClient } from '../../actions/public/get-ans-host-query-client'
 import { getAnsHostQueryClientFromApi } from '../../actions/public/get-ans-host-query-client-from-api'
-import { getAnsHostQueryClientFromVersionControl } from '../../actions/public/get-ans-host-query-client-from-version-control'
+import { getAnsHostQueryClientFromRegistry } from '../../actions/public/get-ans-host-query-client-from-registry'
 import { getAnsHostVersionFromApi } from '../../actions/public/get-ans-host-version-from-api'
 import { getCosmWasmClient } from '../../actions/public/get-cosm-wasm-client'
 import { getIbcClientQueryClient } from '../../actions/public/get-ibc-client-query-client'
+import { getRegistryModuleData } from '../../actions/public/get-registry-module-data'
+import { getRegistryQueryClient } from '../../actions/public/get-registry-query-client'
+import { getRegistryQueryClientFromApi } from '../../actions/public/get-registry-query-client-from-api'
 import { getRemoteHostsFromApi } from '../../actions/public/get-remote-hosts-from-api'
-import { getVersionControlModuleData } from '../../actions/public/get-version-control-module-data'
-import { getVersionControlQueryClient } from '../../actions/public/get-version-control-query-client'
-import { getVersionControlQueryClientFromApi } from '../../actions/public/get-version-control-query-client-from-api'
 import { simulateRemoteMsg } from '../../actions/simulate-remote-msg'
 import { ExtractAndPartializeParameters } from '../../types/parameters'
 
@@ -47,11 +47,11 @@ export type PublicActions = {
       typeof getAnsHostQueryClientFromApi
     >,
   ): ReturnType<typeof getAnsHostQueryClientFromApi>
-  getVersionControlQueryClientFromApi(
+  getRegistryQueryClientFromApi(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getVersionControlQueryClientFromApi
+      typeof getRegistryQueryClientFromApi
     >,
-  ): ReturnType<typeof getVersionControlQueryClientFromApi>
+  ): ReturnType<typeof getRegistryQueryClientFromApi>
   getRemoteHosts(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getRemoteHostsFromApi
@@ -102,8 +102,8 @@ export function publicActions(
         ...parameters,
         ...extra,
       }),
-    getVersionControlQueryClientFromApi: ({ extra, ...parameters } = {}) =>
-      getVersionControlQueryClientFromApi({
+    getRegistryQueryClientFromApi: ({ extra, ...parameters } = {}) =>
+      getRegistryQueryClientFromApi({
         cosmWasmClient,
         apiUrl,
         ...parameters,

@@ -1,7 +1,7 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { CamelCasedProperties, Merge } from 'type-fest'
 import { OverrideProperties } from 'type-fest/source/override-properties'
-import { AccountTypes, VersionControlTypes } from '../../codegen/abstract'
+import { AccountTypes, RegistryTypes } from '../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../types/parameters'
 import { WithOptional } from '../../types/utils'
 import { accountIdToParameter } from '../../utils'
@@ -19,7 +19,7 @@ export type CreateAccountMonarchyParameters = WithCosmWasmSignOptions<
       Omit<
         OverrideProperties<
           AccountTypes.InstantiateMsg,
-          { account_id?: VersionControlTypes.AccountId }
+          { account_id?: RegistryTypes.AccountId }
         >,
         'owner'
       >,

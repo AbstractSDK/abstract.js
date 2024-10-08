@@ -1,15 +1,12 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import {
-  IbcClientQueryClient,
-  VersionControlTypes,
-} from '../../../codegen/abstract'
+import { IbcClientQueryClient, RegistryTypes } from '../../../codegen/abstract'
 import { abstractModuleId } from '../../../utils/modules/abstract-module-id'
 import { getIbcClientQueryClient } from '../../public/get-ibc-client-query-client'
 import { CommonModuleNames } from '../../public/types'
 import { getModuleAddress } from './get-module-address'
 
 export type GetIbcClientQueryClientFromManagerParameters = {
-  accountId: VersionControlTypes.AccountId
+  accountId: RegistryTypes.AccountId
   cosmWasmClient: CosmWasmClient
   apiUrl: string
 }

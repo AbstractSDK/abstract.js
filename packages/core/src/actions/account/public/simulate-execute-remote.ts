@@ -3,13 +3,13 @@ import { MaybeArray } from 'src/types/utils'
 import {
   AccountExecuteMsgBuilder,
   AccountTypes,
-  VersionControlTypes,
+  RegistryTypes,
 } from '../../../codegen/abstract'
 import { CosmosMsgForEmpty } from '../../../codegen/abstract/cosmwasm-codegen/Account.types'
 import { simulateExecuteRemoteAccount } from './simulate-execute-remote-account'
 
 export type SimulateExecuteRemoteParameters = {
-  accountId: VersionControlTypes.AccountId
+  accountId: RegistryTypes.AccountId
   cosmWasmClient: CosmWasmClient
   apiUrl: string
   hostChainName: string

@@ -1,10 +1,10 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { CommonModuleNames } from '../../../actions/public/types'
-import { VersionControlTypes } from '../../../codegen/abstract'
+import { RegistryTypes } from '../../../codegen/abstract'
 import { getAccountQueryClientFromApi } from './get-account-query-client-from-api'
 
 export type GetAccountSettingsParameters = {
-  accountId: VersionControlTypes.AccountId
+  accountId: RegistryTypes.AccountId
   cosmWasmClient: CosmWasmClient
   apiUrl: string
 }

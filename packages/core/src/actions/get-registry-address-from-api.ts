@@ -1,19 +1,19 @@
 import { request } from 'graphql-request'
 import { gql } from '../codegen/gql'
 
-export type GetVersionControlAddressFromApiParameters = {
+export type GetRegistryAddressFromApiParameters = {
   apiUrl: string
   chainName: string
 }
 
-export async function getVersionControlAddressFromApi({
+export async function getRegistryAddressFromApi({
   apiUrl,
   chainName,
-}: GetVersionControlAddressFromApiParameters) {
+}: GetRegistryAddressFromApiParameters) {
   const deploymentData = await request(
     apiUrl,
     gql(/* GraphQL */ `
-      query VersionControlDeployment($chain: ID!) {
+      query RegistryDeployment($chain: ID!) {
         deployment(chain: $chain) {
           registry
         }

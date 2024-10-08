@@ -4,15 +4,15 @@ import {
   getInstantiate2Address,
 } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { VersionControlTypes } from '../../../codegen/abstract'
+import { RegistryTypes } from '../../../codegen/abstract'
 import { abstractModuleId } from '../../../utils/modules/abstract-module-id'
-import { getVersionControlAddressFromApi } from '../../get-version-control-address-from-api'
-import { getAppModuleCodeIdFromVersionControl } from '../../public/get-app-module-code-id-from-version-control'
-import { getModuleFactoryAddressFromVersionControl } from '../../public/get-module-factory-address-from-version-control'
+import { getRegistryAddressFromApi } from '../../get-registry-address-from-api'
+import { getAppModuleCodeIdFromRegistry } from '../../public/get-app-module-code-id-from-registry'
+import { getModuleFactoryAddressFromRegistry } from '../../public/get-module-factory-address-from-registry'
 import { CommonModuleNames } from '../../public/types'
 
 export type GetAccountInstantiate2AddressFromApi = {
-  accountId: VersionControlTypes.AccountId
+  accountId: RegistryTypes.AccountId
   cosmWasmClient: CosmWasmClient
   apiUrl: string
 }
@@ -31,21 +31,21 @@ export async function getAccountInstantiate2AddressFromApi({
   const chainId = await cosmWasmClient.getChainId()
   const chainName = chainIdToName(chainId)
 
-  const versionControlAddress = await getVersionControlAddressFromApi({
+  const registryAddress = await getRegistryAddressFromApi({
     apiUrl,
     chainName,
   })
 
-  const moduleFactoryAddress = await getModuleFactoryAddressFromVersionControl({
+  const moduleFactoryAddress = await getModuleFactoryAddressFromRegistry({
     cosmWasmClient,
-    versionControlAddress,
+    registryAddress,
   })
 
-  const accountCodeId = await getAppModuleCodeIdFromVersionControl({
+  const accountCodeId = await getAppModuleCodeIdFromRegistry({
     moduleId: abstractModuleId(CommonModuleNames.ACCOUNT),
     version: 'latest',
     cosmWasmClient,
-    versionControlAddress,
+    registryAddress,
   })
 
   const moduleCodeDetails = await cosmWasmClient.getCodeDetails(accountCodeId)

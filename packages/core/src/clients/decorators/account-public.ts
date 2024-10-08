@@ -16,7 +16,7 @@ import { getSubAccountIds } from '../../actions/account/public/get-sub-account-i
 import { getSubAccountSequences } from '../../actions/account/public/get-sub-account-sequences'
 import { simulateExecuteRemote } from '../../actions/account/public/simulate-execute-remote'
 import { simulateExecuteRemoteAccount } from '../../actions/account/public/simulate-execute-remote-account'
-import { VersionControlTypes } from '../../codegen/abstract/index'
+import { RegistryTypes } from '../../codegen/abstract/index'
 import { ExtractAndPartializeParameters } from '../../types/parameters'
 
 type ExtractAndPartializeDecoratedParametersFromParameters<
@@ -113,7 +113,7 @@ export type AccountPublicActions = {
 }
 
 export function accountPublicActions(
-  accountId: VersionControlTypes.AccountId,
+  accountId: RegistryTypes.AccountId,
   cosmWasmClient: CosmWasmClient,
   apiUrl: string,
 ): AccountPublicActions {

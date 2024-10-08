@@ -1,13 +1,10 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import {
-  IbcClientQueryClient,
-  VersionControlTypes,
-} from '../../../codegen/abstract'
+import { IbcClientQueryClient, RegistryTypes } from '../../../codegen/abstract'
 import { accountIdToParameter } from '../../../utils/account-id/account-id-to-parameter'
 import { getIbcClientQueryClientFromManager } from './get-ibc-client-query-client-from-manager'
 
 export type GetRemoteProxiesParameters = {
-  accountId: VersionControlTypes.AccountId
+  accountId: RegistryTypes.AccountId
   cosmWasmClient: CosmWasmClient
   apiUrl: string
 } & Omit<

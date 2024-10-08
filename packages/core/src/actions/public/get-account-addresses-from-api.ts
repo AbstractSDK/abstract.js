@@ -1,10 +1,10 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { VersionControlTypes } from '../../codegen/abstract'
+import { RegistryTypes } from '../../codegen/abstract'
 import { accountIdToParameter } from '../../utils/account-id'
-import { getVersionControlQueryClientFromApi } from './get-version-control-query-client-from-api'
+import { getRegistryQueryClientFromApi } from './get-registry-query-client-from-api'
 
 export type GetAccountsBaseAddressesFromApiParameters = {
-  accountIds: VersionControlTypes.AccountId[]
+  accountIds: RegistryTypes.AccountId[]
   cosmWasmClient: CosmWasmClient
   apiUrl: string
 }
@@ -14,13 +14,13 @@ export async function getAccountAddressesFromApi({
   cosmWasmClient,
   apiUrl,
 }: GetAccountsBaseAddressesFromApiParameters) {
-  const versionControlQueryClient = await getVersionControlQueryClientFromApi({
+  const registryQueryClient = await getRegistryQueryClientFromApi({
     cosmWasmClient,
     apiUrl,
   })
   return await Promise.all(
     accountIds.map((accountId) =>
-      versionControlQueryClient
+      registryQueryClient
         .account({
           accountId: accountIdToParameter(accountId),
         })

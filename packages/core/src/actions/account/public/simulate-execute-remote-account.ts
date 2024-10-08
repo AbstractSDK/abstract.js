@@ -1,12 +1,12 @@
 import { cosmosWasmExecuteMsg } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { AccountTypes, VersionControlTypes } from '../../../codegen/abstract'
+import { AccountTypes, RegistryTypes } from '../../../codegen/abstract'
 import { CosmosMsgForEmpty } from '../../../codegen/abstract/cosmwasm-codegen/Account.types'
 import { simulateRemoteMsg } from '../../simulate-remote-msg'
 import { getRemoteAccountProxies } from './get-remote-account-proxies'
 
 export type SimulateExecuteRemoteAccountParameters = {
-  accountId: VersionControlTypes.AccountId
+  accountId: RegistryTypes.AccountId
   cosmWasmClient: CosmWasmClient
   apiUrl: string
   hostChainName: string

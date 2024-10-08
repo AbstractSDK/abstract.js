@@ -1,8 +1,8 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 
-import { VersionControlTypes } from '../../codegen/abstract'
-import { versionControlModuleToVersion } from '../../utils/version-control/version-control-module-to-version'
-import { getVersionControlQueryClientFromApi } from './get-version-control-query-client-from-api'
+import { RegistryTypes } from '../../codegen/abstract'
+import { registryModuleToVersion } from '../../utils/registry/registry-module-to-version'
+import { getRegistryQueryClientFromApi } from './get-registry-query-client-from-api'
 
 export type GetAbstractModuleVersion = {
   moduleName: string
@@ -17,28 +17,28 @@ export async function getAbstractModuleVersion({
   version,
   apiUrl,
 }: GetAbstractModuleVersion) {
-  const versionControlQueryClient = await getVersionControlQueryClientFromApi({
+  const registryQueryClient = await getRegistryQueryClientFromApi({
     cosmWasmClient,
     apiUrl,
   })
 
-  const [moduleVersion] = await versionControlQueryClient
+  const [moduleVersion] = await registryQueryClient
     .modules({
       infos: [
         {
           name: moduleName,
           namespace: 'abstract',
           version: version ? { version } : 'latest',
-        } satisfies VersionControlTypes.ModuleInfo,
+        } satisfies RegistryTypes.ModuleInfo,
       ],
     })
     .then(({ modules }) =>
-      modules.map(({ module }) => versionControlModuleToVersion(module)),
+      modules.map(({ module }) => registryModuleToVersion(module)),
     )
 
   if (!moduleVersion) {
     throw new Error(
-      `Could not fetch address for module ${moduleName} version ${version} from registry ${versionControlQueryClient.contractAddress}`,
+      `Could not fetch address for module ${moduleName} version ${version} from registry ${registryQueryClient.contractAddress}`,
     )
   }
 

@@ -1,6 +1,6 @@
-import { VersionControlTypes } from '../../../codegen/abstract'
+import { RegistryTypes } from '../../../codegen/abstract'
 export function moduleVersionToString<
-  TVersion extends VersionControlTypes.ModuleInfo['version'] = VersionControlTypes.ModuleInfo['version'],
+  TVersion extends RegistryTypes.ModuleInfo['version'] = RegistryTypes.ModuleInfo['version'],
 >(version: TVersion) {
   if (typeof version !== 'string') {
     return version.version

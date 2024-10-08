@@ -1,9 +1,9 @@
-import { VersionControlTypes } from '../codegen/abstract/index'
+import { RegistryTypes } from '../codegen/abstract/index'
 import type { Evaluate } from '../types/utils'
 import {
   ABSTRACT_API_URL,
   accountIdToString,
-  versionControlAccountIdToString,
+  registryAccountIdToString,
 } from '../utils'
 import { type Client } from './create-client'
 import { PublicClientConfig, createPublicClient } from './create-public-client'
@@ -13,7 +13,7 @@ import {
 } from './decorators/account-public'
 
 export type AccountPublicClientConfig = PublicClientConfig & {
-  accountId: VersionControlTypes.AccountId
+  accountId: RegistryTypes.AccountId
 }
 
 /**
@@ -24,7 +24,7 @@ export type AccountPublicClient = Evaluate<Client<AccountPublicActions>>
 export function createAccountPublicClient(
   parameters: AccountPublicClientConfig,
 ): AccountPublicClient {
-  const accountIdString = versionControlAccountIdToString(parameters.accountId)
+  const accountIdString = registryAccountIdToString(parameters.accountId)
   const {
     key = `account-public-${accountIdString}`,
     name = `AccountPublic Client (${accountIdString})`,

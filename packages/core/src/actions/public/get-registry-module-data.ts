@@ -1,34 +1,34 @@
 import { rawQuery } from '@abstract-money/cosmwasm-utils'
 import { type CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { match } from 'ts-pattern'
-import { VersionControlTypes } from '../../codegen/abstract'
+import { RegistryTypes } from '../../codegen/abstract'
 import { ModuleData } from '../../utils/modules/msg-factory'
-import { formatModuleIdWithVersion } from '../../utils/version-control/module-id/format-module-id-with-version'
-import { versionControlModuleToAddress } from '../../utils/version-control/version-control-module-to-address'
-import { versionControlModuleToCodeId } from '../../utils/version-control/version-control-module-to-code-id'
-import { versionControlModuleToType } from '../../utils/version-control/version-control-module-to-type'
+import { formatModuleIdWithVersion } from '../../utils/registry/module-id/format-module-id-with-version'
+import { registryModuleToAddress } from '../../utils/registry/registry-module-to-address'
+import { registryModuleToCodeId } from '../../utils/registry/registry-module-to-code-id'
+import { registryModuleToType } from '../../utils/registry/registry-module-to-type'
 
-export type GetVersionControlModuleDataParameters<
-  TVcModule extends VersionControlTypes.Module = VersionControlTypes.Module,
+export type GetRegistryModuleDataParameters<
+  TVcModule extends RegistryTypes.Module = RegistryTypes.Module,
 > = { cosmWasmClient: CosmWasmClient; module: TVcModule }
 
-export async function getVersionControlModuleData<
-  const TVcModule extends VersionControlTypes.Module = VersionControlTypes.Module,
+export async function getRegistryModuleData<
+  const TVcModule extends RegistryTypes.Module = RegistryTypes.Module,
 >({
   cosmWasmClient,
   module,
-}: GetVersionControlModuleDataParameters<TVcModule>): Promise<ModuleData | null> {
+}: GetRegistryModuleDataParameters<TVcModule>): Promise<ModuleData | null> {
   // Retrieve the first instantiation of the module
-  const moduleType = versionControlModuleToType(module)
+  const moduleType = registryModuleToType(module)
   const firstInstantiation = await match(moduleType)
     .with('adapter', async () => {
-      return Promise.resolve(versionControlModuleToAddress(module))
+      return Promise.resolve(registryModuleToAddress(module))
     })
     // TODO: not all standalones will have module_data
     .with('standalone', 'app', async () => {
       // retrieve the first instantiation
       const instantiations = await cosmWasmClient.getContracts(
-        versionControlModuleToCodeId(module),
+        registryModuleToCodeId(module),
       )
       const firstInstantiation = instantiations[0]
       if (!firstInstantiation) {

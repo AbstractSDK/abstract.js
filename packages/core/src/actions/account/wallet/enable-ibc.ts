@@ -1,13 +1,13 @@
 import { ABSTRACT_NAMESPACE } from '@abstract-money/core'
 import { ExecuteResult, SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { AccountClient, VersionControlTypes } from '../../../codegen/abstract'
+import { AccountClient, RegistryTypes } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { CommonModuleNames } from '../../public/types'
 import { getAccountClientFromApi } from './get-account-client-from-api'
 import { installModules } from './install-modules'
 
 export type EnableIbcParameters = WithCosmWasmSignOptions<{
-  accountId: VersionControlTypes.AccountId
+  accountId: RegistryTypes.AccountId
   signingCosmWasmClient: SigningCosmWasmClient
   apiUrl: string
   sender: string

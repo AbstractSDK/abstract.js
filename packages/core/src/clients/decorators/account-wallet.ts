@@ -20,7 +20,7 @@ import { updateOwnership } from '../../actions/account/wallet/update-ownership'
 import { updateStatus } from '../../actions/account/wallet/update-status'
 import { upgradeModules } from '../../actions/account/wallet/upgrade-modules'
 import { withdraw } from '../../actions/account/wallet/withdraw'
-import { VersionControlTypes } from '../../codegen/abstract/index'
+import { RegistryTypes } from '../../codegen/abstract/index'
 import { ExtractAndPartializeParameters } from '../../types/parameters'
 
 type ExtractAndPartializeDecoratedParametersFromParameters<
@@ -142,7 +142,7 @@ export type AccountWalletActions = {
 }
 
 export function accountWalletActions(
-  accountId: VersionControlTypes.AccountId,
+  accountId: RegistryTypes.AccountId,
   signingCosmWasmClient: SigningCosmWasmClient,
   sender: string,
   apiUrl: string,

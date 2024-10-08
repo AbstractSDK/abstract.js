@@ -6,7 +6,7 @@ import { UseQueryParameters, useQuery } from '../types/queries'
 
 interface AbstractModuleClientConstructor {
   new (args: {
-    accountClient: AccountWalletClient
+    accountWalletClient: AccountWalletClient
     moduleId: string
   }): any
 }
@@ -14,16 +14,16 @@ interface AbstractModuleClientConstructor {
 async function getAbstractModuleClient<
   TModule extends AbstractModuleClientConstructor,
 >({
-  accountClient,
+  accountWalletClient,
   moduleId,
   Module,
 }: {
-  accountClient: AccountWalletClient
+  accountWalletClient: AccountWalletClient
   moduleId: string
   Module: TModule
 }) {
   return new Module({
-    accountClient: accountClient,
+    accountWalletClient: accountWalletClient,
     moduleId,
   }) as InstanceType<TModule>
 }
@@ -56,7 +56,7 @@ export function useAbstractModuleClient<
 }: UseAbstractModuleClientParameters<TModule>) {
   const { useAccountWalletClient } = useConfig()
 
-  const accountClient = useAccountWalletClient({
+  const accountWalletClient = useAccountWalletClient({
     accountId,
     chainName,
   })
@@ -67,16 +67,17 @@ export function useAbstractModuleClient<
   )
 
   const queryFn = React.useCallback(() => {
-    if (!accountClient) throw new Error('accountClient is not defined')
+    if (!accountWalletClient)
+      throw new Error('accountWalletClient is not defined')
 
     return getAbstractModuleClient({
-      accountClient: accountClient,
+      accountWalletClient: accountWalletClient,
       moduleId,
       Module,
     })
-  }, [accountClient, moduleId, Module])
+  }, [accountWalletClient, moduleId, Module])
 
-  const enabled = Boolean(accountClient && (query.enabled ?? true))
+  const enabled = Boolean(accountWalletClient && (query.enabled ?? true))
 
   const {
     data,

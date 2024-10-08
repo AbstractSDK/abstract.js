@@ -1,13 +1,13 @@
 import { ContractMsg } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { ModuleType, wrapModuleQueryMsg } from 'src/utils/modules'
-import { VersionControlTypes } from '../../../codegen/abstract'
+import { RegistryTypes } from '../../../codegen/abstract'
 import { getModuleAddress } from './get-module-address'
 
 export type QueryModuleParameters<
   TModuleMsg extends ContractMsg = ContractMsg,
 > = {
-  accountId: VersionControlTypes.AccountId
+  accountId: RegistryTypes.AccountId
   cosmWasmClient: CosmWasmClient
   apiUrl: string
 } & {

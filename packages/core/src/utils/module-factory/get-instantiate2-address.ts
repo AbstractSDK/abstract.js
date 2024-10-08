@@ -1,13 +1,13 @@
 import { instantiate2Address } from '@cosmjs/cosmwasm-stargate'
 import { fromHex } from '@cosmjs/encoding'
 import { bech32 } from 'bech32'
-import { AccountId, versionControlAccountIdToString } from '../account-id'
+import { AccountId, registryAccountIdToString } from '../account-id'
 import { toSha256 } from '../encoding'
 
 const SALT_POSTFIX = 'abstract'
 
 async function getAccountIdSalt(accountId: AccountId) {
-  const sha256 = await toSha256(versionControlAccountIdToString(accountId))
+  const sha256 = await toSha256(registryAccountIdToString(accountId))
   const encoder = new TextEncoder()
 
   return new Uint8Array([...sha256, ...encoder.encode(SALT_POSTFIX)])

@@ -1,5 +1,5 @@
 import { ExecuteResult, SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { AccountClient, VersionControlTypes } from '../../../codegen/abstract'
+import { AccountClient, RegistryTypes } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { getAccountClientFromApi } from './get-account-client-from-api'
 import { BaseAccountWalletParameters } from './types'

@@ -1,13 +1,13 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { getAbstractModuleAddressFromVersionControl } from '../../actions/public/get-abstract-module-address-from-version-control'
+import { getAbstractModuleAddressFromRegistry } from '../../actions/public/get-abstract-module-address-from-registry'
 import { getAccountQueryClient } from '../../actions/public/get-account-query-client'
-import { getAnsHostAddressFromVersionControl } from '../../actions/public/get-ans-host-address-from-version-control'
+import { getAnsHostAddressFromRegistry } from '../../actions/public/get-ans-host-address-from-registry'
 import { getAnsHostQueryClient } from '../../actions/public/get-ans-host-query-client'
-import { getAnsHostQueryClientFromVersionControl } from '../../actions/public/get-ans-host-query-client-from-version-control'
+import { getAnsHostQueryClientFromRegistry } from '../../actions/public/get-ans-host-query-client-from-registry'
 import { getCosmWasmClient } from '../../actions/public/get-cosm-wasm-client'
 import { getIbcClientQueryClient } from '../../actions/public/get-ibc-client-query-client'
-import { getVersionControlModuleData } from '../../actions/public/get-version-control-module-data'
-import { getVersionControlQueryClient } from '../../actions/public/get-version-control-query-client'
+import { getRegistryModuleData } from '../../actions/public/get-registry-module-data'
+import { getRegistryQueryClient } from '../../actions/public/get-registry-query-client'
 import { ExtractAndPartializeParameters } from '../../types/parameters'
 
 type ExtractAndPartializeDecoratedParametersFromParameters<
@@ -24,11 +24,11 @@ export type AbstractBaseActions = {
       typeof getAccountQueryClient
     >,
   ): ReturnType<typeof getAccountQueryClient>
-  getVersionControlQueryClient(
+  getRegistryQueryClient(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getVersionControlQueryClient
+      typeof getRegistryQueryClient
     >,
-  ): ReturnType<typeof getVersionControlQueryClient>
+  ): ReturnType<typeof getRegistryQueryClient>
   getAnsHostQueryClient(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAnsHostQueryClient
@@ -39,26 +39,26 @@ export type AbstractBaseActions = {
       typeof getIbcClientQueryClient
     >,
   ): ReturnType<typeof getIbcClientQueryClient>
-  getAbstractModuleAddressFromVersionControl(
+  getAbstractModuleAddressFromRegistry(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getAbstractModuleAddressFromVersionControl
+      typeof getAbstractModuleAddressFromRegistry
     >,
-  ): ReturnType<typeof getAbstractModuleAddressFromVersionControl>
-  getAnsHostAddressFromVersionControl(
+  ): ReturnType<typeof getAbstractModuleAddressFromRegistry>
+  getAnsHostAddressFromRegistry(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getAnsHostAddressFromVersionControl
+      typeof getAnsHostAddressFromRegistry
     >,
-  ): ReturnType<typeof getAnsHostAddressFromVersionControl>
-  getAnsHostQueryClientFromVersionControl(
+  ): ReturnType<typeof getAnsHostAddressFromRegistry>
+  getAnsHostQueryClientFromRegistry(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getAnsHostQueryClientFromVersionControl
+      typeof getAnsHostQueryClientFromRegistry
     >,
-  ): ReturnType<typeof getAnsHostQueryClientFromVersionControl>
-  getVersionControlModuleData(
+  ): ReturnType<typeof getAnsHostQueryClientFromRegistry>
+  getRegistryModuleData(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getVersionControlModuleData
+      typeof getRegistryModuleData
     >,
-  ): ReturnType<typeof getVersionControlModuleData>
+  ): ReturnType<typeof getRegistryModuleData>
 }
 
 export function abstractBaseActions(
@@ -75,8 +75,8 @@ export function abstractBaseActions(
         ...parameters,
         ...extra,
       }),
-    getVersionControlQueryClient: ({ extra, ...parameters }) =>
-      getVersionControlQueryClient({
+    getRegistryQueryClient: ({ extra, ...parameters }) =>
+      getRegistryQueryClient({
         cosmWasmClient,
         ...parameters,
         ...extra,
@@ -94,26 +94,26 @@ export function abstractBaseActions(
         ...parameters,
         ...extra,
       }),
-    getAbstractModuleAddressFromVersionControl: ({ extra, ...parameters }) =>
-      getAbstractModuleAddressFromVersionControl({
+    getAbstractModuleAddressFromRegistry: ({ extra, ...parameters }) =>
+      getAbstractModuleAddressFromRegistry({
         cosmWasmClient,
         ...parameters,
         ...extra,
       }),
-    getAnsHostAddressFromVersionControl: ({ extra, ...parameters }) =>
-      getAnsHostAddressFromVersionControl({
+    getAnsHostAddressFromRegistry: ({ extra, ...parameters }) =>
+      getAnsHostAddressFromRegistry({
         cosmWasmClient,
         ...parameters,
         ...extra,
       }),
-    getAnsHostQueryClientFromVersionControl: ({ extra, ...parameters }) =>
-      getAnsHostQueryClientFromVersionControl({
+    getAnsHostQueryClientFromRegistry: ({ extra, ...parameters }) =>
+      getAnsHostQueryClientFromRegistry({
         cosmWasmClient,
         ...parameters,
         ...extra,
       }),
-    getVersionControlModuleData: ({ extra, ...parameters }) =>
-      getVersionControlModuleData({
+    getRegistryModuleData: ({ extra, ...parameters }) =>
+      getRegistryModuleData({
         cosmWasmClient,
         ...parameters,
         ...extra,

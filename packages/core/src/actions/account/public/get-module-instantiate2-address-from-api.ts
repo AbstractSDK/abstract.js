@@ -4,15 +4,15 @@ import {
   getInstantiate2Address,
 } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { VersionControlTypes } from '../../../codegen/abstract'
-import { getVersionControlAddressFromApi } from '../../get-version-control-address-from-api'
-import { getAppModuleCodeIdFromVersionControl } from '../../public/get-app-module-code-id-from-version-control'
-import { getModuleFactoryAddressFromVersionControl } from '../../public/get-module-factory-address-from-version-control'
+import { RegistryTypes } from '../../../codegen/abstract'
+import { getRegistryAddressFromApi } from '../../get-registry-address-from-api'
+import { getAppModuleCodeIdFromRegistry } from '../../public/get-app-module-code-id-from-registry'
+import { getModuleFactoryAddressFromRegistry } from '../../public/get-module-factory-address-from-registry'
 
 export type GetModuleInstantiate2AddressFromApi = {
-  accountId: VersionControlTypes.AccountId
+  accountId: RegistryTypes.AccountId
   moduleId: ModuleId
-  version?: VersionControlTypes.ModuleVersion
+  version?: RegistryTypes.ModuleVersion
   cosmWasmClient: CosmWasmClient
   apiUrl: string
 }
@@ -27,21 +27,21 @@ export async function getModuleInstantiate2AddressFromApi({
   const chainId = await cosmWasmClient.getChainId()
   const chainName = chainIdToName(chainId)
 
-  const versionControlAddress = await getVersionControlAddressFromApi({
+  const registryAddress = await getRegistryAddressFromApi({
     apiUrl,
     chainName,
   })
 
-  const moduleFactoryAddress = await getModuleFactoryAddressFromVersionControl({
+  const moduleFactoryAddress = await getModuleFactoryAddressFromRegistry({
     cosmWasmClient,
-    versionControlAddress,
+    registryAddress,
   })
 
-  const moduleCodeId = await getAppModuleCodeIdFromVersionControl({
+  const moduleCodeId = await getAppModuleCodeIdFromRegistry({
     moduleId,
     version,
     cosmWasmClient,
-    versionControlAddress,
+    registryAddress,
   })
 
   const moduleCodeDetails = await cosmWasmClient.getCodeDetails(moduleCodeId)

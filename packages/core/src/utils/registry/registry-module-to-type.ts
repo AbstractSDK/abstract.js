@@ -1,8 +1,8 @@
 import { P, match } from 'ts-pattern'
-import { VersionControlTypes } from '../../codegen/abstract'
+import { RegistryTypes } from '../../codegen/abstract'
 
-export function versionControlModuleToType<
-  const TVcModule extends VersionControlTypes.Module = VersionControlTypes.Module,
+export function registryModuleToType<
+  const TVcModule extends RegistryTypes.Module = RegistryTypes.Module,
 >(module: TVcModule) {
   return match(module.reference)
     .with({ account: P.select() }, () => 'account' as const)

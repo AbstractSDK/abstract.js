@@ -1,4 +1,4 @@
-import { VersionControlTypes } from '../../codegen/abstract'
+import { RegistryTypes } from '../../codegen/abstract'
 import { ACCOUNT_ID_CHAIN_DELIMITER } from './account-id'
 
 /**
@@ -7,9 +7,7 @@ import { ACCOUNT_ID_CHAIN_DELIMITER } from './account-id'
  * { seq: 45, trace: ['juno'] } => 'juno-45'
  * @param id
  */
-export function versionControlAccountIdToString(
-  id: VersionControlTypes.AccountId,
-) {
+export function registryAccountIdToString(id: RegistryTypes.AccountId) {
   if (id.trace === 'local') {
     return `local-${id.seq}`
   }

@@ -7,7 +7,7 @@ const contractsConfig = [
     version: '0.24.0-test.1',
   },
   {
-    name: 'version-control',
+    name: 'registry',
     version: '0.24.0-rc.1',
   },
   {
