@@ -13,6 +13,9 @@ export type AccountWalletClientConfig = WalletClientConfig & {
   accountId: VersionControlTypes.AccountId
 }
 
+/**
+ * A signing client interact with a specific account in the Abstract infrastructure.
+ */
 export type AccountWalletClient = Evaluate<
   Client<AccountWalletActions & WalletActions>
 >

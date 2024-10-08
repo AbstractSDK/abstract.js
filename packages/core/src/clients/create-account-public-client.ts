@@ -16,6 +16,9 @@ export type AccountPublicClientConfig = PublicClientConfig & {
   accountId: VersionControlTypes.AccountId
 }
 
+/**
+ * A query client for querying a specific account in the Abstract infrastructure.
+ */
 export type AccountPublicClient = Evaluate<Client<AccountPublicActions>>
 
 export function createAccountPublicClient(

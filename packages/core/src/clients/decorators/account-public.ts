@@ -25,6 +25,10 @@ type ExtractAndPartializeDecoratedParametersFromParameters<
   fn,
   'cosmWasmClient' | 'accountId' | 'apiUrl'
 >
+
+/**
+ * The public query client actions for an Abstract account.
+ */
 export type AccountPublicActions = {
   getAccountAddress(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<

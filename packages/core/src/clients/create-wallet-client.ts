@@ -12,6 +12,10 @@ export type WalletClientConfig = Omit<PublicClientConfig, 'cosmWasmClient'> & {
 
 export type WalletClient = Evaluate<Client<WalletActions>>
 
+/**
+ * Create a signing client to interact with the Abstract infrastructure.
+ * @param parameters
+ */
 export function createWalletClient(
   parameters: WalletClientConfig,
 ): WalletClient {

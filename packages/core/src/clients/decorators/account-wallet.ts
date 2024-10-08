@@ -30,6 +30,9 @@ type ExtractAndPartializeDecoratedParametersFromParameters<
   'accountId' | 'signingCosmWasmClient' | 'apiUrl' | 'sender'
 >
 
+/**
+ * The wallet (mutating) actions for an Abstract account.
+ */
 export type AccountWalletActions = {
   claimNamespace(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<

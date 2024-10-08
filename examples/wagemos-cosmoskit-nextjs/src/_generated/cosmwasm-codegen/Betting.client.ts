@@ -6,97 +6,68 @@
 
 import { CamelCasedProperties } from "type-fest";
 import { SigningCosmWasmClient, ExecuteResult } from "@abstract-money/cli/cosmjs";
-import { AbstractQueryClient, AbstractAccountQueryClient, AbstractAccountClient, AppExecuteMsg, AppExecuteMsgFactory, AdapterExecuteMsg, AdapterExecuteMsgFactory, AbstractClient, AbstractAccountId } from "@abstract-money/core/legacy";
 import { StdFee, Coin } from "@abstract-money/cli/cosmjs";
 import { Decimal, InstantiateMsg, ExecuteMsg, AssetEntry, AccountTrace, ChainName, Uint128, AccountOdds, AccountId, Bet, AnsAsset, QueryMsg, MigrateMsg, Addr, BetsResponse, ConfigResponse, ListOddsResponse, RoundStatus, RoundsResponse, RoundResponse, OddsResponse } from "./Betting.types";
 import { BettingQueryMsgBuilder, BettingExecuteMsgBuilder } from "./Betting.message-builder";
+import { AccountWalletClient, AccountPublicClient, AppExecuteMsg, AppExecuteMsgFactory } from "@abstract-money/core";
+
 export interface IBettingAppQueryClient {
   moduleId: string;
-  accountQueryClient: AbstractAccountQueryClient;
+  accountPublicClient: AccountPublicClient;
   _moduleAddress: string | undefined;
-  round: (params: CamelCasedProperties<Extract<QueryMsg, {
-    round: unknown;
-  }>["round"]>) => Promise<RoundResponse>;
-  listRounds: (params: CamelCasedProperties<Extract<QueryMsg, {
-    list_rounds: unknown;
-  }>["list_rounds"]>) => Promise<RoundsResponse>;
+  round: () => Promise<RoundResponse>;
   odds: (params: CamelCasedProperties<Extract<QueryMsg, {
     odds: unknown;
   }>["odds"]>) => Promise<OddsResponse>;
-  listOdds: (params: CamelCasedProperties<Extract<QueryMsg, {
-    list_odds: unknown;
-  }>["list_odds"]>) => Promise<ListOddsResponse>;
+  listOdds: () => Promise<ListOddsResponse>;
   config: () => Promise<ConfigResponse>;
-  bets: (params: CamelCasedProperties<Extract<QueryMsg, {
-    bets: unknown;
-  }>["bets"]>) => Promise<BetsResponse>;
-  connectSigningClient: (signingClient: SigningCosmWasmClient, address: string) => BettingAppClient;
+  bets: () => Promise<BetsResponse>;
   getAddress: () => Promise<string>;
 }
+
 export class BettingAppQueryClient implements IBettingAppQueryClient {
-  accountQueryClient: AbstractAccountQueryClient;
+  accountPublicClient: AccountPublicClient;
   moduleId: string;
   _moduleAddress: string | undefined;
 
   constructor({
-    abstractQueryClient,
-    accountId,
-    managerAddress,
-    proxyAddress,
-    moduleId
-  }: {
-    abstractQueryClient: AbstractQueryClient;
-    accountId: AbstractAccountId;
-    managerAddress: string;
-    proxyAddress: string;
+                accountPublicClient,
+                moduleId
+              }: {
+    accountPublicClient: AccountPublicClient;
     moduleId: string;
   }) {
-    this.accountQueryClient = new AbstractAccountQueryClient({
-      abstract: abstractQueryClient,
-      accountId,
-      managerAddress,
-      proxyAddress
-    });
+    this.accountPublicClient = accountPublicClient;
     this.moduleId = moduleId;
     this.round = this.round.bind(this);
-    this.listRounds = this.listRounds.bind(this);
     this.odds = this.odds.bind(this);
     this.listOdds = this.listOdds.bind(this);
     this.config = this.config.bind(this);
     this.bets = this.bets.bind(this);
   }
 
-  round = async (params: CamelCasedProperties<Extract<QueryMsg, {
-    round: unknown;
-  }>["round"]>): Promise<RoundResponse> => {
-    return this._query(BettingQueryMsgBuilder.round(params));
-  };
-  listRounds = async (params: CamelCasedProperties<Extract<QueryMsg, {
-    list_rounds: unknown;
-  }>["list_rounds"]>): Promise<RoundsResponse> => {
-    return this._query(BettingQueryMsgBuilder.listRounds(params));
+  round = async (): Promise<RoundResponse> => {
+    return this._query(BettingQueryMsgBuilder.round());
   };
   odds = async (params: CamelCasedProperties<Extract<QueryMsg, {
     odds: unknown;
   }>["odds"]>): Promise<OddsResponse> => {
     return this._query(BettingQueryMsgBuilder.odds(params));
   };
-  listOdds = async (params: CamelCasedProperties<Extract<QueryMsg, {
-    list_odds: unknown;
-  }>["list_odds"]>): Promise<ListOddsResponse> => {
-    return this._query(BettingQueryMsgBuilder.listOdds(params));
+  listOdds = async (): Promise<ListOddsResponse> => {
+    return this._query(BettingQueryMsgBuilder.listOdds());
   };
   config = async (): Promise<ConfigResponse> => {
     return this._query(BettingQueryMsgBuilder.config());
   };
-  bets = async (params: CamelCasedProperties<Extract<QueryMsg, {
-    bets: unknown;
-  }>["bets"]>): Promise<BetsResponse> => {
-    return this._query(BettingQueryMsgBuilder.bets(params));
+  bets = async (): Promise<BetsResponse> => {
+    return this._query(BettingQueryMsgBuilder.bets());
   };
   getAddress = async (): Promise<string> => {
     if (!this._moduleAddress) {
-      const address = await this.accountQueryClient.getModuleAddress(this.moduleId);
+      const address = await this.accountPublicClient.getModuleAddress({
+        id: this.moduleId
+      });
 
       if (address === null) {
         throw new Error(`Module ${this.moduleId} not installed`);
@@ -107,72 +78,50 @@ export class BettingAppQueryClient implements IBettingAppQueryClient {
 
     return this._moduleAddress!;
   };
-  connectSigningClient = (signingClient: SigningCosmWasmClient, address: string): BettingAppClient => {
-    return new BettingAppClient({
-      accountId: this.accountQueryClient.accountId,
-      managerAddress: this.accountQueryClient.managerAddress,
-      proxyAddress: this.accountQueryClient.proxyAddress,
-      moduleId: this.moduleId,
-      abstractClient: this.accountQueryClient.abstract.connectSigningClient(signingClient, address)
-    });
-  };
   _query = async (queryMsg: QueryMsg): Promise<any> => {
-    return this.accountQueryClient.queryModule({
+    return this.accountPublicClient.queryModule({
       moduleId: this.moduleId,
       moduleType: "app",
       queryMsg
     });
   };
 }
+
 export interface IBettingAppClient extends IBettingAppQueryClient {
-  accountClient: AbstractAccountClient;
-  createRound: (params: CamelCasedProperties<Extract<ExecuteMsg, {
-    create_round: unknown;
-  }>["create_round"]>, fee?: number | StdFee | "auto", memo?: string, _funds?: Coin[]) => Promise<ExecuteResult>;
-  register: (params: CamelCasedProperties<Extract<ExecuteMsg, {
-    register: unknown;
-  }>["register"]>, fee?: number | StdFee | "auto", memo?: string, _funds?: Coin[]) => Promise<ExecuteResult>;
+  accountWalletClient: AccountWalletClient;
+  register: (fee_?: number | StdFee | "auto", memo_?: string, funds_?: Coin[]) => Promise<ExecuteResult>;
   updateAccounts: (params: CamelCasedProperties<Extract<ExecuteMsg, {
     update_accounts: unknown;
-  }>["update_accounts"]>, fee?: number | StdFee | "auto", memo?: string, _funds?: Coin[]) => Promise<ExecuteResult>;
+  }>["update_accounts"]>, fee_?: number | StdFee | "auto", memo_?: string, funds_?: Coin[]) => Promise<ExecuteResult>;
   placeBet: (params: CamelCasedProperties<Extract<ExecuteMsg, {
     place_bet: unknown;
-  }>["place_bet"]>, fee?: number | StdFee | "auto", memo?: string, _funds?: Coin[]) => Promise<ExecuteResult>;
-  distributeWinnings: (params: CamelCasedProperties<Extract<ExecuteMsg, {
-    distribute_winnings: unknown;
-  }>["distribute_winnings"]>, fee?: number | StdFee | "auto", memo?: string, _funds?: Coin[]) => Promise<ExecuteResult>;
+  }>["place_bet"]>, fee_?: number | StdFee | "auto", memo_?: string, funds_?: Coin[]) => Promise<ExecuteResult>;
+  distributeWinnings: (fee_?: number | StdFee | "auto", memo_?: string, funds_?: Coin[]) => Promise<ExecuteResult>;
   closeRound: (params: CamelCasedProperties<Extract<ExecuteMsg, {
     close_round: unknown;
-  }>["close_round"]>, fee?: number | StdFee | "auto", memo?: string, _funds?: Coin[]) => Promise<ExecuteResult>;
+  }>["close_round"]>, fee_?: number | StdFee | "auto", memo_?: string, funds_?: Coin[]) => Promise<ExecuteResult>;
   updateConfig: (params: CamelCasedProperties<Extract<ExecuteMsg, {
     update_config: unknown;
-  }>["update_config"]>, fee?: number | StdFee | "auto", memo?: string, _funds?: Coin[]) => Promise<ExecuteResult>;
+  }>["update_config"]>, fee_?: number | StdFee | "auto", memo_?: string, funds_?: Coin[]) => Promise<ExecuteResult>;
 }
+
 export class BettingAppClient extends BettingAppQueryClient implements IBettingAppClient {
-  accountClient: AbstractAccountClient;
+  accountWalletClient: AccountWalletClient;
 
   constructor({
-    abstractClient,
-    accountId,
-    managerAddress,
-    proxyAddress,
-    moduleId
-  }: {
-    abstractClient: AbstractClient;
-    accountId: AbstractAccountId;
-    managerAddress: string;
-    proxyAddress: string;
+                accountPublicClient,
+                accountWalletClient,
+                moduleId
+              }: {
+    accountPublicClient: AccountPublicClient;
+    accountWalletClient: AccountWalletClient;
     moduleId: string;
   }) {
     super({
-      abstractQueryClient: abstractClient,
-      accountId,
-      managerAddress,
-      proxyAddress,
+      accountPublicClient,
       moduleId
     });
-    this.accountClient = AbstractAccountClient.fromQueryClient(this.accountQueryClient, abstractClient);
-    this.createRound = this.createRound.bind(this);
+    this.accountWalletClient = accountWalletClient;
     this.register = this.register.bind(this);
     this.updateAccounts = this.updateAccounts.bind(this);
     this.placeBet = this.placeBet.bind(this);
@@ -181,43 +130,36 @@ export class BettingAppClient extends BettingAppQueryClient implements IBettingA
     this.updateConfig = this.updateConfig.bind(this);
   }
 
-  createRound = async (params: CamelCasedProperties<Extract<ExecuteMsg, {
-    create_round: unknown;
-  }>["create_round"]>, fee: number | StdFee | "auto" = "auto", memo?: string, _funds?: Coin[]): Promise<ExecuteResult> => {
-    return this._execute(BettingExecuteMsgBuilder.createRound(params), fee, memo, _funds);
-  };
-  register = async (params: CamelCasedProperties<Extract<ExecuteMsg, {
-    register: unknown;
-  }>["register"]>, fee: number | StdFee | "auto" = "auto", memo?: string, _funds?: Coin[]): Promise<ExecuteResult> => {
-    return this._execute(BettingExecuteMsgBuilder.register(params), fee, memo, _funds);
+  register = async (fee_: number | StdFee | "auto" = "auto", memo_?: string, funds_?: Coin[]): Promise<ExecuteResult> => {
+    return this._execute(BettingExecuteMsgBuilder.register(), fee_, memo_, funds_);
   };
   updateAccounts = async (params: CamelCasedProperties<Extract<ExecuteMsg, {
     update_accounts: unknown;
-  }>["update_accounts"]>, fee: number | StdFee | "auto" = "auto", memo?: string, _funds?: Coin[]): Promise<ExecuteResult> => {
-    return this._execute(BettingExecuteMsgBuilder.updateAccounts(params), fee, memo, _funds);
+  }>["update_accounts"]>, fee_: number | StdFee | "auto" = "auto", memo_?: string, funds_?: Coin[]): Promise<ExecuteResult> => {
+    return this._execute(BettingExecuteMsgBuilder.updateAccounts(params), fee_, memo_, funds_);
   };
   placeBet = async (params: CamelCasedProperties<Extract<ExecuteMsg, {
     place_bet: unknown;
-  }>["place_bet"]>, fee: number | StdFee | "auto" = "auto", memo?: string, _funds?: Coin[]): Promise<ExecuteResult> => {
-    return this._execute(BettingExecuteMsgBuilder.placeBet(params), fee, memo, _funds);
+  }>["place_bet"]>, fee_: number | StdFee | "auto" = "auto", memo_?: string, funds_?: Coin[]): Promise<ExecuteResult> => {
+    return this._execute(BettingExecuteMsgBuilder.placeBet(params), fee_, memo_, funds_);
   };
-  distributeWinnings = async (params: CamelCasedProperties<Extract<ExecuteMsg, {
-    distribute_winnings: unknown;
-  }>["distribute_winnings"]>, fee: number | StdFee | "auto" = "auto", memo?: string, _funds?: Coin[]): Promise<ExecuteResult> => {
-    return this._execute(BettingExecuteMsgBuilder.distributeWinnings(params), fee, memo, _funds);
+  distributeWinnings = async (fee_: number | StdFee | "auto" = "auto", memo_?: string, funds_?: Coin[]): Promise<ExecuteResult> => {
+    return this._execute(BettingExecuteMsgBuilder.distributeWinnings(), fee_, memo_, funds_);
   };
   closeRound = async (params: CamelCasedProperties<Extract<ExecuteMsg, {
     close_round: unknown;
-  }>["close_round"]>, fee: number | StdFee | "auto" = "auto", memo?: string, _funds?: Coin[]): Promise<ExecuteResult> => {
-    return this._execute(BettingExecuteMsgBuilder.closeRound(params), fee, memo, _funds);
+  }>["close_round"]>, fee_: number | StdFee | "auto" = "auto", memo_?: string, funds_?: Coin[]): Promise<ExecuteResult> => {
+    return this._execute(BettingExecuteMsgBuilder.closeRound(params), fee_, memo_, funds_);
   };
   updateConfig = async (params: CamelCasedProperties<Extract<ExecuteMsg, {
     update_config: unknown;
-  }>["update_config"]>, fee: number | StdFee | "auto" = "auto", memo?: string, _funds?: Coin[]): Promise<ExecuteResult> => {
-    return this._execute(BettingExecuteMsgBuilder.updateConfig(params), fee, memo, _funds);
+  }>["update_config"]>, fee_: number | StdFee | "auto" = "auto", memo_?: string, funds_?: Coin[]): Promise<ExecuteResult> => {
+    return this._execute(BettingExecuteMsgBuilder.updateConfig(params), fee_, memo_, funds_);
   };
-  _execute = async (msg: ExecuteMsg, fee: number | StdFee | "auto" = "auto", memo?: string, _funds?: Coin[]): Promise<ExecuteResult> => {
+  _execute = async (msg: ExecuteMsg, fee_: number | StdFee | "auto" = "auto", memo_?: string, funds_?: Coin[]): Promise<ExecuteResult> => {
+    const signingCwClient = await this.accountWalletClient.getSigningCosmWasmClient();
+    const sender = await this.accountWalletClient.getSenderAddress();
     const moduleMsg: AppExecuteMsg<ExecuteMsg> = AppExecuteMsgFactory.executeApp(msg);
-    return await this.accountClient.abstract.client.execute(this.accountClient.sender, await this.getAddress(), moduleMsg, fee, memo, _funds);
+    return await signingCwClient.execute(sender, await this.getAddress(), moduleMsg, fee_, memo_, funds_);
   };
 }

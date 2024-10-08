@@ -12,6 +12,9 @@ type ExtractAndPartializeDecoratedParametersFromParameters<
   fn extends (payload: any) => any,
 > = ExtractAndPartializeParameters<fn, 'apiUrl'>
 
+/**
+ * Query actions to be performed on the Abstract API.
+ */
 export type ApiActions = {
   getAnsHostAddressFromApi(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<

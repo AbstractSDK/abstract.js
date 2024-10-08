@@ -8,7 +8,7 @@ export type GetAnsHostVersionParameters = {
   version?: string
 }
 
-export async function getAnsHostVersion({
+export async function getAnsHostVersionFromApi({
   cosmWasmClient,
   apiUrl,
   version,
