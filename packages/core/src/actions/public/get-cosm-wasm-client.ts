@@ -4,7 +4,7 @@ export type GetCosmWasmClientParameters = {
   cosmWasmClient: CosmWasmClient
 }
 
-export async function getCosmWasmClient({
+export function getCosmWasmClient({
   cosmWasmClient,
 }: GetCosmWasmClientParameters) {
   return cosmWasmClient

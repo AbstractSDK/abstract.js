@@ -1,11 +1,16 @@
 import * as React from 'react'
 
-import { AccountId, AccountWalletClient } from '@abstract-money/core'
+import {
+  AccountId,
+  AccountPublicClient,
+  AccountWalletClient,
+} from '@abstract-money/core'
 import { useConfig } from '../contexts'
 import { UseQueryParameters, useQuery } from '../types/queries'
 
 interface AbstractModuleClientConstructor {
   new (args: {
+    accountPublicClient: AccountPublicClient
     accountWalletClient: AccountWalletClient
     moduleId: string
   }): any
@@ -14,15 +19,18 @@ interface AbstractModuleClientConstructor {
 async function getAbstractModuleClient<
   TModule extends AbstractModuleClientConstructor,
 >({
+  accountPublicClient,
   accountWalletClient,
   moduleId,
   Module,
 }: {
+  accountPublicClient: AccountPublicClient
   accountWalletClient: AccountWalletClient
   moduleId: string
   Module: TModule
 }) {
   return new Module({
+    accountPublicClient: accountPublicClient,
     accountWalletClient: accountWalletClient,
     moduleId,
   }) as InstanceType<TModule>
@@ -54,7 +62,12 @@ export function useAbstractModuleClient<
   query = {},
   sender: _sender,
 }: UseAbstractModuleClientParameters<TModule>) {
-  const { useAccountWalletClient } = useConfig()
+  const { useAccountWalletClient, useAccountPublicClient } = useConfig()
+
+  const accountPublicClient = useAccountPublicClient({
+    accountId,
+    chainName,
+  })
 
   const accountWalletClient = useAccountWalletClient({
     accountId,
@@ -67,15 +80,18 @@ export function useAbstractModuleClient<
   )
 
   const queryFn = React.useCallback(() => {
+    if (!accountPublicClient)
+      throw new Error('accountPublicClient is not defined')
     if (!accountWalletClient)
       throw new Error('accountWalletClient is not defined')
 
     return getAbstractModuleClient({
+      accountPublicClient: accountPublicClient,
       accountWalletClient: accountWalletClient,
       moduleId,
       Module,
     })
-  }, [accountWalletClient, moduleId, Module])
+  }, [accountPublicClient, accountWalletClient, moduleId, Module])
 
   const enabled = Boolean(accountWalletClient && (query.enabled ?? true))
 
