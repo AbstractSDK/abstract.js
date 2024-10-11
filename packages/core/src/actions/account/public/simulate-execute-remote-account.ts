@@ -19,7 +19,7 @@ export type SimulateExecuteRemoteAccountParameters = {
  * @param cosmWasmClient
  * @param apiUrl
  * @param hostChainName
- * @param managerMsg
+ * @param accountMsg
  * @experimental
  */
 export async function simulateExecuteRemoteAccount({

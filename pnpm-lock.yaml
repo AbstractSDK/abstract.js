@@ -360,8 +360,8 @@ importers:
         specifier: workspace:*
         version: link:../bundle-require
       '@abstract-money/ts-codegen':
-        specifier: 0.37.0-beta-2
-        version: 0.37.0-beta-2
+        specifier: 0.37.0-beta-3
+        version: 0.37.0-beta-3
       '@cosmjs/cosmwasm-stargate':
         specifier: ^0.32.3
         version: 0.32.3
@@ -686,8 +686,8 @@ importers:
 
 packages:
 
-  /@abstract-money/ts-codegen@0.37.0-beta-2:
-    resolution: {integrity: sha512-T9+zc/pYzdW1aTKg1Jnvzm8vgUfEsM9tSCD5SPglAwsoi8g3TsHbh4RbfDQcKCvWdae8D7EF6F1Dj/QuMmbSag==}
+  /@abstract-money/ts-codegen@0.37.0-beta-3:
+    resolution: {integrity: sha512-XrgDPRdsXUCpeKoEKIZgysh88217oMMl53rc2sG1Z7IoJj4maA+kW7+1RjmzmJOqg8jipFtUK5kMmH6hXocORg==}
     hasBin: true
     dependencies:
       '@babel/core': 7.18.10
@@ -716,13 +716,13 @@ packages:
       parse-package-name: 1.0.0
       rimraf: 3.0.2
       shelljs: 0.8.5
-      wasm-ast-types: /@abstract-money/wasm-ast-types@0.28.0-beta-2
+      wasm-ast-types: /@abstract-money/wasm-ast-types@0.28.0-beta-3
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@abstract-money/wasm-ast-types@0.28.0-beta-2:
-    resolution: {integrity: sha512-TmMpJwAQNA7kam7DGGaL0GTTFXO1b8YE+WcDRai/okOXCyBcGLNoC/yxdiVFyzkTcifeunVXtQ/gUhly5C/MpQ==}
+  /@abstract-money/wasm-ast-types@0.28.0-beta-3:
+    resolution: {integrity: sha512-fTUVZBjFpo+IRm+krtNYBCLRDcPIeKxpJgB1cosJAWOmHt8IHNagMYrMrmFrGV6ZbW5Us73/D6oe9n5KMv4eRw==}
     dependencies:
       '@babel/runtime': 7.23.4
       '@babel/types': 7.18.10

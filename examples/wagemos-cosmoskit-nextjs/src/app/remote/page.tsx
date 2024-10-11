@@ -9,7 +9,6 @@ import {
   useSimulateExecuteRemoteManager,
 } from '@abstract-money/react'
 import { useChain } from '@cosmos-kit/react'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { useCallback, useMemo, useState } from 'react'
 import { Button } from '../../components/ui/button'
 import {
@@ -79,7 +78,6 @@ export default function RemotePage() {
       funds: [],
       args: {
         hostChainName: chainInput,
-        base_asset: 'juno>juno',
         installModules: [],
       },
     })
@@ -95,7 +93,7 @@ export default function RemotePage() {
       fee: 'auto',
       args: {
         hostChainName: chainInput,
-        managerMsg: {
+        accountMsg: {
           update_info: {
             name: 'test',
           },
@@ -116,7 +114,7 @@ export default function RemotePage() {
     console.log('simulating remote account')
     simulateRemote({
       hostChainName: chainInput,
-      managerMsg: {
+      accountMsg: {
         update_info: {
           name: 'test',
         },

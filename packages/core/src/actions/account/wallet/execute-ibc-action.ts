@@ -1,19 +1,8 @@
-import semver from 'semver/preload'
-import {
-  AccountClient,
-  AccountMsgComposer,
-  AccountTypes,
-  IbcClientTypes,
-} from '../../../codegen/abstract'
-import { ModuleType } from '../../../codegen/gql/graphql'
+import { IbcClientTypes } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
-import { MaybeArray } from '../../../types/utils'
 import { abstractModuleId } from '../../../utils/modules/abstract-module-id'
-import { encodeModuleMsg } from '../../../utils/modules/encode-module-msg'
 import { CommonModuleNames } from '../../public/types'
 import { getModuleAddress } from '../public/get-module-address'
-import { getModuleVersion } from '../public/get-module-version'
-import { executeOnModule } from './execute-on-module'
 import { getAccountClientFromApi } from './get-account-client-from-api'
 import { BaseAccountWalletParameters } from './types'
 
@@ -32,7 +21,7 @@ export type ExecuteIbcActionParameters = Omit<
  * @param signingCosmWasmClient
  * @param apiUrl
  * @param sender
- * @param managerMsg
+ * @param msg
  * @param fee
  * @param memo
  */

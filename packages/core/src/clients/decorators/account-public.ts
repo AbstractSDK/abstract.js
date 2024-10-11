@@ -2,6 +2,7 @@ import { ContractMsg } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { queryModule } from 'src/actions/account/public/query-module'
 import { getAccountAddressFromApi } from '../../actions/account/public/get-account-address-from-api'
+import { getAccountId } from '../../actions/account/public/get-account-id'
 import { getAccountInstantiate2AddressFromApi } from '../../actions/account/public/get-account-instantiate2-address-from-api'
 import { getAccountQueryClientFromApi } from '../../actions/account/public/get-account-query-client-from-api'
 import { getAccountSettings } from '../../actions/account/public/get-account-settings'
@@ -10,6 +11,7 @@ import { getModuleInstantiate2AddressFromApi } from '../../actions/account/publi
 import { getModules } from '../../actions/account/public/get-modules'
 import { getNamespace } from '../../actions/account/public/get-namespace'
 import { getOwner } from '../../actions/account/public/get-owner'
+import { getRegistryAccountId } from '../../actions/account/public/get-registry-account-id'
 import { getRemoteAccountIds } from '../../actions/account/public/get-remote-account-ids'
 import { getRemoteAccountProxies } from '../../actions/account/public/get-remote-account-proxies'
 import { getSubAccountIds } from '../../actions/account/public/get-sub-account-ids'
@@ -30,6 +32,8 @@ type ExtractAndPartializeDecoratedParametersFromParameters<
  * The public query client actions for an Abstract account.
  */
 export type AccountPublicActions = {
+  getRegistryAccountId(): ReturnType<typeof getRegistryAccountId>
+  getAccountId(): ReturnType<typeof getAccountId>
   getAccountAddress(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAccountAddressFromApi
@@ -118,6 +122,8 @@ export function accountPublicActions(
   apiUrl: string,
 ): AccountPublicActions {
   return {
+    getRegistryAccountId: () => getRegistryAccountId({ accountId }),
+    getAccountId: () => getAccountId({ accountId, cosmWasmClient }),
     getAccountAddress: ({ extra, ...parameters } = {}) =>
       getAccountAddressFromApi({
         accountId,
