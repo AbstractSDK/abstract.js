@@ -36,7 +36,7 @@
   "type": "module",
   "dependencies": {
     "@abstract-money/bundle-require": "workspace:*",
-    "@abstract-money/ts-codegen": "0.36.0-beta-1",
+    "@abstract-money/ts-codegen": "0.37.0-beta-2",
     "@cosmjs/cosmwasm-stargate": "^0.32.3",
     "@cosmjs/stargate": "^0.32.3",
     "abort-controller": "^3.0.0",
