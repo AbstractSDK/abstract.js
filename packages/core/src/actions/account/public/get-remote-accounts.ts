@@ -1,15 +1,15 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { IbcClientQueryClient, RegistryTypes } from '../../../codegen/abstract'
 import { accountIdToParameter } from '../../../utils/account-id/account-id-to-parameter'
-import { getIbcClientQueryClientFromManager } from './get-ibc-client-query-client-from-manager'
+import { getIbcClientQueryClientFromAccount } from './get-ibc-client-query-client-from-account'
 
-export type GetRemoteProxiesParameters = {
+export type GetRemoteAccountsParameters = {
   accountId: RegistryTypes.AccountId
   cosmWasmClient: CosmWasmClient
   apiUrl: string
 } & Omit<
   Parameters<
-    typeof IbcClientQueryClient.prototype.listRemoteProxiesByAccountId
+    typeof IbcClientQueryClient.prototype.listRemoteAccountsByAccountId
   >[0],
   'accountId'
 >
@@ -18,32 +18,32 @@ type ChainName = string
 type MaybeProxyAddress = string | null
 
 /**
- * Get the remote proxies for the given account.
+ * Get the remote accounts for the given account.
  * @param accountId
  * @param cosmWasmClient
  * @param apiUrl
  */
-export async function getRemoteAccountProxies({
+export async function getRemoteAccounts({
   accountId,
   cosmWasmClient,
   apiUrl,
-}: GetRemoteProxiesParameters): Promise<Record<ChainName, MaybeProxyAddress>> {
+}: GetRemoteAccountsParameters): Promise<Record<ChainName, MaybeProxyAddress>> {
   let ibcClient: IbcClientQueryClient
   try {
-    ibcClient = await getIbcClientQueryClientFromManager({
+    ibcClient = await getIbcClientQueryClientFromAccount({
       accountId,
       cosmWasmClient,
       apiUrl,
     })
   } catch (e) {
-    console.log('remoteProxies error', e)
+    console.log('remoteAccounts error', e)
     // IBC client not installed
     return {}
   }
 
-  const remoteProxies = await ibcClient.listRemoteProxiesByAccountId({
+  const remoteAccounts = await ibcClient.listRemoteAccountsByAccountId({
     accountId: accountIdToParameter(accountId),
   })
 
-  return Object.fromEntries(remoteProxies.proxies)
+  return Object.fromEntries(remoteAccounts.accounts)
 }

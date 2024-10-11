@@ -3,16 +3,13 @@ import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { abstractModuleId } from '../../../utils/modules/abstract-module-id'
 import { CommonModuleNames } from '../../public/types'
 import { getModuleAddress } from '../public/get-module-address'
-import { getAccountClientFromApi } from './get-account-client-from-api'
+import { executeOnModule } from './execute-on-module'
 import { BaseAccountWalletParameters } from './types'
 
-export type ExecuteIbcActionParameters = Omit<
-  WithCosmWasmSignOptions<
-    BaseAccountWalletParameters & {
-      msg: IbcClientTypes.ExecuteMsg
-    }
-  >,
-  'funds'
+export type ExecuteIbcActionParameters = WithCosmWasmSignOptions<
+  BaseAccountWalletParameters & {
+    msg: IbcClientTypes.ExecuteMsg
+  }
 >
 
 /**
@@ -24,6 +21,7 @@ export type ExecuteIbcActionParameters = Omit<
  * @param msg
  * @param fee
  * @param memo
+ * @param funds
  */
 export async function executeIbcAction({
   accountId,
@@ -33,6 +31,7 @@ export async function executeIbcAction({
   msg,
   fee,
   memo,
+  funds,
 }: ExecuteIbcActionParameters) {
   const ibcClientAddress = getModuleAddress({
     accountId,
@@ -47,11 +46,18 @@ export async function executeIbcAction({
     )
   }
 
-  const accountClient = await getAccountClientFromApi({
+  return executeOnModule({
     accountId,
     signingCosmWasmClient,
-    sender,
     apiUrl,
+    sender,
+    moduleId: abstractModuleId(CommonModuleNames.IBC_CLIENT),
+    moduleType: 'native',
+    moduleMsg: msg,
+    moduleFunds: funds,
+    fee,
+    memo,
+    // We pass in no funds here because we want to send them along with the module funds
+    funds: [],
   })
-  return accountClient.ibcAction({ msg }, fee, memo)
 }

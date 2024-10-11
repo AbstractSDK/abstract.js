@@ -1,29 +1,29 @@
-import { AccountFactoryTypes } from '../codegen/abstract'
+import { AccountTypes } from '../../codegen/abstract'
 import { ContractExecuteMsgBuilder } from './contract-msg-builder'
-type FactoryExecuteMsg = AccountFactoryTypes.ExecuteMsg
+type AccountExecuteMsg = AccountTypes.ExecuteMsg
 
 test('ContractClient variant and msg', () => {
-  class FactoryMessageBulider extends ContractExecuteMsgBuilder<FactoryExecuteMsg> {}
+  class FactoryMessageBulider extends ContractExecuteMsgBuilder<AccountExecuteMsg> {}
 
   expect(
     new FactoryMessageBulider()
-      .withVariant('update_config')
-      .withParams({ ans_host_contract: 'foo' })
+      .withVariant('update_info')
+      .withParams({ name: 'foo' })
       .toJson(),
   ).toEqual({
-    update_config: { ans_host_contract: 'foo' },
+    update_info: { name: 'foo' },
   })
 })
 
 // test for msg
 test('ContractClient.variantMsg', () => {
-  class FactoryMessageBulider extends ContractExecuteMsgBuilder<FactoryExecuteMsg> {}
+  class FactoryMessageBulider extends ContractExecuteMsgBuilder<AccountExecuteMsg> {}
 
   expect(
     new FactoryMessageBulider()
-      .withActionMsg('update_config', { ans_host_contract: 'foo' })
+      .withActionMsg('update_info', { name: 'foo' })
       .toJson(),
   ).toEqual({
-    update_config: { ans_host_contract: 'foo' },
+    update_info: { name: 'foo' },
   })
 })

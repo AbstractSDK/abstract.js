@@ -6,7 +6,7 @@ import {
   useExecuteOnRemoteManager,
   useRemoteAccountIds,
   useRemoteHosts,
-  useSimulateExecuteRemoteManager,
+  useSimulateExecuteRemoteAccount,
 } from '@abstract-money/react'
 import { useChain } from '@cosmos-kit/react'
 import { useCallback, useMemo, useState } from 'react'
@@ -103,7 +103,7 @@ export default function RemotePage() {
   }, [execRemote, chainInput])
 
   const { mutate: simulateRemote, isLoading: isSimulating } =
-    useSimulateExecuteRemoteManager({
+    useSimulateExecuteRemoteAccount({
       accountId: firstAccount,
       chainName: firstAccount?.chainName,
     })

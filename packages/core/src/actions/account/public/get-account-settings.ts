@@ -1,3 +1,4 @@
+import { abstractModuleId } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { CommonModuleNames } from '../../../actions/public/types'
 import { RegistryTypes } from '../../../codegen/abstract'
@@ -9,6 +10,12 @@ export type GetAccountSettingsParameters = {
   apiUrl: string
 }
 
+/**
+ * @deprecated
+ * @param accountId
+ * @param cosmWasmClient
+ * @param apiUrl
+ */
 export async function getAccountSettings({
   accountId,
   cosmWasmClient,
@@ -28,7 +35,7 @@ export async function getAccountSettings({
     })
     if (fetchedModules.module_infos.length === 0) break
     for (const moduleInfo of fetchedModules.module_infos)
-      if (moduleInfo.id === `abstract:${CommonModuleNames.IBC_CLIENT}`)
+      if (moduleInfo.id === abstractModuleId(CommonModuleNames.IBC_CLIENT))
         return { ibcEnabled: true }
     cursor =
       fetchedModules.module_infos[fetchedModules.module_infos.length - 1]?.id

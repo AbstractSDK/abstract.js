@@ -12,21 +12,21 @@ import {
   UseMutationReturnType,
 } from '../../../types/queries'
 
-type SimulateExecuteRemoteManagerMutation = Parameters<
-  AccountPublicClient['simulateExecuteRemoteManager']
+type SimulateExecuteRemoteAccountMutation = Parameters<
+  AccountPublicClient['simulateExecuteRemoteAccount']
 >[0]
 
 type SimulatedReturn = Awaited<
-  ReturnType<AccountPublicClient['simulateExecuteRemoteManager']>
+  ReturnType<AccountPublicClient['simulateExecuteRemoteAccount']>
 >
 
-export type UseSimulateExecuteRemoteManagerParameters = {
+export type UseSimulateExecuteRemoteAccountParameters = {
   accountId: AccountId | undefined
   chainName: string | undefined
   mutation?: UseMutationParameters<
     SimulatedReturn,
     unknown,
-    SimulateExecuteRemoteManagerMutation
+    SimulateExecuteRemoteAccountMutation
   >
 }
 
@@ -36,14 +36,14 @@ export type UseSimulateExecuteRemoteManagerParameters = {
  * @param chainName
  * @param mutation
  */
-export function useSimulateExecuteRemoteManager({
+export function useSimulateExecuteRemoteAccount({
   accountId,
   chainName,
   mutation,
-}: UseSimulateExecuteRemoteManagerParameters): UseMutationReturnType<
+}: UseSimulateExecuteRemoteAccountParameters): UseMutationReturnType<
   SimulatedReturn,
   unknown,
-  SimulateExecuteRemoteManagerMutation
+  SimulateExecuteRemoteAccountMutation
 > {
   const config = useConfig()
   const accountClient = config.useAccountPublicClient({
@@ -52,10 +52,10 @@ export function useSimulateExecuteRemoteManager({
   })
 
   return useMutation(
-    ['simulateExecuteRemoteManager', chainName, accountId],
+    ['simulateExecuteRemoteAccount', chainName, accountId],
     ({ ...params }) => {
       if (!accountClient) throw new Error('client is not defined')
-      return accountClient.simulateExecuteRemoteManager({ ...params })
+      return accountClient.simulateExecuteRemoteAccount({ ...params })
     },
     mutation,
   )

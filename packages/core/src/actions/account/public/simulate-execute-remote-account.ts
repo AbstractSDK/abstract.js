@@ -3,7 +3,7 @@ import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { AccountTypes, RegistryTypes } from '../../../codegen/abstract'
 import { CosmosMsgForEmpty } from '../../../codegen/abstract/cosmwasm-codegen/Account.types'
 import { simulateRemoteMsg } from '../../simulate-remote-msg'
-import { getRemoteAccountProxies } from './get-remote-account-proxies'
+import { getRemoteAccounts } from './get-remote-accounts'
 
 export type SimulateExecuteRemoteAccountParameters = {
   accountId: RegistryTypes.AccountId
@@ -29,7 +29,7 @@ export async function simulateExecuteRemoteAccount({
   hostChainName,
   accountMsg,
 }: SimulateExecuteRemoteAccountParameters) {
-  const remoteProxies = await getRemoteAccountProxies({
+  const remoteProxies = await getRemoteAccounts({
     accountId,
     cosmWasmClient,
     apiUrl,

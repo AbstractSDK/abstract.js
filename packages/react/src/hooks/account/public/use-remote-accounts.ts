@@ -9,18 +9,16 @@ import React from 'react'
 import { useConfig } from '../../../contexts'
 import { WithArgs } from '../../../types/args'
 
-type QueryFnData = Awaited<
-  ReturnType<AccountPublicClient['getRemoteAccountProxies']>
->
+type QueryFnData = Awaited<ReturnType<AccountPublicClient['getRemoteAccounts']>>
 
 type QueryError = unknown
 type QueryData = QueryFnData
 type QueryKey = readonly [
-  'getRemoteAccountProxies',
+  'getRemoteAccounts',
   AccountPublicClient | undefined,
   (
     | NonNullable<
-        Parameters<AccountPublicClient['getRemoteAccountProxies']>[0]
+        Parameters<AccountPublicClient['getRemoteAccounts']>[0]
       >['extra']
     | undefined
   ),
@@ -32,8 +30,8 @@ type QueryOptions<TData = QueryData> = Omit<
 >
 type QueryResult<TData = QueryData> = UseQueryResult<TData, QueryError>
 
-export type UseRemoteProxiesParameters<TData = QueryData> = WithArgs<
-  Parameters<AccountPublicClient['getRemoteAccountProxies']>[0]
+export type UseRemoteAccountsParameters<TData = QueryData> = WithArgs<
+  Parameters<AccountPublicClient['getRemoteAccounts']>[0]
 > & {
   query?: QueryOptions<TData>
   chainName: string | undefined
@@ -47,19 +45,19 @@ export type UseRemoteProxiesParameters<TData = QueryData> = WithArgs<
  * @param chainName
  * @param query
  */
-export function useRemoteProxies<TData = QueryData>({
+export function useRemoteAccounts<TData = QueryData>({
   accountId,
   extra,
   chainName,
   query = {},
-}: UseRemoteProxiesParameters<TData>): QueryResult<TData> {
+}: UseRemoteAccountsParameters<TData>): QueryResult<TData> {
   const config = useConfig()
   const accountPublicClient = config.useAccountPublicClient({
     accountId,
     chainName,
   })
   const queryKey = React.useMemo(
-    () => ['getRemoteAccountProxies', accountPublicClient, extra] as const,
+    () => ['getRemoteAccounts', accountPublicClient, extra] as const,
     [accountPublicClient, extra],
   )
 
@@ -72,7 +70,7 @@ export function useRemoteProxies<TData = QueryData>({
     ({ queryKey: [_, accountPublicClient, extra] }) => {
       if (!accountPublicClient) throw new Error('No client')
 
-      return accountPublicClient.getRemoteAccountProxies(
+      return accountPublicClient.getRemoteAccounts(
         extra
           ? {
               extra,

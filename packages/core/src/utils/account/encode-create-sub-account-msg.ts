@@ -2,12 +2,12 @@ import { AccountMsgComposer } from '../../codegen/abstract'
 
 export function encodeCreateSubAccountMsg({
   sender,
-  managerAddress,
+  accountAddress,
   ...rest
 }: Parameters<typeof AccountMsgComposer.prototype.createSubAccount>[0] & {
   sender: string
-  managerAddress: string
+  accountAddress: string
 }) {
-  const composer = new AccountMsgComposer(sender, managerAddress)
+  const composer = new AccountMsgComposer(sender, accountAddress)
   return composer.createSubAccount(rest)
 }

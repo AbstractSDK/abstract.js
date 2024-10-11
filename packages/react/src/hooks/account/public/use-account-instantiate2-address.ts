@@ -11,17 +11,17 @@ import {
 } from '../../../types/queries'
 
 type QueryFnData = Awaited<
-  ReturnType<AccountPublicClient['getManagerInstantiate2Address']>
+  ReturnType<AccountPublicClient['getAccountInstantiate2Address']>
 >
 
 type QueryError = unknown
 type QueryData = QueryFnData
 type QueryKey = readonly [
-  'managerInstantiate2Address',
+  'accountInstantiate2Address',
   AccountPublicClient | undefined,
   (
     | NonNullable<
-        Parameters<AccountPublicClient['getManagerInstantiate2Address']>[0]
+        Parameters<AccountPublicClient['getAccountInstantiate2Address']>[0]
       >['extra']
   ),
 ]
@@ -34,27 +34,27 @@ type QueryOptions<TData = QueryData> = UseQueryParameters<
 >
 type QueryResult<TData = QueryData> = UseQueryReturnType<TData, QueryError>
 
-export type UseManagerInstantiate2AddressParameters<TData = QueryData> =
+export type UseAccountInstantiate2AddressParameters<TData = QueryData> =
   WithArgs<
-    Parameters<AccountPublicClient['getManagerInstantiate2Address']>[0]
+    Parameters<AccountPublicClient['getAccountInstantiate2Address']>[0]
   > & {
     query?: QueryOptions<TData>
     chainName: string | undefined
     accountId: AccountId | undefined
   }
-export function useManagerInstantiate2Address<TData = QueryData>({
+export function useAccountInstantiate2Address<TData = QueryData>({
   accountId,
   chainName,
   extra,
   query = {},
-}: UseManagerInstantiate2AddressParameters<TData>): QueryResult<TData> {
+}: UseAccountInstantiate2AddressParameters<TData>): QueryResult<TData> {
   const config = useConfig()
   const accountPublicClient = config.useAccountPublicClient({
     accountId,
     chainName,
   })
   const queryKey = React.useMemo(
-    () => ['managerInstantiate2Address', accountPublicClient, extra] as const,
+    () => ['accountInstantiate2Address', accountPublicClient, extra] as const,
     [accountPublicClient, extra],
   )
 
@@ -64,7 +64,7 @@ export function useManagerInstantiate2Address<TData = QueryData>({
     ({ queryKey: [_, accountPublicClient, extra] }) => {
       if (!accountPublicClient) throw new Error('No client')
 
-      return accountPublicClient.getManagerInstantiate2Address(
+      return accountPublicClient.getAccountInstantiate2Address(
         extra ? { extra } : undefined,
       )
     },

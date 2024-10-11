@@ -5,24 +5,24 @@ import { getIbcClientQueryClient } from '../../public/get-ibc-client-query-clien
 import { CommonModuleNames } from '../../public/types'
 import { getModuleAddress } from './get-module-address'
 
-export type GetIbcClientQueryClientFromManagerParameters = {
+export type GetIbcClientQueryClientParameters = {
   accountId: RegistryTypes.AccountId
   cosmWasmClient: CosmWasmClient
   apiUrl: string
 }
 
 /**
- * Retrieve the {@link IbcClientQueryClient} from the manager account.
+ * Retrieve the {@link IbcClientQueryClient} from the account.
  * @throws if the IBC-client module is not installed
  * @param accountId
  * @param cosmWasmClient
  * @param apiUrl
  */
-export async function getIbcClientQueryClientFromManager({
+export async function getIbcClientQueryClientFromAccount({
   accountId,
   cosmWasmClient,
   apiUrl,
-}: GetIbcClientQueryClientFromManagerParameters) {
+}: GetIbcClientQueryClientParameters) {
   const ibcClientAddress = await getModuleAddress({
     accountId,
     cosmWasmClient,

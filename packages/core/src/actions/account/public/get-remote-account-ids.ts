@@ -4,11 +4,11 @@ import {
   hostChainNameToName,
 } from '@abstract-money/core'
 import {
-  GetRemoteProxiesParameters,
-  getRemoteAccountProxies,
-} from './get-remote-account-proxies'
+  GetRemoteAccountsParameters,
+  getRemoteAccounts,
+} from './get-remote-accounts'
 
-export type GetRemoteAccountIdsParameters = GetRemoteProxiesParameters
+export type GetRemoteAccountIdsParameters = GetRemoteAccountsParameters
 
 /**
  * Get the Account's remote Account ids.
@@ -21,7 +21,7 @@ export async function getRemoteAccountIds({
   cosmWasmClient,
   apiUrl,
 }: GetRemoteAccountIdsParameters): Promise<AccountId[]> {
-  const remoteProxies = await getRemoteAccountProxies({
+  const remoteProxies = await getRemoteAccounts({
     accountId,
     cosmWasmClient,
     apiUrl,

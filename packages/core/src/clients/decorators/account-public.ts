@@ -13,7 +13,7 @@ import { getNamespace } from '../../actions/account/public/get-namespace'
 import { getOwner } from '../../actions/account/public/get-owner'
 import { getRegistryAccountId } from '../../actions/account/public/get-registry-account-id'
 import { getRemoteAccountIds } from '../../actions/account/public/get-remote-account-ids'
-import { getRemoteAccountProxies } from '../../actions/account/public/get-remote-account-proxies'
+import { getRemoteAccounts } from '../../actions/account/public/get-remote-accounts'
 import { getSubAccountIds } from '../../actions/account/public/get-sub-account-ids'
 import { getSubAccountSequences } from '../../actions/account/public/get-sub-account-sequences'
 import { simulateExecuteRemote } from '../../actions/account/public/simulate-execute-remote'
@@ -64,7 +64,7 @@ export type AccountPublicActions = {
       typeof getModuleInstantiate2AddressFromApi
     >,
   ): ReturnType<typeof getModuleInstantiate2AddressFromApi>
-  getManagerInstantiate2Address(
+  getAccountInstantiate2Address(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAccountInstantiate2AddressFromApi
     >,
@@ -91,15 +91,15 @@ export type AccountPublicActions = {
   ): ReturnType<typeof getSubAccountSequences>
   getRemoteAccountProxies(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getRemoteAccountProxies
+      typeof getRemoteAccounts
     >,
-  ): ReturnType<typeof getRemoteAccountProxies>
+  ): ReturnType<typeof getRemoteAccounts>
   getRemoteAccountIds(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getRemoteAccountIds
     >,
   ): ReturnType<typeof getRemoteAccountIds>
-  simulateExecuteRemoteManager(
+  simulateExecuteRemoteAccount(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof simulateExecuteRemoteAccount
     >,
@@ -172,7 +172,7 @@ export function accountPublicActions(
         ...parameters,
         ...extra,
       }),
-    getManagerInstantiate2Address: ({ extra, ...parameters } = {}) =>
+    getAccountInstantiate2Address: ({ extra, ...parameters } = {}) =>
       getAccountInstantiate2AddressFromApi({
         accountId,
         cosmWasmClient,
@@ -213,7 +213,7 @@ export function accountPublicActions(
         ...extra,
       }),
     getRemoteAccountProxies: ({ extra, ...parameters } = {}) =>
-      getRemoteAccountProxies({
+      getRemoteAccounts({
         accountId,
         cosmWasmClient,
         apiUrl,
@@ -228,7 +228,7 @@ export function accountPublicActions(
         ...parameters,
         ...extra,
       }),
-    simulateExecuteRemoteManager: ({ extra, ...parameters }) =>
+    simulateExecuteRemoteAccount: ({ extra, ...parameters }) =>
       simulateExecuteRemoteAccount({
         accountId,
         cosmWasmClient,

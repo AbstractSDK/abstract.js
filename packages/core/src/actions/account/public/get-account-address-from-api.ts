@@ -1,6 +1,5 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { RegistryTypes } from '../../../codegen/abstract'
-import { accountIdToParameter } from '../../../utils/account-id'
 import { getRegistryQueryClientFromApi } from '../../public/get-registry-query-client-from-api'
 import { getAccountAddressFromRegistry } from './get-account-address-from-registry'
 

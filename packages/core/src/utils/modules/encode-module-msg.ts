@@ -1,5 +1,6 @@
 import { ContractMsg, ModuleType, jsonToBinary } from '@abstract-money/core'
 import { AccountExecuteMsgBuilder, AccountTypes } from '../../codegen/abstract'
+import { Coin } from '../../codegen/abstract/cosmwasm-codegen/Account.types'
 import { wrapModuleExecMsg } from './wrap-module-exec-msg'
 
 /**
@@ -26,6 +27,7 @@ export const encodeModuleMsg = <TModuleMsg extends ContractMsg>(
  * @param moduleId - The ID of the module on which the message should be executed.
  * @param moduleMsg - The message to be executed.
  * @param moduleType - The type of the module.
+ * @param funds - An optional array of funds to be sent with the message.
  *
  * @returns A ContractMsg representing the execution message for the specified module.
  *
@@ -36,8 +38,10 @@ export const executeOnModuleMsg = <TModuleMsg extends ContractMsg>(
   moduleId: string,
   moduleMsg: TModuleMsg | string,
   moduleType?: ModuleType,
+  funds?: Coin[],
 ): AccountTypes.ExecuteMsg =>
   AccountExecuteMsgBuilder.executeOnModule({
     moduleId,
     execMsg: encodeModuleMsg(moduleMsg, moduleType),
+    funds: funds || [],
   })
