@@ -9,11 +9,10 @@ import {
 } from '@abstract-money/core/utils'
 
 import {
-  useAccountFactoryQueryClientFromApi,
   useCreateAccountMonarchy,
-  useModuleInstantiate2AddressFromApi,
   useSignAndBroadcast,
 } from '@abstract-money/react'
+import { useModuleInstantiate2Address } from '@abstract-money/react'
 import { useAccount } from 'graz'
 import React, { useCallback, useEffect, useMemo } from 'react'
 import { Button } from '../../components/ui/button'
@@ -35,31 +34,23 @@ export default function AuthzPage() {
   })
   const { data: account } = useAccount({ chainId: 'osmosis-1' })
 
-  const { data: accountFactory, isLoading } =
-    useAccountFactoryQueryClientFromApi({ chainName: CHAIN_NAME })
-
   const { mutate: createAccount } = useCreateAccountMonarchy({
     chainName: CHAIN_NAME,
   })
 
   const onCreateAccount = useCallback(async () => {
-    if (!accountFactory || !account)
-      throw new Error('no account factory or account')
-
-    const config = await accountFactory.config()
-    const sequence = config.local_account_sequence + 1
+    if (!account) throw new Error('no account factory or account')
 
     createAccount({
       fee: 'auto',
       args: {
         name: 'funny-squid',
-        accountId: stringToAccountId(`local-${sequence}`, CHAIN_NAME),
         owner: account.bech32Address,
       },
     })
-  }, [accountFactory])
+  }, [account])
 
-  const { data: savingsAppAddress } = useModuleInstantiate2AddressFromApi({
+  const { data: savingsAppAddress } = useModuleInstantiate2Address({
     accountId: stringToAccountId(TEST_SAVINGS_ACCOUNT_ID, CHAIN_NAME),
     chainName: CHAIN_NAME,
     args: {
@@ -139,11 +130,7 @@ export default function AuthzPage() {
     <>
       <Button onClick={onGrantAuthzClick}> Grant AuthZ</Button>
       <Button onClick={onTransferClick}> Transfer</Button>
-      {isLoading ? (
-        'Loading'
-      ) : (
-        <Button onClick={onCreateAccount}>Create Account</Button>
-      )}
+      <Button onClick={onCreateAccount}>Create Account</Button>
       <WalletButton />
     </>
   )

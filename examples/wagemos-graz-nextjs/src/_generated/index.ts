@@ -49,7 +49,7 @@ import {
 // React
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const BETTING_MODULE_ID = 'abstract:betting'
+export const BETTING_MODULE_ID = 'wagemos:betting'
 
 export const betting = {
   queries: {
@@ -231,7 +231,6 @@ export const betting = {
         accountId,
         chainName,
         sender,
-
         Module: BettingAppClient,
       })
 
@@ -403,9 +402,9 @@ export const betting = {
       const {
         data: bettingAppClient,
         // TODO: figure out what to do with those
-        // isLoading: isBettingAppClientLoading,
-        // isError: isBettingAppClientError,
-        // error: bettingAppClientError,
+        isLoading: isBettingAppClientLoading,
+        isError: isBettingAppClientError,
+        error: bettingAppClientError,
       } = useAbstractModuleClient({
         moduleId: BETTING_MODULE_ID,
         accountId,
@@ -414,6 +413,11 @@ export const betting = {
 
         Module: BettingAppClient,
       })
+
+      console.log('bettingAppClient', bettingAppClient)
+      console.log('isBettingAppClientLoading', isBettingAppClientLoading)
+      console.log('isBettingAppClientError', isBettingAppClientError)
+      console.log('bettingAppClientError', bettingAppClientError)
 
       const {
         mutate: mutate_,
