@@ -17,7 +17,7 @@ export type SimulateExecuteRemoteParameters = {
 }
 
 /**
- * Simulate messages to be executed on a remote proxy on a remote chain. This should be run before calling `{@link AccountPublicClient#executeRemote}`
+ * Simulate messages to be executed on a remote account on a remote chain. This should be run before calling `{@link AccountPublicClient#executeRemote}`
  * @param accountId
  * @param cosmWasmClient
  * @param apiUrl

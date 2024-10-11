@@ -296,17 +296,6 @@ interface IAbstractAccountClient extends IAbstractAccountQueryClient {
 }
 
 /**
- * Execute a message on a module.
- */
-interface ExecuteOnModule {
-  moduleId: string
-  moduleType?: ModuleType
-  execMsg: ContractMsg
-}
-
-const PROXY_MODULE_ID = 'abstract:proxy'
-
-/**
  * The AbstractAccountClient class extends the AbstractAccountQueryClient class and provides
  * additional functionality to interact with a specific Account deployed on Abstract.
  *

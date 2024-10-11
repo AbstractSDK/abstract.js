@@ -37,7 +37,7 @@ export async function simulateExecuteRemoteAccount({
 
   const remoteAccountAddress = remoteProxies[hostChainName]
   if (!remoteAccountAddress) {
-    throw new Error(`No remote proxy found for chain ${hostChainName}`)
+    throw new Error(`No remote account found for chain ${hostChainName}`)
   }
 
   const cosmosAccountMsg: CosmosMsgForEmpty = cosmosWasmExecuteMsg(
