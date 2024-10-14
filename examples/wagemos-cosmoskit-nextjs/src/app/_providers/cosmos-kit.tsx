@@ -54,38 +54,7 @@ export function CosmosKitProvider(props: { children: ReactNode }) {
         duration: 1000 * 60 * 60 * 24 * 7,
       }}
       endpointOptions={{
-        isLazy: true,
-        endpoints: {
-          archway: {
-            rpc: [
-              'https://497eb440-0152-48f8-85ff-f0cf7c8a5632.archway-1.mesa-rpc.newmetric.xyz',
-            ],
-            // rpc: ['https://juno-rpc.polkachu.com'],
-            // rpc: ['https://g.w.lavanet.xyz:443/gateway/jun1/rpc-http/1edd160f38824b5c019c1215d4aed47a'],
-            isLazy: true,
-          },
-          juno: {
-            rpc: [
-              'https://497eb440-0152-48f8-85ff-f0cf7c8a5632.juno-1.mesa-rpc.newmetric.xyz',
-            ],
-            // rpc: ['https://archway-rpc.polkachu.com'],
-            isLazy: true,
-          },
-          neutron: {
-            // rpc: [
-            //   'https://497eb440-0152-48f8-85ff-f0cf7c8a5632.neutron-1.mesa-rpc.newmetric.xyz',
-            // ],
-            rpc: ['https://neutron-rpc.polkachu.com'],
-            isLazy: true,
-          },
-          osmosis: {
-            rpc: [
-              'https://497eb440-0152-48f8-85ff-f0cf7c8a5632.osmosis-1.mesa-rpc.newmetric.xyz',
-            ],
-            // rpc: ['https://osmosis-rpc.polkachu.com'],
-            isLazy: true,
-          },
-        },
+        isLazy: true
       }}
       {...props}
     />
