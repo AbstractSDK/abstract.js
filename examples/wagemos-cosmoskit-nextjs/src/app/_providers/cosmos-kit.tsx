@@ -54,7 +54,7 @@ export function CosmosKitProvider(props: { children: ReactNode }) {
         duration: 1000 * 60 * 60 * 24 * 7,
       }}
       endpointOptions={{
-        isLazy: true
+        isLazy: true,
       }}
       {...props}
     />
