@@ -42,3 +42,12 @@ This monorepo contains the Typescript-based SDKs for AbstractSDK. Please [read t
    pnpm build
    ```
 
+
+## Types
+
+We have tried to make this repository compatible with both ESM and CJS, following guides from https://johnnyreilly.com/dual-publishing-esm-cjs-modules-with-tsup-and-are-the-types-wrong.
+
+To check the types are exported properly, run the commands in the packages in which you're interested:
+```bash
+npx --yes @arethetypeswrong/cli --pack .
+```
