@@ -72,14 +72,18 @@ export class AbstractAccountQueryClient implements IAbstractAccountQueryClient {
     abstractClient: AbstractQueryClient,
     accountId: AccountId,
   ): Promise<AbstractAccountQueryClient> {
-    const { account } = await abstractClient.registryQueryClient.account({
-      accountId: accountIdToParameter(accountId),
+    const { accounts } = await abstractClient.registryQueryClient.accounts({
+      accountIds: [accountIdToParameter(accountId)],
     })
+
+    if (!accounts[0]) {
+      throw new Error(`Account ${accountId} not found.`)
+    }
 
     return new AbstractAccountQueryClient({
       abstract: abstractClient,
       accountId,
-      accountAddress: account,
+      accountAddress: accounts[0],
     })
   }
 

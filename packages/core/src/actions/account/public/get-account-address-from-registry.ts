@@ -2,7 +2,6 @@ import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { RegistryTypes } from '../../../codegen/abstract'
 import { accountIdToParameter } from '../../../utils/account-id'
 import { getRegistryQueryClient } from '../../public/get-registry-query-client'
-import { getRegistryQueryClientFromApi } from '../../public/get-registry-query-client-from-api'
 
 export type GetAccountAddressFromRegistryParameters = {
   accountId: RegistryTypes.AccountId
@@ -20,11 +19,15 @@ export async function getAccountAddressFromRegistry({
     registryAddress,
   })
 
-  const { account } = await registryQueryClient.account({
-    accountId: accountIdToParameter(accountId),
+  const { accounts } = await registryQueryClient.accounts({
+    accountIds: [accountIdToParameter(accountId)],
   })
 
+  if (!accounts[0]) {
+    throw new Error(`Account not found: ${accountId}`)
+  }
+
   return {
-    account,
+    account: accounts[0],
   }
 }
