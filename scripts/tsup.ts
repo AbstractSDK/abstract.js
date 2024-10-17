@@ -83,7 +83,11 @@ export function getConfig({ dev, noExport, ...options }: GetConfig): Options {
   }
 }
 
-type CjsAndEsmExports = { types?: string; require?: string; import?: string }
+type CjsAndEsmExports = {
+  types?: string
+  require?: { types: string; require: string }
+  import?: { types: string; import: string }
+}
 type EsmExports = { types?: string; default: string }
 
 type Exports = {
@@ -123,8 +127,14 @@ async function generateExports(
     if (format.includes('cjs')) {
       exports[name] = {
         types: distTypesFile,
-        require: distRequireFile,
-        import: distSourceFile,
+        import: {
+          types: distTypesFile,
+          import: distSourceFile,
+        },
+        require: {
+          types: distTypesFile.replace('.d.ts', '.d.cts'),
+          require: distRequireFile,
+        },
       }
     } else {
       exports[name] = {
@@ -155,6 +165,9 @@ async function generateProxyPackages(exports: Exports) {
   for (const [key, value] of Object.entries(exports)) {
     if (typeof value === 'string') continue
     if (key === '.') continue
+    await fs.ensureDir(key)
+
+    // Check for esm export
     const esmExport =
       'default' in value
         ? value.default
@@ -163,9 +176,11 @@ async function generateProxyPackages(exports: Exports) {
         : undefined
 
     if (!esmExport) continue
-    await fs.ensureDir(key)
-    const esmEntrypoint = path.relative(key, esmExport)
-    const esmFileExists = await fs.pathExists(esmExport)
+
+    const esmSstringExport =
+      typeof esmExport === 'string' ? esmExport : esmExport.import
+    const esmEntrypoint = path.relative(key, esmSstringExport)
+    const esmFileExists = await fs.pathExists(esmSstringExport)
     if (!esmFileExists)
       throw new Error(
         `Proxy package "${key}" entrypoint "${esmEntrypoint}" does not exist.`,
@@ -179,13 +194,31 @@ async function generateProxyPackages(exports: Exports) {
       }`,
     )
 
-    if ('require' in value && value.require !== undefined) {
-      const cjsEntrypoint = path.relative(key, value.require)
-      const cjsFileExists = await fs.pathExists(value.require)
+    // Check for cjs export
+    const cjsExport = 'require' in value ? value.require : undefined
+    if (cjsExport) {
+      // cjs export
+      const cjsStringExport =
+        typeof cjsExport === 'string' ? cjsExport : cjsExport.require
+      const cjsEntrypoint = path.relative(key, cjsStringExport)
+      const cjsFileExists = await fs.pathExists(cjsStringExport)
       if (!cjsFileExists)
         throw new Error(
           `Proxy package "${key}" cjsEntrypoint "${cjsEntrypoint}" does not exist.`,
         )
+
+      // Check for types export
+      const typesExport = 'types' in value ? value.types : cjsExport.types
+
+      if (!typesExport) continue
+
+      const esmTypesEntrypoint = path.relative(key, typesExport)
+      const cjsTypesEntrypoint = esmTypesEntrypoint.replace('.d.ts', '.d.cts')
+      // const typesFileExists = await fs.pathExists(typesExport)
+      // if (!typesFileExists)
+      //   throw new Error(
+      //     `Proxy package "${key}" entrypoint "${esmTypesEntrypoint}" does not exist.`,
+      //   )
 
       await fs.outputFile(
         `${key}/package.json`,
@@ -193,9 +226,16 @@ async function generateProxyPackages(exports: Exports) {
         "type": "module",
         "main": "${cjsEntrypoint}",
         "module": "${esmEntrypoint}",
+        "types": "${esmTypesEntrypoint}",
         "exports": {
-          "require": "${cjsEntrypoint}",
-          "import": "${esmEntrypoint}"
+          "import": {
+            "types": "${esmTypesEntrypoint}",
+            "import": "${esmEntrypoint}"
+          },
+          "require": {
+            "types": "${cjsTypesEntrypoint}",
+            "require": "${cjsEntrypoint}",
+          }
         }
       }`,
       )

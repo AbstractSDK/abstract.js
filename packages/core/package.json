@@ -81,33 +81,69 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "require": "./dist/index.cjs"
+      }
     },
     "./actions": {
       "types": "./dist/actions/index.d.ts",
-      "require": "./dist/actions/index.cjs",
-      "import": "./dist/actions/index.js"
+      "import": {
+        "types": "./dist/actions/index.d.ts",
+        "import": "./dist/actions/index.js"
+      },
+      "require": {
+        "types": "./dist/actions/index.d.cts",
+        "require": "./dist/actions/index.cjs"
+      }
     },
     "./clients": {
       "types": "./dist/clients/index.d.ts",
-      "require": "./dist/clients/index.cjs",
-      "import": "./dist/clients/index.js"
+      "import": {
+        "types": "./dist/clients/index.d.ts",
+        "import": "./dist/clients/index.js"
+      },
+      "require": {
+        "types": "./dist/clients/index.d.cts",
+        "require": "./dist/clients/index.cjs"
+      }
     },
     "./legacy": {
       "types": "./dist/legacy/index.d.ts",
-      "require": "./dist/legacy/index.cjs",
-      "import": "./dist/legacy/index.js"
+      "import": {
+        "types": "./dist/legacy/index.d.ts",
+        "import": "./dist/legacy/index.js"
+      },
+      "require": {
+        "types": "./dist/legacy/index.d.cts",
+        "require": "./dist/legacy/index.cjs"
+      }
     },
     "./codegen/abstract": {
       "types": "./dist/codegen/abstract/index.d.ts",
-      "require": "./dist/codegen/abstract/index.cjs",
-      "import": "./dist/codegen/abstract/index.js"
+      "import": {
+        "types": "./dist/codegen/abstract/index.d.ts",
+        "import": "./dist/codegen/abstract/index.js"
+      },
+      "require": {
+        "types": "./dist/codegen/abstract/index.d.cts",
+        "require": "./dist/codegen/abstract/index.cjs"
+      }
     },
     "./utils": {
       "types": "./dist/utils/index.d.ts",
-      "require": "./dist/utils/index.cjs",
-      "import": "./dist/utils/index.js"
+      "import": {
+        "types": "./dist/utils/index.d.ts",
+        "import": "./dist/utils/index.js"
+      },
+      "require": {
+        "types": "./dist/utils/index.d.cts",
+        "require": "./dist/utils/index.cjs"
+      }
     },
     "./package.json": "./package.json"
   },
