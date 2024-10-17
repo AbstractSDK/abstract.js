@@ -1,6 +1,6 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { CamelCasedProperties, Merge } from 'type-fest'
-import { OverrideProperties } from 'type-fest/source/override-properties'
+import { OverrideProperties } from 'type-fest'
 import { AccountTypes, RegistryTypes } from '../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../types/parameters'
 import { WithOptional } from '../../types/utils'

@@ -31,24 +31,20 @@
     "rimraf": "^3.0.0",
     "@types/node": "^20.0.0"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.js"
+      "default": "./dist/index.js"
     },
     "./client": {
       "types": "./dist/client/index.d.ts",
-      "require": "./dist/client/index.cjs",
-      "import": "./dist/client/index.js"
+      "default": "./dist/client/index.js"
     },
     "./query": {
       "types": "./dist/query/index.d.ts",
-      "require": "./dist/query/index.cjs",
-      "import": "./dist/query/index.js"
+      "default": "./dist/query/index.js"
     },
     "./package.json": "./package.json"
   },
