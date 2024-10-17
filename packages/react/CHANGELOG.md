@@ -1,5 +1,27 @@
 # @abstract-money/react
 
+## 2.0.0
+
+### Major Changes
+
+- [#127](https://github.com/AbstractSDK/abstract.js/pull/127) [`e46ec91`](https://github.com/AbstractSDK/abstract.js/commit/e46ec91c1169752f552dd627d2fe93bb3ff932be) Thanks [@adairrr](https://github.com/adairrr)! - Update Abstract to 0.24.0 with unified accounts
+
+  The major changes include:
+
+  - Updating Abstract to 0.24.0
+  - Removing distinction between `proxy` and `manager`, replacing them with simply `account`
+  - Clarify `executeRemote` and `executeOnRemote`
+  - Add doc comments
+  - Remove components from legacy code
+  - Ensure generation works for both esm and cjs
+
+### Patch Changes
+
+- [#125](https://github.com/AbstractSDK/abstract.js/pull/125) [`a0c78be`](https://github.com/AbstractSDK/abstract.js/commit/a0c78be885b934e4c6c1a219b07ed58e3248f8d4) Thanks [@adairrr](https://github.com/adairrr)! - useUse to use with re-exported useUse
+
+- Updated dependencies [[`e46ec91`](https://github.com/AbstractSDK/abstract.js/commit/e46ec91c1169752f552dd627d2fe93bb3ff932be)]:
+  - @abstract-money/core@3.0.0
+
 ## 1.4.0
 
 ### Minor Changes
