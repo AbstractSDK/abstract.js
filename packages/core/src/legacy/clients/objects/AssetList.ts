@@ -4,13 +4,14 @@ import { type MsgSend } from 'cosmjs-types/cosmos/bank/v1beta1/tx'
 import { type MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
 import { match } from 'ts-pattern'
 
-import { ProxyTypes } from '../../../codegen/abstract'
-export type CosmosMsgForEmpty = ProxyTypes.CosmosMsgForEmpty
-import { EncodedMsg } from '../../messages'
+import { AccountTypes } from '../../../codegen/abstract'
+export type CosmosMsgForEmpty = AccountTypes.CosmosMsgForEmpty
+import { EncodedMsg } from '@abstract-money/core'
 import { Asset } from './Asset'
 
 /**
  * Represents a list of fungible tokens, each with a known amount.
+ * @deprecated
  */
 export class AssetList {
   constructor(public _assets: Asset[]) {}

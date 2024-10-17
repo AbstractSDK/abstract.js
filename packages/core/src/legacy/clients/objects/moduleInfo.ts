@@ -1,8 +1,8 @@
 import { P, match } from 'ts-pattern'
-import { VersionControlTypes } from '../../../codegen/abstract'
+import { RegistryTypes } from '../../../codegen/abstract'
 
-type VcModuleInfo = VersionControlTypes.ModuleInfo
-type ModuleVersion = VersionControlTypes.ModuleVersion
+type VcModuleInfo = RegistryTypes.ModuleInfo
+type ModuleVersion = RegistryTypes.ModuleVersion
 
 interface ModuleById {
   moduleId: string
@@ -18,6 +18,9 @@ interface ModuleByName {
 
 export type ModuleByIdOrName = ModuleById | ModuleByName
 
+/**
+ * @deprecated
+ */
 export class ModuleInfo implements VcModuleInfo {
   name: string
   namespace: string

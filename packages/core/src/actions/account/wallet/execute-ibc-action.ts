@@ -1,22 +1,15 @@
-import semver from 'semver/preload'
-import { IbcClientTypes, ProxyTypes } from '../../../codegen/abstract'
-import { ModuleType } from '../../../codegen/gql/graphql'
+import { IbcClientTypes } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
-import { MaybeArray } from '../../../types/utils'
 import { abstractModuleId } from '../../../utils/modules/abstract-module-id'
 import { CommonModuleNames } from '../../public/types'
 import { getModuleAddress } from '../public/get-module-address'
-import { getModuleVersion } from '../public/get-module-version'
 import { executeOnModule } from './execute-on-module'
 import { BaseAccountWalletParameters } from './types'
 
-export type ExecuteIbcActionParameters = Omit<
-  WithCosmWasmSignOptions<
-    BaseAccountWalletParameters & {
-      msg: IbcClientTypes.ExecuteMsg
-    }
-  >,
-  'funds'
+export type ExecuteIbcActionParameters = WithCosmWasmSignOptions<
+  BaseAccountWalletParameters & {
+    msg: IbcClientTypes.ExecuteMsg
+  }
 >
 
 /**
@@ -25,9 +18,10 @@ export type ExecuteIbcActionParameters = Omit<
  * @param signingCosmWasmClient
  * @param apiUrl
  * @param sender
- * @param managerMsg
+ * @param msg
  * @param fee
  * @param memo
+ * @param funds
  */
 export async function executeIbcAction({
   accountId,
@@ -37,6 +31,7 @@ export async function executeIbcAction({
   msg,
   fee,
   memo,
+  funds,
 }: ExecuteIbcActionParameters) {
   const ibcClientAddress = getModuleAddress({
     accountId,
@@ -51,44 +46,18 @@ export async function executeIbcAction({
     )
   }
 
-  const proxyVersion = await getModuleVersion({
-    accountId,
-    cosmWasmClient: signingCosmWasmClient,
-    apiUrl,
-    id: abstractModuleId(CommonModuleNames.PROXY),
-  })
-
-  const isNewerThanV022 = proxyVersion
-    ? semver.minor(proxyVersion.version) >= 22
-    : true
-
-  let proxyMsg
-  if (isNewerThanV022) {
-    proxyMsg = {
-      ibc_action: {
-        msg,
-      },
-    } satisfies ProxyTypes.ExecuteMsg
-  } else {
-    // older versions accept an array
-    proxyMsg = {
-      ibc_action: {
-        msgs: [msg],
-      },
-    }
-  }
-
-  console.log('proxyMsg', proxyMsg)
-
   return executeOnModule({
     accountId,
     signingCosmWasmClient,
     apiUrl,
     sender,
-    moduleId: abstractModuleId(CommonModuleNames.PROXY),
-    moduleType: ModuleType.AccountBase,
-    moduleMsg: proxyMsg,
+    moduleId: abstractModuleId(CommonModuleNames.IBC_CLIENT),
+    moduleType: 'native',
+    moduleMsg: msg,
+    moduleFunds: funds,
     fee,
     memo,
+    // We pass in no funds here because we want to send them along with the module funds
+    funds: [],
   })
 }

@@ -16,10 +16,12 @@ import {
 } from '../../components/ui/dialog'
 import { useToast } from '../../components/ui/use-toast'
 
+import { CHAIN_IDS } from '../_lib/constants'
+
 function DisconnectButton() {
   const { disconnect } = useDisconnect()
   const { data: account } = useAccount({
-    chainId: 'osmosis-1',
+    chainId: CHAIN_IDS[0],
   })
 
   const { toast } = useToast()
@@ -55,7 +57,8 @@ function ConnectButton() {
   const { toast } = useToast()
 
   const { isConnecting } = useAccount({
-    chainId: 'osmosis-1',
+    chainId: CHAIN_IDS,
+    multiChain: true,
     onConnect: ({ walletType, chains }) => {
       toast({
         title: `Wallet connected! using ${walletType} to ${chains.map(
@@ -73,7 +76,7 @@ function ConnectButton() {
   const { connect } = useConnect()
 
   const handleConnect = (wallet: WalletType) => {
-    connect({ walletType: wallet, chainId: ['osmosis-1', 'neutron-1'] })
+    connect({ walletType: wallet, chainId: CHAIN_IDS })
     setIsOpen(false)
   }
   return (
@@ -107,7 +110,7 @@ function ConnectButton() {
 
 export function WalletButton() {
   const { isConnected } = useAccount({
-    chainId: ['neutron-1', 'osmosis-1'],
+    chainId: CHAIN_IDS,
   })
   if (isConnected) {
     return <DisconnectButton />

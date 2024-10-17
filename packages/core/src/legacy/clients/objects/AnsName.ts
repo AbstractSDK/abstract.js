@@ -1,3 +1,6 @@
+/**
+ * @deprecated
+ */
 export abstract class AnsName {
   static chainNameIbcAsset(chainName: string, asset: string): string {
     return `${chainName.toLowerCase().replace('testnet', '')}>${asset}`

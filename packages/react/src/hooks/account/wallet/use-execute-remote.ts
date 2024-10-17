@@ -18,6 +18,12 @@ export type UseExecuteRemoteParameters = {
   >
 }
 
+/**
+ * Execute CosmosMsgs as the remote account.
+ * @param accountId
+ * @param chainName
+ * @param mutation
+ */
 export function useExecuteRemote({
   accountId,
   chainName,

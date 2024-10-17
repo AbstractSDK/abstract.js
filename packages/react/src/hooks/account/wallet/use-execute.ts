@@ -18,6 +18,13 @@ export type UseExecuteParameters = {
   chainName: string | undefined
   mutation?: UseMutationParameters<DeliverTxResponse, unknown, ExecuteMutation>
 }
+
+/**
+ * Execute a msg as the account.
+ * @param accountId
+ * @param chainName
+ * @param mutation
+ */
 export function useExecute({
   accountId,
   chainName,

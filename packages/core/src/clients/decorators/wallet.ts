@@ -1,19 +1,15 @@
-import { getAccountFactoryClientFromApi } from '../../actions/wallet/get-account-factory-client-from-api'
-import { getAccountFactoryClientFromVersionControl } from '../../actions/wallet/get-account-factory-client-from-version-control'
 import { getAnsHostClientFromApi } from '../../actions/wallet/get-ans-host-client-from-api'
-import { getAnsHostClientFromVersionControl } from '../../actions/wallet/get-ans-host-client-from-version-control'
-import { getVersionControlClientFromApi } from '../../actions/wallet/get-version-control-client-from-api'
+import { getAnsHostClientFromRegistry } from '../../actions/wallet/get-ans-host-client-from-registry'
+import { getRegistryClientFromApi } from '../../actions/wallet/get-registry-client-from-api'
 
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { createAccount } from '../../actions/wallet/create-account'
 import { createAccountMonarchy } from '../../actions/wallet/create-account-monarchy'
-import { getAccountFactoryClient } from '../../actions/wallet/get-account-factory-client'
+import { getAccountClient } from '../../actions/wallet/get-account-client'
 import { getAnsHostClient } from '../../actions/wallet/get-ans-host-client'
-import { getManagerClient } from '../../actions/wallet/get-manager-client'
-import { getProxyClient } from '../../actions/wallet/get-proxy-client'
+import { getRegistryClient } from '../../actions/wallet/get-registry-client'
 import { getSenderAddress } from '../../actions/wallet/get-sender-address'
 import { getSigningCosmWasmClient } from '../../actions/wallet/get-signing-cosm-wasm-client'
-import { getVersionControlClient } from '../../actions/wallet/get-version-control-client'
 import { ExtractAndPartializeParameters } from '../../types/parameters'
 
 type ExtractAndPartializeDecoratedParametersFromParameters<
@@ -34,21 +30,6 @@ export type WalletActions = {
       typeof createAccountMonarchy
     >,
   ): ReturnType<typeof createAccountMonarchy>
-  getAccountFactoryClient(
-    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getAccountFactoryClient
-    >,
-  ): ReturnType<typeof getAccountFactoryClient>
-  getAccountFactoryClientFromVersionControl(
-    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getAccountFactoryClientFromVersionControl
-    >,
-  ): ReturnType<typeof getAccountFactoryClientFromVersionControl>
-  getAccountFactoryClientFromApi(
-    parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getAccountFactoryClientFromApi
-    >,
-  ): ReturnType<typeof getAccountFactoryClientFromApi>
   getAnsHostClient(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAnsHostClient
@@ -59,31 +40,26 @@ export type WalletActions = {
       typeof getAnsHostClientFromApi
     >,
   ): ReturnType<typeof getAnsHostClientFromApi>
-  getAnsHostClientFromVersionControl(
+  getAnsHostClientFromRegistry(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getAnsHostClientFromVersionControl
+      typeof getAnsHostClientFromRegistry
     >,
-  ): ReturnType<typeof getAnsHostClientFromVersionControl>
-  getVersionControlClient(
+  ): ReturnType<typeof getAnsHostClientFromRegistry>
+  getRegistryClient(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getVersionControlClient
+      typeof getRegistryClient
     >,
-  ): ReturnType<typeof getVersionControlClient>
-  getVersionControlClientFromApi(
+  ): ReturnType<typeof getRegistryClient>
+  getRegistryClientFromApi(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getVersionControlClientFromApi
+      typeof getRegistryClientFromApi
     >,
-  ): ReturnType<typeof getVersionControlClientFromApi>
-  getManagerClient(
+  ): ReturnType<typeof getRegistryClientFromApi>
+  getAccountClient(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getManagerClient
+      typeof getAccountClient
     >,
-  ): ReturnType<typeof getManagerClient>
-  getProxyClient(
-    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getProxyClient
-    >,
-  ): ReturnType<typeof getProxyClient>
+  ): ReturnType<typeof getAccountClient>
   getSigningCosmWasmClient(): ReturnType<typeof getSigningCosmWasmClient>
   getSenderAddress(): ReturnType<typeof getSenderAddress>
 }
@@ -111,29 +87,6 @@ export function walletActions(
         ...extra,
       }),
 
-    getAccountFactoryClient: ({ extra, ...parameters }) =>
-      getAccountFactoryClient({
-        signingCosmWasmClient,
-        sender,
-        ...parameters,
-        ...extra,
-      }),
-    getAccountFactoryClientFromVersionControl: ({ extra, ...parameters }) =>
-      getAccountFactoryClientFromVersionControl({
-        signingCosmWasmClient,
-        sender,
-        ...parameters,
-        ...extra,
-      }),
-    getAccountFactoryClientFromApi: ({ extra, ...parameters } = {}) =>
-      getAccountFactoryClientFromApi({
-        signingCosmWasmClient,
-        sender,
-        apiUrl,
-        ...parameters,
-        ...extra,
-      }),
-
     getAnsHostClient: ({ extra, ...parameters }) =>
       getAnsHostClient({
         signingCosmWasmClient,
@@ -149,39 +102,32 @@ export function walletActions(
         ...parameters,
         ...extra,
       }),
-    getAnsHostClientFromVersionControl: ({ extra, ...parameters }) =>
-      getAnsHostClientFromVersionControl({
+    getAnsHostClientFromRegistry: ({ extra, ...parameters }) =>
+      getAnsHostClientFromRegistry({
         signingCosmWasmClient,
         sender,
         ...parameters,
         ...extra,
       }),
 
-    getVersionControlClientFromApi: ({ extra, ...parameters } = {}) =>
-      getVersionControlClientFromApi({
+    getRegistryClientFromApi: ({ extra, ...parameters } = {}) =>
+      getRegistryClientFromApi({
         signingCosmWasmClient,
         sender,
         apiUrl,
         ...parameters,
         ...extra,
       }),
-    getVersionControlClient: ({ extra, ...parameters }) =>
-      getVersionControlClient({
+    getRegistryClient: ({ extra, ...parameters }) =>
+      getRegistryClient({
         signingCosmWasmClient,
         sender,
         ...parameters,
         ...extra,
       }),
 
-    getManagerClient: ({ extra, ...parameters }) =>
-      getManagerClient({
-        signingCosmWasmClient,
-        sender,
-        ...parameters,
-        ...extra,
-      }),
-    getProxyClient: ({ extra, ...parameters }) =>
-      getProxyClient({
+    getAccountClient: ({ extra, ...parameters }) =>
+      getAccountClient({
         signingCosmWasmClient,
         sender,
         ...parameters,

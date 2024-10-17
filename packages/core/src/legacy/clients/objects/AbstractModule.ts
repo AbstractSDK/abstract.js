@@ -1,29 +1,30 @@
 import { type CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { P, match } from 'ts-pattern'
-import { type ModuleType } from '../../clients/AbstractAccountClient'
-import { RAW_QUERY_KEYS } from '../../constants'
+
+import { RegistryQueryClient, RegistryTypes } from '../../../codegen/abstract'
+
+type VcModule = RegistryTypes.Module
+type ModuleConfiguration = RegistryTypes.ModuleConfiguration
+type VcModuleInfo = RegistryTypes.ModuleInfo
+type ModuleReference = RegistryTypes.ModuleReference
+type ModuleResponse = RegistryTypes.ModuleResponse
 
 import {
-  VersionControlQueryClient as RegistryQueryClient,
-  VersionControlTypes,
-} from '../../../codegen/abstract'
-
-type VcModule = VersionControlTypes.Module
-type ModuleConfiguration = VersionControlTypes.ModuleConfiguration
-type VcModuleInfo = VersionControlTypes.ModuleInfo
-type ModuleReference = VersionControlTypes.ModuleReference
-type ModuleResponse = VersionControlTypes.ModuleResponse
-
-import { type ModuleData } from '../../generics/Module.types'
+  ModuleData,
+  ModuleType,
+  RAW_QUERY_KEYS,
+  rawQuery,
+} from '@abstract-money/core'
 import { ModuleNotFoundError } from '../errors'
-import { rawQuery } from '../helpers'
 import { ModuleInfo } from './moduleInfo'
 
 interface IAbstractModule extends VcModule {
   config: ModuleConfiguration
 }
+
 /**
  * A class representing an abstract module.
+ * @deprecated
  */
 export class AbstractModule implements VcModule {
   info: ModuleInfo
@@ -106,7 +107,7 @@ export class AbstractModule implements VcModule {
    */
   get type(): ModuleType {
     return match(this.reference)
-      .with({ account_base: P.select() }, () => 'account_base' as const)
+      .with({ account: P.select() }, () => 'account' as const)
       .with({ app: P.select() }, () => 'app' as const)
       .with({ standalone: P.select() }, () => 'standalone' as const)
       .with({ native: P.select() }, () => 'native' as const)
@@ -129,7 +130,7 @@ export class AbstractModule implements VcModule {
 
   get codeId(): number {
     return match(this.reference)
-      .with({ account_base: P.select() }, (core) => core)
+      .with({ account: P.select() }, (core) => core)
       .with({ app: P.select() }, (app) => app)
       .with({ standalone: P.select() }, (standalone) => standalone)
       .otherwise((x) => {
@@ -167,7 +168,7 @@ export class AbstractModule implements VcModule {
         }
         return Promise.resolve(firstInstantiation)
       })
-      .with('native', 'account_base', () => {
+      .with('native', 'account', () => {
         return null
       })
       .otherwise(() => {
@@ -184,7 +185,7 @@ export class AbstractModule implements VcModule {
     console.log(firstInstantiation)
 
     return await rawQuery<ModuleData | null>({
-      readOnlyClient: client,
+      cosmWasmClient: client,
       address: firstInstantiation,
       key: RAW_QUERY_KEYS.ModuleData,
     })

@@ -1,11 +1,11 @@
-import { ManagerClient } from '../../../codegen/abstract'
+import { AccountClient } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
-import { getManagerClientFromApi } from './get-manager-client-from-api'
+import { getAccountClientFromApi } from './get-account-client-from-api'
 import { BaseAccountWalletParameters } from './types'
 
 export type UpdateInfoParameters = WithCosmWasmSignOptions<
   BaseAccountWalletParameters &
-    Parameters<typeof ManagerClient.prototype.updateInfo>[0]
+    Parameters<typeof AccountClient.prototype.updateInfo>[0]
 >
 
 export async function updateInfo({
@@ -18,11 +18,11 @@ export async function updateInfo({
   funds,
   ...rest
 }: UpdateInfoParameters) {
-  const managerClient = await getManagerClientFromApi({
+  const accountClient = await getAccountClientFromApi({
     accountId,
     signingCosmWasmClient,
     sender,
     apiUrl,
   })
-  return managerClient.updateInfo({ ...rest }, fee, memo, funds)
+  return accountClient.updateInfo({ ...rest }, fee, memo, funds)
 }

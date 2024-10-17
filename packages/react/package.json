@@ -51,16 +51,31 @@
     "ts-pattern": "^4.0.6",
     "tslib": "^2.3.1"
   },
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "require": "./dist/index.cjs"
+      }
     },
     "./hooks": {
       "types": "./dist/hooks/index.d.ts",
-      "default": "./dist/hooks/index.js"
+      "import": {
+        "types": "./dist/hooks/index.d.ts",
+        "import": "./dist/hooks/index.js"
+      },
+      "require": {
+        "types": "./dist/hooks/index.d.cts",
+        "require": "./dist/hooks/index.cjs"
+      }
     },
     "./package.json": "./package.json"
   },

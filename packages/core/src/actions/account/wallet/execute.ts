@@ -1,16 +1,26 @@
-import { ProxyExecuteMsgBuilder, ProxyTypes } from '../../../codegen/abstract'
+import {
+  AccountExecuteMsgBuilder,
+  AccountMsgComposer,
+  AccountTypes,
+} from '../../../codegen/abstract'
 import { ModuleType } from '../../../codegen/gql/graphql'
 import { MaybeArray } from '../../../types/utils'
 import { executeOnModule } from './execute-on-module'
 import { BaseAccountWalletParameters } from './types'
 
+import { AccountId } from '@abstract-money/core'
+import { toUtf8 } from '@cosmjs/encoding'
+import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
+import { CosmosMsgForEmpty } from '../../../codegen/abstract/cosmwasm-codegen/Account.types'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { abstractModuleId } from '../../../utils/modules/abstract-module-id'
+import { encodeModuleMsg } from '../../../utils/modules/encode-module-msg'
 import { CommonModuleNames } from '../../public/types'
+import { getAccountAddressFromApi } from '../public/get-account-address-from-api'
 export type ExecuteParameters = Omit<
   WithCosmWasmSignOptions<
     BaseAccountWalletParameters & {
-      msgs: MaybeArray<ProxyTypes.CosmosMsgForEmpty>
+      msgs: MaybeArray<AccountTypes.CosmosMsgForEmpty>
     }
   >,
   'funds'
@@ -35,17 +45,28 @@ export async function execute({
   fee,
   memo,
 }: ExecuteParameters) {
-  return executeOnModule({
+  const { account } = await getAccountAddressFromApi({
     accountId,
-    signingCosmWasmClient,
+    cosmWasmClient: signingCosmWasmClient,
     apiUrl,
-    sender,
-    moduleId: abstractModuleId(CommonModuleNames.PROXY),
-    moduleType: ModuleType.AccountBase,
-    moduleMsg: ProxyExecuteMsgBuilder.moduleAction({
-      msgs: Array.isArray(msgs) ? msgs : [msgs],
-    }),
-    fee,
-    memo,
   })
+
+  // TODO: use msg-client
+  const _msg: { execute: { msgs: CosmosMsgForEmpty[] } } = {
+    execute: {
+      msgs: Array.isArray(msgs) ? msgs : [msgs],
+    },
+  }
+
+  const encoded = {
+    typeUrl: '/cosmwasm.wasm.v1.MsgExecuteContract',
+    value: MsgExecuteContract.fromPartial({
+      sender: sender,
+      contract: account,
+      msg: toUtf8(JSON.stringify(_msg)),
+      funds: [],
+    }),
+  }
+
+  return signingCosmWasmClient.signAndBroadcast(sender, [encoded], fee, memo)
 }

@@ -1,5 +1,5 @@
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
-import { getVersionControlClientFromApi } from '../../wallet/get-version-control-client-from-api'
+import { getRegistryClientFromApi } from '../../wallet/get-registry-client-from-api'
 import { getNamespace } from '../public/get-namespace'
 import { BaseAccountWalletParameters } from './types'
 
@@ -15,7 +15,7 @@ export async function revokeNamespace({
   memo,
   funds,
 }: RevokeNamespaceParameters) {
-  const versionControlClient = await getVersionControlClientFromApi({
+  const registryClient = await getRegistryClientFromApi({
     signingCosmWasmClient,
     apiUrl,
     sender,
@@ -27,7 +27,7 @@ export async function revokeNamespace({
   })
   if (!namespace) throw new Error('Namespace not found')
 
-  return versionControlClient.removeNamespaces(
+  return registryClient.forgoNamespace(
     { namespaces: [namespace] },
     fee,
     memo,

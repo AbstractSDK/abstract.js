@@ -37,6 +37,7 @@ import {
   SelectValue,
 } from '../../components/ui/select'
 import { useToast } from '../../components/ui/use-toast'
+import { ROUND_ACCOUNT_ID, ROUND_CHAIN_NAME } from '../_lib/constants'
 
 const placeBetSchema = z.object({
   amount: z.coerce
@@ -66,12 +67,14 @@ export function PlaceBetDialog({ round }: { round: RoundResponse }) {
     isLoading,
     ...rest
   } = betting.mutations.usePlaceBet({
-    accountId: stringToAccountId('neutron-18'),
-    chainName: 'neutron',
+    accountId: stringToAccountId(ROUND_ACCOUNT_ID),
+    chainName: ROUND_CHAIN_NAME,
   })
 
   const onSubmit: SubmitHandler<z.infer<typeof placeBetSchema>> = useCallback(
     async ({ amount, accountSeq }) => {
+      if (!placeBetAsync)
+        throw new Error('Unexpected error: placeBetAsync is not defined')
       const accountIdToBetOn = round.teams.find(
         (account) => account.seq === +accountSeq,
       )

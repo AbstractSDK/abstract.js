@@ -2,7 +2,7 @@ import { jsonToBinary } from '@abstract-money/core'
 import {
   CosmosMsgForEmpty,
   WasmMsg,
-} from '../../codegen/abstract/cosmwasm-codegen/Proxy.types'
+} from '../../codegen/abstract/cosmwasm-codegen/Account.types'
 
 type EncodedMsg = string
 type JsonMsg = Record<string, unknown>

@@ -3,13 +3,12 @@ import { accountIdToString } from '@abstract-money/core'
 import {
   useAccounts,
   useCreateRemoteAccount,
-  useExecuteOnRemoteManager,
+  useExecuteOnRemote,
   useRemoteAccountIds,
   useRemoteHosts,
-  useSimulateExecuteRemoteManager,
+  useSimulateExecuteRemoteAccount,
 } from '@abstract-money/react'
 import { useChain } from '@cosmos-kit/react'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { useCallback, useMemo, useState } from 'react'
 import { Button } from '../../components/ui/button'
 import {
@@ -56,11 +55,10 @@ export default function RemotePage() {
       chainName: firstAccount?.chainName,
     })
 
-  const { mutate: execRemote, isLoading: isExecuting } =
-    useExecuteOnRemoteManager({
-      accountId: firstAccount,
-      chainName: firstAccount?.chainName,
-    })
+  const { mutate: execOnRemote, isLoading: isExecuting } = useExecuteOnRemote({
+    accountId: firstAccount,
+    chainName: firstAccount?.chainName,
+  })
 
   const { data: remoteAccountIds } = useRemoteAccountIds({
     accountId: firstAccount,
@@ -79,7 +77,6 @@ export default function RemotePage() {
       funds: [],
       args: {
         hostChainName: chainInput,
-        base_asset: 'juno>juno',
         installModules: [],
       },
     })
@@ -90,22 +87,22 @@ export default function RemotePage() {
       throw new Error('chainInput is undefined')
     }
     console.log('executing remote account')
-    execRemote({
+    execOnRemote({
       funds: [],
       fee: 'auto',
       args: {
         hostChainName: chainInput,
-        managerMsg: {
+        accountMsg: {
           update_info: {
             name: 'test',
           },
         },
       },
     })
-  }, [execRemote, chainInput])
+  }, [execOnRemote, chainInput])
 
   const { mutate: simulateRemote, isLoading: isSimulating } =
-    useSimulateExecuteRemoteManager({
+    useSimulateExecuteRemoteAccount({
       accountId: firstAccount,
       chainName: firstAccount?.chainName,
     })
@@ -116,7 +113,7 @@ export default function RemotePage() {
     console.log('simulating remote account')
     simulateRemote({
       hostChainName: chainInput,
-      managerMsg: {
+      accountMsg: {
         update_info: {
           name: 'test',
         },

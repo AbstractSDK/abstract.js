@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     react(),
     registry({
-      contracts: [{ name: 'betting', namespace: 'abstract', version: '0.0.2' }],
+      contracts: [{ namespace: 'wagemos', name: 'betting', version: '0.0.2' }],
     }),
   ],
 })

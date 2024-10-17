@@ -4,11 +4,11 @@ import {
   hostChainNameToName,
 } from '@abstract-money/core'
 import {
-  GetRemoteProxiesParameters,
-  getRemoteAccountProxies,
-} from './get-remote-account-proxies'
+  GetRemoteAccountsParameters,
+  getRemoteAccounts,
+} from './get-remote-accounts'
 
-export type GetRemoteAccountIdsParameters = GetRemoteProxiesParameters
+export type GetRemoteAccountIdsParameters = GetRemoteAccountsParameters
 
 /**
  * Get the Account's remote Account ids.
@@ -21,18 +21,18 @@ export async function getRemoteAccountIds({
   cosmWasmClient,
   apiUrl,
 }: GetRemoteAccountIdsParameters): Promise<AccountId[]> {
-  const remoteProxies = await getRemoteAccountProxies({
+  const remoteAccountAddrs = await getRemoteAccounts({
     accountId,
     cosmWasmClient,
     apiUrl,
   })
 
-  console.log('remote account ids: proxies', remoteProxies)
+  console.log('remote account ids: addresses', remoteAccountAddrs)
 
   const chainId = await cosmWasmClient.getChainId()
   const sourceChainName = chainIdToName(chainId)
 
-  return Object.keys(remoteProxies).map((hostChainName) => {
+  return Object.keys(remoteAccountAddrs).map((hostChainName) => {
     // local accounts are now remote accounts, remote accounts are now one hop further
     const remoteTrace =
       accountId.trace === 'local'

@@ -38,9 +38,6 @@ export async function sendFundsToRemote({
   const sendFundsMsg: IbcClientTypes.ExecuteMsg = {
     send_funds: {
       host_chain: hostChainName,
-      funds: (Array.isArray(assets) ? assets : [assets]).map(
-        assetToNativeAsset,
-      ),
     },
   }
 
@@ -50,6 +47,7 @@ export async function sendFundsToRemote({
     apiUrl,
     sender,
     msg: sendFundsMsg,
+    funds: (Array.isArray(assets) ? assets : [assets]).map(assetToNativeAsset),
     fee,
     memo,
   })

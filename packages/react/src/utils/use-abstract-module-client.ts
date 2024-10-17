@@ -1,20 +1,17 @@
 import * as React from 'react'
 
-import { AccountId, accountIdToParameter } from '@abstract-money/core'
 import {
-  AbstractAccountId,
-  AbstractClient,
-  accountIdToLegacyAccountId,
-} from '@abstract-money/core/legacy'
+  AccountId,
+  AccountPublicClient,
+  AccountWalletClient,
+} from '@abstract-money/core'
+import { useConfig } from '../contexts'
 import { UseQueryParameters, useQuery } from '../types/queries'
-import { useAbstractClient } from './use-abstract-client'
 
 interface AbstractModuleClientConstructor {
   new (args: {
-    abstractClient: AbstractClient
-    accountId: AbstractAccountId
-    managerAddress: string
-    proxyAddress: string
+    accountPublicClient: AccountPublicClient
+    accountWalletClient: AccountWalletClient
     moduleId: string
   }): any
 }
@@ -22,26 +19,19 @@ interface AbstractModuleClientConstructor {
 async function getAbstractModuleClient<
   TModule extends AbstractModuleClientConstructor,
 >({
-  abstractClient,
-  accountId,
+  accountPublicClient,
+  accountWalletClient,
   moduleId,
   Module,
 }: {
-  abstractClient: AbstractClient
-  accountId: AccountId
+  accountPublicClient: AccountPublicClient
+  accountWalletClient: AccountWalletClient
   moduleId: string
   Module: TModule
 }) {
-  const { account_base } = await abstractClient.registryQueryClient.accountBase(
-    {
-      accountId: accountIdToParameter(accountId),
-    },
-  )
   return new Module({
-    abstractClient: abstractClient,
-    accountId: accountIdToLegacyAccountId(accountId),
-    managerAddress: account_base.manager,
-    proxyAddress: account_base.proxy,
+    accountPublicClient: accountPublicClient,
+    accountWalletClient: accountWalletClient,
     moduleId,
   }) as InstanceType<TModule>
 }
@@ -65,22 +55,23 @@ export type UseAbstractModuleClientParameters<
 export function useAbstractModuleClient<
   TModule extends AbstractModuleClientConstructor,
 >({
-  moduleId,
   accountId,
+  moduleId,
   chainName,
   Module,
   query = {},
-  sender,
+  sender: _sender,
 }: UseAbstractModuleClientParameters<TModule>) {
-  const {
-    data: abstractClient,
-    isLoading: isAbstractClientLoading,
-    isError: isAbstractClientError,
-    error: abstractClientError,
-  } = useAbstractClient({
+  const { useAccountWalletClient, useAccountPublicClient } = useConfig()
+
+  const accountPublicClient = useAccountPublicClient({
+    accountId,
     chainName,
-    sender,
-    query: { enabled: query.enabled ?? true },
+  })
+
+  const accountWalletClient = useAccountWalletClient({
+    accountId,
+    chainName,
   })
 
   const queryKey = React.useMemo(
@@ -89,20 +80,20 @@ export function useAbstractModuleClient<
   )
 
   const queryFn = React.useCallback(() => {
-    if (!abstractClient) throw new Error('abstractClient is not defined')
-    if (!accountId) throw new Error('accountId is not defined')
+    if (!accountPublicClient)
+      throw new Error('accountPublicClient is not defined')
+    if (!accountWalletClient)
+      throw new Error('accountWalletClient is not defined')
 
     return getAbstractModuleClient({
-      abstractClient,
-      accountId,
+      accountPublicClient: accountPublicClient,
+      accountWalletClient: accountWalletClient,
       moduleId,
       Module,
     })
-  }, [abstractClient, accountId, moduleId, Module])
+  }, [accountPublicClient, accountWalletClient, moduleId, Module])
 
-  const enabled = Boolean(
-    abstractClient && accountId && (query.enabled ?? true),
-  )
+  const enabled = Boolean(accountWalletClient && (query.enabled ?? true))
 
   const {
     data,
@@ -111,13 +102,14 @@ export function useAbstractModuleClient<
     error: abstractModuleClientError,
   } = useQuery({ queryKey, queryFn, ...query, enabled })
 
-  if (isAbstractClientError)
+  // TODO: combine?
+  if (!enabled)
     return {
       data: undefined,
-      isLoading: false,
-      isError: true,
+      isLoading: true,
+      isError: false,
       isSuccess: false,
-      error: abstractClientError,
+      error: undefined,
     } as const
   if (isAbstractModuleClientError)
     return {
@@ -127,7 +119,7 @@ export function useAbstractModuleClient<
       isSuccess: false,
       error: abstractModuleClientError,
     } as const
-  if (isAbstractClientLoading || isAbstractModuleClientLoading)
+  if (isAbstractModuleClientLoading)
     return {
       data: undefined,
       isLoading: true,

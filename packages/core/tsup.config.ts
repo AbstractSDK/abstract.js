@@ -12,10 +12,11 @@ export default defineConfig(
       'src/index.ts',
       'src/actions/index.ts',
       'src/clients/index.ts',
+      'src/legacy/index.ts',
       'src/codegen/abstract/index.ts',
       'src/utils/index.ts',
-      'src/legacy/index.ts',
     ],
     external: [...Object.keys(dependencies)],
+    format: ['esm', 'cjs'],
   }),
 )

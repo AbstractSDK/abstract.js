@@ -1,20 +1,27 @@
+import { abstractModuleId } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { CommonModuleNames } from '../../../actions/public/types'
-import { VersionControlTypes } from '../../../codegen/abstract'
-import { getManagerQueryClientFromApi } from './get-manager-query-client-from-api'
+import { RegistryTypes } from '../../../codegen/abstract'
+import { getAccountQueryClientFromApi } from './get-account-query-client-from-api'
 
 export type GetAccountSettingsParameters = {
-  accountId: VersionControlTypes.AccountId
+  accountId: RegistryTypes.AccountId
   cosmWasmClient: CosmWasmClient
   apiUrl: string
 }
 
+/**
+ * @deprecated
+ * @param accountId
+ * @param cosmWasmClient
+ * @param apiUrl
+ */
 export async function getAccountSettings({
   accountId,
   cosmWasmClient,
   apiUrl,
 }: GetAccountSettingsParameters) {
-  const managerClient = await getManagerQueryClientFromApi({
+  const accountClient = await getAccountQueryClientFromApi({
     accountId,
     cosmWasmClient,
     apiUrl,
@@ -22,13 +29,13 @@ export async function getAccountSettings({
 
   let cursor: string | undefined
   do {
-    const fetchedModules = await managerClient.moduleInfos({
+    const fetchedModules = await accountClient.moduleInfos({
       limit: 20,
       startAfter: cursor,
     })
     if (fetchedModules.module_infos.length === 0) break
     for (const moduleInfo of fetchedModules.module_infos)
-      if (moduleInfo.id === `abstract:${CommonModuleNames.IBC_CLIENT}`)
+      if (moduleInfo.id === abstractModuleId(CommonModuleNames.IBC_CLIENT))
         return { ibcEnabled: true }
     cursor =
       fetchedModules.module_infos[fetchedModules.module_infos.length - 1]?.id

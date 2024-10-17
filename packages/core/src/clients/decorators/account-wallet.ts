@@ -6,11 +6,10 @@ import { deposit } from '../../actions/account/wallet/deposit'
 import { enableIbc } from '../../actions/account/wallet/enable-ibc'
 import { execute } from '../../actions/account/wallet/execute'
 import { executeOnModule } from '../../actions/account/wallet/execute-on-module'
-import { executeOnRemoteManager } from '../../actions/account/wallet/execute-on-remote-manager'
+import { executeOnRemoteAccount } from '../../actions/account/wallet/execute-on-remote-account'
 import { executeOnRemoteModule } from '../../actions/account/wallet/execute-on-remote-module'
 import { executeRemote } from '../../actions/account/wallet/execute-remote'
-import { getManagerClientFromApi } from '../../actions/account/wallet/get-manager-client-from-api'
-import { getProxyClientFromApi } from '../../actions/account/wallet/get-proxy-client-from-api'
+import { getAccountClientFromApi } from '../../actions/account/wallet/get-account-client-from-api'
 import { installModules } from '../../actions/account/wallet/install-modules'
 import { revokeNamespace } from '../../actions/account/wallet/remove-namespace'
 import { requestFundsFromRemote } from '../../actions/account/wallet/request-remote-funds'
@@ -21,7 +20,7 @@ import { updateOwnership } from '../../actions/account/wallet/update-ownership'
 import { updateStatus } from '../../actions/account/wallet/update-status'
 import { upgradeModules } from '../../actions/account/wallet/upgrade-modules'
 import { withdraw } from '../../actions/account/wallet/withdraw'
-import { VersionControlTypes } from '../../codegen/abstract/index'
+import { RegistryTypes } from '../../codegen/abstract/index'
 import { ExtractAndPartializeParameters } from '../../types/parameters'
 
 type ExtractAndPartializeDecoratedParametersFromParameters<
@@ -31,6 +30,9 @@ type ExtractAndPartializeDecoratedParametersFromParameters<
   'accountId' | 'signingCosmWasmClient' | 'apiUrl' | 'sender'
 >
 
+/**
+ * The wallet (mutating) actions for an Abstract account.
+ */
 export type AccountWalletActions = {
   claimNamespace(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
@@ -67,11 +69,11 @@ export type AccountWalletActions = {
       typeof executeOnModule
     >,
   ): ReturnType<typeof executeOnModule>
-  executeOnRemoteManager(
+  executeOnRemote(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof executeOnRemoteManager
+      typeof executeOnRemoteAccount
     >,
-  ): ReturnType<typeof executeOnRemoteManager>
+  ): ReturnType<typeof executeOnRemoteAccount>
   executeOnRemoteModule(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof executeOnRemoteModule
@@ -92,16 +94,11 @@ export type AccountWalletActions = {
       typeof requestFundsFromRemote
     >,
   ): ReturnType<typeof requestFundsFromRemote>
-  getManagerClientFromApi(
+  getAccountClientFromApi(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getManagerClientFromApi
+      typeof getAccountClientFromApi
     >,
-  ): ReturnType<typeof getManagerClientFromApi>
-  getProxyClientFromApi(
-    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getProxyClientFromApi
-    >,
-  ): ReturnType<typeof getProxyClientFromApi>
+  ): ReturnType<typeof getAccountClientFromApi>
   revokeNamespace(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof revokeNamespace
@@ -145,7 +142,7 @@ export type AccountWalletActions = {
 }
 
 export function accountWalletActions(
-  accountId: VersionControlTypes.AccountId,
+  accountId: RegistryTypes.AccountId,
   signingCosmWasmClient: SigningCosmWasmClient,
   sender: string,
   apiUrl: string,
@@ -232,8 +229,8 @@ export function accountWalletActions(
         ...parameters,
         ...extra,
       }),
-    executeOnRemoteManager: ({ extra, ...parameters }) =>
-      executeOnRemoteManager({
+    executeOnRemote: ({ extra, ...parameters }) =>
+      executeOnRemoteAccount({
         accountId,
         signingCosmWasmClient,
         apiUrl,
@@ -331,17 +328,8 @@ export function accountWalletActions(
         ...parameters,
         ...extra,
       }),
-    getManagerClientFromApi: ({ extra, ...parameters }) =>
-      getManagerClientFromApi({
-        accountId,
-        signingCosmWasmClient,
-        apiUrl,
-        sender,
-        ...parameters,
-        ...extra,
-      }),
-    getProxyClientFromApi: ({ extra, ...parameters }) =>
-      getProxyClientFromApi({
+    getAccountClientFromApi: ({ extra, ...parameters }) =>
+      getAccountClientFromApi({
         accountId,
         signingCosmWasmClient,
         apiUrl,

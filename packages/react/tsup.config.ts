@@ -13,5 +13,6 @@ export default defineConfig(
     banner: {
       js: '"use client";',
     },
+    format: ['esm', 'cjs'],
   }),
 )

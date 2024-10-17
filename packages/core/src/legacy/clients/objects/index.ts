@@ -1,4 +1,3 @@
-export * from './AbstractAccountId'
 export * from './AbstractModule'
 export * from './AnsAsset'
 export * from './AnsAssetEntry'

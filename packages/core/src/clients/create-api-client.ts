@@ -7,6 +7,9 @@ export type ApiClientConfig = ClientConfig & {
   apiUrl?: string
 }
 
+/**
+ * A client to query the Abstract API.
+ */
 export type ApiClient = Evaluate<Client<ApiActions>>
 
 export function createApiClient(parameters: ApiClientConfig): ApiClient {

@@ -1,12 +1,12 @@
-import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { ManagerClient, VersionControlTypes } from '../../../codegen/abstract'
+import { ExecuteResult, SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { AccountClient, RegistryTypes } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
-import { getManagerClientFromApi } from './get-manager-client-from-api'
+import { getAccountClientFromApi } from './get-account-client-from-api'
 import { BaseAccountWalletParameters } from './types'
 
 export type InstallModulesParameters = WithCosmWasmSignOptions<
   BaseAccountWalletParameters &
-    Parameters<typeof ManagerClient.prototype.installModules>[0]
+    Parameters<typeof AccountClient.prototype.installModules>[0]
 >
 
 export async function installModules({
@@ -18,12 +18,12 @@ export async function installModules({
   memo,
   funds,
   ...rest
-}: InstallModulesParameters) {
-  const managerClient = await getManagerClientFromApi({
+}: InstallModulesParameters): Promise<ExecuteResult> {
+  const accountClient = await getAccountClientFromApi({
     accountId,
     signingCosmWasmClient,
     sender,
     apiUrl,
   })
-  return managerClient.installModules(rest, fee, memo, funds)
+  return accountClient.installModules(rest, fee, memo, funds)
 }

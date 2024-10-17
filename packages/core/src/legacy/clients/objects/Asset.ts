@@ -2,8 +2,7 @@ import { type Coin } from '@cosmjs/stargate'
 import { parseCoins } from '@cosmjs/stargate'
 import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
 import { P, match } from 'ts-pattern'
-import { jsonToBinary, jsonToUtf8 } from '../../../utils/encoding'
-import { EncodedMsg } from '../../messages'
+import { EncodedMsg, jsonToBinary, jsonToUtf8 } from '../../../utils/encoding'
 import { type AssetInfo } from './AssetInfo'
 
 /**
@@ -11,6 +10,7 @@ import { type AssetInfo } from './AssetInfo'
  *
  * Each asset instance contains two values: `info`, which specifies the asset’s type (CW20 or
  * native), and its `amount`, which specifies the asset’s amount.
+ * @deprecated
  */
 export class Asset {
   constructor(public readonly info: AssetInfo, public readonly amount: string) {

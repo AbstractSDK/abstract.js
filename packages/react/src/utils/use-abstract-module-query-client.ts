@@ -1,21 +1,13 @@
 import * as React from 'react'
 
-import { AccountId, accountIdToParameter } from '@abstract-money/core'
-import {
-  AbstractAccountId,
-  AbstractQueryClient,
-  accountIdToLegacyAccountId,
-} from '@abstract-money/core/legacy'
+import { AccountId } from '@abstract-money/core'
+import { AccountPublicClient } from '@abstract-money/core/src'
 import { useConfig } from '../contexts'
 import { UseQueryParameters, useQuery } from '../types/queries'
-import { useAbstractQueryClient } from './use-abstract-query-client'
 
 interface AbstractModuleQueryClientConstructor {
   new (args: {
-    abstractQueryClient: AbstractQueryClient
-    accountId: AbstractAccountId
-    managerAddress: string
-    proxyAddress: string
+    accountPublicClient: AccountPublicClient
     moduleId: string
   }): any
 }
@@ -23,26 +15,17 @@ interface AbstractModuleQueryClientConstructor {
 async function getAbstractModuleQueryClient<
   TModule extends AbstractModuleQueryClientConstructor,
 >({
-  abstractQueryClient,
-  accountId,
+  accountPublicClient,
   moduleId,
   Module,
 }: {
-  abstractQueryClient: AbstractQueryClient
+  accountPublicClient: AccountPublicClient
   overrideApiUrl?: string
-  accountId: AccountId
   moduleId: string
   Module: TModule
 }) {
-  const { account_base } =
-    await abstractQueryClient.registryQueryClient.accountBase({
-      accountId: accountIdToParameter(accountId),
-    })
   return new Module({
-    abstractQueryClient,
-    accountId: accountIdToLegacyAccountId(accountId),
-    managerAddress: account_base.manager,
-    proxyAddress: account_base.proxy,
+    accountPublicClient: accountPublicClient,
     moduleId,
   }) as InstanceType<TModule>
 }
@@ -57,9 +40,8 @@ type TQueryKey<TModule extends AbstractModuleQueryClientConstructor> =
   readonly [
     'module-query-client',
     string,
-    AccountId | undefined,
     TModule,
-    AbstractQueryClient | undefined,
+    AccountPublicClient | undefined,
   ]
 
 export type UseAbstractModuleQueryClientParameters<
@@ -86,45 +68,32 @@ export function useAbstractModuleQueryClient<
   Module,
   query = {},
 }: UseAbstractModuleQueryClientParameters<TModule>) {
-  const { apiUrl } = useConfig()
+  const { apiUrl, useAccountPublicClient } = useConfig()
 
-  const {
-    data: abstractQueryClient,
-    isLoading: isAbstractClientLoading,
-    isError: isAbstractClientError,
-    error: abstractClientError,
-  } = useAbstractQueryClient({
+  const accountPublicClient = useAccountPublicClient({
+    accountId,
     chainName,
-    query: { enabled: query.enabled ?? true },
   })
 
   const queryKey = React.useMemo(
     () =>
-      [
-        'module-query-client',
-        moduleId,
-        accountId,
-        Module,
-        abstractQueryClient,
-      ] as const,
-    [moduleId, accountId, abstractQueryClient],
+      ['module-query-client', moduleId, Module, accountPublicClient] as const,
+    [moduleId, accountId, accountPublicClient],
   )
 
   const queryFn = React.useCallback(() => {
-    if (!abstractQueryClient) throw new Error('client is not defined')
-    if (!accountId) throw new Error('accountId is not defined')
+    if (!accountPublicClient) throw new Error('client is not defined')
 
     return getAbstractModuleQueryClient({
-      abstractQueryClient,
+      accountPublicClient,
       overrideApiUrl: apiUrl,
-      accountId,
       moduleId,
       Module,
     })
-  }, [abstractQueryClient, apiUrl, accountId, moduleId, Module])
+  }, [accountPublicClient, apiUrl, accountId, moduleId, Module])
 
   const enabled = Boolean(
-    abstractQueryClient && accountId && (query.enabled ?? true),
+    accountPublicClient && accountId && (query.enabled ?? true),
   )
 
   const {
@@ -134,13 +103,14 @@ export function useAbstractModuleQueryClient<
     error: abstractModuleQueryClientError,
   } = useQuery({ queryKey, queryFn, ...query, enabled })
 
-  if (isAbstractClientError)
+  // TODO: combine?
+  if (!enabled)
     return {
       data: undefined,
-      isLoading: false,
-      isError: true,
+      isLoading: true,
+      isError: false,
       isSuccess: false,
-      error: abstractClientError,
+      error: undefined,
     } as const
   if (isAbstractModuleQueryClientError)
     return {
@@ -150,7 +120,7 @@ export function useAbstractModuleQueryClient<
       isSuccess: false,
       error: abstractModuleQueryClientError,
     } as const
-  if (isAbstractClientLoading || isAbstractModuleQueryClientLoading)
+  if (isAbstractModuleQueryClientLoading)
     return {
       data: undefined,
       isLoading: true,

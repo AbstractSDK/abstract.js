@@ -1,21 +1,21 @@
-import { ManagerMsgComposer } from '../../../codegen/abstract'
-import { ModuleType } from '../../../codegen/gql/graphql'
+import { ModuleType } from '@abstract-money/core'
+import { Coin } from '@cosmjs/stargate'
+import { AccountMsgComposer } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
+import { MaybeArray } from '../../../types/utils'
 import { encodeModuleMsg } from '../../../utils/modules/encode-module-msg'
-import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
+import { getAccountAddressFromApi } from '../public/get-account-address-from-api'
 import { BaseAccountWalletParameters } from './types'
 
 type Base64EncodedJson = string
 
-export type ExecuteOnModuleParameters = Omit<
-  WithCosmWasmSignOptions<
-    BaseAccountWalletParameters & {
-      moduleId: string
-      moduleType?: ModuleType
-      moduleMsg: Record<string, unknown> | Base64EncodedJson
-    }
-  >,
-  'funds'
+export type ExecuteOnModuleParameters = WithCosmWasmSignOptions<
+  BaseAccountWalletParameters & {
+    moduleId: string
+    moduleType?: ModuleType
+    moduleMsg: Record<string, unknown> | Base64EncodedJson
+    moduleFunds?: Coin[]
+  }
 >
 
 /**
@@ -24,9 +24,10 @@ export type ExecuteOnModuleParameters = Omit<
  * @param signingCosmWasmClient
  * @param apiUrl
  * @param sender
- * @param moduleId
- * @param moduleType
- * @param msg
+ * @param moduleId - The ID of the module on which the message should be executed.
+ * @param moduleType - The type of the module.
+ * @param moduleFunds - Funds to be sent from the account
+ * @param msg - The execution message.
  * @param fee
  * @param memo
  */
@@ -38,10 +39,12 @@ export async function executeOnModule({
   moduleId,
   moduleType,
   moduleMsg,
+  moduleFunds,
   fee,
   memo,
+  funds,
 }: ExecuteOnModuleParameters) {
-  const { managerAddress } = await getAccountBaseAddressesFromApi({
+  const { account } = await getAccountAddressFromApi({
     accountId,
     cosmWasmClient: signingCosmWasmClient,
     apiUrl,
@@ -50,10 +53,15 @@ export async function executeOnModule({
   return signingCosmWasmClient.signAndBroadcast(
     sender,
     [
-      new ManagerMsgComposer(sender, managerAddress).execOnModule({
-        moduleId: moduleId,
-        execMsg: encodeModuleMsg(moduleMsg, moduleType),
-      }),
+      new AccountMsgComposer(sender, account).executeOnModule(
+        {
+          moduleId: moduleId,
+          execMsg: encodeModuleMsg(moduleMsg, moduleType),
+          // TODO: allow for funds to be sent with the message
+          funds: moduleFunds || [],
+        },
+        funds,
+      ),
     ],
     fee,
     memo,

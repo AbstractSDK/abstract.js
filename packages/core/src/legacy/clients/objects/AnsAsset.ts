@@ -1,12 +1,13 @@
+import { EncodedMsg } from '@abstract-money/core'
 import { type Coin } from '@cosmjs/stargate'
 import { type AbstractQueryClient } from '../../clients/AbstractClient'
-import { EncodedMsg } from '../../messages'
 import { AnsAssetEntry } from './AnsAssetEntry'
 import { AnsAssetList } from './AnsAssetList'
 import { type Asset } from './Asset'
 
 /**
  * Represents an asset within Abstract Name Service with an amount.
+ * @deprecated
  */
 export class AnsAsset {
   readonly amount: string

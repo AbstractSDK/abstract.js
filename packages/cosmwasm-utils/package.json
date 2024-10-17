@@ -1,6 +1,6 @@
 {
   "name": "@abstract-money/cosmwasm-utils",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "Cosmwasm utils",
   "author": "adairrr <adair@abstract.money>",
   "license": "MIT",
@@ -31,20 +31,24 @@
     "rimraf": "^3.0.0",
     "@types/node": "^20.0.0"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
     },
     "./client": {
       "types": "./dist/client/index.d.ts",
-      "default": "./dist/client/index.js"
+      "require": "./dist/client/index.cjs",
+      "import": "./dist/client/index.js"
     },
     "./query": {
       "types": "./dist/query/index.d.ts",
-      "default": "./dist/query/index.js"
+      "require": "./dist/query/index.cjs",
+      "import": "./dist/query/index.js"
     },
     "./package.json": "./package.json"
   },

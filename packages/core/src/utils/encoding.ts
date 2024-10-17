@@ -17,3 +17,7 @@ export const toSha256 = async (text: string): Promise<Uint8Array> => {
   const hash = await crypto.subtle.digest('SHA-256', data)
   return new Uint8Array(hash)
 }
+export type EncodedMsg = {
+  readonly typeUrl: string
+  readonly value: any
+}

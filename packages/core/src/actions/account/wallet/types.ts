@@ -1,8 +1,8 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { VersionControlTypes } from '../../../codegen/abstract'
+import { RegistryTypes } from '../../../codegen/abstract'
 
 export type BaseAccountWalletParameters = {
-  accountId: VersionControlTypes.AccountId
+  accountId: RegistryTypes.AccountId
   signingCosmWasmClient: SigningCosmWasmClient
   apiUrl: string
   sender: string

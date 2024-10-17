@@ -1,29 +1,15 @@
-import { cosmosWasmExecuteMsg, jsonToBinary } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { MaybeArray } from 'src/types/utils'
 import {
-  ManagerExecuteMsgBuilder,
-  ManagerTypes,
-  ProxyExecuteMsgBuilder,
-  ProxyTypes,
-  VersionControlTypes,
+  AccountExecuteMsgBuilder,
+  AccountTypes,
+  RegistryTypes,
 } from '../../../codegen/abstract'
-import { CosmosMsgForEmpty } from '../../../codegen/abstract/cosmwasm-codegen/Proxy.types'
-import { rawQuery } from '../../../utils'
-import { abstractModuleId } from '../../../utils/modules/abstract-module-id'
-import {
-  encodeModuleMsg,
-  executeOnModuleMsg,
-  executeOnProxyMsg,
-} from '../../../utils/modules/encode-module-msg'
-import { getCosmWasmClientFromApi } from '../../get-cosmwasm-client-from-api'
-import { CommonModuleNames } from '../../public/types'
-import { simulateRemoteMsg } from '../../simulate-remote-msg'
-import { getRemoteAccountProxies } from './get-remote-account-proxies'
-import { simulateExecuteRemoteManager } from './simulate-execute-remote-manager'
+import { CosmosMsgForEmpty } from '../../../codegen/abstract/cosmwasm-codegen/Account.types'
+import { simulateExecuteRemoteAccount } from './simulate-execute-remote-account'
 
 export type SimulateExecuteRemoteParameters = {
-  accountId: VersionControlTypes.AccountId
+  accountId: RegistryTypes.AccountId
   cosmWasmClient: CosmWasmClient
   apiUrl: string
   hostChainName: string
@@ -31,7 +17,7 @@ export type SimulateExecuteRemoteParameters = {
 }
 
 /**
- * Simulate messages to be executed on a remote proxy on a remote chain. This should be run before calling `{@link AccountPublicClient#executeRemote}`
+ * Simulate messages to be executed on a remote account on a remote chain. This should be run before calling `{@link AccountPublicClient#executeRemote}`
  * @param accountId
  * @param cosmWasmClient
  * @param apiUrl
@@ -45,11 +31,14 @@ export async function simulateExecuteRemote({
   hostChainName,
   msgs,
 }: SimulateExecuteRemoteParameters) {
-  return simulateExecuteRemoteManager({
+  const accountMsg: AccountTypes.ExecuteMsg = AccountExecuteMsgBuilder.execute({
+    msgs: Array.isArray(msgs) ? msgs : [msgs],
+  })
+  return simulateExecuteRemoteAccount({
     apiUrl,
     accountId,
     cosmWasmClient,
     hostChainName,
-    managerMsg: executeOnProxyMsg(msgs),
+    accountMsg,
   })
 }

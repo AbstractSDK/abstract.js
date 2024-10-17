@@ -8,7 +8,7 @@ import {
   MsgUpdateAdmin,
 } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
 import { P, match } from 'ts-pattern'
-import { CosmosMsgForEmpty } from '../../legacy'
+import { CosmosMsgForEmpty } from '../../codegen/abstract/cosmwasm-codegen/Account.types'
 
 export interface EncodeObject {
   readonly typeUrl: string
@@ -69,7 +69,7 @@ function wasmEncoder(
         msg: fromBase64(instantiate2.msg),
         funds: instantiate2.funds,
         salt: fromBase64(instantiate2.salt),
-        fixMsg: instantiate2.fix_msg,
+        // fixMsg: instantiate2.fix_msg,
       },
     }))
     .with({ migrate: P.select() }, (migrate) => ({

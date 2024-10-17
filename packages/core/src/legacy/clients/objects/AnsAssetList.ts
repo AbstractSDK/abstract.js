@@ -1,9 +1,9 @@
+import { EncodedMsg } from '@abstract-money/core'
 import { match } from 'ts-pattern'
 import { gql } from '../../../codegen/gql'
 import { AssetType } from '../../../codegen/gql/graphql'
 import { type AbstractQueryClient } from '../../clients/AbstractClient'
 import { type AnsAsset } from '../../clients/objects/AnsAsset'
-import { EncodedMsg } from '../../messages'
 import { Asset } from './Asset'
 import { AssetList } from './AssetList'
 
@@ -22,6 +22,7 @@ const assetsQuery = gql(/* GraphQL */ `
 /**
  * Class representing a list of ANS assets.
  * Also see {@link AssetList}
+ * @deprecated
  */
 export class AnsAssetList {
   constructor(public _assets: AnsAsset[]) {}

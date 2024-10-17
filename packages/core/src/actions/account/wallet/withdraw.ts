@@ -1,6 +1,6 @@
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
-import { Asset, encodeAssetsProxyTransferMsgs } from '../../../utils/assets'
-import { getAccountBaseAddressesFromApi } from '../public/get-account-base-addresses-from-api'
+import { Asset, encodeAssetsAccountTransferMsgs } from '../../../utils/assets'
+import { getAccountAddressFromApi } from '../public/get-account-address-from-api'
 import { execute } from './execute'
 import { BaseAccountWalletParameters } from './types'
 
@@ -21,15 +21,15 @@ export async function withdraw({
   assets,
   recipient,
 }: WithdrawParameters) {
-  const { proxyAddress } = await getAccountBaseAddressesFromApi({
+  const { account } = await getAccountAddressFromApi({
     accountId,
     cosmWasmClient: signingCosmWasmClient,
     apiUrl,
   })
 
-  const transferMsgs = encodeAssetsProxyTransferMsgs(
+  const transferMsgs = encodeAssetsAccountTransferMsgs(
     assets,
-    proxyAddress,
+    account,
     recipient,
   )
 

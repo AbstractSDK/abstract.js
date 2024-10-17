@@ -10,6 +10,7 @@ const ANS_PROTOCOL_SEPARATOR = '/'
  *
  * This is because on juno, it is juno>dao. On osmosis, it is juno>dao.
  * From osmosis -> terra, it is osmosis>juno>dao
+ * @deprecated
  */
 export class AnsAssetEntry {
   private readonly _ansName: string

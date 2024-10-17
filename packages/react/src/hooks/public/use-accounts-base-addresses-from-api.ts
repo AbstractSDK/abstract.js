@@ -15,7 +15,7 @@ type QueryFnData = Awaited<ReturnType<PublicClient['getAccountsBaseAddresses']>>
 type QueryError = unknown
 type QueryData = QueryFnData
 type QueryKey = readonly [
-  'accountBaseAddresses',
+  'accountAddress',
   MaybeChainName,
   PublicClient | undefined,
   WithArgs<Parameters<PublicClient['getAccountsBaseAddresses']>[0]>['args'],
@@ -51,13 +51,7 @@ export function useAccountsBaseAddressesFromApi<TData = QueryData>({
   })
   const queryKey = React.useMemo(
     () =>
-      [
-        'accountBaseAddresses',
-        chainName,
-        accountPublicClient,
-        args,
-        extra,
-      ] as const,
+      ['accountAddress', chainName, accountPublicClient, args, extra] as const,
     [accountPublicClient, chainName, args, extra],
   )
 

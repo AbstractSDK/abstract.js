@@ -1,13 +1,15 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { AccountFactoryClient } from '../../codegen/abstract'
+import { CamelCasedProperties, Merge } from 'type-fest'
+import { OverrideProperties } from 'type-fest/source/override-properties'
+import { AccountTypes, RegistryTypes } from '../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../types/parameters'
 import { WithOptional } from '../../types/utils'
 import { ABSTRACT_NAMESPACE, accountIdToParameter } from '../../utils'
 import { parseCreateAccountExecuteResult } from '../../utils/account-factory/parse-create-account-execute-result'
 import { chainIdToName } from '../../utils/chain-registry'
-import { abstractModuleId } from '../../utils/modules/abstract-module-id'
+import { getRegistryAddressFromApi } from '../get-registry-address-from-api'
+import { getAppModuleCodeIdFromRegistry } from '../public/get-app-module-code-id-from-registry'
 import { CommonModuleNames } from '../public/types'
-import { getAccountFactoryClientFromApi } from './get-account-factory-client-from-api'
 
 export type CreateAccountParameters = WithCosmWasmSignOptions<
   {
@@ -15,9 +17,14 @@ export type CreateAccountParameters = WithCosmWasmSignOptions<
     apiUrl: string
     sender: string
     enableIbc?: boolean
-  } & WithOptional<
-    Parameters<typeof AccountFactoryClient.prototype.createAccount>[0],
-    'installModules'
+  } & CamelCasedProperties<
+    WithOptional<
+      OverrideProperties<
+        AccountTypes.InstantiateMsg,
+        { account_id?: RegistryTypes.AccountId }
+      >,
+      'install_modules' | 'owner'
+    >
   >
 >
 export async function createAccount({
@@ -25,14 +32,14 @@ export async function createAccount({
   apiUrl,
   sender,
   installModules = [],
-  baseAsset,
   description,
   name,
   namespace,
-  governance,
+  authenticator,
   link,
   accountId,
   enableIbc,
+  owner,
   fee,
   memo,
   funds,
@@ -57,27 +64,45 @@ export async function createAccount({
     })
   }
 
-  const accountFactoryClient = await getAccountFactoryClientFromApi({
-    signingCosmWasmClient,
+  const registryAddress = await getRegistryAddressFromApi({
     apiUrl,
-    sender,
+    chainName,
   })
 
-  // @TODO: parameter validation
-  const result = await accountFactoryClient.createAccount(
-    {
-      installModules,
-      baseAsset,
-      description,
-      name,
-      namespace,
-      governance,
-      link,
-      accountId: accountId ? accountIdToParameter(accountId) : undefined,
+  const accountCodeId = await getAppModuleCodeIdFromRegistry({
+    cosmWasmClient: signingCosmWasmClient,
+    registryAddress,
+    moduleId: 'abstract:account',
+    version: 'latest',
+  })
+
+  const instantiateMsg: AccountTypes.InstantiateMsg = {
+    owner: owner || {
+      monarchy: {
+        monarch: sender,
+      },
     },
+    install_modules: installModules,
+    description,
+    name,
+    namespace,
+    link,
+    account_id: accountId ? accountIdToParameter(accountId) : undefined,
+    authenticator,
+  }
+
+  // @TODO: parameter validation
+  const result = await signingCosmWasmClient.instantiate(
+    sender,
+    accountCodeId,
+    instantiateMsg,
+    'Abstract Account',
     fee,
-    memo,
-    funds,
+    {
+      memo,
+      funds,
+      admin: sender,
+    },
   )
 
   return parseCreateAccountExecuteResult(result, chainName)

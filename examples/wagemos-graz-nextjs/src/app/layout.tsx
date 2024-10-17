@@ -3,6 +3,7 @@
 import { grazProvider } from '@abstract-money/provider-graz'
 import { AbstractProvider, createConfig } from '@abstract-money/react'
 import { QueryClient } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Inter, Poppins } from 'next/font/google'
 import { Toaster } from '../components/ui/toaster'
 import { cn } from '../utils'
@@ -32,7 +33,7 @@ const poppins = Poppins({
 })
 const abstractConfig = createConfig({
   provider: grazProvider,
-  apiUrl: 'https://api.abstract.money/graphql',
+  apiUrl: 'http://localhost:4001/graphql',
 })
 
 export default function RootLayout({
@@ -52,6 +53,7 @@ export default function RootLayout({
               </section>
             </main>
           </AbstractProvider>
+          <ReactQueryDevtools client={client} />
         </GrazProvider>
         <Toaster />
       </body>

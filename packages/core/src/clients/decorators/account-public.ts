@@ -1,23 +1,24 @@
+import { ContractMsg } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { getAccountBaseAddressesFromApi } from '../../actions/account/public/get-account-base-addresses-from-api'
+import { queryModule } from 'src/actions/account/public/query-module'
+import { getAccountAddressFromApi } from '../../actions/account/public/get-account-address-from-api'
+import { getAccountId } from '../../actions/account/public/get-account-id'
+import { getAccountInstantiate2AddressFromApi } from '../../actions/account/public/get-account-instantiate2-address-from-api'
+import { getAccountQueryClientFromApi } from '../../actions/account/public/get-account-query-client-from-api'
 import { getAccountSettings } from '../../actions/account/public/get-account-settings'
-import { getBaseToken } from '../../actions/account/public/get-base-token'
-import { getManagerInstantiate2AddressFromApi } from '../../actions/account/public/get-manager-instantiate2-address-from-api'
-import { getManagerQueryClientFromApi } from '../../actions/account/public/get-manager-query-client-from-api'
 import { getModuleAddress } from '../../actions/account/public/get-module-address'
 import { getModuleInstantiate2AddressFromApi } from '../../actions/account/public/get-module-instantiate2-address-from-api'
 import { getModules } from '../../actions/account/public/get-modules'
 import { getNamespace } from '../../actions/account/public/get-namespace'
 import { getOwner } from '../../actions/account/public/get-owner'
-import { getProxyQueryClientFromApi } from '../../actions/account/public/get-proxy-query-client-from-api'
+import { getRegistryAccountId } from '../../actions/account/public/get-registry-account-id'
 import { getRemoteAccountIds } from '../../actions/account/public/get-remote-account-ids'
-import { getRemoteAccountProxies } from '../../actions/account/public/get-remote-account-proxies'
+import { getRemoteAccounts } from '../../actions/account/public/get-remote-accounts'
 import { getSubAccountIds } from '../../actions/account/public/get-sub-account-ids'
 import { getSubAccountSequences } from '../../actions/account/public/get-sub-account-sequences'
-import { getTotalValue } from '../../actions/account/public/get-total-value'
 import { simulateExecuteRemote } from '../../actions/account/public/simulate-execute-remote'
-import { simulateExecuteRemoteManager } from '../../actions/account/public/simulate-execute-remote-manager'
-import { VersionControlTypes } from '../../codegen/abstract/index'
+import { simulateExecuteRemoteAccount } from '../../actions/account/public/simulate-execute-remote-account'
+import { RegistryTypes } from '../../codegen/abstract/index'
 import { ExtractAndPartializeParameters } from '../../types/parameters'
 
 type ExtractAndPartializeDecoratedParametersFromParameters<
@@ -26,27 +27,28 @@ type ExtractAndPartializeDecoratedParametersFromParameters<
   fn,
   'cosmWasmClient' | 'accountId' | 'apiUrl'
 >
+
+/**
+ * The public query client actions for an Abstract account.
+ */
 export type AccountPublicActions = {
-  getAccountBaseAddresses(
+  getRegistryAccountId(): ReturnType<typeof getRegistryAccountId>
+  getAccountId(): ReturnType<typeof getAccountId>
+  getAccountAddress(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getAccountBaseAddressesFromApi
+      typeof getAccountAddressFromApi
     >,
-  ): ReturnType<typeof getAccountBaseAddressesFromApi>
+  ): ReturnType<typeof getAccountAddressFromApi>
   getAccountSettings(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAccountSettings
     >,
   ): ReturnType<typeof getAccountSettings>
-  getBaseToken(
+  getAccountQueryClientFromApi(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getBaseToken
+      typeof getAccountQueryClientFromApi
     >,
-  ): ReturnType<typeof getBaseToken>
-  getManagerQueryClientFromApi(
-    parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getManagerQueryClientFromApi
-    >,
-  ): ReturnType<typeof getManagerQueryClientFromApi>
+  ): ReturnType<typeof getAccountQueryClientFromApi>
   getModuleAddress(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getModuleAddress
@@ -62,11 +64,11 @@ export type AccountPublicActions = {
       typeof getModuleInstantiate2AddressFromApi
     >,
   ): ReturnType<typeof getModuleInstantiate2AddressFromApi>
-  getManagerInstantiate2Address(
+  getAccountInstantiate2Address(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getManagerInstantiate2AddressFromApi
+      typeof getAccountInstantiate2AddressFromApi
     >,
-  ): ReturnType<typeof getManagerInstantiate2AddressFromApi>
+  ): ReturnType<typeof getAccountInstantiate2AddressFromApi>
   getNamespace(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getNamespace
@@ -77,11 +79,6 @@ export type AccountPublicActions = {
       typeof getOwner
     >,
   ): ReturnType<typeof getOwner>
-  getProxyQueryClientFromApi(
-    parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getProxyQueryClientFromApi
-    >,
-  ): ReturnType<typeof getProxyQueryClientFromApi>
   getSubAccountIds(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getSubAccountIds
@@ -92,41 +89,43 @@ export type AccountPublicActions = {
       typeof getSubAccountSequences
     >,
   ): ReturnType<typeof getSubAccountSequences>
-  getRemoteAccountProxies(
+  getRemoteAccounts(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getRemoteAccountProxies
+      typeof getRemoteAccounts
     >,
-  ): ReturnType<typeof getRemoteAccountProxies>
+  ): ReturnType<typeof getRemoteAccounts>
   getRemoteAccountIds(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getRemoteAccountIds
     >,
   ): ReturnType<typeof getRemoteAccountIds>
-  getTotalValue(
-    parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getTotalValue
-    >,
-  ): ReturnType<typeof getTotalValue>
-  simulateExecuteRemoteManager(
+  simulateExecuteRemoteAccount(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof simulateExecuteRemoteManager
+      typeof simulateExecuteRemoteAccount
     >,
-  ): ReturnType<typeof simulateExecuteRemoteManager>
+  ): ReturnType<typeof simulateExecuteRemoteAccount>
   simulateExecuteRemote(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof simulateExecuteRemote
     >,
   ): ReturnType<typeof simulateExecuteRemote>
+  queryModule<TModuleMsg extends ContractMsg>(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof queryModule<TModuleMsg>
+    >,
+  ): ReturnType<typeof queryModule<TModuleMsg>>
 }
 
 export function accountPublicActions(
-  accountId: VersionControlTypes.AccountId,
+  accountId: RegistryTypes.AccountId,
   cosmWasmClient: CosmWasmClient,
   apiUrl: string,
 ): AccountPublicActions {
   return {
-    getAccountBaseAddresses: ({ extra, ...parameters } = {}) =>
-      getAccountBaseAddressesFromApi({
+    getRegistryAccountId: () => getRegistryAccountId({ accountId }),
+    getAccountId: () => getAccountId({ accountId, cosmWasmClient }),
+    getAccountAddress: ({ extra, ...parameters } = {}) =>
+      getAccountAddressFromApi({
         accountId,
         cosmWasmClient,
         apiUrl,
@@ -141,16 +140,8 @@ export function accountPublicActions(
         ...parameters,
         ...extra,
       }),
-    getBaseToken: ({ extra, ...parameters } = {}) =>
-      getBaseToken({
-        accountId,
-        cosmWasmClient,
-        apiUrl,
-        ...parameters,
-        ...extra,
-      }),
-    getManagerQueryClientFromApi: ({ extra, ...parameters } = {}) =>
-      getManagerQueryClientFromApi({
+    getAccountQueryClientFromApi: ({ extra, ...parameters } = {}) =>
+      getAccountQueryClientFromApi({
         accountId,
         cosmWasmClient,
         apiUrl,
@@ -181,8 +172,8 @@ export function accountPublicActions(
         ...parameters,
         ...extra,
       }),
-    getManagerInstantiate2Address: ({ extra, ...parameters } = {}) =>
-      getManagerInstantiate2AddressFromApi({
+    getAccountInstantiate2Address: ({ extra, ...parameters } = {}) =>
+      getAccountInstantiate2AddressFromApi({
         accountId,
         cosmWasmClient,
         apiUrl,
@@ -205,14 +196,6 @@ export function accountPublicActions(
         ...parameters,
         ...extra,
       }),
-    getProxyQueryClientFromApi: ({ extra, ...parameters } = {}) =>
-      getProxyQueryClientFromApi({
-        accountId,
-        cosmWasmClient,
-        apiUrl,
-        ...parameters,
-        ...extra,
-      }),
     getSubAccountIds: ({ extra, ...parameters } = {}) =>
       getSubAccountIds({
         accountId,
@@ -229,8 +212,8 @@ export function accountPublicActions(
         ...parameters,
         ...extra,
       }),
-    getRemoteAccountProxies: ({ extra, ...parameters } = {}) =>
-      getRemoteAccountProxies({
+    getRemoteAccounts: ({ extra, ...parameters } = {}) =>
+      getRemoteAccounts({
         accountId,
         cosmWasmClient,
         apiUrl,
@@ -245,16 +228,8 @@ export function accountPublicActions(
         ...parameters,
         ...extra,
       }),
-    getTotalValue: ({ extra, ...parameters } = {}) =>
-      getTotalValue({
-        accountId,
-        cosmWasmClient,
-        apiUrl,
-        ...parameters,
-        ...extra,
-      }),
-    simulateExecuteRemoteManager: ({ extra, ...parameters }) =>
-      simulateExecuteRemoteManager({
+    simulateExecuteRemoteAccount: ({ extra, ...parameters }) =>
+      simulateExecuteRemoteAccount({
         accountId,
         cosmWasmClient,
         apiUrl,
@@ -263,6 +238,14 @@ export function accountPublicActions(
       }),
     simulateExecuteRemote: ({ extra, ...parameters }) =>
       simulateExecuteRemote({
+        accountId,
+        cosmWasmClient,
+        apiUrl,
+        ...parameters,
+        ...extra,
+      }),
+    queryModule: ({ extra, ...parameters }) =>
+      queryModule({
         accountId,
         cosmWasmClient,
         apiUrl,

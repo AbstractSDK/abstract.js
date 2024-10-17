@@ -1,8 +1,8 @@
-import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { VersionControlClient } from '../../../codegen/abstract'
+import { ExecuteResult, SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { RegistryClient } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { accountIdToParameter } from '../../../utils/account-id'
-import { getVersionControlClientFromApi } from '../../wallet/get-version-control-client-from-api'
+import { getRegistryClientFromApi } from '../../wallet/get-registry-client-from-api'
 
 export type ClaimNamespaceParameters = WithCosmWasmSignOptions<
   {
@@ -10,7 +10,7 @@ export type ClaimNamespaceParameters = WithCosmWasmSignOptions<
     apiUrl: string
     sender: string
     namespace: string
-  } & Parameters<typeof VersionControlClient.prototype.claimNamespace>[0]
+  } & Parameters<typeof RegistryClient.prototype.claimNamespace>[0]
 >
 
 export async function claimNamespace({
@@ -22,13 +22,13 @@ export async function claimNamespace({
   fee,
   funds,
   memo,
-}: ClaimNamespaceParameters) {
-  const versionControlClient = await getVersionControlClientFromApi({
+}: ClaimNamespaceParameters): Promise<ExecuteResult> {
+  const registryClient = await getRegistryClientFromApi({
     signingCosmWasmClient,
     apiUrl,
     sender,
   })
-  return versionControlClient.claimNamespace(
+  return registryClient.claimNamespace(
     { accountId: accountIdToParameter(accountId), namespace },
     fee,
     memo,
