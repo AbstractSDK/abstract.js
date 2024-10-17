@@ -21,18 +21,18 @@ export async function getRemoteAccountIds({
   cosmWasmClient,
   apiUrl,
 }: GetRemoteAccountIdsParameters): Promise<AccountId[]> {
-  const remoteProxies = await getRemoteAccounts({
+  const remoteAccountAddrs = await getRemoteAccounts({
     accountId,
     cosmWasmClient,
     apiUrl,
   })
 
-  console.log('remote account ids: proxies', remoteProxies)
+  console.log('remote account ids: addresses', remoteAccountAddrs)
 
   const chainId = await cosmWasmClient.getChainId()
   const sourceChainName = chainIdToName(chainId)
 
-  return Object.keys(remoteProxies).map((hostChainName) => {
+  return Object.keys(remoteAccountAddrs).map((hostChainName) => {
     // local accounts are now remote accounts, remote accounts are now one hop further
     const remoteTrace =
       accountId.trace === 'local'

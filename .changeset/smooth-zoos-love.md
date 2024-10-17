@@ -11,3 +11,7 @@
 ---
 
 Update Abstract to 0.24.0 with unified accounts
+
+The major changes include:
+- Removing distinction between `proxy` and `manager`, replacing them with simply `account`
+- 

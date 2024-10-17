@@ -89,7 +89,7 @@ export type AccountPublicActions = {
       typeof getSubAccountSequences
     >,
   ): ReturnType<typeof getSubAccountSequences>
-  getRemoteAccountProxies(
+  getRemoteAccounts(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getRemoteAccounts
     >,
@@ -212,7 +212,7 @@ export function accountPublicActions(
         ...parameters,
         ...extra,
       }),
-    getRemoteAccountProxies: ({ extra, ...parameters } = {}) =>
+    getRemoteAccounts: ({ extra, ...parameters } = {}) =>
       getRemoteAccounts({
         accountId,
         cosmWasmClient,

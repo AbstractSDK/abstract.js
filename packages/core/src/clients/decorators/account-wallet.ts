@@ -69,7 +69,7 @@ export type AccountWalletActions = {
       typeof executeOnModule
     >,
   ): ReturnType<typeof executeOnModule>
-  executeOnRemoteManager(
+  executeOnRemote(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof executeOnRemoteAccount
     >,
@@ -229,7 +229,7 @@ export function accountWalletActions(
         ...parameters,
         ...extra,
       }),
-    executeOnRemoteManager: ({ extra, ...parameters }) =>
+    executeOnRemote: ({ extra, ...parameters }) =>
       executeOnRemoteAccount({
         accountId,
         signingCosmWasmClient,

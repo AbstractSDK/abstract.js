@@ -1,34 +1,35 @@
 import { AccountId, AccountWalletClient } from '@abstract-money/core'
+import { type AccountTypes } from '@abstract-money/core/src/codegen/abstract'
 import { useMutation } from '@tanstack/react-query'
 import { useConfig } from '../../../contexts'
 import { ExtractArgsFromParameters } from '../../../types/args'
 import { UseMutationParameters } from '../../../types/queries'
 
-type ExecuteRemoteAccountMutation = ExtractArgsFromParameters<
-  Parameters<AccountWalletClient['executeRemote']>[0]
+type ExecuteOnRemoteAccountMutation = ExtractArgsFromParameters<
+  Parameters<AccountWalletClient['executeOnRemote']>[0]
 >
 
-export type UseExecuteRemoteParameters = {
+export type UseExecuteOnRemoteParameters = {
   accountId: AccountId | undefined
   chainName: string | undefined
   mutation?: UseMutationParameters<
-    Awaited<ReturnType<AccountWalletClient['executeRemote']>>,
+    Awaited<ReturnType<AccountWalletClient['executeOnRemote']>>,
     unknown,
-    ExecuteRemoteAccountMutation
+    ExecuteOnRemoteAccountMutation
   >
 }
 
 /**
- * Execute CosmosMsgs as the remote account.
+ * Execute {@link AccountTypes.ExecuteMsg} on a remote account.
  * @param accountId
  * @param chainName
  * @param mutation
  */
-export function useExecuteRemote({
+export function useExecuteOnRemote({
   accountId,
   chainName,
   mutation,
-}: UseExecuteRemoteParameters) {
+}: UseExecuteOnRemoteParameters) {
   const config = useConfig()
   const accountClient = config.useAccountWalletClient({
     accountId,
@@ -36,10 +37,10 @@ export function useExecuteRemote({
   })
 
   return useMutation(
-    ['executeRemote', chainName, accountId],
+    ['executeOnRemote', chainName, accountId],
     ({ args, ...cosmWasmSignOptions }) => {
       if (!accountClient) throw new Error('accountClient is not defined')
-      return accountClient.executeRemote({ ...cosmWasmSignOptions, ...args })
+      return accountClient.executeOnRemote({ ...cosmWasmSignOptions, ...args })
     },
     mutation,
   )

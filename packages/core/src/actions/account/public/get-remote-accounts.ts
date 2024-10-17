@@ -15,7 +15,7 @@ export type GetRemoteAccountsParameters = {
 >
 
 type ChainName = string
-type MaybeProxyAddress = string | null
+type MaybeAccountAddress = string | null
 
 /**
  * Get the remote accounts for the given account.
@@ -27,7 +27,9 @@ export async function getRemoteAccounts({
   accountId,
   cosmWasmClient,
   apiUrl,
-}: GetRemoteAccountsParameters): Promise<Record<ChainName, MaybeProxyAddress>> {
+}: GetRemoteAccountsParameters): Promise<
+  Record<ChainName, MaybeAccountAddress>
+> {
   let ibcClient: IbcClientQueryClient
   try {
     ibcClient = await getIbcClientQueryClientFromAccount({

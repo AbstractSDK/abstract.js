@@ -3,7 +3,7 @@ import { accountIdToString } from '@abstract-money/core'
 import {
   useAccounts,
   useCreateRemoteAccount,
-  useExecuteOnRemoteManager,
+  useExecuteOnRemote,
   useRemoteAccountIds,
   useRemoteHosts,
   useSimulateExecuteRemoteAccount,
@@ -55,11 +55,10 @@ export default function RemotePage() {
       chainName: firstAccount?.chainName,
     })
 
-  const { mutate: execRemote, isLoading: isExecuting } =
-    useExecuteOnRemoteManager({
-      accountId: firstAccount,
-      chainName: firstAccount?.chainName,
-    })
+  const { mutate: execOnRemote, isLoading: isExecuting } = useExecuteOnRemote({
+    accountId: firstAccount,
+    chainName: firstAccount?.chainName,
+  })
 
   const { data: remoteAccountIds } = useRemoteAccountIds({
     accountId: firstAccount,
@@ -88,7 +87,7 @@ export default function RemotePage() {
       throw new Error('chainInput is undefined')
     }
     console.log('executing remote account')
-    execRemote({
+    execOnRemote({
       funds: [],
       fee: 'auto',
       args: {
@@ -100,7 +99,7 @@ export default function RemotePage() {
         },
       },
     })
-  }, [execRemote, chainInput])
+  }, [execOnRemote, chainInput])
 
   const { mutate: simulateRemote, isLoading: isSimulating } =
     useSimulateExecuteRemoteAccount({
