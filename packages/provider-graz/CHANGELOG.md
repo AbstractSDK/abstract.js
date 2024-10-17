@@ -1,5 +1,30 @@
 # @abstract-money/provider-graz
 
+## 7.0.0
+
+### Major Changes
+
+- [#127](https://github.com/AbstractSDK/abstract.js/pull/127) [`e46ec91`](https://github.com/AbstractSDK/abstract.js/commit/e46ec91c1169752f552dd627d2fe93bb3ff932be) Thanks [@adairrr](https://github.com/adairrr)! - Update Abstract to 0.24.0 with unified accounts
+
+  The major changes include:
+
+  - Updating Abstract to 0.24.0
+  - Removing distinction between `proxy` and `manager`, replacing them with simply `account`
+  - Clarify `executeRemote` and `executeOnRemote`
+  - Add doc comments
+  - Remove components from legacy code
+  - Ensure generation works for both esm and cjs
+
+### Minor Changes
+
+- [#124](https://github.com/AbstractSDK/abstract.js/pull/124) [`0ed4329`](https://github.com/AbstractSDK/abstract.js/commit/0ed432944ab838c084d88e8d2ec5f32ece730afb) Thanks [@adairrr](https://github.com/adairrr)! - Update graz to 0.19
+
+### Patch Changes
+
+- Updated dependencies [[`a0c78be`](https://github.com/AbstractSDK/abstract.js/commit/a0c78be885b934e4c6c1a219b07ed58e3248f8d4), [`e46ec91`](https://github.com/AbstractSDK/abstract.js/commit/e46ec91c1169752f552dd627d2fe93bb3ff932be)]:
+  - @abstract-money/react@2.0.0
+  - @abstract-money/core@2.0.0
+
 ## 6.0.0
 
 ### Patch Changes
