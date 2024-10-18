@@ -213,12 +213,12 @@ async function generateProxyPackages(exports: Exports) {
       if (!typesExport) continue
 
       const esmTypesEntrypoint = path.relative(key, typesExport)
-      const cjsTypesEntrypoint = esmTypesEntrypoint.replace('.d.ts', '.d.cts')
       // const typesFileExists = await fs.pathExists(typesExport)
       // if (!typesFileExists)
       //   throw new Error(
       //     `Proxy package "${key}" entrypoint "${esmTypesEntrypoint}" does not exist.`,
       //   )
+      const cjsTypesEntrypoint = esmTypesEntrypoint.replace('.d.ts', '.d.cts')
 
       await fs.outputFile(
         `${key}/package.json`,

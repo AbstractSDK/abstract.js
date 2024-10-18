@@ -1,10 +1,10 @@
 import { AccountId, AccountPublicClient } from '@abstract-money/core'
 import {
-  QueryFunction,
   UseQueryOptions,
   UseQueryResult,
   useQuery,
 } from '@tanstack/react-query'
+import { QueryFunction } from '@tanstack/react-query'
 import React from 'react'
 import { useConfig } from '../../../contexts'
 import { WithArgs } from '../../../types/args'

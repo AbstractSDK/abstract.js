@@ -57,7 +57,10 @@ export function useRemoteAccountIds<TData = QueryData>({
   )
 
   const enabled = React.useMemo(
-    () => Boolean(accountPublicClient && (query.enabled ?? true)),
+    () =>
+      Boolean(
+        accountPublicClient && ((query.enabled as boolean | undefined) ?? true),
+      ),
     [query.enabled, accountPublicClient],
   )
 
