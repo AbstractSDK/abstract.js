@@ -49,6 +49,7 @@ export function CosmosKitProvider(props: { children: ReactNode }) {
       })}
       assetLists={assets}
       wallets={wallets}
+      // @ts-ignore
       signerOptions={signerOptions}
       sessionOptions={{
         duration: 1000 * 60 * 60 * 24 * 7,

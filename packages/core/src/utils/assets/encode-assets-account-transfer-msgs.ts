@@ -20,7 +20,7 @@ export function encodeAssetsAccountTransferMsgs(
             to_address: toAddress,
           },
         },
-      } as const
+      } satisfies CosmosMsgForEmpty
     }
     if (msg.typeUrl === '/cosmwasm.wasm.v1.MsgExecuteContract') {
       const { contract, msg: execMsg } = msg.value
@@ -32,7 +32,7 @@ export function encodeAssetsAccountTransferMsgs(
             msg: toBase64(execMsg),
           },
         },
-      } as const
+      } satisfies CosmosMsgForEmpty
     }
     throw new Error(`Unsupported message type: ${msg.typeUrl}`)
   }) satisfies CosmosMsgForEmpty[]
