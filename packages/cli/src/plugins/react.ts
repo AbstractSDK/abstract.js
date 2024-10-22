@@ -14,16 +14,16 @@ const codegen = (_codegen as any).default as typeof _codegen
 
 type ReactResult = RequiredBy<Plugin, 'run'>
 
-const DISABLED_APPSTRACT_APP_FOR_NAMESPACES_LIST = ['cw-plus']
+const DISABLED_ABSTRACT_APP_FOR_NAMESPACES_LIST = ['cw-plus']
 
 type ReactOptions = {
-  disableAppstractAppFor?: string[]
+  disableAbstractAppFor?: string[]
 }
 
 export function react(options: ReactOptions = {}): ReactResult {
-  const disableAppstractAppFor = [
-    ...(options.disableAppstractAppFor ?? []),
-    ...DISABLED_APPSTRACT_APP_FOR_NAMESPACES_LIST,
+  const disableAbstractAppFor = [
+    ...(options.disableAbstractAppFor ?? []),
+    ...DISABLED_ABSTRACT_APP_FOR_NAMESPACES_LIST,
   ]
 
   return {
@@ -58,7 +58,7 @@ export function react(options: ReactOptions = {}): ReactResult {
 
       // Guard speicfic contracts to not have the abstract app generated
       const contractsWithoutAbstractApp = contracts.filter(({ namespace }) =>
-        disableAppstractAppFor.includes(namespace),
+        disableAbstractAppFor.includes(namespace),
       )
 
       await codegen({
@@ -66,7 +66,7 @@ export function react(options: ReactOptions = {}): ReactResult {
         contracts: contracts
           .filter(
             ({ namespace }) =>
-              !disableAppstractAppFor.includes(namespace) &&
+              !disableAbstractAppFor.includes(namespace) &&
               contractsWithoutAbstractApp.every(
                 (guardedContract) => guardedContract.namespace !== namespace,
               ),
@@ -81,7 +81,7 @@ export function react(options: ReactOptions = {}): ReactResult {
           contracts: [
             ...contractsWithoutAbstractApp,
             ...contracts.filter(({ namespace }) =>
-              disableAppstractAppFor.includes(namespace),
+              disableAbstractAppFor.includes(namespace),
             ),
           ].map(({ name, path }) => ({ name, dir: path })),
           outPath: cosmwasmCodegenDirPath,

@@ -5,6 +5,10 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", "lib/**", "esm/**"]
     },
+    "typecheck": {
+      "dependsOn": ["build"],
+      "outputs": []
+    },
     "docgen": {
       "dependsOn": ["build"],
       "inputs": ["src/**/*.tsx", "src/**/*.ts"],
