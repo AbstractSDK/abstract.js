@@ -14,7 +14,7 @@ const codegen = (_codegen as any).default as typeof _codegen
 type VanillaResult = RequiredBy<Plugin, 'run'>
 
 type VanillaOptions = {
-  enableAppstractAppFor?: string[]
+  enableAbstractAppFor?: string[]
 }
 
 export function vanilla(options: VanillaOptions = {}): VanillaResult {
@@ -36,14 +36,14 @@ export function vanilla(options: VanillaOptions = {}): VanillaResult {
       await codegen({
         options: codegenOptions,
         contracts: contracts
-          .filter(({ name }) => !options.enableAppstractAppFor?.includes(name))
+          .filter(({ name }) => !options.enableAbstractAppFor?.includes(name))
           .map(({ name, path }) => ({ name, dir: path })),
         outPath: cosmwasmCodegenDirPath,
       })
 
-      if (options.enableAppstractAppFor?.length !== 0) {
+      if (options.enableAbstractAppFor?.length !== 0) {
         const abstractContracts = contracts.filter(({ name }) =>
-          options.enableAppstractAppFor?.includes(name),
+          options.enableAbstractAppFor?.includes(name),
         )
 
         for (const abstractContract of abstractContracts) {
@@ -140,7 +140,7 @@ export function vanilla(options: VanillaOptions = {}): VanillaResult {
         )
 
         // TODO: Apps are duplicating the type imports
-        const isAppEnabled = options.enableAppstractAppFor?.includes(
+        const isAppEnabled = options.enableAbstractAppFor?.includes(
           contract.name,
         )
         const importTypesLine = isAppEnabled
