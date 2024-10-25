@@ -1,5 +1,6 @@
 import {
   ABSTRACT_API_URL,
+  ABSTRACT_CONSTANTS,
   AccountId,
   accountIdToString,
 } from '@abstract-money/core'
@@ -20,7 +21,11 @@ import {
   createApiClient,
   createPublicClient,
 } from '../../clients'
-import { RegistryClient, RegistryQueryClient } from '../../codegen/abstract'
+import {
+  RegistryClient,
+  RegistryQueryClient,
+  RegistryTypes,
+} from '../../codegen/abstract'
 import { gql } from '../../codegen/gql'
 import { assets, chains } from '../../utils/chain-registry'
 import { graphqlRequest } from '../api'
@@ -303,86 +308,105 @@ export class AbstractQueryClient implements IAbstractQueryClient {
     }
     return account
   }
-  //
-  // /**
-  //  * Load all local accounts.
-  //  */
-  // async loadAccounts(
-  //   startAfterSequence?: number,
-  //   count?: number,
-  // ): Promise<AbstractAccountQueryClient[]> {
-  //   const nextAccountIdSeq = await this.factoryQueryClient
-  //     .config()
-  //     .then(({ local_account_sequence }) => local_account_sequence)
-  //
-  //   if (startAfterSequence && startAfterSequence >= nextAccountIdSeq) return []
-  //
-  //   const accounts: AbstractAccountQueryClient[] = []
-  //   for (
-  //     let accountSeq = startAfterSequence ?? 0;
-  //     accountSeq < nextAccountIdSeq;
-  //     accountSeq++
-  //   ) {
-  //     const account = await this.loadAccount(
-  //       await this.localAccountId(accountSeq),
-  //     )
-  //     accounts.push(account)
-  //     if (count && accounts.length >= count) break
-  //   }
-  //
-  //   return accounts
-  // }
-  //
-  // /**
-  //  * Filter the list of Accounts by the given filter.
-  //  * This method is extremely inefficient if querying live (as opposed to archive) nodes.
-  //  * @param filter
-  //  */
-  // async filterAccounts(
-  //   filter: AccountFilter,
-  // ): Promise<AbstractAccountQueryClient[]> {
-  //   const chainName = await this.getChainName()
-  //   const nextAccountIdSeq = await this.factoryQueryClient
-  //     .config()
-  //     .then(({ local_account_sequence }) => local_account_sequence)
-  //
-  //   const matchingAccounts: AbstractAccountQueryClient[] = []
-  //   for (let accountSeq = 0; accountSeq < nextAccountIdSeq; accountSeq++) {
-  //     const account = await this.loadAccount(
-  //       AbstractAccountId.local(chainName, accountSeq),
-  //     )
-  //
-  //     if (filter.owner) {
-  //       const owner = await account.getOwner()
-  //       if (owner !== filter.owner) continue
-  //     }
-  //
-  //     const installedModules =
-  //       filter.moduleIds || filter.modules ? await account.getModules() : []
-  //     const modulesFilter = filter.modules || []
-  //     if (filter.moduleIds) {
-  //       modulesFilter.push(...filter.moduleIds.map((id) => ({ id })))
-  //     }
-  //
-  //     if (
-  //       modulesFilter.every(({ id, version }) => {
-  //         const installedModule = installedModules.find(
-  //           (module) => module.id === id,
-  //         )
-  //
-  //         return (
-  //           installedModule &&
-  //           (!version ||
-  //             semverSatisfies(installedModule.version.version, version))
-  //         )
-  //       })
-  //     ) {
-  //       matchingAccounts.push(account)
-  //     }
-  //   }
-  //
-  //   return matchingAccounts
-  // }
+
+  /**
+   * Load all local accounts.
+   */
+  async loadAccounts({
+    startAfter: startAfter_,
+  }: {
+    startAfter?: AccountId
+  } = {}): Promise<AbstractAccountQueryClient[]> {
+    const chainName = await this.getChainName()
+    const allAccounts: AbstractAccountQueryClient[] = []
+    let startAfter: RegistryTypes.AccountId | undefined = startAfter_
+    let hasMore = true
+
+    while (hasMore) {
+      const { accounts } = await this.registryQueryClient.accountList({
+        limit: ABSTRACT_CONSTANTS.MAX_PAGE_SIZE,
+        startAfter,
+      })
+
+      // Add current batch to the overall list
+      const accountQueryClients = accounts.map(
+        ([accountId, address]) =>
+          new AbstractAccountQueryClient({
+            abstract: this,
+            accountId: {
+              ...accountId,
+              chainName,
+            },
+            accountAddress: address,
+          }),
+      )
+
+      // Cache the clients
+      accountQueryClients.map((q) => {
+        this.accountCache.set(accountIdToString(q.accountId), q)
+      })
+
+      allAccounts.push(...accountQueryClients)
+
+      // Check if we've reached the end of the list
+      if (accounts.length < ABSTRACT_CONSTANTS.MAX_PAGE_SIZE) {
+        hasMore = false
+      } else {
+        // Set startAfter to the last account in the current batch to get the next page
+        // @ts-ignore
+        startAfter = accounts[accounts.length - 1][0]
+      }
+    }
+
+    return allAccounts
+  }
+
+  /**
+   * Filter the list of Accounts by the given filter.
+   * This method is extremely inefficient if querying live (as opposed to archive) nodes.
+   * @param filter
+   */
+  async filterAccounts(
+    filter: AccountFilter,
+  ): Promise<AbstractAccountQueryClient[]> {
+    const chainName = await this.getChainName()
+
+    const allAccounts = await this.loadAccounts()
+
+    const matchingAccounts: AbstractAccountQueryClient[] = []
+
+    for (const account of allAccounts) {
+      if (filter.owner) {
+        const owner = await account.getOwner()
+        if (owner !== filter.owner) continue
+      }
+
+      const installedModules =
+        filter.moduleIds || filter.modules ? await account.getModules() : []
+      const modulesFilter = filter.modules || []
+      if (filter.moduleIds) {
+        modulesFilter.push(...filter.moduleIds.map((id) => ({ id })))
+      }
+
+      if (
+        modulesFilter.every(({ id, version }) => {
+          const installedModule = installedModules.find(
+            (module) => module.id === id,
+          )
+
+          return (
+            installedModule &&
+            (!version ||
+              semverSatisfies(installedModule.version.version, version))
+          )
+        })
+      ) {
+        matchingAccounts.push(account)
+      }
+    }
+
+    return matchingAccounts
+  }
 
   /**
    * Upgrade the abstract client to an executable client.

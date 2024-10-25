@@ -187,11 +187,9 @@ export class AbstractAccountQueryClient implements IAbstractAccountQueryClient {
    */
   public async getOwner(invalidateCache?: boolean): Promise<string | null> {
     if (invalidateCache || this._owner === undefined) {
-      const owner = (await this.accountQueryClient
+      const governance = await this.accountQueryClient
         .ownership()
-        .then(({ owner }) => owner)) as unknown
-
-      const governance = owner as unknown as GovernanceDetails
+        .then(({ owner }) => owner)
 
       this._owner = match(governance)
         .with({ monarchy: { monarch: P.select() } }, (monarch) => monarch)
