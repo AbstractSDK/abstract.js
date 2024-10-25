@@ -1,5 +1,5 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { CamelCasedProperties, Merge } from 'type-fest'
+import { CamelCasedProperties } from 'type-fest'
 import { OverrideProperties } from 'type-fest'
 import { AccountTypes, RegistryTypes } from '../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../types/parameters'
@@ -7,6 +7,10 @@ import { WithOptional } from '../../types/utils'
 import { ABSTRACT_NAMESPACE, accountIdToParameter } from '../../utils'
 import { parseCreateAccountExecuteResult } from '../../utils/account-factory/parse-create-account-execute-result'
 import { chainIdToName } from '../../utils/chain-registry'
+import {
+  MergedModuleInstallConfig,
+  moduleInstallConfig,
+} from '../../utils/modules/module-install-config'
 import { getRegistryAddressFromApi } from '../get-registry-address-from-api'
 import { getAppModuleCodeIdFromRegistry } from '../public/get-app-module-code-id-from-registry'
 import { CommonModuleNames } from '../public/types'
@@ -21,9 +25,12 @@ export type CreateAccountParameters = WithCosmWasmSignOptions<
     WithOptional<
       OverrideProperties<
         AccountTypes.InstantiateMsg,
-        { account_id?: RegistryTypes.AccountId }
+        {
+          account_id?: RegistryTypes.AccountId
+          install_modules?: MergedModuleInstallConfig[]
+        }
       >,
-      'install_modules' | 'owner'
+      'owner'
     >
   >
 >
@@ -50,17 +57,15 @@ export async function createAccount({
   if (
     enableIbc &&
     !installModules.some(
-      ({ module }) =>
-        module.name === CommonModuleNames.IBC_CLIENT &&
-        module.namespace === ABSTRACT_NAMESPACE,
+      ({ name, namespace }) =>
+        name === CommonModuleNames.IBC_CLIENT &&
+        namespace === ABSTRACT_NAMESPACE,
     )
   ) {
     installModules.push({
-      module: {
-        name: CommonModuleNames.IBC_CLIENT,
-        namespace: ABSTRACT_NAMESPACE,
-        version: 'latest',
-      },
+      name: CommonModuleNames.IBC_CLIENT,
+      namespace: ABSTRACT_NAMESPACE,
+      version: 'latest',
     })
   }
 
@@ -82,7 +87,7 @@ export async function createAccount({
         monarch: sender,
       },
     },
-    install_modules: installModules,
+    install_modules: installModules.map((m) => moduleInstallConfig(m)),
     description,
     name,
     namespace,

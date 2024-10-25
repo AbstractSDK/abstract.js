@@ -19,11 +19,9 @@ export async function enableIbc({
     ...parameters,
     modules: [
       {
-        module: {
-          name: CommonModuleNames.IBC_CLIENT,
-          namespace: ABSTRACT_NAMESPACE,
-          version: 'latest',
-        },
+        name: CommonModuleNames.IBC_CLIENT,
+        namespace: ABSTRACT_NAMESPACE,
+        version: 'latest',
       },
     ],
   })
