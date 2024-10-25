@@ -1,12 +1,20 @@
 import { ExecuteResult, SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { OverrideProperties } from 'type-fest'
 import { AccountClient, RegistryTypes } from '../../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
+import {
+  MergedModuleInstallConfig,
+  moduleInstallConfig,
+} from '../../../utils/modules/module-install-config'
 import { getAccountClientFromApi } from './get-account-client-from-api'
 import { BaseAccountWalletParameters } from './types'
 
 export type InstallModulesParameters = WithCosmWasmSignOptions<
   BaseAccountWalletParameters &
-    Parameters<typeof AccountClient.prototype.installModules>[0]
+    OverrideProperties<
+      Parameters<typeof AccountClient.prototype.installModules>[0],
+      { modules: MergedModuleInstallConfig[] }
+    >
 >
 
 export async function installModules({
@@ -17,6 +25,7 @@ export async function installModules({
   fee,
   memo,
   funds,
+  modules,
   ...rest
 }: InstallModulesParameters): Promise<ExecuteResult> {
   const accountClient = await getAccountClientFromApi({
@@ -25,5 +34,10 @@ export async function installModules({
     sender,
     apiUrl,
   })
-  return accountClient.installModules(rest, fee, memo, funds)
+  return accountClient.installModules(
+    { modules: modules.map((m) => moduleInstallConfig(m)), ...rest },
+    fee,
+    memo,
+    funds,
+  )
 }

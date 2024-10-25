@@ -1,30 +1,12 @@
-import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { CamelCasedProperties, OverrideProperties } from 'type-fest'
-import { AccountTypes, RegistryTypes } from '../../codegen/abstract'
-import { WithCosmWasmSignOptions } from '../../types/parameters'
-import { WithOptional } from '../../types/utils'
+import { OverrideProperties } from 'type-fest'
 import { accountIdToParameter } from '../../utils'
-import { createAccount } from './create-account'
+import { CreateAccountParameters, createAccount } from './create-account'
 
-export type CreateAccountMonarchyParameters = WithCosmWasmSignOptions<
+export type CreateAccountMonarchyParameters = OverrideProperties<
+  CreateAccountParameters,
   {
-    signingCosmWasmClient: SigningCosmWasmClient
-    apiUrl: string
-    sender: string
     owner: string
-    enableIbc?: boolean
-  } & CamelCasedProperties<
-    WithOptional<
-      Omit<
-        OverrideProperties<
-          AccountTypes.InstantiateMsg,
-          { account_id?: RegistryTypes.AccountId }
-        >,
-        'owner'
-      >,
-      'install_modules'
-    >
-  >
+  }
 >
 
 /**
