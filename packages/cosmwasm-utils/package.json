@@ -36,15 +36,36 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "require": "./dist/index.cjs"
+      }
     },
     "./client": {
       "types": "./dist/client/index.d.ts",
-      "default": "./dist/client/index.js"
+      "import": {
+        "types": "./dist/client/index.d.ts",
+        "import": "./dist/client/index.js"
+      },
+      "require": {
+        "types": "./dist/client/index.d.cts",
+        "require": "./dist/client/index.cjs"
+      }
     },
     "./query": {
       "types": "./dist/query/index.d.ts",
-      "default": "./dist/query/index.js"
+      "import": {
+        "types": "./dist/query/index.d.ts",
+        "import": "./dist/query/index.js"
+      },
+      "require": {
+        "types": "./dist/query/index.d.cts",
+        "require": "./dist/query/index.cjs"
+      }
     },
     "./package.json": "./package.json"
   },
