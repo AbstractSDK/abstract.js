@@ -1,5 +1,11 @@
 # @abstract-money/cli
 
+## 1.2.0
+
+### Minor Changes
+
+- [#130](https://github.com/AbstractSDK/abstract.js/pull/130) [`83a66c2`](https://github.com/AbstractSDK/abstract.js/commit/83a66c2bf962c4533baa6a584895c0d3e3758a6f) Thanks [@adairrr](https://github.com/adairrr)! - Add chainName to code generation
+
 ## 1.1.0
 
 ### Minor Changes
