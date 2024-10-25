@@ -56,22 +56,25 @@ export function react(options: ReactOptions = {}): ReactResult {
 
       const cosmwasmCodegenDirPath = join(out, 'cosmwasm-codegen')
 
-      // Guard speicfic contracts to not have the abstract app generated
-      const contractsWithoutAbstractApp = contracts.filter(({ namespace }) =>
-        disableAbstractAppFor.includes(namespace),
+      // Guard specific contracts to not have the abstract app generated
+      const contractsWithoutAbstractApp = contracts.filter(({ name }) =>
+        disableAbstractAppFor.includes(name),
       )
+
+      const absContracts = contracts
+        .filter(
+          ({ name }) =>
+            !disableAbstractAppFor.includes(name) &&
+            contractsWithoutAbstractApp.every(
+              (guardedContract) => guardedContract.name !== name,
+            ),
+        )
+        .map(({ name, path }) => ({ name, dir: path }))
+      console.log('absContracts', absContracts)
 
       await codegen({
         options: codegenOptions,
-        contracts: contracts
-          .filter(
-            ({ namespace }) =>
-              !disableAbstractAppFor.includes(namespace) &&
-              contractsWithoutAbstractApp.every(
-                (guardedContract) => guardedContract.namespace !== namespace,
-              ),
-          )
-          .map(({ name, path }) => ({ name, dir: path })),
+        contracts: absContracts,
         outPath: cosmwasmCodegenDirPath,
       })
 
@@ -80,8 +83,8 @@ export function react(options: ReactOptions = {}): ReactResult {
           options: { ...codegenOptions, abstractApp: { enabled: false } },
           contracts: [
             ...contractsWithoutAbstractApp,
-            ...contracts.filter(({ namespace }) =>
-              disableAbstractAppFor.includes(namespace),
+            ...contracts.filter(({ name }) =>
+              disableAbstractAppFor.includes(name),
             ),
           ].map(({ name, path }) => ({ name, dir: path })),
           outPath: cosmwasmCodegenDirPath,
@@ -242,12 +245,14 @@ export function react(options: ReactOptions = {}): ReactResult {
               cosmwasmCodegenDirPath,
               `${contractNamePascalCase}.types.ts`,
             )
-            imports.push(
-              `import * as ${contractNamePascalCase}Types from './${relative(
-                out,
-                typesFilePath.slice(0, -3),
-              )}'`,
-            )
+            if (hasAbstractApp) {
+              imports.push(
+                `import * as ${contractNamePascalCase}Types from './${relative(
+                  out,
+                  typesFilePath.slice(0, -3),
+                )}'`,
+              )
+            }
           }
 
           imports.push(
@@ -293,7 +298,7 @@ export function react(options: ReactOptions = {}): ReactResult {
                 )}>>[0], 'client'> & { ${
                   hasAbstractApp
                     ? 'accountId: AccountId | undefined; chainName: string | undefined;'
-                    : 'contractAddress: string | undefined;'
+                    : 'contractAddress: string | undefined; chainName: string | undefined'
                 }}) => {
                     const {
                       data: ${queryClientCamelCase},
@@ -346,11 +351,11 @@ export function react(options: ReactOptions = {}): ReactResult {
                     { ${
                       hasAbstractApp
                         ? 'accountId, chainName, sender'
-                        : 'contractAddress, sender'
+                        : 'contractAddress, chainName, sender'
                     } }: { ${
                   hasAbstractApp
                     ? 'accountId: AccountId | undefined; chainName: string | undefined; sender?: string | undefined;'
-                    : 'contractAddress: string | undefined; sender?: string | undefined;'
+                    : 'contractAddress: string | undefined; chainName: string | undefined; sender?: string | undefined;'
                 } },
                     options?: Omit<
                       UseMutationOptions<
@@ -377,7 +382,7 @@ export function react(options: ReactOptions = {}): ReactResult {
                         chainName,
                         sender,
                         `
-                            : 'contractAddress,'
+                            : 'contractAddress, chainName,'
                         }
                         Module: ${clientPascalCase},
                       }
