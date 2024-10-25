@@ -1,5 +1,11 @@
 # @abstract-money/cosmwasm-utils
 
+## 0.3.1
+
+### Patch Changes
+
+- [#131](https://github.com/AbstractSDK/abstract.js/pull/131) [`04cb51f`](https://github.com/AbstractSDK/abstract.js/commit/04cb51fffc933abf6e47b881001e6bb3fb340f02) Thanks [@adairrr](https://github.com/adairrr)! - Ensure that cosmwasm-utils is cjs-compatible
+
 ## 0.3.0
 
 ### Minor Changes
