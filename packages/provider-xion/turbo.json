@@ -1,0 +1,16 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["@abstract-money/react#build", "clean"],
+      "outputs": ["dist/**"]
+    },
+    "typecheck": {
+      "dependsOn": ["@abstract-money/react#build", "clean"]
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}
