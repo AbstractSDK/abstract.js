@@ -7,23 +7,24 @@ export function getCosmWasmClientQueryKey(chainName: string) {
 }
 
 /**
- * Get the proxy URL for the given chain id. TODO: remove...
+ * Get a polkachu URL for the given chain id. TODO: replace with something from the Abstract API.
  * @deprecated
- * @param chainId
+ * @param chainName
  */
-const chainIdToRpc = (chainId: string) => {
-  return `https://rpc-proxy.abstract-os.workers.dev/${chainId}/rpc`
+const chainNameToRpc = (chainName: string) => {
+  const hyphenatedChainName = chainName.replace('testnet', '-testnet')
+  return `https://${hyphenatedChainName}-rpc.polkachu.com/`
 }
 
 async function getCosmWasmClient(chainName: string) {
-  const chainId = chainNameToId(chainName)
-
-  const endpoint = chainIdToRpc(chainName)
+  const endpoint = chainNameToRpc(chainName)
 
   const client = await CosmWasmClient.connect(endpoint).catch((e) => {
     console.error('Failed to connect to chain', chainName, e)
     throw e
   })
+
+  const chainId = chainNameToId(chainName)
 
   const clientChainId = await client.getChainId()
   console.debug('Retrieved chain ID', clientChainId, chainName)
