@@ -269,7 +269,7 @@ importers:
         version: 0.8.0
       graz:
         specifier: ^0.1.19
-        version: 0.1.19(@cosmjs/amino@0.32.4)(@cosmjs/cosmwasm-stargate@0.32.4)(@cosmjs/launchpad@0.27.1)(@cosmjs/proto-signing@0.32.4)(@cosmjs/stargate@0.32.3)(@cosmjs/tendermint-rpc@0.32.4)(@leapwallet/cosmos-social-login-capsule-provider@0.0.39)(@types/react@18.2.0)(axios@0.27.2)(react-dom@18.0.0)(react@18.0.0)(starknet@6.11.0)
+        version: 0.1.19(@cosmjs/amino@0.32.4)(@cosmjs/cosmwasm-stargate@0.32.3)(@cosmjs/launchpad@0.27.1)(@cosmjs/proto-signing@0.32.4)(@cosmjs/stargate@0.32.3)(@cosmjs/tendermint-rpc@0.32.4)(@leapwallet/cosmos-social-login-capsule-provider@0.0.39)(@types/react@18.2.0)(axios@0.27.2)(react-dom@18.0.0)(react@18.0.0)(starknet@6.11.0)
       long:
         specifier: ^5.2.3
         version: 5.2.3
@@ -624,7 +624,7 @@ importers:
         version: 20.0.0
       graz:
         specifier: ^0.1.19
-        version: 0.1.19(@cosmjs/amino@0.32.4)(@cosmjs/cosmwasm-stargate@0.32.4)(@cosmjs/launchpad@0.27.1)(@cosmjs/proto-signing@0.32.4)(@cosmjs/stargate@0.32.3)(@cosmjs/tendermint-rpc@0.32.4)(@leapwallet/cosmos-social-login-capsule-provider@0.0.39)(@types/react@18.2.0)(axios@0.27.2)(react-dom@18.0.0)(react@18.0.0)(starknet@6.11.0)
+        version: 0.1.19(@cosmjs/amino@0.32.4)(@cosmjs/cosmwasm-stargate@0.32.3)(@cosmjs/launchpad@0.27.1)(@cosmjs/proto-signing@0.32.4)(@cosmjs/stargate@0.32.3)(@cosmjs/tendermint-rpc@0.32.4)(@leapwallet/cosmos-social-login-capsule-provider@0.0.39)(@types/react@18.2.0)(axios@0.27.2)(react-dom@18.0.0)(react@18.0.0)(starknet@6.11.0)
       rimraf:
         specifier: ^3.0.0
         version: 3.0.0
@@ -645,7 +645,7 @@ importers:
         specifier: '=1.0.0-alpha.50'
         version: 1.0.0-alpha.50(@types/react@18.2.0)(graphql@16.8.1)(react-dom@18.2.0)(react@18.3.1)(starknet@6.11.0)
       '@cosmjs/cosmwasm-stargate':
-        specifier: ^0.32.3
+        specifier: 0.32.3
         version: 0.32.3
       '@types/node':
         specifier: ^20.0.0
@@ -3124,6 +3124,7 @@ packages:
       - bufferutil
       - debug
       - utf-8-validate
+    dev: true
 
   /@cosmjs/crypto@0.24.1:
     resolution: {integrity: sha512-GPhaWmQO06mXldKj/b+oKF5o3jMNfRKpAw+Q8XQhrD7ItinVPDMu8Xgl6frUXWTUdgpYwqpvqOcpm85QUsYV0Q==}
@@ -3626,7 +3627,7 @@ packages:
       '@chain-registry/keplr': 1.74.3
       '@chain-registry/types': 0.46.15
       '@cosmjs/amino': 0.32.4
-      '@cosmjs/cosmwasm-stargate': 0.32.4
+      '@cosmjs/cosmwasm-stargate': 0.32.3
       '@cosmjs/proto-signing': 0.32.4
       '@cosmjs/stargate': 0.32.4
       '@dao-dao/cosmiframe': 0.1.0(@cosmjs/amino@0.32.4)(@cosmjs/proto-signing@0.32.4)
@@ -12125,7 +12126,7 @@ packages:
     resolution: {integrity: sha512-59LZHPdGZVh695Ud9lRzPBVTtlX9ZCV150Er2W43ro37wVof0ctenSaskPPjN7lVTIN8mSZt8PHUNKZuNQUuxw==}
     engines: {node: ^12.22.0 || ^14.16.0 || ^16.0.0 || >=17.0.0}
 
-  /graz@0.1.19(@cosmjs/amino@0.32.4)(@cosmjs/cosmwasm-stargate@0.32.4)(@cosmjs/launchpad@0.27.1)(@cosmjs/proto-signing@0.32.4)(@cosmjs/stargate@0.32.3)(@cosmjs/tendermint-rpc@0.32.4)(@leapwallet/cosmos-social-login-capsule-provider@0.0.39)(@types/react@18.2.0)(axios@0.27.2)(react-dom@18.0.0)(react@18.0.0)(starknet@6.11.0):
+  /graz@0.1.19(@cosmjs/amino@0.32.4)(@cosmjs/cosmwasm-stargate@0.32.3)(@cosmjs/launchpad@0.27.1)(@cosmjs/proto-signing@0.32.4)(@cosmjs/stargate@0.32.3)(@cosmjs/tendermint-rpc@0.32.4)(@leapwallet/cosmos-social-login-capsule-provider@0.0.39)(@types/react@18.2.0)(axios@0.27.2)(react-dom@18.0.0)(react@18.0.0)(starknet@6.11.0):
     resolution: {integrity: sha512-KaRQJ7HTQp3vbX/bG2Oc9T3t/KyaIuU5dLoGU2QNFirNjIpRbhkBtCll9Li5A6+zw3O9bHkbZ1aUaKfuVyBS8w==}
     hasBin: true
     peerDependencies:
@@ -12139,7 +12140,7 @@ packages:
       react: '>=17'
     dependencies:
       '@cosmjs/amino': 0.32.4
-      '@cosmjs/cosmwasm-stargate': 0.32.4
+      '@cosmjs/cosmwasm-stargate': 0.32.3
       '@cosmjs/launchpad': 0.27.1
       '@cosmjs/proto-signing': 0.32.4
       '@cosmjs/stargate': 0.32.3
