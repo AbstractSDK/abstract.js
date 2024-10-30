@@ -1,5 +1,16 @@
 # @abstract-money/react
 
+## 2.1.0
+
+### Minor Changes
+
+- [#133](https://github.com/AbstractSDK/abstract.js/pull/133) [`b63ee9b`](https://github.com/AbstractSDK/abstract.js/commit/b63ee9bdb1809ab1ffadde21f76ab1735208ba87) Thanks [@adairrr](https://github.com/adairrr)! - Add installModules and update the types for createAccount
+
+### Patch Changes
+
+- Updated dependencies [[`b63ee9b`](https://github.com/AbstractSDK/abstract.js/commit/b63ee9bdb1809ab1ffadde21f76ab1735208ba87)]:
+  - @abstract-money/core@3.1.0
+
 ## 2.0.1
 
 ### Patch Changes
