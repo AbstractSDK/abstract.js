@@ -1,5 +1,13 @@
 # @abstract-money/provider-xion
 
+## 2.0.0
+
+### Patch Changes
+
+- Updated dependencies [[`f2c6344`](https://github.com/AbstractSDK/abstract.js/commit/f2c6344babaccd2b25cc0cd54e6774496d2be1ad)]:
+  - @abstract-money/core@3.2.0
+  - @abstract-money/react@2.2.0
+
 ## 1.0.0
 
 ### Patch Changes

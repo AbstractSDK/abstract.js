@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 3.2.0
+
+### Minor Changes
+
+- [`f2c6344`](https://github.com/AbstractSDK/abstract.js/commit/f2c6344babaccd2b25cc0cd54e6774496d2be1ad) Thanks [@adairrr](https://github.com/adairrr)! - Make getAccountAddress just return the address
+
 ## 3.1.0
 
 ### Minor Changes

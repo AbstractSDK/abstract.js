@@ -1,6 +1,6 @@
 {
   "name": "@abstract-money/provider-xion",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Provider for Xion",
   "homepage": "https://github.com/AbstractSDK/abstract.js#readme",
   "author": "adair <adair@abstract.money>",
