@@ -10,7 +10,7 @@ export async function getAccountClientFromApi({
   apiUrl,
   sender,
 }: GetAccountClientFromApiParameters) {
-  const { account } = await getAccountAddressFromApi({
+  const account = await getAccountAddressFromApi({
     accountId,
     cosmWasmClient: signingCosmWasmClient,
     apiUrl,

@@ -45,7 +45,7 @@ export async function execute({
   fee,
   memo,
 }: ExecuteParameters) {
-  const { account } = await getAccountAddressFromApi({
+  const account = await getAccountAddressFromApi({
     accountId,
     cosmWasmClient: signingCosmWasmClient,
     apiUrl,
