@@ -1,4 +1,3 @@
-import { StargateClient } from '@abstract-money/cli/.tsup/declaration/_tsup-dts-aggregation'
 import { Registry } from '@cosmjs/proto-signing'
 import {
   QueryClient,

@@ -62,7 +62,7 @@ export type PublicActions = {
       typeof getSimulationResultFromApi
     >,
   ): ReturnType<typeof getSimulationResultFromApi>
-  simulateRemoteMsg(
+  simulateRemoteCosmosMsg(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof simulateRemoteCosmosMsg
     >,
@@ -123,7 +123,7 @@ export function publicActions(
         ...parameters,
         ...extra,
       }),
-    simulateRemoteMsg: ({ extra, ...parameters }) =>
+    simulateRemoteCosmosMsg: ({ extra, ...parameters }) =>
       simulateRemoteCosmosMsg({
         cosmWasmClient,
         apiUrl,

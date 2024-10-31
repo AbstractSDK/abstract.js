@@ -1,2 +1,2 @@
 export * from './encoding'
-export * from './simulate-msgs'
+export * from './simulate-cosmos-msgs'

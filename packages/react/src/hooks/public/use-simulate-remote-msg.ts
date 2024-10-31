@@ -42,10 +42,10 @@ export function useSimulateRemoteMsg({
   })
 
   return useMutation(
-    ['simulateRemoteMsg', chainName],
+    ['simulateRemoteCosmosMsg', chainName],
     ({ ...params }) => {
       if (!accountClient) throw new Error('accountClient is not defined')
-      return accountClient.simulateRemoteMsg({
+      return accountClient.simulateRemoteCosmosMsg({
         ...params,
       })
     },
