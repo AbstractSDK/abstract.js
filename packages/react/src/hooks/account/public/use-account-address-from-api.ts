@@ -70,3 +70,5 @@ export function useAccountAddressFromApi<TData = QueryData>({
 
   return useQuery({ queryKey, queryFn, ...query, enabled })
 }
+
+export const useAccountAddress = useAccountAddressFromApi

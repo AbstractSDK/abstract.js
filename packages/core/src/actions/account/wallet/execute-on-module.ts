@@ -44,7 +44,7 @@ export async function executeOnModule({
   memo,
   funds,
 }: ExecuteOnModuleParameters) {
-  const { account } = await getAccountAddressFromApi({
+  const account = await getAccountAddressFromApi({
     accountId,
     cosmWasmClient: signingCosmWasmClient,
     apiUrl,

@@ -21,7 +21,7 @@ export async function deposit({
   fee,
   memo,
 }: DepositParameters) {
-  const { account } = await getAccountAddressFromApi({
+  const account = await getAccountAddressFromApi({
     accountId,
     cosmWasmClient: signingCosmWasmClient,
     apiUrl,

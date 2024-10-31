@@ -27,7 +27,5 @@ export async function getAccountAddressFromRegistry({
     throw new Error(`Account not found: ${accountId}`)
   }
 
-  return {
-    account: accounts[0],
-  }
+  return accounts[0]
 }
