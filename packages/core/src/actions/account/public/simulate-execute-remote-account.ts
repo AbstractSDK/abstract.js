@@ -2,7 +2,7 @@ import { cosmosWasmExecuteMsg } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { AccountTypes, RegistryTypes } from '../../../codegen/abstract'
 import { CosmosMsgForEmpty } from '../../../codegen/abstract/cosmwasm-codegen/Account.types'
-import { simulateRemoteMsg } from '../../simulate-remote-msg'
+import { simulateRemoteCosmosMsg } from '../../simulate-remote-cosmos-msg'
 import { getRemoteAccounts } from './get-remote-accounts'
 
 export type SimulateExecuteRemoteAccountParameters = {
@@ -46,7 +46,7 @@ export async function simulateExecuteRemoteAccount({
     [],
   )
 
-  return simulateRemoteMsg({
+  return simulateRemoteCosmosMsg({
     apiUrl,
     hostChainName,
     msgs: cosmosAccountMsg,

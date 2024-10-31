@@ -6,18 +6,22 @@ import {
   UseMutationReturnType,
 } from '../../types/queries'
 
-type SimulateRemoteMutation = Parameters<PublicClient['simulateRemoteMsg']>[0]
+type SimulateRemoteMutation = Parameters<
+  PublicClient['simulateRemoteCosmosMsg']
+>[0]
 
 export type UseSimulateRemoteMsgParameters = {
   chainName: string | undefined
   mutation?: UseMutationParameters<
-    Awaited<ReturnType<PublicClient['simulateRemoteMsg']>>,
+    Awaited<ReturnType<PublicClient['simulateRemoteCosmosMsg']>>,
     unknown,
     SimulateRemoteMutation
   >
 }
 
-type SimulatedReturn = Awaited<ReturnType<PublicClient['simulateRemoteMsg']>>
+type SimulatedReturn = Awaited<
+  ReturnType<PublicClient['simulateRemoteCosmosMsg']>
+>
 
 /**
  * Simulate a message to be executed on a remote chain by the ibc host.

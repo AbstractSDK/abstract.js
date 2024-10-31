@@ -4,19 +4,23 @@ import { registry, vanilla } from '@abstract-money/cli/plugins'
 const contractsConfig = [
   {
     name: 'account',
-    version: '0.24.1-beta.2',
+    version: '0.24.1',
   },
   {
     name: 'registry',
-    version: '0.24.1-beta.2',
+    version: '0.24.1',
   },
   {
     name: 'ans-host',
-    version: '0.24.1-beta.2',
+    version: '0.24.1',
   },
   {
     name: 'ibc-client',
-    version: '0.24.1-beta.2',
+    version: '0.24.1',
+  },
+  {
+    name: 'ica-client',
+    version: '0.24.1',
   },
 ]
 

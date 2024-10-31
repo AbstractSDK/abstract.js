@@ -5,7 +5,7 @@ import { getIbcClientQueryClient } from '../../public/get-ibc-client-query-clien
 import { CommonModuleNames } from '../../public/types'
 import { getModuleAddress } from './get-module-address'
 
-export type GetIbcClientQueryClientParameters = {
+export type GetIbcClientQueryClientFromAccountParameters = {
   accountId: RegistryTypes.AccountId
   cosmWasmClient: CosmWasmClient
   apiUrl: string
@@ -22,7 +22,7 @@ export async function getIbcClientQueryClientFromAccount({
   accountId,
   cosmWasmClient,
   apiUrl,
-}: GetIbcClientQueryClientParameters) {
+}: GetIbcClientQueryClientFromAccountParameters) {
   const ibcClientAddress = await getModuleAddress({
     accountId,
     cosmWasmClient,
