@@ -25,7 +25,7 @@ export type UseClaimNamespaceParameters = {
 }
 
 /**
- * Execute a msg as the account.
+ * Claim a namespace from version control on the account.
  * @param accountId
  * @param chainName
  * @param mutation

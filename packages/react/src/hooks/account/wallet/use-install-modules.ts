@@ -9,14 +9,18 @@ import {
   UseMutationReturnType,
 } from '../../../types/queries'
 
-type ExecuteMutation = ExtractArgsFromParameters<
+type InstallModulesMutation = ExtractArgsFromParameters<
   Parameters<AccountWalletClient['installModules']>[0]
 >
 
-export type UseExecuteParameters = {
+export type UseInstallModulesParameters = {
   accountId: AccountId | undefined
   chainName: string | undefined
-  mutation?: UseMutationParameters<ExecuteResult, unknown, ExecuteMutation>
+  mutation?: UseMutationParameters<
+    ExecuteResult,
+    unknown,
+    InstallModulesMutation
+  >
 }
 
 /**
@@ -29,10 +33,10 @@ export function useInstallModules({
   accountId,
   chainName,
   mutation,
-}: UseExecuteParameters): UseMutationReturnType<
+}: UseInstallModulesParameters): UseMutationReturnType<
   ExecuteResult,
   unknown,
-  ExecuteMutation
+  InstallModulesMutation
 > {
   const config = useConfig()
   const accountClient = config.useAccountWalletClient({
