@@ -1,6 +1,6 @@
 import { AccountWalletClient } from '@abstract-money/core/clients'
 import { AccountId } from '@abstract-money/core/utils'
-import { DeliverTxResponse } from '@cosmjs/stargate'
+import { ExecuteResult } from '@cosmjs/cosmwasm-stargate'
 import { useMutation } from '@tanstack/react-query'
 import { useConfig } from '../../../contexts'
 import { ExtractArgsFromParameters } from '../../../types/args'
@@ -16,7 +16,7 @@ type ExecuteMutation = ExtractArgsFromParameters<
 export type UseExecuteParameters = {
   accountId: AccountId | undefined
   chainName: string | undefined
-  mutation?: UseMutationParameters<DeliverTxResponse, unknown, ExecuteMutation>
+  mutation?: UseMutationParameters<ExecuteResult, unknown, ExecuteMutation>
 }
 
 /**
@@ -30,7 +30,7 @@ export function useInstallModules({
   chainName,
   mutation,
 }: UseExecuteParameters): UseMutationReturnType<
-  DeliverTxResponse,
+  ExecuteResult,
   unknown,
   ExecuteMutation
 > {

@@ -8,13 +8,10 @@ import { CosmosMsgForEmpty } from '../../../codegen/abstract/cosmwasm-codegen/Ac
 import { WithCosmWasmSignOptions } from '../../../types/parameters'
 import { getAccountAddressFromApi } from '../public/get-account-address-from-api'
 
-export type ExecuteParameters = Omit<
-  WithCosmWasmSignOptions<
-    BaseAccountWalletParameters & {
-      msgs: MaybeArray<AccountTypes.CosmosMsgForEmpty>
-    }
-  >,
-  'funds'
+export type ExecuteParameters = WithCosmWasmSignOptions<
+  BaseAccountWalletParameters & {
+    msgs: MaybeArray<AccountTypes.CosmosMsgForEmpty>
+  }
 >
 
 /**
@@ -26,6 +23,7 @@ export type ExecuteParameters = Omit<
  * @param msgs
  * @param fee
  * @param memo
+ * @param funds - funds FROM the wallet
  */
 export async function execute({
   accountId,
@@ -35,6 +33,7 @@ export async function execute({
   msgs,
   fee,
   memo,
+  funds,
 }: ExecuteParameters) {
   const account = await getAccountAddressFromApi({
     accountId,
@@ -55,7 +54,7 @@ export async function execute({
       sender: sender,
       contract: account,
       msg: toUtf8(JSON.stringify(_msg)),
-      funds: [],
+      funds,
     }),
   }
 

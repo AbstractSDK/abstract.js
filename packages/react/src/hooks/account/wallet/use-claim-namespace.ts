@@ -1,5 +1,6 @@
 import { AccountWalletClient } from '@abstract-money/core/clients'
 import { AccountId } from '@abstract-money/core/utils'
+import { ExecuteResult } from '@cosmjs/cosmwasm-stargate'
 import { DeliverTxResponse } from '@cosmjs/stargate'
 import { useMutation } from '@tanstack/react-query'
 import { useConfig } from '../../../contexts'
@@ -9,30 +10,34 @@ import {
   UseMutationReturnType,
 } from '../../../types/queries'
 
-type WithdrawMutation = ExtractArgsFromParameters<
-  Parameters<AccountWalletClient['sendFunds']>[0]
+type ClaimNamespaceMutation = ExtractArgsFromParameters<
+  Parameters<AccountWalletClient['claimNamespace']>[0]
 >
 
-export type UseSendFundsParameters = {
+export type UseClaimNamespaceParameters = {
   accountId: AccountId | undefined
   chainName: string | undefined
-  mutation?: UseMutationParameters<DeliverTxResponse, unknown, WithdrawMutation>
+  mutation?: UseMutationParameters<
+    ExecuteResult,
+    unknown,
+    ClaimNamespaceMutation
+  >
 }
 
-export type UseWithdrawParameters = UseSendFundsParameters
-
 /**
- * Hook to send funds from an Account.
- * @param options send funds options.
+ * Execute a msg as the account.
+ * @param accountId
+ * @param chainName
+ * @param mutation
  */
-export function useSendFunds({
+export function useClaimNamespace({
   accountId,
   chainName,
   mutation,
-}: UseSendFundsParameters): UseMutationReturnType<
-  DeliverTxResponse,
+}: UseClaimNamespaceParameters): UseMutationReturnType<
+  ExecuteResult,
   unknown,
-  WithdrawMutation
+  ClaimNamespaceMutation
 > {
   const config = useConfig()
   const accountClient = config.useAccountWalletClient({
@@ -40,16 +45,11 @@ export function useSendFunds({
     accountId,
   })
   return useMutation(
-    ['sendFunds', chainName, accountId],
+    ['claimNamespace', chainName, accountId],
     ({ args, ...cosmWasmSignOptions }) => {
-      if (!accountClient) throw new Error('accountClient is not defined')
-      return accountClient.sendFunds({ ...args, ...cosmWasmSignOptions })
+      if (!accountClient) throw new Error('client is not defined')
+      return accountClient.claimNamespace({ ...cosmWasmSignOptions, ...args })
     },
     mutation,
   )
 }
-
-/**
- * @deprecated use `useSendFunds` instead.
- */
-export const useWithdraw = useSendFunds
