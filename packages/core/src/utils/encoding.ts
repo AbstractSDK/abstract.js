@@ -12,11 +12,11 @@ export const toUint8Array = (text: string) =>
   Uint8Array.from(Array.from(text).map((letter) => letter.charCodeAt(0)))
 
 export const toSha256 = async (text: string): Promise<Uint8Array> => {
-  const encoder = new TextEncoder()
-  const data = encoder.encode(text)
+  const data = toUtf8(text)
   const hash = await crypto.subtle.digest('SHA-256', data)
   return new Uint8Array(hash)
 }
+
 export type EncodedMsg = {
   readonly typeUrl: string
   readonly value: any

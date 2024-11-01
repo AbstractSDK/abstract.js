@@ -1,7 +1,7 @@
 import {
   ModuleId,
   chainIdToName,
-  getInstantiate2Address,
+  getInstantiate2AddressWithAccountId,
 } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { RegistryTypes } from '../../../codegen/abstract'
@@ -46,9 +46,9 @@ export async function getModuleInstantiate2AddressFromApi({
 
   const moduleCodeDetails = await cosmWasmClient.getCodeDetails(moduleCodeId)
 
-  return getInstantiate2Address(
+  return getInstantiate2AddressWithAccountId(
     moduleFactoryAddress,
     moduleCodeDetails.checksum,
-    { ...accountId, chainName },
+    accountId,
   )
 }

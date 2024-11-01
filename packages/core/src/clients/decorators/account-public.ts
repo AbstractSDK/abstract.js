@@ -3,7 +3,6 @@ import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { queryModule } from 'src/actions/account/public/query-module'
 import { getAccountAddressFromApi } from '../../actions/account/public/get-account-address-from-api'
 import { getAccountId } from '../../actions/account/public/get-account-id'
-import { getAccountInstantiate2AddressFromApi } from '../../actions/account/public/get-account-instantiate2-address-from-api'
 import { getAccountQueryClientFromApi } from '../../actions/account/public/get-account-query-client-from-api'
 import { getAccountSettings } from '../../actions/account/public/get-account-settings'
 import { getModuleAddress } from '../../actions/account/public/get-module-address'
@@ -59,16 +58,11 @@ export type AccountPublicActions = {
       typeof getModules
     >,
   ): ReturnType<typeof getModules>
-  getModuleInstantiate2Address(
+  predictModuleAddress(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getModuleInstantiate2AddressFromApi
     >,
   ): ReturnType<typeof getModuleInstantiate2AddressFromApi>
-  getAccountInstantiate2Address(
-    parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getAccountInstantiate2AddressFromApi
-    >,
-  ): ReturnType<typeof getAccountInstantiate2AddressFromApi>
   getNamespace(
     parameters?: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getNamespace
@@ -164,16 +158,8 @@ export function accountPublicActions(
         ...parameters,
         ...extra,
       }),
-    getModuleInstantiate2Address: ({ extra, ...parameters }) =>
+    predictModuleAddress: ({ extra, ...parameters }) =>
       getModuleInstantiate2AddressFromApi({
-        accountId,
-        cosmWasmClient,
-        apiUrl,
-        ...parameters,
-        ...extra,
-      }),
-    getAccountInstantiate2Address: ({ extra, ...parameters } = {}) =>
-      getAccountInstantiate2AddressFromApi({
         accountId,
         cosmWasmClient,
         apiUrl,

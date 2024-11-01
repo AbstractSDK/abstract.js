@@ -1,32 +1,48 @@
 import { instantiate2Address } from '@cosmjs/cosmwasm-stargate'
-import { fromHex } from '@cosmjs/encoding'
+import { fromHex, toUtf8 } from '@cosmjs/encoding'
 import { bech32 } from 'bech32'
-import { AccountId, registryAccountIdToString } from '../account-id'
+import { RegistryTypes } from '../../codegen/abstract'
+import { registryAccountIdToString } from '../account-id'
 import { toSha256 } from '../encoding'
 
 const SALT_POSTFIX = 'abstract'
 
-async function getAccountIdSalt(accountId: AccountId) {
+async function getAccountIdSalt(accountId: RegistryTypes.AccountId) {
   const sha256 = await toSha256(registryAccountIdToString(accountId))
-  const encoder = new TextEncoder()
 
-  return new Uint8Array([...sha256, ...encoder.encode(SALT_POSTFIX)])
+  return new Uint8Array([...sha256, ...toUtf8(SALT_POSTFIX)])
 }
 
 /**
- * Returns the instantiate2 address for the given account factory address, codeIdChecksum and accountId
- * @param moduleFactoryAddress - the module factory is the creator
+ * Returns the instantiate2 address for the given creator address, codeIdChecksum and accountId
+ * @param creatorAddress - address of the contract creator
  * @param codeIdChecksum - checksum of the code id of the contract expected to be instantiated
  * @param accountId
  */
-export async function getInstantiate2Address(
-  moduleFactoryAddress: string,
+export async function getInstantiate2AddressWithAccountId(
+  creatorAddress: string,
   codeIdChecksum: string,
-  accountId: AccountId,
+  accountId: RegistryTypes.AccountId,
+) {
+  const salt = await getAccountIdSalt(accountId)
+
+  return getInstantiate2Address(creatorAddress, codeIdChecksum, salt)
+}
+
+/**
+ * Returns the instantiate2 address for the given creator address, codeIdChecksum and salt
+ * @param creatorAddress - address of the contract creator
+ * @param codeIdChecksum - checksum of the code id of the contract expected to be instantiated
+ * @param salt - the salt to use for the address calculation
+ */
+export async function getInstantiate2Address(
+  creatorAddress: string,
+  codeIdChecksum: string,
+  salt: string | Uint8Array,
 ) {
   const hexedChecksum = fromHex(codeIdChecksum)
-  const salt = await getAccountIdSalt(accountId)
-  const prefix = bech32.decode(moduleFactoryAddress).prefix
+  const saltBytes = typeof salt === 'string' ? toUtf8(salt) : salt
+  const prefix = bech32.decode(creatorAddress).prefix
 
-  return instantiate2Address(hexedChecksum, moduleFactoryAddress, salt, prefix)
+  return instantiate2Address(hexedChecksum, creatorAddress, saltBytes, prefix)
 }

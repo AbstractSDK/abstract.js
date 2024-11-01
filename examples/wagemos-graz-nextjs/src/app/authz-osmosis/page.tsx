@@ -12,7 +12,7 @@ import {
   useCreateAccountMonarchy,
   useSignAndBroadcast,
 } from '@abstract-money/react'
-import { useModuleInstantiate2Address } from '@abstract-money/react'
+import { usePredictModuleAddress } from '@abstract-money/react'
 import { useAccount } from 'graz'
 import React, { useCallback, useEffect, useMemo } from 'react'
 import { Button } from '../../components/ui/button'
@@ -50,7 +50,7 @@ export default function AuthzPage() {
     })
   }, [account])
 
-  const { data: savingsAppAddress } = useModuleInstantiate2Address({
+  const { data: savingsAppAddress } = usePredictModuleAddress({
     accountId: stringToAccountId(TEST_SAVINGS_ACCOUNT_ID, CHAIN_NAME),
     chainName: CHAIN_NAME,
     args: {
