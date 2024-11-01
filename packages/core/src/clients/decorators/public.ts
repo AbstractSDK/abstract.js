@@ -15,7 +15,7 @@ import { getRegistryModuleData } from '../../actions/public/get-registry-module-
 import { getRegistryQueryClient } from '../../actions/public/get-registry-query-client'
 import { getRegistryQueryClientFromApi } from '../../actions/public/get-registry-query-client-from-api'
 import { getRemoteHostsFromApi } from '../../actions/public/get-remote-hosts-from-api'
-import { simulateRemoteMsg } from '../../actions/simulate-remote-msg'
+import { simulateRemoteCosmosMsg } from '../../actions/simulate-remote-cosmos-msg'
 import { ExtractAndPartializeParameters } from '../../types/parameters'
 
 type ExtractAndPartializeDecoratedParametersFromParameters<
@@ -62,11 +62,11 @@ export type PublicActions = {
       typeof getSimulationResultFromApi
     >,
   ): ReturnType<typeof getSimulationResultFromApi>
-  simulateRemoteMsg(
+  simulateRemoteCosmosMsg(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof simulateRemoteMsg
+      typeof simulateRemoteCosmosMsg
     >,
-  ): ReturnType<typeof simulateRemoteMsg>
+  ): ReturnType<typeof simulateRemoteCosmosMsg>
 }
 
 export function publicActions(
@@ -123,8 +123,8 @@ export function publicActions(
         ...parameters,
         ...extra,
       }),
-    simulateRemoteMsg: ({ extra, ...parameters }) =>
-      simulateRemoteMsg({
+    simulateRemoteCosmosMsg: ({ extra, ...parameters }) =>
+      simulateRemoteCosmosMsg({
         cosmWasmClient,
         apiUrl,
         ...parameters,

@@ -1,4 +1,5 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
+import { getIcaClientQueryClient } from 'src/actions/public/get-ica-client-query-client'
 import { getAbstractModuleAddressFromRegistry } from '../../actions/public/get-abstract-module-address-from-registry'
 import { getAccountQueryClient } from '../../actions/public/get-account-query-client'
 import { getAnsHostAddressFromRegistry } from '../../actions/public/get-ans-host-address-from-registry'
@@ -34,16 +35,6 @@ export type AbstractBaseActions = {
       typeof getAnsHostQueryClient
     >,
   ): ReturnType<typeof getAnsHostQueryClient>
-  getIbcClientQueryClient(
-    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getIbcClientQueryClient
-    >,
-  ): ReturnType<typeof getIbcClientQueryClient>
-  getAbstractModuleAddressFromRegistry(
-    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof getAbstractModuleAddressFromRegistry
-    >,
-  ): ReturnType<typeof getAbstractModuleAddressFromRegistry>
   getAnsHostAddressFromRegistry(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAnsHostAddressFromRegistry
@@ -54,6 +45,22 @@ export type AbstractBaseActions = {
       typeof getAnsHostQueryClientFromRegistry
     >,
   ): ReturnType<typeof getAnsHostQueryClientFromRegistry>
+  getIbcClientQueryClient(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof getIbcClientQueryClient
+    >,
+  ): ReturnType<typeof getIbcClientQueryClient>
+  getIcaClientQueryClient(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof getIcaClientQueryClient
+    >,
+  ): ReturnType<typeof getIcaClientQueryClient>
+  getAbstractModuleAddressFromRegistry(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof getAbstractModuleAddressFromRegistry
+    >,
+  ): ReturnType<typeof getAbstractModuleAddressFromRegistry>
+
   getRegistryModuleData(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getRegistryModuleData
@@ -90,6 +97,12 @@ export function abstractBaseActions(
       }),
     getIbcClientQueryClient: ({ extra, ...parameters }) =>
       getIbcClientQueryClient({
+        cosmWasmClient,
+        ...parameters,
+        ...extra,
+      }),
+    getIcaClientQueryClient: ({ extra, ...parameters }) =>
+      getIcaClientQueryClient({
         cosmWasmClient,
         ...parameters,
         ...extra,

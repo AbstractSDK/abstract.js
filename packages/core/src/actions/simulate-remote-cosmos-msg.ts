@@ -6,7 +6,7 @@ import { getCometClientFromApi } from './get-comet-client-from-api'
 import { getRegistryAddressFromApi } from './get-registry-address-from-api'
 import { getIbcHostAddressFromRegistry } from './public/get-ibc-host-address-from-registry'
 
-export type SimulateRemoteMsgParameters = {
+export type SimulateRemoteCosmosMsgParameters = {
   apiUrl: string
   hostChainName: string
   msgs: MaybeArray<AccountTypes.CosmosMsgForEmpty>
@@ -21,11 +21,11 @@ export type SimulateRemoteMsgParameters = {
  * @param msgs
  * @experimental
  */
-export async function simulateRemoteMsg({
+export async function simulateRemoteCosmosMsg({
   apiUrl,
   hostChainName,
   msgs,
-}: SimulateRemoteMsgParameters) {
+}: SimulateRemoteCosmosMsgParameters) {
   // TODO: these queries could be combined
   const remoteVcAddress = await getRegistryAddressFromApi({
     apiUrl,

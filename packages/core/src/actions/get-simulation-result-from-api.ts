@@ -1,6 +1,6 @@
 import { AccountTypes } from '../codegen/abstract'
 import { MaybeArray } from '../types/utils'
-import { simulateWasmCosmosMsgs } from '../utils/cosmos'
+import { simulateWasmCosmosMsgs } from '../utils/cosmos/simulate-cosmos-msgs'
 import { getCometClientFromApi } from './get-comet-client-from-api'
 
 export type GetSimulationResultParameters = {
