@@ -3,6 +3,7 @@ import { getSimulationResultFromApi } from '../../actions/get-simulation-result-
 import { getAbstractModuleAddressFromRegistry } from '../../actions/public/get-abstract-module-address-from-registry'
 import { getAbstractModuleVersion } from '../../actions/public/get-abstract-module-version'
 import { getAccountAddressesFromApi } from '../../actions/public/get-account-addresses-from-api'
+import { getAccountInstantiate2AddressFromApi } from '../../actions/public/get-account-instantiate2-address-from-api'
 import { getAccountQueryClient } from '../../actions/public/get-account-query-client'
 import { getAnsHostAddressFromRegistry } from '../../actions/public/get-ans-host-address-from-registry'
 import { getAnsHostQueryClient } from '../../actions/public/get-ans-host-query-client'
@@ -27,11 +28,16 @@ type ExtractAndPartializeDecoratedParametersFromParameters<
  * Also see {@link AbstractBaseActions} for more public query actions.
  */
 export type PublicActions = {
-  getAccountsBaseAddresses(
+  getAccountsAddresses(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAccountAddressesFromApi
     >,
   ): ReturnType<typeof getAccountAddressesFromApi>
+  predictAccountAddress(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof getAccountInstantiate2AddressFromApi
+    >,
+  ): ReturnType<typeof getAccountInstantiate2AddressFromApi>
   getAbstractModuleVersion(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getAbstractModuleVersion
@@ -57,6 +63,7 @@ export type PublicActions = {
       typeof getRemoteHostsFromApi
     >,
   ): ReturnType<typeof getRemoteHostsFromApi>
+
   getSimulationResult(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof getSimulationResultFromApi
@@ -74,8 +81,15 @@ export function publicActions(
   apiUrl: string,
 ): PublicActions {
   return {
-    getAccountsBaseAddresses: ({ extra, ...parameters }) =>
+    getAccountsAddresses: ({ extra, ...parameters }) =>
       getAccountAddressesFromApi({
+        cosmWasmClient,
+        apiUrl,
+        ...parameters,
+        ...extra,
+      }),
+    predictAccountAddress: ({ extra, ...parameters }) =>
+      getAccountInstantiate2AddressFromApi({
         cosmWasmClient,
         apiUrl,
         ...parameters,

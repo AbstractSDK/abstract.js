@@ -11,19 +11,17 @@ import {
 } from '../../../types/queries'
 
 type QueryFnData = Awaited<
-  ReturnType<AccountPublicClient['getModuleInstantiate2Address']>
+  ReturnType<AccountPublicClient['predictModuleAddress']>
 >
 
 type QueryError = unknown
 type QueryData = QueryFnData
 type QueryKey = readonly [
-  'moduleInstantiate2Address',
+  'predictModuleAddress',
   AccountPublicClient | undefined,
-  UseModuleInstantiate2AddressParameters['args'],
+  UsePredictModuleAddressParameters['args'],
   (
-    | Parameters<
-        AccountPublicClient['getModuleInstantiate2Address']
-      >[0]['extra']
+    | Parameters<AccountPublicClient['predictModuleAddress']>[0]['extra']
     | undefined
   ),
 ]
@@ -36,30 +34,28 @@ type QueryOptions<TData = QueryData> = UseQueryParameters<
 >
 type QueryResult<TData = QueryData> = UseQueryReturnType<TData, QueryError>
 
-export type UseModuleInstantiate2AddressParameters<TData = QueryData> =
-  WithArgs<
-    Parameters<AccountPublicClient['getModuleInstantiate2Address']>[0]
-  > & {
-    query?: QueryOptions<TData>
-    chainName: string | undefined
-    accountId: AccountId | undefined
-  }
+export type UsePredictModuleAddressParameters<TData = QueryData> = WithArgs<
+  Parameters<AccountPublicClient['predictModuleAddress']>[0]
+> & {
+  query?: QueryOptions<TData>
+  chainName: string | undefined
+  accountId: AccountId | undefined
+}
 
-export function useModuleInstantiate2Address<TData = QueryData>({
+export function usePredictModuleAddress<TData = QueryData>({
   args,
   accountId,
   chainName,
   extra,
   query = {},
-}: UseModuleInstantiate2AddressParameters<TData>): QueryResult<TData> {
+}: UsePredictModuleAddressParameters<TData>): QueryResult<TData> {
   const config = useConfig()
   const accountPublicClient = config.useAccountPublicClient({
     accountId,
     chainName,
   })
   const queryKey = React.useMemo(
-    () =>
-      ['moduleInstantiate2Address', accountPublicClient, args, extra] as const,
+    () => ['predictModuleAddress', accountPublicClient, args, extra] as const,
     [accountPublicClient, args, extra],
   )
 
@@ -72,7 +68,7 @@ export function useModuleInstantiate2Address<TData = QueryData>({
       if (!accountPublicClient) throw new Error('No client')
       if (!args) throw new Error('No args')
 
-      return accountPublicClient.getModuleInstantiate2Address({
+      return accountPublicClient.predictModuleAddress({
         ...args,
         ...extra,
       })
@@ -86,5 +82,10 @@ export function useModuleInstantiate2Address<TData = QueryData>({
 /**
  * @deprecated
  */
-const useModuleInstantiate2AddressFromApi = useModuleInstantiate2Address
-export { useModuleInstantiate2AddressFromApi }
+const useModuleInstantiate2AddressFromApi = usePredictModuleAddress
+/**
+ * @deprecated
+ */
+const useModuleInstantiate2Address = usePredictModuleAddress
+
+export { useModuleInstantiate2AddressFromApi, useModuleInstantiate2Address }

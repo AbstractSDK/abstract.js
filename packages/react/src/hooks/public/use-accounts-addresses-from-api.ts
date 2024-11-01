@@ -10,7 +10,7 @@ import {
 } from '../../types/queries'
 import { MaybeChainName } from './index'
 
-type QueryFnData = Awaited<ReturnType<PublicClient['getAccountsBaseAddresses']>>
+type QueryFnData = Awaited<ReturnType<PublicClient['getAccountsAddresses']>>
 
 type QueryError = unknown
 type QueryData = QueryFnData
@@ -18,11 +18,9 @@ type QueryKey = readonly [
   'accountAddress',
   MaybeChainName,
   PublicClient | undefined,
-  WithArgs<Parameters<PublicClient['getAccountsBaseAddresses']>[0]>['args'],
+  WithArgs<Parameters<PublicClient['getAccountsAddresses']>[0]>['args'],
   (
-    | NonNullable<
-        Parameters<PublicClient['getAccountsBaseAddresses']>[0]
-      >['extra']
+    | NonNullable<Parameters<PublicClient['getAccountsAddresses']>[0]>['extra']
     | undefined
   ),
 ]
@@ -33,18 +31,19 @@ type QueryOptions<TData = QueryData> = Omit<
 >
 type QueryResult<TData = QueryData> = UseQueryReturnType<TData, QueryError>
 
-export type UseAccountsBaseAddressesFromApiParameters<TData = QueryData> =
-  WithArgs<Parameters<PublicClient['getAccountsBaseAddresses']>[0]> & {
-    chainName?: string | undefined
-    query?: QueryOptions<TData>
-  }
+export type UseAccountsAddressesFromApiParameters<TData = QueryData> = WithArgs<
+  Parameters<PublicClient['getAccountsAddresses']>[0]
+> & {
+  chainName?: string | undefined
+  query?: QueryOptions<TData>
+}
 
-export function useAccountsBaseAddressesFromApi<TData = QueryData>({
+export function useAccountsAddressesFromApi<TData = QueryData>({
   chainName,
   args,
   extra,
   query = {},
-}: UseAccountsBaseAddressesFromApiParameters<TData>): QueryResult<TData> {
+}: UseAccountsAddressesFromApiParameters<TData>): QueryResult<TData> {
   const config = useConfig()
   const accountPublicClient = config.usePublicClient({
     chainName,
@@ -63,7 +62,7 @@ export function useAccountsBaseAddressesFromApi<TData = QueryData>({
     ({ queryKey: [_, _chainName, accountPublicClient, args, extra] }) => {
       if (!accountPublicClient || !args) throw new Error('No client or args')
 
-      return accountPublicClient.getAccountsBaseAddresses({ extra, ...args })
+      return accountPublicClient.getAccountsAddresses({ extra, ...args })
     },
     [],
   )
