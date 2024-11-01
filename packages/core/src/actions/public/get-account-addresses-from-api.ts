@@ -2,7 +2,7 @@ import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { RegistryTypes } from '../../codegen/abstract'
 import { getRegistryQueryClientFromApi } from './get-registry-query-client-from-api'
 
-export type getAccountsAddressesFromApiParameters = {
+export type GetAccountsAddressesFromApiParameters = {
   accountIds: RegistryTypes.AccountId[]
   cosmWasmClient: CosmWasmClient
   apiUrl: string
@@ -12,7 +12,7 @@ export async function getAccountAddressesFromApi({
   accountIds,
   cosmWasmClient,
   apiUrl,
-}: getAccountsAddressesFromApiParameters) {
+}: GetAccountsAddressesFromApiParameters) {
   const registryQueryClient = await getRegistryQueryClientFromApi({
     cosmWasmClient,
     apiUrl,
