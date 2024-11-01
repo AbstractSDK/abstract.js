@@ -10,24 +10,26 @@ import {
 } from '../../../types/queries'
 
 type WithdrawMutation = ExtractArgsFromParameters<
-  Parameters<AccountWalletClient['withdraw']>[0]
+  Parameters<AccountWalletClient['sendFunds']>[0]
 >
 
-export type UseWithdrawParameters = {
+export type UseSendFundsParameters = {
   accountId: AccountId | undefined
   chainName: string | undefined
   mutation?: UseMutationParameters<DeliverTxResponse, unknown, WithdrawMutation>
 }
 
+export type UseWithdrawParameters = UseSendFundsParameters
+
 /**
- * Hook to withdraw to an Account.
- * @param options withdraw options.
+ * Hook to send funds from an Account.
+ * @param options send funds options.
  */
-export function useWithdraw({
+export function useSendFunds({
   accountId,
   chainName,
   mutation,
-}: UseWithdrawParameters): UseMutationReturnType<
+}: UseSendFundsParameters): UseMutationReturnType<
   DeliverTxResponse,
   unknown,
   WithdrawMutation
@@ -38,11 +40,16 @@ export function useWithdraw({
     accountId,
   })
   return useMutation(
-    ['withdraw', chainName, accountId],
+    ['sendFunds', chainName, accountId],
     ({ args, ...cosmWasmSignOptions }) => {
       if (!accountClient) throw new Error('accountClient is not defined')
-      return accountClient.withdraw({ ...args, ...cosmWasmSignOptions })
+      return accountClient.sendFunds({ ...args, ...cosmWasmSignOptions })
     },
     mutation,
   )
 }
+
+/**
+ * @deprecated use `useSendFunds` instead.
+ */
+export const useWithdraw = useSendFunds

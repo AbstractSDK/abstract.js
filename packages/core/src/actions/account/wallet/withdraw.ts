@@ -4,14 +4,31 @@ import { getAccountAddressFromApi } from '../public/get-account-address-from-api
 import { execute } from './execute'
 import { BaseAccountWalletParameters } from './types'
 
-export type WithdrawParameters = WithCosmWasmSignOptions<
+export type SendFundsParameters = WithCosmWasmSignOptions<
   BaseAccountWalletParameters & {
     assets: Asset[]
     recipient: string
   }
 >
 
-export async function withdraw({
+/**
+ * @deprecated use `SendFundsParameters` instead
+ */
+export type WithdrawParameters = SendFundsParameters
+
+/**
+ * Send funds or withdraw funds from the account.
+ * @param fee
+ * @param memo
+ * @param accountId
+ * @param signingCosmWasmClient
+ * @param apiUrl
+ * @param sender
+ * @param assets
+ * @param recipient
+ * @param funds - funds included from the WALLET.
+ */
+export async function sendFunds({
   fee,
   memo,
   accountId,
@@ -20,7 +37,8 @@ export async function withdraw({
   sender,
   assets,
   recipient,
-}: WithdrawParameters) {
+  funds,
+}: SendFundsParameters) {
   const account = await getAccountAddressFromApi({
     accountId,
     cosmWasmClient: signingCosmWasmClient,
@@ -41,5 +59,11 @@ export async function withdraw({
     msgs: transferMsgs,
     fee,
     memo,
+    funds,
   })
 }
+
+/**
+ * @deprecated use `sendFunds` instead
+ */
+export const withdraw = sendFunds

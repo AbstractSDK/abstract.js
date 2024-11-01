@@ -19,7 +19,7 @@ import { updateInfo } from '../../actions/account/wallet/update-info'
 import { updateOwnership } from '../../actions/account/wallet/update-ownership'
 import { updateStatus } from '../../actions/account/wallet/update-status'
 import { upgradeModules } from '../../actions/account/wallet/upgrade-modules'
-import { withdraw } from '../../actions/account/wallet/withdraw'
+import { sendFunds, withdraw } from '../../actions/account/wallet/withdraw'
 import { RegistryTypes } from '../../codegen/abstract/index'
 import { ExtractAndPartializeParameters } from '../../types/parameters'
 
@@ -54,11 +54,20 @@ export type AccountWalletActions = {
       typeof deposit
     >,
   ): ReturnType<typeof deposit>
+  /**
+   * @deprecated
+   * @see sendFunds
+   */
   withdraw(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof withdraw
     >,
   ): ReturnType<typeof withdraw>
+  sendFunds(
+    parameters: ExtractAndPartializeDecoratedParametersFromParameters<
+      typeof sendFunds
+    >,
+  ): ReturnType<typeof sendFunds>
   execute(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
       typeof execute
@@ -276,6 +285,15 @@ export function accountWalletActions(
       }),
     withdraw: ({ extra, ...parameters }) =>
       withdraw({
+        accountId,
+        signingCosmWasmClient,
+        apiUrl,
+        sender,
+        ...parameters,
+        ...extra,
+      }),
+    sendFunds: ({ extra, ...parameters }) =>
+      sendFunds({
         accountId,
         signingCosmWasmClient,
         apiUrl,

@@ -1,6 +1,7 @@
 import { AccountWalletClient } from '@abstract-money/core/clients'
 import { AccountId } from '@abstract-money/core/utils'
 import { ExecuteResult } from '@cosmjs/cosmwasm-stargate'
+import { DeliverTxResponse } from '@cosmjs/stargate'
 import { useMutation } from '@tanstack/react-query'
 import { useConfig } from '../../../contexts'
 import { ExtractArgsFromParameters } from '../../../types/args'
@@ -9,34 +10,34 @@ import {
   UseMutationReturnType,
 } from '../../../types/queries'
 
-type InstallModulesMutation = ExtractArgsFromParameters<
-  Parameters<AccountWalletClient['installModules']>[0]
+type ClaimNamespaceMutation = ExtractArgsFromParameters<
+  Parameters<AccountWalletClient['claimNamespace']>[0]
 >
 
-export type UseInstallModulesParameters = {
+export type UseClaimNamespaceParameters = {
   accountId: AccountId | undefined
   chainName: string | undefined
   mutation?: UseMutationParameters<
     ExecuteResult,
     unknown,
-    InstallModulesMutation
+    ClaimNamespaceMutation
   >
 }
 
 /**
- * Install modules on an account.
+ * Claim a namespace from version control on the account.
  * @param accountId
  * @param chainName
  * @param mutation
  */
-export function useInstallModules({
+export function useClaimNamespace({
   accountId,
   chainName,
   mutation,
-}: UseInstallModulesParameters): UseMutationReturnType<
+}: UseClaimNamespaceParameters): UseMutationReturnType<
   ExecuteResult,
   unknown,
-  InstallModulesMutation
+  ClaimNamespaceMutation
 > {
   const config = useConfig()
   const accountClient = config.useAccountWalletClient({
@@ -44,10 +45,10 @@ export function useInstallModules({
     accountId,
   })
   return useMutation(
-    ['installModules', chainName, accountId],
+    ['claimNamespace', chainName, accountId],
     ({ args, ...cosmWasmSignOptions }) => {
       if (!accountClient) throw new Error('client is not defined')
-      return accountClient.installModules({ ...cosmWasmSignOptions, ...args })
+      return accountClient.claimNamespace({ ...cosmWasmSignOptions, ...args })
     },
     mutation,
   )
