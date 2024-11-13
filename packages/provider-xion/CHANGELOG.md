@@ -1,5 +1,15 @@
 # @abstract-money/provider-xion
 
+## 3.0.1
+
+### Patch Changes
+
+- [#143](https://github.com/AbstractSDK/abstract.js/pull/143) [`1ce9029`](https://github.com/AbstractSDK/abstract.js/commit/1ce9029f93b885b8381096ff8c89b456a5385f4e) Thanks [@adairrr](https://github.com/adairrr)! - Don't import from src/types in xion-provider
+
+- Updated dependencies []:
+  - @abstract-money/core@3.3.1
+  - @abstract-money/react@2.3.1
+
 ## 3.0.0
 
 ### Patch Changes
