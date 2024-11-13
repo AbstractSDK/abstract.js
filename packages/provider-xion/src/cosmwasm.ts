@@ -1,6 +1,6 @@
 import { chainNameToId } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import type { UseQueryOptions } from '@tanstack/react-query/src/types'
+import type { UseQueryOptions } from '@tanstack/react-query'
 
 export function getCosmWasmClientQueryKey(chainName: string) {
   return ['cosmWasmClient', chainName]
