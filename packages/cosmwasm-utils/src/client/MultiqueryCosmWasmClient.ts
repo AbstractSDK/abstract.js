@@ -119,7 +119,10 @@ export class MultiqueryCosmWasmClient extends CosmWasmClient {
     return new Promise((resolve, reject) => {
       this.queryQueue.push({ address, queryMsg, resolve, reject })
 
-      if (this.queryQueue.length >= this.batchSizeLimit) {
+      if (
+        this.queryQueue.length >= this.batchSizeLimit ||
+        address === this.multiqueryContractAddress
+      ) {
         this.processQueryQueue()
       }
     })
@@ -149,6 +152,9 @@ export class MultiqueryCosmWasmClient extends CosmWasmClient {
       address,
       data: jsonToBinary(queryMsg),
     }))
+
+    console.log('calls length', calls.length)
+    console.log('calls', calls)
 
     const result = (await super.queryContractSmart(
       this.multiqueryContractAddress,
