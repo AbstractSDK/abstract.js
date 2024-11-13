@@ -1,5 +1,13 @@
 # @abstract-money/cosmwasm-utils
 
+## 0.3.2
+
+### Patch Changes
+
+- [#144](https://github.com/AbstractSDK/abstract.js/pull/144) [`e90ce9e`](https://github.com/AbstractSDK/abstract.js/commit/e90ce9eede700abbf67dc52404971485d0b7fe56) Thanks [@adairrr](https://github.com/adairrr)! - Add a multiquery cosmwasm client for more efficient queries
+
+- [#143](https://github.com/AbstractSDK/abstract.js/pull/143) [`c937b82`](https://github.com/AbstractSDK/abstract.js/commit/c937b82e457817ff2099ae78a72aee27f678a7e0) Thanks [@adairrr](https://github.com/adairrr)! - Throw proper error in rawQury
+
 ## 0.3.1
 
 ### Patch Changes
