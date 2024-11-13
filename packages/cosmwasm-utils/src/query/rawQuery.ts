@@ -25,6 +25,7 @@ export const rawQuery = async <TResponse = unknown>({
       return res
     } catch (e) {
       console.error('Could not parse response', e, fromAscii(response))
+      throw e
     }
   })
 }
