@@ -1,6 +1,6 @@
 {
   "name": "@abstract-money/cosmwasm-utils",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Cosmwasm utils",
   "author": "adairrr <adair@abstract.money>",
   "license": "MIT",

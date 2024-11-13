@@ -1,5 +1,11 @@
 # @abstract-money/cosmwasm-utils
 
+## 0.3.3
+
+### Patch Changes
+
+- [#146](https://github.com/AbstractSDK/abstract.js/pull/146) [`d37943d`](https://github.com/AbstractSDK/abstract.js/commit/d37943d4fa3cfc12ab040c6958f43176409db7ec) Thanks [@adairrr](https://github.com/adairrr)! - Disallow aggregated aggregated queries
+
 ## 0.3.2
 
 ### Patch Changes
