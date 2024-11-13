@@ -1,5 +1,13 @@
 # @abstract-money/provider-xion
 
+## 3.0.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @abstract-money/core@3.3.2
+  - @abstract-money/react@2.3.2
+
 ## 3.0.1
 
 ### Patch Changes
