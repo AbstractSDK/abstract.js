@@ -29,11 +29,11 @@
   },
   "type": "module",
   "devDependencies": {
-    "@abstract-money/react": "workspace:*",
     "@abstract-money/core": "workspace:*",
+    "@abstract-money/react": "workspace:*",
+    "@burnt-labs/abstraxion": "=1.0.0-alpha.50",
     "@cosmjs/cosmwasm-stargate": "0.32.3",
     "@types/node": "^20.0.0",
-    "@burnt-labs/abstraxion": "=1.0.0-alpha.50",
     "rimraf": "^3.0.0"
   },
   "main": "dist/index.js",
@@ -50,9 +50,12 @@
   ],
   "sideEffects": false,
   "peerDependencies": {
-    "@abstract-money/react": "workspace:*",
     "@abstract-money/core": "workspace:*",
+    "@abstract-money/react": "workspace:*",
     "@burnt-labs/abstraxion": "^1.0.0-alpha.50",
     "typescript": ">=5.0.4"
+  },
+  "dependencies": {
+    "esbuild-plugin-polyfill-node": "^0.3.0"
   }
 }

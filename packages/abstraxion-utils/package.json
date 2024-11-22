@@ -23,7 +23,8 @@
     "@cosmjs/math": "0.32.3",
     "protobufjs": "^7.4.0",
     "long": "^5.2.3",
-    "type-fest": "^4.2.6"
+    "type-fest": "^4.2.6",
+    "@abstract-money/core": "workspace:*"
   },
   "peerDependenciesMeta": {
     "typescript": {
@@ -31,8 +32,7 @@
     }
   },
   "peerDependencies": {
-    "typescript": ">=5.0.4",
-    "@abstract-money/core": "workspace:*"
+    "typescript": ">=5.0.4"
   },
   "devDependencies": {
     "rimraf": "^3.0.0",
@@ -43,36 +43,15 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": {
-        "types": "./dist/index.d.ts",
-        "import": "./dist/index.js"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "require": "./dist/index.cjs"
-      }
+      "default": "./dist/index.js"
     },
     "./actions": {
       "types": "./dist/actions/index.d.ts",
-      "import": {
-        "types": "./dist/actions/index.d.ts",
-        "import": "./dist/actions/index.js"
-      },
-      "require": {
-        "types": "./dist/actions/index.d.cts",
-        "require": "./dist/actions/index.cjs"
-      }
+      "default": "./dist/actions/index.js"
     },
     "./decorators": {
       "types": "./dist/decorators/index.d.ts",
-      "import": {
-        "types": "./dist/decorators/index.d.ts",
-        "import": "./dist/decorators/index.js"
-      },
-      "require": {
-        "types": "./dist/decorators/index.d.cts",
-        "require": "./dist/decorators/index.cjs"
-      }
+      "default": "./dist/decorators/index.js"
     },
     "./package.json": "./package.json"
   },

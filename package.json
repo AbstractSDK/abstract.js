@@ -42,7 +42,6 @@
     "tsup": "^8.0.0",
     "turbo": "1.10.9",
     "tsx": "^4.7.1",
-
     "typescript": "^5.0.4"
   },
   "simple-git-hooks": {

@@ -9,7 +9,8 @@ export default defineConfig(
     outDir: 'dist',
     //dev: process.env.DEV === 'true',
     entry: ['src/index.ts', 'src/actions/index.ts', 'src/decorators/index.ts'],
+    // external: [...Object.keys(dependencies)],
     external: [...Object.keys(dependencies), ...Object.keys(peerDependencies)],
-    format: ['esm', 'cjs'],
+    format: ['esm'],
   }),
 )
