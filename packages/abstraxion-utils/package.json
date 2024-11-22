@@ -1,0 +1,60 @@
+{
+  "name": "@abstract-money/abstraxion-utils",
+  "version": "0.0.1",
+  "description": "Abstraxion utils",
+  "author": "adairrr <adair@abstract.money>",
+  "license": "MIT",
+  "repository": "",
+  "engines": {
+    "node": ">=10"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsup",
+    "clean": "rimraf dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@cosmjs/encoding": "^0.32.3",
+    "@cosmjs/stargate": "^0.32.3",
+    "@cosmjs/proto-signing": "^0.32.3",
+    "@cosmjs/tendermint-rpc": "^0.32.3",
+    "@cosmjs/math": "^0.32.3",
+    "protobufjs": "^7.4.0",
+    "long": "^5.2.3"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "peerDependencies": {
+    "typescript": ">=5.0.4",
+    "@abstract-money/core": "workspace:*"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.0",
+    "@types/node": "^20.0.0",
+    "@cosmjs/amino": "^0.32.3"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "require": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "/dist"
+  ],
+  "sideEffects": false
+}

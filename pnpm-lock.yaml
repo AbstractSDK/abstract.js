@@ -332,6 +332,46 @@ importers:
         specifier: ^5.0.4
         version: 5.0.4
 
+  packages/abstraxion-utils:
+    dependencies:
+      '@abstract-money/core':
+        specifier: workspace:*
+        version: link:../core
+      '@cosmjs/encoding':
+        specifier: ^0.32.3
+        version: 0.32.3
+      '@cosmjs/math':
+        specifier: ^0.32.3
+        version: 0.32.4
+      '@cosmjs/proto-signing':
+        specifier: ^0.32.3
+        version: 0.32.3
+      '@cosmjs/stargate':
+        specifier: ^0.32.3
+        version: 0.32.3
+      '@cosmjs/tendermint-rpc':
+        specifier: ^0.32.3
+        version: 0.32.3
+      long:
+        specifier: ^5.2.3
+        version: 5.2.3
+      protobufjs:
+        specifier: ^7.4.0
+        version: 7.4.0
+      typescript:
+        specifier: '>=5.0.4'
+        version: 5.0.4
+    devDependencies:
+      '@cosmjs/amino':
+        specifier: ^0.32.3
+        version: 0.32.4
+      '@types/node':
+        specifier: ^20.0.0
+        version: 20.0.0
+      rimraf:
+        specifier: ^3.0.0
+        version: 3.0.0
+
   packages/bundle-require:
     dependencies:
       load-tsconfig:
@@ -3094,11 +3134,11 @@ packages:
     dependencies:
       '@cosmjs/amino': 0.32.4
       '@cosmjs/crypto': 0.32.4
-      '@cosmjs/encoding': 0.32.3
+      '@cosmjs/encoding': 0.32.4
       '@cosmjs/math': 0.32.4
-      '@cosmjs/proto-signing': 0.32.3
-      '@cosmjs/stargate': 0.32.3
-      '@cosmjs/tendermint-rpc': 0.32.3
+      '@cosmjs/proto-signing': 0.32.4
+      '@cosmjs/stargate': 0.32.4
+      '@cosmjs/tendermint-rpc': 0.32.4
       '@cosmjs/utils': 0.32.4
       cosmjs-types: 0.9.0
       pako: 2.1.0
@@ -3310,6 +3350,11 @@ packages:
     dependencies:
       bn.js: 5.2.1
 
+  /@cosmjs/math@0.32.3:
+    resolution: {integrity: sha512-amumUtZs8hCCnV+lSBaJIiZkGabQm22QGg/IotYrhcmoOEOjt82n7hMNlNXRs7V6WLMidGrGYcswB5zcmp0Meg==}
+    dependencies:
+      bn.js: 5.2.1
+
   /@cosmjs/math@0.32.4:
     resolution: {integrity: sha512-++dqq2TJkoB8zsPVYCvrt88oJWsy1vMOuSOKcdlnXuOA/ASheTJuYy4+oZlTQ3Fr8eALDLGGPhJI02W2HyAQaw==}
     dependencies:
@@ -3353,7 +3398,7 @@ packages:
     dependencies:
       '@cosmjs/amino': 0.32.4
       '@cosmjs/crypto': 0.32.4
-      '@cosmjs/encoding': 0.32.3
+      '@cosmjs/encoding': 0.32.4
       '@cosmjs/math': 0.32.4
       '@cosmjs/utils': 0.32.4
       cosmjs-types: 0.9.0
@@ -3482,9 +3527,9 @@ packages:
     resolution: {integrity: sha512-xeprW+VR9xKGstqZg0H/KBZoUp8/FfFyS9ljIUTLM/UINjP2MhiwncANPS2KScfJVepGufUKk0/phHUeIBSEkw==}
     dependencies:
       '@cosmjs/crypto': 0.32.4
-      '@cosmjs/encoding': 0.32.4
+      '@cosmjs/encoding': 0.32.3
       '@cosmjs/json-rpc': 0.32.4
-      '@cosmjs/math': 0.32.4
+      '@cosmjs/math': 0.32.3
       '@cosmjs/socket': 0.32.4
       '@cosmjs/stream': 0.32.4
       '@cosmjs/utils': 0.32.4
@@ -15116,6 +15161,25 @@ packages:
       '@types/long': 4.0.2
       '@types/node': 20.0.0
       long: 4.0.0
+
+  /protobufjs@7.4.0:
+    resolution: {integrity: sha512-mRUWCc3KUU4w1jU8sGxICXH/gNS94DvI1gxqDvBzhj1JpcsimQkYiOJfwsPUykUI5ZaspFbSgmBLER8IrQ3tqw==}
+    engines: {node: '>=12.0.0'}
+    requiresBuild: true
+    dependencies:
+      '@protobufjs/aspromise': 1.1.2
+      '@protobufjs/base64': 1.1.2
+      '@protobufjs/codegen': 2.0.4
+      '@protobufjs/eventemitter': 1.1.0
+      '@protobufjs/fetch': 1.1.0
+      '@protobufjs/float': 1.0.2
+      '@protobufjs/inquire': 1.1.0
+      '@protobufjs/path': 1.1.2
+      '@protobufjs/pool': 1.1.0
+      '@protobufjs/utf8': 1.1.0
+      '@types/node': 20.0.0
+      long: 5.2.3
+    dev: false
 
   /proxy-compare@2.5.1:
     resolution: {integrity: sha512-oyfc0Tx87Cpwva5ZXezSp5V9vht1c7dZBhvuV/y3ctkgMVUmiAGDVeeB0dKhGSyT0v1ZTEQYpe/RXlBVBNuCLA==}
