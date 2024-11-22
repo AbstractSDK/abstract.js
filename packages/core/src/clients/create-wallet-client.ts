@@ -7,6 +7,7 @@ import {
   PublicClientConfig,
   createPublicClient,
 } from './create-public-client'
+import { PublicActions } from './decorators/public'
 import { type WalletActions, walletActions } from './decorators/wallet'
 
 export type WalletClientConfig = Omit<PublicClientConfig, 'cosmWasmClient'> & {
@@ -14,7 +15,7 @@ export type WalletClientConfig = Omit<PublicClientConfig, 'cosmWasmClient'> & {
   sender: string
 }
 
-export type WalletClient = Evaluate<PublicClient & Client<WalletActions>>
+export type WalletClient = Evaluate<Client<WalletActions>>
 
 /**
  * Create a signing client to interact with the Abstract infrastructure.

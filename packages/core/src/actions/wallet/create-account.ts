@@ -30,7 +30,7 @@ export type CreateAccountParameters = WithCosmWasmSignOptions<
           install_modules?: MergedModuleInstallConfig[]
         }
       >,
-      'owner'
+      'owner' | 'code_id'
     >
   >
 >
@@ -44,6 +44,7 @@ export async function createAccount({
   namespace,
   authenticator,
   link,
+  codeId,
   accountId,
   enableIbc,
   owner,
@@ -82,6 +83,7 @@ export async function createAccount({
   })
 
   const instantiateMsg: AccountTypes.InstantiateMsg = {
+    code_id: codeId ?? accountCodeId,
     owner: owner || {
       monarchy: {
         monarch: sender,

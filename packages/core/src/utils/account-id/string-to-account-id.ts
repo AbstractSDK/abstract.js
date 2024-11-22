@@ -15,12 +15,22 @@ export function stringToAccountId(
 
   const accountSequence = Number.parseInt(sequenceStr)
 
-  if (chainString === 'local' && !chainName) {
-    throw new Error('chainName must be provided for local account ids')
+  if (chainString === 'local') {
+    if (!chainName)
+      throw new Error('chainName must be provided for local account ids')
+    return {
+      chainName,
+      seq: accountSequence,
+      trace: 'local',
+    }
   }
 
   const splitChainString = chainString.split(ACCOUNT_ID_CHAIN_DELIMITER)
-  const accountSourceChain = splitChainString[splitChainString.length - 1]
+  if (splitChainString.some((s) => !s)) {
+    throw new Error(`Invalid chain string in account id ${value}`)
+  }
+  const accountSourceChain =
+    splitChainString.length > 1 ? splitChainString[0] : chainString
   if (!accountSourceChain) {
     throw new Error(
       `Account must have source chain when not a local one: ${value}`,
@@ -44,7 +54,8 @@ export function stringToAccountId(
     chainName: accountSourceChain,
     seq: accountSequence,
     trace: {
-      remote: splitChainString.slice(0, splitChainString.length - 1),
+      // The remote trace is reversed
+      remote: splitChainString.slice(1, splitChainString.length).reverse(),
     },
   }
 }
