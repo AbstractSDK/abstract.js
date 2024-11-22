@@ -4,7 +4,11 @@ import { OverrideProperties } from 'type-fest'
 import { AccountTypes, RegistryTypes } from '../../codegen/abstract'
 import { WithCosmWasmSignOptions } from '../../types/parameters'
 import { WithOptional } from '../../types/utils'
-import { ABSTRACT_NAMESPACE, accountIdToParameter } from '../../utils'
+import {
+  ABSTRACT_NAMESPACE,
+  abstractModuleId,
+  accountIdToParameter,
+} from '../../utils'
 import { parseCreateAccountExecuteResult } from '../../utils/account-factory/parse-create-account-execute-result'
 import { chainIdToName } from '../../utils/chain-registry'
 import {
@@ -15,25 +19,29 @@ import { getRegistryAddressFromApi } from '../get-registry-address-from-api'
 import { getAppModuleCodeIdFromRegistry } from '../public/get-app-module-code-id-from-registry'
 import { CommonModuleNames } from '../public/types'
 
+export type CreateAccountArguments = {
+  enableIbc?: boolean
+} & CamelCasedProperties<
+  WithOptional<
+    OverrideProperties<
+      AccountTypes.InstantiateMsg,
+      {
+        account_id?: RegistryTypes.AccountId
+        install_modules?: MergedModuleInstallConfig[]
+      }
+    >,
+    'owner' | 'code_id'
+  >
+>
+
 export type CreateAccountParameters = WithCosmWasmSignOptions<
   {
     signingCosmWasmClient: SigningCosmWasmClient
     apiUrl: string
     sender: string
-    enableIbc?: boolean
-  } & CamelCasedProperties<
-    WithOptional<
-      OverrideProperties<
-        AccountTypes.InstantiateMsg,
-        {
-          account_id?: RegistryTypes.AccountId
-          install_modules?: MergedModuleInstallConfig[]
-        }
-      >,
-      'owner' | 'code_id'
-    >
-  >
+  } & CreateAccountArguments
 >
+
 export async function createAccount({
   signingCosmWasmClient,
   apiUrl,
@@ -78,7 +86,7 @@ export async function createAccount({
   const accountCodeId = await getAppModuleCodeIdFromRegistry({
     cosmWasmClient: signingCosmWasmClient,
     registryAddress,
-    moduleId: 'abstract:account',
+    moduleId: abstractModuleId(CommonModuleNames.ACCOUNT),
     version: 'latest',
   })
 

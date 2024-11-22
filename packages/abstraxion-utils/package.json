@@ -15,13 +15,15 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@cosmjs/encoding": "^0.32.3",
-    "@cosmjs/stargate": "^0.32.3",
-    "@cosmjs/proto-signing": "^0.32.3",
-    "@cosmjs/tendermint-rpc": "^0.32.3",
-    "@cosmjs/math": "^0.32.3",
+    "@cosmjs/encoding": "0.32.3",
+    "@cosmjs/stargate": "0.32.3",
+    "@cosmjs/proto-signing": "0.32.3",
+    "@cosmjs/tendermint-rpc": "0.32.3",
+    "@cosmjs/cosmwasm-stargate": "0.32.3",
+    "@cosmjs/math": "0.32.3",
     "protobufjs": "^7.4.0",
-    "long": "^5.2.3"
+    "long": "^5.2.3",
+    "type-fest": "^4.2.6"
   },
   "peerDependenciesMeta": {
     "typescript": {
@@ -34,8 +36,7 @@
   },
   "devDependencies": {
     "rimraf": "^3.0.0",
-    "@types/node": "^20.0.0",
-    "@cosmjs/amino": "^0.32.3"
+    "@types/node": "^20.0.0"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -51,9 +52,33 @@
         "require": "./dist/index.cjs"
       }
     },
+    "./actions": {
+      "types": "./dist/actions/index.d.ts",
+      "import": {
+        "types": "./dist/actions/index.d.ts",
+        "import": "./dist/actions/index.js"
+      },
+      "require": {
+        "types": "./dist/actions/index.d.cts",
+        "require": "./dist/actions/index.cjs"
+      }
+    },
+    "./decorators": {
+      "types": "./dist/decorators/index.d.ts",
+      "import": {
+        "types": "./dist/decorators/index.d.ts",
+        "import": "./dist/decorators/index.js"
+      },
+      "require": {
+        "types": "./dist/decorators/index.d.cts",
+        "require": "./dist/decorators/index.cjs"
+      }
+    },
     "./package.json": "./package.json"
   },
   "files": [
+    "/actions",
+    "/decorators",
     "/dist"
   ],
   "sideEffects": false

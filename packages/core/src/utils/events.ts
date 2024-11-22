@@ -1,5 +1,6 @@
 import { type Attribute, type ExecuteResult } from '@cosmjs/cosmwasm-stargate'
 import { type Event } from '@cosmjs/stargate/build/events'
+import { WithOptional } from '../types/utils'
 
 /**
  * Searches in events for event of the given event type and in that event
@@ -37,13 +38,12 @@ export const ABSTRACT_EVENT_MARKER = 'wasm-abstract'
  * @returns The attribute value if found, or undefined if not found.
  */
 export function findAbstractAttribute(
-  executeResult: ExecuteResult,
+  executeResult: WithOptional<Pick<ExecuteResult, 'logs' | 'events'>, 'logs'>,
   key: string,
 ): Attribute {
-  executeResult.events
   return findAttribute(
-    executeResult.logs.length > 0
-      ? executeResult.logs[0]?.events
+    executeResult.logs && executeResult.logs?.length > 0
+      ? executeResult.logs?.[0]?.events
       : executeResult.events,
     ABSTRACT_EVENT_MARKER,
     key,

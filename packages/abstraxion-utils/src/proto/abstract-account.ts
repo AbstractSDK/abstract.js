@@ -243,7 +243,7 @@ export type DeepPartial<T> = T extends Builtin
   : T extends globalThis.Array<infer U>
   ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
+  ? readonly DeepPartial<U>[]
   : T extends {}
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>

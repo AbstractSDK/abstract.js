@@ -8,7 +8,7 @@ export default defineConfig(
     experimentalDts: false,
     outDir: 'dist',
     //dev: process.env.DEV === 'true',
-    entry: ['src/index.ts'],
+    entry: ['src/index.ts', 'src/actions/index.ts', 'src/decorators/index.ts'],
     external: [...Object.keys(dependencies), ...Object.keys(peerDependencies)],
     format: ['esm', 'cjs'],
   }),

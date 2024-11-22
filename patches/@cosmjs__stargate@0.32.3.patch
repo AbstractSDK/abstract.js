@@ -1,0 +1,133 @@
+diff --git a/build/modules/authz/aminomessages.js b/build/modules/authz/aminomessages.js
+index 5db0fdaf1e4e003a99bbc77798aa47811901b7ea..1a95a6b8beabb8c5e1db16f9475546df99c62c5c 100644
+--- a/build/modules/authz/aminomessages.js
++++ b/build/modules/authz/aminomessages.js
+@@ -1,16 +1,115 @@
+-"use strict";
+-Object.defineProperty(exports, "__esModule", { value: true });
+-exports.createAuthzAminoConverters = void 0;
++'use strict'
++const tx_1 = require('cosmjs-types/cosmos/authz/v1beta1/tx')
++const authz_1 = require('cosmjs-types/cosmos/authz/v1beta1/authz')
++const bank_1 = require('cosmjs-types/cosmos/bank/v1beta1/authz')
++const timestamp_1 = require('cosmjs-types/google/protobuf/timestamp')
++Object.defineProperty(exports, '__esModule', { value: true })
++exports.createAuthzAminoConverters = void 0
+ function createAuthzAminoConverters() {
+-    return {
+-    // For Cosmos SDK < 0.46 the Amino JSON codec was broken on chain and thus inaccessible.
+-    // Now this can be implemented for 0.46+ chains, see
+-    // https://github.com/cosmos/cosmjs/issues/1092
+-    //
+-    // "/cosmos.authz.v1beta1.MsgGrant": IMPLEMENT ME,
+-    // "/cosmos.authz.v1beta1.MsgExec": IMPLEMENT ME,
+-    // "/cosmos.authz.v1beta1.MsgRevoke": IMPLEMENT ME,
+-    };
++  return {
++    '/cosmos.authz.v1beta1.MsgGrant': {
++      aminoType: 'cosmos-sdk/MsgGrant',
++      toAmino: ({ granter, grantee, grant }) => {
++        if (!grant || !grant.authorization) {
++          throw new Error(`Unsupported grant type: '${grant?.authorization?.typeUrl}'`)
++        }
++        let authorizationValue
++        switch (grant?.authorization?.typeUrl) {
++          case '/cosmos.authz.v1beta1.GenericAuthorization': {
++            const generic = authz_1.GenericAuthorization.decode(grant.authorization.value)
++            authorizationValue = {
++              type: 'cosmos-sdk/GenericAuthorization',
++              value: {
++                msg: generic.msg,
++              },
++            }
++            break
++          }
++          case '/cosmos.bank.v1beta1.SendAuthorization': {
++            const spend = bank_1.SendAuthorization.decode(grant.authorization.value)
++            authorizationValue = {
++              type: 'cosmos-sdk/SendAuthorization',
++              value: {
++                spend_limit: spend.spendLimit,
++              },
++            }
++            break
++          }
++          default:
++            throw new Error(`Unsupported grant type: '${grant.authorization.typeUrl}'`)
++        }
++        const expiration = grant.expiration?.seconds ? Number(grant.expiration.seconds) : undefined
++        return {
++          granter,
++          grantee,
++          grant: {
++            authorization: authorizationValue,
++            expiration: expiration
++              ? new Date(expiration * 1000).toISOString().replace(/\.000Z$/, 'Z')
++              : undefined,
++          },
++        }
++      },
++      fromAmino: ({ granter, grantee, grant }) => {
++        const authorizationType = grant?.authorization?.type
++        let authorizationValue
++        switch (authorizationType) {
++          case 'cosmos-sdk/GenericAuthorization': {
++            authorizationValue = {
++              typeUrl: '/cosmos.authz.v1beta1.GenericAuthorization',
++              value: authz_1.GenericAuthorization.encode({
++                msg: grant.authorization.value.msg,
++              }).finish(),
++            }
++            break
++          }
++          case 'cosmos-sdk/SendAuthorization': {
++            authorizationValue = {
++              typeUrl: '/cosmos.bank.v1beta1.SendAuthorization',
++              value: bank_1.SendAuthorization.encode(
++                bank_1.SendAuthorization.fromPartial({
++                  spendLimit: grant.authorization.value.spend_limit,
++                }),
++              ).finish(),
++            }
++            break
++          }
++          default:
++            throw new Error(`Unsupported grant type: '${grant?.authorization?.type}'`)
++        }
++        const expiration = grant.expiration ? Date.parse(Number(grant.expiration)) : undefined
++        return tx_1.MsgGrant.fromPartial({
++          granter,
++          grantee,
++          grant: {
++            authorization: authorizationValue,
++            expiration: expiration
++              ? timestamp_1.Timestamp.fromPartial({
++                  seconds: Number(expiration) / 1000,
++                  nanos: (Number(expiration) % 1000) * 1e6,
++                })
++              : undefined,
++          },
++        })
++      },
++    },
++    '/cosmos.authz.v1beta1.MsgRevoke': {
++      aminoType: 'cosmos-sdk/MsgRevoke',
++      toAmino: ({ granter, grantee, msgTypeUrl }) => ({
++        granter,
++        grantee,
++        msg_type_url: msgTypeUrl,
++      }),
++      /* eslint-disable camelcase */
++      fromAmino: ({ granter, grantee, msg_type_url }) =>
++        tx_1.MsgRevoke.fromPartial({
++          granter,
++          grantee,
++          msgTypeUrl: msg_type_url,
++        }),
++      /* eslint-enable camelcase */
++    },
++  }
+ }
+-exports.createAuthzAminoConverters = createAuthzAminoConverters;
++exports.createAuthzAminoConverters = createAuthzAminoConverters
+ //# sourceMappingURL=aminomessages.js.map
