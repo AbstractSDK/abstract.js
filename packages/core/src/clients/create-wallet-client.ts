@@ -2,7 +2,11 @@ import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import type { Evaluate } from '../types/utils'
 import { ABSTRACT_API_URL } from '../utils'
 import { type Client } from './create-client'
-import { PublicClientConfig, createPublicClient } from './create-public-client'
+import {
+  PublicClient,
+  PublicClientConfig,
+  createPublicClient,
+} from './create-public-client'
 import { type WalletActions, walletActions } from './decorators/wallet'
 
 export type WalletClientConfig = Omit<PublicClientConfig, 'cosmWasmClient'> & {
@@ -10,7 +14,7 @@ export type WalletClientConfig = Omit<PublicClientConfig, 'cosmWasmClient'> & {
   sender: string
 }
 
-export type WalletClient = Evaluate<Client<WalletActions>>
+export type WalletClient = Evaluate<PublicClient & Client<WalletActions>>
 
 /**
  * Create a signing client to interact with the Abstract infrastructure.

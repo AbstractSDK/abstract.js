@@ -4,7 +4,7 @@ export type GetSigningCosmWasmClientParameters = {
   signingCosmWasmClient: SigningCosmWasmClient
 }
 
-export async function getSigningCosmWasmClient({
+export function getSigningCosmWasmClient({
   signingCosmWasmClient,
 }: GetSigningCosmWasmClientParameters) {
   return signingCosmWasmClient
