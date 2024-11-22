@@ -57,9 +57,31 @@ export async function getRegistryModuleData<
     return null
   }
 
-  return await rawQuery<ModuleData | null>({
-    client: cosmWasmClient,
-    address: firstInstantiation,
-    key: 'module_data',
-  })
+  let moduleData: ModuleData | null = null
+  try {
+    moduleData = await rawQuery<ModuleData | null>({
+      client: cosmWasmClient,
+      address: firstInstantiation,
+      key: 'mod',
+    })
+  } catch (error) {
+    try {
+      moduleData = await rawQuery<ModuleData | null>({
+        client: cosmWasmClient,
+        address: firstInstantiation,
+        key: 'module_data',
+      })
+    } catch (error2) {
+      console.debug(
+        `Could not retrieve module_data for ${formatModuleIdWithVersion(
+          module.info.namespace,
+          module.info.name,
+          module.info.version,
+        )}`,
+        error,
+        error2,
+      )
+    }
+  }
+  return moduleData
 }

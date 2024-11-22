@@ -153,9 +153,6 @@ export class MultiqueryCosmWasmClient extends CosmWasmClient {
       data: jsonToBinary(queryMsg),
     }))
 
-    console.log('calls length', calls.length)
-    console.log('calls', calls)
-
     const result = (await super.queryContractSmart(
       this.multiqueryContractAddress,
       <QueryMsg>{
