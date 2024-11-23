@@ -1,5 +1,16 @@
 ## 0.1.0
 
+## 3.4.0
+
+### Minor Changes
+
+- [#148](https://github.com/AbstractSDK/abstract.js/pull/148) [`83cd666`](https://github.com/AbstractSDK/abstract.js/commit/83cd666774aa33d60e41fe404fa920a53b2e465b) Thanks [@adairrr](https://github.com/adairrr)! - Update Abstract to 0.25 with account instantiation changes
+
+### Patch Changes
+
+- Updated dependencies [[`83cd666`](https://github.com/AbstractSDK/abstract.js/commit/83cd666774aa33d60e41fe404fa920a53b2e465b)]:
+  - @abstract-money/cosmwasm-utils@0.3.4
+
 ## 3.3.2
 
 ### Patch Changes
