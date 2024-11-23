@@ -1,13 +1,11 @@
-# cosmwasm
+# XION Actions
 
-> Typescript CosmWasm helpers
-
-[![NPM](https://img.shields.io/npm/v/cosmwasm.svg)](https://www.npmjs.com/package/cosmwasm) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+> Abstract.js actions for interacting with XION
 
 ## Install
 
 ```bash
-npm install --save cosmwasm
+npm install --save @abstract-money/actions-xion
 ```
 
 ## Usage
