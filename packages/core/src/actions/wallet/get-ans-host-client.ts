@@ -8,7 +8,7 @@ export type GetAnsHostClientParameters = {
   ansHostAddress: string
 }
 
-export async function getAnsHostClient({
+export function getAnsHostClient({
   signingCosmWasmClient,
   sender,
   ansHostAddress,

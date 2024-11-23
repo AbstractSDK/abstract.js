@@ -8,7 +8,7 @@ export type GetRegistryClientParameters = {
   registryAddress: string
 }
 
-export async function getRegistryClient({
+export function getRegistryClient({
   signingCosmWasmClient,
   sender,
   registryAddress,

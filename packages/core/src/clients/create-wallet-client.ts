@@ -2,7 +2,12 @@ import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import type { Evaluate } from '../types/utils'
 import { ABSTRACT_API_URL } from '../utils'
 import { type Client } from './create-client'
-import { PublicClientConfig, createPublicClient } from './create-public-client'
+import {
+  PublicClient,
+  PublicClientConfig,
+  createPublicClient,
+} from './create-public-client'
+import { PublicActions } from './decorators/public'
 import { type WalletActions, walletActions } from './decorators/wallet'
 
 export type WalletClientConfig = Omit<PublicClientConfig, 'cosmWasmClient'> & {
