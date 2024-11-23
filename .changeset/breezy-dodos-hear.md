@@ -1,5 +1,5 @@
 ---
-"@abstract-money/abstraxion-utils": patch
+"@abstract-money/actions-xion": patch
 "@abstract-money/core": patch
 "@abstract-money/cosmwasm-utils": patch
 "@abstract-money/provider-xion": patch

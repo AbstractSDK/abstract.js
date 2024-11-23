@@ -346,7 +346,7 @@ importers:
         specifier: ^5.0.4
         version: 5.0.4
 
-  packages/abstraxion-utils:
+  packages/actions-xion:
     dependencies:
       '@abstract-money/core':
         specifier: workspace:*
