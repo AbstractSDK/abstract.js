@@ -1,0 +1,64 @@
+{
+  "name": "@abstract-money/actions-xion",
+  "version": "0.0.1",
+  "description": "Abstraxion utils",
+  "author": "adairrr <adair@abstract.money>",
+  "license": "MIT",
+  "repository": "",
+  "engines": {
+    "node": ">=10"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsup",
+    "clean": "rimraf dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@cosmjs/encoding": "0.32.3",
+    "@cosmjs/stargate": "0.32.3",
+    "@cosmjs/proto-signing": "0.32.3",
+    "@cosmjs/tendermint-rpc": "0.32.3",
+    "@cosmjs/cosmwasm-stargate": "0.32.3",
+    "@cosmjs/math": "0.32.3",
+    "protobufjs": "^7.4.0",
+    "long": "^5.2.3",
+    "type-fest": "^4.2.6",
+    "@abstract-money/core": "workspace:*"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "peerDependencies": {
+    "typescript": ">=5.0.4"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.0",
+    "@types/node": "^20.0.0"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./actions": {
+      "types": "./dist/actions/index.d.ts",
+      "default": "./dist/actions/index.js"
+    },
+    "./decorators": {
+      "types": "./dist/decorators/index.d.ts",
+      "default": "./dist/decorators/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "/actions",
+    "/decorators",
+    "/dist"
+  ],
+  "sideEffects": false
+}

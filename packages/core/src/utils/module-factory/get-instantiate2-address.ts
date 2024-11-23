@@ -7,7 +7,12 @@ import { toSha256 } from '../encoding'
 
 const SALT_POSTFIX = 'abstract'
 
-async function getAccountIdSalt(accountId: RegistryTypes.AccountId) {
+/**
+ * Generate a salt for the given accountId.
+ * @param accountId
+ * @see https://github.com/AbstractSDK/abstract/blob/58fdfbfa6628da928f812bbf14352895a00d2e13/framework/packages/abstract-std/src/objects/salt.rs#L7
+ */
+export async function getAccountIdSalt(accountId: RegistryTypes.AccountId) {
   const sha256 = await toSha256(registryAccountIdToString(accountId))
 
   return new Uint8Array([...sha256, ...toUtf8(SALT_POSTFIX)])

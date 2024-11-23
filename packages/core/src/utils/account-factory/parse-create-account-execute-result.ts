@@ -1,14 +1,10 @@
 import { ExecuteResult } from '@cosmjs/cosmwasm-stargate'
-import {
-  ACCOUNT_ID_CHAIN_DELIMITER,
-  AccountId,
-  accountIdToString,
-  stringToAccountId,
-} from '../account-id'
+import { WithOptional } from '../../types/utils'
+import { stringToAccountId } from '../account-id'
 import { findAbstractAttribute } from '../events'
 
 export function parseCreateAccountExecuteResult(
-  result: ExecuteResult,
+  result: WithOptional<Pick<ExecuteResult, 'logs' | 'events'>, 'logs'>,
   chainName: string,
 ) {
   const accountIdString = findAbstractAttribute(result, 'account_id').value
