@@ -1,5 +1,11 @@
 # @abstract-money/actions-xion
 
+## 0.0.3
+
+### Patch Changes
+
+- [#153](https://github.com/AbstractSDK/abstract.js/pull/153) [`903df40`](https://github.com/AbstractSDK/abstract.js/commit/903df4049ea531b536048270dc597e23572cab42) Thanks [@adairrr](https://github.com/adairrr)! - Build CJS for XION actions and ensure proper imports
+
 ## 0.0.2
 
 ### Patch Changes
