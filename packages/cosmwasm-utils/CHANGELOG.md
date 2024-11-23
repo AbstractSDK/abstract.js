@@ -1,5 +1,11 @@
 # @abstract-money/cosmwasm-utils
 
+## 0.3.5
+
+### Patch Changes
+
+- [#149](https://github.com/AbstractSDK/abstract.js/pull/149) [`c8826a8`](https://github.com/AbstractSDK/abstract.js/commit/c8826a86906954097b1495e26309cea578d81b53) Thanks [@adairrr](https://github.com/adairrr)! - Add Abtsraxion utils for building on xion, including new wallet and client actions. Publicize more types from core
+
 ## 0.3.4
 
 ### Patch Changes
