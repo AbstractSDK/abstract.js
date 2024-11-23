@@ -11,6 +11,6 @@ export default defineConfig(
     entry: ['src/index.ts', 'src/actions/index.ts', 'src/decorators/index.ts'],
     // external: [...Object.keys(dependencies)],
     external: [...Object.keys(dependencies), ...Object.keys(peerDependencies)],
-    format: ['esm'],
+    format: ['esm', 'cjs'],
   }),
 )
