@@ -43,15 +43,36 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "require": "./dist/index.cjs"
+      }
     },
     "./actions": {
       "types": "./dist/actions/index.d.ts",
-      "default": "./dist/actions/index.js"
+      "import": {
+        "types": "./dist/actions/index.d.ts",
+        "import": "./dist/actions/index.js"
+      },
+      "require": {
+        "types": "./dist/actions/index.d.cts",
+        "require": "./dist/actions/index.cjs"
+      }
     },
     "./decorators": {
       "types": "./dist/decorators/index.d.ts",
-      "default": "./dist/decorators/index.js"
+      "import": {
+        "types": "./dist/decorators/index.d.ts",
+        "import": "./dist/decorators/index.js"
+      },
+      "require": {
+        "types": "./dist/decorators/index.d.cts",
+        "require": "./dist/decorators/index.cjs"
+      }
     },
     "./package.json": "./package.json"
   },

@@ -14,13 +14,13 @@
     // TODO: change to true
     "noUnusedLocals": false,
     "noUnusedParameters": true,
-//    "paths": {
-//      // TODO: Remove once issue is fixed
-//      // https://github.com/microsoft/TypeScript/issues/48212
-//      "@cosmjs/cosmwasm-stargate": [
-//        "packages/core/node_modules/@cosmjs/cosmwasm-stargate/build"
-//      ],
-//    },
+    "paths": {
+      // TODO: Remove once issue is fixed
+      // https://github.com/microsoft/TypeScript/issues/48212
+      "@cosmjs/cosmwasm-stargate": [
+        "packages/core/node_modules/@cosmjs/cosmwasm-stargate/build"
+      ],
+    },
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,

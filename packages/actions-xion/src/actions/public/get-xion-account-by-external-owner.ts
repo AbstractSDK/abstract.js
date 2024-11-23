@@ -1,8 +1,8 @@
+import { getRegistryQueryClientFromApi } from '@abstract-money/core/actions'
 import {
   AccountQueryClient,
   RegistryTypes,
 } from '@abstract-money/core/codegen/abstract'
-import { getRegistryQueryClientFromApi } from '@abstract-money/core/src/actions'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { predictXionAccountIdByExternalOwner } from './predict-xion-account-id-by-external-owner'
 

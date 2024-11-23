@@ -1,5 +1,5 @@
 import { AccountId, AccountWalletClient } from '@abstract-money/core'
-import { type AccountTypes } from '@abstract-money/core/src/codegen/abstract'
+import { type AccountTypes } from '@abstract-money/core/codegen/abstract'
 import { useMutation } from '@tanstack/react-query'
 import { useConfig } from '../../../contexts'
 import { ExtractArgsFromParameters } from '../../../types/args'

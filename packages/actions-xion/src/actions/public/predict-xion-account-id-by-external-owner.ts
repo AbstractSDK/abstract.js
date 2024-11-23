@@ -1,4 +1,4 @@
-import { RegistryTypes } from '@abstract-money/core/src/codegen/abstract'
+import { RegistryTypes } from '@abstract-money/core/codegen/abstract'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { Uint64 } from '@cosmjs/math'
 import { decodePubkey } from '@cosmjs/proto-signing'
