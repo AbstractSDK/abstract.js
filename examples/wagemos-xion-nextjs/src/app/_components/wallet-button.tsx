@@ -16,20 +16,34 @@ import {
 } from '../../components/ui/dialog'
 import { useToast } from '../../components/ui/use-toast'
 
-import { CHAIN_IDS } from '../_lib/constants'
+import { useConfig } from '@abstract-money/react'
+import {
+  useAbstraxionAccount,
+  useAbstraxionSigningClient,
+  useModal,
+} from '@burnt-labs/abstraxion'
+import { CHAIN_IDS, ROUND_CHAIN_NAME } from '../_lib/constants'
+import { useDevMode } from '../_providers/dev-mode'
 
 function DisconnectButton() {
-  const { disconnect } = useDisconnect()
-  const { data: account } = useAccount({
-    chainId: CHAIN_IDS[0],
+  const { disconnect: grazDisconnect } = useDisconnect()
+  const { logout: xionDisconnect } = useAbstraxionSigningClient()
+  const config = useConfig()
+  const account = config.provider.useSenderAddress({
+    chainName: ROUND_CHAIN_NAME,
   })
 
   const { toast } = useToast()
 
   const handleCopy = () => {
     if (!account) return
-    navigator.clipboard.writeText(account?.bech32Address)
+    navigator.clipboard.writeText(account)
     toast({ title: 'Address copied to clipboard' })
+  }
+
+  const disconnect = () => {
+    grazDisconnect()
+    xionDisconnect?.()
   }
 
   return (
@@ -39,7 +53,7 @@ function DisconnectButton() {
         variant="outline"
         onClick={handleCopy}
       >
-        {account?.bech32Address}
+        {account}
       </Button>
       <Button
         className="rounded-tl-none rounded-bl-none"
@@ -55,6 +69,8 @@ function ConnectButton() {
   const wallets = getAvailableWallets()
   const [isOpen, setIsOpen] = useState(false)
   const { toast } = useToast()
+  const { devMode } = useDevMode()
+  const [modalShown, setShowModal] = useModal()
 
   const { isConnecting } = useAccount({
     chainId: CHAIN_IDS,
@@ -81,7 +97,9 @@ function ConnectButton() {
   }
   return (
     <>
-      <Button onClick={() => setIsOpen(true)}>Connect Wallet</Button>
+      <Button onClick={() => (devMode ? setIsOpen(true) : setShowModal(true))}>
+        Connect Wallet
+      </Button>
       <Dialog open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
         <DialogContent>
           <DialogHeader>
@@ -109,10 +127,12 @@ function ConnectButton() {
 }
 
 export function WalletButton() {
-  const { isConnected } = useAccount({
-    chainId: CHAIN_IDS,
+  const config = useConfig()
+  const account = config.provider.useSenderAddress({
+    chainName: ROUND_CHAIN_NAME,
   })
-  if (isConnected) {
+
+  if (account) {
     return <DisconnectButton />
   }
   return <ConnectButton />

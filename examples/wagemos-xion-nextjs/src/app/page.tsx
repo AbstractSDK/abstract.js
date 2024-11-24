@@ -1,5 +1,7 @@
 'use client'
 
+import { Abstraxion, useModal } from '@burnt-labs/abstraxion'
+import React from 'react'
 import { PlaceBetDialog } from './_components/place-bet-dialog'
 import {
   Round,
@@ -20,12 +22,12 @@ import { useListRounds } from './_hooks/use-list-rounds'
 
 export default function Home() {
   const { data, isLoading, isError } = useListRounds()
+  const [, sotShowXionModal] = useModal()
   if (isLoading) return <p>Loading...</p>
   if (isError) return <p>Error</p>
   return (
     <>
-      <h1>WAGEMOS with graz</h1>
-      <WalletButton />
+      <Abstraxion onClose={() => sotShowXionModal(false)} />
       <div>
         <h4>List of Rounds:</h4>
         <div className="grid row-auto gap-2 md:grid-cols-2">

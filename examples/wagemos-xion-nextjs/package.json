@@ -1,5 +1,5 @@
 {
-  "name": "wagemos-graz-nextjs",
+  "name": "wagemos-xion-nextjs",
   "version": "0.4.8",
   "private": true,
   "scripts": {
@@ -12,10 +12,10 @@
     "generate": "graz generate -g -M neutron,osmosis -T neutrontestnet,osmosistestnet,xiontestnet"
   },
   "dependencies": {
+    "@abstract-money/actions-xion": "workspace:*",
     "@abstract-money/core": "workspace:*",
     "@abstract-money/provider-graz": "workspace:*",
     "@abstract-money/provider-xion": "workspace:*",
-    "@abstract-money/actions-xion": "workspace:*",
     "@abstract-money/react": "workspace:*",
     "@burnt-labs/abstraxion": "^1.0.0-alpha.53",
     "@cosmjs/stargate": "^0.32.3",
@@ -27,7 +27,7 @@
     "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
-    "@tanstack/react-query": "4.36.1",
+    "@tanstack/react-query": "^4.35.1",
     "@tanstack/react-query-devtools": "^5.40.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
@@ -42,7 +42,8 @@
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
     "type-fest": "^4.2.6",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "zustand": "^5.0.1"
   },
   "devDependencies": {
     "@abstract-money/cli": "workspace:*",

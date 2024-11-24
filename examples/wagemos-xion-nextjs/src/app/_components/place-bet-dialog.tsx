@@ -1,6 +1,7 @@
 'use client'
 
 import { stringToAccountId } from '@abstract-money/core'
+import { useConfig } from '@abstract-money/react'
 import { coin } from '@cosmjs/stargate'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { DialogDescription } from '@radix-ui/react-dialog'
@@ -54,7 +55,10 @@ const placeBetSchema = z.object({
 export function PlaceBetDialog({ round }: { round: RoundResponse }) {
   const [isOpen, setIsOpen] = useState(false)
 
-  const { isConnected } = useAccount()
+  const config = useConfig()
+  const account = config.provider.useSenderAddress({
+    chainName: ROUND_CHAIN_NAME,
+  })
 
   const form = useForm({
     mode: 'onTouched',
@@ -114,7 +118,7 @@ export function PlaceBetDialog({ round }: { round: RoundResponse }) {
 
   return (
     <>
-      <Button disabled={!isConnected} onClick={() => setIsOpen(true)}>
+      <Button disabled={!account} onClick={() => setIsOpen(true)}>
         Place Bet
       </Button>
       <Dialog open={isOpen} onOpenChange={(open) => setIsOpen(open)}>

@@ -48,7 +48,7 @@ importers:
         version: 4.0.0
       '@tanstack/react-query':
         specifier: 4.36.1
-        version: 4.36.1(react-dom@18.0.0)(react@18.0.0)
+        version: 4.36.1(react-dom@18.2.0)(react@18.3.1)
       '@types/dedent':
         specifier: ^0.7.0
         version: 0.7.0
@@ -394,7 +394,7 @@ importers:
         specifier: ^1.1.5
         version: 1.1.5(@types/react-dom@18.0.0)(@types/react@18.2.0)(react-dom@18.0.0)(react@18.0.0)
       '@tanstack/react-query':
-        specifier: 4.36.1
+        specifier: ^4.35.1
         version: 4.36.1(react-dom@18.0.0)(react@18.0.0)
       '@tanstack/react-query-devtools':
         specifier: ^5.40.0
@@ -441,6 +441,9 @@ importers:
       zod:
         specifier: ^3.22.4
         version: 3.22.4
+      zustand:
+        specifier: ^5.0.1
+        version: 5.0.1(@types/react@18.2.0)(react@18.0.0)
     devDependencies:
       '@abstract-money/cli':
         specifier: workspace:*
@@ -829,11 +832,14 @@ importers:
         specifier: workspace:*
         version: link:../react
       '@burnt-labs/abstraxion':
-        specifier: '=1.0.0-alpha.50'
-        version: 1.0.0-alpha.50(@types/react@18.2.0)(graphql@16.8.1)(react-dom@18.2.0)(react@18.3.1)(starknet@6.11.0)
+        specifier: ^1.0.0-alpha.53
+        version: 1.0.0-alpha.53(@types/react@18.2.0)(graphql@16.8.1)(react-dom@18.2.0)(react@18.3.1)(starknet@6.11.0)
       '@cosmjs/cosmwasm-stargate':
         specifier: 0.32.3
         version: 0.32.3(patch_hash=ac4bp4jmz6fix4oxonhymnas5q)
+      '@tanstack/react-query':
+        specifier: ^4.32.0
+        version: 4.36.1(react-dom@18.2.0)(react@18.3.1)
       '@types/node':
         specifier: ^20.0.0
         version: 20.0.0
@@ -860,7 +866,7 @@ importers:
         version: 0.32.3(patch_hash=4oh5wgjtlosv2ck7xd6xzfueoi)
       '@tanstack/react-query':
         specifier: ^4.12
-        version: 4.36.1(react-dom@18.0.0)(react@18.0.0)
+        version: 4.36.1(react-dom@18.2.0)(react@18.3.1)
       dedent:
         specifier: ^0.7.0
         version: 0.7.0
@@ -2891,36 +2897,6 @@ packages:
     dev: true
     optional: true
 
-  /@burnt-labs/abstraxion-core@1.0.0-alpha.46(@types/react@18.2.0)(graphql@16.8.1)(react-dom@18.2.0)(react@18.3.1)(starknet@6.11.0):
-    resolution: {integrity: sha512-B7jooj0kR/YReV9hV56LZpRSBHKQaCGZX48jfFcRAkm+uZ9NMETg97IENQTrCskf4AtJemsTZG7PV3TqfCrtaw==}
-    dependencies:
-      '@burnt-labs/constants': 0.1.0-alpha.13
-      '@burnt-labs/signers': 0.1.0-alpha.13(@types/react@18.2.0)(graphql@16.8.1)(react-dom@18.2.0)(react@18.3.1)
-      '@cosmjs/amino': 0.32.4
-      '@cosmjs/cosmwasm-stargate': 0.32.4
-      '@cosmjs/crypto': 0.32.4
-      '@cosmjs/encoding': 0.32.4
-      '@cosmjs/proto-signing': 0.32.4
-      '@cosmjs/stargate': 0.32.4
-      '@cosmjs/tendermint-rpc': 0.32.4
-      '@cosmjs/utils': 0.32.4
-      '@keplr-wallet/cosmos': 0.12.141(starknet@6.11.0)
-      '@keplr-wallet/crypto': 0.12.141(starknet@6.11.0)
-      cosmjs-types: 0.9.0
-      jose: 5.9.4
-    transitivePeerDependencies:
-      - '@types/react'
-      - bufferutil
-      - debug
-      - graphql
-      - graphql-ws
-      - react
-      - react-dom
-      - starknet
-      - subscriptions-transport-ws
-      - utf-8-validate
-    dev: true
-
   /@burnt-labs/abstraxion-core@1.0.0-alpha.48(@types/react@18.2.0)(graphql@16.8.1)(react-dom@18.0.0)(react@18.0.0)(starknet@6.11.0):
     resolution: {integrity: sha512-ItgsKYyVVeeMlXjEAxw+HFG10m4NqEDBvbvQu8rU1pjcLS6EQM/d48WzkrFKEZXpLPYQJ4oHcjm3zKoIXE0/oQ==}
     dependencies:
@@ -2951,16 +2927,11 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@burnt-labs/abstraxion@1.0.0-alpha.50(@types/react@18.2.0)(graphql@16.8.1)(react-dom@18.2.0)(react@18.3.1)(starknet@6.11.0):
-    resolution: {integrity: sha512-AyuJHF1dEnXuh+eDruqg0JqmkvfdKxIJPK2PECIbQEIS9voQ0b/TKKlLccoEDnkMFBGXbnylrnsnwkfY7wh7gA==}
-    peerDependencies:
-      react: ^18.2.0
-      react-dom: 18.2.0
+  /@burnt-labs/abstraxion-core@1.0.0-alpha.48(@types/react@18.2.0)(graphql@16.8.1)(react-dom@18.2.0)(react@18.3.1)(starknet@6.11.0):
+    resolution: {integrity: sha512-ItgsKYyVVeeMlXjEAxw+HFG10m4NqEDBvbvQu8rU1pjcLS6EQM/d48WzkrFKEZXpLPYQJ4oHcjm3zKoIXE0/oQ==}
     dependencies:
-      '@burnt-labs/abstraxion-core': 1.0.0-alpha.46(@types/react@18.2.0)(graphql@16.8.1)(react-dom@18.2.0)(react@18.3.1)(starknet@6.11.0)
-      '@burnt-labs/constants': 0.1.0-alpha.13
+      '@burnt-labs/constants': 0.1.0-alpha.14
       '@burnt-labs/signers': 0.1.0-alpha.13(@types/react@18.2.0)(graphql@16.8.1)(react-dom@18.2.0)(react@18.3.1)
-      '@burnt-labs/ui': 0.1.0-alpha.14(@types/react@18.2.0)(react-dom@18.2.0)(react@18.3.1)
       '@cosmjs/amino': 0.32.4
       '@cosmjs/cosmwasm-stargate': 0.32.4
       '@cosmjs/crypto': 0.32.4
@@ -2969,17 +2940,18 @@ packages:
       '@cosmjs/stargate': 0.32.4
       '@cosmjs/tendermint-rpc': 0.32.4
       '@cosmjs/utils': 0.32.4
-      '@types/react-dom': 18.3.1
+      '@keplr-wallet/cosmos': 0.12.141(starknet@6.11.0)
+      '@keplr-wallet/crypto': 0.12.141(starknet@6.11.0)
       cosmjs-types: 0.9.0
       jose: 5.9.4
-      react: 18.3.1
-      react-dom: 18.2.0(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
       - bufferutil
       - debug
       - graphql
       - graphql-ws
+      - react
+      - react-dom
       - starknet
       - subscriptions-transport-ws
       - utf-8-validate
@@ -3019,13 +2991,42 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@burnt-labs/constants@0.1.0-alpha.13:
-    resolution: {integrity: sha512-Qn1JzISzVODw5XZU9kRi7logKlu9kR+R4sMmVcLrJxV6frjtBVgvdoLb+XfSnH9LV2SsV57C/iJYReaeUltLeg==}
+  /@burnt-labs/abstraxion@1.0.0-alpha.53(@types/react@18.2.0)(graphql@16.8.1)(react-dom@18.2.0)(react@18.3.1)(starknet@6.11.0):
+    resolution: {integrity: sha512-QVVn2jKFjfZ34137AFisloqgQnaiCwOg4Ry37unb7VXNopsNQkjpRDVCLTJGVk6SsZDoOcU983IVjgpkW7lCDQ==}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: 18.2.0
+    dependencies:
+      '@burnt-labs/abstraxion-core': 1.0.0-alpha.48(@types/react@18.2.0)(graphql@16.8.1)(react-dom@18.2.0)(react@18.3.1)(starknet@6.11.0)
+      '@burnt-labs/constants': 0.1.0-alpha.14
+      '@burnt-labs/signers': 0.1.0-alpha.13(@types/react@18.2.0)(graphql@16.8.1)(react-dom@18.2.0)(react@18.3.1)
+      '@burnt-labs/ui': 0.1.0-alpha.15(@types/react@18.2.0)(react-dom@18.2.0)(react@18.3.1)
+      '@cosmjs/amino': 0.32.4
+      '@cosmjs/cosmwasm-stargate': 0.32.4
+      '@cosmjs/crypto': 0.32.4
+      '@cosmjs/encoding': 0.32.4
+      '@cosmjs/proto-signing': 0.32.4
+      '@cosmjs/stargate': 0.32.4
+      '@cosmjs/tendermint-rpc': 0.32.4
+      '@cosmjs/utils': 0.32.4
+      '@types/react-dom': 18.3.1
+      cosmjs-types: 0.9.0
+      jose: 5.9.4
+      react: 18.3.1
+      react-dom: 18.2.0(react@18.3.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - bufferutil
+      - debug
+      - graphql
+      - graphql-ws
+      - starknet
+      - subscriptions-transport-ws
+      - utf-8-validate
     dev: true
 
   /@burnt-labs/constants@0.1.0-alpha.14:
     resolution: {integrity: sha512-ChaVXdHOgMHvtTDXNPTYMKwP0W6tLCpKuJXadeLfFQzJCd3K9DoxG6JZxzrVBq2FXVJGFUvRy4I+0uD1HvZfow==}
-    dev: false
 
   /@burnt-labs/signers@0.1.0-alpha.13(@types/react@18.2.0)(graphql@16.8.1)(react-dom@18.0.0)(react@18.0.0):
     resolution: {integrity: sha512-89O2oWpR+qvZs13vDB1aibp0FkkPEQf9NUVwVe/pN/JnuhPKWW4a1rUB6/qEkcEAMkQFsT7hyaqhRzx2hbfC6Q==}
@@ -3085,20 +3086,6 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@burnt-labs/ui@0.1.0-alpha.14(@types/react@18.2.0)(react-dom@18.2.0)(react@18.3.1):
-    resolution: {integrity: sha512-lNYcQP8E30TFll1l6B3jojQK6T0+NErfqwoVVtSKaBbt5cZOlG17z4WBmeVkCVfREwygjKi86+WzomR6KVfySg==}
-    peerDependencies:
-      react: ^18.2.0
-    dependencies:
-      '@radix-ui/react-dialog': 1.0.5(@types/react-dom@18.3.1)(@types/react@18.2.0)(react-dom@18.2.0)(react@18.3.1)
-      '@radix-ui/react-popover': 1.1.2(@types/react-dom@18.3.1)(@types/react@18.2.0)(react-dom@18.2.0)(react@18.3.1)
-      '@types/react-dom': 18.3.1
-      react: 18.3.1
-    transitivePeerDependencies:
-      - '@types/react'
-      - react-dom
-    dev: true
-
   /@burnt-labs/ui@0.1.0-alpha.15(@types/react@18.2.0)(react-dom@18.0.0)(react@18.0.0):
     resolution: {integrity: sha512-4N4BaBqLLD6IxAMOTnUHpYLhaB/cl5OniQfuDzM/ArU8YsmGFo8xrn5pyTIzJsAb6HqeZM9pxoQ3LKEXhelspQ==}
     peerDependencies:
@@ -3113,6 +3100,21 @@ packages:
       - '@types/react'
       - react-dom
     dev: false
+
+  /@burnt-labs/ui@0.1.0-alpha.15(@types/react@18.2.0)(react-dom@18.2.0)(react@18.3.1):
+    resolution: {integrity: sha512-4N4BaBqLLD6IxAMOTnUHpYLhaB/cl5OniQfuDzM/ArU8YsmGFo8xrn5pyTIzJsAb6HqeZM9pxoQ3LKEXhelspQ==}
+    peerDependencies:
+      react: ^18.2.0
+    dependencies:
+      '@radix-ui/react-dialog': 1.0.5(@types/react-dom@18.3.1)(@types/react@18.2.0)(react-dom@18.2.0)(react@18.3.1)
+      '@radix-ui/react-popover': 1.1.2(@types/react-dom@18.3.1)(@types/react@18.2.0)(react-dom@18.2.0)(react@18.3.1)
+      '@radix-ui/react-visually-hidden': 1.1.0(@types/react-dom@18.3.1)(@types/react@18.2.0)(react-dom@18.2.0)(react@18.3.1)
+      '@types/react-dom': 18.3.1
+      react: 18.3.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+    dev: true
 
   /@celo/base@3.2.0:
     resolution: {integrity: sha512-9wfZYiYv7dzt17a29fxU6sV7JssyXfpSQ9kPSpfOlsewPICXwfOMQ+25Jn6xZu20Vx9rmKebmLHiQyiuYEDOcQ==}
@@ -8560,6 +8562,26 @@ packages:
       react-dom: 18.0.0(react@18.0.0)
     dev: false
 
+  /@radix-ui/react-visually-hidden@1.1.0(@types/react-dom@18.3.1)(@types/react@18.2.0)(react-dom@18.2.0)(react@18.3.1):
+    resolution: {integrity: sha512-N8MDZqtgCgG5S3aV60INAB475osJousYpZ4cTJ2cFbMpdHS5Y6loLTH8LPtkj2QN0x93J30HT/M3qJXM0+lyeQ==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+      react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@radix-ui/react-primitive': 2.0.0(@types/react-dom@18.3.1)(@types/react@18.2.0)(react-dom@18.2.0)(react@18.3.1)
+      '@types/react': 18.2.0
+      '@types/react-dom': 18.3.1
+      react: 18.3.1
+      react-dom: 18.2.0(react@18.3.1)
+    dev: true
+
   /@radix-ui/rect@1.0.1:
     resolution: {integrity: sha512-fyrgCaedtvMg9NK3en0pnOYJdtfwxUcNolezkNPUsoX57X8oQk+NkqcvzHXD2uKNij6GXmWU9NDru2IWjrO4BQ==}
     dependencies:
@@ -9021,6 +9043,23 @@ packages:
       react: 18.0.0
       react-dom: 18.0.0(react@18.0.0)
       use-sync-external-store: 1.2.2(react@18.0.0)
+
+  /@tanstack/react-query@4.36.1(react-dom@18.2.0)(react@18.3.1):
+    resolution: {integrity: sha512-y7ySVHFyyQblPl3J3eQBWpXZkliroki3ARnBKsdJchlgt7yJLRDUcf4B8soufgiYt3pEQIkBWBx1N9/ZPIeUWw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@tanstack/query-core': 4.36.1
+      react: 18.3.1
+      react-dom: 18.2.0(react@18.3.1)
+      use-sync-external-store: 1.2.2(react@18.3.1)
 
   /@terra-money/station-connector@1.1.4(@cosmjs/amino@0.32.4)(axios@0.27.2):
     resolution: {integrity: sha512-0xQ1haSJnY6ltjhptFoVa1yhNUIBsbCAEQCUukSY93GSo6tt+DN4RAku9i1ulfY/UizXnxH/mn+6aJyTCZGGcg==}
@@ -16122,7 +16161,6 @@ packages:
       loose-envify: 1.4.0
       react: 18.3.1
       scheduler: 0.23.2
-    dev: true
 
   /react-dom@18.3.1(react@18.0.0):
     resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
@@ -16302,7 +16340,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
-    dev: true
 
   /read-cache@1.0.0:
     resolution: {integrity: sha512-Owdv/Ft7IjOgm/i0xvNDZ1LrRANRfew4b2prF3OWMQLxLfu3bS8FVhCsrSCMK4lR56Y9ya+AThoTpDCTxCmpRA==}
@@ -16753,7 +16790,6 @@ packages:
     resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
     dependencies:
       loose-envify: 1.4.0
-    dev: true
 
   /scrypt-js@3.0.1:
     resolution: {integrity: sha512-cdwTTnqPu0Hyvf5in5asVdZocVDTNRmR7XEcJuIzMjJeSHybHl7vpB66AzwTaIg6CLSbtjcxc8fqcySfnTkccA==}
@@ -18214,6 +18250,13 @@ packages:
     dependencies:
       react: 18.0.0
 
+  /use-sync-external-store@1.2.2(react@18.3.1):
+    resolution: {integrity: sha512-PElTlVMwpblvbNqQ82d2n6RjStvdSoNe9FG28kNfz3WiXilJm4DdNkEzRhCZuIDwY8U08WVihhGR5iRqAwfDiw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.3.1
+
   /utf8@3.0.0:
     resolution: {integrity: sha512-E8VjFIQ/TyQgp+TZfS6l8yp/xWppSAHzidGiRrqe4bK4XP9pTRyKFgGJpO3SN7zdX4DeomTrwaseCHovfpFcqQ==}
 
@@ -18823,3 +18866,25 @@ packages:
       immer: 9.0.21
       react: 18.0.0
       use-sync-external-store: 1.2.2(react@18.0.0)
+
+  /zustand@5.0.1(@types/react@18.2.0)(react@18.0.0):
+    resolution: {integrity: sha512-pRET7Lao2z+n5R/HduXMio35TncTlSW68WsYBq2Lg1ASspsNGjpwLAsij3RpouyV6+kHMwwwzP0bZPD70/Jx/w==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@types/react': '>=18.0.0'
+      immer: '>=9.0.6'
+      react: '>=18.0.0'
+      use-sync-external-store: '>=1.2.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      immer:
+        optional: true
+      react:
+        optional: true
+      use-sync-external-store:
+        optional: true
+    dependencies:
+      '@types/react': 18.2.0
+      react: 18.0.0
+    dev: false

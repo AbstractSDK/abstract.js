@@ -1,14 +1,15 @@
 'use client'
 
-import { grazProvider } from '@abstract-money/provider-graz'
-import { xionProvider } from '@abstract-money/provider-xion'
-import { AbstractProvider, createConfig } from '@abstract-money/react'
-import { AbstraxionProvider } from '@burnt-labs/abstraxion'
+import { Abstraxion, AbstraxionProvider } from '@burnt-labs/abstraxion'
 import { QueryClient } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Inter, Poppins } from 'next/font/google'
+import React from 'react'
 import { Toaster } from '../components/ui/toaster'
 import { cn } from '../utils'
+import { Header } from './_components/header'
+import { BETTING_APP_ADDRESS } from './_lib/constants'
+import { AbstractProvider } from './_providers/abstract'
 import { GrazProvider } from './_providers/graz'
 import './globals.css'
 
@@ -33,10 +34,6 @@ const poppins = Poppins({
   weight: ['900', '800', '700'],
   variable: '--font-display',
 })
-const abstractConfig = createConfig({
-  provider: grazProvider,
-  apiUrl: 'https://believathon.api.abstract.money/',
-})
 
 export default function RootLayout({
   children,
@@ -47,18 +44,40 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(inter.variable, poppins.variable)}>
-        {/*<AbstraxionProvider config={{}}>*/}
         <GrazProvider client={client}>
-          <AbstractProvider config={abstractConfig}>
-            <main className="flex flex-col items-center p-24 min-h-screen">
-              <section className="mt-10">
-                <div className="mt-10">{children}</div>
-              </section>
-            </main>
-          </AbstractProvider>
-          <ReactQueryDevtools client={client} />
+          <AbstraxionProvider
+            config={{
+              // treasury: 'xion1h82c0efsxxq4pgua754u6xepfu6avglup20fl834gc2ah0ptgn5s2zffe9',
+              bank: [
+                {
+                  denom: 'uxion',
+                  amount: '1000000',
+                },
+              ],
+              contracts: [
+                {
+                  address: BETTING_APP_ADDRESS,
+                  amounts: [
+                    {
+                      denom: 'uxion',
+                      amount: '1000000',
+                    },
+                  ],
+                },
+              ],
+            }}
+          >
+            <AbstractProvider>
+              <Header />
+              <main className="flex flex-col items-center p-24 min-h-screen">
+                <section className="mt-10">
+                  <div className="mt-10">{children}</div>
+                </section>
+              </main>
+            </AbstractProvider>
+            <ReactQueryDevtools client={client} />
+          </AbstraxionProvider>
         </GrazProvider>
-        {/*</AbstraxionProvider>*/}
         <Toaster />
       </body>
     </html>

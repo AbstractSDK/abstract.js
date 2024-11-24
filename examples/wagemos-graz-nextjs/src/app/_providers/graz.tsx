@@ -38,12 +38,6 @@ export function GrazProvider(
               denom: 'untrn',
             },
           },
-          [testnetChains.xiontestnet.chainId]: {
-            gas: {
-              price: '0.001',
-              denom: 'uxion',
-            },
-          },
         },
       }}
       {...props}
