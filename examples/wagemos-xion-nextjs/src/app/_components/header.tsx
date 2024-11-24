@@ -1,3 +1,5 @@
+import { Switch } from '@radix-ui/react-switch'
+import { Label } from '../../components/ui/label'
 import { useDevMode } from '../_providers/dev-mode'
 import { WalletButton } from './wallet-button'
 
@@ -15,22 +17,23 @@ export const Header = () => {
 
         {/* Right section */}
         <div className="w-32 flex items-center justify-end gap-2">
-          <button
-            onClick={() => setDevMode(!devMode)}
-            className={`px-3 py-1.5 text-sm rounded-md transition-colors
-              ${
-                devMode
-                  ? 'bg-purple-100 text-purple-700 hover:bg-purple-200'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            type={'button'}
-          >
-            {devMode ? 'Dev Mode On' : 'Dev Mode'}
-          </button>
+          <div className="flex items-center space-x-2">
+            <Switch
+              id="dev-mode"
+              checked={devMode}
+              onCheckedChange={setDevMode}
+            />
+            <Label
+              htmlFor="dev-mode"
+              className="text-sm font-medium leading-none"
+            >
+              Dev Mode
+            </Label>
+          </div>
         </div>
-      </div>
-      <div className={'flex justify-end'}>
-        <WalletButton />
+        <div className={'flex justify-end'}>
+          <WalletButton />
+        </div>
       </div>
     </header>
   )
