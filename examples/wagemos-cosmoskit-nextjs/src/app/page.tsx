@@ -18,12 +18,13 @@ import {
   RoundWinningTeam,
 } from './_components/round'
 import { WalletButton } from './_components/wallet-button'
+import { ROUND_ACCOUNT_ID, ROUND_CHAIN_NAME } from './_lib/constants'
 
 export default function Home() {
   const { data, isLoading, isError } = betting.queries.useListRounds({
     args: {},
-    accountId: stringToAccountId('neutron-18'),
-    chainName: 'neutron',
+    accountId: stringToAccountId(ROUND_ACCOUNT_ID),
+    chainName: ROUND_CHAIN_NAME,
   })
   if (isLoading) return <p>Loading...</p>
   if (isError) return <p>Error</p>

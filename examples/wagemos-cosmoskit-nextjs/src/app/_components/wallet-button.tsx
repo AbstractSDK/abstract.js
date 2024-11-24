@@ -3,8 +3,11 @@ import { useChain } from '@cosmos-kit/react'
 import { useCallback } from 'react'
 import { Button } from '../../components/ui/button'
 import { useToast } from '../../components/ui/use-toast'
+import { ROUND_CHAIN_NAME } from '../_lib/constants'
 
-function DisconnectButton({ chainName = 'neutron' }: { chainName?: string }) {
+function DisconnectButton({
+  chainName = ROUND_CHAIN_NAME,
+}: { chainName?: string }) {
   const { disconnect, address } = useChain(chainName)
 
   const { toast } = useToast()
@@ -44,7 +47,9 @@ function DisconnectButton({ chainName = 'neutron' }: { chainName?: string }) {
   )
 }
 
-function ConnectButton({ chainName = 'neutron' }: { chainName?: string }) {
+function ConnectButton({
+  chainName = ROUND_CHAIN_NAME,
+}: { chainName?: string }) {
   const { connect } = useChain(chainName)
 
   const { toast } = useToast()
@@ -63,7 +68,7 @@ function ConnectButton({ chainName = 'neutron' }: { chainName?: string }) {
 }
 
 export function WalletButton({
-  chainName = 'neutron',
+  chainName = ROUND_CHAIN_NAME,
 }: { chainName?: string }) {
   const { isWalletConnected: isConnected } = useChain(chainName)
   if (isConnected) {

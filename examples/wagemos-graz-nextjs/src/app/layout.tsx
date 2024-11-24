@@ -33,7 +33,7 @@ const poppins = Poppins({
 })
 const abstractConfig = createConfig({
   provider: grazProvider,
-  apiUrl: 'http://localhost:4001/graphql',
+  apiUrl: 'https://api-hackmos-2024.up.railway.app/',
 })
 
 export default function RootLayout({
