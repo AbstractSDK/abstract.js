@@ -4,6 +4,8 @@
   "pipeline": {
     "build": {
       "dependsOn": [
+        "@abstract-money/actions-xion#build",
+        "@abstract-money/provider-xion#build",
         "@abstract-money/provider-graz#build",
         "@abstract-money/react#build",
         "generate"
@@ -12,6 +14,8 @@
     },
     "dev": {
       "dependsOn": [
+        "@abstract-money/actions-xion#build",
+        "@abstract-money/provider-xion#build",
         "@abstract-money/provider-graz#build",
         "@abstract-money/react#build",
         "generate"
@@ -20,6 +24,8 @@
     },
     "typecheck": {
       "dependsOn": [
+        "@abstract-money/actions-xion#build",
+        "@abstract-money/provider-xion#build",
         "@abstract-money/provider-graz#build",
         "@abstract-money/react#build",
         "generate"
