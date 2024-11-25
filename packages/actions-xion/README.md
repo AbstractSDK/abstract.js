@@ -13,7 +13,7 @@ npm install --save @abstract-money/actions-xion
 ### Xion Public Client
 ```tsx
 import { useConfig } from '@abstract-money/react'
-import { xionPublicActions } from '@abstract-money/actions-xion`
+import { xionPublicActions } from '@abstract-money/actions-xion'
 import { useQuery } from '@tanstack/react-query'
 
 const config = useConfig();
