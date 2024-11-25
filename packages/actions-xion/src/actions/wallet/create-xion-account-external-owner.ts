@@ -5,7 +5,7 @@ import {
   createXionAccount,
 } from './create-xion-account'
 
-export type CreateXionAccountExternallyOwnedParameters = Omit<
+export type CreateXionAccountExternalOwnerParameters = Omit<
   OverrideProperties<CreateXionAccountParameters, { owner: string }>,
   'accountId'
 >
@@ -18,7 +18,7 @@ export type CreateXionAccountExternallyOwnedParameters = Omit<
 export async function createXionAccountExternalOwner({
   owner,
   ...params
-}: CreateXionAccountExternallyOwnedParameters) {
+}: CreateXionAccountExternalOwnerParameters) {
   const predictedAccountId = await predictXionAccountIdByExternalOwner({
     cosmWasmClient: params.signingCosmWasmClient,
     owner,
