@@ -23,7 +23,11 @@ const publicXionClient = publicClient.extend(() => xionPublicActions(cosmWasmCli
 
 const { data: xionEoaAccount } = useQuery({
   queryKey: ['xionAccount', ownerAddress],
-  queryFn: async () => publicXionClient.getXionAccountByExternalOwner({ owner: "OWNER_ADDRESS" })
+  queryFn: async () => {
+    if (!publicXionClient) throw new Error('no xion client')
+    publicXionClient.getXionAccountByExternalOwner({ owner: "OWNER_ADDRESS" })
+  },
+  enabled: !!publicXionClient
 })
 
 ```
