@@ -1,4 +1,5 @@
 import { ExtractAndPartializeParameters } from '@abstract-money/core'
+import { PublicClient } from '@abstract-money/core/src'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { getXionAccountByExternalOwner } from '../actions/public/get-xion-account-by-external-owner'
 import { predictXionAccountIdByExternalOwner } from '../actions/public/predict-xion-account-id-by-external-owner'
