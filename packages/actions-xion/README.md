@@ -35,7 +35,7 @@ const { data: xionEoaAccount } = useQuery({
 ### Xion Wallet Client
 ```tsx
 import { useConfig } from '@abstract-money/react'
-import { xionWalletActions } from '@abstract-money/actions-xion`
+import { xionWalletActions } from '@abstract-money/actions-xion'
 
 const config = useConfig();
 const walletClient = config.useWalletClient({ chainName: 'xiontestnet' })
