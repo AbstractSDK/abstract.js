@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 3.4.2
+
+### Patch Changes
+
+- [`5bb5a12`](https://github.com/AbstractSDK/abstract.js/commit/5bb5a12dc20cec33ea0e1a3569387a1497e2bc7b) Thanks [@adairrr](https://github.com/adairrr)! - Update adapter message builders
+
 ## 3.4.1
 
 ### Patch Changes
