@@ -1,4 +1,4 @@
-import { ContractMsg } from '@abstract-money/core'
+import { type AppQueryMsg, ContractMsg } from '@abstract-money/core'
 import { CamelCasedProperties } from 'type-fest'
 import {
   AdapterBaseExecuteMsg,
@@ -33,17 +33,17 @@ import {
 export abstract class AdapterExecuteMsgFactory {
   /**
    * Make a request to an adapter module.
-   * @param proxyAddress
+   * @param accountAddress
    * @param request
    */
   static executeAdapter = <TAppMsg>({
-    proxyAddress,
+    accountAddress,
     request,
   }: CamelCasedProperties<
     AdapterRequestMsg<TAppMsg>
   >): AdapterExecuteMsg<TAppMsg> => {
     return ModuleExecuteMsgFactory.module({
-      proxy_address: proxyAddress,
+      account_address: accountAddress,
       request,
     })
   }
@@ -82,14 +82,14 @@ export abstract class AdapterQueryMsgBuilder {
 
   /**
    * Base adapter authorized addresses query.
-   * @param proxyAddress
+   * @param accountAddress
    */
   static authorizedAddresses = (
-    proxyAddress?: string,
+    accountAddress?: string,
   ): AdapterQueryMsg<never> => {
     return ModuleQueryMsgFactory.base({
       authorized_addresses: {
-        proxy_address: proxyAddress,
+        account_address: accountAddress,
       },
     })
   }
@@ -99,7 +99,16 @@ export abstract class AdapterQueryMsgBuilder {
    */
   static config = (): AdapterQueryMsg<never> => {
     return ModuleQueryMsgFactory.base({
-      config: {},
+      base_config: {},
+    })
+  }
+
+  /**
+   * App module data query.
+   */
+  static moduleData = (): AppQueryMsg<never> => {
+    return ModuleQueryMsgFactory.base({
+      module_data: {},
     })
   }
 }

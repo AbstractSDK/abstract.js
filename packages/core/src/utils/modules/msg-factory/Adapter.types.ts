@@ -7,7 +7,7 @@ export type AdapterBaseExecuteMsg = {
   }
 }
 export type AdapterRequestMsg<TAppMsg> = {
-  proxy_address?: string | null
+  account_address?: string | null
   request: TAppMsg
 }
 
@@ -18,11 +18,14 @@ export type AdapterExecuteMsg<TAppMsg> = ModuleExecuteMsg<
 export type AdapterBaseQueryMsg =
   | {
       authorized_addresses: {
-        proxy_address?: string | null
+        account_address?: string | null
       }
     }
   | {
-      config: Record<string, never>
+      base_config: Record<string, never>
+    }
+  | {
+      module_data: Record<string, never>
     }
 
 export type AdapterQueryMsg<TAppMsg> = ModuleQueryMsg<
@@ -32,7 +35,7 @@ export type AdapterQueryMsg<TAppMsg> = ModuleQueryMsg<
 
 export type AdapterBaseInitMsg = {
   ans_host_address: string
-  version_control_address: string
+  registry_address: string
 }
 
 export interface AdapterAuthorizedAddressesResponse {
@@ -40,7 +43,7 @@ export interface AdapterAuthorizedAddressesResponse {
 }
 
 export interface AdapterConfigResponse {
-  version_control_address: string
+  registry_address: string
   ans_host_address: string
   dependencies: string[]
 }
