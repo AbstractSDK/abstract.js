@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 3.4.3
+
+### Patch Changes
+
+- [`ba39dbe`](https://github.com/AbstractSDK/abstract.js/commit/ba39dbe4997c2a1e3c2372b6d9fefced23bf5d35) Thanks [@adairrr](https://github.com/adairrr)! - Ensure that hostChainNameToName doesn't throw
+
 ## 3.4.2
 
 ### Patch Changes
