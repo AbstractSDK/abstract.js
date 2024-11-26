@@ -12,18 +12,30 @@ export type AppExecuteMsg<TAppMsg> = ModuleExecuteMsg<
 >
 export type AppBaseQueryMsg =
   | {
-      admin: Record<string, never>
+      base_admin: Record<string, never>
     }
   | {
-      config: Record<string, never>
+      base_config: Record<string, never>
+    }
+  | {
+      module_data: Record<string, never>
+    }
+  | {
+      top_level_owner: Record<string, never>
     }
 
 export type AppQueryMsg<TAppMsg> = ModuleQueryMsg<AppBaseQueryMsg, TAppMsg>
 
 export type AppBaseInitMsg = {
   ans_host_address: string
-  version_control_address: string
+  registry_address: string
 }
 
 // Empty migrate msg
 export type AppBaseMigrateMsg = Record<string, never>
+
+export interface AppConfigResponse {
+  account: string
+  ans_host_address: string
+  registry_address: string
+}

@@ -1,5 +1,12 @@
 # @abstract-money/actions-xion
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies [[`5bb5a12`](https://github.com/AbstractSDK/abstract.js/commit/5bb5a12dc20cec33ea0e1a3569387a1497e2bc7b)]:
+  - @abstract-money/core@3.4.2
+
 ## 0.0.3
 
 ### Patch Changes

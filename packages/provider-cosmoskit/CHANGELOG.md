@@ -1,5 +1,12 @@
 # @abstract-money/provider-cosmoskit
 
+## 10.0.5
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @abstract-money/react@2.3.5
+
 ## 10.0.4
 
 ### Patch Changes

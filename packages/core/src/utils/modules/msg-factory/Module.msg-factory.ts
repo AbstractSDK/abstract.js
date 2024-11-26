@@ -79,7 +79,7 @@ export abstract class ModuleInitMsgFactory {
     return {
       base: {
         ans_host_address: ansHostAddress,
-        version_control_address: registryAddress,
+        registry_address: registryAddress,
       },
       module: appModuleInitMsg,
     }
@@ -99,7 +99,7 @@ export abstract class ModuleInitMsgFactory {
     return {
       base: {
         ans_host_address: ansHostAddress,
-        version_control_address: registryAddress,
+        registry_address: registryAddress,
       },
       module: adapterInitMsg,
     }

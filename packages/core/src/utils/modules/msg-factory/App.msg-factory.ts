@@ -56,7 +56,7 @@ export abstract class AppQueryMsgFactory {
    */
   static config = (): AppQueryMsg<never> => {
     return ModuleQueryMsgFactory.base({
-      config: {},
+      base_config: {},
     })
   }
 
@@ -65,7 +65,25 @@ export abstract class AppQueryMsgFactory {
    */
   static admin = (): AppQueryMsg<never> => {
     return ModuleQueryMsgFactory.base({
-      admin: {},
+      base_admin: {},
+    })
+  }
+
+  /**
+   * App module data query.
+   */
+  static moduleData = (): AppQueryMsg<never> => {
+    return ModuleQueryMsgFactory.base({
+      module_data: {},
+    })
+  }
+
+  /**
+   * App top level owner query.
+   */
+  static topLevelOwner = (): AppQueryMsg<never> => {
+    return ModuleQueryMsgFactory.base({
+      top_level_owner: {},
     })
   }
 }
