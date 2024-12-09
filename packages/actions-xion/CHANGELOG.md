@@ -1,5 +1,16 @@
 # @abstract-money/actions-xion
 
+## 0.1.0
+
+### Minor Changes
+
+- [#155](https://github.com/AbstractSDK/abstract.js/pull/155) [`5147aaa`](https://github.com/AbstractSDK/abstract.js/commit/5147aaa1bc108566bd1749311603149b0218066b) Thanks [@adairrr](https://github.com/adairrr)! - Update XION actions with better names
+
+### Patch Changes
+
+- Updated dependencies [[`d3a3cb0`](https://github.com/AbstractSDK/abstract.js/commit/d3a3cb09883ec9d88cf581404cd77d3858778a8d)]:
+  - @abstract-money/core@3.4.4
+
 ## 0.0.5
 
 ### Patch Changes

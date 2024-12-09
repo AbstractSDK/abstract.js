@@ -1,5 +1,17 @@
 # @abstract-money/provider-xion
 
+## 4.1.0
+
+### Minor Changes
+
+- [#155](https://github.com/AbstractSDK/abstract.js/pull/155) [`d3a3cb0`](https://github.com/AbstractSDK/abstract.js/commit/d3a3cb09883ec9d88cf581404cd77d3858778a8d) Thanks [@adairrr](https://github.com/adairrr)! - Update xion abstraxion dep
+
+### Patch Changes
+
+- Updated dependencies [[`d3a3cb0`](https://github.com/AbstractSDK/abstract.js/commit/d3a3cb09883ec9d88cf581404cd77d3858778a8d)]:
+  - @abstract-money/core@3.4.4
+  - @abstract-money/react@2.3.7
+
 ## 4.0.3
 
 ### Patch Changes
