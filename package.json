@@ -2,7 +2,7 @@
   "private": true,
   "workspaces": ["examples/*", "packages/*"],
   "scripts": {
-    "build": "turbo build",
+    "build": "turbo build --filter='!wagemos-cosmoskit-nextjs'",
     "changeset:release": "turbo build && changeset publish",
     "changeset:version": "changeset version && pnpm install --lockfile-only",
     "cjs:release": "node -r esbuild-register ./scripts/cjs.ts",

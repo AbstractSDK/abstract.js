@@ -1,0 +1,38 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "pipeline": {
+    "build": {
+      "dependsOn": [
+        "@abstract-money/actions-xion#build",
+        "@abstract-money/provider-xion#build",
+        "@abstract-money/provider-graz#build",
+        "@abstract-money/react#build",
+        "generate"
+      ],
+      "outputs": [".next/**"]
+    },
+    "dev": {
+      "dependsOn": [
+        "@abstract-money/actions-xion#build",
+        "@abstract-money/provider-xion#build",
+        "@abstract-money/provider-graz#build",
+        "@abstract-money/react#build",
+        "generate"
+      ],
+      "cache": false
+    },
+    "typecheck": {
+      "dependsOn": [
+        "@abstract-money/actions-xion#build",
+        "@abstract-money/provider-xion#build",
+        "@abstract-money/provider-graz#build",
+        "@abstract-money/react#build",
+        "generate"
+      ]
+    },
+    "generate": {
+      "outputs": ["node_modules/graz/chains"]
+    }
+  }
+}

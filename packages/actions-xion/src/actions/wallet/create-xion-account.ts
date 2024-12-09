@@ -5,6 +5,12 @@ import {
   jsonToUtf8,
 } from '@abstract-money/core'
 import { WithCosmWasmSignOptions } from '@abstract-money/core'
+import { abstractModuleId } from '@abstract-money/core'
+import {
+  CommonModuleNames,
+  getAppModuleCodeIdFromRegistry,
+  getRegistryAddressFromApi,
+} from '@abstract-money/core/actions'
 import {
   AccountTypes,
   RegistryTypes,
@@ -37,6 +43,7 @@ export type CreateXionAccountParameters = OverrideProperties<
           account_id: RegistryTypes.AccountId
           authenticator: AccountTypes.InstantiateMsg['authenticator']
           install_modules?: MergedModuleInstallConfig[]
+          code_id?: number
         }
       >
     >
@@ -64,7 +71,7 @@ export type CreateXionAccountParameters = OverrideProperties<
  */
 export async function createXionAccount({
   signingCosmWasmClient,
-  apiUrl: _apiUrl,
+  apiUrl,
   sender,
   installModules = [],
   description,
@@ -73,7 +80,7 @@ export async function createXionAccount({
   authenticator,
   link,
   accountId,
-  codeId,
+  codeId: codeId_,
   owner,
   fee,
   memo,
@@ -82,19 +89,36 @@ export async function createXionAccount({
   const chainId = await signingCosmWasmClient.getChainId()
   const chainName = chainIdToName(chainId)
 
-  // TODO: verify that the code-id is whitelisted for XION
+  // CodeId can be passed in or retrieved from registry
+  let codeId
+  if (codeId_ !== undefined) {
+    codeId = codeId_
+  } else {
+    const registryAddress = await getRegistryAddressFromApi({
+      apiUrl,
+      chainName,
+    })
 
+    codeId = await getAppModuleCodeIdFromRegistry({
+      cosmWasmClient: signingCosmWasmClient,
+      registryAddress,
+      moduleId: abstractModuleId(CommonModuleNames.ACCOUNT),
+      version: 'latest',
+    })
+  }
+
+  // TODO: verify that the code-id is whitelisted for XION
   const codeIdChecksum = await signingCosmWasmClient
     .getCodeDetails(codeId)
     .then(({ checksum }) => checksum)
-
-  const instantiateSalt = await getAccountIdSalt(accountId)
 
   const _predictedAccountAddress = await getInstantiate2AddressWithAccountId(
     sender,
     codeIdChecksum,
     accountId,
   )
+
+  const instantiateSalt = await getAccountIdSalt(accountId)
 
   const instantiateMsg: AccountTypes.InstantiateMsg = {
     code_id: codeId,

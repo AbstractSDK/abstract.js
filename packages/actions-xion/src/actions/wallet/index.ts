@@ -1,2 +1,2 @@
 export * from './create-xion-account'
-export * from './create-xion-account-externally-owned'
+export * from './create-xion-account-external-owner'

@@ -1,7 +1,7 @@
 import { ExtractAndPartializeParameters } from '@abstract-money/core'
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate'
 import { createXionAccount } from '../actions/wallet/create-xion-account'
-import { createXionAccountExternallyOwned } from '../actions/wallet/create-xion-account-externally-owned'
+import { createXionAccountExternalOwner } from '../actions/wallet/create-xion-account-external-owner'
 
 type ExtractAndPartializeDecoratedParametersFromParameters<
   fn extends (payload: any) => any,
@@ -20,11 +20,11 @@ export type XionWalletActions = {
       typeof createXionAccount
     >,
   ): ReturnType<typeof createXionAccount>
-  createXionAccountExternallyOwned(
+  createXionAccountExternalOwner(
     parameters: ExtractAndPartializeDecoratedParametersFromParameters<
-      typeof createXionAccountExternallyOwned
+      typeof createXionAccountExternalOwner
     >,
-  ): ReturnType<typeof createXionAccountExternallyOwned>
+  ): ReturnType<typeof createXionAccountExternalOwner>
 }
 
 export function xionWalletActions(
@@ -33,7 +33,6 @@ export function xionWalletActions(
   apiUrl: string,
 ): XionWalletActions {
   // TODO: update the registry to include the xion types
-  signingCosmWasmClient.registry
   return {
     createXionAccount: ({ extra, ...parameters }) =>
       createXionAccount({
@@ -43,8 +42,8 @@ export function xionWalletActions(
         ...parameters,
         ...extra,
       }),
-    createXionAccountExternallyOwned: ({ extra, ...parameters }) =>
-      createXionAccountExternallyOwned({
+    createXionAccountExternalOwner: ({ extra, ...parameters }) =>
+      createXionAccountExternalOwner({
         signingCosmWasmClient,
         sender,
         apiUrl,

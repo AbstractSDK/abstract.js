@@ -21,8 +21,8 @@ interface XionAbstractAccountByOwner {
  */
 export async function getXionAccountByExternalOwner({
   cosmWasmClient,
-  owner,
   apiUrl,
+  owner,
 }: XionAbstractAccountByOwner): Promise<
   { client: AccountQueryClient; accountId: RegistryTypes.AccountId } | undefined
 > {
