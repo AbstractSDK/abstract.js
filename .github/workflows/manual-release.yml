@@ -14,6 +14,7 @@ on:
           - "@abstract-money/provider-cosmoskit"
           - "@abstract-money/provider-graz"
           - "@abstract-money/provider-xion"
+          - "@abstract-money/actions-xion"
       # TODO: Infer from package name
       path:
         type: choice
@@ -26,6 +27,7 @@ on:
           - "provider-cosmoskit"
           - "provider-graz"
           - "provider-xion"
+          - "actions-xion"
 env:
   FORCE_COLOR: true
 
