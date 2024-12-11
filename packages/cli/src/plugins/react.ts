@@ -69,14 +69,22 @@ export function react(options: ReactOptions = {}): ReactResult {
               (guardedContract) => guardedContract.name !== name,
             ),
         )
-        .map(({ name, path }) => ({ name, dir: path }))
-      console.log('absContracts', absContracts)
+        .map(({ name, path, moduleType }) => ({ name, dir: path, moduleType }))
+      console.debug('absContracts', absContracts)
 
-      await codegen({
-        options: codegenOptions,
-        contracts: absContracts,
-        outPath: cosmwasmCodegenDirPath,
-      })
+      await Promise.all(
+        absContracts.map(
+          async ({ moduleType, ...contract }) =>
+            await codegen({
+              options: {
+                ...codegenOptions,
+                abstractApp: { ...codegenOptions.abstractApp, moduleType },
+              },
+              contracts: [contract],
+              outPath: cosmwasmCodegenDirPath,
+            }),
+        ),
+      )
 
       if (contractsWithoutAbstractApp.length !== 0)
         await codegen({
