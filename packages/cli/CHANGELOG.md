@@ -1,5 +1,11 @@
 # @abstract-money/cli
 
+## 1.2.1
+
+### Patch Changes
+
+- [`db90546`](https://github.com/AbstractSDK/abstract.js/commit/db90546db636da4460a045a6a48f0612aff34d48) Thanks [@adairrr](https://github.com/adairrr)! - Ensure that the cli generates proper adapter types
+
 ## 1.2.0
 
 ### Minor Changes
