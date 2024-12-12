@@ -33,18 +33,18 @@ import {
 export abstract class AdapterExecuteMsgFactory {
   /**
    * Make a request to an adapter module.
-   * @param accountAddress
-   * @param request
+   * @param accountAddress optionally specify the account address to execute the request on. If not specified, the request must come from the account itself.
+   * @param msg the message to execute on the adapter
    */
   static executeAdapter = <TAppMsg>({
     accountAddress,
-    request,
+    ...rest
   }: CamelCasedProperties<
     AdapterRequestMsg<TAppMsg>
   >): AdapterExecuteMsg<TAppMsg> => {
     return ModuleExecuteMsgFactory.module({
       account_address: accountAddress,
-      request,
+      msg: 'msg' in rest ? rest.msg : rest.request,
     })
   }
 
