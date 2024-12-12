@@ -6,10 +6,16 @@ export type AdapterBaseExecuteMsg = {
     to_remove?: string[] | null
   }
 }
-export type AdapterRequestMsg<TAppMsg> = {
-  account_address?: string | null
-  request: TAppMsg
-}
+export type AdapterRequestMsg<TAppMsg> =
+  | {
+      account_address?: string | null
+      msg: TAppMsg
+    }
+  | /** @deprecated */ {
+      account_address?: string | null
+      /** @deprecated */
+      request: TAppMsg
+    }
 
 export type AdapterExecuteMsg<TAppMsg> = ModuleExecuteMsg<
   AdapterBaseExecuteMsg,
