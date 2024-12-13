@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 3.4.5
+
+### Patch Changes
+
+- [#161](https://github.com/AbstractSDK/abstract.js/pull/161) [`605f095`](https://github.com/AbstractSDK/abstract.js/commit/605f095a6d76c8733909a778bd47002f3f578842) Thanks [@adairrr](https://github.com/adairrr)! - Update adapter execute msg factory with proper api
+
 ## 3.4.4
 
 ### Patch Changes
