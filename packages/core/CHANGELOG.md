@@ -1,5 +1,15 @@
 ## 0.1.0
 
+## 3.5.0
+
+### Minor Changes
+
+- [#163](https://github.com/AbstractSDK/abstract.js/pull/163) [`eafab00`](https://github.com/AbstractSDK/abstract.js/commit/eafab000987e70f00892d4659568bd2a3c6b5aaf) Thanks [@adairrr](https://github.com/adairrr)! - Abstract 0.26
+
+### Patch Changes
+
+- [#163](https://github.com/AbstractSDK/abstract.js/pull/163) [`eafab00`](https://github.com/AbstractSDK/abstract.js/commit/eafab000987e70f00892d4659568bd2a3c6b5aaf) Thanks [@adairrr](https://github.com/adairrr)! - Add polytone proxy address prediction functions
+
 ## 3.4.5
 
 ### Patch Changes
