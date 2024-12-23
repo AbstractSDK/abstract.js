@@ -38,7 +38,7 @@ export const generatePolytoneProxySalt = ({
  * @param controllerSender - The sending address on the controller chain.
  * @param hostVoiceAddress - The address of the host chain's Voice contract.
  * @param hostProxyChecksum - The checksum of the host chain's proxy contract.
- * @param voiceConnectionId - The connection ID of the Voice contract to the Note.
+ * @param hostVoiceConnectionId - The connection ID of the Voice contract to the Note.
  */
 export const predictPolytoneProxyAddress = async ({
   controllerNoteAddress,
@@ -50,8 +50,8 @@ export const predictPolytoneProxyAddress = async ({
   controllerNoteAddress: string
   controllerSender: string
   hostVoiceAddress: string
-  hostProxyChecksum: string
   hostVoiceConnectionId: `connection-${string}`
+  hostProxyChecksum: string
 }) => {
   // Sanity check
   const notePrefix = fromBech32(controllerNoteAddress).prefix
