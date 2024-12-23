@@ -12,4 +12,6 @@ export * from './events'
 export * from './authz'
 export * from './cosmwasm'
 export * from './modules'
+export * from './polytone'
+
 export { ABSTRACT_NAMESPACE } from './modules/abstract-module-id'
