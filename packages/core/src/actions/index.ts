@@ -7,6 +7,7 @@ export * from './get-modules-from-api'
 export * from './get-registry-address-from-api'
 export * from './get-chain-rpc-from-api'
 export * from './get-sub-account-ids-by-module-id'
+export * from './simulate-remote-cosmos-msg'
 
 export * from './account/public/get-account-address-from-api'
 export * from './account/public/get-ibc-client-query-client-from-account'

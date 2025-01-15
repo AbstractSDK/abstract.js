@@ -11,6 +11,7 @@ export * from './encoding'
 export * from './events'
 export * from './authz'
 export * from './cosmwasm'
+export * from './cosmos'
 export * from './modules'
 export * from './polytone'
 
