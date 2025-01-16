@@ -42,13 +42,29 @@ describe('predictPolytoneProxyAddress', () => {
 
   it('returns the correct address with full function', async () => {
     const result = await predictPolytoneProxyAddress({
+      controllerNoteAddress: neutronNoteAddress,
+      controllerSender: neutronSenderAddress,
       hostVoiceAddress: neutronToOsmosisVoiceAddress,
       hostProxyChecksum: osmosisProxyChecksum,
       hostVoiceConnectionId: connectionIdFromVoice,
-      controllerNoteAddress: neutronNoteAddress,
-      controllerSender: neutronSenderAddress,
     })
 
     expect(result).toBe(expectedAddress)
+  })
+
+  it('returns the correct address with xion', async () => {
+    const result = await predictPolytoneProxyAddress({
+      controllerNoteAddress:
+        'xion1hs95lgvuy0p6jn4v7js5x8plfdqw867lsuh5xv6d2ua20jprkges7as2wd',
+      controllerSender: 'xion1kjzpqv393k4g064xh04j4hwy5d0s03wfcmqte2',
+      hostVoiceAddress:
+        'osmo1pd2tw9230k9qhzq046yrkel940x93732pq5c3mcqrnahj3ekhw7q64tfwr',
+      hostProxyChecksum: osmosisProxyChecksum,
+      hostVoiceConnectionId: 'connection-2823',
+    })
+
+    expect(result).toBe(
+      'osmo1lwaeqc7ahm2a7gvpyfqsu5s8ulaj349ggtzpfjd6r07xhper5q5qc6p2fs',
+    )
   })
 })
