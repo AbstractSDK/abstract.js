@@ -1,5 +1,4 @@
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { getIcaClientQueryClient } from 'src/actions/public/get-ica-client-query-client'
 import { getAbstractModuleAddressFromRegistry } from '../../actions/public/get-abstract-module-address-from-registry'
 import { getAccountQueryClient } from '../../actions/public/get-account-query-client'
 import { getAnsHostAddressFromRegistry } from '../../actions/public/get-ans-host-address-from-registry'
@@ -7,6 +6,7 @@ import { getAnsHostQueryClient } from '../../actions/public/get-ans-host-query-c
 import { getAnsHostQueryClientFromRegistry } from '../../actions/public/get-ans-host-query-client-from-registry'
 import { getCosmWasmClient } from '../../actions/public/get-cosm-wasm-client'
 import { getIbcClientQueryClient } from '../../actions/public/get-ibc-client-query-client'
+import { getIcaClientQueryClient } from '../../actions/public/get-ica-client-query-client'
 import { getRegistryModuleData } from '../../actions/public/get-registry-module-data'
 import { getRegistryQueryClient } from '../../actions/public/get-registry-query-client'
 import { ExtractAndPartializeParameters } from '../../types/parameters'
