@@ -1,7 +1,7 @@
 import { ContractMsg } from '@abstract-money/core'
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate'
-import { ModuleType, wrapModuleQueryMsg } from 'src/utils/modules'
 import { RegistryTypes } from '../../../codegen/abstract'
+import { ModuleType, wrapModuleQueryMsg } from '../../../utils/modules'
 import { getModuleAddress } from './get-module-address'
 
 export type QueryModuleParameters<
