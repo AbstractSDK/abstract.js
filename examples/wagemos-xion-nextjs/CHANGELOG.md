@@ -1,5 +1,16 @@
 # wagemos-graz-nextjs
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies [[`bf49268`](https://github.com/AbstractSDK/abstract.js/commit/bf492684b7839de8222643e226d0165514793134), [`236a881`](https://github.com/AbstractSDK/abstract.js/commit/236a8819cd5d803badefcfebbc5fcd3e190dcb9c)]:
+  - @abstract-money/core@3.5.1
+  - @abstract-money/actions-xion@0.1.3
+  - @abstract-money/provider-graz@12.0.1
+  - @abstract-money/provider-xion@5.0.1
+  - @abstract-money/react@2.3.10
+
 ## 0.1.2
 
 ### Patch Changes

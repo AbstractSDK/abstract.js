@@ -1,5 +1,13 @@
 ## 0.1.0
 
+## 3.5.1
+
+### Patch Changes
+
+- [#167](https://github.com/AbstractSDK/abstract.js/pull/167) [`bf49268`](https://github.com/AbstractSDK/abstract.js/commit/bf492684b7839de8222643e226d0165514793134) Thanks [@adairrr](https://github.com/adairrr)! - Add polytone simulation
+
+- [#165](https://github.com/AbstractSDK/abstract.js/pull/165) [`236a881`](https://github.com/AbstractSDK/abstract.js/commit/236a8819cd5d803badefcfebbc5fcd3e190dcb9c) Thanks [@adairrr](https://github.com/adairrr)! - Export more functions
+
 ## 3.5.0
 
 ### Minor Changes
