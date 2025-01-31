@@ -1,5 +1,12 @@
 # @abstract-money/react
 
+## 2.3.10
+
+### Patch Changes
+
+- Updated dependencies [[`bf49268`](https://github.com/AbstractSDK/abstract.js/commit/bf492684b7839de8222643e226d0165514793134), [`236a881`](https://github.com/AbstractSDK/abstract.js/commit/236a8819cd5d803badefcfebbc5fcd3e190dcb9c)]:
+  - @abstract-money/core@3.5.1
+
 ## 2.3.9
 
 ### Patch Changes
